@@ -37,6 +37,9 @@
     "enableTranslation": true,
     "nativeLanguage": "en",
     "languages": ["en", "pl"],
-    "blueprints": []
+    "blueprints": [],
+    "herokuAppName": "cechini",
+    "herokuDeployType": "git",
+    "herokuJavaVersion": "12"
   }
 }
