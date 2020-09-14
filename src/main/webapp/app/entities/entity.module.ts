@@ -4,6 +4,62 @@ import { RouterModule } from '@angular/router';
 @NgModule({
   imports: [
     RouterModule.forChild([
+      {
+        path: 'worker',
+        loadChildren: () => import('./worker/worker.module').then(m => m.CechiniWorkerModule),
+      },
+      {
+        path: 'store',
+        loadChildren: () => import('./store/store.module').then(m => m.CechiniStoreModule),
+      },
+      {
+        path: 'store-group',
+        loadChildren: () => import('./store-group/store-group.module').then(m => m.CechiniStoreGroupModule),
+      },
+      {
+        path: 'manager',
+        loadChildren: () => import('./manager/manager.module').then(m => m.CechiniManagerModule),
+      },
+      {
+        path: 'order',
+        loadChildren: () => import('./order/order.module').then(m => m.CechiniOrderModule),
+      },
+      {
+        path: 'order-item',
+        loadChildren: () => import('./order-item/order-item.module').then(m => m.CechiniOrderItemModule),
+      },
+      {
+        path: 'product',
+        loadChildren: () => import('./product/product.module').then(m => m.CechiniProductModule),
+      },
+      {
+        path: 'warehouse',
+        loadChildren: () => import('./warehouse/warehouse.module').then(m => m.CechiniWarehouseModule),
+      },
+      {
+        path: 'report',
+        loadChildren: () => import('./report/report.module').then(m => m.CechiniReportModule),
+      },
+      {
+        path: 'route',
+        loadChildren: () => import('./route/route.module').then(m => m.CechiniRouteModule),
+      },
+      {
+        path: 'city',
+        loadChildren: () => import('./city/city.module').then(m => m.CechiniCityModule),
+      },
+      {
+        path: 'location',
+        loadChildren: () => import('./location/location.module').then(m => m.CechiniLocationModule),
+      },
+      {
+        path: 'status',
+        loadChildren: () => import('./status/status.module').then(m => m.CechiniStatusModule),
+      },
+      {
+        path: 'photo',
+        loadChildren: () => import('./photo/photo.module').then(m => m.CechiniPhotoModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

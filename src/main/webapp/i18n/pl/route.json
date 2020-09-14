@@ -1,0 +1,24 @@
+{
+  "cechiniApp": {
+    "route": {
+      "home": {
+        "title": "Route",
+        "createLabel": "Dodaj Route",
+        "createOrEditLabel": "Dodaj lub edytuj: Route",
+        "notFound": "No Routes found"
+      },
+      "created": "Utworzono nowy obiekt typu Route z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Route z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Route z identyfikatorem {{ param }}",
+      "delete": {
+        "question": "Czy na pewno chcesz usunąć Route {{ id }}?"
+      },
+      "detail": {
+        "title": "Route"
+      },
+      "name": "Name",
+      "worker": "Worker",
+      "location": "Location"
+    }
+  }
+}

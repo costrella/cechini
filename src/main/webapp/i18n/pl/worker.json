@@ -1,0 +1,34 @@
+{
+  "cechiniApp": {
+    "worker": {
+      "home": {
+        "title": "Worker",
+        "createLabel": "Dodaj Worker",
+        "createOrEditLabel": "Dodaj lub edytuj: Worker",
+        "notFound": "No Workers found"
+      },
+      "created": "Utworzono nowy obiekt typu Worker z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Worker z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Worker z identyfikatorem {{ param }}",
+      "delete": {
+        "question": "Czy na pewno chcesz usunąć Worker {{ id }}?"
+      },
+      "detail": {
+        "title": "Worker"
+      },
+      "name": "Name",
+      "surname": "Surname",
+      "hiredDate": "Hired Date",
+      "desc": "Desc",
+      "login": "Login",
+      "password": "Password",
+      "target": "Target",
+      "store": "Store",
+      "order": "Order",
+      "report": "Report",
+      "route": "Route",
+      "status": "Status",
+      "manager": "Manager"
+    }
+  }
+}

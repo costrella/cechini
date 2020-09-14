@@ -1,0 +1,70 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-report-heading" jhiTranslate="cechiniApp.report.home.createOrEditLabel">Create or edit a Report</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cechiniApp.report.number" for="field_number">Number</label>
+                    <input type="text" class="form-control" name="number" id="field_number"
+                           formControlName="number"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cechiniApp.report.reportDate" for="field_reportDate">Report Date</label>
+                    <div class="input-group">
+                        <input id="field_reportDate" type="text" class="form-control" name="reportDate" ngbDatepicker #reportDateDp="ngbDatepicker" formControlName="reportDate"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="reportDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cechiniApp.report.workerDesc" for="field_workerDesc">Worker Desc</label>
+                    <input type="text" class="form-control" name="workerDesc" id="field_workerDesc"
+                           formControlName="workerDesc"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cechiniApp.report.managerDesc" for="field_managerDesc">Manager Desc</label>
+                    <input type="text" class="form-control" name="managerDesc" id="field_managerDesc"
+                           formControlName="managerDesc"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cechiniApp.report.worker" for="field_worker">Worker</label>
+                    <select class="form-control" id="field_worker" name="worker" formControlName="workerId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="workerOption.id" *ngFor="let workerOption of workers; trackBy: trackById">{{ workerOption.surname }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cechiniApp.report.store" for="field_store">Store</label>
+                    <select class="form-control" id="field_store" name="store" formControlName="storeId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="storeOption.id" *ngFor="let storeOption of stores; trackBy: trackById">{{ storeOption.name }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

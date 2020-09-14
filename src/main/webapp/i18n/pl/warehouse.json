@@ -1,0 +1,24 @@
+{
+  "cechiniApp": {
+    "warehouse": {
+      "home": {
+        "title": "Warehouse",
+        "createLabel": "Dodaj Warehouse",
+        "createOrEditLabel": "Dodaj lub edytuj: Warehouse",
+        "notFound": "No Warehouses found"
+      },
+      "created": "Utworzono nowy obiekt typu Warehouse z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Warehouse z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Warehouse z identyfikatorem {{ param }}",
+      "delete": {
+        "question": "Czy na pewno chcesz usunąć Warehouse {{ id }}?"
+      },
+      "detail": {
+        "title": "Warehouse"
+      },
+      "name": "Name",
+      "order": "Order",
+      "location": "Location"
+    }
+  }
+}

@@ -1,0 +1,60 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="worker">
+            <h2><span jhiTranslate="cechiniApp.worker.detail.title">Worker</span> {{ worker.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="cechiniApp.worker.name">Name</span></dt>
+                <dd>
+                    <span>{{ worker.name }}</span>
+                </dd>
+                <dt><span jhiTranslate="cechiniApp.worker.surname">Surname</span></dt>
+                <dd>
+                    <span>{{ worker.surname }}</span>
+                </dd>
+                <dt><span jhiTranslate="cechiniApp.worker.hiredDate">Hired Date</span></dt>
+                <dd>
+                    <span>{{ worker.hiredDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="cechiniApp.worker.desc">Desc</span></dt>
+                <dd>
+                    <span>{{ worker.desc }}</span>
+                </dd>
+                <dt><span jhiTranslate="cechiniApp.worker.login">Login</span></dt>
+                <dd>
+                    <span>{{ worker.login }}</span>
+                </dd>
+                <dt><span jhiTranslate="cechiniApp.worker.password">Password</span></dt>
+                <dd>
+                    <span>{{ worker.password }}</span>
+                </dd>
+                <dt><span jhiTranslate="cechiniApp.worker.target">Target</span></dt>
+                <dd>
+                    <span>{{ worker.target }}</span>
+                </dd>
+                <dt><span jhiTranslate="cechiniApp.worker.status">Status</span></dt>
+                <dd>
+                    <div *ngIf="worker.statusId">
+                        <a [routerLink]="['/status', worker.statusId, 'view']">{{ worker.statusName }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/worker', worker.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
