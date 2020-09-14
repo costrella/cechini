@@ -13,6 +13,7 @@ import org.mapstruct.*;
 public interface LocationMapper extends EntityMapper<LocationDTO, Location> {
 
     @Mapping(source = "city.id", target = "cityId")
+    @Mapping(source = "city.name", target = "cityName")
     LocationDTO toDto(Location location);
 
     @Mapping(target = "stores", ignore = true)

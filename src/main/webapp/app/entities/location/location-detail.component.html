@@ -23,7 +23,7 @@
                 <dt><span jhiTranslate="cechiniApp.location.city">City</span></dt>
                 <dd>
                     <div *ngIf="location.cityId">
-                        <a [routerLink]="['/city', location.cityId, 'view']">{{ location.cityId }}</a>
+                        <a [routerLink]="['/city', location.cityId, 'view']">{{ location.cityName }}</a>
                     </div>
                 </dd>
             </dl>

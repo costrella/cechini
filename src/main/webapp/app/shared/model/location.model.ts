@@ -11,6 +11,7 @@ export interface ILocation {
   routes?: IRoute[];
   warehouses?: IWarehouse[];
   cityId?: number;
+  cityName?: string;
 }
 
 export class Location implements ILocation {
@@ -22,6 +23,7 @@ export class Location implements ILocation {
     public stores?: IStore[],
     public routes?: IRoute[],
     public warehouses?: IWarehouse[],
-    public cityId?: number
+    public cityId?: number,
+    public cityName?: string
   ) {}
 }

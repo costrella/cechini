@@ -20,9 +20,9 @@ export class RouteResolve implements Resolve<IRoute> {
     const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(
-        flatMap((route: HttpResponse<Route>) => {
-          if (route.body) {
-            return of(route.body);
+        flatMap((r: HttpResponse<Route>) => {
+          if (r.body) {
+            return of(r.body);
           } else {
             this.router.navigate(['404']);
             return EMPTY;
