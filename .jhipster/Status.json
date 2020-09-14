@@ -1,0 +1,35 @@
+{
+  "name": "Status",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "order",
+      "otherEntityRelationshipName": "status",
+      "relationshipName": "order"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "worker",
+      "otherEntityRelationshipName": "status",
+      "relationshipName": "worker"
+    }
+  ],
+  "changelogDate": "20200903191808",
+  "entityTableName": "status",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

@@ -1,0 +1,27 @@
+{
+  "cechiniApp": {
+    "store": {
+      "home": {
+        "title": "Store",
+        "createLabel": "Dodaj Store",
+        "createOrEditLabel": "Dodaj lub edytuj: Store",
+        "notFound": "No Stores found"
+      },
+      "created": "Utworzono nowy obiekt typu Store z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Store z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Store z identyfikatorem {{ param }}",
+      "delete": {
+        "question": "Czy na pewno chcesz usunąć Store {{ id }}?"
+      },
+      "detail": {
+        "title": "Store"
+      },
+      "name": "Name",
+      "order": "Order",
+      "report": "Report",
+      "worker": "Worker",
+      "location": "Location",
+      "storegroup": "Storegroup"
+    }
+  }
+}

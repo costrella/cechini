@@ -1,0 +1,29 @@
+{
+  "name": "StoreGroup",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "store",
+      "otherEntityRelationshipName": "storegroup",
+      "relationshipName": "store"
+    }
+  ],
+  "changelogDate": "20200903190808",
+  "entityTableName": "store_group",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}
