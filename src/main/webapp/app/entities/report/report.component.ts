@@ -1,15 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
-import { ActivatedRoute, ParamMap, Router, Data } from '@angular/router';
-import { Subscription, combineLatest } from 'rxjs';
-import { JhiEventManager } from 'ng-jhipster';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Data, ParamMap, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
-import { IReport } from 'app/shared/model/report.model';
-
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
-import { ReportService } from './report.service';
+import { IReport } from 'app/shared/model/report.model';
+import { IWorker } from 'app/shared/model/worker.model';
+import { JhiEventManager } from 'ng-jhipster';
+import { combineLatest, Subscription } from 'rxjs';
+import { WorkerService } from '../worker/worker.service';
 import { ReportDeleteDialogComponent } from './report-delete-dialog.component';
+import { ReportService } from './report.service';
 
 @Component({
   selector: 'jhi-report',
@@ -17,6 +17,8 @@ import { ReportDeleteDialogComponent } from './report-delete-dialog.component';
 })
 export class ReportComponent implements OnInit, OnDestroy {
   reports?: IReport[];
+  workers?: IWorker[];
+  worker?: IWorker;
   eventSubscriber?: Subscription;
   totalItems = 0;
   itemsPerPage = ITEMS_PER_PAGE;
@@ -30,10 +32,14 @@ export class ReportComponent implements OnInit, OnDestroy {
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
     protected eventManager: JhiEventManager,
-    protected modalService: NgbModal
+    protected modalService: NgbModal,
+    protected workerService: WorkerService
   ) {}
 
   loadPage(page?: number, dontNavigate?: boolean): void {
+    // console.log("worker: " + this.worker);
+    console.log('doesnt work');
+
     const pageToLoad: number = page || this.page || 1;
 
     this.reportService
@@ -46,6 +52,13 @@ export class ReportComponent implements OnInit, OnDestroy {
         (res: HttpResponse<IReport[]>) => this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate),
         () => this.onError()
       );
+
+    this.workerService.findAll().subscribe(
+      (res: HttpResponse<IWorker[]>) => {
+        this.workers = res.body || [];
+      },
+      () => this.onError()
+    );
   }
 
   ngOnInit(): void {

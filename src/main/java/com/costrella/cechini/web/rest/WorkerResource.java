@@ -98,6 +98,12 @@ public class WorkerResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+    @GetMapping("/workers/all")
+    public ResponseEntity<List<WorkerDTO>> getAllWorkers() {
+        log.debug("REST request to get a page of Workers");
+        return ResponseEntity.ok().body(workerService.findAll());
+    }
+
     /**
      * {@code GET  /workers/:id} : get the "id" worker.
      *

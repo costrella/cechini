@@ -67,6 +67,13 @@ public class ReportService {
     }
 
     @Transactional(readOnly = true)
+    public Page<ReportDTO> findAllByStoreId(Pageable pageable, Long id) {
+        log.debug("Request to get all Reports by store id");
+        return reportRepository.findAllByStoreId(id, pageable)
+            .map(reportMapper::toDto);
+    }
+
+    @Transactional(readOnly = true)
     public Page<ReportDTO> findAllByNumber(Pageable pageable, String number) {
         log.debug("Request to get all Reports by number");
         return reportRepository.findAllByNumber(number, pageable)

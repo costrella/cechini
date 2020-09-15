@@ -12,7 +12,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing {@link Worker}.
@@ -58,6 +60,11 @@ public class WorkerService {
             .map(workerMapper::toDto);
     }
 
+    @Transactional(readOnly = true)
+    public List<WorkerDTO> findAll() {
+        return workerRepository.findAll().stream()
+            .map(workerMapper::toDto).collect(Collectors.toList());
+    }
 
     /**
      * Get one worker by id.
