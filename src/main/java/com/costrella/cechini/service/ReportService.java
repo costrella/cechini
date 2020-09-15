@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -58,6 +59,19 @@ public class ReportService {
             .map(reportMapper::toDto);
     }
 
+    @Transactional(readOnly = true)
+    public Page<ReportDTO> findAllByWorkerId(Pageable pageable, Long id) {
+        log.debug("Request to get all Reports by worker id");
+        return reportRepository.findAllByWorkerId(id, pageable)
+            .map(reportMapper::toDto);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<ReportDTO> findAllByNumber(Pageable pageable, String number) {
+        log.debug("Request to get all Reports by number");
+        return reportRepository.findAllByNumber(number, pageable)
+            .map(reportMapper::toDto);
+    }
 
     /**
      * Get one report by id.

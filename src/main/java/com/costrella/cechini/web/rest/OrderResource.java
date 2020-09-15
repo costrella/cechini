@@ -98,6 +98,11 @@ public class OrderResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+    @GetMapping("/ordersList")
+    public ResponseEntity<List<OrderDTO>> getAllOrdersList() {
+        return ResponseEntity.ok().body(orderService.findAll());
+    }
+
     /**
      * {@code GET  /orders/:id} : get the "id" order.
      *

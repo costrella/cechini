@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -93,6 +92,21 @@ public class ReportResource {
     public ResponseEntity<List<ReportDTO>> getAllReports(Pageable pageable) {
         log.debug("REST request to get a page of Reports");
         Page<ReportDTO> page = reportService.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    @GetMapping("/reports/number/{number}")
+    public ResponseEntity<List<ReportDTO>> getAllReportsByNumber(Pageable pageable, @PathVariable String number) {
+        Page<ReportDTO> page = reportService.findAllByNumber(pageable, number);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    @GetMapping("/reports/worker/{id}")
+    public ResponseEntity<List<ReportDTO>> getAllReportsByWorkerId(Pageable pageable, @PathVariable Long id) {
+        log.debug("REST request to get a page of Reports");
+        Page<ReportDTO> page = reportService.findAllByWorkerId(pageable, id);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

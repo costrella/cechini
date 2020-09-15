@@ -12,7 +12,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing {@link Order}.
@@ -58,6 +60,12 @@ public class OrderService {
             .map(orderMapper::toDto);
     }
 
+    @Transactional(readOnly = true)
+    public List<OrderDTO> findAll() {
+        log.debug("Request to get all Orders List");
+        return orderRepository.findAll().stream()
+            .map(orderMapper::toDto).collect(Collectors.toList());
+    }
 
     /**
      * Get one order by id.
