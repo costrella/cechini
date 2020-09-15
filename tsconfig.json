@@ -7,5 +7,7 @@
     {
       "path": "./tsconfig.e2e.json"
     }
-  ]
+  ],
+  "emitDecoratorMetadata": true,
+  "experimentalDecorators": true
 }
