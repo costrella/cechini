@@ -1,0 +1,55 @@
+{
+  "name": "Location",
+  "fields": [
+    {
+      "fieldName": "street",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lat",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lng",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "store",
+      "otherEntityRelationshipName": "location",
+      "relationshipName": "store"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "track",
+      "otherEntityRelationshipName": "location",
+      "relationshipName": "track"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "warehouse",
+      "otherEntityRelationshipName": "location",
+      "relationshipName": "warehouse"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "city",
+      "otherEntityRelationshipName": "location",
+      "relationshipName": "city",
+      "otherEntityField": "name"
+    }
+  ],
+  "changelogDate": "20200921171236",
+  "entityTableName": "location",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

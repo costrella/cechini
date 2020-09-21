@@ -1,0 +1,24 @@
+{
+  "cechiniApp": {
+    "photo": {
+      "home": {
+        "title": "Photo",
+        "createLabel": "Dodaj Photo",
+        "createOrEditLabel": "Dodaj lub edytuj: Photo",
+        "notFound": "No Photos found"
+      },
+      "created": "Utworzono nowy obiekt typu Photo z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Photo z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Photo z identyfikatorem {{ param }}",
+      "delete": {
+        "question": "Czy na pewno chcesz usunąć Photo {{ id }}?"
+      },
+      "detail": {
+        "title": "Photo"
+      },
+      "uri": "Uri",
+      "value": "Value",
+      "report": "Report"
+    }
+  }
+}

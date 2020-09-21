@@ -1,0 +1,86 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-store-heading" jhiTranslate="cechiniApp.store.home.createOrEditLabel">Create or edit a Store</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cechiniApp.store.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           formControlName="name"/>
+                    <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cechiniApp.store.nip" for="field_nip">Nip</label>
+                    <input type="text" class="form-control" name="nip" id="field_nip"
+                           formControlName="nip"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cechiniApp.store.desc" for="field_desc">Desc</label>
+                    <input type="text" class="form-control" name="desc" id="field_desc"
+                           formControlName="desc"/>
+                    <div *ngIf="editForm.get('desc')!.invalid && (editForm.get('desc')!.dirty || editForm.get('desc')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('desc')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 2000 }">
+                        This field cannot be longer than 2000 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cechiniApp.store.visited" for="field_visited">Visited</label>
+                    <input type="checkbox" class="form-control" name="visited" id="field_visited"
+                           formControlName="visited"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cechiniApp.store.worker" for="field_worker">Worker</label>
+                    <select class="form-control" id="field_worker" name="worker" formControlName="workerId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="workerOption.id" *ngFor="let workerOption of workers; trackBy: trackById">{{ workerOption.surname }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cechiniApp.store.location" for="field_location">Location</label>
+                    <select class="form-control" id="field_location" name="location" formControlName="locationId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="locationOption.id" *ngFor="let locationOption of locations; trackBy: trackById">{{ locationOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cechiniApp.store.storegroup" for="field_storegroup">Storegroup</label>
+                    <select class="form-control" id="field_storegroup" name="storegroup" formControlName="storegroupId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="storeGroupOption.id" *ngFor="let storeGroupOption of storegroups; trackBy: trackById">{{ storeGroupOption.name }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

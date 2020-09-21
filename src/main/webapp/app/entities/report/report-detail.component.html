@@ -1,0 +1,56 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="report">
+            <h2><span jhiTranslate="cechiniApp.report.detail.title">Report</span> {{ report.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="cechiniApp.report.number">Number</span></dt>
+                <dd>
+                    <span>{{ report.number }}</span>
+                </dd>
+                <dt><span jhiTranslate="cechiniApp.report.reportDate">Report Date</span></dt>
+                <dd>
+                    <span>{{ report.reportDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="cechiniApp.report.desc">Desc</span></dt>
+                <dd>
+                    <span>{{ report.desc }}</span>
+                </dd>
+                <dt><span jhiTranslate="cechiniApp.report.worker">Worker</span></dt>
+                <dd>
+                    <div *ngIf="report.workerId">
+                        <a [routerLink]="['/worker', report.workerId, 'view']">{{ report.workerSurname }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="cechiniApp.report.store">Store</span></dt>
+                <dd>
+                    <div *ngIf="report.storeId">
+                        <a [routerLink]="['/store', report.storeId, 'view']">{{ report.storeName }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="cechiniApp.report.order">Order</span></dt>
+                <dd>
+                    <div *ngIf="report.orderId">
+                        <a [routerLink]="['/order', report.orderId, 'view']">{{ report.orderId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/report', report.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

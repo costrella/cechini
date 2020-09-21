@@ -1,0 +1,34 @@
+{
+  "name": "Photo",
+  "fields": [
+    {
+      "fieldName": "uri",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "value",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "report",
+      "otherEntityRelationshipName": "photos",
+      "relationshipName": "report",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200921171436",
+  "entityTableName": "photo",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

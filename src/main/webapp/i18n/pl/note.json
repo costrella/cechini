@@ -1,0 +1,27 @@
+{
+  "cechiniApp": {
+    "note": {
+      "home": {
+        "title": "Note",
+        "createLabel": "Dodaj Note",
+        "createOrEditLabel": "Dodaj lub edytuj: Note",
+        "notFound": "No Notes found"
+      },
+      "created": "Utworzono nowy obiekt typu Note z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Note z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Note z identyfikatorem {{ param }}",
+      "delete": {
+        "question": "Czy na pewno chcesz usunąć Note {{ id }}?"
+      },
+      "detail": {
+        "title": "Note"
+      },
+      "value": "Value",
+      "date": "Date",
+      "store": "Store",
+      "workerNote": "Worker Note",
+      "managerNote": "Manager Note",
+      "report": "Report"
+    }
+  }
+}

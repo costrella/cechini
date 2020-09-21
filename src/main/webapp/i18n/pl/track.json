@@ -1,0 +1,24 @@
+{
+  "cechiniApp": {
+    "track": {
+      "home": {
+        "title": "Track",
+        "createLabel": "Dodaj Track",
+        "createOrEditLabel": "Dodaj lub edytuj: Track",
+        "notFound": "No Tracks found"
+      },
+      "created": "Utworzono nowy obiekt typu Track z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Track z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Track z identyfikatorem {{ param }}",
+      "delete": {
+        "question": "Czy na pewno chcesz usunąć Track {{ id }}?"
+      },
+      "detail": {
+        "title": "Track"
+      },
+      "name": "Name",
+      "worker": "Worker",
+      "location": "Location"
+    }
+  }
+}

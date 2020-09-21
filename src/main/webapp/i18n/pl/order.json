@@ -1,0 +1,28 @@
+{
+  "cechiniApp": {
+    "order": {
+      "home": {
+        "title": "Order",
+        "createLabel": "Dodaj Order",
+        "createOrEditLabel": "Dodaj lub edytuj: Order",
+        "notFound": "No Orders found"
+      },
+      "created": "Utworzono nowy obiekt typu Order z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Order z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Order z identyfikatorem {{ param }}",
+      "delete": {
+        "question": "Czy na pewno chcesz usunąć Order {{ id }}?"
+      },
+      "detail": {
+        "title": "Order"
+      },
+      "orderDate": "Order Date",
+      "deliveryDate": "Delivery Date",
+      "comment": "Comment",
+      "orderItem": "Order Item",
+      "report": "Report",
+      "warehouse": "Warehouse",
+      "status": "Status"
+    }
+  }
+}

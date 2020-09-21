@@ -1,0 +1,46 @@
+{
+  "name": "Manager",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "surname",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "hiredDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "note",
+      "otherEntityRelationshipName": "managerNote",
+      "relationshipName": "note"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "worker",
+      "otherEntityRelationshipName": "manager",
+      "relationshipName": "worker",
+      "otherEntityField": "surname",
+      "ownerSide": true
+    }
+  ],
+  "changelogDate": "20200921170436",
+  "entityTableName": "manager",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

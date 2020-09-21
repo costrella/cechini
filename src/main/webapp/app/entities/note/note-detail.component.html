@@ -1,0 +1,58 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="note">
+            <h2><span jhiTranslate="cechiniApp.note.detail.title">Note</span> {{ note.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="cechiniApp.note.value">Value</span></dt>
+                <dd>
+                    <span>{{ note.value }}</span>
+                </dd>
+                <dt><span jhiTranslate="cechiniApp.note.date">Date</span></dt>
+                <dd>
+                    <span>{{ note.date }}</span>
+                </dd>
+                <dt><span jhiTranslate="cechiniApp.note.store">Store</span></dt>
+                <dd>
+                    <div *ngIf="note.storeId">
+                        <a [routerLink]="['/store', note.storeId, 'view']">{{ note.storeId }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="cechiniApp.note.workerNote">Worker Note</span></dt>
+                <dd>
+                    <div *ngIf="note.workerNoteId">
+                        <a [routerLink]="['/worker', note.workerNoteId, 'view']">{{ note.workerNoteId }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="cechiniApp.note.managerNote">Manager Note</span></dt>
+                <dd>
+                    <div *ngIf="note.managerNoteId">
+                        <a [routerLink]="['/manager', note.managerNoteId, 'view']">{{ note.managerNoteId }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="cechiniApp.note.report">Report</span></dt>
+                <dd>
+                    <div *ngIf="note.reportId">
+                        <a [routerLink]="['/report', note.reportId, 'view']">{{ note.reportId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/note', note.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
