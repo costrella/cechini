@@ -1,12 +1,15 @@
 package com.costrella.cechini.service;
 
 import com.costrella.cechini.domain.Report;
+import com.costrella.cechini.domain.Store;
+import com.costrella.cechini.domain.Worker;
 import com.costrella.cechini.repository.ReportRepository;
 import com.costrella.cechini.service.dto.ReportDTO;
 import com.costrella.cechini.service.mapper.ReportMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -64,6 +67,22 @@ public class ReportService {
         log.debug("Request to get all Reports by worker id");
         return reportRepository.findAllByWorkerId(id, pageable)
             .map(reportMapper::toDto);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<ReportDTO> findAllByWorkerIdAndStoreId(Pageable pageable, Long id, Long storeId) {
+        return reportRepository.findAllByWorkerIdAndStoreId(id, storeId,  pageable)
+            .map(reportMapper::toDto);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<ReportDTO> findAllByExample(Pageable pageable, Long workerId, Long storeId, Long warehouseId) {
+        Report report = new Report();
+        report.setStore(new Store().id(storeId));
+        report.setWorker(new Worker().id(workerId));
+        return reportRepository.findAll(Example.of(report), pageable).map(reportMapper::toDto);
+//        return reportRepository.findAllByWorkerIdAndStoreId(id, storeId,  pageable)
+//            .map(reportMapper::toDto);
     }
 
     @Transactional(readOnly = true)

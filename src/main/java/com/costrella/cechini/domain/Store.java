@@ -54,6 +54,11 @@ public class Store implements Serializable {
         this.id = id;
     }
 
+    public Store id(Long id){
+        this.id = id;
+        return this;
+    }
+
     public String getName() {
         return name;
     }

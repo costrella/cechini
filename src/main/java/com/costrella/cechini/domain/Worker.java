@@ -73,6 +73,11 @@ public class Worker implements Serializable {
         return id;
     }
 
+    public Worker id(Long id){
+        this.id = id;
+        return this;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
