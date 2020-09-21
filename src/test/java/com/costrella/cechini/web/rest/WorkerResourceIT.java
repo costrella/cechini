@@ -47,6 +47,9 @@ public class WorkerResourceIT {
     private static final String DEFAULT_DESC = "AAAAAAAAAA";
     private static final String UPDATED_DESC = "BBBBBBBBBB";
 
+    private static final String DEFAULT_PHONE = "AAAAAAAAAA";
+    private static final String UPDATED_PHONE = "BBBBBBBBBB";
+
     private static final String DEFAULT_LOGIN = "AAAAAAAAAA";
     private static final String UPDATED_LOGIN = "BBBBBBBBBB";
 
@@ -55,6 +58,9 @@ public class WorkerResourceIT {
 
     private static final Long DEFAULT_TARGET = 1L;
     private static final Long UPDATED_TARGET = 2L;
+
+    private static final Boolean DEFAULT_ACTIVE = false;
+    private static final Boolean UPDATED_ACTIVE = true;
 
     @Autowired
     private WorkerRepository workerRepository;
@@ -85,9 +91,11 @@ public class WorkerResourceIT {
             .surname(DEFAULT_SURNAME)
             .hiredDate(DEFAULT_HIRED_DATE)
             .desc(DEFAULT_DESC)
+            .phone(DEFAULT_PHONE)
             .login(DEFAULT_LOGIN)
             .password(DEFAULT_PASSWORD)
-            .target(DEFAULT_TARGET);
+            .target(DEFAULT_TARGET)
+            .active(DEFAULT_ACTIVE);
         return worker;
     }
     /**
@@ -102,9 +110,11 @@ public class WorkerResourceIT {
             .surname(UPDATED_SURNAME)
             .hiredDate(UPDATED_HIRED_DATE)
             .desc(UPDATED_DESC)
+            .phone(UPDATED_PHONE)
             .login(UPDATED_LOGIN)
             .password(UPDATED_PASSWORD)
-            .target(UPDATED_TARGET);
+            .target(UPDATED_TARGET)
+            .active(UPDATED_ACTIVE);
         return worker;
     }
 
@@ -132,9 +142,11 @@ public class WorkerResourceIT {
         assertThat(testWorker.getSurname()).isEqualTo(DEFAULT_SURNAME);
         assertThat(testWorker.getHiredDate()).isEqualTo(DEFAULT_HIRED_DATE);
         assertThat(testWorker.getDesc()).isEqualTo(DEFAULT_DESC);
+        assertThat(testWorker.getPhone()).isEqualTo(DEFAULT_PHONE);
         assertThat(testWorker.getLogin()).isEqualTo(DEFAULT_LOGIN);
         assertThat(testWorker.getPassword()).isEqualTo(DEFAULT_PASSWORD);
         assertThat(testWorker.getTarget()).isEqualTo(DEFAULT_TARGET);
+        assertThat(testWorker.isActive()).isEqualTo(DEFAULT_ACTIVE);
     }
 
     @Test
@@ -213,9 +225,11 @@ public class WorkerResourceIT {
             .andExpect(jsonPath("$.[*].surname").value(hasItem(DEFAULT_SURNAME)))
             .andExpect(jsonPath("$.[*].hiredDate").value(hasItem(DEFAULT_HIRED_DATE.toString())))
             .andExpect(jsonPath("$.[*].desc").value(hasItem(DEFAULT_DESC)))
+            .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE)))
             .andExpect(jsonPath("$.[*].login").value(hasItem(DEFAULT_LOGIN)))
             .andExpect(jsonPath("$.[*].password").value(hasItem(DEFAULT_PASSWORD)))
-            .andExpect(jsonPath("$.[*].target").value(hasItem(DEFAULT_TARGET.intValue())));
+            .andExpect(jsonPath("$.[*].target").value(hasItem(DEFAULT_TARGET.intValue())))
+            .andExpect(jsonPath("$.[*].active").value(hasItem(DEFAULT_ACTIVE.booleanValue())));
     }
     
     @Test
@@ -233,9 +247,11 @@ public class WorkerResourceIT {
             .andExpect(jsonPath("$.surname").value(DEFAULT_SURNAME))
             .andExpect(jsonPath("$.hiredDate").value(DEFAULT_HIRED_DATE.toString()))
             .andExpect(jsonPath("$.desc").value(DEFAULT_DESC))
+            .andExpect(jsonPath("$.phone").value(DEFAULT_PHONE))
             .andExpect(jsonPath("$.login").value(DEFAULT_LOGIN))
             .andExpect(jsonPath("$.password").value(DEFAULT_PASSWORD))
-            .andExpect(jsonPath("$.target").value(DEFAULT_TARGET.intValue()));
+            .andExpect(jsonPath("$.target").value(DEFAULT_TARGET.intValue()))
+            .andExpect(jsonPath("$.active").value(DEFAULT_ACTIVE.booleanValue()));
     }
     @Test
     @Transactional
@@ -262,9 +278,11 @@ public class WorkerResourceIT {
             .surname(UPDATED_SURNAME)
             .hiredDate(UPDATED_HIRED_DATE)
             .desc(UPDATED_DESC)
+            .phone(UPDATED_PHONE)
             .login(UPDATED_LOGIN)
             .password(UPDATED_PASSWORD)
-            .target(UPDATED_TARGET);
+            .target(UPDATED_TARGET)
+            .active(UPDATED_ACTIVE);
         WorkerDTO workerDTO = workerMapper.toDto(updatedWorker);
 
         restWorkerMockMvc.perform(put("/api/workers").with(csrf())
@@ -280,9 +298,11 @@ public class WorkerResourceIT {
         assertThat(testWorker.getSurname()).isEqualTo(UPDATED_SURNAME);
         assertThat(testWorker.getHiredDate()).isEqualTo(UPDATED_HIRED_DATE);
         assertThat(testWorker.getDesc()).isEqualTo(UPDATED_DESC);
+        assertThat(testWorker.getPhone()).isEqualTo(UPDATED_PHONE);
         assertThat(testWorker.getLogin()).isEqualTo(UPDATED_LOGIN);
         assertThat(testWorker.getPassword()).isEqualTo(UPDATED_PASSWORD);
         assertThat(testWorker.getTarget()).isEqualTo(UPDATED_TARGET);
+        assertThat(testWorker.isActive()).isEqualTo(UPDATED_ACTIVE);
     }
 
     @Test

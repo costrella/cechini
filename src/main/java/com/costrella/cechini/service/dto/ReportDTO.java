@@ -1,6 +1,7 @@
 package com.costrella.cechini.service.dto;
 
 import java.time.LocalDate;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 
 /**
@@ -14,9 +15,7 @@ public class ReportDTO implements Serializable {
 
     private LocalDate reportDate;
 
-    private String workerDesc;
-
-    private String managerDesc;
+    private String desc;
 
 
     private Long workerId;
@@ -26,6 +25,8 @@ public class ReportDTO implements Serializable {
     private Long storeId;
 
     private String storeName;
+
+    private Long orderId;
     
     public Long getId() {
         return id;
@@ -51,20 +52,12 @@ public class ReportDTO implements Serializable {
         this.reportDate = reportDate;
     }
 
-    public String getWorkerDesc() {
-        return workerDesc;
+    public String getDesc() {
+        return desc;
     }
 
-    public void setWorkerDesc(String workerDesc) {
-        this.workerDesc = workerDesc;
-    }
-
-    public String getManagerDesc() {
-        return managerDesc;
-    }
-
-    public void setManagerDesc(String managerDesc) {
-        this.managerDesc = managerDesc;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public Long getWorkerId() {
@@ -99,6 +92,14 @@ public class ReportDTO implements Serializable {
         this.storeName = storeName;
     }
 
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -123,12 +124,12 @@ public class ReportDTO implements Serializable {
             "id=" + getId() +
             ", number='" + getNumber() + "'" +
             ", reportDate='" + getReportDate() + "'" +
-            ", workerDesc='" + getWorkerDesc() + "'" +
-            ", managerDesc='" + getManagerDesc() + "'" +
+            ", desc='" + getDesc() + "'" +
             ", workerId=" + getWorkerId() +
             ", workerSurname='" + getWorkerSurname() + "'" +
             ", storeId=" + getStoreId() +
             ", storeName='" + getStoreName() + "'" +
+            ", orderId=" + getOrderId() +
             "}";
     }
 }

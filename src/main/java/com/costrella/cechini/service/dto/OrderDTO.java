@@ -14,22 +14,20 @@ public class OrderDTO implements Serializable {
     @NotNull
     private LocalDate orderDate;
 
+    @NotNull
+    private LocalDate deliveryDate;
 
-    private Long workerId;
+    @Size(max = 2000)
+    private String comment;
 
-    private String workerSurname;
-
-    private Long storeId;
-
-    private String storeName;
-
-    private Long statusId;
-
-    private String statusName;
 
     private Long warehouseId;
 
     private String warehouseName;
+
+    private Long statusId;
+
+    private String statusName;
     
     public Long getId() {
         return id;
@@ -47,52 +45,20 @@ public class OrderDTO implements Serializable {
         this.orderDate = orderDate;
     }
 
-    public Long getWorkerId() {
-        return workerId;
+    public LocalDate getDeliveryDate() {
+        return deliveryDate;
     }
 
-    public void setWorkerId(Long workerId) {
-        this.workerId = workerId;
+    public void setDeliveryDate(LocalDate deliveryDate) {
+        this.deliveryDate = deliveryDate;
     }
 
-    public String getWorkerSurname() {
-        return workerSurname;
+    public String getComment() {
+        return comment;
     }
 
-    public void setWorkerSurname(String workerSurname) {
-        this.workerSurname = workerSurname;
-    }
-
-    public Long getStoreId() {
-        return storeId;
-    }
-
-    public void setStoreId(Long storeId) {
-        this.storeId = storeId;
-    }
-
-    public String getStoreName() {
-        return storeName;
-    }
-
-    public void setStoreName(String storeName) {
-        this.storeName = storeName;
-    }
-
-    public Long getStatusId() {
-        return statusId;
-    }
-
-    public void setStatusId(Long statusId) {
-        this.statusId = statusId;
-    }
-
-    public String getStatusName() {
-        return statusName;
-    }
-
-    public void setStatusName(String statusName) {
-        this.statusName = statusName;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public Long getWarehouseId() {
@@ -109,6 +75,22 @@ public class OrderDTO implements Serializable {
 
     public void setWarehouseName(String warehouseName) {
         this.warehouseName = warehouseName;
+    }
+
+    public Long getStatusId() {
+        return statusId;
+    }
+
+    public void setStatusId(Long statusId) {
+        this.statusId = statusId;
+    }
+
+    public String getStatusName() {
+        return statusName;
+    }
+
+    public void setStatusName(String statusName) {
+        this.statusName = statusName;
     }
 
     @Override
@@ -134,14 +116,12 @@ public class OrderDTO implements Serializable {
         return "OrderDTO{" +
             "id=" + getId() +
             ", orderDate='" + getOrderDate() + "'" +
-            ", workerId=" + getWorkerId() +
-            ", workerSurname='" + getWorkerSurname() + "'" +
-            ", storeId=" + getStoreId() +
-            ", storeName='" + getStoreName() + "'" +
-            ", statusId=" + getStatusId() +
-            ", statusName='" + getStatusName() + "'" +
+            ", deliveryDate='" + getDeliveryDate() + "'" +
+            ", comment='" + getComment() + "'" +
             ", warehouseId=" + getWarehouseId() +
             ", warehouseName='" + getWarehouseName() + "'" +
+            ", statusId=" + getStatusId() +
+            ", statusName='" + getStatusName() + "'" +
             "}";
     }
 }

@@ -34,6 +34,9 @@ public class Manager implements Serializable {
     @Column(name = "hired_date")
     private Instant hiredDate;
 
+    @OneToMany(mappedBy = "managerNote")
+    private Set<Note> notes = new HashSet<>();
+
     @ManyToMany
     @JoinTable(name = "manager_worker",
                joinColumns = @JoinColumn(name = "manager_id", referencedColumnName = "id"),
@@ -86,6 +89,31 @@ public class Manager implements Serializable {
 
     public void setHiredDate(Instant hiredDate) {
         this.hiredDate = hiredDate;
+    }
+
+    public Set<Note> getNotes() {
+        return notes;
+    }
+
+    public Manager notes(Set<Note> notes) {
+        this.notes = notes;
+        return this;
+    }
+
+    public Manager addNote(Note note) {
+        this.notes.add(note);
+        note.setManagerNote(this);
+        return this;
+    }
+
+    public Manager removeNote(Note note) {
+        this.notes.remove(note);
+        note.setManagerNote(null);
+        return this;
+    }
+
+    public void setNotes(Set<Note> notes) {
+        this.notes = notes;
     }
 
     public Set<Worker> getWorkers() {

@@ -16,6 +16,10 @@ public class OrderItemDTO implements Serializable {
     @NotNull
     private Long quantity;
 
+    private String atr1;
+
+    private String atr2;
+
 
     private Long productId;
 
@@ -45,6 +49,22 @@ public class OrderItemDTO implements Serializable {
 
     public void setQuantity(Long quantity) {
         this.quantity = quantity;
+    }
+
+    public String getAtr1() {
+        return atr1;
+    }
+
+    public void setAtr1(String atr1) {
+        this.atr1 = atr1;
+    }
+
+    public String getAtr2() {
+        return atr2;
+    }
+
+    public void setAtr2(String atr2) {
+        this.atr2 = atr2;
     }
 
     public Long getProductId() {
@@ -95,6 +115,8 @@ public class OrderItemDTO implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", quantity=" + getQuantity() +
+            ", atr1='" + getAtr1() + "'" +
+            ", atr2='" + getAtr2() + "'" +
             ", productId=" + getProductId() +
             ", productName='" + getProductName() + "'" +
             ", orderId=" + getOrderId() +

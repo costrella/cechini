@@ -12,6 +12,18 @@
                 <dd>
                     <span>{{ store.name }}</span>
                 </dd>
+                <dt><span jhiTranslate="cechiniApp.store.nip">Nip</span></dt>
+                <dd>
+                    <span>{{ store.nip }}</span>
+                </dd>
+                <dt><span jhiTranslate="cechiniApp.store.desc">Desc</span></dt>
+                <dd>
+                    <span>{{ store.desc }}</span>
+                </dd>
+                <dt><span jhiTranslate="cechiniApp.store.visited">Visited</span></dt>
+                <dd>
+                    <span>{{ store.visited }}</span>
+                </dd>
                 <dt><span jhiTranslate="cechiniApp.store.worker">Worker</span></dt>
                 <dd>
                     <div *ngIf="store.workerId">
@@ -21,7 +33,7 @@
                 <dt><span jhiTranslate="cechiniApp.store.location">Location</span></dt>
                 <dd>
                     <div *ngIf="store.locationId">
-                        <a [routerLink]="['/location', store.locationId, 'view']">{{ store.locationCity }}</a>
+                        <a [routerLink]="['/location', store.locationId, 'view']">{{ store.locationId }}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="cechiniApp.store.storegroup">Storegroup</span></dt>

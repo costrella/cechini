@@ -15,7 +15,7 @@
       "relationshipName": "store"
     }
   ],
-  "changelogDate": "20200903190808",
+  "changelogDate": "20200921170336",
   "entityTableName": "store_group",
   "dto": "mapstruct",
   "pagination": "pagination",

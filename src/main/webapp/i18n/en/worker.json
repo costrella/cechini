@@ -20,14 +20,15 @@
       "surname": "Surname",
       "hiredDate": "Hired Date",
       "desc": "Desc",
+      "phone": "Phone",
       "login": "Login",
       "password": "Password",
       "target": "Target",
+      "active": "Active",
+      "note": "Note",
       "store": "Store",
-      "order": "Order",
       "report": "Report",
-      "route": "Route",
-      "status": "Status",
+      "track": "Track",
       "manager": "Manager"
     }
   }

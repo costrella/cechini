@@ -24,6 +24,10 @@
                 <dd>
                     <span>{{ worker.desc }}</span>
                 </dd>
+                <dt><span jhiTranslate="cechiniApp.worker.phone">Phone</span></dt>
+                <dd>
+                    <span>{{ worker.phone }}</span>
+                </dd>
                 <dt><span jhiTranslate="cechiniApp.worker.login">Login</span></dt>
                 <dd>
                     <span>{{ worker.login }}</span>
@@ -36,11 +40,9 @@
                 <dd>
                     <span>{{ worker.target }}</span>
                 </dd>
-                <dt><span jhiTranslate="cechiniApp.worker.status">Status</span></dt>
+                <dt><span jhiTranslate="cechiniApp.worker.active">Active</span></dt>
                 <dd>
-                    <div *ngIf="worker.statusId">
-                        <a [routerLink]="['/status', worker.statusId, 'view']">{{ worker.statusName }}</a>
-                    </div>
+                    <span>{{ worker.active }}</span>
                 </dd>
             </dl>
 

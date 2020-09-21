@@ -13,7 +13,10 @@ import org.mapstruct.*;
 public interface ManagerMapper extends EntityMapper<ManagerDTO, Manager> {
 
 
+    @Mapping(target = "notes", ignore = true)
+    @Mapping(target = "removeNote", ignore = true)
     @Mapping(target = "removeWorker", ignore = true)
+    Manager toEntity(ManagerDTO managerDTO);
 
     default Manager fromId(Long id) {
         if (id == null) {

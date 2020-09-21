@@ -15,8 +15,6 @@ public interface StatusMapper extends EntityMapper<StatusDTO, Status> {
 
     @Mapping(target = "orders", ignore = true)
     @Mapping(target = "removeOrder", ignore = true)
-    @Mapping(target = "workers", ignore = true)
-    @Mapping(target = "removeWorker", ignore = true)
     Status toEntity(StatusDTO statusDTO);
 
     default Status fromId(Long id) {

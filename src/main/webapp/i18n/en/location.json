@@ -20,7 +20,7 @@
       "lat": "Lat",
       "lng": "Lng",
       "store": "Store",
-      "route": "Route",
+      "track": "Track",
       "warehouse": "Warehouse",
       "city": "City"
     }

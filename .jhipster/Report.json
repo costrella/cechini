@@ -10,11 +10,7 @@
       "fieldType": "LocalDate"
     },
     {
-      "fieldName": "workerDesc",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "managerDesc",
+      "fieldName": "desc",
       "fieldType": "String"
     }
   ],
@@ -26,9 +22,16 @@
       "relationshipName": "photos"
     },
     {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "note",
+      "otherEntityRelationshipName": "report",
+      "relationshipName": "note"
+    },
+    {
       "relationshipType": "many-to-one",
       "otherEntityName": "worker",
       "otherEntityRelationshipName": "report",
+      "relationshipValidateRules": "required",
       "relationshipName": "worker",
       "otherEntityField": "surname"
     },
@@ -36,11 +39,19 @@
       "relationshipType": "many-to-one",
       "otherEntityName": "store",
       "otherEntityRelationshipName": "report",
+      "relationshipValidateRules": "required",
       "relationshipName": "store",
       "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "order",
+      "otherEntityRelationshipName": "report",
+      "relationshipName": "order",
+      "otherEntityField": "id"
     }
   ],
-  "changelogDate": "20200903191408",
+  "changelogDate": "20200921170936",
   "entityTableName": "report",
   "dto": "mapstruct",
   "pagination": "pagination",

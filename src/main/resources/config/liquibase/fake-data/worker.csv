@@ -1,11 +1,11 @@
-id;name;surname;hired_date;jhi_desc;login;password;target
-1;contingency connect Costa Rica;Analyst metrics quantifying;2020-09-03;robust Kip;stable Berkshire;South Carolina;7375
-2;deposit Lead harness;West Virginia connecting deposit;2020-09-03;Avon multi-byte Plains;Utah South Dakota eyeballs;synergistic bypassing Sleek Rubber Shirt;98495
-3;withdrawal withdrawal;navigate e-tailers;2020-09-03;global;PCI holistic schemas;mindshare Diverse;68535
-4;sky blue protocol Frozen;Intelligent Plastic Hat Auto Loan Account;2020-09-03;SCSI;payment;Garden Multi-lateral Corporate;97429
-5;Avon impactful;alarm Wyoming;2020-09-03;Networked override cross-platform;Belize Dollar Credit Card Account SQL;Alley Hollow Virgin Islands, British;33059
-6;Global Switchable clicks-and-mortar;matrices;2020-09-03;Regional Re-contextualized;holistic;Bermuda;36905
-7;Rubber sensor;strategize Home Loan Account;2020-09-03;multi-byte cross-platform;navigate;Universal vertical;72949
-8;Consultant;Generic Connecticut Personal Loan Account;2020-09-02;overriding;vortals innovate Product;XML;64021
-9;Wisconsin;Towels Ergonomic Industrial;2020-09-03;array Reverse-engineered;orchid virtual;Licensed Steel Table Interactions;44323
-10;Persistent payment Managed;upward-trending Savings Account;2020-09-03;Balanced Toys;Principal back-end quantify;revolutionize invoice Baby;40545
+id;name;surname;hired_date;jhi_desc;phone;login;password;target;active
+1;contingency connect Costa Rica;Analyst metrics quantifying;2020-09-21;robust Kip;1-284-415-7076;Lead;open-source West Virginia;82368;true
+2;Grass-roots Analyst;multi-byte;2020-09-21;Planner COM;428-378-1056 x39463;action-items navigate;leverage Gorgeous Cotton Cheese;87361;false
+3;Lake;Ireland program magenta;2020-09-20;Puerto Rico;(193) 012-5671;SCSI;payment;69019;false
+4;Multi-lateral;Frozen Lesotho Concrete;2020-09-21;alarm Wyoming;1-824-717-3761;invoice pricing structure;Grocery sexy;97503;false
+5;Global Switchable clicks-and-mortar;matrices;2020-09-21;Regional Re-contextualized;(242) 503-4157;withdrawal e-markets;Health multi-byte;79047;false
+6;navigate;Universal vertical;2020-09-20;Consultant;1-065-169-9082 x74437;access XML withdrawal;Branding Towels;8344;false
+7;Architect;array Reverse-engineered;2020-09-21;Auto Loan Account;1-507-049-9492;payment Managed;upward-trending Savings Account;21967;true
+8;Small Rubber Salad;Consultant Soft Auto Loan Account;2020-09-21;invoice Baby transition;536-005-9079 x072;paradigm feed Investment Account;digital Steel;62942;true
+9;turn-key strategize;6th generation Tanzanian Shilling SCSI;2020-09-20;PCI;884-462-3761 x80722;networks;red;50217;true
+10;UIC-Franc models;Lead;2020-09-20;digital Gloves Plastic;(103) 602-9568;backing up copying Incredible;Concrete Infrastructure panel;40180;true

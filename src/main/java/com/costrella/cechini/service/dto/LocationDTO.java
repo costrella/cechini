@@ -6,7 +6,7 @@ import java.io.Serializable;
  * A DTO for the {@link com.costrella.cechini.domain.Location} entity.
  */
 public class LocationDTO implements Serializable {
-
+    
     private Long id;
 
     private String street;
@@ -15,10 +15,11 @@ public class LocationDTO implements Serializable {
 
     private String lng;
 
-    private String cityName;
 
     private Long cityId;
 
+    private String cityName;
+    
     public Long getId() {
         return id;
     }
@@ -93,6 +94,7 @@ public class LocationDTO implements Serializable {
             ", lat='" + getLat() + "'" +
             ", lng='" + getLng() + "'" +
             ", cityId=" + getCityId() +
+            ", cityName='" + getCityName() + "'" +
             "}";
     }
 }

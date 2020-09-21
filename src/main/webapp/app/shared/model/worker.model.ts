@@ -1,8 +1,8 @@
 import { Moment } from 'moment';
+import { INote } from 'app/shared/model/note.model';
 import { IStore } from 'app/shared/model/store.model';
-import { IOrder } from 'app/shared/model/order.model';
 import { IReport } from 'app/shared/model/report.model';
-import { IRoute } from 'app/shared/model/route.model';
+import { ITrack } from 'app/shared/model/track.model';
 import { IManager } from 'app/shared/model/manager.model';
 
 export interface IWorker {
@@ -11,15 +11,15 @@ export interface IWorker {
   surname?: string;
   hiredDate?: Moment;
   desc?: string;
+  phone?: string;
   login?: string;
   password?: string;
   target?: number;
+  active?: boolean;
+  notes?: INote[];
   stores?: IStore[];
-  orders?: IOrder[];
   reports?: IReport[];
-  routes?: IRoute[];
-  statusName?: string;
-  statusId?: number;
+  tracks?: ITrack[];
   managers?: IManager[];
 }
 
@@ -30,15 +30,17 @@ export class Worker implements IWorker {
     public surname?: string,
     public hiredDate?: Moment,
     public desc?: string,
+    public phone?: string,
     public login?: string,
     public password?: string,
     public target?: number,
+    public active?: boolean,
+    public notes?: INote[],
     public stores?: IStore[],
-    public orders?: IOrder[],
     public reports?: IReport[],
-    public routes?: IRoute[],
-    public statusName?: string,
-    public statusId?: number,
+    public tracks?: ITrack[],
     public managers?: IManager[]
-  ) {}
+  ) {
+    this.active = this.active || false;
+  }
 }

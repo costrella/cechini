@@ -7,16 +7,12 @@ import { Observable } from 'rxjs';
 
 import { IOrder, Order } from 'app/shared/model/order.model';
 import { OrderService } from './order.service';
-import { IWorker } from 'app/shared/model/worker.model';
-import { WorkerService } from 'app/entities/worker/worker.service';
-import { IStore } from 'app/shared/model/store.model';
-import { StoreService } from 'app/entities/store/store.service';
-import { IStatus } from 'app/shared/model/status.model';
-import { StatusService } from 'app/entities/status/status.service';
 import { IWarehouse } from 'app/shared/model/warehouse.model';
 import { WarehouseService } from 'app/entities/warehouse/warehouse.service';
+import { IStatus } from 'app/shared/model/status.model';
+import { StatusService } from 'app/entities/status/status.service';
 
-type SelectableEntity = IWorker | IStore | IStatus | IWarehouse;
+type SelectableEntity = IWarehouse | IStatus;
 
 @Component({
   selector: 'jhi-order-update',
@@ -24,27 +20,24 @@ type SelectableEntity = IWorker | IStore | IStatus | IWarehouse;
 })
 export class OrderUpdateComponent implements OnInit {
   isSaving = false;
-  workers: IWorker[] = [];
-  stores: IStore[] = [];
-  statuses: IStatus[] = [];
   warehouses: IWarehouse[] = [];
+  statuses: IStatus[] = [];
   orderDateDp: any;
+  deliveryDateDp: any;
 
   editForm = this.fb.group({
     id: [],
     orderDate: [null, [Validators.required]],
-    workerId: [null, Validators.required],
-    storeId: [null, Validators.required],
-    statusId: [null, Validators.required],
+    deliveryDate: [null, [Validators.required]],
+    comment: [null, [Validators.maxLength(2000)]],
     warehouseId: [],
+    statusId: [null, Validators.required],
   });
 
   constructor(
     protected orderService: OrderService,
-    protected workerService: WorkerService,
-    protected storeService: StoreService,
-    protected statusService: StatusService,
     protected warehouseService: WarehouseService,
+    protected statusService: StatusService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -53,13 +46,9 @@ export class OrderUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ order }) => {
       this.updateForm(order);
 
-      this.workerService.query().subscribe((res: HttpResponse<IWorker[]>) => (this.workers = res.body || []));
-
-      this.storeService.query().subscribe((res: HttpResponse<IStore[]>) => (this.stores = res.body || []));
+      this.warehouseService.query().subscribe((res: HttpResponse<IWarehouse[]>) => (this.warehouses = res.body || []));
 
       this.statusService.query().subscribe((res: HttpResponse<IStatus[]>) => (this.statuses = res.body || []));
-
-      this.warehouseService.query().subscribe((res: HttpResponse<IWarehouse[]>) => (this.warehouses = res.body || []));
     });
   }
 
@@ -67,10 +56,10 @@ export class OrderUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: order.id,
       orderDate: order.orderDate,
-      workerId: order.workerId,
-      storeId: order.storeId,
-      statusId: order.statusId,
+      deliveryDate: order.deliveryDate,
+      comment: order.comment,
       warehouseId: order.warehouseId,
+      statusId: order.statusId,
     });
   }
 
@@ -93,10 +82,10 @@ export class OrderUpdateComponent implements OnInit {
       ...new Order(),
       id: this.editForm.get(['id'])!.value,
       orderDate: this.editForm.get(['orderDate'])!.value,
-      workerId: this.editForm.get(['workerId'])!.value,
-      storeId: this.editForm.get(['storeId'])!.value,
-      statusId: this.editForm.get(['statusId'])!.value,
+      deliveryDate: this.editForm.get(['deliveryDate'])!.value,
+      comment: this.editForm.get(['comment'])!.value,
       warehouseId: this.editForm.get(['warehouseId'])!.value,
+      statusId: this.editForm.get(['statusId'])!.value,
     };
   }
 

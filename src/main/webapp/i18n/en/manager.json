@@ -19,6 +19,7 @@
       "name": "Name",
       "surname": "Surname",
       "hiredDate": "Hired Date",
+      "note": "Note",
       "worker": "Worker"
     }
   }

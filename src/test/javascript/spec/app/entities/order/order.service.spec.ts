@@ -24,7 +24,7 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new Order(0, currentDate);
+      elemDefault = new Order(0, currentDate, currentDate, 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -32,6 +32,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             orderDate: currentDate.format(DATE_FORMAT),
+            deliveryDate: currentDate.format(DATE_FORMAT),
           },
           elemDefault
         );
@@ -48,6 +49,7 @@ describe('Service Tests', () => {
           {
             id: 0,
             orderDate: currentDate.format(DATE_FORMAT),
+            deliveryDate: currentDate.format(DATE_FORMAT),
           },
           elemDefault
         );
@@ -55,6 +57,7 @@ describe('Service Tests', () => {
         const expected = Object.assign(
           {
             orderDate: currentDate,
+            deliveryDate: currentDate,
           },
           returnedFromService
         );
@@ -70,6 +73,8 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             orderDate: currentDate.format(DATE_FORMAT),
+            deliveryDate: currentDate.format(DATE_FORMAT),
+            comment: 'BBBBBB',
           },
           elemDefault
         );
@@ -77,6 +82,7 @@ describe('Service Tests', () => {
         const expected = Object.assign(
           {
             orderDate: currentDate,
+            deliveryDate: currentDate,
           },
           returnedFromService
         );
@@ -92,6 +98,8 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             orderDate: currentDate.format(DATE_FORMAT),
+            deliveryDate: currentDate.format(DATE_FORMAT),
+            comment: 'BBBBBB',
           },
           elemDefault
         );
@@ -99,6 +107,7 @@ describe('Service Tests', () => {
         const expected = Object.assign(
           {
             orderDate: currentDate,
+            deliveryDate: currentDate,
           },
           returnedFromService
         );

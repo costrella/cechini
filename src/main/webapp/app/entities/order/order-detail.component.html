@@ -12,28 +12,24 @@
                 <dd>
                     <span>{{ order.orderDate }}</span>
                 </dd>
-                <dt><span jhiTranslate="cechiniApp.order.worker">Worker</span></dt>
+                <dt><span jhiTranslate="cechiniApp.order.deliveryDate">Delivery Date</span></dt>
                 <dd>
-                    <div *ngIf="order.workerId">
-                        <a [routerLink]="['/worker', order.workerId, 'view']">{{ order.workerSurname }}</a>
-                    </div>
+                    <span>{{ order.deliveryDate }}</span>
                 </dd>
-                <dt><span jhiTranslate="cechiniApp.order.store">Store</span></dt>
+                <dt><span jhiTranslate="cechiniApp.order.comment">Comment</span></dt>
                 <dd>
-                    <div *ngIf="order.storeId">
-                        <a [routerLink]="['/store', order.storeId, 'view']">{{ order.storeName }}</a>
+                    <span>{{ order.comment }}</span>
+                </dd>
+                <dt><span jhiTranslate="cechiniApp.order.warehouse">Warehouse</span></dt>
+                <dd>
+                    <div *ngIf="order.warehouseId">
+                        <a [routerLink]="['/warehouse', order.warehouseId, 'view']">{{ order.warehouseName }}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="cechiniApp.order.status">Status</span></dt>
                 <dd>
                     <div *ngIf="order.statusId">
                         <a [routerLink]="['/status', order.statusId, 'view']">{{ order.statusName }}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="cechiniApp.order.warehouse">Warehouse</span></dt>
-                <dd>
-                    <div *ngIf="order.warehouseId">
-                        <a [routerLink]="['/warehouse', order.warehouseId, 'view']">{{ order.warehouseName }}</a>
                     </div>
                 </dd>
             </dl>

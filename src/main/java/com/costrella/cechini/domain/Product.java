@@ -26,6 +26,15 @@ public class Product implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "ean")
+    private String ean;
+
+    @Column(name = "atr_1")
+    private String atr1;
+
+    @Column(name = "atr_2")
+    private String atr2;
+
     @OneToMany(mappedBy = "product")
     private Set<OrderItem> orderItems = new HashSet<>();
 
@@ -49,6 +58,45 @@ public class Product implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getEan() {
+        return ean;
+    }
+
+    public Product ean(String ean) {
+        this.ean = ean;
+        return this;
+    }
+
+    public void setEan(String ean) {
+        this.ean = ean;
+    }
+
+    public String getAtr1() {
+        return atr1;
+    }
+
+    public Product atr1(String atr1) {
+        this.atr1 = atr1;
+        return this;
+    }
+
+    public void setAtr1(String atr1) {
+        this.atr1 = atr1;
+    }
+
+    public String getAtr2() {
+        return atr2;
+    }
+
+    public Product atr2(String atr2) {
+        this.atr2 = atr2;
+        return this;
+    }
+
+    public void setAtr2(String atr2) {
+        this.atr2 = atr2;
     }
 
     public Set<OrderItem> getOrderItems() {
@@ -99,6 +147,9 @@ public class Product implements Serializable {
         return "Product{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", ean='" + getEan() + "'" +
+            ", atr1='" + getAtr1() + "'" +
+            ", atr2='" + getAtr2() + "'" +
             "}";
     }
 }

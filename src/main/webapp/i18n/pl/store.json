@@ -17,7 +17,10 @@
         "title": "Store"
       },
       "name": "Name",
-      "order": "Order",
+      "nip": "Nip",
+      "desc": "Desc",
+      "visited": "Visited",
+      "note": "Note",
       "report": "Report",
       "worker": "Worker",
       "location": "Location",

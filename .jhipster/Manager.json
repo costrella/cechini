@@ -18,6 +18,12 @@
   ],
   "relationships": [
     {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "note",
+      "otherEntityRelationshipName": "managerNote",
+      "relationshipName": "note"
+    },
+    {
       "relationshipType": "many-to-many",
       "otherEntityName": "worker",
       "otherEntityRelationshipName": "manager",
@@ -26,7 +32,7 @@
       "ownerSide": true
     }
   ],
-  "changelogDate": "20200903190908",
+  "changelogDate": "20200921170436",
   "entityTableName": "manager",
   "dto": "mapstruct",
   "pagination": "pagination",

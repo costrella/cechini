@@ -22,7 +22,7 @@
       "otherEntityField": "id"
     }
   ],
-  "changelogDate": "20200903191308",
+  "changelogDate": "20200921170836",
   "entityTableName": "warehouse",
   "dto": "mapstruct",
   "pagination": "pagination",

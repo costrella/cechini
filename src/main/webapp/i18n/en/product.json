@@ -17,6 +17,9 @@
         "title": "Product"
       },
       "name": "Name",
+      "ean": "Ean",
+      "atr1": "Atr 1",
+      "atr2": "Atr 2",
       "orderItem": "Order Item"
     }
   }

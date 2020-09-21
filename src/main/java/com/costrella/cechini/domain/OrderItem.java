@@ -29,6 +29,12 @@ public class OrderItem implements Serializable {
     @Column(name = "quantity", nullable = false)
     private Long quantity;
 
+    @Column(name = "atr_1")
+    private String atr1;
+
+    @Column(name = "atr_2")
+    private String atr2;
+
     @ManyToOne
     @JsonIgnoreProperties(value = "orderItems", allowSetters = true)
     private Product product;
@@ -70,6 +76,32 @@ public class OrderItem implements Serializable {
 
     public void setQuantity(Long quantity) {
         this.quantity = quantity;
+    }
+
+    public String getAtr1() {
+        return atr1;
+    }
+
+    public OrderItem atr1(String atr1) {
+        this.atr1 = atr1;
+        return this;
+    }
+
+    public void setAtr1(String atr1) {
+        this.atr1 = atr1;
+    }
+
+    public String getAtr2() {
+        return atr2;
+    }
+
+    public OrderItem atr2(String atr2) {
+        this.atr2 = atr2;
+        return this;
+    }
+
+    public void setAtr2(String atr2) {
+        this.atr2 = atr2;
     }
 
     public Product getProduct() {
@@ -122,6 +154,8 @@ public class OrderItem implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", quantity=" + getQuantity() +
+            ", atr1='" + getAtr1() + "'" +
+            ", atr2='" + getAtr2() + "'" +
             "}";
     }
 }

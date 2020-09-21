@@ -7,8 +7,6 @@ import { Observable } from 'rxjs';
 
 import { IWorker, Worker } from 'app/shared/model/worker.model';
 import { WorkerService } from './worker.service';
-import { IStatus } from 'app/shared/model/status.model';
-import { StatusService } from 'app/entities/status/status.service';
 
 @Component({
   selector: 'jhi-worker-update',
@@ -16,7 +14,6 @@ import { StatusService } from 'app/entities/status/status.service';
 })
 export class WorkerUpdateComponent implements OnInit {
   isSaving = false;
-  statuses: IStatus[] = [];
   hiredDateDp: any;
 
   editForm = this.fb.group({
@@ -24,25 +21,19 @@ export class WorkerUpdateComponent implements OnInit {
     name: [null, [Validators.required]],
     surname: [null, [Validators.required]],
     hiredDate: [],
-    desc: [],
+    desc: [null, [Validators.maxLength(2000)]],
+    phone: [],
     login: [],
     password: [],
     target: [],
-    statusId: [],
+    active: [],
   });
 
-  constructor(
-    protected workerService: WorkerService,
-    protected statusService: StatusService,
-    protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
-  ) {}
+  constructor(protected workerService: WorkerService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ worker }) => {
       this.updateForm(worker);
-
-      this.statusService.query().subscribe((res: HttpResponse<IStatus[]>) => (this.statuses = res.body || []));
     });
   }
 
@@ -53,10 +44,11 @@ export class WorkerUpdateComponent implements OnInit {
       surname: worker.surname,
       hiredDate: worker.hiredDate,
       desc: worker.desc,
+      phone: worker.phone,
       login: worker.login,
       password: worker.password,
       target: worker.target,
-      statusId: worker.statusId,
+      active: worker.active,
     });
   }
 
@@ -82,10 +74,11 @@ export class WorkerUpdateComponent implements OnInit {
       surname: this.editForm.get(['surname'])!.value,
       hiredDate: this.editForm.get(['hiredDate'])!.value,
       desc: this.editForm.get(['desc'])!.value,
+      phone: this.editForm.get(['phone'])!.value,
       login: this.editForm.get(['login'])!.value,
       password: this.editForm.get(['password'])!.value,
       target: this.editForm.get(['target'])!.value,
-      statusId: this.editForm.get(['statusId'])!.value,
+      active: this.editForm.get(['active'])!.value,
     };
   }
 
@@ -103,9 +96,5 @@ export class WorkerUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
-  }
-
-  trackById(index: number, item: IStatus): any {
-    return item.id;
   }
 }

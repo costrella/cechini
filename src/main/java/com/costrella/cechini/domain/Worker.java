@@ -1,7 +1,6 @@
 package com.costrella.cechini.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -36,8 +35,12 @@ public class Worker implements Serializable {
     @Column(name = "hired_date")
     private LocalDate hiredDate;
 
-    @Column(name = "jhi_desc")
+    @Size(max = 2000)
+    @Column(name = "jhi_desc", length = 2000)
     private String desc;
+
+    @Column(name = "phone")
+    private String phone;
 
     @Column(name = "login")
     private String login;
@@ -48,21 +51,20 @@ public class Worker implements Serializable {
     @Column(name = "target")
     private Long target;
 
-    @OneToMany(mappedBy = "worker")
-    private Set<Store> stores = new HashSet<>();
+    @Column(name = "active")
+    private Boolean active;
+
+    @OneToMany(mappedBy = "workerNote")
+    private Set<Note> notes = new HashSet<>();
 
     @OneToMany(mappedBy = "worker")
-    private Set<Order> orders = new HashSet<>();
+    private Set<Store> stores = new HashSet<>();
 
     @OneToMany(mappedBy = "worker")
     private Set<Report> reports = new HashSet<>();
 
     @OneToMany(mappedBy = "worker")
-    private Set<Route> routes = new HashSet<>();
-
-    @ManyToOne
-    @JsonIgnoreProperties(value = "workers", allowSetters = true)
-    private Status status;
+    private Set<Track> tracks = new HashSet<>();
 
     @ManyToMany(mappedBy = "workers")
     @JsonIgnore
@@ -134,6 +136,19 @@ public class Worker implements Serializable {
         this.desc = desc;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public Worker phone(String phone) {
+        this.phone = phone;
+        return this;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public String getLogin() {
         return login;
     }
@@ -173,6 +188,44 @@ public class Worker implements Serializable {
         this.target = target;
     }
 
+    public Boolean isActive() {
+        return active;
+    }
+
+    public Worker active(Boolean active) {
+        this.active = active;
+        return this;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public Set<Note> getNotes() {
+        return notes;
+    }
+
+    public Worker notes(Set<Note> notes) {
+        this.notes = notes;
+        return this;
+    }
+
+    public Worker addNote(Note note) {
+        this.notes.add(note);
+        note.setWorkerNote(this);
+        return this;
+    }
+
+    public Worker removeNote(Note note) {
+        this.notes.remove(note);
+        note.setWorkerNote(null);
+        return this;
+    }
+
+    public void setNotes(Set<Note> notes) {
+        this.notes = notes;
+    }
+
     public Set<Store> getStores() {
         return stores;
     }
@@ -196,31 +249,6 @@ public class Worker implements Serializable {
 
     public void setStores(Set<Store> stores) {
         this.stores = stores;
-    }
-
-    public Set<Order> getOrders() {
-        return orders;
-    }
-
-    public Worker orders(Set<Order> orders) {
-        this.orders = orders;
-        return this;
-    }
-
-    public Worker addOrder(Order order) {
-        this.orders.add(order);
-        order.setWorker(this);
-        return this;
-    }
-
-    public Worker removeOrder(Order order) {
-        this.orders.remove(order);
-        order.setWorker(null);
-        return this;
-    }
-
-    public void setOrders(Set<Order> orders) {
-        this.orders = orders;
     }
 
     public Set<Report> getReports() {
@@ -248,42 +276,29 @@ public class Worker implements Serializable {
         this.reports = reports;
     }
 
-    public Set<Route> getRoutes() {
-        return routes;
+    public Set<Track> getTracks() {
+        return tracks;
     }
 
-    public Worker routes(Set<Route> routes) {
-        this.routes = routes;
+    public Worker tracks(Set<Track> tracks) {
+        this.tracks = tracks;
         return this;
     }
 
-    public Worker addRoute(Route route) {
-        this.routes.add(route);
-        route.setWorker(this);
+    public Worker addTrack(Track track) {
+        this.tracks.add(track);
+        track.setWorker(this);
         return this;
     }
 
-    public Worker removeRoute(Route route) {
-        this.routes.remove(route);
-        route.setWorker(null);
+    public Worker removeTrack(Track track) {
+        this.tracks.remove(track);
+        track.setWorker(null);
         return this;
     }
 
-    public void setRoutes(Set<Route> routes) {
-        this.routes = routes;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public Worker status(Status status) {
-        this.status = status;
-        return this;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setTracks(Set<Track> tracks) {
+        this.tracks = tracks;
     }
 
     public Set<Manager> getManagers() {
@@ -337,9 +352,11 @@ public class Worker implements Serializable {
             ", surname='" + getSurname() + "'" +
             ", hiredDate='" + getHiredDate() + "'" +
             ", desc='" + getDesc() + "'" +
+            ", phone='" + getPhone() + "'" +
             ", login='" + getLogin() + "'" +
             ", password='" + getPassword() + "'" +
             ", target=" + getTarget() +
+            ", active='" + isActive() + "'" +
             "}";
     }
 }

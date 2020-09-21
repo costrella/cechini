@@ -18,11 +18,12 @@
       },
       "number": "Number",
       "reportDate": "Report Date",
-      "workerDesc": "Worker Desc",
-      "managerDesc": "Manager Desc",
+      "desc": "Desc",
       "photos": "Photos",
+      "note": "Note",
       "worker": "Worker",
-      "store": "Store"
+      "store": "Store",
+      "order": "Order"
     }
   }
 }

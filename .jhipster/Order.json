@@ -5,6 +5,17 @@
       "fieldName": "orderDate",
       "fieldType": "LocalDate",
       "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "deliveryDate",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "comment",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "2000"
     }
   ],
   "relationships": [
@@ -15,19 +26,16 @@
       "relationshipName": "orderItem"
     },
     {
-      "relationshipType": "many-to-one",
-      "otherEntityName": "worker",
+      "relationshipType": "one-to-many",
+      "otherEntityName": "report",
       "otherEntityRelationshipName": "order",
-      "relationshipValidateRules": "required",
-      "relationshipName": "worker",
-      "otherEntityField": "surname"
+      "relationshipName": "report"
     },
     {
       "relationshipType": "many-to-one",
-      "otherEntityName": "store",
+      "otherEntityName": "warehouse",
       "otherEntityRelationshipName": "order",
-      "relationshipValidateRules": "required",
-      "relationshipName": "store",
+      "relationshipName": "warehouse",
       "otherEntityField": "name"
     },
     {
@@ -37,16 +45,9 @@
       "relationshipValidateRules": "required",
       "relationshipName": "status",
       "otherEntityField": "name"
-    },
-    {
-      "relationshipType": "many-to-one",
-      "otherEntityName": "warehouse",
-      "otherEntityRelationshipName": "order",
-      "relationshipName": "warehouse",
-      "otherEntityField": "name"
     }
   ],
-  "changelogDate": "20200903191008",
+  "changelogDate": "20200921170536",
   "entityTableName": "order",
   "dto": "mapstruct",
   "pagination": "pagination",

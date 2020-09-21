@@ -24,8 +24,11 @@
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="name"><span jhiTranslate="cechiniApp.store.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="nip"><span jhiTranslate="cechiniApp.store.nip">Nip</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="desc"><span jhiTranslate="cechiniApp.store.desc">Desc</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="visited"><span jhiTranslate="cechiniApp.store.visited">Visited</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="workerSurname"><span jhiTranslate="cechiniApp.store.worker">Worker</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="locationCity"><span jhiTranslate="cechiniApp.store.location">Location</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="locationId"><span jhiTranslate="cechiniApp.store.location">Location</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="storegroupName"><span jhiTranslate="cechiniApp.store.storegroup">Storegroup</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
@@ -34,6 +37,9 @@
                 <tr *ngFor="let store of stores ;trackBy: trackId">
                     <td><a [routerLink]="['/store', store.id, 'view']">{{ store.id }}</a></td>
                     <td>{{ store.name }}</td>
+                    <td>{{ store.nip }}</td>
+                    <td>{{ store.desc }}</td>
+                    <td>{{ store.visited }}</td>
                     <td>
                         <div *ngIf="store.workerId">
                             <a [routerLink]="['/worker', store.workerId , 'view']" >{{ store.workerSurname }}</a>
@@ -41,7 +47,7 @@
                     </td>
                     <td>
                         <div *ngIf="store.locationId">
-                            <a [routerLink]="['/location', store.locationId , 'view']" >{{ store.locationCity }}</a>
+                            <a [routerLink]="['/location', store.locationId , 'view']" >{{ store.locationId }}</a>
                         </div>
                     </td>
                     <td>

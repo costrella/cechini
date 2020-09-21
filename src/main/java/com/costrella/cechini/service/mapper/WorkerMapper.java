@@ -9,22 +9,18 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link Worker} and its DTO {@link WorkerDTO}.
  */
-@Mapper(componentModel = "spring", uses = {StatusMapper.class})
+@Mapper(componentModel = "spring", uses = {})
 public interface WorkerMapper extends EntityMapper<WorkerDTO, Worker> {
 
-    @Mapping(source = "status.id", target = "statusId")
-    @Mapping(source = "status.name", target = "statusName")
-    WorkerDTO toDto(Worker worker);
 
+    @Mapping(target = "notes", ignore = true)
+    @Mapping(target = "removeNote", ignore = true)
     @Mapping(target = "stores", ignore = true)
     @Mapping(target = "removeStore", ignore = true)
-    @Mapping(target = "orders", ignore = true)
-    @Mapping(target = "removeOrder", ignore = true)
     @Mapping(target = "reports", ignore = true)
     @Mapping(target = "removeReport", ignore = true)
-    @Mapping(target = "routes", ignore = true)
-    @Mapping(target = "removeRoute", ignore = true)
-    @Mapping(source = "statusId", target = "status")
+    @Mapping(target = "tracks", ignore = true)
+    @Mapping(target = "removeTrack", ignore = true)
     @Mapping(target = "managers", ignore = true)
     @Mapping(target = "removeManager", ignore = true)
     Worker toEntity(WorkerDTO workerDTO);

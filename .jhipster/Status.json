@@ -13,15 +13,9 @@
       "otherEntityName": "order",
       "otherEntityRelationshipName": "status",
       "relationshipName": "order"
-    },
-    {
-      "relationshipType": "one-to-many",
-      "otherEntityName": "worker",
-      "otherEntityRelationshipName": "status",
-      "relationshipName": "worker"
     }
   ],
-  "changelogDate": "20200903191808",
+  "changelogDate": "20200921171336",
   "entityTableName": "status",
   "dto": "mapstruct",
   "pagination": "pagination",

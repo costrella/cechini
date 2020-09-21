@@ -17,6 +17,12 @@
     },
     {
       "fieldName": "desc",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "2000"
+    },
+    {
+      "fieldName": "phone",
       "fieldType": "String"
     },
     {
@@ -30,20 +36,24 @@
     {
       "fieldName": "target",
       "fieldType": "Long"
+    },
+    {
+      "fieldName": "active",
+      "fieldType": "Boolean"
     }
   ],
   "relationships": [
     {
       "relationshipType": "one-to-many",
-      "otherEntityName": "store",
-      "otherEntityRelationshipName": "worker",
-      "relationshipName": "store"
+      "otherEntityName": "note",
+      "otherEntityRelationshipName": "workerNote",
+      "relationshipName": "note"
     },
     {
       "relationshipType": "one-to-many",
-      "otherEntityName": "order",
+      "otherEntityName": "store",
       "otherEntityRelationshipName": "worker",
-      "relationshipName": "order"
+      "relationshipName": "store"
     },
     {
       "relationshipType": "one-to-many",
@@ -53,16 +63,9 @@
     },
     {
       "relationshipType": "one-to-many",
-      "otherEntityName": "route",
+      "otherEntityName": "track",
       "otherEntityRelationshipName": "worker",
-      "relationshipName": "route"
-    },
-    {
-      "relationshipType": "many-to-one",
-      "otherEntityName": "status",
-      "otherEntityRelationshipName": "worker",
-      "relationshipName": "status",
-      "otherEntityField": "name"
+      "relationshipName": "track"
     },
     {
       "relationshipType": "many-to-many",
@@ -73,7 +76,7 @@
       "ownerSide": false
     }
   ],
-  "changelogDate": "20200903190608",
+  "changelogDate": "20200921170136",
   "javadoc": "Pomysły: notyfikacje",
   "entityTableName": "worker",
   "dto": "mapstruct",

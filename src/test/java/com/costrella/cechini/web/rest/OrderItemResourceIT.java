@@ -39,6 +39,12 @@ public class OrderItemResourceIT {
     private static final Long DEFAULT_QUANTITY = 1L;
     private static final Long UPDATED_QUANTITY = 2L;
 
+    private static final String DEFAULT_ATR_1 = "AAAAAAAAAA";
+    private static final String UPDATED_ATR_1 = "BBBBBBBBBB";
+
+    private static final String DEFAULT_ATR_2 = "AAAAAAAAAA";
+    private static final String UPDATED_ATR_2 = "BBBBBBBBBB";
+
     @Autowired
     private OrderItemRepository orderItemRepository;
 
@@ -65,7 +71,9 @@ public class OrderItemResourceIT {
     public static OrderItem createEntity(EntityManager em) {
         OrderItem orderItem = new OrderItem()
             .name(DEFAULT_NAME)
-            .quantity(DEFAULT_QUANTITY);
+            .quantity(DEFAULT_QUANTITY)
+            .atr1(DEFAULT_ATR_1)
+            .atr2(DEFAULT_ATR_2);
         return orderItem;
     }
     /**
@@ -77,7 +85,9 @@ public class OrderItemResourceIT {
     public static OrderItem createUpdatedEntity(EntityManager em) {
         OrderItem orderItem = new OrderItem()
             .name(UPDATED_NAME)
-            .quantity(UPDATED_QUANTITY);
+            .quantity(UPDATED_QUANTITY)
+            .atr1(UPDATED_ATR_1)
+            .atr2(UPDATED_ATR_2);
         return orderItem;
     }
 
@@ -103,6 +113,8 @@ public class OrderItemResourceIT {
         OrderItem testOrderItem = orderItemList.get(orderItemList.size() - 1);
         assertThat(testOrderItem.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testOrderItem.getQuantity()).isEqualTo(DEFAULT_QUANTITY);
+        assertThat(testOrderItem.getAtr1()).isEqualTo(DEFAULT_ATR_1);
+        assertThat(testOrderItem.getAtr2()).isEqualTo(DEFAULT_ATR_2);
     }
 
     @Test
@@ -178,7 +190,9 @@ public class OrderItemResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(orderItem.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].quantity").value(hasItem(DEFAULT_QUANTITY.intValue())));
+            .andExpect(jsonPath("$.[*].quantity").value(hasItem(DEFAULT_QUANTITY.intValue())))
+            .andExpect(jsonPath("$.[*].atr1").value(hasItem(DEFAULT_ATR_1)))
+            .andExpect(jsonPath("$.[*].atr2").value(hasItem(DEFAULT_ATR_2)));
     }
     
     @Test
@@ -193,7 +207,9 @@ public class OrderItemResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(orderItem.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
-            .andExpect(jsonPath("$.quantity").value(DEFAULT_QUANTITY.intValue()));
+            .andExpect(jsonPath("$.quantity").value(DEFAULT_QUANTITY.intValue()))
+            .andExpect(jsonPath("$.atr1").value(DEFAULT_ATR_1))
+            .andExpect(jsonPath("$.atr2").value(DEFAULT_ATR_2));
     }
     @Test
     @Transactional
@@ -217,7 +233,9 @@ public class OrderItemResourceIT {
         em.detach(updatedOrderItem);
         updatedOrderItem
             .name(UPDATED_NAME)
-            .quantity(UPDATED_QUANTITY);
+            .quantity(UPDATED_QUANTITY)
+            .atr1(UPDATED_ATR_1)
+            .atr2(UPDATED_ATR_2);
         OrderItemDTO orderItemDTO = orderItemMapper.toDto(updatedOrderItem);
 
         restOrderItemMockMvc.perform(put("/api/order-items").with(csrf())
@@ -231,6 +249,8 @@ public class OrderItemResourceIT {
         OrderItem testOrderItem = orderItemList.get(orderItemList.size() - 1);
         assertThat(testOrderItem.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testOrderItem.getQuantity()).isEqualTo(UPDATED_QUANTITY);
+        assertThat(testOrderItem.getAtr1()).isEqualTo(UPDATED_ATR_1);
+        assertThat(testOrderItem.getAtr2()).isEqualTo(UPDATED_ATR_2);
     }
 
     @Test

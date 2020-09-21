@@ -17,11 +17,12 @@
         "title": "Order"
       },
       "orderDate": "Order Date",
+      "deliveryDate": "Delivery Date",
+      "comment": "Comment",
       "orderItem": "Order Item",
-      "worker": "Worker",
-      "store": "Store",
-      "status": "Status",
-      "warehouse": "Warehouse"
+      "report": "Report",
+      "warehouse": "Warehouse",
+      "status": "Status"
     }
   }
 }

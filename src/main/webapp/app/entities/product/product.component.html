@@ -24,6 +24,9 @@
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="name"><span jhiTranslate="cechiniApp.product.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="ean"><span jhiTranslate="cechiniApp.product.ean">Ean</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="atr1"><span jhiTranslate="cechiniApp.product.atr1">Atr 1</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="atr2"><span jhiTranslate="cechiniApp.product.atr2">Atr 2</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -31,6 +34,9 @@
                 <tr *ngFor="let product of products ;trackBy: trackId">
                     <td><a [routerLink]="['/product', product.id, 'view']">{{ product.id }}</a></td>
                     <td>{{ product.name }}</td>
+                    <td>{{ product.ean }}</td>
+                    <td>{{ product.atr1 }}</td>
+                    <td>{{ product.atr2 }}</td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

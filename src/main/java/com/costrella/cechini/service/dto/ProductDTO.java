@@ -13,6 +13,12 @@ public class ProductDTO implements Serializable {
     @NotNull
     private String name;
 
+    private String ean;
+
+    private String atr1;
+
+    private String atr2;
+
     
     public Long getId() {
         return id;
@@ -28,6 +34,30 @@ public class ProductDTO implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getEan() {
+        return ean;
+    }
+
+    public void setEan(String ean) {
+        this.ean = ean;
+    }
+
+    public String getAtr1() {
+        return atr1;
+    }
+
+    public void setAtr1(String atr1) {
+        this.atr1 = atr1;
+    }
+
+    public String getAtr2() {
+        return atr2;
+    }
+
+    public void setAtr2(String atr2) {
+        this.atr2 = atr2;
     }
 
     @Override
@@ -53,6 +83,9 @@ public class ProductDTO implements Serializable {
         return "ProductDTO{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", ean='" + getEan() + "'" +
+            ", atr1='" + getAtr1() + "'" +
+            ", atr2='" + getAtr2() + "'" +
             "}";
     }
 }

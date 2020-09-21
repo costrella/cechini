@@ -2,8 +2,6 @@ package com.costrella.cechini.web.rest;
 
 import com.costrella.cechini.CechiniApp;
 import com.costrella.cechini.domain.Order;
-import com.costrella.cechini.domain.Worker;
-import com.costrella.cechini.domain.Store;
 import com.costrella.cechini.domain.Status;
 import com.costrella.cechini.repository.OrderRepository;
 import com.costrella.cechini.service.OrderService;
@@ -41,6 +39,12 @@ public class OrderResourceIT {
     private static final LocalDate DEFAULT_ORDER_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_ORDER_DATE = LocalDate.now(ZoneId.systemDefault());
 
+    private static final LocalDate DEFAULT_DELIVERY_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DELIVERY_DATE = LocalDate.now(ZoneId.systemDefault());
+
+    private static final String DEFAULT_COMMENT = "AAAAAAAAAA";
+    private static final String UPDATED_COMMENT = "BBBBBBBBBB";
+
     @Autowired
     private OrderRepository orderRepository;
 
@@ -66,27 +70,9 @@ public class OrderResourceIT {
      */
     public static Order createEntity(EntityManager em) {
         Order order = new Order()
-            .orderDate(DEFAULT_ORDER_DATE);
-        // Add required entity
-        Worker worker;
-        if (TestUtil.findAll(em, Worker.class).isEmpty()) {
-            worker = WorkerResourceIT.createEntity(em);
-            em.persist(worker);
-            em.flush();
-        } else {
-            worker = TestUtil.findAll(em, Worker.class).get(0);
-        }
-        order.setWorker(worker);
-        // Add required entity
-        Store store;
-        if (TestUtil.findAll(em, Store.class).isEmpty()) {
-            store = StoreResourceIT.createEntity(em);
-            em.persist(store);
-            em.flush();
-        } else {
-            store = TestUtil.findAll(em, Store.class).get(0);
-        }
-        order.setStore(store);
+            .orderDate(DEFAULT_ORDER_DATE)
+            .deliveryDate(DEFAULT_DELIVERY_DATE)
+            .comment(DEFAULT_COMMENT);
         // Add required entity
         Status status;
         if (TestUtil.findAll(em, Status.class).isEmpty()) {
@@ -107,27 +93,9 @@ public class OrderResourceIT {
      */
     public static Order createUpdatedEntity(EntityManager em) {
         Order order = new Order()
-            .orderDate(UPDATED_ORDER_DATE);
-        // Add required entity
-        Worker worker;
-        if (TestUtil.findAll(em, Worker.class).isEmpty()) {
-            worker = WorkerResourceIT.createUpdatedEntity(em);
-            em.persist(worker);
-            em.flush();
-        } else {
-            worker = TestUtil.findAll(em, Worker.class).get(0);
-        }
-        order.setWorker(worker);
-        // Add required entity
-        Store store;
-        if (TestUtil.findAll(em, Store.class).isEmpty()) {
-            store = StoreResourceIT.createUpdatedEntity(em);
-            em.persist(store);
-            em.flush();
-        } else {
-            store = TestUtil.findAll(em, Store.class).get(0);
-        }
-        order.setStore(store);
+            .orderDate(UPDATED_ORDER_DATE)
+            .deliveryDate(UPDATED_DELIVERY_DATE)
+            .comment(UPDATED_COMMENT);
         // Add required entity
         Status status;
         if (TestUtil.findAll(em, Status.class).isEmpty()) {
@@ -162,6 +130,8 @@ public class OrderResourceIT {
         assertThat(orderList).hasSize(databaseSizeBeforeCreate + 1);
         Order testOrder = orderList.get(orderList.size() - 1);
         assertThat(testOrder.getOrderDate()).isEqualTo(DEFAULT_ORDER_DATE);
+        assertThat(testOrder.getDeliveryDate()).isEqualTo(DEFAULT_DELIVERY_DATE);
+        assertThat(testOrder.getComment()).isEqualTo(DEFAULT_COMMENT);
     }
 
     @Test
@@ -207,6 +177,26 @@ public class OrderResourceIT {
 
     @Test
     @Transactional
+    public void checkDeliveryDateIsRequired() throws Exception {
+        int databaseSizeBeforeTest = orderRepository.findAll().size();
+        // set the field null
+        order.setDeliveryDate(null);
+
+        // Create the Order, which fails.
+        OrderDTO orderDTO = orderMapper.toDto(order);
+
+
+        restOrderMockMvc.perform(post("/api/orders").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(orderDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Order> orderList = orderRepository.findAll();
+        assertThat(orderList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllOrders() throws Exception {
         // Initialize the database
         orderRepository.saveAndFlush(order);
@@ -216,7 +206,9 @@ public class OrderResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(order.getId().intValue())))
-            .andExpect(jsonPath("$.[*].orderDate").value(hasItem(DEFAULT_ORDER_DATE.toString())));
+            .andExpect(jsonPath("$.[*].orderDate").value(hasItem(DEFAULT_ORDER_DATE.toString())))
+            .andExpect(jsonPath("$.[*].deliveryDate").value(hasItem(DEFAULT_DELIVERY_DATE.toString())))
+            .andExpect(jsonPath("$.[*].comment").value(hasItem(DEFAULT_COMMENT)));
     }
     
     @Test
@@ -230,7 +222,9 @@ public class OrderResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(order.getId().intValue()))
-            .andExpect(jsonPath("$.orderDate").value(DEFAULT_ORDER_DATE.toString()));
+            .andExpect(jsonPath("$.orderDate").value(DEFAULT_ORDER_DATE.toString()))
+            .andExpect(jsonPath("$.deliveryDate").value(DEFAULT_DELIVERY_DATE.toString()))
+            .andExpect(jsonPath("$.comment").value(DEFAULT_COMMENT));
     }
     @Test
     @Transactional
@@ -253,7 +247,9 @@ public class OrderResourceIT {
         // Disconnect from session so that the updates on updatedOrder are not directly saved in db
         em.detach(updatedOrder);
         updatedOrder
-            .orderDate(UPDATED_ORDER_DATE);
+            .orderDate(UPDATED_ORDER_DATE)
+            .deliveryDate(UPDATED_DELIVERY_DATE)
+            .comment(UPDATED_COMMENT);
         OrderDTO orderDTO = orderMapper.toDto(updatedOrder);
 
         restOrderMockMvc.perform(put("/api/orders").with(csrf())
@@ -266,6 +262,8 @@ public class OrderResourceIT {
         assertThat(orderList).hasSize(databaseSizeBeforeUpdate);
         Order testOrder = orderList.get(orderList.size() - 1);
         assertThat(testOrder.getOrderDate()).isEqualTo(UPDATED_ORDER_DATE);
+        assertThat(testOrder.getDeliveryDate()).isEqualTo(UPDATED_DELIVERY_DATE);
+        assertThat(testOrder.getComment()).isEqualTo(UPDATED_COMMENT);
     }
 
     @Test

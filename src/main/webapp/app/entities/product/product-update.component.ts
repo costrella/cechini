@@ -18,6 +18,9 @@ export class ProductUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     name: [null, [Validators.required]],
+    ean: [],
+    atr1: [],
+    atr2: [],
   });
 
   constructor(protected productService: ProductService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -32,6 +35,9 @@ export class ProductUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: product.id,
       name: product.name,
+      ean: product.ean,
+      atr1: product.atr1,
+      atr2: product.atr2,
     });
   }
 
@@ -54,6 +60,9 @@ export class ProductUpdateComponent implements OnInit {
       ...new Product(),
       id: this.editForm.get(['id'])!.value,
       name: this.editForm.get(['name'])!.value,
+      ean: this.editForm.get(['ean'])!.value,
+      atr1: this.editForm.get(['atr1'])!.value,
+      atr2: this.editForm.get(['atr2'])!.value,
     };
   }
 

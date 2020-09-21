@@ -20,7 +20,7 @@ describe('Service Tests', () => {
       service = injector.get(OrderItemService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new OrderItem(0, 'AAAAAAA', 0);
+      elemDefault = new OrderItem(0, 'AAAAAAA', 0, 'AAAAAAA', 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -56,6 +56,8 @@ describe('Service Tests', () => {
           {
             name: 'BBBBBB',
             quantity: 1,
+            atr1: 'BBBBBB',
+            atr2: 'BBBBBB',
           },
           elemDefault
         );
@@ -74,6 +76,8 @@ describe('Service Tests', () => {
           {
             name: 'BBBBBB',
             quantity: 1,
+            atr1: 'BBBBBB',
+            atr2: 'BBBBBB',
           },
           elemDefault
         );

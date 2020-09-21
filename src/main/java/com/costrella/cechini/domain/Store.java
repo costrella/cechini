@@ -27,8 +27,18 @@ public class Store implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "nip")
+    private String nip;
+
+    @Size(max = 2000)
+    @Column(name = "jhi_desc", length = 2000)
+    private String desc;
+
+    @Column(name = "visited")
+    private Boolean visited;
+
     @OneToMany(mappedBy = "store")
-    private Set<Order> orders = new HashSet<>();
+    private Set<Note> notes = new HashSet<>();
 
     @OneToMany(mappedBy = "store")
     private Set<Report> reports = new HashSet<>();
@@ -72,29 +82,68 @@ public class Store implements Serializable {
         this.name = name;
     }
 
-    public Set<Order> getOrders() {
-        return orders;
+    public String getNip() {
+        return nip;
     }
 
-    public Store orders(Set<Order> orders) {
-        this.orders = orders;
+    public Store nip(String nip) {
+        this.nip = nip;
         return this;
     }
 
-    public Store addOrder(Order order) {
-        this.orders.add(order);
-        order.setStore(this);
+    public void setNip(String nip) {
+        this.nip = nip;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public Store desc(String desc) {
+        this.desc = desc;
         return this;
     }
 
-    public Store removeOrder(Order order) {
-        this.orders.remove(order);
-        order.setStore(null);
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public Boolean isVisited() {
+        return visited;
+    }
+
+    public Store visited(Boolean visited) {
+        this.visited = visited;
         return this;
     }
 
-    public void setOrders(Set<Order> orders) {
-        this.orders = orders;
+    public void setVisited(Boolean visited) {
+        this.visited = visited;
+    }
+
+    public Set<Note> getNotes() {
+        return notes;
+    }
+
+    public Store notes(Set<Note> notes) {
+        this.notes = notes;
+        return this;
+    }
+
+    public Store addNote(Note note) {
+        this.notes.add(note);
+        note.setStore(this);
+        return this;
+    }
+
+    public Store removeNote(Note note) {
+        this.notes.remove(note);
+        note.setStore(null);
+        return this;
+    }
+
+    public void setNotes(Set<Note> notes) {
+        this.notes = notes;
     }
 
     public Set<Report> getReports() {
@@ -184,6 +233,9 @@ public class Store implements Serializable {
         return "Store{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", nip='" + getNip() + "'" +
+            ", desc='" + getDesc() + "'" +
+            ", visited='" + isVisited() + "'" +
             "}";
     }
 }

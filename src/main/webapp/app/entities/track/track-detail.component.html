@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="track">
+            <h2><span jhiTranslate="cechiniApp.track.detail.title">Track</span> {{ track.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="cechiniApp.track.name">Name</span></dt>
+                <dd>
+                    <span>{{ track.name }}</span>
+                </dd>
+                <dt><span jhiTranslate="cechiniApp.track.worker">Worker</span></dt>
+                <dd>
+                    <div *ngIf="track.workerId">
+                        <a [routerLink]="['/worker', track.workerId, 'view']">{{ track.workerSurname }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="cechiniApp.track.location">Location</span></dt>
+                <dd>
+                    <div *ngIf="track.locationId">
+                        <a [routerLink]="['/location', track.locationId, 'view']">{{ track.locationId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/track', track.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

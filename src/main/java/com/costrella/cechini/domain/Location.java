@@ -35,7 +35,7 @@ public class Location implements Serializable {
     private Set<Store> stores = new HashSet<>();
 
     @OneToMany(mappedBy = "location")
-    private Set<Route> routes = new HashSet<>();
+    private Set<Track> tracks = new HashSet<>();
 
     @OneToMany(mappedBy = "location")
     private Set<Warehouse> warehouses = new HashSet<>();
@@ -117,29 +117,29 @@ public class Location implements Serializable {
         this.stores = stores;
     }
 
-    public Set<Route> getRoutes() {
-        return routes;
+    public Set<Track> getTracks() {
+        return tracks;
     }
 
-    public Location routes(Set<Route> routes) {
-        this.routes = routes;
+    public Location tracks(Set<Track> tracks) {
+        this.tracks = tracks;
         return this;
     }
 
-    public Location addRoute(Route route) {
-        this.routes.add(route);
-        route.setLocation(this);
+    public Location addTrack(Track track) {
+        this.tracks.add(track);
+        track.setLocation(this);
         return this;
     }
 
-    public Location removeRoute(Route route) {
-        this.routes.remove(route);
-        route.setLocation(null);
+    public Location removeTrack(Track track) {
+        this.tracks.remove(track);
+        track.setLocation(null);
         return this;
     }
 
-    public void setRoutes(Set<Route> routes) {
-        this.routes = routes;
+    public void setTracks(Set<Track> tracks) {
+        this.tracks = tracks;
     }
 
     public Set<Warehouse> getWarehouses() {

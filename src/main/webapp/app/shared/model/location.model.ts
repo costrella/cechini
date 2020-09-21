@@ -1,5 +1,5 @@
 import { IStore } from 'app/shared/model/store.model';
-import { IRoute } from 'app/shared/model/route.model';
+import { ITrack } from 'app/shared/model/track.model';
 import { IWarehouse } from 'app/shared/model/warehouse.model';
 
 export interface ILocation {
@@ -8,10 +8,10 @@ export interface ILocation {
   lat?: string;
   lng?: string;
   stores?: IStore[];
-  routes?: IRoute[];
+  tracks?: ITrack[];
   warehouses?: IWarehouse[];
-  cityId?: number;
   cityName?: string;
+  cityId?: number;
 }
 
 export class Location implements ILocation {
@@ -21,9 +21,9 @@ export class Location implements ILocation {
     public lat?: string,
     public lng?: string,
     public stores?: IStore[],
-    public routes?: IRoute[],
+    public tracks?: ITrack[],
     public warehouses?: IWarehouse[],
-    public cityId?: number,
-    public cityName?: string
+    public cityName?: string,
+    public cityId?: number
   ) {}
 }

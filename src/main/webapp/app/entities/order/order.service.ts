@@ -52,6 +52,7 @@ export class OrderService {
   protected convertDateFromClient(order: IOrder): IOrder {
     const copy: IOrder = Object.assign({}, order, {
       orderDate: order.orderDate && order.orderDate.isValid() ? order.orderDate.format(DATE_FORMAT) : undefined,
+      deliveryDate: order.deliveryDate && order.deliveryDate.isValid() ? order.deliveryDate.format(DATE_FORMAT) : undefined,
     });
     return copy;
   }
@@ -59,6 +60,7 @@ export class OrderService {
   protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
     if (res.body) {
       res.body.orderDate = res.body.orderDate ? moment(res.body.orderDate) : undefined;
+      res.body.deliveryDate = res.body.deliveryDate ? moment(res.body.deliveryDate) : undefined;
     }
     return res;
   }
@@ -67,6 +69,7 @@ export class OrderService {
     if (res.body) {
       res.body.forEach((order: IOrder) => {
         order.orderDate = order.orderDate ? moment(order.orderDate) : undefined;
+        order.deliveryDate = order.deliveryDate ? moment(order.deliveryDate) : undefined;
       });
     }
     return res;

@@ -36,6 +36,15 @@ public class StoreResourceIT {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
+    private static final String DEFAULT_NIP = "AAAAAAAAAA";
+    private static final String UPDATED_NIP = "BBBBBBBBBB";
+
+    private static final String DEFAULT_DESC = "AAAAAAAAAA";
+    private static final String UPDATED_DESC = "BBBBBBBBBB";
+
+    private static final Boolean DEFAULT_VISITED = false;
+    private static final Boolean UPDATED_VISITED = true;
+
     @Autowired
     private StoreRepository storeRepository;
 
@@ -61,7 +70,10 @@ public class StoreResourceIT {
      */
     public static Store createEntity(EntityManager em) {
         Store store = new Store()
-            .name(DEFAULT_NAME);
+            .name(DEFAULT_NAME)
+            .nip(DEFAULT_NIP)
+            .desc(DEFAULT_DESC)
+            .visited(DEFAULT_VISITED);
         return store;
     }
     /**
@@ -72,7 +84,10 @@ public class StoreResourceIT {
      */
     public static Store createUpdatedEntity(EntityManager em) {
         Store store = new Store()
-            .name(UPDATED_NAME);
+            .name(UPDATED_NAME)
+            .nip(UPDATED_NIP)
+            .desc(UPDATED_DESC)
+            .visited(UPDATED_VISITED);
         return store;
     }
 
@@ -97,6 +112,9 @@ public class StoreResourceIT {
         assertThat(storeList).hasSize(databaseSizeBeforeCreate + 1);
         Store testStore = storeList.get(storeList.size() - 1);
         assertThat(testStore.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testStore.getNip()).isEqualTo(DEFAULT_NIP);
+        assertThat(testStore.getDesc()).isEqualTo(DEFAULT_DESC);
+        assertThat(testStore.isVisited()).isEqualTo(DEFAULT_VISITED);
     }
 
     @Test
@@ -151,7 +169,10 @@ public class StoreResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(store.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].nip").value(hasItem(DEFAULT_NIP)))
+            .andExpect(jsonPath("$.[*].desc").value(hasItem(DEFAULT_DESC)))
+            .andExpect(jsonPath("$.[*].visited").value(hasItem(DEFAULT_VISITED.booleanValue())));
     }
     
     @Test
@@ -165,7 +186,10 @@ public class StoreResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(store.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
+            .andExpect(jsonPath("$.nip").value(DEFAULT_NIP))
+            .andExpect(jsonPath("$.desc").value(DEFAULT_DESC))
+            .andExpect(jsonPath("$.visited").value(DEFAULT_VISITED.booleanValue()));
     }
     @Test
     @Transactional
@@ -188,7 +212,10 @@ public class StoreResourceIT {
         // Disconnect from session so that the updates on updatedStore are not directly saved in db
         em.detach(updatedStore);
         updatedStore
-            .name(UPDATED_NAME);
+            .name(UPDATED_NAME)
+            .nip(UPDATED_NIP)
+            .desc(UPDATED_DESC)
+            .visited(UPDATED_VISITED);
         StoreDTO storeDTO = storeMapper.toDto(updatedStore);
 
         restStoreMockMvc.perform(put("/api/stores").with(csrf())
@@ -201,6 +228,9 @@ public class StoreResourceIT {
         assertThat(storeList).hasSize(databaseSizeBeforeUpdate);
         Store testStore = storeList.get(storeList.size() - 1);
         assertThat(testStore.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testStore.getNip()).isEqualTo(UPDATED_NIP);
+        assertThat(testStore.getDesc()).isEqualTo(UPDATED_DESC);
+        assertThat(testStore.isVisited()).isEqualTo(UPDATED_VISITED);
     }
 
     @Test

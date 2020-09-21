@@ -23,9 +23,9 @@
     },
     {
       "relationshipType": "one-to-many",
-      "otherEntityName": "route",
+      "otherEntityName": "track",
       "otherEntityRelationshipName": "location",
-      "relationshipName": "route"
+      "relationshipName": "track"
     },
     {
       "relationshipType": "one-to-many",
@@ -38,10 +38,10 @@
       "otherEntityName": "city",
       "otherEntityRelationshipName": "location",
       "relationshipName": "city",
-      "otherEntityField": "id"
+      "otherEntityField": "name"
     }
   ],
-  "changelogDate": "20200903191708",
+  "changelogDate": "20200921171236",
   "entityTableName": "location",
   "dto": "mapstruct",
   "pagination": "pagination",

@@ -13,14 +13,19 @@ public class StoreDTO implements Serializable {
     @NotNull
     private String name;
 
+    private String nip;
+
+    @Size(max = 2000)
+    private String desc;
+
+    private Boolean visited;
+
 
     private Long workerId;
 
     private String workerSurname;
 
     private Long locationId;
-
-    private String locationCity;
 
     private Long storegroupId;
 
@@ -40,6 +45,30 @@ public class StoreDTO implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getNip() {
+        return nip;
+    }
+
+    public void setNip(String nip) {
+        this.nip = nip;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public Boolean isVisited() {
+        return visited;
+    }
+
+    public void setVisited(Boolean visited) {
+        this.visited = visited;
     }
 
     public Long getWorkerId() {
@@ -64,14 +93,6 @@ public class StoreDTO implements Serializable {
 
     public void setLocationId(Long locationId) {
         this.locationId = locationId;
-    }
-
-    public String getLocationCity() {
-        return locationCity;
-    }
-
-    public void setLocationCity(String locationCity) {
-        this.locationCity = locationCity;
     }
 
     public Long getStoregroupId() {
@@ -113,10 +134,12 @@ public class StoreDTO implements Serializable {
         return "StoreDTO{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", nip='" + getNip() + "'" +
+            ", desc='" + getDesc() + "'" +
+            ", visited='" + isVisited() + "'" +
             ", workerId=" + getWorkerId() +
             ", workerSurname='" + getWorkerSurname() + "'" +
             ", locationId=" + getLocationId() +
-            ", locationCity='" + getLocationCity() + "'" +
             ", storegroupId=" + getStoregroupId() +
             ", storegroupName='" + getStoregroupName() + "'" +
             "}";

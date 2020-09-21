@@ -15,7 +15,7 @@
       "relationshipName": "location"
     }
   ],
-  "changelogDate": "20200903191608",
+  "changelogDate": "20200921171136",
   "entityTableName": "city",
   "dto": "mapstruct",
   "pagination": "pagination",

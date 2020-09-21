@@ -16,11 +16,12 @@
         "product": "Product",
         "warehouse": "Warehouse",
         "report": "Report",
-        "route": "Route",
+        "track": "Track",
         "city": "City",
         "location": "Location",
         "status": "Status",
         "photo": "Photo",
+        "note": "Note",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

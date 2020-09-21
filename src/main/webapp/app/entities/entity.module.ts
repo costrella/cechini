@@ -41,8 +41,8 @@ import { RouterModule } from '@angular/router';
         loadChildren: () => import('./report/report.module').then(m => m.CechiniReportModule),
       },
       {
-        path: 'route',
-        loadChildren: () => import('./route/route.module').then(m => m.CechiniRouteModule),
+        path: 'track',
+        loadChildren: () => import('./track/track.module').then(m => m.CechiniTrackModule),
       },
       {
         path: 'city',
@@ -59,6 +59,10 @@ import { RouterModule } from '@angular/router';
       {
         path: 'photo',
         loadChildren: () => import('./photo/photo.module').then(m => m.CechiniPhotoModule),
+      },
+      {
+        path: 'note',
+        loadChildren: () => import('./note/note.module').then(m => m.CechiniNoteModule),
       },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),

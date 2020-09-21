@@ -18,6 +18,8 @@
       },
       "name": "Name",
       "quantity": "Quantity",
+      "atr1": "Atr 1",
+      "atr2": "Atr 2",
       "product": "Product",
       "order": "Order"
     }

@@ -18,8 +18,8 @@ public interface LocationMapper extends EntityMapper<LocationDTO, Location> {
 
     @Mapping(target = "stores", ignore = true)
     @Mapping(target = "removeStore", ignore = true)
-    @Mapping(target = "routes", ignore = true)
-    @Mapping(target = "removeRoute", ignore = true)
+    @Mapping(target = "tracks", ignore = true)
+    @Mapping(target = "removeTrack", ignore = true)
     @Mapping(target = "warehouses", ignore = true)
     @Mapping(target = "removeWarehouse", ignore = true)
     @Mapping(source = "cityId", target = "city")

@@ -11,8 +11,10 @@ import { IWorker } from 'app/shared/model/worker.model';
 import { WorkerService } from 'app/entities/worker/worker.service';
 import { IStore } from 'app/shared/model/store.model';
 import { StoreService } from 'app/entities/store/store.service';
+import { IOrder } from 'app/shared/model/order.model';
+import { OrderService } from 'app/entities/order/order.service';
 
-type SelectableEntity = IWorker | IStore;
+type SelectableEntity = IWorker | IStore | IOrder;
 
 @Component({
   selector: 'jhi-report-update',
@@ -22,22 +24,24 @@ export class ReportUpdateComponent implements OnInit {
   isSaving = false;
   workers: IWorker[] = [];
   stores: IStore[] = [];
+  orders: IOrder[] = [];
   reportDateDp: any;
 
   editForm = this.fb.group({
     id: [],
     number: [],
     reportDate: [],
-    workerDesc: [],
-    managerDesc: [],
-    workerId: [],
-    storeId: [],
+    desc: [],
+    workerId: [null, Validators.required],
+    storeId: [null, Validators.required],
+    orderId: [],
   });
 
   constructor(
     protected reportService: ReportService,
     protected workerService: WorkerService,
     protected storeService: StoreService,
+    protected orderService: OrderService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -49,6 +53,8 @@ export class ReportUpdateComponent implements OnInit {
       this.workerService.query().subscribe((res: HttpResponse<IWorker[]>) => (this.workers = res.body || []));
 
       this.storeService.query().subscribe((res: HttpResponse<IStore[]>) => (this.stores = res.body || []));
+
+      this.orderService.query().subscribe((res: HttpResponse<IOrder[]>) => (this.orders = res.body || []));
     });
   }
 
@@ -57,10 +63,10 @@ export class ReportUpdateComponent implements OnInit {
       id: report.id,
       number: report.number,
       reportDate: report.reportDate,
-      workerDesc: report.workerDesc,
-      managerDesc: report.managerDesc,
+      desc: report.desc,
       workerId: report.workerId,
       storeId: report.storeId,
+      orderId: report.orderId,
     });
   }
 
@@ -84,10 +90,10 @@ export class ReportUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       number: this.editForm.get(['number'])!.value,
       reportDate: this.editForm.get(['reportDate'])!.value,
-      workerDesc: this.editForm.get(['workerDesc'])!.value,
-      managerDesc: this.editForm.get(['managerDesc'])!.value,
+      desc: this.editForm.get(['desc'])!.value,
       workerId: this.editForm.get(['workerId'])!.value,
       storeId: this.editForm.get(['storeId'])!.value,
+      orderId: this.editForm.get(['orderId'])!.value,
     };
   }
 

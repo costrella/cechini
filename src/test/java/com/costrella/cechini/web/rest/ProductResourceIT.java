@@ -36,6 +36,15 @@ public class ProductResourceIT {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
+    private static final String DEFAULT_EAN = "AAAAAAAAAA";
+    private static final String UPDATED_EAN = "BBBBBBBBBB";
+
+    private static final String DEFAULT_ATR_1 = "AAAAAAAAAA";
+    private static final String UPDATED_ATR_1 = "BBBBBBBBBB";
+
+    private static final String DEFAULT_ATR_2 = "AAAAAAAAAA";
+    private static final String UPDATED_ATR_2 = "BBBBBBBBBB";
+
     @Autowired
     private ProductRepository productRepository;
 
@@ -61,7 +70,10 @@ public class ProductResourceIT {
      */
     public static Product createEntity(EntityManager em) {
         Product product = new Product()
-            .name(DEFAULT_NAME);
+            .name(DEFAULT_NAME)
+            .ean(DEFAULT_EAN)
+            .atr1(DEFAULT_ATR_1)
+            .atr2(DEFAULT_ATR_2);
         return product;
     }
     /**
@@ -72,7 +84,10 @@ public class ProductResourceIT {
      */
     public static Product createUpdatedEntity(EntityManager em) {
         Product product = new Product()
-            .name(UPDATED_NAME);
+            .name(UPDATED_NAME)
+            .ean(UPDATED_EAN)
+            .atr1(UPDATED_ATR_1)
+            .atr2(UPDATED_ATR_2);
         return product;
     }
 
@@ -97,6 +112,9 @@ public class ProductResourceIT {
         assertThat(productList).hasSize(databaseSizeBeforeCreate + 1);
         Product testProduct = productList.get(productList.size() - 1);
         assertThat(testProduct.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testProduct.getEan()).isEqualTo(DEFAULT_EAN);
+        assertThat(testProduct.getAtr1()).isEqualTo(DEFAULT_ATR_1);
+        assertThat(testProduct.getAtr2()).isEqualTo(DEFAULT_ATR_2);
     }
 
     @Test
@@ -151,7 +169,10 @@ public class ProductResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(product.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].ean").value(hasItem(DEFAULT_EAN)))
+            .andExpect(jsonPath("$.[*].atr1").value(hasItem(DEFAULT_ATR_1)))
+            .andExpect(jsonPath("$.[*].atr2").value(hasItem(DEFAULT_ATR_2)));
     }
     
     @Test
@@ -165,7 +186,10 @@ public class ProductResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(product.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
+            .andExpect(jsonPath("$.ean").value(DEFAULT_EAN))
+            .andExpect(jsonPath("$.atr1").value(DEFAULT_ATR_1))
+            .andExpect(jsonPath("$.atr2").value(DEFAULT_ATR_2));
     }
     @Test
     @Transactional
@@ -188,7 +212,10 @@ public class ProductResourceIT {
         // Disconnect from session so that the updates on updatedProduct are not directly saved in db
         em.detach(updatedProduct);
         updatedProduct
-            .name(UPDATED_NAME);
+            .name(UPDATED_NAME)
+            .ean(UPDATED_EAN)
+            .atr1(UPDATED_ATR_1)
+            .atr2(UPDATED_ATR_2);
         ProductDTO productDTO = productMapper.toDto(updatedProduct);
 
         restProductMockMvc.perform(put("/api/products").with(csrf())
@@ -201,6 +228,9 @@ public class ProductResourceIT {
         assertThat(productList).hasSize(databaseSizeBeforeUpdate);
         Product testProduct = productList.get(productList.size() - 1);
         assertThat(testProduct.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testProduct.getEan()).isEqualTo(UPDATED_EAN);
+        assertThat(testProduct.getAtr1()).isEqualTo(UPDATED_ATR_1);
+        assertThat(testProduct.getAtr2()).isEqualTo(UPDATED_ATR_2);
     }
 
     @Test

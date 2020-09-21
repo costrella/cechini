@@ -3,6 +3,7 @@ package com.costrella.cechini.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -29,22 +30,28 @@ public class Report implements Serializable {
     @Column(name = "report_date")
     private LocalDate reportDate;
 
-    @Column(name = "worker_desc")
-    private String workerDesc;
-
-    @Column(name = "manager_desc")
-    private String managerDesc;
+    @Column(name = "jhi_desc")
+    private String desc;
 
     @OneToMany(mappedBy = "report")
     private Set<Photo> photos = new HashSet<>();
 
-    @ManyToOne
+    @OneToMany(mappedBy = "report")
+    private Set<Note> notes = new HashSet<>();
+
+    @ManyToOne(optional = false)
+    @NotNull
     @JsonIgnoreProperties(value = "reports", allowSetters = true)
     private Worker worker;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
+    @NotNull
     @JsonIgnoreProperties(value = "reports", allowSetters = true)
     private Store store;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = "reports", allowSetters = true)
+    private Order order;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -81,30 +88,17 @@ public class Report implements Serializable {
         this.reportDate = reportDate;
     }
 
-    public String getWorkerDesc() {
-        return workerDesc;
+    public String getDesc() {
+        return desc;
     }
 
-    public Report workerDesc(String workerDesc) {
-        this.workerDesc = workerDesc;
+    public Report desc(String desc) {
+        this.desc = desc;
         return this;
     }
 
-    public void setWorkerDesc(String workerDesc) {
-        this.workerDesc = workerDesc;
-    }
-
-    public String getManagerDesc() {
-        return managerDesc;
-    }
-
-    public Report managerDesc(String managerDesc) {
-        this.managerDesc = managerDesc;
-        return this;
-    }
-
-    public void setManagerDesc(String managerDesc) {
-        this.managerDesc = managerDesc;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public Set<Photo> getPhotos() {
@@ -132,6 +126,31 @@ public class Report implements Serializable {
         this.photos = photos;
     }
 
+    public Set<Note> getNotes() {
+        return notes;
+    }
+
+    public Report notes(Set<Note> notes) {
+        this.notes = notes;
+        return this;
+    }
+
+    public Report addNote(Note note) {
+        this.notes.add(note);
+        note.setReport(this);
+        return this;
+    }
+
+    public Report removeNote(Note note) {
+        this.notes.remove(note);
+        note.setReport(null);
+        return this;
+    }
+
+    public void setNotes(Set<Note> notes) {
+        this.notes = notes;
+    }
+
     public Worker getWorker() {
         return worker;
     }
@@ -156,6 +175,19 @@ public class Report implements Serializable {
 
     public void setStore(Store store) {
         this.store = store;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public Report order(Order order) {
+        this.order = order;
+        return this;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
@@ -182,8 +214,7 @@ public class Report implements Serializable {
             "id=" + getId() +
             ", number='" + getNumber() + "'" +
             ", reportDate='" + getReportDate() + "'" +
-            ", workerDesc='" + getWorkerDesc() + "'" +
-            ", managerDesc='" + getManagerDesc() + "'" +
+            ", desc='" + getDesc() + "'" +
             "}";
     }
 }

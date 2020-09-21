@@ -5,6 +5,18 @@
       "fieldName": "name",
       "fieldType": "String",
       "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "ean",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "atr1",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "atr2",
+      "fieldType": "String"
     }
   ],
   "relationships": [
@@ -15,7 +27,7 @@
       "relationshipName": "orderItem"
     }
   ],
-  "changelogDate": "20200903191208",
+  "changelogDate": "20200921170736",
   "entityTableName": "product",
   "dto": "mapstruct",
   "pagination": "pagination",

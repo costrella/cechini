@@ -21,7 +21,10 @@ public class WorkerDTO implements Serializable {
 
     private LocalDate hiredDate;
 
+    @Size(max = 2000)
     private String desc;
+
+    private String phone;
 
     private String login;
 
@@ -29,10 +32,8 @@ public class WorkerDTO implements Serializable {
 
     private Long target;
 
+    private Boolean active;
 
-    private Long statusId;
-
-    private String statusName;
     
     public Long getId() {
         return id;
@@ -74,6 +75,14 @@ public class WorkerDTO implements Serializable {
         this.desc = desc;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public String getLogin() {
         return login;
     }
@@ -98,20 +107,12 @@ public class WorkerDTO implements Serializable {
         this.target = target;
     }
 
-    public Long getStatusId() {
-        return statusId;
+    public Boolean isActive() {
+        return active;
     }
 
-    public void setStatusId(Long statusId) {
-        this.statusId = statusId;
-    }
-
-    public String getStatusName() {
-        return statusName;
-    }
-
-    public void setStatusName(String statusName) {
-        this.statusName = statusName;
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     @Override
@@ -140,11 +141,11 @@ public class WorkerDTO implements Serializable {
             ", surname='" + getSurname() + "'" +
             ", hiredDate='" + getHiredDate() + "'" +
             ", desc='" + getDesc() + "'" +
+            ", phone='" + getPhone() + "'" +
             ", login='" + getLogin() + "'" +
             ", password='" + getPassword() + "'" +
             ", target=" + getTarget() +
-            ", statusId=" + getStatusId() +
-            ", statusName='" + getStatusName() + "'" +
+            ", active='" + isActive() + "'" +
             "}";
     }
 }

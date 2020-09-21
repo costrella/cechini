@@ -29,9 +29,6 @@ public class Status implements Serializable {
     @OneToMany(mappedBy = "status")
     private Set<Order> orders = new HashSet<>();
 
-    @OneToMany(mappedBy = "status")
-    private Set<Worker> workers = new HashSet<>();
-
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -77,31 +74,6 @@ public class Status implements Serializable {
 
     public void setOrders(Set<Order> orders) {
         this.orders = orders;
-    }
-
-    public Set<Worker> getWorkers() {
-        return workers;
-    }
-
-    public Status workers(Set<Worker> workers) {
-        this.workers = workers;
-        return this;
-    }
-
-    public Status addWorker(Worker worker) {
-        this.workers.add(worker);
-        worker.setStatus(this);
-        return this;
-    }
-
-    public Status removeWorker(Worker worker) {
-        this.workers.remove(worker);
-        worker.setStatus(null);
-        return this;
-    }
-
-    public void setWorkers(Set<Worker> workers) {
-        this.workers = workers;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

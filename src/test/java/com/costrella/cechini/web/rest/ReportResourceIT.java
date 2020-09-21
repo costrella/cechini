@@ -2,6 +2,8 @@ package com.costrella.cechini.web.rest;
 
 import com.costrella.cechini.CechiniApp;
 import com.costrella.cechini.domain.Report;
+import com.costrella.cechini.domain.Worker;
+import com.costrella.cechini.domain.Store;
 import com.costrella.cechini.repository.ReportRepository;
 import com.costrella.cechini.service.ReportService;
 import com.costrella.cechini.service.dto.ReportDTO;
@@ -41,11 +43,8 @@ public class ReportResourceIT {
     private static final LocalDate DEFAULT_REPORT_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_REPORT_DATE = LocalDate.now(ZoneId.systemDefault());
 
-    private static final String DEFAULT_WORKER_DESC = "AAAAAAAAAA";
-    private static final String UPDATED_WORKER_DESC = "BBBBBBBBBB";
-
-    private static final String DEFAULT_MANAGER_DESC = "AAAAAAAAAA";
-    private static final String UPDATED_MANAGER_DESC = "BBBBBBBBBB";
+    private static final String DEFAULT_DESC = "AAAAAAAAAA";
+    private static final String UPDATED_DESC = "BBBBBBBBBB";
 
     @Autowired
     private ReportRepository reportRepository;
@@ -74,8 +73,27 @@ public class ReportResourceIT {
         Report report = new Report()
             .number(DEFAULT_NUMBER)
             .reportDate(DEFAULT_REPORT_DATE)
-            .workerDesc(DEFAULT_WORKER_DESC)
-            .managerDesc(DEFAULT_MANAGER_DESC);
+            .desc(DEFAULT_DESC);
+        // Add required entity
+        Worker worker;
+        if (TestUtil.findAll(em, Worker.class).isEmpty()) {
+            worker = WorkerResourceIT.createEntity(em);
+            em.persist(worker);
+            em.flush();
+        } else {
+            worker = TestUtil.findAll(em, Worker.class).get(0);
+        }
+        report.setWorker(worker);
+        // Add required entity
+        Store store;
+        if (TestUtil.findAll(em, Store.class).isEmpty()) {
+            store = StoreResourceIT.createEntity(em);
+            em.persist(store);
+            em.flush();
+        } else {
+            store = TestUtil.findAll(em, Store.class).get(0);
+        }
+        report.setStore(store);
         return report;
     }
     /**
@@ -88,8 +106,27 @@ public class ReportResourceIT {
         Report report = new Report()
             .number(UPDATED_NUMBER)
             .reportDate(UPDATED_REPORT_DATE)
-            .workerDesc(UPDATED_WORKER_DESC)
-            .managerDesc(UPDATED_MANAGER_DESC);
+            .desc(UPDATED_DESC);
+        // Add required entity
+        Worker worker;
+        if (TestUtil.findAll(em, Worker.class).isEmpty()) {
+            worker = WorkerResourceIT.createUpdatedEntity(em);
+            em.persist(worker);
+            em.flush();
+        } else {
+            worker = TestUtil.findAll(em, Worker.class).get(0);
+        }
+        report.setWorker(worker);
+        // Add required entity
+        Store store;
+        if (TestUtil.findAll(em, Store.class).isEmpty()) {
+            store = StoreResourceIT.createUpdatedEntity(em);
+            em.persist(store);
+            em.flush();
+        } else {
+            store = TestUtil.findAll(em, Store.class).get(0);
+        }
+        report.setStore(store);
         return report;
     }
 
@@ -115,8 +152,7 @@ public class ReportResourceIT {
         Report testReport = reportList.get(reportList.size() - 1);
         assertThat(testReport.getNumber()).isEqualTo(DEFAULT_NUMBER);
         assertThat(testReport.getReportDate()).isEqualTo(DEFAULT_REPORT_DATE);
-        assertThat(testReport.getWorkerDesc()).isEqualTo(DEFAULT_WORKER_DESC);
-        assertThat(testReport.getManagerDesc()).isEqualTo(DEFAULT_MANAGER_DESC);
+        assertThat(testReport.getDesc()).isEqualTo(DEFAULT_DESC);
     }
 
     @Test
@@ -153,8 +189,7 @@ public class ReportResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(report.getId().intValue())))
             .andExpect(jsonPath("$.[*].number").value(hasItem(DEFAULT_NUMBER)))
             .andExpect(jsonPath("$.[*].reportDate").value(hasItem(DEFAULT_REPORT_DATE.toString())))
-            .andExpect(jsonPath("$.[*].workerDesc").value(hasItem(DEFAULT_WORKER_DESC)))
-            .andExpect(jsonPath("$.[*].managerDesc").value(hasItem(DEFAULT_MANAGER_DESC)));
+            .andExpect(jsonPath("$.[*].desc").value(hasItem(DEFAULT_DESC)));
     }
     
     @Test
@@ -170,8 +205,7 @@ public class ReportResourceIT {
             .andExpect(jsonPath("$.id").value(report.getId().intValue()))
             .andExpect(jsonPath("$.number").value(DEFAULT_NUMBER))
             .andExpect(jsonPath("$.reportDate").value(DEFAULT_REPORT_DATE.toString()))
-            .andExpect(jsonPath("$.workerDesc").value(DEFAULT_WORKER_DESC))
-            .andExpect(jsonPath("$.managerDesc").value(DEFAULT_MANAGER_DESC));
+            .andExpect(jsonPath("$.desc").value(DEFAULT_DESC));
     }
     @Test
     @Transactional
@@ -196,8 +230,7 @@ public class ReportResourceIT {
         updatedReport
             .number(UPDATED_NUMBER)
             .reportDate(UPDATED_REPORT_DATE)
-            .workerDesc(UPDATED_WORKER_DESC)
-            .managerDesc(UPDATED_MANAGER_DESC);
+            .desc(UPDATED_DESC);
         ReportDTO reportDTO = reportMapper.toDto(updatedReport);
 
         restReportMockMvc.perform(put("/api/reports").with(csrf())
@@ -211,8 +244,7 @@ public class ReportResourceIT {
         Report testReport = reportList.get(reportList.size() - 1);
         assertThat(testReport.getNumber()).isEqualTo(UPDATED_NUMBER);
         assertThat(testReport.getReportDate()).isEqualTo(UPDATED_REPORT_DATE);
-        assertThat(testReport.getWorkerDesc()).isEqualTo(UPDATED_WORKER_DESC);
-        assertThat(testReport.getManagerDesc()).isEqualTo(UPDATED_MANAGER_DESC);
+        assertThat(testReport.getDesc()).isEqualTo(UPDATED_DESC);
     }
 
     @Test

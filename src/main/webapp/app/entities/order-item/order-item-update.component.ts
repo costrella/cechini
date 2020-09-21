@@ -27,6 +27,8 @@ export class OrderItemUpdateComponent implements OnInit {
     id: [],
     name: [null, [Validators.required]],
     quantity: [null, [Validators.required]],
+    atr1: [],
+    atr2: [],
     productId: [],
     orderId: [],
   });
@@ -54,6 +56,8 @@ export class OrderItemUpdateComponent implements OnInit {
       id: orderItem.id,
       name: orderItem.name,
       quantity: orderItem.quantity,
+      atr1: orderItem.atr1,
+      atr2: orderItem.atr2,
       productId: orderItem.productId,
       orderId: orderItem.orderId,
     });
@@ -79,6 +83,8 @@ export class OrderItemUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       name: this.editForm.get(['name'])!.value,
       quantity: this.editForm.get(['quantity'])!.value,
+      atr1: this.editForm.get(['atr1'])!.value,
+      atr2: this.editForm.get(['atr2'])!.value,
       productId: this.editForm.get(['productId'])!.value,
       orderId: this.editForm.get(['orderId'])!.value,
     };
