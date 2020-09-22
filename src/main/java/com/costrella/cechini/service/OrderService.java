@@ -67,13 +67,13 @@ public class OrderService {
         log.debug("Request to get all Orders List");
         return orderRepository.findAll().stream()
             .map(orderMapper::toDto).collect(Collectors.toList());
-
+    }
 
     /**
      *  Get all the orders where Report is {@code null}.
      *  @return the list of entities.
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public List<OrderDTO> findAllWhereReportIsNull() {
         log.debug("Request to get all orders where Report is null");
         return StreamSupport
