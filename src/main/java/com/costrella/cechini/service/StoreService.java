@@ -3,6 +3,7 @@ package com.costrella.cechini.service;
 import com.costrella.cechini.domain.Store;
 import com.costrella.cechini.repository.StoreRepository;
 import com.costrella.cechini.service.dto.StoreDTO;
+import com.costrella.cechini.service.dto.WorkerDTO;
 import com.costrella.cechini.service.mapper.StoreMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +13,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing {@link Store}.
@@ -56,6 +59,12 @@ public class StoreService {
         log.debug("Request to get all Stores");
         return storeRepository.findAll(pageable)
             .map(storeMapper::toDto);
+    }
+
+    @Transactional(readOnly = true)
+    public List<StoreDTO> findAll() {
+        return storeRepository.findAll().stream()
+            .map(storeMapper::toDto).collect(Collectors.toList());
     }
 
 

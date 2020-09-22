@@ -14,6 +14,40 @@
 
     <jhi-alert></jhi-alert>
 
+    <div class="row">
+        <div class="col-md-5">
+            <h4>Filter by worker and store</h4>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" jhiTranslate="cechiniApp.worker.home.title">Workers</span>
+                </div>
+
+                <select  [(ngModel)]="worker" name="worker"
+                #name="ngModel" (ngModelChange)="filter()" class="form-control">
+                    <option value=""></option>
+                    <option *ngFor="let w of workers" [ngValue]="w">
+                        {{w.surname}} {{w.name}}
+                    </option>
+                </select>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" jhiTranslate="cechiniApp.store.home.title">Stores</span>
+                </div>
+
+                <select  [(ngModel)]="store" name="store"
+                #name="ngModel" (ngModelChange)="filter()" class="form-control">
+                    <option value=""></option>
+                    <option *ngFor="let s of stores" [ngValue]="s">
+                        {{s.name}}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+
     <div class="alert alert-warning" id="no-result" *ngIf="reports?.length === 0">
         <span jhiTranslate="cechiniApp.report.home.notFound">No reports found</span>
     </div>

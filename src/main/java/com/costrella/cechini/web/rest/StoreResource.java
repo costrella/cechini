@@ -1,6 +1,7 @@
 package com.costrella.cechini.web.rest;
 
 import com.costrella.cechini.service.StoreService;
+import com.costrella.cechini.service.dto.WorkerDTO;
 import com.costrella.cechini.web.rest.errors.BadRequestAlertException;
 import com.costrella.cechini.service.dto.StoreDTO;
 
@@ -96,6 +97,12 @@ public class StoreResource {
         Page<StoreDTO> page = storeService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    @GetMapping("/stores/all")
+    public ResponseEntity<List<StoreDTO>> getAllStores() {
+        log.debug("REST request to get a page of Workers");
+        return ResponseEntity.ok().body(storeService.findAll());
     }
 
     /**

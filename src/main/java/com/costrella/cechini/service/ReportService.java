@@ -76,13 +76,11 @@ public class ReportService {
     }
 
     @Transactional(readOnly = true)
-    public Page<ReportDTO> findAllByExample(Pageable pageable, Long workerId, Long storeId, Long warehouseId) {
+    public Page<ReportDTO> findByStoreAndWorker(Pageable pageable, Long workerId, Long storeId) {
         Report report = new Report();
-        report.setStore(new Store().id(storeId));
-        report.setWorker(new Worker().id(workerId));
+        if(storeId != 0) report.setStore(new Store().id(storeId));
+        if(workerId != 0) report.setWorker(new Worker().id(workerId));
         return reportRepository.findAll(Example.of(report), pageable).map(reportMapper::toDto);
-//        return reportRepository.findAllByWorkerIdAndStoreId(id, storeId,  pageable)
-//            .map(reportMapper::toDto);
     }
 
     @Transactional(readOnly = true)

@@ -35,4 +35,8 @@ export class StoreService {
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
+
+  findAll(): Observable<EntityArrayResponseType> {
+    return this.http.get<IStore[]>(`${this.resourceUrl}/all`, { observe: 'response' });
+  }
 }

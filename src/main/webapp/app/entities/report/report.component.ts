@@ -1,15 +1,17 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
-import { ActivatedRoute, ParamMap, Router, Data } from '@angular/router';
-import { Subscription, combineLatest } from 'rxjs';
-import { JhiEventManager } from 'ng-jhipster';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Data, ParamMap, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
-import { IReport } from 'app/shared/model/report.model';
-
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
-import { ReportService } from './report.service';
+import { IReport } from 'app/shared/model/report.model';
+import { IStore, Store } from 'app/shared/model/store.model';
+import { IWorker, Worker } from 'app/shared/model/worker.model';
+import { JhiEventManager } from 'ng-jhipster';
+import { combineLatest, Subscription } from 'rxjs';
+import { StoreService } from '../store/store.service';
+import { WorkerService } from '../worker/worker.service';
 import { ReportDeleteDialogComponent } from './report-delete-dialog.component';
+import { ReportService } from './report.service';
 
 @Component({
   selector: 'jhi-report',
@@ -17,6 +19,10 @@ import { ReportDeleteDialogComponent } from './report-delete-dialog.component';
 })
 export class ReportComponent implements OnInit, OnDestroy {
   reports?: IReport[];
+  stores?: IStore[];
+  workers?: IWorker[];
+  worker?: IWorker;
+  store?: IStore;
   eventSubscriber?: Subscription;
   totalItems = 0;
   itemsPerPage = ITEMS_PER_PAGE;
@@ -30,10 +36,33 @@ export class ReportComponent implements OnInit, OnDestroy {
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
     protected eventManager: JhiEventManager,
-    protected modalService: NgbModal
+    protected modalService: NgbModal,
+    protected workerService: WorkerService,
+    protected storeService: StoreService
   ) {}
 
+  filter(): void {
+    const pageToLoad = 1;
+
+    const workerId = this.worker?.id || 0;
+    const storeId = this.store?.id || 0;
+
+    this.reportService
+      .findByStoreAndWorker(storeId, workerId, {
+        page: 0,
+        size: this.itemsPerPage,
+        sort: this.sort(),
+      })
+      .subscribe(
+        (res: HttpResponse<IReport[]>) => this.onSuccess(res.body, res.headers, pageToLoad, false),
+        () => this.onError()
+      );
+  }
+
   loadPage(page?: number, dontNavigate?: boolean): void {
+    // console.log("worker: " + this.worker);
+    console.log('doesnt work');
+
     const pageToLoad: number = page || this.page || 1;
 
     this.reportService
@@ -51,6 +80,25 @@ export class ReportComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.handleNavigation();
     this.registerChangeInReports();
+    this.initFilter();
+  }
+
+  initFilter(): void {
+    this.worker = new Worker();
+    this.workerService.findAll().subscribe(
+      (res: HttpResponse<IWorker[]>) => {
+        this.workers = res.body || [];
+      },
+      () => this.onError()
+    );
+
+    this.store = new Store();
+    this.storeService.findAll().subscribe(
+      (res: HttpResponse<IStore[]>) => {
+        this.stores = res.body || [];
+      },
+      () => this.onError()
+    );
   }
 
   protected handleNavigation(): void {

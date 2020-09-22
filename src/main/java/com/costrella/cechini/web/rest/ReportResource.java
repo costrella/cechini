@@ -111,16 +111,9 @@ public class ReportResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
-//    @GetMapping("/reports/{workerId}/{storeId}")
-//    public ResponseEntity<List<ReportDTO>> getAllReportsByWorkerIdAndStoreGroupId(Pageable pageable, @PathVariable Long workerId, @PathVariable Long storeId) {
-//        Page<ReportDTO> page = reportService.findAllByWorkerIdAndStoreId(pageable, workerId, storeId);
-//        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-//        return ResponseEntity.ok().headers(headers).body(page.getContent());
-//    }
-
-    @GetMapping("/reports/{workerId}/{storeId}/{warehouseId}")
-    public ResponseEntity<List<ReportDTO>> getAllReportsByWorkerIdAndStoreGroupIdTEST(Pageable pageable, @PathVariable Long workerId, @PathVariable Long storeId, @PathVariable Long warehouseId) {
-        Page<ReportDTO> page = reportService.findAllByExample(pageable, workerId, storeId, warehouseId);
+    @GetMapping("/reports/worker/{workerId}/store/{storeId}")
+    public ResponseEntity<List<ReportDTO>> getReportsByWorkerAndStore(Pageable pageable, @PathVariable Long workerId, @PathVariable Long storeId) {
+        Page<ReportDTO> page = reportService.findByStoreAndWorker(pageable, workerId, storeId);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
