@@ -1,5 +1,6 @@
 package com.costrella.cechini.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -39,8 +40,9 @@ public class Order implements Serializable {
     @OneToMany(mappedBy = "order")
     private Set<OrderItem> orderItems = new HashSet<>();
 
-    @OneToMany(mappedBy = "order")
-    private Set<Report> reports = new HashSet<>();
+    @OneToOne(mappedBy = "order")
+    @JsonIgnore
+    private Report report;
 
     @ManyToOne
     @JsonIgnoreProperties(value = "orders", allowSetters = true)
@@ -124,29 +126,17 @@ public class Order implements Serializable {
         this.orderItems = orderItems;
     }
 
-    public Set<Report> getReports() {
-        return reports;
+    public Report getReport() {
+        return report;
     }
 
-    public Order reports(Set<Report> reports) {
-        this.reports = reports;
+    public Order report(Report report) {
+        this.report = report;
         return this;
     }
 
-    public Order addReport(Report report) {
-        this.reports.add(report);
-        report.setOrder(this);
-        return this;
-    }
-
-    public Order removeReport(Report report) {
-        this.reports.remove(report);
-        report.setOrder(null);
-        return this;
-    }
-
-    public void setReports(Set<Report> reports) {
-        this.reports = reports;
+    public void setReport(Report report) {
+        this.report = report;
     }
 
     public Warehouse getWarehouse() {

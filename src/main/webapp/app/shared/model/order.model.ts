@@ -1,6 +1,5 @@
 import { Moment } from 'moment';
 import { IOrderItem } from 'app/shared/model/order-item.model';
-import { IReport } from 'app/shared/model/report.model';
 
 export interface IOrder {
   id?: number;
@@ -8,7 +7,7 @@ export interface IOrder {
   deliveryDate?: Moment;
   comment?: string;
   orderItems?: IOrderItem[];
-  reports?: IReport[];
+  reportId?: number;
   warehouseName?: string;
   warehouseId?: number;
   statusName?: string;
@@ -22,7 +21,7 @@ export class Order implements IOrder {
     public deliveryDate?: Moment,
     public comment?: string,
     public orderItems?: IOrderItem[],
-    public reports?: IReport[],
+    public reportId?: number,
     public warehouseName?: string,
     public warehouseId?: number,
     public statusName?: string,

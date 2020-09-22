@@ -19,11 +19,11 @@
       "number": "Number",
       "reportDate": "Report Date",
       "desc": "Desc",
+      "order": "Order",
       "photos": "Photos",
       "note": "Note",
       "worker": "Worker",
-      "store": "Store",
-      "order": "Order"
+      "store": "Store"
     }
   }
 }

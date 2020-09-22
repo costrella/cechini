@@ -23,6 +23,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 /**
  * REST controller for managing {@link com.costrella.cechini.domain.Order}.
@@ -88,10 +89,16 @@ public class OrderResource {
      * {@code GET  /orders} : get all the orders.
      *
      * @param pageable the pagination information.
+     * @param filter the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of orders in body.
      */
     @GetMapping("/orders")
-    public ResponseEntity<List<OrderDTO>> getAllOrders(Pageable pageable) {
+    public ResponseEntity<List<OrderDTO>> getAllOrders(Pageable pageable, @RequestParam(required = false) String filter) {
+        if ("report-is-null".equals(filter)) {
+            log.debug("REST request to get all Orders where report is null");
+            return new ResponseEntity<>(orderService.findAllWhereReportIsNull(),
+                    HttpStatus.OK);
+        }
         log.debug("REST request to get a page of Orders");
         Page<OrderDTO> page = orderService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);

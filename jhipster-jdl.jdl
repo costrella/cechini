@@ -93,6 +93,10 @@ relationship ManyToMany {
 	Manager{worker(surname)} to Worker{manager(surname)}
 }
 
+relationship OneToOne {
+ 	Report{order} to Order{report},
+}
+
 relationship OneToMany {
 	Report{photos} to Photo{report},
     
@@ -113,8 +117,6 @@ relationship OneToMany {
     
     Product to OrderItem{product(name)},
     Order to OrderItem{order},
-    
-    Order to Report{order},
     
     Worker to Track{worker(surname)},
     Location to Track{location},

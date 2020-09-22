@@ -60,9 +60,9 @@
                     <th scope="col"  jhiSortBy="number"><span jhiTranslate="cechiniApp.report.number">Number</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="reportDate"><span jhiTranslate="cechiniApp.report.reportDate">Report Date</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="desc"><span jhiTranslate="cechiniApp.report.desc">Desc</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="orderId"><span jhiTranslate="cechiniApp.report.order">Order</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="workerSurname"><span jhiTranslate="cechiniApp.report.worker">Worker</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="storeName"><span jhiTranslate="cechiniApp.report.store">Store</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="orderId"><span jhiTranslate="cechiniApp.report.order">Order</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -73,6 +73,11 @@
                     <td>{{ report.reportDate | date:'mediumDate' }}</td>
                     <td>{{ report.desc }}</td>
                     <td>
+                        <div *ngIf="report.orderId">
+                            <a [routerLink]="['/order', report.orderId , 'view']" >{{ report.orderId }}</a>
+                        </div>
+                    </td>
+                    <td>
                         <div *ngIf="report.workerId">
                             <a [routerLink]="['/worker', report.workerId , 'view']" >{{ report.workerSurname }}</a>
                         </div>
@@ -80,11 +85,6 @@
                     <td>
                         <div *ngIf="report.storeId">
                             <a [routerLink]="['/store', report.storeId , 'view']" >{{ report.storeName }}</a>
-                        </div>
-                    </td>
-                    <td>
-                        <div *ngIf="report.orderId">
-                            <a [routerLink]="['/order', report.orderId , 'view']" >{{ report.orderId }}</a>
                         </div>
                     </td>
                     <td class="text-right">

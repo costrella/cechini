@@ -18,6 +18,8 @@ public class ReportDTO implements Serializable {
     private String desc;
 
 
+    private Long orderId;
+
     private Long workerId;
 
     private String workerSurname;
@@ -25,8 +27,6 @@ public class ReportDTO implements Serializable {
     private Long storeId;
 
     private String storeName;
-
-    private Long orderId;
     
     public Long getId() {
         return id;
@@ -58,6 +58,14 @@ public class ReportDTO implements Serializable {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
 
     public Long getWorkerId() {
@@ -92,14 +100,6 @@ public class ReportDTO implements Serializable {
         this.storeName = storeName;
     }
 
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -125,11 +125,11 @@ public class ReportDTO implements Serializable {
             ", number='" + getNumber() + "'" +
             ", reportDate='" + getReportDate() + "'" +
             ", desc='" + getDesc() + "'" +
+            ", orderId=" + getOrderId() +
             ", workerId=" + getWorkerId() +
             ", workerSurname='" + getWorkerSurname() + "'" +
             ", storeId=" + getStoreId() +
             ", storeName='" + getStoreName() + "'" +
-            ", orderId=" + getOrderId() +
             "}";
     }
 }

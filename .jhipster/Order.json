@@ -26,10 +26,11 @@
       "relationshipName": "orderItem"
     },
     {
-      "relationshipType": "one-to-many",
+      "relationshipType": "one-to-one",
       "otherEntityName": "report",
       "otherEntityRelationshipName": "order",
-      "relationshipName": "report"
+      "relationshipName": "report",
+      "ownerSide": false
     },
     {
       "relationshipType": "many-to-one",

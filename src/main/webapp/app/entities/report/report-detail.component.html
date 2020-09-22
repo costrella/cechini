@@ -20,6 +20,12 @@
                 <dd>
                     <span>{{ report.desc }}</span>
                 </dd>
+                <dt><span jhiTranslate="cechiniApp.report.order">Order</span></dt>
+                <dd>
+                    <div *ngIf="report.orderId">
+                        <a [routerLink]="['/order', report.orderId, 'view']">{{ report.orderId }}</a>
+                    </div>
+                </dd>
                 <dt><span jhiTranslate="cechiniApp.report.worker">Worker</span></dt>
                 <dd>
                     <div *ngIf="report.workerId">
@@ -30,12 +36,6 @@
                 <dd>
                     <div *ngIf="report.storeId">
                         <a [routerLink]="['/store', report.storeId, 'view']">{{ report.storeName }}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="cechiniApp.report.order">Order</span></dt>
-                <dd>
-                    <div *ngIf="report.orderId">
-                        <a [routerLink]="['/order', report.orderId, 'view']">{{ report.orderId }}</a>
                     </div>
                 </dd>
             </dl>

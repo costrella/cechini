@@ -12,9 +12,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * Service Implementation for managing {@link Order}.
@@ -65,6 +67,20 @@ public class OrderService {
         log.debug("Request to get all Orders List");
         return orderRepository.findAll().stream()
             .map(orderMapper::toDto).collect(Collectors.toList());
+
+
+    /**
+     *  Get all the orders where Report is {@code null}.
+     *  @return the list of entities.
+     */
+    @Transactional(readOnly = true) 
+    public List<OrderDTO> findAllWhereReportIsNull() {
+        log.debug("Request to get all orders where Report is null");
+        return StreamSupport
+            .stream(orderRepository.findAll().spliterator(), false)
+            .filter(order -> order.getReport() == null)
+            .map(orderMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 
     /**

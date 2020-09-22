@@ -33,6 +33,10 @@ public class Report implements Serializable {
     @Column(name = "jhi_desc")
     private String desc;
 
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Order order;
+
     @OneToMany(mappedBy = "report")
     private Set<Photo> photos = new HashSet<>();
 
@@ -48,10 +52,6 @@ public class Report implements Serializable {
     @NotNull
     @JsonIgnoreProperties(value = "reports", allowSetters = true)
     private Store store;
-
-    @ManyToOne
-    @JsonIgnoreProperties(value = "reports", allowSetters = true)
-    private Order order;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -99,6 +99,19 @@ public class Report implements Serializable {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public Report order(Order order) {
+        this.order = order;
+        return this;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     public Set<Photo> getPhotos() {
@@ -175,19 +188,6 @@ public class Report implements Serializable {
 
     public void setStore(Store store) {
         this.store = store;
-    }
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public Report order(Order order) {
-        this.order = order;
-        return this;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

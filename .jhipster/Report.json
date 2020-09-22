@@ -16,6 +16,14 @@
   ],
   "relationships": [
     {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "order",
+      "otherEntityRelationshipName": "report",
+      "relationshipName": "order",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
       "relationshipType": "one-to-many",
       "otherEntityName": "photo",
       "otherEntityRelationshipName": "report",
@@ -42,13 +50,6 @@
       "relationshipValidateRules": "required",
       "relationshipName": "store",
       "otherEntityField": "name"
-    },
-    {
-      "relationshipType": "many-to-one",
-      "otherEntityName": "order",
-      "otherEntityRelationshipName": "report",
-      "relationshipName": "order",
-      "otherEntityField": "id"
     }
   ],
   "changelogDate": "20200921170936",

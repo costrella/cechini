@@ -24,14 +24,14 @@
             <column name="jhi_desc" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="order_id" type="bigint">
+                <constraints unique="true" nullable="true" uniqueConstraintName="ux_report_order_id" />
+            </column>
             <column name="worker_id" type="bigint">
                 <constraints nullable="false" />
             </column>
             <column name="store_id" type="bigint">
                 <constraints nullable="false" />
-            </column>
-            <column name="order_id" type="bigint">
-                <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>

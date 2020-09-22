@@ -4,17 +4,18 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { IReport, Report } from 'app/shared/model/report.model';
 import { ReportService } from './report.service';
+import { IOrder } from 'app/shared/model/order.model';
+import { OrderService } from 'app/entities/order/order.service';
 import { IWorker } from 'app/shared/model/worker.model';
 import { WorkerService } from 'app/entities/worker/worker.service';
 import { IStore } from 'app/shared/model/store.model';
 import { StoreService } from 'app/entities/store/store.service';
-import { IOrder } from 'app/shared/model/order.model';
-import { OrderService } from 'app/entities/order/order.service';
 
-type SelectableEntity = IWorker | IStore | IOrder;
+type SelectableEntity = IOrder | IWorker | IStore;
 
 @Component({
   selector: 'jhi-report-update',
@@ -22,9 +23,9 @@ type SelectableEntity = IWorker | IStore | IOrder;
 })
 export class ReportUpdateComponent implements OnInit {
   isSaving = false;
+  orders: IOrder[] = [];
   workers: IWorker[] = [];
   stores: IStore[] = [];
-  orders: IOrder[] = [];
   reportDateDp: any;
 
   editForm = this.fb.group({
@@ -32,16 +33,16 @@ export class ReportUpdateComponent implements OnInit {
     number: [],
     reportDate: [],
     desc: [],
+    orderId: [],
     workerId: [null, Validators.required],
     storeId: [null, Validators.required],
-    orderId: [],
   });
 
   constructor(
     protected reportService: ReportService,
+    protected orderService: OrderService,
     protected workerService: WorkerService,
     protected storeService: StoreService,
-    protected orderService: OrderService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -50,11 +51,31 @@ export class ReportUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ report }) => {
       this.updateForm(report);
 
+      this.orderService
+        .query({ filter: 'report-is-null' })
+        .pipe(
+          map((res: HttpResponse<IOrder[]>) => {
+            return res.body || [];
+          })
+        )
+        .subscribe((resBody: IOrder[]) => {
+          if (!report.orderId) {
+            this.orders = resBody;
+          } else {
+            this.orderService
+              .find(report.orderId)
+              .pipe(
+                map((subRes: HttpResponse<IOrder>) => {
+                  return subRes.body ? [subRes.body].concat(resBody) : resBody;
+                })
+              )
+              .subscribe((concatRes: IOrder[]) => (this.orders = concatRes));
+          }
+        });
+
       this.workerService.query().subscribe((res: HttpResponse<IWorker[]>) => (this.workers = res.body || []));
 
       this.storeService.query().subscribe((res: HttpResponse<IStore[]>) => (this.stores = res.body || []));
-
-      this.orderService.query().subscribe((res: HttpResponse<IOrder[]>) => (this.orders = res.body || []));
     });
   }
 
@@ -64,9 +85,9 @@ export class ReportUpdateComponent implements OnInit {
       number: report.number,
       reportDate: report.reportDate,
       desc: report.desc,
+      orderId: report.orderId,
       workerId: report.workerId,
       storeId: report.storeId,
-      orderId: report.orderId,
     });
   }
 
@@ -91,9 +112,9 @@ export class ReportUpdateComponent implements OnInit {
       number: this.editForm.get(['number'])!.value,
       reportDate: this.editForm.get(['reportDate'])!.value,
       desc: this.editForm.get(['desc'])!.value,
+      orderId: this.editForm.get(['orderId'])!.value,
       workerId: this.editForm.get(['workerId'])!.value,
       storeId: this.editForm.get(['storeId'])!.value,
-      orderId: this.editForm.get(['orderId'])!.value,
     };
   }
 

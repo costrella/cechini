@@ -34,6 +34,14 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cechiniApp.report.order" for="field_order">Order</label>
+                    <select class="form-control" id="field_order" name="order" formControlName="orderId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="orderOption.id" *ngFor="let orderOption of orders; trackBy: trackById">{{ orderOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="cechiniApp.report.worker" for="field_worker">Worker</label>
                     <select class="form-control" id="field_worker" name="worker" formControlName="workerId">
                         <option *ngIf="!editForm.get('workerId')!.value" [ngValue]="null" selected></option>
@@ -59,14 +67,6 @@
                            *ngIf="editForm.get('storeId')?.errors?.required" jhiTranslate="entity.validation.required">
                         This field is required.
                     </small>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cechiniApp.report.order" for="field_order">Order</label>
-                    <select class="form-control" id="field_order" name="order" formControlName="orderId">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="orderOption.id" *ngFor="let orderOption of orders; trackBy: trackById">{{ orderOption.id }}</option>
-                    </select>
                 </div>
             </div>
 

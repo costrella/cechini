@@ -7,13 +7,13 @@ export interface IReport {
   number?: string;
   reportDate?: Moment;
   desc?: string;
+  orderId?: number;
   photos?: IPhoto[];
   notes?: INote[];
   workerSurname?: string;
   workerId?: number;
   storeName?: string;
   storeId?: number;
-  orderId?: number;
 }
 
 export class Report implements IReport {
@@ -22,12 +22,12 @@ export class Report implements IReport {
     public number?: string,
     public reportDate?: Moment,
     public desc?: string,
+    public orderId?: number,
     public photos?: IPhoto[],
     public notes?: INote[],
     public workerSurname?: string,
     public workerId?: number,
     public storeName?: string,
-    public storeId?: number,
-    public orderId?: number
+    public storeId?: number
   ) {}
 }
