@@ -3,12 +3,13 @@ package com.costrella.cechini.service.dto;
 import java.time.LocalDate;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * A DTO for the {@link com.costrella.cechini.domain.Order} entity.
  */
 public class OrderDTO implements Serializable {
-    
+
     private Long id;
 
     @NotNull
@@ -20,6 +21,15 @@ public class OrderDTO implements Serializable {
     @Size(max = 2000)
     private String comment;
 
+    private List<OrderItemDTO> orderItems;
+
+    public List<OrderItemDTO> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItemDTO> orderItems) {
+        this.orderItems = orderItems;
+    }
 
     private Long warehouseId;
 
@@ -28,7 +38,7 @@ public class OrderDTO implements Serializable {
     private Long statusId;
 
     private String statusName;
-    
+
     public Long getId() {
         return id;
     }

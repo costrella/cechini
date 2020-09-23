@@ -3,6 +3,7 @@ package com.costrella.cechini.service;
 import com.costrella.cechini.domain.Order;
 import com.costrella.cechini.repository.OrderRepository;
 import com.costrella.cechini.service.dto.OrderDTO;
+import com.costrella.cechini.service.mapper.OrderItemMapper;
 import com.costrella.cechini.service.mapper.OrderMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,9 +32,12 @@ public class OrderService {
 
     private final OrderMapper orderMapper;
 
-    public OrderService(OrderRepository orderRepository, OrderMapper orderMapper) {
+    private final OrderItemMapper orderItemMapper;
+
+    public OrderService(OrderRepository orderRepository, OrderMapper orderMapper, OrderItemMapper orderItemMapper) {
         this.orderRepository = orderRepository;
         this.orderMapper = orderMapper;
+        this.orderItemMapper = orderItemMapper;
     }
 
     /**
@@ -93,7 +97,7 @@ public class OrderService {
     public Optional<OrderDTO> findOne(Long id) {
         log.debug("Request to get Order : {}", id);
         return orderRepository.findById(id)
-            .map(orderMapper::toDto);
+            .map(v -> orderMapper.toDtoCustom(v, orderItemMapper));
     }
 
     /**

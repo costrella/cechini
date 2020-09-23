@@ -1,10 +1,12 @@
 package com.costrella.cechini.service.mapper;
 
 
-import com.costrella.cechini.domain.*;
+import com.costrella.cechini.domain.Order;
 import com.costrella.cechini.service.dto.OrderDTO;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
-import org.mapstruct.*;
+import java.util.stream.Collectors;
 
 /**
  * Mapper for the entity {@link Order} and its DTO {@link OrderDTO}.
@@ -32,5 +34,26 @@ public interface OrderMapper extends EntityMapper<OrderDTO, Order> {
         Order order = new Order();
         order.setId(id);
         return order;
+    }
+
+    default OrderDTO toDtoCustom(Order order, OrderItemMapper orderItemMapper) {
+        if (order == null) {
+            return null;
+        }
+        OrderDTO orderDTO = new OrderDTO(); //todo
+        orderDTO.setId(order.getId());
+        orderDTO.setComment(order.getComment());
+        orderDTO.setDeliveryDate(order.getDeliveryDate());
+        orderDTO.setOrderDate(order.getOrderDate());
+        if (order.getStatus() != null) {
+            orderDTO.setStatusId(order.getStatus().getId());
+            orderDTO.setStatusName(order.getStatus().getName());
+        }
+        if (order.getWarehouse() != null) {
+            orderDTO.setWarehouseId(order.getWarehouse().getId());
+            orderDTO.setWarehouseName(order.getWarehouse().getName());
+        }
+        orderDTO.setOrderItems(order.getOrderItems().stream().map(orderItemMapper::toDto).collect(Collectors.toList()));
+        return orderDTO;
     }
 }
