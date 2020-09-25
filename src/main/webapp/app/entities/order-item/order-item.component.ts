@@ -34,7 +34,10 @@ export class OrderItemComponent implements OnInit, OnDestroy {
   ) {}
 
   loadPage(page?: number, dontNavigate?: boolean): void {
+    console.log('<<< loadPAge');
+
     const pageToLoad: number = page || this.page || 1;
+    console.log('<<< pageToLoad: ' + pageToLoad);
 
     this.orderItemService
       .query({
@@ -55,12 +58,16 @@ export class OrderItemComponent implements OnInit, OnDestroy {
 
   protected handleNavigation(): void {
     combineLatest(this.activatedRoute.data, this.activatedRoute.queryParamMap, (data: Data, params: ParamMap) => {
+      console.log('<<< 01');
+
       const page = params.get('page');
       const pageNumber = page !== null ? +page : 1;
       const sort = (params.get('sort') ?? data['defaultSort']).split(',');
       const predicate = sort[0];
       const ascending = sort[1] === 'asc';
+      console.log('<<< 02');
       if (pageNumber !== this.page || predicate !== this.predicate || ascending !== this.ascending) {
+        console.log('<<< 03');
         this.predicate = predicate;
         this.ascending = ascending;
         this.loadPage(pageNumber, true);
