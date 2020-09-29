@@ -34,7 +34,8 @@
             </thead>
             <tbody>
                 <tr *ngFor="let orderItem of orderItems ;trackBy: trackId">
-                    <td>{{ orderItem.id }}</td>
+                    <td><a (click)="onGoToPage2()">{{ orderItem.id }}</a></td>
+                    <!-- <td>{{ orderItem.id }}</td> -->
                     <td>{{ orderItem.name }}</td>
                     <td>{{ orderItem.quantity }}</td>
                     <td>{{ orderItem.atr1 }}</td>

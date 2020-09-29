@@ -41,6 +41,10 @@ export class OrderItemComponent implements OnInit, OnDestroy {
     this.orderId = orderId;
   }
 
+  onGoToPage2(): void {
+    console.log('<<< onclik!!!');
+  }
+
   loadPage(page?: number, dontNavigate?: boolean): void {
     const pageToLoad: number = page || this.page || 1;
 
