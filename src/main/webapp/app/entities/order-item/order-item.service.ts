@@ -27,6 +27,11 @@ export class OrderItemService {
     return this.http.get<IOrderItem>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
+  findAllByOrderId(orderId: number, req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http.get<IOrderItem[]>(`${this.resourceUrl}/order/${orderId}`, { params: options, observe: 'response' });
+  }
+
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http.get<IOrderItem[]>(this.resourceUrl, { params: options, observe: 'response' });

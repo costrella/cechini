@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, ParamMap, Router, Data } from '@angular/router';
 import { Subscription, combineLatest } from 'rxjs';
@@ -24,6 +24,8 @@ export class OrderItemComponent implements OnInit, OnDestroy {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
+  internal?: boolean;
+  orderId?: number;
 
   constructor(
     protected orderItemService: OrderItemService,
@@ -33,22 +35,38 @@ export class OrderItemComponent implements OnInit, OnDestroy {
     protected modalService: NgbModal
   ) {}
 
+  @Input()
+  set setOrderId(orderId?: number) {
+    this.internal = true;
+    this.orderId = orderId;
+  }
+
   loadPage(page?: number, dontNavigate?: boolean): void {
-    console.log('<<< loadPAge');
-
     const pageToLoad: number = page || this.page || 1;
-    console.log('<<< pageToLoad: ' + pageToLoad);
 
-    this.orderItemService
-      .query({
-        page: pageToLoad - 1,
-        size: this.itemsPerPage,
-        sort: this.sort(),
-      })
-      .subscribe(
-        (res: HttpResponse<IOrderItem[]>) => this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate),
-        () => this.onError()
-      );
+    if (this.internal) {
+      this.orderItemService
+        .findAllByOrderId(this.orderId || 0, {
+          page: pageToLoad - 1,
+          size: this.itemsPerPage,
+          sort: this.sort(),
+        })
+        .subscribe(
+          (res: HttpResponse<IOrderItem[]>) => this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate),
+          () => this.onError()
+        );
+    } else {
+      this.orderItemService
+        .query({
+          page: pageToLoad - 1,
+          size: this.itemsPerPage,
+          sort: this.sort(),
+        })
+        .subscribe(
+          (res: HttpResponse<IOrderItem[]>) => this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate),
+          () => this.onError()
+        );
+    }
   }
 
   ngOnInit(): void {
@@ -58,16 +76,12 @@ export class OrderItemComponent implements OnInit, OnDestroy {
 
   protected handleNavigation(): void {
     combineLatest(this.activatedRoute.data, this.activatedRoute.queryParamMap, (data: Data, params: ParamMap) => {
-      console.log('<<< 01');
-
       const page = params.get('page');
       const pageNumber = page !== null ? +page : 1;
-      const sort = (params.get('sort') ?? data['defaultSort']).split(',');
+      const sort = this.internal ? ['id', 'asc'] : (params.get('sort') ?? data['defaultSort']).split(',');
       const predicate = sort[0];
       const ascending = sort[1] === 'asc';
-      console.log('<<< 02');
       if (pageNumber !== this.page || predicate !== this.predicate || ascending !== this.ascending) {
-        console.log('<<< 03');
         this.predicate = predicate;
         this.ascending = ascending;
         this.loadPage(pageNumber, true);

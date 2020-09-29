@@ -58,6 +58,10 @@ public class OrderItemService {
             .map(orderItemMapper::toDto);
     }
 
+    public Page<OrderItemDTO> findAllByOrderId(Pageable pageable, Long orderId) {
+        return orderItemRepository.findAllByOrderId(pageable, orderId).map(orderItemMapper::toDto);
+    }
+
 
     /**
      * Get one orderItem by id.
@@ -81,4 +85,5 @@ public class OrderItemService {
         log.debug("Request to delete OrderItem : {}", id);
         orderItemRepository.deleteById(id);
     }
+
 }
