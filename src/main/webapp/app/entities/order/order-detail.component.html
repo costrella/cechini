@@ -34,19 +34,18 @@
                 </dd>
             </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
+            <button type="submit" (click)="previousState()" class="btn btn-info">
                 <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
             </button>
 
-            <button type="button"
-                    [routerLink]="['/order', order.id, 'edit']"
-                    class="btn btn-primary">
+            <button type="button" [routerLink]="['/order', order.id, 'edit']" class="btn btn-primary">
                 <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
             </button>
+
+            <div *ngIf="order.id">
+                <jhi-order-item [setOrderId]="order.id"></jhi-order-item>
+            </div>
+
         </div>
     </div>
-    <!-- <jhi-order-item-test></jhi-order-item-test> -->
-    <jhi-order-item [setOrderId]="order?.id"></jhi-order-item>
 </div>

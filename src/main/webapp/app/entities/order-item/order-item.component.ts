@@ -36,7 +36,7 @@ export class OrderItemComponent implements OnInit, OnDestroy {
   ) {}
 
   @Input()
-  set setOrderId(orderId?: number) {
+  set setOrderId(orderId: number) {
     this.internal = true;
     this.orderId = orderId;
   }
