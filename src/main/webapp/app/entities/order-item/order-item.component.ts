@@ -41,8 +41,12 @@ export class OrderItemComponent implements OnInit, OnDestroy {
     this.orderId = orderId;
   }
 
-  onGoToPage2(): void {
-    console.log('<<< onclik!!!');
+  clickItem(orderId?: number): void {
+    this.router.navigate(['/order-item/' + orderId + '/view']);
+  }
+
+  editItem(orderId?: number): void {
+    this.router.navigate(['/order-item/' + orderId + '/edit']);
   }
 
   loadPage(page?: number, dontNavigate?: boolean): void {

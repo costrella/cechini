@@ -12,6 +12,10 @@ export interface IOrder {
   warehouseId?: number;
   statusName?: string;
   statusId?: number;
+  workerId?: number;
+  workerSurname?: string;
+  storeId?: number;
+  storeName?: string;
 }
 
 export class Order implements IOrder {
@@ -25,6 +29,10 @@ export class Order implements IOrder {
     public warehouseName?: string,
     public warehouseId?: number,
     public statusName?: string,
-    public statusId?: number
+    public statusId?: number,
+    public workerId?: number,
+    public workerSurname?: string,
+    public storeId?: number,
+    public storeName?: string
   ) {}
 }

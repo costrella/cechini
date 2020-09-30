@@ -40,7 +40,7 @@ public interface OrderMapper extends EntityMapper<OrderDTO, Order> {
         if (order == null) {
             return null;
         }
-        OrderDTO orderDTO = new OrderDTO(); //todo
+        OrderDTO orderDTO = new OrderDTO();
         orderDTO.setId(order.getId());
         orderDTO.setComment(order.getComment());
         orderDTO.setDeliveryDate(order.getDeliveryDate());
@@ -52,6 +52,18 @@ public interface OrderMapper extends EntityMapper<OrderDTO, Order> {
         if (order.getWarehouse() != null) {
             orderDTO.setWarehouseId(order.getWarehouse().getId());
             orderDTO.setWarehouseName(order.getWarehouse().getName());
+        }
+        if (order.getReport() != null) {
+            orderDTO.setReportId(order.getReport().getId());
+            if (order.getReport().getStore() != null) {
+                orderDTO.setStoreId(order.getReport().getStore().getId());
+                orderDTO.setStoreName(order.getReport().getStore().getName());
+            }
+            if(order.getReport().getWorker() != null){
+                orderDTO.setWorkerId(order.getReport().getWorker().getId());
+                orderDTO.setWorkerSurname(order.getReport().getWorker().getSurname());
+            }
+
         }
         orderDTO.setOrderItems(order.getOrderItems().stream().map(orderItemMapper::toDto).collect(Collectors.toList()));
         return orderDTO;

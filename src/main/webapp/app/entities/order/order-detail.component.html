@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-    <div class="col-8">
+    <div class="col-12">
         <div *ngIf="order">
             <h2><span jhiTranslate="cechiniApp.order.detail.title">Order</span> {{ order.id }}</h2>
 
@@ -15,6 +15,24 @@
                 <dt><span jhiTranslate="cechiniApp.order.deliveryDate">Delivery Date</span></dt>
                 <dd>
                     <span>{{ order.deliveryDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="cechiniApp.worker.detail.title">Worker</span></dt>
+                <dd>
+                    <div *ngIf="order.workerId">
+                        <a [routerLink]="['/worker', order.workerId, 'view']">{{ order.workerSurname }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="cechiniApp.store.detail.title">Store</span></dt>
+                <dd>
+                    <div *ngIf="order.storeId">
+                        <a [routerLink]="['/store', order.storeId, 'view']">{{ order.storeName }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="cechiniApp.order.report">Report</span></dt>
+                <dd>
+                    <div *ngIf="order.reportId">
+                        <a [routerLink]="['/report', order.reportId, 'view']">{{ order.reportId }}</a>
+                    </div>
                 </dd>
                 <dt><span jhiTranslate="cechiniApp.order.comment">Comment</span></dt>
                 <dd>

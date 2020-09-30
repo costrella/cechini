@@ -39,6 +39,16 @@ public class OrderDTO implements Serializable {
 
     private String statusName;
 
+    private Long reportId;
+
+    private Long storeId;
+
+    private String storeName;
+
+    private Long workerId;
+
+    private String workerSurname;
+
     public Long getId() {
         return id;
     }
@@ -103,6 +113,46 @@ public class OrderDTO implements Serializable {
         this.statusName = statusName;
     }
 
+    public Long getReportId() {
+        return reportId;
+    }
+
+    public void setReportId(Long reportId) {
+        this.reportId = reportId;
+    }
+
+    public Long getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(Long storeId) {
+        this.storeId = storeId;
+    }
+
+    public String getStoreName() {
+        return storeName;
+    }
+
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
+    }
+
+    public Long getWorkerId() {
+        return workerId;
+    }
+
+    public void setWorkerId(Long workerId) {
+        this.workerId = workerId;
+    }
+
+    public String getWorkerSurname() {
+        return workerSurname;
+    }
+
+    public void setWorkerSurname(String workerSurname) {
+        this.workerSurname = workerSurname;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -121,17 +171,24 @@ public class OrderDTO implements Serializable {
     }
 
     // prettier-ignore
+
     @Override
     public String toString() {
         return "OrderDTO{" +
-            "id=" + getId() +
-            ", orderDate='" + getOrderDate() + "'" +
-            ", deliveryDate='" + getDeliveryDate() + "'" +
-            ", comment='" + getComment() + "'" +
-            ", warehouseId=" + getWarehouseId() +
-            ", warehouseName='" + getWarehouseName() + "'" +
-            ", statusId=" + getStatusId() +
-            ", statusName='" + getStatusName() + "'" +
-            "}";
+            "id=" + id +
+            ", orderDate=" + orderDate +
+            ", deliveryDate=" + deliveryDate +
+            ", comment='" + comment + '\'' +
+            ", orderItems=" + orderItems +
+            ", warehouseId=" + warehouseId +
+            ", warehouseName='" + warehouseName + '\'' +
+            ", statusId=" + statusId +
+            ", statusName='" + statusName + '\'' +
+            ", reportId=" + reportId +
+            ", storeId=" + storeId +
+            ", storeName='" + storeName + '\'' +
+            ", workerId=" + workerId +
+            ", workerSurname='" + workerSurname + '\'' +
+            '}';
     }
 }
