@@ -1,5 +1,5 @@
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Data, ParamMap, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
@@ -30,6 +30,8 @@ export class ReportComponent implements OnInit, OnDestroy {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
+  internal?: boolean;
+  storeId?: number;
 
   constructor(
     protected reportService: ReportService,
@@ -40,6 +42,16 @@ export class ReportComponent implements OnInit, OnDestroy {
     protected workerService: WorkerService,
     protected storeService: StoreService
   ) {}
+
+  @Input()
+  set setStoreId(storeId: number) {
+    this.internal = true;
+    this.storeId = storeId;
+  }
+
+  clickItem(array: any[]): void {
+    this.router.navigate([array[0] + array[1] + array[2]]);
+  }
 
   filter(): void {
     const pageToLoad = 1;
@@ -60,21 +72,31 @@ export class ReportComponent implements OnInit, OnDestroy {
   }
 
   loadPage(page?: number, dontNavigate?: boolean): void {
-    // console.log("worker: " + this.worker);
-    console.log('doesnt work');
-
     const pageToLoad: number = page || this.page || 1;
 
-    this.reportService
-      .query({
-        page: pageToLoad - 1,
-        size: this.itemsPerPage,
-        sort: this.sort(),
-      })
-      .subscribe(
-        (res: HttpResponse<IReport[]>) => this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate),
-        () => this.onError()
-      );
+    if (this.internal) {
+      this.reportService
+        .findAllByStoreId(this.storeId || 0, {
+          page: pageToLoad - 1,
+          size: this.itemsPerPage,
+          sort: this.sort(),
+        })
+        .subscribe(
+          (res: HttpResponse<IReport[]>) => this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate),
+          () => this.onError()
+        );
+    } else {
+      this.reportService
+        .query({
+          page: pageToLoad - 1,
+          size: this.itemsPerPage,
+          sort: this.sort(),
+        })
+        .subscribe(
+          (res: HttpResponse<IReport[]>) => this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate),
+          () => this.onError()
+        );
+    }
   }
 
   ngOnInit(): void {
@@ -105,7 +127,7 @@ export class ReportComponent implements OnInit, OnDestroy {
     combineLatest(this.activatedRoute.data, this.activatedRoute.queryParamMap, (data: Data, params: ParamMap) => {
       const page = params.get('page');
       const pageNumber = page !== null ? +page : 1;
-      const sort = (params.get('sort') ?? data['defaultSort']).split(',');
+      const sort = this.internal ? ['id', 'asc'] : (params.get('sort') ?? data['defaultSort']).split(',');
       const predicate = sort[0];
       const ascending = sort[1] === 'asc';
       if (pageNumber !== this.page || predicate !== this.predicate || ascending !== this.ascending) {

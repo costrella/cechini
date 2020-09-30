@@ -2,19 +2,19 @@
     <h2 id="page-heading">
         <span jhiTranslate="cechiniApp.report.home.title">Reports</span>
 
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-report" [routerLink]="['/report/new']">
+        <!-- <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-report" [routerLink]="['/report/new']">
             <fa-icon icon="plus"></fa-icon>
             <span  jhiTranslate="cechiniApp.report.home.createLabel">
             Create a new Report
             </span>
-        </button>
+        </button> -->
     </h2>
 
     <jhi-alert-error></jhi-alert-error>
 
     <jhi-alert></jhi-alert>
 
-    <div class="row">
+    <div *ngIf="!internal" class="row">
         <div class="col-md-5">
             <h4>Filter by worker and store</h4>
 
@@ -23,8 +23,8 @@
                     <span class="input-group-text" jhiTranslate="cechiniApp.worker.home.title">Workers</span>
                 </div>
 
-                <select  [(ngModel)]="worker" name="worker"
-                #name="ngModel" (ngModelChange)="filter()" class="form-control">
+                <select [(ngModel)]="worker" name="worker" #name="ngModel" (ngModelChange)="filter()"
+                    class="form-control">
                     <option value=""></option>
                     <option *ngFor="let w of workers" [ngValue]="w">
                         {{w.surname}} {{w.name}}
@@ -37,8 +37,8 @@
                     <span class="input-group-text" jhiTranslate="cechiniApp.store.home.title">Stores</span>
                 </div>
 
-                <select  [(ngModel)]="store" name="store"
-                #name="ngModel" (ngModelChange)="filter()" class="form-control">
+                <select [(ngModel)]="store" name="store" #name="ngModel" (ngModelChange)="filter()"
+                    class="form-control">
                     <option value=""></option>
                     <option *ngFor="let s of stores" [ngValue]="s">
                         {{s.name}}
@@ -56,55 +56,74 @@
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
-                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="number"><span jhiTranslate="cechiniApp.report.number">Number</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="reportDate"><span jhiTranslate="cechiniApp.report.reportDate">Report Date</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="desc"><span jhiTranslate="cechiniApp.report.desc">Desc</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="orderId"><span jhiTranslate="cechiniApp.report.order">Order</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="workerSurname"><span jhiTranslate="cechiniApp.report.worker">Worker</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="storeName"><span jhiTranslate="cechiniApp.report.store">Store</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="number"><span jhiTranslate="cechiniApp.report.number">Number</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="reportDate"><span jhiTranslate="cechiniApp.report.reportDate">Report
+                            Date</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="desc"><span jhiTranslate="cechiniApp.report.desc">Desc</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="orderId"><span jhiTranslate="cechiniApp.report.order">Order</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="workerSurname"><span
+                            jhiTranslate="cechiniApp.report.worker">Worker</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="storeName"><span jhiTranslate="cechiniApp.report.store">Store</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let report of reports ;trackBy: trackId">
-                    <td><a [routerLink]="['/report', report.id, 'view']">{{ report.id }}</a></td>
+                    <td>
+                        <a (click)="clickItem(['/report/', report.id, '/view'])">
+                            {{ report.id }}
+                        </a>
+                    </td>
                     <td>{{ report.number }}</td>
                     <td>{{ report.reportDate | date:'mediumDate' }}</td>
                     <td>{{ report.desc }}</td>
                     <td>
                         <div *ngIf="report.orderId">
-                            <a [routerLink]="['/order', report.orderId , 'view']" >{{ report.orderId }}</a>
+                            <a (click)="clickItem(['/order/', report.orderId , '/view'])">{{ report.orderId }}</a>
                         </div>
                     </td>
                     <td>
                         <div *ngIf="report.workerId">
-                            <a [routerLink]="['/worker', report.workerId , 'view']" >{{ report.workerSurname }}</a>
+                            <a (click)="clickItem(['/worker/', report.workerId , '/view'])">{{ report.workerSurname }}</a>
                         </div>
                     </td>
                     <td>
                         <div *ngIf="report.storeId">
-                            <a [routerLink]="['/store', report.storeId , 'view']" >{{ report.storeName }}</a>
+                            <a (click)="clickItem(['/store/', report.storeId , '/view'])">{{ report.storeName }}</a>
                         </div>
                     </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"
-                                    [routerLink]="['/report', report.id, 'view']"
+                                    (click)="clickItem(['/report/', report.id, '/view'])"
                                     class="btn btn-info btn-sm">
                                 <fa-icon icon="eye"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                             </button>
 
                             <button type="submit"
-                                    [routerLink]="['/report', report.id, 'edit']"
+                                    (click)="clickItem(['/report/', report.id, '/edit'])"
                                     class="btn btn-primary btn-sm">
                                 <fa-icon icon="pencil-alt"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                             </button>
 
-                            <button type="submit" (click)="delete(report)"
-                                    class="btn btn-danger btn-sm">
+                            <button type="submit" (click)="delete(report)" class="btn btn-danger btn-sm">
                                 <fa-icon icon="times"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
                             </button>
@@ -121,7 +140,8 @@
         </div>
 
         <div class="row justify-content-center">
-            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage"
+                [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
         </div>
     </div>
 </div>
