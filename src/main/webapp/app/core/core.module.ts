@@ -28,7 +28,7 @@ import { fontAwesomeIcons } from './icons/font-awesome-icons';
       alertAsToast: false,
       alertTimeout: 5000,
       i18nEnabled: true,
-      defaultI18nLang: 'en',
+      defaultI18nLang: 'pl',
     }),
     TranslateModule.forRoot({
       loader: {
