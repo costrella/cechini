@@ -2,32 +2,32 @@
   "cechiniApp": {
     "worker": {
       "home": {
-        "title": "Worker",
-        "createLabel": "Dodaj Worker",
-        "createOrEditLabel": "Dodaj lub edytuj: Worker",
-        "notFound": "No Workers found"
+        "title": "Przedstawiciele",
+        "createLabel": "Dodaj Przedstawiciela",
+        "createOrEditLabel": "Dodaj lub edytuj: Przedstawiciel",
+        "notFound": "Nie znaleziono Przedstawicieli"
       },
-      "created": "Utworzono nowy obiekt typu Worker z identyfikatorem {{ param }}",
-      "updated": "Uaktualniono obiekt typu Worker z identyfikatorem {{ param }}",
-      "deleted": "Usunięto obiekt typu Worker z identyfikatorem {{ param }}",
+      "created": "Utworzono nowy obiekt typu Przedstawiciel z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Przedstawiciel z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Przedstawiciel z identyfikatorem {{ param }}",
       "delete": {
-        "question": "Czy na pewno chcesz usunąć Worker {{ id }}?"
+        "question": "Czy na pewno chcesz usunąć Przedstawiciel {{ id }}?"
       },
       "detail": {
-        "title": "Worker"
+        "title": "Przedstawiciel"
       },
-      "name": "Name",
-      "surname": "Surname",
-      "hiredDate": "Hired Date",
-      "desc": "Desc",
-      "phone": "Phone",
+      "name": "Imię",
+      "surname": "Nazwisko",
+      "hiredDate": "Data zatrudnienia",
+      "desc": "Opis",
+      "phone": "Telefon",
       "login": "Login",
-      "password": "Password",
+      "password": "Hasło",
       "target": "Target",
-      "active": "Active",
-      "note": "Note",
-      "store": "Store",
-      "report": "Report",
+      "active": "Aktywny",
+      "note": "Notyfikacja",
+      "store": "Sklep",
+      "report": "Raport",
       "track": "Track",
       "manager": "Manager"
     }

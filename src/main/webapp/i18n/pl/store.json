@@ -2,29 +2,29 @@
   "cechiniApp": {
     "store": {
       "home": {
-        "title": "Store",
-        "createLabel": "Dodaj Store",
-        "createOrEditLabel": "Dodaj lub edytuj: Store",
-        "notFound": "No Stores found"
+        "title": "Sklepy",
+        "createLabel": "Dodaj Sklep",
+        "createOrEditLabel": "Dodaj lub edytuj: Sklep",
+        "notFound": "Nie znaleziono Sklepów"
       },
-      "created": "Utworzono nowy obiekt typu Store z identyfikatorem {{ param }}",
-      "updated": "Uaktualniono obiekt typu Store z identyfikatorem {{ param }}",
-      "deleted": "Usunięto obiekt typu Store z identyfikatorem {{ param }}",
+      "created": "Utworzono nowy obiekt typu Sklep z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Sklep z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Sklep z identyfikatorem {{ param }}",
       "delete": {
-        "question": "Czy na pewno chcesz usunąć Store {{ id }}?"
+        "question": "Czy na pewno chcesz usunąć Sklep {{ id }}?"
       },
       "detail": {
-        "title": "Store"
+        "title": "Sklepy"
       },
-      "name": "Name",
+      "name": "Nazwa",
       "nip": "Nip",
-      "desc": "Desc",
-      "visited": "Visited",
-      "note": "Note",
-      "report": "Report",
-      "worker": "Worker",
-      "location": "Location",
-      "storegroup": "Storegroup"
+      "desc": "Opis",
+      "visited": "Odwiedzono",
+      "note": "Notyfikacja",
+      "report": "Raport",
+      "worker": "Przedstawiciel",
+      "location": "Lokalizacja",
+      "storegroup": "Grupa sklepu"
     }
   }
 }

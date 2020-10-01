@@ -6,22 +6,22 @@
       "home": "Strona domowa",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
-        "main": "Encje",
-        "worker": "Worker",
-        "store": "Store",
-        "storeGroup": "Store Group",
+        "main": "Menu",
+        "worker": "Przedstawiciele",
+        "store": "Skepy",
+        "storeGroup": "Grupy Sklepów",
         "manager": "Manager",
-        "order": "Order",
+        "order": "Zamówienia",
         "orderItem": "Order Item",
-        "product": "Product",
-        "warehouse": "Warehouse",
-        "report": "Report",
+        "product": "Produkty",
+        "warehouse": "Hurtownie",
+        "report": "Raporty",
         "track": "Track",
-        "city": "City",
-        "location": "Location",
-        "status": "Status",
-        "photo": "Photo",
-        "note": "Note",
+        "city": "Miasta",
+        "location": "Lokalizacje",
+        "status": "Statusy",
+        "photo": "Zdjęcia",
+        "note": "Notyfikacje",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
@@ -150,5 +150,5 @@
       "not.image": "File was expected to be an image but was found to be \"{{ fileType }}\""
     }
   },
-  "footer": "To jest stopka"
+  "footer": "KOSTRZEWA DEVELOP 2020"
 }

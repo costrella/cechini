@@ -2,23 +2,23 @@
   "cechiniApp": {
     "warehouse": {
       "home": {
-        "title": "Warehouse",
-        "createLabel": "Dodaj Warehouse",
-        "createOrEditLabel": "Dodaj lub edytuj: Warehouse",
-        "notFound": "No Warehouses found"
+        "title": "Hurtownie",
+        "createLabel": "Dodaj Hurtownie",
+        "createOrEditLabel": "Dodaj lub edytuj: Hurtownia",
+        "notFound": "Nie znaleziono Hurtowni"
       },
-      "created": "Utworzono nowy obiekt typu Warehouse z identyfikatorem {{ param }}",
-      "updated": "Uaktualniono obiekt typu Warehouse z identyfikatorem {{ param }}",
-      "deleted": "Usunięto obiekt typu Warehouse z identyfikatorem {{ param }}",
+      "created": "Utworzono nowy obiekt typu Hurtownia z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Hurtownia z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Hurtownia z identyfikatorem {{ param }}",
       "delete": {
-        "question": "Czy na pewno chcesz usunąć Warehouse {{ id }}?"
+        "question": "Czy na pewno chcesz usunąć Hurtownia {{ id }}?"
       },
       "detail": {
-        "title": "Warehouse"
+        "title": "Hurtownia"
       },
-      "name": "Name",
-      "order": "Order",
-      "location": "Location"
+      "name": "Nazwa",
+      "order": "Zamówienie",
+      "location": "Lokalizacja"
     }
   }
 }

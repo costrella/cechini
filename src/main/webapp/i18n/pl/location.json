@@ -1,28 +1,28 @@
 {
   "cechiniApp": {
-    "location": {
+    "Lokalizacja": {
       "home": {
-        "title": "Location",
-        "createLabel": "Dodaj Location",
-        "createOrEditLabel": "Dodaj lub edytuj: Location",
-        "notFound": "No Locations found"
+        "title": "Lokalizacja",
+        "createLabel": "Dodaj Lokalizacje",
+        "createOrEditLabel": "Dodaj lub edytuj: Lokalizacja",
+        "notFound": "Nie znaleziono Lokalizacji"
       },
-      "created": "Utworzono nowy obiekt typu Location z identyfikatorem {{ param }}",
-      "updated": "Uaktualniono obiekt typu Location z identyfikatorem {{ param }}",
-      "deleted": "Usunięto obiekt typu Location z identyfikatorem {{ param }}",
+      "created": "Utworzono nowy obiekt typu Lokalizacja z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Lokalizacja z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Lokalizacja z identyfikatorem {{ param }}",
       "delete": {
-        "question": "Czy na pewno chcesz usunąć Location {{ id }}?"
+        "question": "Czy na pewno chcesz usunąć Lokalizacje {{ id }}?"
       },
       "detail": {
-        "title": "Location"
+        "title": "Lokalizacja"
       },
-      "street": "Street",
+      "street": "Ulica",
       "lat": "Lat",
       "lng": "Lng",
-      "store": "Store",
+      "store": "Sklep",
       "track": "Track",
-      "warehouse": "Warehouse",
-      "city": "City"
+      "warehouse": "Hurtownia",
+      "city": "Miasto"
     }
   }
 }
