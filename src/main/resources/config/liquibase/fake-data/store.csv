@@ -1,11 +1,11 @@
-id;name;nip;jhi_desc;visited
-1;Sklep 01;012312123431;Dynamic Administrator teal;false
-2;Sklep 02;012312123431;Shirt;false
-3;Sklep 03;012312123431;standardization Serbia Books;false
-4;Sklep 04;012312123431;Fantastic;false
-5;Sklep 05;012312123431;parse black Tuna;false
-6;Sklep 06;012312123431;initiatives;true
-7;Sklep 07;012312123431;partnerships Buckinghamshire;false
-8;Sklep 08;012312123431;Senior;false
-9;Sklep 09;012312123431;Global Ergonomic Bacon;false
-10;Sklep 10;012312123431;applications;false
+id;name;nip;jhi_desc;visited;storegroup_id;worker_id;location_id
+1;Sklep 01;012312123431;Dynamic Administrator teal;false;3;1;4
+2;Sklep 02;012312123431;Shirt;false;5;2;5
+3;Sklep 03;012312123431;standardization Serbia Books;false;6;3;6
+4;Sklep 04;012312123431;Fantastic;false;7;3;3
+5;Sklep 05;012312123431;parse black Tuna;false;3;4;2
+6;Sklep 06;012312123431;initiatives;true;2;4;1
+7;Sklep 07;012312123431;partnerships Buckinghamshire;false;3;5;9
+8;Sklep 08;012312123431;Senior;false;6;1;8
+9;Sklep 09;012312123431;Global Ergonomic Bacon;false;9;7;7
+10;Sklep 10;012312123431;applications;false;7;8;6

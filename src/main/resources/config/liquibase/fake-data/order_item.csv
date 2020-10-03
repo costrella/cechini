@@ -1,11 +1,11 @@
-id;name;quantity;atr_1;atr_2
-1;function;54520;Streamlined Credit Card Account revolutionary;Switchable Metal
-2;paradigms;55993;Money Market Account;program
-3;application Central African Republic;27113;Engineer driver Intelligent;Lempira Configuration Human
-4;Indiana Grocery;56275;parse California auxiliary;payment Guinea-Bissau
-5;e-markets client-driven;33897;red Personal Loan Account;Buckinghamshire
-6;Drive Small;88198;payment;Outdoors fuchsia
-7;Up-sized experiences navigating;29919;Dynamic generating International;silver redundant French Southern Territories
-8;index turn-key next generation;18351;Rubber;Intelligent Fresh Shirt Kansas action-items
-9;Cotton wireless;92686;Borders Sports orchestrate;Gorgeous Wyoming circuit
-10;connecting Minnesota;45157;bandwidth haptic;transmit Meadow
+id;name;quantity;atr_1;atr_2;product_id;order_id
+1;function;54520;Streamlined Credit Card Account revolutionary;Switchable Metal;2;1
+2;paradigms;55993;Money Market Account;program;4;1
+3;application Central African Republic;27113;Engineer driver Intelligent;Lempira Configuration Human;5;1
+4;Indiana Grocery;56275;parse California auxiliary;payment Guinea-Bissau;3;2
+5;e-markets client-driven;33897;red Personal Loan Account;Buckinghamshire;1;1
+6;Drive Small;88198;payment;Outdoors fuchsia;3;1
+7;Up-sized experiences navigating;29919;Dynamic generating International;silver redundant French Southern Territories;5;2
+8;index turn-key next generation;18351;Rubber;Intelligent Fresh Shirt Kansas action-items;7;1
+9;Cotton wireless;92686;Borders Sports orchestrate;Gorgeous Wyoming circuit;8;2
+10;connecting Minnesota;45157;bandwidth haptic;transmit Meadow;9;4

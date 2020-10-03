@@ -1,6 +1,6 @@
 {
   "cechiniApp": {
-    "Lokalizacja": {
+    "location": {
       "home": {
         "title": "Lokalizacja",
         "createLabel": "Dodaj Lokalizacje",

@@ -6,7 +6,7 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    
+
     <!--
         Added the entity Store.
     -->
@@ -64,6 +64,9 @@
             <column name="jhi_desc" type="string"/>
             <column name="visited" type="boolean"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+            <column name="storegroup_id" type="numeric"/>
+            <column name="worker_id" type="numeric"/>
+            <column name="location_id" type="numeric"/>
         </loadData>
     </changeSet>
 
