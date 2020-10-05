@@ -5,6 +5,7 @@ export interface IOrderItem {
   atr1?: string;
   atr2?: string;
   productName?: string;
+  productEan?: string;
   productId?: number;
   orderId?: number;
 }
@@ -17,6 +18,7 @@ export class OrderItem implements IOrderItem {
     public atr1?: string,
     public atr2?: string,
     public productName?: string,
+    public productEan?: string,
     public productId?: number,
     public orderId?: number
   ) {}

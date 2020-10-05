@@ -28,14 +28,17 @@
                     <!-- <th scope="col" jhiSortBy="name"><span jhiTranslate="cechiniApp.orderItem.name">Name</span>
                         <fa-icon icon="sort"></fa-icon>
                     </th> -->
-                    <!-- <th scope="col" jhiSortBy="atr1"><span jhiTranslate="cechiniApp.orderItem.atr1">Atr 1</span>
-                        <fa-icon icon="sort"></fa-icon>
-                    </th>
-                    <th scope="col" jhiSortBy="atr2"><span jhiTranslate="cechiniApp.orderItem.atr2">Atr 2</span>
+                    <!-- <th scope="col" jhiSortBy="atr2"><span jhiTranslate="cechiniApp.orderItem.atr2">Atr 2</span>
                         <fa-icon icon="sort"></fa-icon>
                     </th> -->
                     <th scope="col" jhiSortBy="productName"><span
                             jhiTranslate="cechiniApp.orderItem.product">Product</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="atr1"><span jhiTranslate="cechiniApp.product.atr1">Atr 1</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="atr1"><span jhiTranslate="cechiniApp.product.ean">Ean</span>
                         <fa-icon icon="sort"></fa-icon>
                     </th>
                     <th scope="col" jhiSortBy="quantity"><span
@@ -53,16 +56,16 @@
                     <!-- <td><a (click)="clickItem(orderItem.id)">{{ orderItem.id }}</a></td> -->
                     <!-- <td>{{ orderItem.id }}</td> -->
                     <!-- <td>{{ orderItem.name }}</td> -->
-                    <!-- <td>{{ orderItem.atr1 }}</td>
-                    <td>{{ orderItem.atr2 }}</td> -->
+                    <!-- <td>{{ orderItem.atr2 }}</td> -->
                     <td>
                         <div *ngIf="orderItem.productId">
                             <a  (click)="clickItem(['/product/', orderItem.productId , '/view'])">
                                 {{ orderItem.productName }}
                             </a>
-                            
                         </div>
                     </td>
+                    <td>{{ orderItem.atr1 }}</td>
+                    <td>{{ orderItem.productEan }}</td>
                     <td>{{ orderItem.quantity }}</td>
                     <!-- <td>
                         <div *ngIf="orderItem.orderId">

@@ -7,7 +7,7 @@ import java.io.Serializable;
  * A DTO for the {@link com.costrella.cechini.domain.OrderItem} entity.
  */
 public class OrderItemDTO implements Serializable {
-    
+
     private Long id;
 
     @NotNull
@@ -20,13 +20,22 @@ public class OrderItemDTO implements Serializable {
 
     private String atr2;
 
-
     private Long productId;
 
     private String productName;
 
+    private String productEan;
+
     private Long orderId;
-    
+
+    public String getProductEan() {
+        return productEan;
+    }
+
+    public void setProductEan(String productEan) {
+        this.productEan = productEan;
+    }
+
     public Long getId() {
         return id;
     }

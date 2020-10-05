@@ -1,7 +1,10 @@
 <div class="row justify-content-center">
-    <div class="col-8">
+    <div class="col-12">
         <div *ngIf="worker">
-            <h2><span jhiTranslate="cechiniApp.worker.detail.title">Worker</span> {{ worker.id }}</h2>
+            <h2><span jhiTranslate="cechiniApp.worker.detail.title">Worker</span>
+                {{ worker.surname }} {{ worker.name }}
+
+            </h2>
 
             <hr>
 
@@ -18,12 +21,12 @@
                 </dd>
                 <dt><span jhiTranslate="cechiniApp.worker.hiredDate">Hired Date</span></dt>
                 <dd>
-                    <span>{{ worker.hiredDate }}</span>
+                    <span>{{ worker.hiredDate | date:'dd/MM/yyyy' }}</span>
                 </dd>
-                <dt><span jhiTranslate="cechiniApp.worker.desc">Desc</span></dt>
+                <!-- <dt><span jhiTranslate="cechiniApp.worker.desc">Desc</span></dt>
                 <dd>
                     <span>{{ worker.desc }}</span>
-                </dd>
+                </dd> -->
                 <dt><span jhiTranslate="cechiniApp.worker.phone">Phone</span></dt>
                 <dd>
                     <span>{{ worker.phone }}</span>
@@ -46,17 +49,17 @@
                 </dd>
             </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
+            <button type="submit" (click)="previousState()" class="btn btn-info">
                 <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
             </button>
 
-            <button type="button"
-                    [routerLink]="['/worker', worker.id, 'edit']"
-                    class="btn btn-primary">
+            <button type="button" [routerLink]="['/worker', worker.id, 'edit']" class="btn btn-primary">
                 <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
             </button>
+
+            <div *ngIf="worker.id">
+                <jhi-report [setWorkerId]="worker.id"></jhi-report>
+            </div>
         </div>
     </div>
 </div>

@@ -25,7 +25,7 @@
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="orderDate"><span jhiTranslate="cechiniApp.order.orderDate">Order Date</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="deliveryDate"><span jhiTranslate="cechiniApp.order.deliveryDate">Delivery Date</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="comment"><span jhiTranslate="cechiniApp.order.comment">Comment</span> <fa-icon icon="sort"></fa-icon></th>
+                    <!-- <th scope="col"  jhiSortBy="comment"><span jhiTranslate="cechiniApp.order.comment">Comment</span> <fa-icon icon="sort"></fa-icon></th> -->
                     <th scope="col"  jhiSortBy="warehouseName"><span jhiTranslate="cechiniApp.order.warehouse">Warehouse</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="statusName"><span jhiTranslate="cechiniApp.order.status">Status</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
@@ -36,7 +36,7 @@
                     <td><a [routerLink]="['/order', order.id, 'view']">{{ order.id }}</a></td>
                     <td>{{ order.orderDate | date:'mediumDate' }}</td>
                     <td>{{ order.deliveryDate | date:'mediumDate' }}</td>
-                    <td>{{ order.comment }}</td>
+                    <!-- <td>{{ order.comment }}</td> -->
                     <td>
                         <div *ngIf="order.warehouseId">
                             <a [routerLink]="['/warehouse', order.warehouseId , 'view']" >{{ order.warehouseName }}</a>

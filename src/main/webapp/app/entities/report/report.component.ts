@@ -13,6 +13,11 @@ import { WorkerService } from '../worker/worker.service';
 import { ReportDeleteDialogComponent } from './report-delete-dialog.component';
 import { ReportService } from './report.service';
 
+export enum ReportPageType {
+  WORKER = 'WORKER',
+  STORE = 'STORE',
+}
+
 @Component({
   selector: 'jhi-report',
   templateUrl: './report.component.html',
@@ -31,7 +36,9 @@ export class ReportComponent implements OnInit, OnDestroy {
   ascending!: boolean;
   ngbPaginationPage = 1;
   internal?: boolean;
+  type?: ReportPageType;
   storeId?: number;
+  workerId?: number;
 
   constructor(
     protected reportService: ReportService,
@@ -46,7 +53,15 @@ export class ReportComponent implements OnInit, OnDestroy {
   @Input()
   set setStoreId(storeId: number) {
     this.internal = true;
+    this.type = ReportPageType.STORE;
     this.storeId = storeId;
+  }
+
+  @Input()
+  set setWorkerId(workerId: number) {
+    this.internal = true;
+    this.type = ReportPageType.WORKER;
+    this.workerId = workerId;
   }
 
   clickItem(array: any[]): void {
@@ -75,16 +90,33 @@ export class ReportComponent implements OnInit, OnDestroy {
     const pageToLoad: number = page || this.page || 1;
 
     if (this.internal) {
-      this.reportService
-        .findAllByStoreId(this.storeId || 0, {
-          page: pageToLoad - 1,
-          size: this.itemsPerPage,
-          sort: this.sort(),
-        })
-        .subscribe(
-          (res: HttpResponse<IReport[]>) => this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate),
-          () => this.onError()
-        );
+      switch (this.type) {
+        case ReportPageType.STORE:
+          this.reportService
+            .findAllByStoreId(this.storeId || 0, {
+              page: pageToLoad - 1,
+              size: this.itemsPerPage,
+              sort: this.sort(),
+            })
+            .subscribe(
+              (res: HttpResponse<IReport[]>) => this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate),
+              () => this.onError()
+            );
+          break;
+
+        case ReportPageType.WORKER:
+          this.reportService
+            .findAllByWorkerId(this.workerId || 0, {
+              page: pageToLoad - 1,
+              size: this.itemsPerPage,
+              sort: this.sort(),
+            })
+            .subscribe(
+              (res: HttpResponse<IReport[]>) => this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate),
+              () => this.onError()
+            );
+          break;
+      }
     } else {
       this.reportService
         .query({

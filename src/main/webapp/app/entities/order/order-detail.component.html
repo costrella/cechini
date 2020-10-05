@@ -47,9 +47,9 @@
                 <dt><span jhiTranslate="cechiniApp.order.status">Status</span></dt>
                 <dd>
                     <div *ngIf="order.statusId">
-                        <!-- <a [routerLink]="['/status', order.statusId, 'view']"> -->
-                            <span class="badge badge-info">{{ order.statusName }}</span>
-                        <!-- </a> -->
+                        <a [routerLink]="['/status', order.statusId, 'view']">
+                            {{ order.statusName }}
+                        </a>
                     </div>
                 </dd>
             </dl>
