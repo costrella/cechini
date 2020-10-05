@@ -14,11 +14,11 @@
         "question": "Czy na pewno chcesz usunąć Produkt {{ id }}?"
       },
       "detail": {
-        "title": "Produkty"
+        "title": "Produkt"
       },
       "name": "Nazwa",
       "ean": "Ean",
-      "atr1": "Atr 1",
+      "atr1": "Pojemność",
       "atr2": "Atr 2",
       "orderItem": "Order Item"
     }

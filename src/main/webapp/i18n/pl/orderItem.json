@@ -14,7 +14,7 @@
         "question": "Czy na pewno chcesz usunąć Pozycje Zamówienia {{ id }}?"
       },
       "detail": {
-        "title": "Pozycje Zamówienia"
+        "title": "Pozycja Zamówienia"
       },
       "name": "Nazwa",
       "quantity": "Ilość",

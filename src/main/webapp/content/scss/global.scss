@@ -18,6 +18,15 @@ h4 {
 a:hover {
   /* make sure browsers use the pointer cursor for anchors, even with no href */
   cursor: pointer;
+  // color: red;
+}
+
+#test {
+  color: red;
+}
+
+a {
+  color: #00a6ff;
 }
 
 .dropdown-item:hover {

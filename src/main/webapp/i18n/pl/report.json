@@ -14,7 +14,7 @@
         "question": "Czy na pewno chcesz usunąć Raport {{ id }}?"
       },
       "detail": {
-        "title": "Raporty"
+        "title": "Raport"
       },
       "number": "Numer",
       "reportDate": "Data raportu",

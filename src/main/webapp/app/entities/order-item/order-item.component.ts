@@ -41,9 +41,13 @@ export class OrderItemComponent implements OnInit, OnDestroy {
     this.orderId = orderId;
   }
 
-  clickItem(orderId?: number): void {
-    this.router.navigate(['/order-item/' + orderId + '/view']);
+  clickItem(array: any[]): void {
+    this.router.navigate([array[0] + array[1] + array[2]]);
   }
+
+  // clickItem(orderId?: number): void {
+  //   this.router.navigate(['/order-item/' + orderId + '/view']);
+  // }
 
   editItem(orderId?: number): void {
     this.router.navigate(['/order-item/' + orderId + '/edit']);

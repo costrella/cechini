@@ -22,51 +22,54 @@
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
-                    <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span>
+                    <!-- <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span>
                         <fa-icon icon="sort"></fa-icon>
-                    </th>
-                    <th scope="col" jhiSortBy="name"><span jhiTranslate="cechiniApp.orderItem.name">Name</span>
+                    </th> -->
+                    <!-- <th scope="col" jhiSortBy="name"><span jhiTranslate="cechiniApp.orderItem.name">Name</span>
                         <fa-icon icon="sort"></fa-icon>
-                    </th>
-                    <th scope="col" jhiSortBy="quantity"><span
-                            jhiTranslate="cechiniApp.orderItem.quantity">Quantity</span>
-                        <fa-icon icon="sort"></fa-icon>
-                    </th>
-                    <th scope="col" jhiSortBy="atr1"><span jhiTranslate="cechiniApp.orderItem.atr1">Atr 1</span>
+                    </th> -->
+                    <!-- <th scope="col" jhiSortBy="atr1"><span jhiTranslate="cechiniApp.orderItem.atr1">Atr 1</span>
                         <fa-icon icon="sort"></fa-icon>
                     </th>
                     <th scope="col" jhiSortBy="atr2"><span jhiTranslate="cechiniApp.orderItem.atr2">Atr 2</span>
                         <fa-icon icon="sort"></fa-icon>
-                    </th>
+                    </th> -->
                     <th scope="col" jhiSortBy="productName"><span
                             jhiTranslate="cechiniApp.orderItem.product">Product</span>
                         <fa-icon icon="sort"></fa-icon>
                     </th>
-                    <th scope="col" jhiSortBy="orderId"><span jhiTranslate="cechiniApp.orderItem.order">Order</span>
+                    <th scope="col" jhiSortBy="quantity"><span
+                        jhiTranslate="cechiniApp.orderItem.quantity">Quantity</span>
+                    <fa-icon icon="sort"></fa-icon>
+                </th>
+                    <!-- <th scope="col" jhiSortBy="orderId"><span jhiTranslate="cechiniApp.orderItem.order">Order</span>
                         <fa-icon icon="sort"></fa-icon>
-                    </th>
-                    <th scope="col"></th>
+                    </th> -->
+                    <!-- <th scope="col"></th> -->
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let orderItem of orderItems ;trackBy: trackId">
-                    <td><a (click)="clickItem(orderItem.id)">{{ orderItem.id }}</a></td>
+                    <!-- <td><a (click)="clickItem(orderItem.id)">{{ orderItem.id }}</a></td> -->
                     <!-- <td>{{ orderItem.id }}</td> -->
-                    <td>{{ orderItem.name }}</td>
-                    <td>{{ orderItem.quantity }}</td>
-                    <td>{{ orderItem.atr1 }}</td>
-                    <td>{{ orderItem.atr2 }}</td>
+                    <!-- <td>{{ orderItem.name }}</td> -->
+                    <!-- <td>{{ orderItem.atr1 }}</td>
+                    <td>{{ orderItem.atr2 }}</td> -->
                     <td>
                         <div *ngIf="orderItem.productId">
-                            {{ orderItem.productName }}
+                            <a  (click)="clickItem(['/product/', orderItem.productId , '/view'])">
+                                {{ orderItem.productName }}
+                            </a>
+                            
                         </div>
                     </td>
-                    <td>
+                    <td>{{ orderItem.quantity }}</td>
+                    <!-- <td>
                         <div *ngIf="orderItem.orderId">
                             {{ orderItem.orderId }}
                         </div>
-                    </td>
-                    <td class="text-right">
+                    </td> -->
+                    <!-- <td class="text-right">
                         <div class="btn-group">
 
                             <button type="submit" (click)="editItem(orderItem.id)" class="btn btn-primary btn-sm">
@@ -79,7 +82,7 @@
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
                             </button>
                         </div>
-                    </td>
+                    </td> -->
                 </tr>
             </tbody>
         </table>

@@ -14,7 +14,7 @@
         "question": "Czy na pewno chcesz usunąć Zamówienie {{ id }}?"
       },
       "detail": {
-        "title": "Zamówienia"
+        "title": "Szczegóły Zamówienia"
       },
       "orderDate": "Data zamówienia",
       "deliveryDate": "Data dostarczenia",

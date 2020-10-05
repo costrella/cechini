@@ -14,7 +14,7 @@
         "question": "Czy na pewno chcesz usunąć Sklep {{ id }}?"
       },
       "detail": {
-        "title": "Sklepy"
+        "title": "Sklep"
       },
       "name": "Nazwa",
       "nip": "Nip",
