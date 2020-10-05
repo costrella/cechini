@@ -27,6 +27,7 @@
                     <th scope="col"  jhiSortBy="deliveryDate"><span jhiTranslate="cechiniApp.order.deliveryDate">Delivery Date</span> <fa-icon icon="sort"></fa-icon></th>
                     <!-- <th scope="col"  jhiSortBy="comment"><span jhiTranslate="cechiniApp.order.comment">Comment</span> <fa-icon icon="sort"></fa-icon></th> -->
                     <th scope="col"  jhiSortBy="warehouseName"><span jhiTranslate="cechiniApp.order.warehouse">Warehouse</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"><span jhiTranslate="cechiniApp.worker.home.title">Worker</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="statusName"><span jhiTranslate="cechiniApp.order.status">Status</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
@@ -34,12 +35,17 @@
             <tbody>
                 <tr *ngFor="let order of orders ;trackBy: trackId">
                     <td><a [routerLink]="['/order', order.id, 'view']">{{ order.id }}</a></td>
-                    <td>{{ order.orderDate | date:'mediumDate' }}</td>
-                    <td>{{ order.deliveryDate | date:'mediumDate' }}</td>
+                    <td>{{ order.orderDate | date:'dd/MM/yyyy' }}</td>
+                    <td>{{ order.deliveryDate | date:'dd/MM/yyyy' }}</td>
                     <!-- <td>{{ order.comment }}</td> -->
                     <td>
                         <div *ngIf="order.warehouseId">
                             <a [routerLink]="['/warehouse', order.warehouseId , 'view']" >{{ order.warehouseName }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="order.workerId">
+                            <a [routerLink]="['/worker', order.workerId , 'view']" >{{ order.workerSurname }}</a>
                         </div>
                     </td>
                     <td>
