@@ -5,7 +5,8 @@
         "title": "Reports",
         "createLabel": "Create a new Report",
         "createOrEditLabel": "Create or edit a Report",
-        "notFound": "No Reports found"
+        "notFound": "No Reports found",
+        "filter": "Filter"
       },
       "created": "A new Report is created with identifier {{ param }}",
       "updated": "A Report is updated with identifier {{ param }}",

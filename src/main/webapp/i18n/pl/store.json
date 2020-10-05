@@ -5,7 +5,8 @@
         "title": "Sklepy",
         "createLabel": "Dodaj Sklep",
         "createOrEditLabel": "Dodaj lub edytuj: Sklep",
-        "notFound": "Nie znaleziono Sklepów"
+        "notFound": "Nie znaleziono Sklepów",
+        "filter": "Fitrowanie"
       },
       "created": "Utworzono nowy obiekt typu Sklep z identyfikatorem {{ param }}",
       "updated": "Uaktualniono obiekt typu Sklep z identyfikatorem {{ param }}",

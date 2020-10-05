@@ -5,7 +5,8 @@
         "title": "Stores",
         "createLabel": "Create a new Store",
         "createOrEditLabel": "Create or edit a Store",
-        "notFound": "No Stores found"
+        "notFound": "No Stores found",
+        "filter": "Filter"
       },
       "created": "A new Store is created with identifier {{ param }}",
       "updated": "A Store is updated with identifier {{ param }}",

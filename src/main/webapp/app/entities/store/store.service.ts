@@ -27,6 +27,11 @@ export class StoreService {
     return this.http.get<IStore>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
+  findAllByWorker(workerId: number, req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http.get<IStore[]>(`${this.resourceUrl}/worker/${workerId}`, { params: options, observe: 'response' });
+  }
+
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http.get<IStore[]>(this.resourceUrl, { params: options, observe: 'response' });

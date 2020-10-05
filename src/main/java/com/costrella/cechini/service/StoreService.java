@@ -2,6 +2,7 @@ package com.costrella.cechini.service;
 
 import com.costrella.cechini.domain.Store;
 import com.costrella.cechini.repository.StoreRepository;
+import com.costrella.cechini.service.dto.ReportDTO;
 import com.costrella.cechini.service.dto.StoreDTO;
 import com.costrella.cechini.service.dto.WorkerDTO;
 import com.costrella.cechini.service.mapper.StoreMapper;
@@ -90,4 +91,11 @@ public class StoreService {
         log.debug("Request to delete Store : {}", id);
         storeRepository.deleteById(id);
     }
+
+    @Transactional(readOnly = true)
+    public Page<StoreDTO> findAllByWorkerId(Pageable pageable, Long id) {
+        return storeRepository.findAllByWorkerId(id, pageable)
+            .map(storeMapper::toDto);
+    }
+
 }

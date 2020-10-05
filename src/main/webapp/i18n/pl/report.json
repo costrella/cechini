@@ -5,7 +5,8 @@
         "title": "Raporty",
         "createLabel": "Dodaj Raport",
         "createOrEditLabel": "Dodaj lub edytuj: Raport",
-        "notFound": "Nie znaleziono Raportów"
+        "notFound": "Nie znaleziono Raportów",
+        "filter": "Fitrowanie"
       },
       "created": "Utworzono nowy obiekt typu Raport z identyfikatorem {{ param }}",
       "updated": "Uaktualniono obiekt typu Raport z identyfikatorem {{ param }}",
