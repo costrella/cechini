@@ -12,6 +12,8 @@ export interface IStore {
   workerSurname?: string;
   workerId?: number;
   locationId?: number;
+  locationStreet?: string;
+  locationCityName?: string;
   storegroupName?: string;
   storegroupId?: number;
 }
@@ -28,6 +30,8 @@ export class Store implements IStore {
     public workerSurname?: string,
     public workerId?: number,
     public locationId?: number,
+    public locationStreet?: string,
+    public locationCityName?: string,
     public storegroupName?: string,
     public storegroupId?: number
   ) {

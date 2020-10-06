@@ -79,13 +79,16 @@
                     <th scope="col" jhiSortBy="storeName"><span jhiTranslate="cechiniApp.report.store">Store</span>
                         <fa-icon icon="sort"></fa-icon>
                     </th>
+                    <th scope="col"><span jhiTranslate="cechiniApp.report.photos">Photos</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let report of reports ;trackBy: trackId">
                     <td>
-                        <a (click)="clickItem(['/report/', report.id, '/view'])">
+                        <a style="color: #00a6ff" (click)="clickItem(['/report/', report.id, '/view'])">
                             {{ report.id }}
                         </a>
                     </td>
@@ -94,19 +97,20 @@
                     <td>{{ report.desc }}</td>
                     <td>
                         <div *ngIf="report.orderId">
-                            <a (click)="clickItem(['/order/', report.orderId , '/view'])">{{ report.orderId }}</a>
+                            <a style="color: #00a6ff" (click)="clickItem(['/order/', report.orderId , '/view'])">{{ report.orderId }}</a>
                         </div>
                     </td>
                     <td>
                         <div *ngIf="report.workerId">
-                            <a (click)="clickItem(['/worker/', report.workerId , '/view'])">{{ report.workerSurname }}</a>
+                            <a style="color: #00a6ff" (click)="clickItem(['/worker/', report.workerId , '/view'])">{{ report.workerSurname }}</a>
                         </div>
                     </td>
                     <td>
                         <div *ngIf="report.storeId">
-                            <a (click)="clickItem(['/store/', report.storeId , '/view'])">{{ report.storeName }}</a>
+                            <a style="color: #00a6ff" (click)="clickItem(['/store/', report.storeId , '/view'])">{{ report.storeName }}</a>
                         </div>
                     </td>
+                    <td>test</td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"
@@ -116,12 +120,12 @@
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                             </button>
 
-                            <button type="submit"
+                            <!-- <button type="submit"
                                     (click)="clickItem(['/report/', report.id, '/edit'])"
                                     class="btn btn-primary btn-sm">
                                 <fa-icon icon="pencil-alt"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                            </button>
+                            </button> -->
 
                             <button type="submit" (click)="delete(report)" class="btn btn-danger btn-sm">
                                 <fa-icon icon="times"></fa-icon>

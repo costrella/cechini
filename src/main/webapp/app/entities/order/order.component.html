@@ -2,12 +2,12 @@
     <h2 id="page-heading">
         <span jhiTranslate="cechiniApp.order.home.title">Orders</span>
 
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-order" [routerLink]="['/order/new']">
+        <!-- <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-order" [routerLink]="['/order/new']">
             <fa-icon icon="plus"></fa-icon>
             <span  jhiTranslate="cechiniApp.order.home.createLabel">
             Create a new Order
             </span>
-        </button>
+        </button> -->
     </h2>
 
     <jhi-alert-error></jhi-alert-error>
@@ -27,7 +27,7 @@
                     <th scope="col"  jhiSortBy="deliveryDate"><span jhiTranslate="cechiniApp.order.deliveryDate">Delivery Date</span> <fa-icon icon="sort"></fa-icon></th>
                     <!-- <th scope="col"  jhiSortBy="comment"><span jhiTranslate="cechiniApp.order.comment">Comment</span> <fa-icon icon="sort"></fa-icon></th> -->
                     <th scope="col"  jhiSortBy="warehouseName"><span jhiTranslate="cechiniApp.order.warehouse">Warehouse</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"><span jhiTranslate="cechiniApp.worker.home.title">Worker</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"><span jhiTranslate="cechiniApp.worker.detail.title">Worker</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="statusName"><span jhiTranslate="cechiniApp.order.status">Status</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>

@@ -86,7 +86,8 @@
                     </td>
                     <td>
                         <div *ngIf="store.locationId">
-                            <a [routerLink]="['/location', store.locationId , 'view']">{{ store.locationId }}</a>
+                            <!-- <a [routerLink]="['/location', store.locationId , 'view']">{{ store.locationId }}</a> -->
+                            {{store.locationStreet}} {{store.locationCityName}}
                         </div>
                     </td>
                     <td>
