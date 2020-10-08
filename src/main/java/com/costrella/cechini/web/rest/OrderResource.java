@@ -1,6 +1,7 @@
 package com.costrella.cechini.web.rest;
 
 import com.costrella.cechini.service.OrderService;
+import com.costrella.cechini.service.dto.StoreDTO;
 import com.costrella.cechini.web.rest.errors.BadRequestAlertException;
 import com.costrella.cechini.service.dto.OrderDTO;
 
@@ -101,6 +102,13 @@ public class OrderResource {
         }
         log.debug("REST request to get a page of Orders");
         Page<OrderDTO> page = orderService.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    @GetMapping("/orders/worker/{id}")
+    public ResponseEntity<List<OrderDTO>> getAllByWorkerId(Pageable pageable, @PathVariable Long id) {
+        Page<OrderDTO> page = orderService.findAllByWorkerId(pageable, id);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

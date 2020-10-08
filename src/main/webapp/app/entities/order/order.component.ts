@@ -10,6 +10,8 @@ import { IOrder } from 'app/shared/model/order.model';
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { OrderService } from './order.service';
 import { OrderDeleteDialogComponent } from './order-delete-dialog.component';
+import { WorkerService } from '../worker/worker.service';
+import { IWorker, Worker } from 'app/shared/model/worker.model';
 
 @Component({
   selector: 'jhi-order',
@@ -17,6 +19,8 @@ import { OrderDeleteDialogComponent } from './order-delete-dialog.component';
 })
 export class OrderComponent implements OnInit, OnDestroy {
   orders?: IOrder[];
+  workers?: IWorker[];
+  worker?: IWorker;
   eventSubscriber?: Subscription;
   totalItems = 0;
   itemsPerPage = ITEMS_PER_PAGE;
@@ -30,8 +34,30 @@ export class OrderComponent implements OnInit, OnDestroy {
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
     protected eventManager: JhiEventManager,
-    protected modalService: NgbModal
+    protected modalService: NgbModal,
+    protected workerService: WorkerService
   ) {}
+
+  filter(): void {
+    const pageToLoad = 1;
+
+    const workerId = this.worker?.id;
+
+    if (workerId) {
+      this.orderService
+        .findAllByWorker(workerId, {
+          page: 0,
+          size: this.itemsPerPage,
+          sort: this.sort(),
+        })
+        .subscribe(
+          (res: HttpResponse<IOrder[]>) => this.onSuccess(res.body, res.headers, pageToLoad, false),
+          () => this.onError()
+        );
+    } else {
+      this.loadPage();
+    }
+  }
 
   loadPage(page?: number, dontNavigate?: boolean): void {
     const pageToLoad: number = page || this.page || 1;
@@ -51,6 +77,17 @@ export class OrderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.handleNavigation();
     this.registerChangeInOrders();
+    this.initFilter();
+  }
+
+  initFilter(): void {
+    this.worker = new Worker();
+    this.workerService.findAll().subscribe(
+      (res: HttpResponse<IWorker[]>) => {
+        this.workers = res.body || [];
+      },
+      () => this.onError()
+    );
   }
 
   protected handleNavigation(): void {

@@ -14,6 +14,27 @@
 
     <jhi-alert></jhi-alert>
 
+    <div class="row">
+        <div class="col-md-5">
+            <h4 jhiTranslate="cechiniApp.order.home.filter">Filter by worker</h4>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" jhiTranslate="cechiniApp.worker.detail.title">Workers</span>
+                </div>
+
+                <select [(ngModel)]="worker" name="worker" #name="ngModel" (ngModelChange)="filter()"
+                    class="form-control">
+                    <option value=""></option>
+                    <option *ngFor="let w of workers" [ngValue]="w">
+                        {{w.surname}} {{w.name}}
+                    </option>
+                </select>
+            </div>
+
+        </div>
+    </div>
+
     <div class="alert alert-warning" id="no-result" *ngIf="orders?.length === 0">
         <span jhiTranslate="cechiniApp.order.home.notFound">No orders found</span>
     </div>
@@ -26,6 +47,7 @@
                     <th scope="col"  jhiSortBy="orderDate"><span jhiTranslate="cechiniApp.order.orderDate">Order Date</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="deliveryDate"><span jhiTranslate="cechiniApp.order.deliveryDate">Delivery Date</span> <fa-icon icon="sort"></fa-icon></th>
                     <!-- <th scope="col"  jhiSortBy="comment"><span jhiTranslate="cechiniApp.order.comment">Comment</span> <fa-icon icon="sort"></fa-icon></th> -->
+                    <th scope="col"  jhiSortBy="storeName"><span jhiTranslate="cechiniApp.order.store">Store</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="warehouseName"><span jhiTranslate="cechiniApp.order.warehouse">Warehouse</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"><span jhiTranslate="cechiniApp.worker.detail.title">Worker</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="statusName"><span jhiTranslate="cechiniApp.order.status">Status</span> <fa-icon icon="sort"></fa-icon></th>
@@ -38,6 +60,11 @@
                     <td>{{ order.orderDate | date:'dd/MM/yyyy' }}</td>
                     <td>{{ order.deliveryDate | date:'dd/MM/yyyy' }}</td>
                     <!-- <td>{{ order.comment }}</td> -->
+                    <td>
+                        <div *ngIf="order.storeId">
+                            <a [routerLink]="['/store', order.storeId , 'view']" >{{ order.storeName }}</a>
+                        </div>
+                    </td>
                     <td>
                         <div *ngIf="order.warehouseId">
                             <a [routerLink]="['/warehouse', order.warehouseId , 'view']" >{{ order.warehouseName }}</a>

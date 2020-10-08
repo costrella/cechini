@@ -16,11 +16,11 @@
 
     <div *ngIf="!internal" class="row">
         <div class="col-md-5">
-            <h4>Filter by worker and store</h4>
+            <h4 jhiTranslate="cechiniApp.report.home.filter">Filter</h4>
 
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" jhiTranslate="cechiniApp.worker.home.title">Workers</span>
+                    <span class="input-group-text" jhiTranslate="cechiniApp.worker.detail.title">Workers</span>
                 </div>
 
                 <select [(ngModel)]="worker" name="worker" #name="ngModel" (ngModelChange)="filter()"

@@ -5,7 +5,8 @@
         "title": "Zamówienia",
         "createLabel": "Dodaj Zamówienie",
         "createOrEditLabel": "Dodaj lub edytuj: Zamówienia",
-        "notFound": "Nie znaleziono Zamówień"
+        "notFound": "Nie znaleziono Zamówień",
+        "filter": "Filtruj"
       },
       "created": "Utworzono nowy obiekt typu Zamówienie z identyfikatorem {{ param }}",
       "updated": "Uaktualniono obiekt typu Zamówienie z identyfikatorem {{ param }}",
@@ -22,7 +23,8 @@
       "orderItem": "Pozycje zamówienia",
       "report": "Raport",
       "warehouse": "Hurtownia",
-      "status": "Status"
+      "status": "Status",
+      "store": "Sklep"
     }
   }
 }

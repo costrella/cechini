@@ -5,7 +5,8 @@
         "title": "Orders",
         "createLabel": "Create a new Order",
         "createOrEditLabel": "Create or edit a Order",
-        "notFound": "No Orders found"
+        "notFound": "No Orders found",
+        "filter": "Filter"
       },
       "created": "A new Order is created with identifier {{ param }}",
       "updated": "A Order is updated with identifier {{ param }}",
@@ -22,7 +23,8 @@
       "orderItem": "Order Item",
       "report": "Report",
       "warehouse": "Warehouse",
-      "status": "Status"
+      "status": "Status",
+      "store": "Store"
     }
   }
 }

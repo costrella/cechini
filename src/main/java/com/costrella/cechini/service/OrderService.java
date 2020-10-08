@@ -1,13 +1,15 @@
 package com.costrella.cechini.service;
 
 import com.costrella.cechini.domain.Order;
+import com.costrella.cechini.domain.Report;
+import com.costrella.cechini.domain.Worker;
 import com.costrella.cechini.repository.OrderRepository;
 import com.costrella.cechini.service.dto.OrderDTO;
 import com.costrella.cechini.service.mapper.OrderItemMapper;
 import com.costrella.cechini.service.mapper.OrderMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -108,5 +110,13 @@ public class OrderService {
     public void delete(Long id) {
         log.debug("Request to delete Order : {}", id);
         orderRepository.deleteById(id);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<OrderDTO> findAllByWorkerId(Pageable pageable, Long id) {
+        Order order = new Order();
+        order.setReport(new Report().worker(new Worker().id(id)));
+        return orderRepository.findAll(Example.of(order), pageable)
+            .map(v -> orderMapper.toDtoCustom(v, orderItemMapper));
     }
 }
