@@ -45,6 +45,9 @@ public class StoreResourceIT {
     private static final Boolean DEFAULT_VISITED = false;
     private static final Boolean UPDATED_VISITED = true;
 
+    private static final String DEFAULT_ADDRESS = "AAAAAAAAAA";
+    private static final String UPDATED_ADDRESS = "BBBBBBBBBB";
+
     @Autowired
     private StoreRepository storeRepository;
 
@@ -73,7 +76,8 @@ public class StoreResourceIT {
             .name(DEFAULT_NAME)
             .nip(DEFAULT_NIP)
             .desc(DEFAULT_DESC)
-            .visited(DEFAULT_VISITED);
+            .visited(DEFAULT_VISITED)
+            .address(DEFAULT_ADDRESS);
         return store;
     }
     /**
@@ -87,7 +91,8 @@ public class StoreResourceIT {
             .name(UPDATED_NAME)
             .nip(UPDATED_NIP)
             .desc(UPDATED_DESC)
-            .visited(UPDATED_VISITED);
+            .visited(UPDATED_VISITED)
+            .address(UPDATED_ADDRESS);
         return store;
     }
 
@@ -115,6 +120,7 @@ public class StoreResourceIT {
         assertThat(testStore.getNip()).isEqualTo(DEFAULT_NIP);
         assertThat(testStore.getDesc()).isEqualTo(DEFAULT_DESC);
         assertThat(testStore.isVisited()).isEqualTo(DEFAULT_VISITED);
+        assertThat(testStore.getAddress()).isEqualTo(DEFAULT_ADDRESS);
     }
 
     @Test
@@ -172,7 +178,8 @@ public class StoreResourceIT {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].nip").value(hasItem(DEFAULT_NIP)))
             .andExpect(jsonPath("$.[*].desc").value(hasItem(DEFAULT_DESC)))
-            .andExpect(jsonPath("$.[*].visited").value(hasItem(DEFAULT_VISITED.booleanValue())));
+            .andExpect(jsonPath("$.[*].visited").value(hasItem(DEFAULT_VISITED.booleanValue())))
+            .andExpect(jsonPath("$.[*].address").value(hasItem(DEFAULT_ADDRESS)));
     }
     
     @Test
@@ -189,7 +196,8 @@ public class StoreResourceIT {
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.nip").value(DEFAULT_NIP))
             .andExpect(jsonPath("$.desc").value(DEFAULT_DESC))
-            .andExpect(jsonPath("$.visited").value(DEFAULT_VISITED.booleanValue()));
+            .andExpect(jsonPath("$.visited").value(DEFAULT_VISITED.booleanValue()))
+            .andExpect(jsonPath("$.address").value(DEFAULT_ADDRESS));
     }
     @Test
     @Transactional
@@ -215,7 +223,8 @@ public class StoreResourceIT {
             .name(UPDATED_NAME)
             .nip(UPDATED_NIP)
             .desc(UPDATED_DESC)
-            .visited(UPDATED_VISITED);
+            .visited(UPDATED_VISITED)
+            .address(UPDATED_ADDRESS);
         StoreDTO storeDTO = storeMapper.toDto(updatedStore);
 
         restStoreMockMvc.perform(put("/api/stores").with(csrf())
@@ -231,6 +240,7 @@ public class StoreResourceIT {
         assertThat(testStore.getNip()).isEqualTo(UPDATED_NIP);
         assertThat(testStore.getDesc()).isEqualTo(UPDATED_DESC);
         assertThat(testStore.isVisited()).isEqualTo(UPDATED_VISITED);
+        assertThat(testStore.getAddress()).isEqualTo(UPDATED_ADDRESS);
     }
 
     @Test

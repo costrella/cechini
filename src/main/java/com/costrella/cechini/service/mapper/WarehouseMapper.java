@@ -9,15 +9,12 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link Warehouse} and its DTO {@link WarehouseDTO}.
  */
-@Mapper(componentModel = "spring", uses = {LocationMapper.class})
+@Mapper(componentModel = "spring", uses = {})
 public interface WarehouseMapper extends EntityMapper<WarehouseDTO, Warehouse> {
 
-    @Mapping(source = "location.id", target = "locationId")
-    WarehouseDTO toDto(Warehouse warehouse);
 
     @Mapping(target = "orders", ignore = true)
     @Mapping(target = "removeOrder", ignore = true)
-    @Mapping(source = "locationId", target = "location")
     Warehouse toEntity(WarehouseDTO warehouseDTO);
 
     default Warehouse fromId(Long id) {

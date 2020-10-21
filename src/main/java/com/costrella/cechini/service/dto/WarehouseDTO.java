@@ -13,8 +13,6 @@ public class WarehouseDTO implements Serializable {
     @NotNull
     private String name;
 
-
-    private Long locationId;
     
     public Long getId() {
         return id;
@@ -30,14 +28,6 @@ public class WarehouseDTO implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Long getLocationId() {
-        return locationId;
-    }
-
-    public void setLocationId(Long locationId) {
-        this.locationId = locationId;
     }
 
     @Override
@@ -63,7 +53,6 @@ public class WarehouseDTO implements Serializable {
         return "WarehouseDTO{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", locationId=" + getLocationId() +
             "}";
     }
 }

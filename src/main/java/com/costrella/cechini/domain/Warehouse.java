@@ -1,6 +1,5 @@
 package com.costrella.cechini.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -29,10 +28,6 @@ public class Warehouse implements Serializable {
 
     @OneToMany(mappedBy = "warehouse")
     private Set<Order> orders = new HashSet<>();
-
-    @ManyToOne
-    @JsonIgnoreProperties(value = "warehouses", allowSetters = true)
-    private Location location;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -79,19 +74,6 @@ public class Warehouse implements Serializable {
 
     public void setOrders(Set<Order> orders) {
         this.orders = orders;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public Warehouse location(Location location) {
-        this.location = location;
-        return this;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

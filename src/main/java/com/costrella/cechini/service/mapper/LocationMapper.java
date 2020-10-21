@@ -9,20 +9,14 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link Location} and its DTO {@link LocationDTO}.
  */
-@Mapper(componentModel = "spring", uses = {CityMapper.class})
+@Mapper(componentModel = "spring", uses = {})
 public interface LocationMapper extends EntityMapper<LocationDTO, Location> {
 
-    @Mapping(source = "city.id", target = "cityId")
-    @Mapping(source = "city.name", target = "cityName")
-    LocationDTO toDto(Location location);
 
     @Mapping(target = "stores", ignore = true)
     @Mapping(target = "removeStore", ignore = true)
     @Mapping(target = "tracks", ignore = true)
     @Mapping(target = "removeTrack", ignore = true)
-    @Mapping(target = "warehouses", ignore = true)
-    @Mapping(target = "removeWarehouse", ignore = true)
-    @Mapping(source = "cityId", target = "city")
     Location toEntity(LocationDTO locationDTO);
 
     default Location fromId(Long id) {

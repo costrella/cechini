@@ -7,13 +7,12 @@ export interface IStore {
   nip?: string;
   desc?: string;
   visited?: boolean;
+  address?: string;
   notes?: INote[];
   reports?: IReport[];
   workerSurname?: string;
   workerId?: number;
   locationId?: number;
-  locationStreet?: string;
-  locationCityName?: string;
   storegroupName?: string;
   storegroupId?: number;
 }
@@ -25,13 +24,12 @@ export class Store implements IStore {
     public nip?: string,
     public desc?: string,
     public visited?: boolean,
+    public address?: string,
     public notes?: INote[],
     public reports?: IReport[],
     public workerSurname?: string,
     public workerId?: number,
     public locationId?: number,
-    public locationStreet?: string,
-    public locationCityName?: string,
     public storegroupName?: string,
     public storegroupId?: number
   ) {

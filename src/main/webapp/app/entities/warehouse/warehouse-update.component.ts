@@ -7,8 +7,6 @@ import { Observable } from 'rxjs';
 
 import { IWarehouse, Warehouse } from 'app/shared/model/warehouse.model';
 import { WarehouseService } from './warehouse.service';
-import { ILocation } from 'app/shared/model/location.model';
-import { LocationService } from 'app/entities/location/location.service';
 
 @Component({
   selector: 'jhi-warehouse-update',
@@ -16,26 +14,17 @@ import { LocationService } from 'app/entities/location/location.service';
 })
 export class WarehouseUpdateComponent implements OnInit {
   isSaving = false;
-  locations: ILocation[] = [];
 
   editForm = this.fb.group({
     id: [],
     name: [null, [Validators.required]],
-    locationId: [],
   });
 
-  constructor(
-    protected warehouseService: WarehouseService,
-    protected locationService: LocationService,
-    protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
-  ) {}
+  constructor(protected warehouseService: WarehouseService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ warehouse }) => {
       this.updateForm(warehouse);
-
-      this.locationService.query().subscribe((res: HttpResponse<ILocation[]>) => (this.locations = res.body || []));
     });
   }
 
@@ -43,7 +32,6 @@ export class WarehouseUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: warehouse.id,
       name: warehouse.name,
-      locationId: warehouse.locationId,
     });
   }
 
@@ -66,7 +54,6 @@ export class WarehouseUpdateComponent implements OnInit {
       ...new Warehouse(),
       id: this.editForm.get(['id'])!.value,
       name: this.editForm.get(['name'])!.value,
-      locationId: this.editForm.get(['locationId'])!.value,
     };
   }
 
@@ -84,9 +71,5 @@ export class WarehouseUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
-  }
-
-  trackById(index: number, item: ILocation): any {
-    return item.id;
   }
 }

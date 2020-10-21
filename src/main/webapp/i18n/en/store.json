@@ -21,6 +21,7 @@
       "nip": "Nip",
       "desc": "Desc",
       "visited": "Visited",
+      "address": "Address",
       "note": "Note",
       "report": "Report",
       "worker": "Worker",

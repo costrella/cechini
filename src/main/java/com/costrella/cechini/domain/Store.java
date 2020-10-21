@@ -37,6 +37,9 @@ public class Store implements Serializable {
     @Column(name = "visited")
     private Boolean visited;
 
+    @Column(name = "address")
+    private String address;
+
     @OneToMany(mappedBy = "store")
     private Set<Note> notes = new HashSet<>();
 
@@ -119,6 +122,19 @@ public class Store implements Serializable {
 
     public void setVisited(Boolean visited) {
         this.visited = visited;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public Store address(String address) {
+        this.address = address;
+        return this;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Set<Note> getNotes() {
@@ -236,6 +252,7 @@ public class Store implements Serializable {
             ", nip='" + getNip() + "'" +
             ", desc='" + getDesc() + "'" +
             ", visited='" + isVisited() + "'" +
+            ", address='" + getAddress() + "'" +
             "}";
     }
 }

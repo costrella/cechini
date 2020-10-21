@@ -9,16 +9,10 @@ public class LocationDTO implements Serializable {
     
     private Long id;
 
-    private String street;
-
     private String lat;
 
     private String lng;
 
-
-    private Long cityId;
-
-    private String cityName;
     
     public Long getId() {
         return id;
@@ -26,14 +20,6 @@ public class LocationDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
     }
 
     public String getLat() {
@@ -50,22 +36,6 @@ public class LocationDTO implements Serializable {
 
     public void setLng(String lng) {
         this.lng = lng;
-    }
-
-    public Long getCityId() {
-        return cityId;
-    }
-
-    public void setCityId(Long cityId) {
-        this.cityId = cityId;
-    }
-
-    public String getCityName() {
-        return cityName;
-    }
-
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
     }
 
     @Override
@@ -90,11 +60,8 @@ public class LocationDTO implements Serializable {
     public String toString() {
         return "LocationDTO{" +
             "id=" + getId() +
-            ", street='" + getStreet() + "'" +
             ", lat='" + getLat() + "'" +
             ", lng='" + getLng() + "'" +
-            ", cityId=" + getCityId() +
-            ", cityName='" + getCityName() + "'" +
             "}";
     }
 }

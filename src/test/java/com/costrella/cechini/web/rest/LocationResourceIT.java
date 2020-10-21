@@ -33,9 +33,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class LocationResourceIT {
 
-    private static final String DEFAULT_STREET = "AAAAAAAAAA";
-    private static final String UPDATED_STREET = "BBBBBBBBBB";
-
     private static final String DEFAULT_LAT = "AAAAAAAAAA";
     private static final String UPDATED_LAT = "BBBBBBBBBB";
 
@@ -67,7 +64,6 @@ public class LocationResourceIT {
      */
     public static Location createEntity(EntityManager em) {
         Location location = new Location()
-            .street(DEFAULT_STREET)
             .lat(DEFAULT_LAT)
             .lng(DEFAULT_LNG);
         return location;
@@ -80,7 +76,6 @@ public class LocationResourceIT {
      */
     public static Location createUpdatedEntity(EntityManager em) {
         Location location = new Location()
-            .street(UPDATED_STREET)
             .lat(UPDATED_LAT)
             .lng(UPDATED_LNG);
         return location;
@@ -106,7 +101,6 @@ public class LocationResourceIT {
         List<Location> locationList = locationRepository.findAll();
         assertThat(locationList).hasSize(databaseSizeBeforeCreate + 1);
         Location testLocation = locationList.get(locationList.size() - 1);
-        assertThat(testLocation.getStreet()).isEqualTo(DEFAULT_STREET);
         assertThat(testLocation.getLat()).isEqualTo(DEFAULT_LAT);
         assertThat(testLocation.getLng()).isEqualTo(DEFAULT_LNG);
     }
@@ -143,7 +137,6 @@ public class LocationResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(location.getId().intValue())))
-            .andExpect(jsonPath("$.[*].street").value(hasItem(DEFAULT_STREET)))
             .andExpect(jsonPath("$.[*].lat").value(hasItem(DEFAULT_LAT)))
             .andExpect(jsonPath("$.[*].lng").value(hasItem(DEFAULT_LNG)));
     }
@@ -159,7 +152,6 @@ public class LocationResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(location.getId().intValue()))
-            .andExpect(jsonPath("$.street").value(DEFAULT_STREET))
             .andExpect(jsonPath("$.lat").value(DEFAULT_LAT))
             .andExpect(jsonPath("$.lng").value(DEFAULT_LNG));
     }
@@ -184,7 +176,6 @@ public class LocationResourceIT {
         // Disconnect from session so that the updates on updatedLocation are not directly saved in db
         em.detach(updatedLocation);
         updatedLocation
-            .street(UPDATED_STREET)
             .lat(UPDATED_LAT)
             .lng(UPDATED_LNG);
         LocationDTO locationDTO = locationMapper.toDto(updatedLocation);
@@ -198,7 +189,6 @@ public class LocationResourceIT {
         List<Location> locationList = locationRepository.findAll();
         assertThat(locationList).hasSize(databaseSizeBeforeUpdate);
         Location testLocation = locationList.get(locationList.size() - 1);
-        assertThat(testLocation.getStreet()).isEqualTo(UPDATED_STREET);
         assertThat(testLocation.getLat()).isEqualTo(UPDATED_LAT);
         assertThat(testLocation.getLng()).isEqualTo(UPDATED_LNG);
     }

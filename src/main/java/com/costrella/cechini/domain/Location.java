@@ -1,6 +1,5 @@
 package com.costrella.cechini.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -22,9 +21,6 @@ public class Location implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "street")
-    private String street;
-
     @Column(name = "lat")
     private String lat;
 
@@ -37,13 +33,6 @@ public class Location implements Serializable {
     @OneToMany(mappedBy = "location")
     private Set<Track> tracks = new HashSet<>();
 
-    @OneToMany(mappedBy = "location")
-    private Set<Warehouse> warehouses = new HashSet<>();
-
-    @ManyToOne
-    @JsonIgnoreProperties(value = "locations", allowSetters = true)
-    private City city;
-
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -51,19 +40,6 @@ public class Location implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public Location street(String street) {
-        this.street = street;
-        return this;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
     }
 
     public String getLat() {
@@ -141,44 +117,6 @@ public class Location implements Serializable {
     public void setTracks(Set<Track> tracks) {
         this.tracks = tracks;
     }
-
-    public Set<Warehouse> getWarehouses() {
-        return warehouses;
-    }
-
-    public Location warehouses(Set<Warehouse> warehouses) {
-        this.warehouses = warehouses;
-        return this;
-    }
-
-    public Location addWarehouse(Warehouse warehouse) {
-        this.warehouses.add(warehouse);
-        warehouse.setLocation(this);
-        return this;
-    }
-
-    public Location removeWarehouse(Warehouse warehouse) {
-        this.warehouses.remove(warehouse);
-        warehouse.setLocation(null);
-        return this;
-    }
-
-    public void setWarehouses(Set<Warehouse> warehouses) {
-        this.warehouses = warehouses;
-    }
-
-    public City getCity() {
-        return city;
-    }
-
-    public Location city(City city) {
-        this.city = city;
-        return this;
-    }
-
-    public void setCity(City city) {
-        this.city = city;
-    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -202,7 +140,6 @@ public class Location implements Serializable {
     public String toString() {
         return "Location{" +
             "id=" + getId() +
-            ", street='" + getStreet() + "'" +
             ", lat='" + getLat() + "'" +
             ", lng='" + getLng() + "'" +
             "}";

@@ -15,8 +15,6 @@ public interface StoreMapper extends EntityMapper<StoreDTO, Store> {
     @Mapping(source = "worker.id", target = "workerId")
     @Mapping(source = "worker.surname", target = "workerSurname")
     @Mapping(source = "location.id", target = "locationId")
-    @Mapping(source = "location.street", target = "locationStreet")
-    @Mapping(source = "location.city.name", target = "locationCityName")
     @Mapping(source = "storegroup.id", target = "storegroupId")
     @Mapping(source = "storegroup.name", target = "storegroupName")
     StoreDTO toDto(Store store);

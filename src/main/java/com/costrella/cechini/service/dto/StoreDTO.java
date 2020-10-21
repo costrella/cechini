@@ -7,7 +7,7 @@ import java.io.Serializable;
  * A DTO for the {@link com.costrella.cechini.domain.Store} entity.
  */
 public class StoreDTO implements Serializable {
-
+    
     private Long id;
 
     @NotNull
@@ -20,6 +20,8 @@ public class StoreDTO implements Serializable {
 
     private Boolean visited;
 
+    private String address;
+
 
     private Long workerId;
 
@@ -27,36 +29,16 @@ public class StoreDTO implements Serializable {
 
     private Long locationId;
 
-    private String locationStreet;
-
-    private String locationCityName;
-
     private Long storegroupId;
 
     private String storegroupName;
-
+    
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getLocationStreet() {
-        return locationStreet;
-    }
-
-    public void setLocationStreet(String locationStreet) {
-        this.locationStreet = locationStreet;
-    }
-
-    public String getLocationCityName() {
-        return locationCityName;
-    }
-
-    public void setLocationCityName(String locationCityName) {
-        this.locationCityName = locationCityName;
     }
 
     public String getName() {
@@ -89,6 +71,14 @@ public class StoreDTO implements Serializable {
 
     public void setVisited(Boolean visited) {
         this.visited = visited;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Long getWorkerId() {
@@ -157,6 +147,7 @@ public class StoreDTO implements Serializable {
             ", nip='" + getNip() + "'" +
             ", desc='" + getDesc() + "'" +
             ", visited='" + isVisited() + "'" +
+            ", address='" + getAddress() + "'" +
             ", workerId=" + getWorkerId() +
             ", workerSurname='" + getWorkerSurname() + "'" +
             ", locationId=" + getLocationId() +

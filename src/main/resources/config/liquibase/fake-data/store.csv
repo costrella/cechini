@@ -1,21 +1,21 @@
-id;name;nip;jhi_desc;visited;storegroup_id;worker_id;location_id
-1;Sklep 01;012312123431;Dynamic Administrator teal;false;3;1;4
-2;Sklep 02;012312123431;Shirt;false;5;2;5
-3;Sklep 03;012312123431;standardization Serbia Books;false;6;3;6
-4;Sklep 04;012312123431;Fantastic;false;7;3;3
-5;Sklep 05;012312123431;parse black Tuna;false;3;4;2
-6;Sklep 06;012312123431;initiatives;true;2;4;1
-7;Sklep 07;012312123431;partnerships Buckinghamshire;false;3;5;9
-8;Sklep 08;012312123431;Senior;false;6;1;8
-9;Sklep 09;012312123431;Global Ergonomic Bacon;false;9;7;7
-10;Sklep Ala;012312123431;applications;false;7;8;6
-11;Sklep Mały;012312123431;Dynamic Administrator teal;false;3;1;4
-12;Sklep Duży;012312123431;Shirt;false;5;2;5
-13;Sklep Testowy;012312123431;standardization Serbia Books;false;6;3;6
-14;Sklep Spożywczy;012312123431;Fantastic;false;7;3;3
-15;Sklep 001;012312123431;parse black Tuna;false;3;4;2
-16;Sklep 006;012312123431;initiatives;true;2;4;1
-17;Sklep 007;012312123431;partnerships Buckinghamshire;false;3;5;9
-18;Sklep 008;012312123431;Senior;false;6;1;8
-19;Sklep 009;012312123431;Global Ergonomic Bacon;false;9;7;7
-20;Sklep 100;012312123431;applications;false;7;8;6
+id;name;nip;jhi_desc;visited;storegroup_id;worker_id
+1;Sklep 01;012312123431;Dynamic Administrator teal;false;3;1
+2;Sklep 02;012312123431;Shirt;false;5;2
+3;Sklep 03;012312123431;standardization Serbia Books;false;6;3
+4;Sklep 04;012312123431;Fantastic;false;7;3
+5;Sklep 05;012312123431;parse black Tuna;false;3;4
+6;Sklep 06;012312123431;initiatives;true;2;4
+7;Sklep 07;012312123431;partnerships Buckinghamshire;false;3;5
+8;Sklep 08;012312123431;Senior;false;6;1
+9;Sklep 09;012312123431;Global Ergonomic Bacon;false;9;7
+10;Sklep Ala;012312123431;applications;false;7;8
+11;Sklep Mały;012312123431;Dynamic Administrator teal;false;3;1
+12;Sklep Duży;012312123431;Shirt;false;5;2
+13;Sklep Testowy;012312123431;standardization Serbia Books;false;6;3
+14;Sklep Spożywczy;012312123431;Fantastic;false;7;3
+15;Sklep 001;012312123431;parse black Tuna;false;3;4
+16;Sklep 006;012312123431;initiatives;true;2;4
+17;Sklep 007;012312123431;partnerships Buckinghamshire;false;3;5
+18;Sklep 008;012312123431;Senior;false;6;1
+19;Sklep 009;012312123431;Global Ergonomic Bacon;false;9;7
+20;Sklep 100;012312123431;applications;false;7;8

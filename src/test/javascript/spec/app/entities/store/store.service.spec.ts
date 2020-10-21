@@ -20,7 +20,7 @@ describe('Service Tests', () => {
       service = injector.get(StoreService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Store(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', false);
+      elemDefault = new Store(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', false, 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -58,6 +58,7 @@ describe('Service Tests', () => {
             nip: 'BBBBBB',
             desc: 'BBBBBB',
             visited: true,
+            address: 'BBBBBB',
           },
           elemDefault
         );
@@ -78,6 +79,7 @@ describe('Service Tests', () => {
             nip: 'BBBBBB',
             desc: 'BBBBBB',
             visited: true,
+            address: 'BBBBBB',
           },
           elemDefault
         );

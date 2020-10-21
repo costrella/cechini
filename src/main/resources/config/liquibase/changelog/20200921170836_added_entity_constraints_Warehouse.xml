@@ -7,12 +7,12 @@
         Added the constraints for entity Warehouse.
     -->
     <changeSet id="20200921170836-2" author="jhipster">
-        
-        <addForeignKeyConstraint baseColumnNames="location_id"
-                                 baseTableName="warehouse"
-                                 constraintName="fk_warehouse_location_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="location"/>
+
+<!--        <addForeignKeyConstraint baseColumnNames="location_id"-->
+<!--                                 baseTableName="warehouse"-->
+<!--                                 constraintName="fk_warehouse_location_id"-->
+<!--                                 referencedColumnNames="id"-->
+<!--                                 referencedTableName="location"/>-->
 
     </changeSet>
 </databaseChangeLog>

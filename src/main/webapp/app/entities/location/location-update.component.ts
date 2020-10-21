@@ -7,8 +7,6 @@ import { Observable } from 'rxjs';
 
 import { ILocation, Location } from 'app/shared/model/location.model';
 import { LocationService } from './location.service';
-import { ICity } from 'app/shared/model/city.model';
-import { CityService } from 'app/entities/city/city.service';
 
 @Component({
   selector: 'jhi-location-update',
@@ -16,38 +14,26 @@ import { CityService } from 'app/entities/city/city.service';
 })
 export class LocationUpdateComponent implements OnInit {
   isSaving = false;
-  cities: ICity[] = [];
 
   editForm = this.fb.group({
     id: [],
-    street: [],
     lat: [],
     lng: [],
-    cityId: [],
   });
 
-  constructor(
-    protected locationService: LocationService,
-    protected cityService: CityService,
-    protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
-  ) {}
+  constructor(protected locationService: LocationService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ location }) => {
       this.updateForm(location);
-
-      this.cityService.query().subscribe((res: HttpResponse<ICity[]>) => (this.cities = res.body || []));
     });
   }
 
   updateForm(location: ILocation): void {
     this.editForm.patchValue({
       id: location.id,
-      street: location.street,
       lat: location.lat,
       lng: location.lng,
-      cityId: location.cityId,
     });
   }
 
@@ -69,10 +55,8 @@ export class LocationUpdateComponent implements OnInit {
     return {
       ...new Location(),
       id: this.editForm.get(['id'])!.value,
-      street: this.editForm.get(['street'])!.value,
       lat: this.editForm.get(['lat'])!.value,
       lng: this.editForm.get(['lng'])!.value,
-      cityId: this.editForm.get(['cityId'])!.value,
     };
   }
 
@@ -90,9 +74,5 @@ export class LocationUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
-  }
-
-  trackById(index: number, item: ICity): any {
-    return item.id;
   }
 }

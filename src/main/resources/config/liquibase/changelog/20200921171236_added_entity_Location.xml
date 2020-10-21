@@ -6,7 +6,7 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-
+    
     <!--
         Added the entity Location.
     -->
@@ -15,16 +15,10 @@
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="street" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
             <column name="lat" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="lng" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="city_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -50,11 +44,9 @@
                   separator=";"
                   tableName="location">
             <column name="id" type="numeric"/>
-            <column name="street" type="string"/>
             <column name="lat" type="string"/>
             <column name="lng" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
-            <column name="city_id" type="numeric"/>
         </loadData>
     </changeSet>
 

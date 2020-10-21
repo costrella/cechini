@@ -23,24 +23,16 @@
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="street"><span jhiTranslate="cechiniApp.location.street">Street</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="lat"><span jhiTranslate="cechiniApp.location.lat">Lat</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="lng"><span jhiTranslate="cechiniApp.location.lng">Lng</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="cityName"><span jhiTranslate="cechiniApp.location.city">City</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let location of locations ;trackBy: trackId">
                     <td><a [routerLink]="['/location', location.id, 'view']">{{ location.id }}</a></td>
-                    <td>{{ location.street }}</td>
                     <td>{{ location.lat }}</td>
                     <td>{{ location.lng }}</td>
-                    <td>
-                        <div *ngIf="location.cityId">
-                            <a [routerLink]="['/city', location.cityId , 'view']" >{{ location.cityName }}</a>
-                        </div>
-                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

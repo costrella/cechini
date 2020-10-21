@@ -2,10 +2,6 @@
   "name": "Location",
   "fields": [
     {
-      "fieldName": "street",
-      "fieldType": "String"
-    },
-    {
       "fieldName": "lat",
       "fieldType": "String"
     },
@@ -26,19 +22,6 @@
       "otherEntityName": "track",
       "otherEntityRelationshipName": "location",
       "relationshipName": "track"
-    },
-    {
-      "relationshipType": "one-to-many",
-      "otherEntityName": "warehouse",
-      "otherEntityRelationshipName": "location",
-      "relationshipName": "warehouse"
-    },
-    {
-      "relationshipType": "many-to-one",
-      "otherEntityName": "city",
-      "otherEntityRelationshipName": "location",
-      "relationshipName": "city",
-      "otherEntityField": "name"
     }
   ],
   "changelogDate": "20200921171236",

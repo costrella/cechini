@@ -18,7 +18,8 @@ entity Store {
 	name String required,
     nip String,
     desc String maxlength(2000),
-    visited Boolean
+    visited Boolean,
+	address String,
 }
 
 entity StoreGroup {
@@ -65,12 +66,7 @@ entity Track {
 	name String
 }
 
-entity City {
-	name String required
-}
-
 entity Location {
-	street String,
     lat String,
     lng String,
 }
@@ -121,15 +117,12 @@ relationship OneToMany {
     Worker to Track{worker(surname)},
     Location to Track{location},
     
-    City to Location{city(name)},
-    
-    Location to Warehouse{location}
 }
 
 
 // Set pagination options
 //paginate JobHistory, Employee with infinite-scroll
-paginate Worker, Store, StoreGroup, Manager, Order, OrderItem, Product, Warehouse, Report, Track, City, Location, Status, Photo, Note with pagination
+paginate Worker, Store, StoreGroup, Manager, Order, OrderItem, Product, Warehouse, Report, Track, Location, Status, Photo, Note with pagination
 
 // Use Data Transfert Objects (DTO)
 dto * with mapstruct

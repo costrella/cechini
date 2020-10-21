@@ -8,10 +8,6 @@
             <jhi-alert-error></jhi-alert-error>
 
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="cechiniApp.location.street">Street</span></dt>
-                <dd>
-                    <span>{{ location.street }}</span>
-                </dd>
                 <dt><span jhiTranslate="cechiniApp.location.lat">Lat</span></dt>
                 <dd>
                     <span>{{ location.lat }}</span>
@@ -19,12 +15,6 @@
                 <dt><span jhiTranslate="cechiniApp.location.lng">Lng</span></dt>
                 <dd>
                     <span>{{ location.lng }}</span>
-                </dd>
-                <dt><span jhiTranslate="cechiniApp.location.city">City</span></dt>
-                <dd>
-                    <div *ngIf="location.cityId">
-                        <a [routerLink]="['/city', location.cityId, 'view']">{{ location.cityName }}</a>
-                    </div>
                 </dd>
             </dl>
 

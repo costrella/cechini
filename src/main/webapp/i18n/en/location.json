@@ -16,13 +16,10 @@
       "detail": {
         "title": "Location"
       },
-      "street": "Street",
       "lat": "Lat",
       "lng": "Lng",
       "store": "Store",
-      "track": "Track",
-      "warehouse": "Warehouse",
-      "city": "City"
+      "track": "Track"
     }
   }
 }

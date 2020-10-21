@@ -19,6 +19,10 @@
     {
       "fieldName": "visited",
       "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "String"
     }
   ],
   "relationships": [
