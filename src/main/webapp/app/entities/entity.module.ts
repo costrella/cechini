@@ -45,10 +45,6 @@ import { RouterModule } from '@angular/router';
         loadChildren: () => import('./track/track.module').then(m => m.CechiniTrackModule),
       },
       {
-        path: 'city',
-        loadChildren: () => import('./city/city.module').then(m => m.CechiniCityModule),
-      },
-      {
         path: 'location',
         loadChildren: () => import('./location/location.module').then(m => m.CechiniLocationModule),
       },

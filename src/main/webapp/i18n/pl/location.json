@@ -21,8 +21,7 @@
       "lng": "Lng",
       "store": "Sklep",
       "track": "Track",
-      "warehouse": "Hurtownia",
-      "city": "Miasto"
+      "warehouse": "Hurtownia"
     }
   }
 }

@@ -1,21 +1,21 @@
-id;name;nip;jhi_desc;visited;storegroup_id;worker_id
-1;Sklep 01;012312123431;Dynamic Administrator teal;false;3;1
-2;Sklep 02;012312123431;Shirt;false;5;2
-3;Sklep 03;012312123431;standardization Serbia Books;false;6;3
-4;Sklep 04;012312123431;Fantastic;false;7;3
-5;Sklep 05;012312123431;parse black Tuna;false;3;4
-6;Sklep 06;012312123431;initiatives;true;2;4
-7;Sklep 07;012312123431;partnerships Buckinghamshire;false;3;5
-8;Sklep 08;012312123431;Senior;false;6;1
-9;Sklep 09;012312123431;Global Ergonomic Bacon;false;9;7
-10;Sklep Ala;012312123431;applications;false;7;8
-11;Sklep Mały;012312123431;Dynamic Administrator teal;false;3;1
-12;Sklep Duży;012312123431;Shirt;false;5;2
-13;Sklep Testowy;012312123431;standardization Serbia Books;false;6;3
-14;Sklep Spożywczy;012312123431;Fantastic;false;7;3
-15;Sklep 001;012312123431;parse black Tuna;false;3;4
-16;Sklep 006;012312123431;initiatives;true;2;4
-17;Sklep 007;012312123431;partnerships Buckinghamshire;false;3;5
-18;Sklep 008;012312123431;Senior;false;6;1
-19;Sklep 009;012312123431;Global Ergonomic Bacon;false;9;7
-20;Sklep 100;012312123431;applications;false;7;8
+id;name;nip;jhi_desc;visited;storegroup_id;worker_id;address
+1;Sklep 01;012312123431;Dynamic Administrator teal;false;3;1;Piłsudskiego 1, Kraków
+2;Sklep 02;012312123431;Shirt;false;5;2;Kraszewskiego 20, Krynica
+3;Sklep 03;012312123431;standardization Serbia Books;false;6;3;Pileckiego 1, Łódź
+4;Sklep 04;012312123431;Fantastic;false;7;3;Andersa 2, Kraków
+5;Sklep 05;012312123431;parse black Tuna;false;3;4;Dywizjonu 303, Kraków
+6;Sklep 06;012312123431;initiatives;true;2;4;Powstańców Warszawskich 1, Warszawa
+7;Sklep 07;012312123431;partnerships Buckinghamshire;false;3;5;Bohaterów Getta 3, Kraków
+8;Sklep 08;012312123431;Senior;false;6;1;Kolejowa 1, Muszyna
+9;Sklep 09;012312123431;Global Ergonomic Bacon;false;9;7;Nikifora Krynickiego 2, Krynica
+10;Sklep Ala;012312123431;applications;false;7;8;Sobieskiego 3, Sandomierz
+11;Sklep Mały;012312123431;Dynamic Administrator teal;false;3;1;Sportowa 1, Kraków
+12;Sklep Duży;012312123431;Shirt;false;5;2;Nadbrzeżna 2, Warszawa
+13;Sklep Testowy;012312123431;standardization Serbia Books;false;6;3;Portowa 2, Gdynia
+14;Sklep Spożywczy;012312123431;Fantastic;false;7;3;Piękna 5, Sopot
+15;Sklep 001;012312123431;parse black Tuna;false;3;4;Piekarzy 6, Wadowice
+16;Sklep 006;012312123431;initiatives;true;2;4;Fieldorfa Nila 4, Kraków
+17;Sklep 007;012312123431;partnerships Buckinghamshire;false;3;5;Inki 5, Kraków
+18;Sklep 008;012312123431;Senior;false;6;1;Żelaznego 44, Krynica
+19;Sklep 009;012312123431;Global Ergonomic Bacon;false;9;7;Jana Pawła II 55, Kraków
+20;Sklep 100;012312123431;applications;false;7;8;""

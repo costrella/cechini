@@ -24,7 +24,6 @@
     <include file="config/liquibase/changelog/20200921170836_added_entity_Warehouse.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200921170936_added_entity_Report.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200921171036_added_entity_Track.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20200921171136_added_entity_City.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200921171236_added_entity_Location.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200921171336_added_entity_Status.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200921171436_added_entity_Photo.xml" relativeToChangelogFile="false"/>
@@ -37,7 +36,6 @@
     <include file="config/liquibase/changelog/20200921170836_added_entity_constraints_Warehouse.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200921170936_added_entity_constraints_Report.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200921171036_added_entity_constraints_Track.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20200921171236_added_entity_constraints_Location.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200921171436_added_entity_constraints_Photo.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200921171536_added_entity_constraints_Note.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
