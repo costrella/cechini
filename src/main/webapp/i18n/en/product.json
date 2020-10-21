@@ -17,9 +17,12 @@
         "title": "Product"
       },
       "name": "Name",
-      "ean": "Ean",
-      "atr1": "Atr 1",
-      "atr2": "Atr 2",
+      "capacity": "Capacity",
+      "eanArt": "Ean Art",
+      "eanPack": "Ean Pack",
+      "packCountPalette": "Pack Count Palette",
+      "artCountPalette": "Art Count Palette",
+      "layerCountPalette": "Layer Count Palette",
       "orderItem": "Order Item"
     }
   }

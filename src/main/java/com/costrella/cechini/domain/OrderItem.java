@@ -3,7 +3,6 @@ package com.costrella.cechini.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
 
 import java.io.Serializable;
 
@@ -21,19 +20,11 @@ public class OrderItem implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @NotNull
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "art_count")
+    private Integer artCount;
 
-    @NotNull
-    @Column(name = "quantity", nullable = false)
-    private Long quantity;
-
-    @Column(name = "atr_1")
-    private String atr1;
-
-    @Column(name = "atr_2")
-    private String atr2;
+    @Column(name = "pack_count")
+    private Integer packCount;
 
     @ManyToOne
     @JsonIgnoreProperties(value = "orderItems", allowSetters = true)
@@ -52,56 +43,30 @@ public class OrderItem implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Integer getArtCount() {
+        return artCount;
     }
 
-    public OrderItem name(String name) {
-        this.name = name;
+    public OrderItem artCount(Integer artCount) {
+        this.artCount = artCount;
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setArtCount(Integer artCount) {
+        this.artCount = artCount;
     }
 
-    public Long getQuantity() {
-        return quantity;
+    public Integer getPackCount() {
+        return packCount;
     }
 
-    public OrderItem quantity(Long quantity) {
-        this.quantity = quantity;
+    public OrderItem packCount(Integer packCount) {
+        this.packCount = packCount;
         return this;
     }
 
-    public void setQuantity(Long quantity) {
-        this.quantity = quantity;
-    }
-
-    public String getAtr1() {
-        return atr1;
-    }
-
-    public OrderItem atr1(String atr1) {
-        this.atr1 = atr1;
-        return this;
-    }
-
-    public void setAtr1(String atr1) {
-        this.atr1 = atr1;
-    }
-
-    public String getAtr2() {
-        return atr2;
-    }
-
-    public OrderItem atr2(String atr2) {
-        this.atr2 = atr2;
-        return this;
-    }
-
-    public void setAtr2(String atr2) {
-        this.atr2 = atr2;
+    public void setPackCount(Integer packCount) {
+        this.packCount = packCount;
     }
 
     public Product getProduct() {
@@ -152,10 +117,8 @@ public class OrderItem implements Serializable {
     public String toString() {
         return "OrderItem{" +
             "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", quantity=" + getQuantity() +
-            ", atr1='" + getAtr1() + "'" +
-            ", atr2='" + getAtr2() + "'" +
+            ", artCount=" + getArtCount() +
+            ", packCount=" + getPackCount() +
             "}";
     }
 }

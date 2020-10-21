@@ -1,41 +1,25 @@
 package com.costrella.cechini.service.dto;
 
-import javax.validation.constraints.*;
 import java.io.Serializable;
 
 /**
  * A DTO for the {@link com.costrella.cechini.domain.OrderItem} entity.
  */
 public class OrderItemDTO implements Serializable {
-
+    
     private Long id;
 
-    @NotNull
-    private String name;
+    private Integer artCount;
 
-    @NotNull
-    private Long quantity;
+    private Integer packCount;
 
-    private String atr1;
-
-    private String atr2;
 
     private Long productId;
 
     private String productName;
 
-    private String productEan;
-
     private Long orderId;
-
-    public String getProductEan() {
-        return productEan;
-    }
-
-    public void setProductEan(String productEan) {
-        this.productEan = productEan;
-    }
-
+    
     public Long getId() {
         return id;
     }
@@ -44,36 +28,20 @@ public class OrderItemDTO implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Integer getArtCount() {
+        return artCount;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setArtCount(Integer artCount) {
+        this.artCount = artCount;
     }
 
-    public Long getQuantity() {
-        return quantity;
+    public Integer getPackCount() {
+        return packCount;
     }
 
-    public void setQuantity(Long quantity) {
-        this.quantity = quantity;
-    }
-
-    public String getAtr1() {
-        return atr1;
-    }
-
-    public void setAtr1(String atr1) {
-        this.atr1 = atr1;
-    }
-
-    public String getAtr2() {
-        return atr2;
-    }
-
-    public void setAtr2(String atr2) {
-        this.atr2 = atr2;
+    public void setPackCount(Integer packCount) {
+        this.packCount = packCount;
     }
 
     public Long getProductId() {
@@ -122,10 +90,8 @@ public class OrderItemDTO implements Serializable {
     public String toString() {
         return "OrderItemDTO{" +
             "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", quantity=" + getQuantity() +
-            ", atr1='" + getAtr1() + "'" +
-            ", atr2='" + getAtr2() + "'" +
+            ", artCount=" + getArtCount() +
+            ", packCount=" + getPackCount() +
             ", productId=" + getProductId() +
             ", productName='" + getProductName() + "'" +
             ", orderId=" + getOrderId() +

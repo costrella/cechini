@@ -39,17 +39,18 @@ entity Order {
 }
 
 entity OrderItem {
-	name String required,
-    quantity Long required,
-    atr1 String,
-    atr2 String,
+    artCount Integer,
+    packCount Integer,
 }
 
 entity Product {
 	name String required,
-    ean String,
-    atr1 String,
-    atr2 String,
+	capacity Integer,
+    eanArt String,
+    eanPack String,
+    packCountPalette Integer,
+	artCountPalette Integer,
+	layerCountPalette Integer,
 }
 
 entity Warehouse {

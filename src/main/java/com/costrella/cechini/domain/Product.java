@@ -26,14 +26,23 @@ public class Product implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "ean")
-    private String ean;
+    @Column(name = "capacity")
+    private Integer capacity;
 
-    @Column(name = "atr_1")
-    private String atr1;
+    @Column(name = "ean_art")
+    private String eanArt;
 
-    @Column(name = "atr_2")
-    private String atr2;
+    @Column(name = "ean_pack")
+    private String eanPack;
+
+    @Column(name = "pack_count_palette")
+    private Integer packCountPalette;
+
+    @Column(name = "art_count_palette")
+    private Integer artCountPalette;
+
+    @Column(name = "layer_count_palette")
+    private Integer layerCountPalette;
 
     @OneToMany(mappedBy = "product")
     private Set<OrderItem> orderItems = new HashSet<>();
@@ -60,43 +69,82 @@ public class Product implements Serializable {
         this.name = name;
     }
 
-    public String getEan() {
-        return ean;
+    public Integer getCapacity() {
+        return capacity;
     }
 
-    public Product ean(String ean) {
-        this.ean = ean;
+    public Product capacity(Integer capacity) {
+        this.capacity = capacity;
         return this;
     }
 
-    public void setEan(String ean) {
-        this.ean = ean;
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
     }
 
-    public String getAtr1() {
-        return atr1;
+    public String getEanArt() {
+        return eanArt;
     }
 
-    public Product atr1(String atr1) {
-        this.atr1 = atr1;
+    public Product eanArt(String eanArt) {
+        this.eanArt = eanArt;
         return this;
     }
 
-    public void setAtr1(String atr1) {
-        this.atr1 = atr1;
+    public void setEanArt(String eanArt) {
+        this.eanArt = eanArt;
     }
 
-    public String getAtr2() {
-        return atr2;
+    public String getEanPack() {
+        return eanPack;
     }
 
-    public Product atr2(String atr2) {
-        this.atr2 = atr2;
+    public Product eanPack(String eanPack) {
+        this.eanPack = eanPack;
         return this;
     }
 
-    public void setAtr2(String atr2) {
-        this.atr2 = atr2;
+    public void setEanPack(String eanPack) {
+        this.eanPack = eanPack;
+    }
+
+    public Integer getPackCountPalette() {
+        return packCountPalette;
+    }
+
+    public Product packCountPalette(Integer packCountPalette) {
+        this.packCountPalette = packCountPalette;
+        return this;
+    }
+
+    public void setPackCountPalette(Integer packCountPalette) {
+        this.packCountPalette = packCountPalette;
+    }
+
+    public Integer getArtCountPalette() {
+        return artCountPalette;
+    }
+
+    public Product artCountPalette(Integer artCountPalette) {
+        this.artCountPalette = artCountPalette;
+        return this;
+    }
+
+    public void setArtCountPalette(Integer artCountPalette) {
+        this.artCountPalette = artCountPalette;
+    }
+
+    public Integer getLayerCountPalette() {
+        return layerCountPalette;
+    }
+
+    public Product layerCountPalette(Integer layerCountPalette) {
+        this.layerCountPalette = layerCountPalette;
+        return this;
+    }
+
+    public void setLayerCountPalette(Integer layerCountPalette) {
+        this.layerCountPalette = layerCountPalette;
     }
 
     public Set<OrderItem> getOrderItems() {
@@ -147,9 +195,12 @@ public class Product implements Serializable {
         return "Product{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", ean='" + getEan() + "'" +
-            ", atr1='" + getAtr1() + "'" +
-            ", atr2='" + getAtr2() + "'" +
+            ", capacity=" + getCapacity() +
+            ", eanArt='" + getEanArt() + "'" +
+            ", eanPack='" + getEanPack() + "'" +
+            ", packCountPalette=" + getPackCountPalette() +
+            ", artCountPalette=" + getArtCountPalette() +
+            ", layerCountPalette=" + getLayerCountPalette() +
             "}";
     }
 }

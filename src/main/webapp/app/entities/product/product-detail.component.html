@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="product">
-            <h2><span jhiTranslate="cechiniApp.product.detail.title">Product</span> {{ product.name }}</h2>
+            <h2><span jhiTranslate="cechiniApp.product.detail.title">Product</span> {{ product.id }}</h2>
 
             <hr>
 
@@ -12,18 +12,30 @@
                 <dd>
                     <span>{{ product.name }}</span>
                 </dd>
-                <dt><span jhiTranslate="cechiniApp.product.ean">Ean</span></dt>
+                <dt><span jhiTranslate="cechiniApp.product.capacity">Capacity</span></dt>
                 <dd>
-                    <span>{{ product.ean }}</span>
+                    <span>{{ product.capacity }}</span>
                 </dd>
-                <dt><span jhiTranslate="cechiniApp.product.atr1">Atr 1</span></dt>
+                <dt><span jhiTranslate="cechiniApp.product.eanArt">Ean Art</span></dt>
                 <dd>
-                    <span>{{ product.atr1 }}</span>
+                    <span>{{ product.eanArt }}</span>
                 </dd>
-                <!-- <dt><span jhiTranslate="cechiniApp.product.atr2">Atr 2</span></dt>
+                <dt><span jhiTranslate="cechiniApp.product.eanPack">Ean Pack</span></dt>
                 <dd>
-                    <span>{{ product.atr2 }}</span>
-                </dd> -->
+                    <span>{{ product.eanPack }}</span>
+                </dd>
+                <dt><span jhiTranslate="cechiniApp.product.packCountPalette">Pack Count Palette</span></dt>
+                <dd>
+                    <span>{{ product.packCountPalette }}</span>
+                </dd>
+                <dt><span jhiTranslate="cechiniApp.product.artCountPalette">Art Count Palette</span></dt>
+                <dd>
+                    <span>{{ product.artCountPalette }}</span>
+                </dd>
+                <dt><span jhiTranslate="cechiniApp.product.layerCountPalette">Layer Count Palette</span></dt>
+                <dd>
+                    <span>{{ product.layerCountPalette }}</span>
+                </dd>
             </dl>
 
             <button type="submit"

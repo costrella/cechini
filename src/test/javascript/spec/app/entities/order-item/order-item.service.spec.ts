@@ -20,7 +20,7 @@ describe('Service Tests', () => {
       service = injector.get(OrderItemService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new OrderItem(0, 'AAAAAAA', 0, 'AAAAAAA', 'AAAAAAA');
+      elemDefault = new OrderItem(0, 0, 0);
     });
 
     describe('Service methods', () => {
@@ -54,10 +54,8 @@ describe('Service Tests', () => {
       it('should update a OrderItem', () => {
         const returnedFromService = Object.assign(
           {
-            name: 'BBBBBB',
-            quantity: 1,
-            atr1: 'BBBBBB',
-            atr2: 'BBBBBB',
+            artCount: 1,
+            packCount: 1,
           },
           elemDefault
         );
@@ -74,10 +72,8 @@ describe('Service Tests', () => {
       it('should return a list of OrderItem', () => {
         const returnedFromService = Object.assign(
           {
-            name: 'BBBBBB',
-            quantity: 1,
-            atr1: 'BBBBBB',
-            atr2: 'BBBBBB',
+            artCount: 1,
+            packCount: 1,
           },
           elemDefault
         );

@@ -16,10 +16,8 @@
       "detail": {
         "title": "Order Item"
       },
-      "name": "Name",
-      "quantity": "Quantity",
-      "atr1": "Atr 1",
-      "atr2": "Atr 2",
+      "artCount": "Art Count",
+      "packCount": "Pack Count",
       "product": "Product",
       "order": "Order"
     }

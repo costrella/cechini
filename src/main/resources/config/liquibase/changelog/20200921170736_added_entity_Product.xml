@@ -18,13 +18,22 @@
             <column name="name" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="ean" type="varchar(255)">
+            <column name="capacity" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="atr_1" type="varchar(255)">
+            <column name="ean_art" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="atr_2" type="varchar(255)">
+            <column name="ean_pack" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="pack_count_palette" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="art_count_palette" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="layer_count_palette" type="integer">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -51,9 +60,12 @@
                   tableName="product">
             <column name="id" type="numeric"/>
             <column name="name" type="string"/>
-            <column name="ean" type="string"/>
-            <column name="atr_1" type="string"/>
-            <column name="atr_2" type="string"/>
+            <column name="capacity" type="numeric"/>
+            <column name="ean_art" type="string"/>
+            <column name="ean_pack" type="string"/>
+            <column name="pack_count_palette" type="numeric"/>
+            <column name="art_count_palette" type="numeric"/>
+            <column name="layer_count_palette" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

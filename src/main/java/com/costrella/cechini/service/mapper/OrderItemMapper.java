@@ -15,8 +15,6 @@ public interface OrderItemMapper extends EntityMapper<OrderItemDTO, OrderItem> {
     @Mapping(source = "product.id", target = "productId")
     @Mapping(source = "product.name", target = "productName")
     @Mapping(source = "order.id", target = "orderId")
-    @Mapping(source = "product.atr1", target = "atr1") //todo zmieniec nazwe na atr1 dla produktu
-    @Mapping(source = "product.ean", target = "productEan")
     OrderItemDTO toDto(OrderItem orderItem);
 
     @Mapping(source = "productId", target = "product")

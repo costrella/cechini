@@ -36,14 +36,23 @@ public class ProductResourceIT {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final String DEFAULT_EAN = "AAAAAAAAAA";
-    private static final String UPDATED_EAN = "BBBBBBBBBB";
+    private static final Integer DEFAULT_CAPACITY = 1;
+    private static final Integer UPDATED_CAPACITY = 2;
 
-    private static final String DEFAULT_ATR_1 = "AAAAAAAAAA";
-    private static final String UPDATED_ATR_1 = "BBBBBBBBBB";
+    private static final String DEFAULT_EAN_ART = "AAAAAAAAAA";
+    private static final String UPDATED_EAN_ART = "BBBBBBBBBB";
 
-    private static final String DEFAULT_ATR_2 = "AAAAAAAAAA";
-    private static final String UPDATED_ATR_2 = "BBBBBBBBBB";
+    private static final String DEFAULT_EAN_PACK = "AAAAAAAAAA";
+    private static final String UPDATED_EAN_PACK = "BBBBBBBBBB";
+
+    private static final Integer DEFAULT_PACK_COUNT_PALETTE = 1;
+    private static final Integer UPDATED_PACK_COUNT_PALETTE = 2;
+
+    private static final Integer DEFAULT_ART_COUNT_PALETTE = 1;
+    private static final Integer UPDATED_ART_COUNT_PALETTE = 2;
+
+    private static final Integer DEFAULT_LAYER_COUNT_PALETTE = 1;
+    private static final Integer UPDATED_LAYER_COUNT_PALETTE = 2;
 
     @Autowired
     private ProductRepository productRepository;
@@ -71,9 +80,12 @@ public class ProductResourceIT {
     public static Product createEntity(EntityManager em) {
         Product product = new Product()
             .name(DEFAULT_NAME)
-            .ean(DEFAULT_EAN)
-            .atr1(DEFAULT_ATR_1)
-            .atr2(DEFAULT_ATR_2);
+            .capacity(DEFAULT_CAPACITY)
+            .eanArt(DEFAULT_EAN_ART)
+            .eanPack(DEFAULT_EAN_PACK)
+            .packCountPalette(DEFAULT_PACK_COUNT_PALETTE)
+            .artCountPalette(DEFAULT_ART_COUNT_PALETTE)
+            .layerCountPalette(DEFAULT_LAYER_COUNT_PALETTE);
         return product;
     }
     /**
@@ -85,9 +97,12 @@ public class ProductResourceIT {
     public static Product createUpdatedEntity(EntityManager em) {
         Product product = new Product()
             .name(UPDATED_NAME)
-            .ean(UPDATED_EAN)
-            .atr1(UPDATED_ATR_1)
-            .atr2(UPDATED_ATR_2);
+            .capacity(UPDATED_CAPACITY)
+            .eanArt(UPDATED_EAN_ART)
+            .eanPack(UPDATED_EAN_PACK)
+            .packCountPalette(UPDATED_PACK_COUNT_PALETTE)
+            .artCountPalette(UPDATED_ART_COUNT_PALETTE)
+            .layerCountPalette(UPDATED_LAYER_COUNT_PALETTE);
         return product;
     }
 
@@ -112,9 +127,12 @@ public class ProductResourceIT {
         assertThat(productList).hasSize(databaseSizeBeforeCreate + 1);
         Product testProduct = productList.get(productList.size() - 1);
         assertThat(testProduct.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testProduct.getEan()).isEqualTo(DEFAULT_EAN);
-        assertThat(testProduct.getAtr1()).isEqualTo(DEFAULT_ATR_1);
-        assertThat(testProduct.getAtr2()).isEqualTo(DEFAULT_ATR_2);
+        assertThat(testProduct.getCapacity()).isEqualTo(DEFAULT_CAPACITY);
+        assertThat(testProduct.getEanArt()).isEqualTo(DEFAULT_EAN_ART);
+        assertThat(testProduct.getEanPack()).isEqualTo(DEFAULT_EAN_PACK);
+        assertThat(testProduct.getPackCountPalette()).isEqualTo(DEFAULT_PACK_COUNT_PALETTE);
+        assertThat(testProduct.getArtCountPalette()).isEqualTo(DEFAULT_ART_COUNT_PALETTE);
+        assertThat(testProduct.getLayerCountPalette()).isEqualTo(DEFAULT_LAYER_COUNT_PALETTE);
     }
 
     @Test
@@ -170,9 +188,12 @@ public class ProductResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(product.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].ean").value(hasItem(DEFAULT_EAN)))
-            .andExpect(jsonPath("$.[*].atr1").value(hasItem(DEFAULT_ATR_1)))
-            .andExpect(jsonPath("$.[*].atr2").value(hasItem(DEFAULT_ATR_2)));
+            .andExpect(jsonPath("$.[*].capacity").value(hasItem(DEFAULT_CAPACITY)))
+            .andExpect(jsonPath("$.[*].eanArt").value(hasItem(DEFAULT_EAN_ART)))
+            .andExpect(jsonPath("$.[*].eanPack").value(hasItem(DEFAULT_EAN_PACK)))
+            .andExpect(jsonPath("$.[*].packCountPalette").value(hasItem(DEFAULT_PACK_COUNT_PALETTE)))
+            .andExpect(jsonPath("$.[*].artCountPalette").value(hasItem(DEFAULT_ART_COUNT_PALETTE)))
+            .andExpect(jsonPath("$.[*].layerCountPalette").value(hasItem(DEFAULT_LAYER_COUNT_PALETTE)));
     }
     
     @Test
@@ -187,9 +208,12 @@ public class ProductResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(product.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
-            .andExpect(jsonPath("$.ean").value(DEFAULT_EAN))
-            .andExpect(jsonPath("$.atr1").value(DEFAULT_ATR_1))
-            .andExpect(jsonPath("$.atr2").value(DEFAULT_ATR_2));
+            .andExpect(jsonPath("$.capacity").value(DEFAULT_CAPACITY))
+            .andExpect(jsonPath("$.eanArt").value(DEFAULT_EAN_ART))
+            .andExpect(jsonPath("$.eanPack").value(DEFAULT_EAN_PACK))
+            .andExpect(jsonPath("$.packCountPalette").value(DEFAULT_PACK_COUNT_PALETTE))
+            .andExpect(jsonPath("$.artCountPalette").value(DEFAULT_ART_COUNT_PALETTE))
+            .andExpect(jsonPath("$.layerCountPalette").value(DEFAULT_LAYER_COUNT_PALETTE));
     }
     @Test
     @Transactional
@@ -213,9 +237,12 @@ public class ProductResourceIT {
         em.detach(updatedProduct);
         updatedProduct
             .name(UPDATED_NAME)
-            .ean(UPDATED_EAN)
-            .atr1(UPDATED_ATR_1)
-            .atr2(UPDATED_ATR_2);
+            .capacity(UPDATED_CAPACITY)
+            .eanArt(UPDATED_EAN_ART)
+            .eanPack(UPDATED_EAN_PACK)
+            .packCountPalette(UPDATED_PACK_COUNT_PALETTE)
+            .artCountPalette(UPDATED_ART_COUNT_PALETTE)
+            .layerCountPalette(UPDATED_LAYER_COUNT_PALETTE);
         ProductDTO productDTO = productMapper.toDto(updatedProduct);
 
         restProductMockMvc.perform(put("/api/products").with(csrf())
@@ -228,9 +255,12 @@ public class ProductResourceIT {
         assertThat(productList).hasSize(databaseSizeBeforeUpdate);
         Product testProduct = productList.get(productList.size() - 1);
         assertThat(testProduct.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testProduct.getEan()).isEqualTo(UPDATED_EAN);
-        assertThat(testProduct.getAtr1()).isEqualTo(UPDATED_ATR_1);
-        assertThat(testProduct.getAtr2()).isEqualTo(UPDATED_ATR_2);
+        assertThat(testProduct.getCapacity()).isEqualTo(UPDATED_CAPACITY);
+        assertThat(testProduct.getEanArt()).isEqualTo(UPDATED_EAN_ART);
+        assertThat(testProduct.getEanPack()).isEqualTo(UPDATED_EAN_PACK);
+        assertThat(testProduct.getPackCountPalette()).isEqualTo(UPDATED_PACK_COUNT_PALETTE);
+        assertThat(testProduct.getArtCountPalette()).isEqualTo(UPDATED_ART_COUNT_PALETTE);
+        assertThat(testProduct.getLayerCountPalette()).isEqualTo(UPDATED_LAYER_COUNT_PALETTE);
     }
 
     @Test

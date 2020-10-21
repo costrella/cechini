@@ -2,26 +2,24 @@
   "cechiniApp": {
     "orderItem": {
       "home": {
-        "title": "Pozycje Zamówienia",
-        "createLabel": "Dodaj Pozycje Zamówienia",
-        "createOrEditLabel": "Dodaj lub edytuj: Pozycje Zamówienia",
-        "notFound": "Nie znaleziono Pozycji Zamówienia"
+        "title": "Order Item",
+        "createLabel": "Dodaj Order Item",
+        "createOrEditLabel": "Dodaj lub edytuj: Order Item",
+        "notFound": "No Order Items found"
       },
-      "created": "Utworzono nowy obiekt typu Pozycje Zamówienia z identyfikatorem {{ param }}",
-      "updated": "Uaktualniono obiekt typu Pozycje Zamówienia z identyfikatorem {{ param }}",
-      "deleted": "Usunięto obiekt typu Pozycje Zamówienia z identyfikatorem {{ param }}",
+      "created": "Utworzono nowy obiekt typu Order Item z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Order Item z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Order Item z identyfikatorem {{ param }}",
       "delete": {
-        "question": "Czy na pewno chcesz usunąć Pozycje Zamówienia {{ id }}?"
+        "question": "Czy na pewno chcesz usunąć Order Item {{ id }}?"
       },
       "detail": {
-        "title": "Pozycja Zamówienia"
+        "title": "Order Item"
       },
-      "name": "Nazwa",
-      "quantity": "Ilość",
-      "atr1": "Atr 1",
-      "atr2": "Atr 2",
-      "product": "Produkt",
-      "order": "Zamówienie"
+      "artCount": "Art Count",
+      "packCount": "Pack Count",
+      "product": "Product",
+      "order": "Order"
     }
   }
 }

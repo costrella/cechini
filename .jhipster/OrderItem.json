@@ -2,22 +2,12 @@
   "name": "OrderItem",
   "fields": [
     {
-      "fieldName": "name",
-      "fieldType": "String",
-      "fieldValidateRules": ["required"]
+      "fieldName": "artCount",
+      "fieldType": "Integer"
     },
     {
-      "fieldName": "quantity",
-      "fieldType": "Long",
-      "fieldValidateRules": ["required"]
-    },
-    {
-      "fieldName": "atr1",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "atr2",
-      "fieldType": "String"
+      "fieldName": "packCount",
+      "fieldType": "Integer"
     }
   ],
   "relationships": [

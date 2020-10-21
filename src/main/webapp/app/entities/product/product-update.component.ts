@@ -18,9 +18,12 @@ export class ProductUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     name: [null, [Validators.required]],
-    ean: [],
-    atr1: [],
-    atr2: [],
+    capacity: [],
+    eanArt: [],
+    eanPack: [],
+    packCountPalette: [],
+    artCountPalette: [],
+    layerCountPalette: [],
   });
 
   constructor(protected productService: ProductService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -35,9 +38,12 @@ export class ProductUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: product.id,
       name: product.name,
-      ean: product.ean,
-      atr1: product.atr1,
-      atr2: product.atr2,
+      capacity: product.capacity,
+      eanArt: product.eanArt,
+      eanPack: product.eanPack,
+      packCountPalette: product.packCountPalette,
+      artCountPalette: product.artCountPalette,
+      layerCountPalette: product.layerCountPalette,
     });
   }
 
@@ -60,9 +66,12 @@ export class ProductUpdateComponent implements OnInit {
       ...new Product(),
       id: this.editForm.get(['id'])!.value,
       name: this.editForm.get(['name'])!.value,
-      ean: this.editForm.get(['ean'])!.value,
-      atr1: this.editForm.get(['atr1'])!.value,
-      atr2: this.editForm.get(['atr2'])!.value,
+      capacity: this.editForm.get(['capacity'])!.value,
+      eanArt: this.editForm.get(['eanArt'])!.value,
+      eanPack: this.editForm.get(['eanPack'])!.value,
+      packCountPalette: this.editForm.get(['packCountPalette'])!.value,
+      artCountPalette: this.editForm.get(['artCountPalette'])!.value,
+      layerCountPalette: this.editForm.get(['layerCountPalette'])!.value,
     };
   }
 

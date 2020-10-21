@@ -33,17 +33,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class OrderItemResourceIT {
 
-    private static final String DEFAULT_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_NAME = "BBBBBBBBBB";
+    private static final Integer DEFAULT_ART_COUNT = 1;
+    private static final Integer UPDATED_ART_COUNT = 2;
 
-    private static final Long DEFAULT_QUANTITY = 1L;
-    private static final Long UPDATED_QUANTITY = 2L;
-
-    private static final String DEFAULT_ATR_1 = "AAAAAAAAAA";
-    private static final String UPDATED_ATR_1 = "BBBBBBBBBB";
-
-    private static final String DEFAULT_ATR_2 = "AAAAAAAAAA";
-    private static final String UPDATED_ATR_2 = "BBBBBBBBBB";
+    private static final Integer DEFAULT_PACK_COUNT = 1;
+    private static final Integer UPDATED_PACK_COUNT = 2;
 
     @Autowired
     private OrderItemRepository orderItemRepository;
@@ -70,10 +64,8 @@ public class OrderItemResourceIT {
      */
     public static OrderItem createEntity(EntityManager em) {
         OrderItem orderItem = new OrderItem()
-            .name(DEFAULT_NAME)
-            .quantity(DEFAULT_QUANTITY)
-            .atr1(DEFAULT_ATR_1)
-            .atr2(DEFAULT_ATR_2);
+            .artCount(DEFAULT_ART_COUNT)
+            .packCount(DEFAULT_PACK_COUNT);
         return orderItem;
     }
     /**
@@ -84,10 +76,8 @@ public class OrderItemResourceIT {
      */
     public static OrderItem createUpdatedEntity(EntityManager em) {
         OrderItem orderItem = new OrderItem()
-            .name(UPDATED_NAME)
-            .quantity(UPDATED_QUANTITY)
-            .atr1(UPDATED_ATR_1)
-            .atr2(UPDATED_ATR_2);
+            .artCount(UPDATED_ART_COUNT)
+            .packCount(UPDATED_PACK_COUNT);
         return orderItem;
     }
 
@@ -111,10 +101,8 @@ public class OrderItemResourceIT {
         List<OrderItem> orderItemList = orderItemRepository.findAll();
         assertThat(orderItemList).hasSize(databaseSizeBeforeCreate + 1);
         OrderItem testOrderItem = orderItemList.get(orderItemList.size() - 1);
-        assertThat(testOrderItem.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testOrderItem.getQuantity()).isEqualTo(DEFAULT_QUANTITY);
-        assertThat(testOrderItem.getAtr1()).isEqualTo(DEFAULT_ATR_1);
-        assertThat(testOrderItem.getAtr2()).isEqualTo(DEFAULT_ATR_2);
+        assertThat(testOrderItem.getArtCount()).isEqualTo(DEFAULT_ART_COUNT);
+        assertThat(testOrderItem.getPackCount()).isEqualTo(DEFAULT_PACK_COUNT);
     }
 
     @Test
@@ -140,46 +128,6 @@ public class OrderItemResourceIT {
 
     @Test
     @Transactional
-    public void checkNameIsRequired() throws Exception {
-        int databaseSizeBeforeTest = orderItemRepository.findAll().size();
-        // set the field null
-        orderItem.setName(null);
-
-        // Create the OrderItem, which fails.
-        OrderItemDTO orderItemDTO = orderItemMapper.toDto(orderItem);
-
-
-        restOrderItemMockMvc.perform(post("/api/order-items").with(csrf())
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(orderItemDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<OrderItem> orderItemList = orderItemRepository.findAll();
-        assertThat(orderItemList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkQuantityIsRequired() throws Exception {
-        int databaseSizeBeforeTest = orderItemRepository.findAll().size();
-        // set the field null
-        orderItem.setQuantity(null);
-
-        // Create the OrderItem, which fails.
-        OrderItemDTO orderItemDTO = orderItemMapper.toDto(orderItem);
-
-
-        restOrderItemMockMvc.perform(post("/api/order-items").with(csrf())
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(orderItemDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<OrderItem> orderItemList = orderItemRepository.findAll();
-        assertThat(orderItemList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void getAllOrderItems() throws Exception {
         // Initialize the database
         orderItemRepository.saveAndFlush(orderItem);
@@ -189,10 +137,8 @@ public class OrderItemResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(orderItem.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].quantity").value(hasItem(DEFAULT_QUANTITY.intValue())))
-            .andExpect(jsonPath("$.[*].atr1").value(hasItem(DEFAULT_ATR_1)))
-            .andExpect(jsonPath("$.[*].atr2").value(hasItem(DEFAULT_ATR_2)));
+            .andExpect(jsonPath("$.[*].artCount").value(hasItem(DEFAULT_ART_COUNT)))
+            .andExpect(jsonPath("$.[*].packCount").value(hasItem(DEFAULT_PACK_COUNT)));
     }
     
     @Test
@@ -206,10 +152,8 @@ public class OrderItemResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(orderItem.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
-            .andExpect(jsonPath("$.quantity").value(DEFAULT_QUANTITY.intValue()))
-            .andExpect(jsonPath("$.atr1").value(DEFAULT_ATR_1))
-            .andExpect(jsonPath("$.atr2").value(DEFAULT_ATR_2));
+            .andExpect(jsonPath("$.artCount").value(DEFAULT_ART_COUNT))
+            .andExpect(jsonPath("$.packCount").value(DEFAULT_PACK_COUNT));
     }
     @Test
     @Transactional
@@ -232,10 +176,8 @@ public class OrderItemResourceIT {
         // Disconnect from session so that the updates on updatedOrderItem are not directly saved in db
         em.detach(updatedOrderItem);
         updatedOrderItem
-            .name(UPDATED_NAME)
-            .quantity(UPDATED_QUANTITY)
-            .atr1(UPDATED_ATR_1)
-            .atr2(UPDATED_ATR_2);
+            .artCount(UPDATED_ART_COUNT)
+            .packCount(UPDATED_PACK_COUNT);
         OrderItemDTO orderItemDTO = orderItemMapper.toDto(updatedOrderItem);
 
         restOrderItemMockMvc.perform(put("/api/order-items").with(csrf())
@@ -247,10 +189,8 @@ public class OrderItemResourceIT {
         List<OrderItem> orderItemList = orderItemRepository.findAll();
         assertThat(orderItemList).hasSize(databaseSizeBeforeUpdate);
         OrderItem testOrderItem = orderItemList.get(orderItemList.size() - 1);
-        assertThat(testOrderItem.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testOrderItem.getQuantity()).isEqualTo(UPDATED_QUANTITY);
-        assertThat(testOrderItem.getAtr1()).isEqualTo(UPDATED_ATR_1);
-        assertThat(testOrderItem.getAtr2()).isEqualTo(UPDATED_ATR_2);
+        assertThat(testOrderItem.getArtCount()).isEqualTo(UPDATED_ART_COUNT);
+        assertThat(testOrderItem.getPackCount()).isEqualTo(UPDATED_PACK_COUNT);
     }
 
     @Test

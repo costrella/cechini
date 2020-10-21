@@ -1,11 +1,11 @@
-id;name;ean;atr_1;atr_2
-1;Woda Cechini Muszyna średnionasycona;5903427830685;2 L;384
-2;Woda Cechini Muszyna niskonasycona;5903427830708;2 L;384
-3;Woda Cechini Muszyna średnionasycona;5903427830357;1,5 L;384
-4;Woda Cechini Muszyna niskonasycona;5903427830128;1,5 L;384
-5;Woda Cechini Muszyna Sport;5903427830128;0,75 L;384
-6;Woda Cechini Muszyna średnionasycona;5903427830074;0,5 L;384
-7;Woda Cechini Muszyna niskonasycona;5903427830982;0,5 L;384
-8;Woda Cechini Muszyna szkło;5903427830265;0,7 L;384
-9;Woda Cechini Muszyna szkło;5903427830241;0,33 L;384
-10;Woda Cechini Muszyna niskonasycona;590342783654;1 L;384
+id;name;capacity;ean_art;ean_pack;pack_count_palette;art_count_palette;layer_count_palette
+1;Woda Cechini Muszyna średnionasycona;2 L;5903427830685;5903427830685;76190;35091;4
+2;Woda Cechini Muszyna niskonasycona;2 L;5903427830685;5903427830685;8294;93728;4
+3;Woda Cechini Muszyna średnionasycona;2 L;5903427830685;5903427830685;46442;91058;4
+4;Woda Cechini Muszyna niskonasycona;2 L;5903427830685;5903427830685;4329;4184;3
+5;Woda Cechini Muszyna Sport;2 L;5903427830685;5903427830685;58781;89275;5
+6;Woda Cechini Muszyna średnionasycona;2 L;5903427830685;5903427830685;27331;47574;5
+7;Woda Cechini Muszyna niskonasycona;2 L;5903427830685;5903427830685;46377;5902;6
+8;Woda Cechini Muszyna szkło;2 L;5903427830685;5903427830685;99001;78011;7
+9;Woda Cechini Muszyna szkło;2 L;5903427830685;5903427830685;86012;25082;8
+10;Woda Cechini Muszyna niskonasycona;2 L;5903427830685;5903427830685;41021;62316;6

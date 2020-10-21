@@ -7,16 +7,28 @@
       "fieldValidateRules": ["required"]
     },
     {
-      "fieldName": "ean",
+      "fieldName": "capacity",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "eanArt",
       "fieldType": "String"
     },
     {
-      "fieldName": "atr1",
+      "fieldName": "eanPack",
       "fieldType": "String"
     },
     {
-      "fieldName": "atr2",
-      "fieldType": "String"
+      "fieldName": "packCountPalette",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "artCountPalette",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "layerCountPalette",
+      "fieldType": "Integer"
     }
   ],
   "relationships": [

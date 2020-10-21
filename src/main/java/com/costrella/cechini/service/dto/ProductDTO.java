@@ -13,11 +13,17 @@ public class ProductDTO implements Serializable {
     @NotNull
     private String name;
 
-    private String ean;
+    private Integer capacity;
 
-    private String atr1;
+    private String eanArt;
 
-    private String atr2;
+    private String eanPack;
+
+    private Integer packCountPalette;
+
+    private Integer artCountPalette;
+
+    private Integer layerCountPalette;
 
     
     public Long getId() {
@@ -36,28 +42,52 @@ public class ProductDTO implements Serializable {
         this.name = name;
     }
 
-    public String getEan() {
-        return ean;
+    public Integer getCapacity() {
+        return capacity;
     }
 
-    public void setEan(String ean) {
-        this.ean = ean;
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
     }
 
-    public String getAtr1() {
-        return atr1;
+    public String getEanArt() {
+        return eanArt;
     }
 
-    public void setAtr1(String atr1) {
-        this.atr1 = atr1;
+    public void setEanArt(String eanArt) {
+        this.eanArt = eanArt;
     }
 
-    public String getAtr2() {
-        return atr2;
+    public String getEanPack() {
+        return eanPack;
     }
 
-    public void setAtr2(String atr2) {
-        this.atr2 = atr2;
+    public void setEanPack(String eanPack) {
+        this.eanPack = eanPack;
+    }
+
+    public Integer getPackCountPalette() {
+        return packCountPalette;
+    }
+
+    public void setPackCountPalette(Integer packCountPalette) {
+        this.packCountPalette = packCountPalette;
+    }
+
+    public Integer getArtCountPalette() {
+        return artCountPalette;
+    }
+
+    public void setArtCountPalette(Integer artCountPalette) {
+        this.artCountPalette = artCountPalette;
+    }
+
+    public Integer getLayerCountPalette() {
+        return layerCountPalette;
+    }
+
+    public void setLayerCountPalette(Integer layerCountPalette) {
+        this.layerCountPalette = layerCountPalette;
     }
 
     @Override
@@ -83,9 +113,12 @@ public class ProductDTO implements Serializable {
         return "ProductDTO{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", ean='" + getEan() + "'" +
-            ", atr1='" + getAtr1() + "'" +
-            ", atr2='" + getAtr2() + "'" +
+            ", capacity=" + getCapacity() +
+            ", eanArt='" + getEanArt() + "'" +
+            ", eanPack='" + getEanPack() + "'" +
+            ", packCountPalette=" + getPackCountPalette() +
+            ", artCountPalette=" + getArtCountPalette() +
+            ", layerCountPalette=" + getLayerCountPalette() +
             "}";
     }
 }
