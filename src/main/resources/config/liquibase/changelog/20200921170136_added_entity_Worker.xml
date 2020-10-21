@@ -21,7 +21,7 @@
             <column name="surname" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="hired_date" type="date">
+            <column name="hired_date" type="datetime">
                 <constraints nullable="true" />
             </column>
             <column name="jhi_desc" type="varchar(2000)">
@@ -44,6 +44,7 @@
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
+        <dropDefaultValue tableName="worker" columnName="hired_date" columnDataType="datetime"/>
     </changeSet>
 
     <changeSet id="20200921170136-1-relations" author="jhipster">
@@ -67,7 +68,7 @@
             <column name="id" type="numeric"/>
             <column name="name" type="string"/>
             <column name="surname" type="string"/>
-            <column name="hired_date" type="date"/>
+            <column name="hired_date" type="datetime"/>
             <column name="jhi_desc" type="string"/>
             <column name="phone" type="string"/>
             <column name="login" type="string"/>

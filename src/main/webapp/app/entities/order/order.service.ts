@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 
-import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { IOrder } from 'app/shared/model/order.model';
@@ -56,8 +55,8 @@ export class OrderService {
 
   protected convertDateFromClient(order: IOrder): IOrder {
     const copy: IOrder = Object.assign({}, order, {
-      orderDate: order.orderDate && order.orderDate.isValid() ? order.orderDate.format(DATE_FORMAT) : undefined,
-      deliveryDate: order.deliveryDate && order.deliveryDate.isValid() ? order.deliveryDate.format(DATE_FORMAT) : undefined,
+      orderDate: order.orderDate && order.orderDate.isValid() ? order.orderDate.toJSON() : undefined,
+      deliveryDate: order.deliveryDate && order.deliveryDate.isValid() ? order.deliveryDate.toJSON() : undefined,
     });
     return copy;
   }

@@ -6,7 +6,7 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-
+    
     <!--
         Added the entity Order.
     -->
@@ -15,10 +15,10 @@
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="order_date" type="date">
+            <column name="order_date" type="datetime">
                 <constraints nullable="false" />
             </column>
-            <column name="delivery_date" type="date">
+            <column name="delivery_date" type="datetime">
                 <constraints nullable="false" />
             </column>
             <column name="comment" type="varchar(2000)">
@@ -32,6 +32,8 @@
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
+        <dropDefaultValue tableName="jhi_order" columnName="order_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="jhi_order" columnName="delivery_date" columnDataType="datetime"/>
     </changeSet>
 
     <changeSet id="20200921170536-1-relations" author="jhipster">
@@ -53,8 +55,8 @@
                   separator=";"
                   tableName="jhi_order">
             <column name="id" type="numeric"/>
-            <column name="order_date" type="date"/>
-            <column name="delivery_date" type="date"/>
+            <column name="order_date" type="datetime"/>
+            <column name="delivery_date" type="datetime"/>
             <column name="comment" type="string"/>
             <column name="status_id" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->

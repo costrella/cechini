@@ -7,7 +7,7 @@
     },
     {
       "fieldName": "reportDate",
-      "fieldType": "LocalDate"
+      "fieldType": "Instant"
     },
     {
       "fieldName": "desc",

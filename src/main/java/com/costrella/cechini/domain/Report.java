@@ -6,7 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,7 +28,7 @@ public class Report implements Serializable {
     private String number;
 
     @Column(name = "report_date")
-    private LocalDate reportDate;
+    private Instant reportDate;
 
     @Column(name = "jhi_desc")
     private String desc;
@@ -75,16 +75,16 @@ public class Report implements Serializable {
         this.number = number;
     }
 
-    public LocalDate getReportDate() {
+    public Instant getReportDate() {
         return reportDate;
     }
 
-    public Report reportDate(LocalDate reportDate) {
+    public Report reportDate(Instant reportDate) {
         this.reportDate = reportDate;
         return this;
     }
 
-    public void setReportDate(LocalDate reportDate) {
+    public void setReportDate(Instant reportDate) {
         this.reportDate = reportDate;
     }
 

@@ -13,7 +13,7 @@
     },
     {
       "fieldName": "hiredDate",
-      "fieldType": "LocalDate"
+      "fieldType": "Instant"
     },
     {
       "fieldName": "desc",

@@ -4,6 +4,8 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import * as moment from 'moment';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { INote, Note } from 'app/shared/model/note.model';
 import { NoteService } from './note.service';
@@ -28,7 +30,6 @@ export class NoteUpdateComponent implements OnInit {
   workers: IWorker[] = [];
   managers: IManager[] = [];
   reports: IReport[] = [];
-  dateDp: any;
 
   editForm = this.fb.group({
     id: [],
@@ -52,6 +53,11 @@ export class NoteUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ note }) => {
+      if (!note.id) {
+        const today = moment().startOf('day');
+        note.date = today;
+      }
+
       this.updateForm(note);
 
       this.storeService.query().subscribe((res: HttpResponse<IStore[]>) => (this.stores = res.body || []));
@@ -68,7 +74,7 @@ export class NoteUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: note.id,
       value: note.value,
-      date: note.date,
+      date: note.date ? note.date.format(DATE_TIME_FORMAT) : null,
       storeId: note.storeId,
       workerNoteId: note.workerNoteId,
       managerNoteId: note.managerNoteId,
@@ -95,7 +101,7 @@ export class NoteUpdateComponent implements OnInit {
       ...new Note(),
       id: this.editForm.get(['id'])!.value,
       value: this.editForm.get(['value'])!.value,
-      date: this.editForm.get(['date'])!.value,
+      date: this.editForm.get(['date'])!.value ? moment(this.editForm.get(['date'])!.value, DATE_TIME_FORMAT) : undefined,
       storeId: this.editForm.get(['storeId'])!.value,
       workerNoteId: this.editForm.get(['workerNoteId'])!.value,
       managerNoteId: this.editForm.get(['managerNoteId'])!.value,

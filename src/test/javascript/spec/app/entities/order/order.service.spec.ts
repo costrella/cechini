@@ -1,7 +1,7 @@
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import * as moment from 'moment';
-import { DATE_FORMAT } from 'app/shared/constants/input.constants';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { OrderService } from 'app/entities/order/order.service';
 import { IOrder, Order } from 'app/shared/model/order.model';
 
@@ -31,8 +31,8 @@ describe('Service Tests', () => {
       it('should find an element', () => {
         const returnedFromService = Object.assign(
           {
-            orderDate: currentDate.format(DATE_FORMAT),
-            deliveryDate: currentDate.format(DATE_FORMAT),
+            orderDate: currentDate.format(DATE_TIME_FORMAT),
+            deliveryDate: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
@@ -48,8 +48,8 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
-            orderDate: currentDate.format(DATE_FORMAT),
-            deliveryDate: currentDate.format(DATE_FORMAT),
+            orderDate: currentDate.format(DATE_TIME_FORMAT),
+            deliveryDate: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
@@ -72,8 +72,8 @@ describe('Service Tests', () => {
       it('should update a Order', () => {
         const returnedFromService = Object.assign(
           {
-            orderDate: currentDate.format(DATE_FORMAT),
-            deliveryDate: currentDate.format(DATE_FORMAT),
+            orderDate: currentDate.format(DATE_TIME_FORMAT),
+            deliveryDate: currentDate.format(DATE_TIME_FORMAT),
             comment: 'BBBBBB',
           },
           elemDefault
@@ -97,8 +97,8 @@ describe('Service Tests', () => {
       it('should return a list of Order', () => {
         const returnedFromService = Object.assign(
           {
-            orderDate: currentDate.format(DATE_FORMAT),
-            deliveryDate: currentDate.format(DATE_FORMAT),
+            orderDate: currentDate.format(DATE_TIME_FORMAT),
+            deliveryDate: currentDate.format(DATE_TIME_FORMAT),
             comment: 'BBBBBB',
           },
           elemDefault

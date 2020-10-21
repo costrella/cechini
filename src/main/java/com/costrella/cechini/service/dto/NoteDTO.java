@@ -1,6 +1,6 @@
 package com.costrella.cechini.service.dto;
 
-import java.time.LocalDate;
+import java.time.Instant;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 
@@ -14,7 +14,7 @@ public class NoteDTO implements Serializable {
     @Size(max = 2000)
     private String value;
 
-    private LocalDate date;
+    private Instant date;
 
 
     private Long storeId;
@@ -41,11 +41,11 @@ public class NoteDTO implements Serializable {
         this.value = value;
     }
 
-    public LocalDate getDate() {
+    public Instant getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Instant date) {
         this.date = date;
     }
 

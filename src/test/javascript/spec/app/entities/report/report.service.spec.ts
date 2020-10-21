@@ -1,7 +1,7 @@
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import * as moment from 'moment';
-import { DATE_FORMAT } from 'app/shared/constants/input.constants';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { ReportService } from 'app/entities/report/report.service';
 import { IReport, Report } from 'app/shared/model/report.model';
 
@@ -31,7 +31,7 @@ describe('Service Tests', () => {
       it('should find an element', () => {
         const returnedFromService = Object.assign(
           {
-            reportDate: currentDate.format(DATE_FORMAT),
+            reportDate: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
@@ -47,7 +47,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
-            reportDate: currentDate.format(DATE_FORMAT),
+            reportDate: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
@@ -70,7 +70,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             number: 'BBBBBB',
-            reportDate: currentDate.format(DATE_FORMAT),
+            reportDate: currentDate.format(DATE_TIME_FORMAT),
             desc: 'BBBBBB',
           },
           elemDefault
@@ -94,7 +94,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             number: 'BBBBBB',
-            reportDate: currentDate.format(DATE_FORMAT),
+            reportDate: currentDate.format(DATE_TIME_FORMAT),
             desc: 'BBBBBB',
           },
           elemDefault

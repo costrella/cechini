@@ -19,11 +19,8 @@
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="cechiniApp.report.reportDate" for="field_reportDate">Report Date</label>
-                    <div class="input-group">
-                        <input id="field_reportDate" type="text" class="form-control" name="reportDate" ngbDatepicker #reportDateDp="ngbDatepicker" formControlName="reportDate"/>
-                        <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="reportDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
-                        </span>
+                    <div class="d-flex">
+                        <input id="field_reportDate" type="datetime-local" class="form-control" name="reportDate" formControlName="reportDate" placeholder="YYYY-MM-DD HH:mm"/>
                     </div>
                 </div>
 

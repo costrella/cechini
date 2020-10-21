@@ -1,6 +1,6 @@
 package com.costrella.cechini.service.dto;
 
-import java.time.LocalDate;
+import java.time.Instant;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.List;
@@ -13,10 +13,10 @@ public class OrderDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private LocalDate orderDate;
+    private Instant orderDate;
 
     @NotNull
-    private LocalDate deliveryDate;
+    private Instant deliveryDate;
 
     @Size(max = 2000)
     private String comment;
@@ -57,19 +57,19 @@ public class OrderDTO implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getOrderDate() {
+    public Instant getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(LocalDate orderDate) {
+    public void setOrderDate(Instant orderDate) {
         this.orderDate = orderDate;
     }
 
-    public LocalDate getDeliveryDate() {
+    public Instant getDeliveryDate() {
         return deliveryDate;
     }
 
-    public void setDeliveryDate(LocalDate deliveryDate) {
+    public void setDeliveryDate(Instant deliveryDate) {
         this.deliveryDate = deliveryDate;
     }
 
@@ -171,24 +171,17 @@ public class OrderDTO implements Serializable {
     }
 
     // prettier-ignore
-
     @Override
     public String toString() {
         return "OrderDTO{" +
-            "id=" + id +
-            ", orderDate=" + orderDate +
-            ", deliveryDate=" + deliveryDate +
-            ", comment='" + comment + '\'' +
-            ", orderItems=" + orderItems +
-            ", warehouseId=" + warehouseId +
-            ", warehouseName='" + warehouseName + '\'' +
-            ", statusId=" + statusId +
-            ", statusName='" + statusName + '\'' +
-            ", reportId=" + reportId +
-            ", storeId=" + storeId +
-            ", storeName='" + storeName + '\'' +
-            ", workerId=" + workerId +
-            ", workerSurname='" + workerSurname + '\'' +
-            '}';
+            "id=" + getId() +
+            ", orderDate='" + getOrderDate() + "'" +
+            ", deliveryDate='" + getDeliveryDate() + "'" +
+            ", comment='" + getComment() + "'" +
+            ", warehouseId=" + getWarehouseId() +
+            ", warehouseName='" + getWarehouseName() + "'" +
+            ", statusId=" + getStatusId() +
+            ", statusName='" + getStatusName() + "'" +
+            "}";
     }
 }

@@ -18,7 +18,7 @@
             <column name="value" type="varchar(2000)">
                 <constraints nullable="true" />
             </column>
-            <column name="date" type="date">
+            <column name="date" type="datetime">
                 <constraints nullable="true" />
             </column>
             <column name="store_id" type="bigint">
@@ -35,6 +35,7 @@
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
+        <dropDefaultValue tableName="note" columnName="date" columnDataType="datetime"/>
     </changeSet>
 
     <changeSet id="20200921171536-1-relations" author="jhipster">
@@ -57,7 +58,7 @@
                   tableName="note">
             <column name="id" type="numeric"/>
             <column name="value" type="string"/>
-            <column name="date" type="date"/>
+            <column name="date" type="datetime"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

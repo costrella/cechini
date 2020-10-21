@@ -3,12 +3,12 @@
   "fields": [
     {
       "fieldName": "orderDate",
-      "fieldType": "LocalDate",
+      "fieldType": "Instant",
       "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "deliveryDate",
-      "fieldType": "LocalDate",
+      "fieldType": "Instant",
       "fieldValidateRules": ["required"]
     },
     {

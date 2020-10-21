@@ -5,7 +5,7 @@
 entity Worker {
 	name String required,
     surname String required,
-    hiredDate LocalDate,
+    hiredDate Instant,
     desc String maxlength(2000),
     phone String,
     login String,
@@ -33,8 +33,8 @@ entity Manager {
 }
 
 entity Order {
-    orderDate LocalDate required,
-    deliveryDate LocalDate required,
+    orderDate Instant required,
+    deliveryDate Instant required,
     comment String maxlength(2000),
 }
 
@@ -59,7 +59,7 @@ entity Warehouse {
 
 entity Report {
 	number String,
-    reportDate LocalDate,
+    reportDate Instant,
     desc String
 }
 
@@ -83,7 +83,7 @@ entity Photo {
 
 entity Note {
     value String maxlength(2000),
-    date LocalDate,
+    date Instant,
 }
 
 relationship ManyToMany {

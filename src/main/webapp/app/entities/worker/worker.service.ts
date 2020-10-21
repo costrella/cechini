@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 
-import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { IWorker } from 'app/shared/model/worker.model';
@@ -57,7 +56,7 @@ export class WorkerService {
 
   protected convertDateFromClient(worker: IWorker): IWorker {
     const copy: IWorker = Object.assign({}, worker, {
-      hiredDate: worker.hiredDate && worker.hiredDate.isValid() ? worker.hiredDate.format(DATE_FORMAT) : undefined,
+      hiredDate: worker.hiredDate && worker.hiredDate.isValid() ? worker.hiredDate.toJSON() : undefined,
     });
     return copy;
   }

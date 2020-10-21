@@ -36,7 +36,7 @@
                 <tr *ngFor="let note of notes ;trackBy: trackId">
                     <td><a [routerLink]="['/note', note.id, 'view']">{{ note.id }}</a></td>
                     <td>{{ note.value }}</td>
-                    <td>{{ note.date | date:'mediumDate' }}</td>
+                    <td>{{ note.date | date:'medium' }}</td>
                     <td>
                         <div *ngIf="note.storeId">
                             <a [routerLink]="['/store', note.storeId , 'view']" >{{ note.storeId }}</a>

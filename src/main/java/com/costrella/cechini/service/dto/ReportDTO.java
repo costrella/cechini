@@ -1,6 +1,6 @@
 package com.costrella.cechini.service.dto;
 
-import java.time.LocalDate;
+import java.time.Instant;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 
@@ -13,7 +13,7 @@ public class ReportDTO implements Serializable {
 
     private String number;
 
-    private LocalDate reportDate;
+    private Instant reportDate;
 
     private String desc;
 
@@ -44,11 +44,11 @@ public class ReportDTO implements Serializable {
         this.number = number;
     }
 
-    public LocalDate getReportDate() {
+    public Instant getReportDate() {
         return reportDate;
     }
 
-    public void setReportDate(LocalDate reportDate) {
+    public void setReportDate(Instant reportDate) {
         this.reportDate = reportDate;
     }
 

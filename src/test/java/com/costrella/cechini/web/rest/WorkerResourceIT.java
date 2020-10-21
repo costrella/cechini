@@ -17,8 +17,8 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
-import java.time.LocalDate;
-import java.time.ZoneId;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -41,8 +41,8 @@ public class WorkerResourceIT {
     private static final String DEFAULT_SURNAME = "AAAAAAAAAA";
     private static final String UPDATED_SURNAME = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_HIRED_DATE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_HIRED_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final Instant DEFAULT_HIRED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_HIRED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String DEFAULT_DESC = "AAAAAAAAAA";
     private static final String UPDATED_DESC = "BBBBBBBBBB";

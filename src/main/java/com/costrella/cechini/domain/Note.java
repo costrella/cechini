@@ -6,7 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.Instant;
 
 /**
  * A Note.
@@ -27,7 +27,7 @@ public class Note implements Serializable {
     private String value;
 
     @Column(name = "date")
-    private LocalDate date;
+    private Instant date;
 
     @ManyToOne
     @JsonIgnoreProperties(value = "notes", allowSetters = true)
@@ -67,16 +67,16 @@ public class Note implements Serializable {
         this.value = value;
     }
 
-    public LocalDate getDate() {
+    public Instant getDate() {
         return date;
     }
 
-    public Note date(LocalDate date) {
+    public Note date(Instant date) {
         this.date = date;
         return this;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Instant date) {
         this.date = date;
     }
 

@@ -1,7 +1,7 @@
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import * as moment from 'moment';
-import { DATE_FORMAT } from 'app/shared/constants/input.constants';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { NoteService } from 'app/entities/note/note.service';
 import { INote, Note } from 'app/shared/model/note.model';
 
@@ -31,7 +31,7 @@ describe('Service Tests', () => {
       it('should find an element', () => {
         const returnedFromService = Object.assign(
           {
-            date: currentDate.format(DATE_FORMAT),
+            date: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
@@ -47,7 +47,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
-            date: currentDate.format(DATE_FORMAT),
+            date: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
@@ -70,7 +70,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             value: 'BBBBBB',
-            date: currentDate.format(DATE_FORMAT),
+            date: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
@@ -93,7 +93,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             value: 'BBBBBB',
-            date: currentDate.format(DATE_FORMAT),
+            date: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );

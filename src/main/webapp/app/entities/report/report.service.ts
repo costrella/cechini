@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 
-import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { IReport } from 'app/shared/model/report.model';
@@ -72,7 +71,7 @@ export class ReportService {
 
   protected convertDateFromClient(report: IReport): IReport {
     const copy: IReport = Object.assign({}, report, {
-      reportDate: report.reportDate && report.reportDate.isValid() ? report.reportDate.format(DATE_FORMAT) : undefined,
+      reportDate: report.reportDate && report.reportDate.isValid() ? report.reportDate.toJSON() : undefined,
     });
     return copy;
   }

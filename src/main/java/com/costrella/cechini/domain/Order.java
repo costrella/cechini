@@ -7,7 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,11 +27,11 @@ public class Order implements Serializable {
 
     @NotNull
     @Column(name = "order_date", nullable = false)
-    private LocalDate orderDate;
+    private Instant orderDate;
 
     @NotNull
     @Column(name = "delivery_date", nullable = false)
-    private LocalDate deliveryDate;
+    private Instant deliveryDate;
 
     @Size(max = 2000)
     @Column(name = "comment", length = 2000)
@@ -62,29 +62,29 @@ public class Order implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getOrderDate() {
+    public Instant getOrderDate() {
         return orderDate;
     }
 
-    public Order orderDate(LocalDate orderDate) {
+    public Order orderDate(Instant orderDate) {
         this.orderDate = orderDate;
         return this;
     }
 
-    public void setOrderDate(LocalDate orderDate) {
+    public void setOrderDate(Instant orderDate) {
         this.orderDate = orderDate;
     }
 
-    public LocalDate getDeliveryDate() {
+    public Instant getDeliveryDate() {
         return deliveryDate;
     }
 
-    public Order deliveryDate(LocalDate deliveryDate) {
+    public Order deliveryDate(Instant deliveryDate) {
         this.deliveryDate = deliveryDate;
         return this;
     }
 
-    public void setDeliveryDate(LocalDate deliveryDate) {
+    public void setDeliveryDate(Instant deliveryDate) {
         this.deliveryDate = deliveryDate;
     }
 

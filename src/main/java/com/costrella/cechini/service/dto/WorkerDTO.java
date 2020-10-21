@@ -1,7 +1,7 @@
 package com.costrella.cechini.service.dto;
 
 import io.swagger.annotations.ApiModel;
-import java.time.LocalDate;
+import java.time.Instant;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 
@@ -19,7 +19,7 @@ public class WorkerDTO implements Serializable {
     @NotNull
     private String surname;
 
-    private LocalDate hiredDate;
+    private Instant hiredDate;
 
     @Size(max = 2000)
     private String desc;
@@ -59,11 +59,11 @@ public class WorkerDTO implements Serializable {
         this.surname = surname;
     }
 
-    public LocalDate getHiredDate() {
+    public Instant getHiredDate() {
         return hiredDate;
     }
 
-    public void setHiredDate(LocalDate hiredDate) {
+    public void setHiredDate(Instant hiredDate) {
         this.hiredDate = hiredDate;
     }
 

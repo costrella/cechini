@@ -5,6 +5,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import * as moment from 'moment';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IReport, Report } from 'app/shared/model/report.model';
 import { ReportService } from './report.service';
@@ -26,7 +28,6 @@ export class ReportUpdateComponent implements OnInit {
   orders: IOrder[] = [];
   workers: IWorker[] = [];
   stores: IStore[] = [];
-  reportDateDp: any;
 
   editForm = this.fb.group({
     id: [],
@@ -49,6 +50,11 @@ export class ReportUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ report }) => {
+      if (!report.id) {
+        const today = moment().startOf('day');
+        report.reportDate = today;
+      }
+
       this.updateForm(report);
 
       this.orderService
@@ -83,7 +89,7 @@ export class ReportUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: report.id,
       number: report.number,
-      reportDate: report.reportDate,
+      reportDate: report.reportDate ? report.reportDate.format(DATE_TIME_FORMAT) : null,
       desc: report.desc,
       orderId: report.orderId,
       workerId: report.workerId,
@@ -110,7 +116,7 @@ export class ReportUpdateComponent implements OnInit {
       ...new Report(),
       id: this.editForm.get(['id'])!.value,
       number: this.editForm.get(['number'])!.value,
-      reportDate: this.editForm.get(['reportDate'])!.value,
+      reportDate: this.editForm.get(['reportDate'])!.value ? moment(this.editForm.get(['reportDate'])!.value, DATE_TIME_FORMAT) : undefined,
       desc: this.editForm.get(['desc'])!.value,
       orderId: this.editForm.get(['orderId'])!.value,
       workerId: this.editForm.get(['workerId'])!.value,

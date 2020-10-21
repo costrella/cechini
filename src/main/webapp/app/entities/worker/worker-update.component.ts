@@ -4,6 +4,8 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import * as moment from 'moment';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IWorker, Worker } from 'app/shared/model/worker.model';
 import { WorkerService } from './worker.service';
@@ -14,7 +16,6 @@ import { WorkerService } from './worker.service';
 })
 export class WorkerUpdateComponent implements OnInit {
   isSaving = false;
-  hiredDateDp: any;
 
   editForm = this.fb.group({
     id: [],
@@ -33,6 +34,11 @@ export class WorkerUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ worker }) => {
+      if (!worker.id) {
+        const today = moment().startOf('day');
+        worker.hiredDate = today;
+      }
+
       this.updateForm(worker);
     });
   }
@@ -42,7 +48,7 @@ export class WorkerUpdateComponent implements OnInit {
       id: worker.id,
       name: worker.name,
       surname: worker.surname,
-      hiredDate: worker.hiredDate,
+      hiredDate: worker.hiredDate ? worker.hiredDate.format(DATE_TIME_FORMAT) : null,
       desc: worker.desc,
       phone: worker.phone,
       login: worker.login,
@@ -72,7 +78,7 @@ export class WorkerUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       name: this.editForm.get(['name'])!.value,
       surname: this.editForm.get(['surname'])!.value,
-      hiredDate: this.editForm.get(['hiredDate'])!.value,
+      hiredDate: this.editForm.get(['hiredDate'])!.value ? moment(this.editForm.get(['hiredDate'])!.value, DATE_TIME_FORMAT) : undefined,
       desc: this.editForm.get(['desc'])!.value,
       phone: this.editForm.get(['phone'])!.value,
       login: this.editForm.get(['login'])!.value,

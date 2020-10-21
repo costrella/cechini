@@ -6,7 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -33,7 +33,7 @@ public class Worker implements Serializable {
     private String surname;
 
     @Column(name = "hired_date")
-    private LocalDate hiredDate;
+    private Instant hiredDate;
 
     @Size(max = 2000)
     @Column(name = "jhi_desc", length = 2000)
@@ -110,16 +110,16 @@ public class Worker implements Serializable {
         this.surname = surname;
     }
 
-    public LocalDate getHiredDate() {
+    public Instant getHiredDate() {
         return hiredDate;
     }
 
-    public Worker hiredDate(LocalDate hiredDate) {
+    public Worker hiredDate(Instant hiredDate) {
         this.hiredDate = hiredDate;
         return this;
     }
 
-    public void setHiredDate(LocalDate hiredDate) {
+    public void setHiredDate(Instant hiredDate) {
         this.hiredDate = hiredDate;
     }
 
