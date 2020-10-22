@@ -12,6 +12,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Optional;
 
 /**
@@ -41,8 +45,27 @@ public class PhotoService {
     public PhotoDTO save(PhotoDTO photoDTO) {
         log.debug("Request to save Photo : {}", photoDTO);
         Photo photo = photoMapper.toEntity(photoDTO);
+        File file = new File("C:\\users\\mikostrz\\mkostrzewa\\others\\cechini\\test.pdf");
+        try {
+            byte[] array = Files.readAllBytes(file.toPath());
+            System.out.println("hi !");
+            photo.setValue(array);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         photo = photoRepository.save(photo);
         return photoMapper.toDto(photo);
+    }
+
+    public static void main(String []args){
+        System.out.println("hi");
+        File file = new File("C:\\users\\mikostrz\\mkostrzewa\\others\\cechini\\test.pdf");
+        try {
+            byte[] array = Files.readAllBytes(file.toPath());
+            System.out.println("hi !" + array.length);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
