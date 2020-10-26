@@ -1,7 +1,6 @@
 package com.costrella.cechini.service.dto;
 
 import java.io.Serializable;
-import javax.persistence.Lob;
 
 /**
  * A DTO for the {@link com.costrella.cechini.domain.Photo} entity.
@@ -12,10 +11,10 @@ public class PhotoDTO implements Serializable {
 
     private String uri;
 
-    @Lob
-    private byte[] value;
-
     private String valueContentType;
+
+
+    private Long fileId;
 
     private Long reportId;
     
@@ -35,20 +34,20 @@ public class PhotoDTO implements Serializable {
         this.uri = uri;
     }
 
-    public byte[] getValue() {
-        return value;
-    }
-
-    public void setValue(byte[] value) {
-        this.value = value;
-    }
-
     public String getValueContentType() {
         return valueContentType;
     }
 
     public void setValueContentType(String valueContentType) {
         this.valueContentType = valueContentType;
+    }
+
+    public Long getFileId() {
+        return fileId;
+    }
+
+    public void setFileId(Long photoFileId) {
+        this.fileId = photoFileId;
     }
 
     public Long getReportId() {
@@ -82,7 +81,8 @@ public class PhotoDTO implements Serializable {
         return "PhotoDTO{" +
             "id=" + getId() +
             ", uri='" + getUri() + "'" +
-            ", value='" + getValue() + "'" +
+            ", valueContentType='" + getValueContentType() + "'" +
+            ", fileId=" + getFileId() +
             ", reportId=" + getReportId() +
             "}";
     }

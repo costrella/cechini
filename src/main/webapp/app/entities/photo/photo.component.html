@@ -24,7 +24,8 @@
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="uri"><span jhiTranslate="cechiniApp.photo.uri">Uri</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="value"><span jhiTranslate="cechiniApp.photo.value">Value</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="valueContentType"><span jhiTranslate="cechiniApp.photo.valueContentType">Value Content Type</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="fileId"><span jhiTranslate="cechiniApp.photo.file">File</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="reportId"><span jhiTranslate="cechiniApp.photo.report">Report</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
@@ -33,11 +34,11 @@
                 <tr *ngFor="let photo of photos ;trackBy: trackId">
                     <td><a [routerLink]="['/photo', photo.id, 'view']">{{ photo.id }}</a></td>
                     <td>{{ photo.uri }}</td>
+                    <td>{{ photo.valueContentType }}</td>
                     <td>
-                        <a *ngIf="photo.value" (click)="openFile(photo.valueContentType, photo.value)">
-                            <img [src]="'data:' + photo.valueContentType + ';base64,' + photo.value" style="max-height: 30px;" alt="photo image"/>
-                        </a>
-                        <span *ngIf="photo.value">{{ photo.valueContentType }}, {{ byteSize(photo.value) }}</span>
+                        <div *ngIf="photo.fileId">
+                            <a [routerLink]="['/photo-file', photo.fileId , 'view']" >{{ photo.fileId }}</a>
+                        </div>
                     </td>
                     <td>
                         <div *ngIf="photo.reportId">

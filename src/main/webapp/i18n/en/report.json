@@ -5,8 +5,7 @@
         "title": "Reports",
         "createLabel": "Create a new Report",
         "createOrEditLabel": "Create or edit a Report",
-        "notFound": "No Reports found",
-        "filter": "Filter"
+        "notFound": "No Reports found"
       },
       "created": "A new Report is created with identifier {{ param }}",
       "updated": "A Report is updated with identifier {{ param }}",
@@ -17,9 +16,9 @@
       "detail": {
         "title": "Report"
       },
-      "number": "Number",
       "reportDate": "Report Date",
       "desc": "Desc",
+      "managerNote": "Manager Note",
       "order": "Order",
       "photos": "Photos",
       "note": "Note",

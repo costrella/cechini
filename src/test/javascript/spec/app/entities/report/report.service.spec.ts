@@ -24,7 +24,7 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new Report(0, 'AAAAAAA', currentDate, 'AAAAAAA');
+      elemDefault = new Report(0, currentDate, 'AAAAAAA', 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -69,9 +69,9 @@ describe('Service Tests', () => {
       it('should update a Report', () => {
         const returnedFromService = Object.assign(
           {
-            number: 'BBBBBB',
             reportDate: currentDate.format(DATE_TIME_FORMAT),
             desc: 'BBBBBB',
+            managerNote: 'BBBBBB',
           },
           elemDefault
         );
@@ -93,9 +93,9 @@ describe('Service Tests', () => {
       it('should return a list of Report', () => {
         const returnedFromService = Object.assign(
           {
-            number: 'BBBBBB',
             reportDate: currentDate.format(DATE_TIME_FORMAT),
             desc: 'BBBBBB',
+            managerNote: 'BBBBBB',
           },
           elemDefault
         );

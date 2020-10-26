@@ -8,6 +8,12 @@
     -->
     <changeSet id="20200921171436-2" author="jhipster">
         
+        <addForeignKeyConstraint baseColumnNames="file_id"
+                                 baseTableName="photo"
+                                 constraintName="fk_photo_file_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="photo_file"/>
+
         <addForeignKeyConstraint baseColumnNames="report_id"
                                  baseTableName="photo"
                                  constraintName="fk_photo_report_id"

@@ -22,6 +22,9 @@
         "photo": "Zdjęcia",
         "note": "Notyfikacje",
         "product": "Product",
+        "report": "Report",
+        "photo": "Photo",
+        "photoFile": "Photo File",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

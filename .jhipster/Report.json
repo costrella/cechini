@@ -2,16 +2,20 @@
   "name": "Report",
   "fields": [
     {
-      "fieldName": "number",
-      "fieldType": "String"
-    },
-    {
       "fieldName": "reportDate",
       "fieldType": "Instant"
     },
     {
       "fieldName": "desc",
-      "fieldType": "String"
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "2000"
+    },
+    {
+      "fieldName": "managerNote",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "2000"
     }
   ],
   "relationships": [

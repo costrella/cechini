@@ -60,6 +60,10 @@ import { RouterModule } from '@angular/router';
         path: 'note',
         loadChildren: () => import('./note/note.module').then(m => m.CechiniNoteModule),
       },
+      {
+        path: 'photo-file',
+        loadChildren: () => import('./photo-file/photo-file.module').then(m => m.CechiniPhotoFileModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

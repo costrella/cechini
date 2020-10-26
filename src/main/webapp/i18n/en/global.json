@@ -21,6 +21,7 @@
         "status": "Status",
         "photo": "Photo",
         "note": "Note",
+        "photoFile": "Photo File",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

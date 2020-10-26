@@ -16,7 +16,6 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Base64Utils;
 import javax.persistence.EntityManager;
 import java.util.List;
 
@@ -37,10 +36,8 @@ public class PhotoResourceIT {
     private static final String DEFAULT_URI = "AAAAAAAAAA";
     private static final String UPDATED_URI = "BBBBBBBBBB";
 
-    private static final byte[] DEFAULT_VALUE = TestUtil.createByteArray(1, "0");
-    private static final byte[] UPDATED_VALUE = TestUtil.createByteArray(1, "1");
-    private static final String DEFAULT_VALUE_CONTENT_TYPE = "image/jpg";
-    private static final String UPDATED_VALUE_CONTENT_TYPE = "image/png";
+    private static final String DEFAULT_VALUE_CONTENT_TYPE = "AAAAAAAAAA";
+    private static final String UPDATED_VALUE_CONTENT_TYPE = "BBBBBBBBBB";
 
     @Autowired
     private PhotoRepository photoRepository;
@@ -68,7 +65,6 @@ public class PhotoResourceIT {
     public static Photo createEntity(EntityManager em) {
         Photo photo = new Photo()
             .uri(DEFAULT_URI)
-            .value(DEFAULT_VALUE)
             .valueContentType(DEFAULT_VALUE_CONTENT_TYPE);
         return photo;
     }
@@ -81,7 +77,6 @@ public class PhotoResourceIT {
     public static Photo createUpdatedEntity(EntityManager em) {
         Photo photo = new Photo()
             .uri(UPDATED_URI)
-            .value(UPDATED_VALUE)
             .valueContentType(UPDATED_VALUE_CONTENT_TYPE);
         return photo;
     }
@@ -107,7 +102,6 @@ public class PhotoResourceIT {
         assertThat(photoList).hasSize(databaseSizeBeforeCreate + 1);
         Photo testPhoto = photoList.get(photoList.size() - 1);
         assertThat(testPhoto.getUri()).isEqualTo(DEFAULT_URI);
-        assertThat(testPhoto.getValue()).isEqualTo(DEFAULT_VALUE);
         assertThat(testPhoto.getValueContentType()).isEqualTo(DEFAULT_VALUE_CONTENT_TYPE);
     }
 
@@ -144,8 +138,7 @@ public class PhotoResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(photo.getId().intValue())))
             .andExpect(jsonPath("$.[*].uri").value(hasItem(DEFAULT_URI)))
-            .andExpect(jsonPath("$.[*].valueContentType").value(hasItem(DEFAULT_VALUE_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].value").value(hasItem(Base64Utils.encodeToString(DEFAULT_VALUE))));
+            .andExpect(jsonPath("$.[*].valueContentType").value(hasItem(DEFAULT_VALUE_CONTENT_TYPE)));
     }
     
     @Test
@@ -160,8 +153,7 @@ public class PhotoResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(photo.getId().intValue()))
             .andExpect(jsonPath("$.uri").value(DEFAULT_URI))
-            .andExpect(jsonPath("$.valueContentType").value(DEFAULT_VALUE_CONTENT_TYPE))
-            .andExpect(jsonPath("$.value").value(Base64Utils.encodeToString(DEFAULT_VALUE)));
+            .andExpect(jsonPath("$.valueContentType").value(DEFAULT_VALUE_CONTENT_TYPE));
     }
     @Test
     @Transactional
@@ -185,7 +177,6 @@ public class PhotoResourceIT {
         em.detach(updatedPhoto);
         updatedPhoto
             .uri(UPDATED_URI)
-            .value(UPDATED_VALUE)
             .valueContentType(UPDATED_VALUE_CONTENT_TYPE);
         PhotoDTO photoDTO = photoMapper.toDto(updatedPhoto);
 
@@ -199,7 +190,6 @@ public class PhotoResourceIT {
         assertThat(photoList).hasSize(databaseSizeBeforeUpdate);
         Photo testPhoto = photoList.get(photoList.size() - 1);
         assertThat(testPhoto.getUri()).isEqualTo(UPDATED_URI);
-        assertThat(testPhoto.getValue()).isEqualTo(UPDATED_VALUE);
         assertThat(testPhoto.getValueContentType()).isEqualTo(UPDATED_VALUE_CONTENT_TYPE);
     }
 

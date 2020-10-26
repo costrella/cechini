@@ -18,11 +18,11 @@
             <column name="uri" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="value" type="longblob">
-                <constraints nullable="true" />
-            </column>
             <column name="value_content_type" type="varchar(255)">
                 <constraints nullable="true" />
+            </column>
+            <column name="file_id" type="bigint">
+                <constraints unique="true" nullable="true" uniqueConstraintName="ux_photo_file_id" />
             </column>
             <column name="report_id" type="bigint">
                 <constraints nullable="true" />
@@ -51,7 +51,6 @@
                   tableName="photo">
             <column name="id" type="numeric"/>
             <column name="uri" type="string"/>
-            <column name="value" type="blob"/>
             <column name="value_content_type" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>

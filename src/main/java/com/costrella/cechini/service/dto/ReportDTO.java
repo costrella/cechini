@@ -11,11 +11,13 @@ public class ReportDTO implements Serializable {
     
     private Long id;
 
-    private String number;
-
     private Instant reportDate;
 
+    @Size(max = 2000)
     private String desc;
+
+    @Size(max = 2000)
+    private String managerNote;
 
 
     private Long orderId;
@@ -36,14 +38,6 @@ public class ReportDTO implements Serializable {
         this.id = id;
     }
 
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
     public Instant getReportDate() {
         return reportDate;
     }
@@ -58,6 +52,14 @@ public class ReportDTO implements Serializable {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public String getManagerNote() {
+        return managerNote;
+    }
+
+    public void setManagerNote(String managerNote) {
+        this.managerNote = managerNote;
     }
 
     public Long getOrderId() {
@@ -122,9 +124,9 @@ public class ReportDTO implements Serializable {
     public String toString() {
         return "ReportDTO{" +
             "id=" + getId() +
-            ", number='" + getNumber() + "'" +
             ", reportDate='" + getReportDate() + "'" +
             ", desc='" + getDesc() + "'" +
+            ", managerNote='" + getManagerNote() + "'" +
             ", orderId=" + getOrderId() +
             ", workerId=" + getWorkerId() +
             ", workerSurname='" + getWorkerSurname() + "'" +

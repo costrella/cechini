@@ -58,9 +58,9 @@ entity Warehouse {
 }
 
 entity Report {
-	number String,
     reportDate Instant,
-    desc String
+    desc String maxlength(2000), //todo uzyc Note
+    managerNote String maxlength(2000), //todo uzyc Note
 }
 
 entity Track {
@@ -78,7 +78,11 @@ entity Status {
 
 entity Photo {
     uri String,
-    value ImageBlob
+    valueContentType String,
+}
+
+entity PhotoFile {
+     value ImageBlob
 }
 
 entity Note {
@@ -92,11 +96,12 @@ relationship ManyToMany {
 
 relationship OneToOne {
  	Report{order} to Order{report},
+ 	Photo{file} to PhotoFile{photo}
 }
 
 relationship OneToMany {
 	Report{photos} to Photo{report},
-    
+
     Store to Note{store},
     Worker to Note{workerNote},
     Manager to Note{managerNote},
@@ -105,19 +110,19 @@ relationship OneToMany {
     Worker to Store{worker(surname)},
     Location to Store{location},
     StoreGroup to Store{storegroup(name)},
-    
+
     Worker to Report{worker(surname) required},
     Store to Report{store(name) required},
-    
-    Warehouse to Order{warehouse(name)}, 
+
+    Warehouse to Order{warehouse(name)},
     Status to Order{status(name) required},
-    
+
     Product to OrderItem{product(name)},
     Order to OrderItem{order},
-    
+
     Worker to Track{worker(surname)},
     Location to Track{location},
-    
+
 }
 
 

@@ -4,9 +4,9 @@ import { INote } from 'app/shared/model/note.model';
 
 export interface IReport {
   id?: number;
-  number?: string;
   reportDate?: Moment;
   desc?: string;
+  managerNote?: string;
   orderId?: number;
   photos?: IPhoto[];
   notes?: INote[];
@@ -19,9 +19,9 @@ export interface IReport {
 export class Report implements IReport {
   constructor(
     public id?: number,
-    public number?: string,
     public reportDate?: Moment,
     public desc?: string,
+    public managerNote?: string,
     public orderId?: number,
     public photos?: IPhoto[],
     public notes?: INote[],

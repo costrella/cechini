@@ -6,12 +6,19 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "value",
-      "fieldType": "byte[]",
-      "fieldTypeBlobContent": "image"
+      "fieldName": "valueContentType",
+      "fieldType": "String"
     }
   ],
   "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "photoFile",
+      "otherEntityRelationshipName": "photo",
+      "relationshipName": "file",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
     {
       "relationshipType": "many-to-one",
       "otherEntityName": "report",

@@ -90,13 +90,6 @@ public class ReportService {
             .map(reportMapper::toDto);
     }
 
-    @Transactional(readOnly = true)
-    public Page<ReportDTO> findAllByNumber(Pageable pageable, String number) {
-        log.debug("Request to get all Reports by number");
-        return reportRepository.findAllByNumber(number, pageable)
-            .map(reportMapper::toDto);
-    }
-
     /**
      * Get one report by id.
      *

@@ -18,21 +18,17 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cechiniApp.photo.value" for="field_value">Value</label>
-                    <div>
-                        <img [src]="'data:' + editForm.get('valueContentType')!.value + ';base64,' + editForm.get('value')!.value" style="max-height: 100px;" *ngIf="editForm.get('value')!.value" alt="photo image"/>
-                        <div *ngIf="editForm.get('value')!.value" class="form-text text-danger clearfix">
-                            <span class="pull-left">{{ editForm.get('valueContentType')!.value }}, {{ byteSize(editForm.get('value')!.value) }}</span>
-                            <button type="button" (click)="clearInputImage('value', 'valueContentType', 'file_value')" class="btn btn-secondary btn-xs pull-right">
-                                <fa-icon icon="times"></fa-icon>
-                            </button>
-                        </div>
-                        <input type="file" id="file_value" (change)="setFileData($event, 'value', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
-                    </div>
-                    <input type="hidden" class="form-control" name="value" id="field_value"
-                           formControlName="value"/>
-                    <input type="hidden" class="form-control" name="valueContentType" id="field_valueContentType"
-                           formControlName="valueContentType" />
+                    <label class="form-control-label" jhiTranslate="cechiniApp.photo.valueContentType" for="field_valueContentType">Value Content Type</label>
+                    <input type="text" class="form-control" name="valueContentType" id="field_valueContentType"
+                           formControlName="valueContentType"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cechiniApp.photo.file" for="field_file">File</label>
+                    <select class="form-control" id="field_file" name="file" formControlName="fileId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="photoFileOption.id" *ngFor="let photoFileOption of files; trackBy: trackById">{{ photoFileOption.id }}</option>
+                    </select>
                 </div>
 
                 <div class="form-group">

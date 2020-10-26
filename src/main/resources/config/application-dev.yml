@@ -37,14 +37,14 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/cechini13
+    url: jdbc:postgresql://localhost:5432/c17
     username: postgres
     password: postgres
     hikari:
       poolName: Hikari
       auto-commit: false
   jpa:
-    database-platform: io.github.jhipster.domain.util.FixedPostgreSQL10Dialect
+    database-platform: io.github.jhipster.domain.util.FixedPostgreSQL10Dialect #if oid - remove it
     show-sql: true
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically

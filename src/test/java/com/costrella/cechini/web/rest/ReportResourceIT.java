@@ -37,14 +37,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class ReportResourceIT {
 
-    private static final String DEFAULT_NUMBER = "AAAAAAAAAA";
-    private static final String UPDATED_NUMBER = "BBBBBBBBBB";
-
     private static final Instant DEFAULT_REPORT_DATE = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_REPORT_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String DEFAULT_DESC = "AAAAAAAAAA";
     private static final String UPDATED_DESC = "BBBBBBBBBB";
+
+    private static final String DEFAULT_MANAGER_NOTE = "AAAAAAAAAA";
+    private static final String UPDATED_MANAGER_NOTE = "BBBBBBBBBB";
 
     @Autowired
     private ReportRepository reportRepository;
@@ -71,9 +71,9 @@ public class ReportResourceIT {
      */
     public static Report createEntity(EntityManager em) {
         Report report = new Report()
-            .number(DEFAULT_NUMBER)
             .reportDate(DEFAULT_REPORT_DATE)
-            .desc(DEFAULT_DESC);
+            .desc(DEFAULT_DESC)
+            .managerNote(DEFAULT_MANAGER_NOTE);
         // Add required entity
         Worker worker;
         if (TestUtil.findAll(em, Worker.class).isEmpty()) {
@@ -104,9 +104,9 @@ public class ReportResourceIT {
      */
     public static Report createUpdatedEntity(EntityManager em) {
         Report report = new Report()
-            .number(UPDATED_NUMBER)
             .reportDate(UPDATED_REPORT_DATE)
-            .desc(UPDATED_DESC);
+            .desc(UPDATED_DESC)
+            .managerNote(UPDATED_MANAGER_NOTE);
         // Add required entity
         Worker worker;
         if (TestUtil.findAll(em, Worker.class).isEmpty()) {
@@ -150,9 +150,9 @@ public class ReportResourceIT {
         List<Report> reportList = reportRepository.findAll();
         assertThat(reportList).hasSize(databaseSizeBeforeCreate + 1);
         Report testReport = reportList.get(reportList.size() - 1);
-        assertThat(testReport.getNumber()).isEqualTo(DEFAULT_NUMBER);
         assertThat(testReport.getReportDate()).isEqualTo(DEFAULT_REPORT_DATE);
         assertThat(testReport.getDesc()).isEqualTo(DEFAULT_DESC);
+        assertThat(testReport.getManagerNote()).isEqualTo(DEFAULT_MANAGER_NOTE);
     }
 
     @Test
@@ -187,9 +187,9 @@ public class ReportResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(report.getId().intValue())))
-            .andExpect(jsonPath("$.[*].number").value(hasItem(DEFAULT_NUMBER)))
             .andExpect(jsonPath("$.[*].reportDate").value(hasItem(DEFAULT_REPORT_DATE.toString())))
-            .andExpect(jsonPath("$.[*].desc").value(hasItem(DEFAULT_DESC)));
+            .andExpect(jsonPath("$.[*].desc").value(hasItem(DEFAULT_DESC)))
+            .andExpect(jsonPath("$.[*].managerNote").value(hasItem(DEFAULT_MANAGER_NOTE)));
     }
     
     @Test
@@ -203,9 +203,9 @@ public class ReportResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(report.getId().intValue()))
-            .andExpect(jsonPath("$.number").value(DEFAULT_NUMBER))
             .andExpect(jsonPath("$.reportDate").value(DEFAULT_REPORT_DATE.toString()))
-            .andExpect(jsonPath("$.desc").value(DEFAULT_DESC));
+            .andExpect(jsonPath("$.desc").value(DEFAULT_DESC))
+            .andExpect(jsonPath("$.managerNote").value(DEFAULT_MANAGER_NOTE));
     }
     @Test
     @Transactional
@@ -228,9 +228,9 @@ public class ReportResourceIT {
         // Disconnect from session so that the updates on updatedReport are not directly saved in db
         em.detach(updatedReport);
         updatedReport
-            .number(UPDATED_NUMBER)
             .reportDate(UPDATED_REPORT_DATE)
-            .desc(UPDATED_DESC);
+            .desc(UPDATED_DESC)
+            .managerNote(UPDATED_MANAGER_NOTE);
         ReportDTO reportDTO = reportMapper.toDto(updatedReport);
 
         restReportMockMvc.perform(put("/api/reports").with(csrf())
@@ -242,9 +242,9 @@ public class ReportResourceIT {
         List<Report> reportList = reportRepository.findAll();
         assertThat(reportList).hasSize(databaseSizeBeforeUpdate);
         Report testReport = reportList.get(reportList.size() - 1);
-        assertThat(testReport.getNumber()).isEqualTo(UPDATED_NUMBER);
         assertThat(testReport.getReportDate()).isEqualTo(UPDATED_REPORT_DATE);
         assertThat(testReport.getDesc()).isEqualTo(UPDATED_DESC);
+        assertThat(testReport.getManagerNote()).isEqualTo(UPDATED_MANAGER_NOTE);
     }
 
     @Test

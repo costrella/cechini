@@ -1,0 +1,30 @@
+{
+  "name": "PhotoFile",
+  "fields": [
+    {
+      "fieldName": "value",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "photo",
+      "otherEntityRelationshipName": "file",
+      "relationshipName": "photo",
+      "ownerSide": false
+    }
+  ],
+  "changelogDate": "20201026202519",
+  "entityTableName": "photo_file",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

@@ -12,13 +12,14 @@
                 <dd>
                     <span>{{ photo.uri }}</span>
                 </dd>
-                <dt><span jhiTranslate="cechiniApp.photo.value">Value</span></dt>
+                <dt><span jhiTranslate="cechiniApp.photo.valueContentType">Value Content Type</span></dt>
                 <dd>
-                    <div *ngIf="photo.value">
-                        <a (click)="openFile(photo.valueContentType, photo.value)">
-                            <img [src]="'data:' + photo.valueContentType + ';base64,' + photo.value" style="max-width: 100%;" alt="photo image"/>
-                        </a>
-                        {{ photo.valueContentType }}, {{ byteSize(photo.value) }}
+                    <span>{{ photo.valueContentType }}</span>
+                </dd>
+                <dt><span jhiTranslate="cechiniApp.photo.file">File</span></dt>
+                <dd>
+                    <div *ngIf="photo.fileId">
+                        <a [routerLink]="['/photo-file', photo.fileId, 'view']">{{ photo.fileId }}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="cechiniApp.photo.report">Report</span></dt>

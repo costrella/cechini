@@ -20,7 +20,7 @@ describe('Service Tests', () => {
       service = injector.get(PhotoService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Photo(0, 'AAAAAAA', 'image/png', 'AAAAAAA');
+      elemDefault = new Photo(0, 'AAAAAAA', 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -55,7 +55,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             uri: 'BBBBBB',
-            value: 'BBBBBB',
+            valueContentType: 'BBBBBB',
           },
           elemDefault
         );
@@ -73,7 +73,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             uri: 'BBBBBB',
-            value: 'BBBBBB',
+            valueContentType: 'BBBBBB',
           },
           elemDefault
         );

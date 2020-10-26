@@ -23,12 +23,12 @@ public class Photo implements Serializable {
     @Column(name = "uri")
     private String uri;
 
-    @Lob
-    @Column(name = "value")
-    private byte[] value;
-
     @Column(name = "value_content_type")
     private String valueContentType;
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    private PhotoFile file;
 
     @ManyToOne
     @JsonIgnoreProperties(value = "photos", allowSetters = true)
@@ -56,19 +56,6 @@ public class Photo implements Serializable {
         this.uri = uri;
     }
 
-    public byte[] getValue() {
-        return value;
-    }
-
-    public Photo value(byte[] value) {
-        this.value = value;
-        return this;
-    }
-
-    public void setValue(byte[] value) {
-        this.value = value;
-    }
-
     public String getValueContentType() {
         return valueContentType;
     }
@@ -80,6 +67,19 @@ public class Photo implements Serializable {
 
     public void setValueContentType(String valueContentType) {
         this.valueContentType = valueContentType;
+    }
+
+    public PhotoFile getFile() {
+        return file;
+    }
+
+    public Photo file(PhotoFile photoFile) {
+        this.file = photoFile;
+        return this;
+    }
+
+    public void setFile(PhotoFile photoFile) {
+        this.file = photoFile;
     }
 
     public Report getReport() {
@@ -118,7 +118,6 @@ public class Photo implements Serializable {
         return "Photo{" +
             "id=" + getId() +
             ", uri='" + getUri() + "'" +
-            ", value='" + getValue() + "'" +
             ", valueContentType='" + getValueContentType() + "'" +
             "}";
     }

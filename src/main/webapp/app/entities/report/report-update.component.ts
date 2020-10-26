@@ -31,9 +31,9 @@ export class ReportUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    number: [],
     reportDate: [],
-    desc: [],
+    desc: [null, [Validators.maxLength(2000)]],
+    managerNote: [null, [Validators.maxLength(2000)]],
     orderId: [],
     workerId: [null, Validators.required],
     storeId: [null, Validators.required],
@@ -88,9 +88,9 @@ export class ReportUpdateComponent implements OnInit {
   updateForm(report: IReport): void {
     this.editForm.patchValue({
       id: report.id,
-      number: report.number,
       reportDate: report.reportDate ? report.reportDate.format(DATE_TIME_FORMAT) : null,
       desc: report.desc,
+      managerNote: report.managerNote,
       orderId: report.orderId,
       workerId: report.workerId,
       storeId: report.storeId,
@@ -115,9 +115,9 @@ export class ReportUpdateComponent implements OnInit {
     return {
       ...new Report(),
       id: this.editForm.get(['id'])!.value,
-      number: this.editForm.get(['number'])!.value,
       reportDate: this.editForm.get(['reportDate'])!.value ? moment(this.editForm.get(['reportDate'])!.value, DATE_TIME_FORMAT) : undefined,
       desc: this.editForm.get(['desc'])!.value,
+      managerNote: this.editForm.get(['managerNote'])!.value,
       orderId: this.editForm.get(['orderId'])!.value,
       workerId: this.editForm.get(['workerId'])!.value,
       storeId: this.editForm.get(['storeId'])!.value,

@@ -17,7 +17,8 @@
         "title": "Photo"
       },
       "uri": "Uri",
-      "value": "Value",
+      "valueContentType": "Value Content Type",
+      "file": "File",
       "report": "Report"
     }
   }

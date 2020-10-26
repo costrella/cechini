@@ -97,13 +97,6 @@ public class ReportResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
-    @GetMapping("/reports/number/{number}")
-    public ResponseEntity<List<ReportDTO>> getAllReportsByNumber(Pageable pageable, @PathVariable String number) {
-        Page<ReportDTO> page = reportService.findAllByNumber(pageable, number);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
-    }
-
     @GetMapping("/reports/worker/{id}")
     public ResponseEntity<List<ReportDTO>> getAllReportsByWorkerId(Pageable pageable, @PathVariable Long id) {
         Page<ReportDTO> page = reportService.findAllByWorkerId(pageable, id);

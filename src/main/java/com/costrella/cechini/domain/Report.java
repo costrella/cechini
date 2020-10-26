@@ -24,14 +24,16 @@ public class Report implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "number")
-    private String number;
-
     @Column(name = "report_date")
     private Instant reportDate;
 
-    @Column(name = "jhi_desc")
+    @Size(max = 2000)
+    @Column(name = "jhi_desc", length = 2000)
     private String desc;
+
+    @Size(max = 2000)
+    @Column(name = "manager_note", length = 2000)
+    private String managerNote;
 
     @OneToOne
     @JoinColumn(unique = true)
@@ -62,19 +64,6 @@ public class Report implements Serializable {
         this.id = id;
     }
 
-    public String getNumber() {
-        return number;
-    }
-
-    public Report number(String number) {
-        this.number = number;
-        return this;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
     public Instant getReportDate() {
         return reportDate;
     }
@@ -99,6 +88,19 @@ public class Report implements Serializable {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public String getManagerNote() {
+        return managerNote;
+    }
+
+    public Report managerNote(String managerNote) {
+        this.managerNote = managerNote;
+        return this;
+    }
+
+    public void setManagerNote(String managerNote) {
+        this.managerNote = managerNote;
     }
 
     public Order getOrder() {
@@ -212,9 +214,9 @@ public class Report implements Serializable {
     public String toString() {
         return "Report{" +
             "id=" + getId() +
-            ", number='" + getNumber() + "'" +
             ", reportDate='" + getReportDate() + "'" +
             ", desc='" + getDesc() + "'" +
+            ", managerNote='" + getManagerNote() + "'" +
             "}";
     }
 }
