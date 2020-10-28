@@ -8,7 +8,7 @@ import java.io.Serializable;
  * A DTO for the {@link com.costrella.cechini.domain.Report} entity.
  */
 public class ReportDTO implements Serializable {
-    
+
     private Long id;
 
     private Instant reportDate;
@@ -19,6 +19,7 @@ public class ReportDTO implements Serializable {
     @Size(max = 2000)
     private String managerNote;
 
+    private int photosCount;
 
     private Long orderId;
 
@@ -29,7 +30,7 @@ public class ReportDTO implements Serializable {
     private Long storeId;
 
     private String storeName;
-    
+
     public Long getId() {
         return id;
     }
@@ -100,6 +101,14 @@ public class ReportDTO implements Serializable {
 
     public void setStoreName(String storeName) {
         this.storeName = storeName;
+    }
+
+    public int getPhotosCount() {
+        return photosCount;
+    }
+
+    public void setPhotosCount(int photosCount) {
+        this.photosCount = photosCount;
     }
 
     @Override

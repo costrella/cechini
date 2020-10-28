@@ -17,6 +17,7 @@ public interface ReportMapper extends EntityMapper<ReportDTO, Report> {
     @Mapping(source = "worker.surname", target = "workerSurname")
     @Mapping(source = "store.id", target = "storeId")
     @Mapping(source = "store.name", target = "storeName")
+    @Mapping(source = "photos.size", target = "photosCount")
     ReportDTO toDto(Report report);
 
     @Mapping(source = "orderId", target = "order")
@@ -35,5 +36,17 @@ public interface ReportMapper extends EntityMapper<ReportDTO, Report> {
         Report report = new Report();
         report.setId(id);
         return report;
+    }
+
+    //    @Mapping(source = "order.id", target = "orderId")
+//    @Mapping(source = "worker.id", target = "workerId")
+//    @Mapping(source = "worker.surname", target = "workerSurname")
+//    @Mapping(source = "store.id", target = "storeId")
+//    @Mapping(source = "store.name", target = "storeName")
+    default ReportDTO toDtoCustom(Report report) {
+        if (report == null) return null;
+        ReportDTO reportDTO = new ReportDTO();
+        reportDTO.setPhotosCount(report.getPhotos().size());
+        return reportDTO;
     }
 }

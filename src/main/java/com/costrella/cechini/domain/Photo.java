@@ -6,6 +6,8 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 
+import static javax.persistence.FetchType.LAZY;
+
 /**
  * A Photo.
  */
@@ -26,7 +28,7 @@ public class Photo implements Serializable {
     @Column(name = "value_content_type")
     private String valueContentType;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = LAZY)
     @JoinColumn(unique = true)
     private PhotoFile file;
 

@@ -58,8 +58,13 @@ public class ReportService {
     @Transactional(readOnly = true)
     public Page<ReportDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Reports");
+//        reportRepository.findAll(pageable)
+//            .map(v -> reportMapper.toDtoCustom(v));
+
         return reportRepository.findAll(pageable)
             .map(reportMapper::toDto);
+
+
     }
 
     @Transactional(readOnly = true)
