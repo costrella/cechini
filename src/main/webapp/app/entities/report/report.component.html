@@ -110,7 +110,9 @@
                             <a style="color: #00a6ff" (click)="clickItem(['/store/', report.storeId , '/view'])">{{ report.storeName }}</a>
                         </div>
                     </td>
-                    <td>test</td>
+                    <td>
+                        <!-- {{report.photos.size}},  -->
+                        {{report.photosCount}}</td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"
@@ -120,12 +122,12 @@
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                             </button>
 
-                            <!-- <button type="submit"
+                            <button type="submit"
                                     (click)="clickItem(['/report/', report.id, '/edit'])"
                                     class="btn btn-primary btn-sm">
                                 <fa-icon icon="pencil-alt"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                            </button> -->
+                            </button>
 
                             <button type="submit" (click)="delete(report)" class="btn btn-danger btn-sm">
                                 <fa-icon icon="times"></fa-icon>

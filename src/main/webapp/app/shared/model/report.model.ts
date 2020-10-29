@@ -14,6 +14,7 @@ export interface IReport {
   workerId?: number;
   storeName?: string;
   storeId?: number;
+  photosCount?: number;
 }
 
 export class Report implements IReport {
@@ -28,6 +29,7 @@ export class Report implements IReport {
     public workerSurname?: string,
     public workerId?: number,
     public storeName?: string,
-    public storeId?: number
+    public storeId?: number,
+    public photosCount?: number
   ) {}
 }
