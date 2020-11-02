@@ -37,7 +37,7 @@ public class Order implements Serializable {
     @Column(name = "comment", length = 2000)
     private String comment;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "order")
     private Set<OrderItem> orderItems = new HashSet<>();
 
     @OneToOne(mappedBy = "order")

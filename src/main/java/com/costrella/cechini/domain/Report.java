@@ -3,8 +3,8 @@ package com.costrella.cechini.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
@@ -62,6 +62,11 @@ public class Report implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Report id(Long id) {
+        this.id = id;
+        return this;
     }
 
     public Instant getReportDate() {

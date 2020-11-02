@@ -1,6 +1,7 @@
 package com.costrella.cechini.service;
 
 import com.costrella.cechini.domain.Order;
+import com.costrella.cechini.domain.Product;
 import com.costrella.cechini.domain.Report;
 import com.costrella.cechini.domain.Worker;
 import com.costrella.cechini.repository.OrderRepository;
@@ -76,8 +77,9 @@ public class OrderService {
     }
 
     /**
-     *  Get all the orders where Report is {@code null}.
-     *  @return the list of entities.
+     * Get all the orders where Report is {@code null}.
+     *
+     * @return the list of entities.
      */
     @Transactional(readOnly = true)
     public List<OrderDTO> findAllWhereReportIsNull() {

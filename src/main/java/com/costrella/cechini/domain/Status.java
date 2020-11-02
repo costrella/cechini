@@ -38,6 +38,11 @@ public class Status implements Serializable {
         this.id = id;
     }
 
+    public Status id(Long id){
+        this.id = id;
+        return this;
+    }
+
     public String getName() {
         return name;
     }

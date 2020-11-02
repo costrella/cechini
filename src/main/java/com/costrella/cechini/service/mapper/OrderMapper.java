@@ -1,7 +1,7 @@
 package com.costrella.cechini.service.mapper;
 
 
-import com.costrella.cechini.domain.Order;
+import com.costrella.cechini.domain.*;
 import com.costrella.cechini.service.dto.OrderDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -24,12 +24,30 @@ public interface OrderMapper extends EntityMapper<OrderDTO, Order> {
     @Mapping(source = "report.store.name", target = "storeName")
     OrderDTO toDto(Order order);
 
-    @Mapping(target = "orderItems", ignore = true)
-    @Mapping(target = "removeOrderItem", ignore = true)
-    @Mapping(target = "report", ignore = true)
-    @Mapping(source = "warehouseId", target = "warehouse")
-    @Mapping(source = "statusId", target = "status")
-    Order toEntity(OrderDTO orderDTO);
+//    @Mapping(target = "orderItems", ignore = false)
+//    @Mapping(target = "removeOrderItem", ignore = true)
+//    @Mapping(target = "report", ignore = true)
+//    @Mapping(source = "warehouseId", target = "warehouse")
+//    @Mapping(source = "statusId", target = "status")
+//    Order toEntity(OrderDTO orderDTO);
+
+    default Order toEntity(OrderDTO orderDTO) {
+        Order order = new Order();
+        order.setId(orderDTO.getId());
+        order.setDeliveryDate(orderDTO.getDeliveryDate());
+        order.setOrderDate(orderDTO.getOrderDate());
+        order.setStatus(new Status().id(orderDTO.getStatusId()));
+//        order.setWarehouse(new Warehouse().id(orderDTO.getId()));
+//        order.setReport(new Report().id(orderDTO.getId()));
+        orderDTO.getOrderItems().stream().forEach(orderItemDTO -> {
+            OrderItem orderItem = new OrderItem().artCount(orderItemDTO.getArtCount()).packCount(orderItemDTO.getPackCount());
+            orderItem.setProduct(new Product().id(orderItemDTO.getProductId()));
+            order.addOrderItem(orderItem);
+        });
+//        throw new RuntimeException("test crash");
+        return order;
+
+    }
 
     default Order fromId(Long id) {
         if (id == null) {
@@ -63,7 +81,7 @@ public interface OrderMapper extends EntityMapper<OrderDTO, Order> {
                 orderDTO.setStoreId(order.getReport().getStore().getId());
                 orderDTO.setStoreName(order.getReport().getStore().getName());
             }
-            if(order.getReport().getWorker() != null){
+            if (order.getReport().getWorker() != null) {
                 orderDTO.setWorkerId(order.getReport().getWorker().getId());
                 orderDTO.setWorkerSurname(order.getReport().getWorker().getSurname());
             }

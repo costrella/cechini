@@ -38,6 +38,11 @@ public class Warehouse implements Serializable {
         this.id = id;
     }
 
+    public Warehouse id(Long id){
+        this.id = id;
+        return this;
+    }
+
     public String getName() {
         return name;
     }
