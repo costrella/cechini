@@ -2,10 +2,10 @@ package com.costrella.cechini.service;
 
 import com.costrella.cechini.domain.Store;
 import com.costrella.cechini.repository.StoreRepository;
-import com.costrella.cechini.service.dto.ReportDTO;
 import com.costrella.cechini.service.dto.StoreDTO;
-import com.costrella.cechini.service.dto.WorkerDTO;
+import com.costrella.cechini.service.dto.StoreDTOSimple;
 import com.costrella.cechini.service.mapper.StoreMapper;
+import com.costrella.cechini.service.mapper.StoreMapperSimple;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,10 +30,12 @@ public class StoreService {
     private final StoreRepository storeRepository;
 
     private final StoreMapper storeMapper;
+    private final StoreMapperSimple storeMapperSimple;
 
-    public StoreService(StoreRepository storeRepository, StoreMapper storeMapper) {
+    public StoreService(StoreRepository storeRepository, StoreMapper storeMapper, StoreMapperSimple storeMapperSimple) {
         this.storeRepository = storeRepository;
         this.storeMapper = storeMapper;
+        this.storeMapperSimple = storeMapperSimple;
     }
 
     /**
@@ -63,9 +65,9 @@ public class StoreService {
     }
 
     @Transactional(readOnly = true)
-    public List<StoreDTO> findAll() {
+    public List<StoreDTOSimple> findAll() {
         return storeRepository.findAll().stream()
-            .map(storeMapper::toDto).collect(Collectors.toList());
+            .map(storeMapperSimple::toDto).collect(Collectors.toList());
     }
 
 

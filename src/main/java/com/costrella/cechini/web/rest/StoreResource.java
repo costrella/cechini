@@ -2,6 +2,7 @@ package com.costrella.cechini.web.rest;
 
 import com.costrella.cechini.service.StoreService;
 import com.costrella.cechini.service.dto.ReportDTO;
+import com.costrella.cechini.service.dto.StoreDTOSimple;
 import com.costrella.cechini.service.dto.WorkerDTO;
 import com.costrella.cechini.web.rest.errors.BadRequestAlertException;
 import com.costrella.cechini.service.dto.StoreDTO;
@@ -108,7 +109,7 @@ public class StoreResource {
     }
 
     @GetMapping("/stores/all")
-    public ResponseEntity<List<StoreDTO>> getAllStores() {
+    public ResponseEntity<List<StoreDTOSimple>> getAllStores() {
         log.debug("REST request to get a page of Workers");
         return ResponseEntity.ok().body(storeService.findAll());
     }
