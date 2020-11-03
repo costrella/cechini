@@ -37,8 +37,8 @@ public interface OrderMapper extends EntityMapper<OrderDTO, Order> {
         order.setDeliveryDate(orderDTO.getDeliveryDate());
         order.setOrderDate(orderDTO.getOrderDate());
         order.setStatus(new Status().id(orderDTO.getStatusId()));
-//        order.setWarehouse(new Warehouse().id(orderDTO.getId()));
-//        order.setReport(new Report().id(orderDTO.getId()));
+        order.setWarehouse(new Warehouse().id(orderDTO.getWarehouseId()));
+        order.setReport(new Report().id(orderDTO.getReportId()));
         orderDTO.getOrderItems().stream().forEach(orderItemDTO -> {
             OrderItem orderItem = new OrderItem().artCount(orderItemDTO.getArtCount()).packCount(orderItemDTO.getPackCount());
             orderItem.setProduct(new Product().id(orderItemDTO.getProductId()));
