@@ -41,7 +41,7 @@
                     class="form-control">
                     <option value=""></option>
                     <option *ngFor="let s of stores" [ngValue]="s">
-                        {{s.name}}
+                        {{s.name}} {{s.address}}
                     </option>
                 </select>
             </div>
