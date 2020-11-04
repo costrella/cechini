@@ -1,0 +1,29 @@
+{
+  "cechiniApp": {
+    "report": {
+      "home": {
+        "title": "Report",
+        "createLabel": "Dodaj Report",
+        "createOrEditLabel": "Dodaj lub edytuj: Report",
+        "notFound": "No Reports found"
+      },
+      "created": "Utworzono nowy obiekt typu Report z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Report z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Report z identyfikatorem {{ param }}",
+      "delete": {
+        "question": "Czy na pewno chcesz usunąć Report {{ id }}?"
+      },
+      "detail": {
+        "title": "Report"
+      },
+      "reportDate": "Report Date",
+      "desc": "Desc",
+      "managerNote": "Manager Note",
+      "order": "Order",
+      "photos": "Photos",
+      "note": "Note",
+      "worker": "Worker",
+      "store": "Store"
+    }
+  }
+}

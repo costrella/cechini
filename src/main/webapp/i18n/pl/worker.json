@@ -1,0 +1,35 @@
+{
+  "cechiniApp": {
+    "worker": {
+      "home": {
+        "title": "Przedstawiciele",
+        "createLabel": "Dodaj Przedstawiciela",
+        "createOrEditLabel": "Dodaj lub edytuj: Przedstawiciel",
+        "notFound": "Nie znaleziono Przedstawicieli"
+      },
+      "created": "Utworzono nowy obiekt typu Przedstawiciel z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Przedstawiciel z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Przedstawiciel z identyfikatorem {{ param }}",
+      "delete": {
+        "question": "Czy na pewno chcesz usunąć Przedstawiciel {{ id }}?"
+      },
+      "detail": {
+        "title": "Przedstawiciel"
+      },
+      "name": "Imię",
+      "surname": "Nazwisko",
+      "hiredDate": "Data zatrudnienia",
+      "desc": "Opis",
+      "phone": "Telefon",
+      "login": "Login",
+      "password": "Hasło",
+      "target": "Target",
+      "active": "Aktywny",
+      "note": "Notyfikacja",
+      "store": "Sklep",
+      "report": "Raport",
+      "track": "Track",
+      "manager": "Manager"
+    }
+  }
+}

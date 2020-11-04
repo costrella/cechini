@@ -1,0 +1,23 @@
+{
+  "cechiniApp": {
+    "storeGroup": {
+      "home": {
+        "title": "Grupy Sklepów",
+        "createLabel": "Dodaj Grupę Sklepu",
+        "createOrEditLabel": "Dodaj lub edytuj: Grupa Sklepu",
+        "notFound": "Nie znaleziono Grup Sklepów"
+      },
+      "created": "Utworzono nowy obiekt typu Grupa Sklepu z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Grupa Sklepu z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Grupa Sklepu z identyfikatorem {{ param }}",
+      "delete": {
+        "question": "Czy na pewno chcesz usunąć Grupa Sklepu {{ id }}?"
+      },
+      "detail": {
+        "title": "Grupa Sklepu"
+      },
+      "name": "Nazwa",
+      "store": "Sklep"
+    }
+  }
+}

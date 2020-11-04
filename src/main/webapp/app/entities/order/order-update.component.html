@@ -1,0 +1,94 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-order-heading" jhiTranslate="cechiniApp.order.home.createOrEditLabel">Create or edit a Order</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cechiniApp.order.orderDate" for="field_orderDate">Order Date</label>
+                    <div class="d-flex">
+                        <input id="field_orderDate" type="datetime-local" class="form-control" name="orderDate" formControlName="orderDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                    <div *ngIf="editForm.get('orderDate')!.invalid && (editForm.get('orderDate')!.dirty || editForm.get('orderDate')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('orderDate')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('orderDate')?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cechiniApp.order.deliveryDate" for="field_deliveryDate">Delivery Date</label>
+                    <div class="d-flex">
+                        <input id="field_deliveryDate" type="datetime-local" class="form-control" name="deliveryDate" formControlName="deliveryDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                    <div *ngIf="editForm.get('deliveryDate')!.invalid && (editForm.get('deliveryDate')!.dirty || editForm.get('deliveryDate')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('deliveryDate')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('deliveryDate')?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cechiniApp.order.comment" for="field_comment">Comment</label>
+                    <input type="text" class="form-control" name="comment" id="field_comment"
+                           formControlName="comment"/>
+                    <div *ngIf="editForm.get('comment')!.invalid && (editForm.get('comment')!.dirty || editForm.get('comment')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('comment')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 2000 }">
+                        This field cannot be longer than 2000 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cechiniApp.order.warehouse" for="field_warehouse">Warehouse</label>
+                    <select class="form-control" id="field_warehouse" name="warehouse" formControlName="warehouseId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="warehouseOption.id" *ngFor="let warehouseOption of warehouses; trackBy: trackById">{{ warehouseOption.name }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cechiniApp.order.status" for="field_status">Status</label>
+                    <select class="form-control" id="field_status" name="status" formControlName="statusId">
+                        <option *ngIf="!editForm.get('statusId')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="statusOption.id" *ngFor="let statusOption of statuses; trackBy: trackById">{{ statusOption.name }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('statusId')!.invalid && (editForm.get('statusId')!.dirty || editForm.get('statusId')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('statusId')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="photoFile">
+            <h2><span jhiTranslate="cechiniApp.photoFile.detail.title">Photo File</span> {{ photoFile.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="cechiniApp.photoFile.value">Value</span></dt>
+                <dd>
+                    <div *ngIf="photoFile.value">
+                        <a (click)="openFile(photoFile.valueContentType, photoFile.value)">
+                            <img [src]="'data:' + photoFile.valueContentType + ';base64,' + photoFile.value" style="max-width: 100%;" alt="photoFile image"/>
+                        </a>
+                        {{ photoFile.valueContentType }}, {{ byteSize(photoFile.value) }}
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/photo-file', photoFile.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

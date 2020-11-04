@@ -1,0 +1,74 @@
+{
+  "name": "Store",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "nip",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "desc",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "2000"
+    },
+    {
+      "fieldName": "visited",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "note",
+      "otherEntityRelationshipName": "store",
+      "relationshipName": "note"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "report",
+      "otherEntityRelationshipName": "store",
+      "relationshipName": "report"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "worker",
+      "otherEntityRelationshipName": "store",
+      "relationshipName": "worker",
+      "otherEntityField": "surname"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "location",
+      "otherEntityRelationshipName": "store",
+      "relationshipName": "location",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "storeGroup",
+      "otherEntityRelationshipName": "store",
+      "relationshipName": "storegroup",
+      "otherEntityField": "name"
+    }
+  ],
+  "changelogDate": "20200921170236",
+  "entityTableName": "store",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

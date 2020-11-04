@@ -1,0 +1,29 @@
+{
+  "cechiniApp": {
+    "product": {
+      "home": {
+        "title": "Product",
+        "createLabel": "Dodaj Product",
+        "createOrEditLabel": "Dodaj lub edytuj: Product",
+        "notFound": "No Products found"
+      },
+      "created": "Utworzono nowy obiekt typu Product z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Product z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Product z identyfikatorem {{ param }}",
+      "delete": {
+        "question": "Czy na pewno chcesz usunąć Product {{ id }}?"
+      },
+      "detail": {
+        "title": "Product"
+      },
+      "name": "Name",
+      "capacity": "Capacity",
+      "eanArt": "Ean Art",
+      "eanPack": "Ean Pack",
+      "packCountPalette": "Pack Count Palette",
+      "artCountPalette": "Art Count Palette",
+      "layerCountPalette": "Layer Count Palette",
+      "orderItem": "Order Item"
+    }
+  }
+}

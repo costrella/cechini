@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity Note.
+    -->
+    <changeSet id="20200921171536-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="store_id"
+                                 baseTableName="note"
+                                 constraintName="fk_note_store_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="store"/>
+
+        <addForeignKeyConstraint baseColumnNames="worker_note_id"
+                                 baseTableName="note"
+                                 constraintName="fk_note_worker_note_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="worker"/>
+
+        <addForeignKeyConstraint baseColumnNames="manager_note_id"
+                                 baseTableName="note"
+                                 constraintName="fk_note_manager_note_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="manager"/>
+
+        <addForeignKeyConstraint baseColumnNames="report_id"
+                                 baseTableName="note"
+                                 constraintName="fk_note_report_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="report"/>
+
+    </changeSet>
+</databaseChangeLog>

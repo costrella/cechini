@@ -1,0 +1,71 @@
+<div class="row justify-content-center">
+    <div class="col-12">
+        <div *ngIf="order">
+            <h2><span jhiTranslate="cechiniApp.order.detail.title">Order</span></h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="cechiniApp.order.orderDate">Order Date</span></dt>
+                <dd>
+                    <span>{{ order.orderDate | date:'dd/MM/yyyy HH:mm' }}</span>
+                </dd>
+                <dt><span jhiTranslate="cechiniApp.order.deliveryDate">Delivery Date</span></dt>
+                <dd>
+                    <span>{{ order.deliveryDate | date:'dd/MM/yyyy' }}</span>
+                </dd>
+                <dt><span jhiTranslate="cechiniApp.worker.detail.title">Worker</span></dt>
+                <dd>
+                    <div *ngIf="order.workerId">
+                        <a [routerLink]="['/worker', order.workerId, 'view']">{{ order.workerSurname }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="cechiniApp.store.detail.title">Store</span></dt>
+                <dd>
+                    <div *ngIf="order.storeId">
+                        <a [routerLink]="['/store', order.storeId, 'view']">{{ order.storeName }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="cechiniApp.order.report">Report</span></dt>
+                <dd>
+                    <div *ngIf="order.reportId">
+                        <a [routerLink]="['/report', order.reportId, 'view']">{{ order.reportId }}</a>
+                    </div>
+                </dd>
+                <!-- <dt><span jhiTranslate="cechiniApp.order.comment">Comment</span></dt>
+                <dd>
+                    <span>{{ order.comment }}</span>
+                </dd> -->
+                <dt><span jhiTranslate="cechiniApp.order.warehouse">Warehouse</span></dt>
+                <dd>
+                    <div *ngIf="order.warehouseId">
+                        <a [routerLink]="['/warehouse', order.warehouseId, 'view']">{{ order.warehouseName }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="cechiniApp.order.status">Status</span></dt>
+                <dd>
+                    <div *ngIf="order.statusId">
+                        <a [routerLink]="['/status', order.statusId, 'view']">
+                            {{ order.statusName }}
+                        </a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit" (click)="previousState()" class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <!-- <button type="button" [routerLink]="['/order', order.id, 'edit']" class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button> -->
+
+            <div *ngIf="order.id">
+                <jhi-order-item [setOrderId]="order.id"></jhi-order-item>
+            </div>
+
+        </div>
+    </div>
+</div>

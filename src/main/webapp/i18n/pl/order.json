@@ -1,0 +1,30 @@
+{
+  "cechiniApp": {
+    "order": {
+      "home": {
+        "title": "Zamówienia",
+        "createLabel": "Dodaj Zamówienie",
+        "createOrEditLabel": "Dodaj lub edytuj: Zamówienia",
+        "notFound": "Nie znaleziono Zamówień",
+        "filter": "Filtruj"
+      },
+      "created": "Utworzono nowy obiekt typu Zamówienie z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Zamówienie z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Zamówienie z identyfikatorem {{ param }}",
+      "delete": {
+        "question": "Czy na pewno chcesz usunąć Zamówienie {{ id }}?"
+      },
+      "detail": {
+        "title": "Szczegóły Zamówienia"
+      },
+      "orderDate": "Data zamówienia",
+      "deliveryDate": "Data dostarczenia",
+      "comment": "Komentarz",
+      "orderItem": "Pozycje zamówienia",
+      "report": "Raport",
+      "warehouse": "Hurtownia",
+      "status": "Status",
+      "store": "Sklep"
+    }
+  }
+}

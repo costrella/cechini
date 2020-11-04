@@ -1,0 +1,26 @@
+{
+  "cechiniApp": {
+    "manager": {
+      "home": {
+        "title": "Manager",
+        "createLabel": "Dodaj Manager",
+        "createOrEditLabel": "Dodaj lub edytuj: Manager",
+        "notFound": "No Managers found"
+      },
+      "created": "Utworzono nowy obiekt typu Manager z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Manager z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Manager z identyfikatorem {{ param }}",
+      "delete": {
+        "question": "Czy na pewno chcesz usunąć Manager {{ id }}?"
+      },
+      "detail": {
+        "title": "Manager"
+      },
+      "name": "Name",
+      "surname": "Surname",
+      "hiredDate": "Hired Date",
+      "note": "Note",
+      "worker": "Worker"
+    }
+  }
+}

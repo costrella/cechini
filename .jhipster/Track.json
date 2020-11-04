@@ -1,0 +1,36 @@
+{
+  "name": "Track",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "worker",
+      "otherEntityRelationshipName": "track",
+      "relationshipName": "worker",
+      "otherEntityField": "surname"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "location",
+      "otherEntityRelationshipName": "track",
+      "relationshipName": "location",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200921171036",
+  "entityTableName": "track",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

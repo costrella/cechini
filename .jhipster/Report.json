@@ -1,0 +1,70 @@
+{
+  "name": "Report",
+  "fields": [
+    {
+      "fieldName": "reportDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "desc",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "2000"
+    },
+    {
+      "fieldName": "managerNote",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "2000"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "order",
+      "otherEntityRelationshipName": "report",
+      "relationshipName": "order",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "photo",
+      "otherEntityRelationshipName": "report",
+      "relationshipName": "photos"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "note",
+      "otherEntityRelationshipName": "report",
+      "relationshipName": "note"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "worker",
+      "otherEntityRelationshipName": "report",
+      "relationshipValidateRules": "required",
+      "relationshipName": "worker",
+      "otherEntityField": "surname"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "store",
+      "otherEntityRelationshipName": "report",
+      "relationshipValidateRules": "required",
+      "relationshipName": "store",
+      "otherEntityField": "name"
+    }
+  ],
+  "changelogDate": "20200921170936",
+  "entityTableName": "report",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

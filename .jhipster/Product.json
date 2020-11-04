@@ -1,0 +1,53 @@
+{
+  "name": "Product",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "capacity",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "eanArt",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "eanPack",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "packCountPalette",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "artCountPalette",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "layerCountPalette",
+      "fieldType": "Integer"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "orderItem",
+      "otherEntityRelationshipName": "product",
+      "relationshipName": "orderItem"
+    }
+  ],
+  "changelogDate": "20200921170736",
+  "entityTableName": "product",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}
