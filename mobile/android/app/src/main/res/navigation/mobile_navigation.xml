@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
+        android:id="@+id/nav_mystores"
         android:name="com.kostrzewa.cechini.ui.mystores.MyStoresFragment"
         android:label="@string/menu_mystores"
-        tools:layout="@layout/fragment_mystores" />
+        tools:layout="@layout/fragment_mystores_list_item" />
 
     <fragment
         android:id="@+id/nav_slideshow"

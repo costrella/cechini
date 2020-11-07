@@ -1,62 +1,112 @@
 package com.kostrzewa.cechini.ui.mystores;
 
+import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.kostrzewa.cechini.R;
+import com.kostrzewa.cechini.data.StoreDataManager;
+import com.kostrzewa.cechini.data.StoreDataManagerImpl;
 import com.kostrzewa.cechini.model.StoreDTO;
-import com.kostrzewa.cechini.rest.RetrofitClient;
 
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
+/**
+ * A fragment representing a list of Items.
+ * <p/>
+ * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
+ * interface.
+ */
 public class MyStoresFragment extends Fragment {
-    private static final String TAG = "MyStoresFragment";
-    private MyStoresViewModel myStoresViewModel;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        myStoresViewModel =
-                ViewModelProviders.of(this).get(MyStoresViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_mystores, container, false);
-        final TextView textView = root.findViewById(R.id.text_gallery);
-        myStoresViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
-        return root;
+    // TODO: Customize parameter argument names
+    private static final String ARG_COLUMN_COUNT = "column-count";
+    // TODO: Customize parameters
+    private int mColumnCount = 1;
+    private OnListFragmentInteractionListener mListener;
+    private StoreDataManager storeDataManager;
+
+    /**
+     * Mandatory empty constructor for the fragment manager to instantiate the
+     * fragment (e.g. upon screen orientation changes).
+     */
+    public MyStoresFragment() {
+    }
+
+    // TODO: Customize parameter initialization
+    @SuppressWarnings("unused")
+    public static MyStoresFragment newInstance(int columnCount) {
+        MyStoresFragment fragment = new MyStoresFragment();
+        Bundle args = new Bundle();
+        args.putInt(ARG_COLUMN_COUNT, columnCount);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        RetrofitClient.getInstance().getService().getAllStores().enqueue(new Callback<List<StoreDTO>>() {
-            @Override
-            public void onResponse(Call<List<StoreDTO>> call, Response<List<StoreDTO>> response) {
-                Log.d(TAG, "onResponse: " + response.code());
-            }
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+        }
+        storeDataManager = new StoreDataManagerImpl(getContext());
+    }
 
-            @Override
-            public void onFailure(Call<List<StoreDTO>> call, Throwable t) {
-                Log.d(TAG, "onFailure: ");
-            }
-        });
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_mystores_list, container, false);
 
-//        getContext().getSharedPreferences().get
+        // Set the adapter
+        if (view instanceof RecyclerView) {
+            Context context = view.getContext();
+            RecyclerView recyclerView = (RecyclerView) view;
+            if (mColumnCount <= 1) {
+                recyclerView.setLayoutManager(new LinearLayoutManager(context));
+            } else {
+                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+            }
+            recyclerView.setAdapter(
+                    new MyStoresRecyclerViewAdapter(storeDataManager.getMyStores(), mListener));
+        }
+        return view;
+    }
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnListFragmentInteractionListener) {
+            mListener = (OnListFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnListFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p/>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnListFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onListFragmentInteraction(StoreDTO item);
     }
 }
