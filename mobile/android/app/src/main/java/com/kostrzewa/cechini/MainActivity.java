@@ -8,6 +8,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -20,6 +21,7 @@ import com.kostrzewa.cechini.data.StoreDataManager;
 import com.kostrzewa.cechini.data.StoreDataManagerImpl;
 import com.kostrzewa.cechini.model.StoreDTO;
 import com.kostrzewa.cechini.ui.mystores.MyStoresFragment;
+import com.kostrzewa.cechini.ui.mystores.detail.MyStoreDetailFragment;
 
 public class MainActivity extends AppCompatActivity implements MyStoresFragment.OnListFragmentInteractionListener {
     private static final String TAG = "MainActivity";
@@ -74,5 +76,31 @@ public class MainActivity extends AppCompatActivity implements MyStoresFragment.
     @Override
     public void onListFragmentInteraction(StoreDTO item) {
         Log.d(TAG, "onListFragmentInteraction: ");
+
+        Bundle args = new Bundle();
+        args.putSerializable("storeDTO", item);
+        args.putString("test", "Test");
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        navController.navigate(R.id.nav_mystores_detail, args);
+        // The user selected the headline of an article from the HeadlinesFragment
+        // Do something here to display that article
+//        MyStoreDetailFragment myStoreDetailFragment = (MyStoreDetailFragment)
+//                getSupportFragmentManager().findFragmentById(R.id.nav_mystores);
+//        Log.d(TAG, "onListFragmentInteraction: " + myStoreDetailFragment);
+//
+////        Bundle args = new Bundle();
+////        args.putInt(ArticleFragment.ARG_POSITION, position);
+////        MyStoreDetailFragment.newInstance()
+//
+//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//
+//        // Replace whatever is in the fragment_container view with this fragment,
+//        // and add the transaction to the back stack so the user can navigate back
+//        transaction.add(MyStoreDetailFragment.newInstance(), null);
+////        transaction.addToBackStack(null);
+//
+//        // Commit the transaction
+//        transaction.commit();
+
     }
 }

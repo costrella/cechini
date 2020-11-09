@@ -3,8 +3,11 @@ package com.kostrzewa.cechini.ui.mystores;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kostrzewa.cechini.R;
@@ -18,7 +21,7 @@ import java.util.List;
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class MyStoresRecyclerViewAdapter extends RecyclerView.Adapter<MyStoresRecyclerViewAdapter.ViewHolder> {
+public class MyStoresRecyclerViewAdapter extends RecyclerView.Adapter<MyStoresRecyclerViewAdapter.ViewHolder> implements Filterable {
 
     private final List<StoreDTO> mValues;
     private final OnListFragmentInteractionListener mListener;
@@ -56,6 +59,21 @@ public class MyStoresRecyclerViewAdapter extends RecyclerView.Adapter<MyStoresRe
     @Override
     public int getItemCount() {
         return mValues.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                return null;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+
+            }
+        };
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
