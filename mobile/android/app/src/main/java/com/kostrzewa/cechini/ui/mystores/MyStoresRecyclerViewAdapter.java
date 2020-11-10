@@ -1,5 +1,6 @@
 package com.kostrzewa.cechini.ui.mystores;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,13 +8,15 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kostrzewa.cechini.R;
+import com.kostrzewa.cechini.data.StoreDataManager;
+import com.kostrzewa.cechini.data.StoreDataManagerImpl;
 import com.kostrzewa.cechini.model.StoreDTO;
 import com.kostrzewa.cechini.ui.mystores.MyStoresFragment.OnListFragmentInteractionListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,11 +25,18 @@ import java.util.List;
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyStoresRecyclerViewAdapter extends RecyclerView.Adapter<MyStoresRecyclerViewAdapter.ViewHolder> implements Filterable {
-
+    private static final String TAG = "MyStoresRecyclerViewAda";
     private final List<StoreDTO> mValues;
+    private List<StoreDTO> mValuesFiltered;
     private final OnListFragmentInteractionListener mListener;
+    private StoreDataManager storeDataManager;
 
-    public MyStoresRecyclerViewAdapter(List<StoreDTO> items, OnListFragmentInteractionListener listener) {
+    public List<StoreDTO> getData() {
+        return mValues;
+    }
+
+    public MyStoresRecyclerViewAdapter(StoreDataManager storeDataManager, List<StoreDTO> items, OnListFragmentInteractionListener listener) {
+        this.storeDataManager = storeDataManager;
         mValues = items;
         mListener = listener;
     }
@@ -41,7 +51,7 @@ public class MyStoresRecyclerViewAdapter extends RecyclerView.Adapter<MyStoresRe
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(""+mValues.get(position).getId());
+        holder.mIdView.setText("" + mValues.get(position).getId());
         holder.mContentView.setText(mValues.get(position).getName() + " " + mValues.get(position).getAddress());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -66,14 +76,42 @@ public class MyStoresRecyclerViewAdapter extends RecyclerView.Adapter<MyStoresRe
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                return null;
+                Log.d(TAG, "performFiltering: ");
+                String charString = constraint.toString();
+                if (charString.isEmpty()) {
+                    mValuesFiltered = storeDataManager.getMyStores();
+                } else {
+                    List<StoreDTO> filteredList = new ArrayList<>();
+                    for (StoreDTO row : storeDataManager.getMyStores()) {
+
+                        // name match condition. this might differ depending on your requirement
+                        // here we are looking for name or phone number match
+
+//                        if (row.getName().toLowerCase().contains(charString.toLowerCase()) || row.getAddress().toLowerCase().contains(charString.toLowerCase())) {
+                        if (row.getName() != null && row.getName().toLowerCase().contains(charString.toLowerCase())) {
+                            filteredList.add(row);
+                        }
+                    }
+
+                    mValuesFiltered = filteredList;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = mValuesFiltered;
+                return filterResults;
             }
 
             @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
+            protected void publishResults(CharSequence constraint, FilterResults filterResults) {
+                Log.d(TAG, "publishResults: ");
+                mValuesFiltered = (ArrayList<StoreDTO>) filterResults.values;
+                getData().clear();
+                getData().addAll(mValuesFiltered);
+                notifyDataSetChanged();
 
             }
         };
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
