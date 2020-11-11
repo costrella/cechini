@@ -20,6 +20,7 @@
     <fragment
         android:id="@+id/nav_mystores_detail"
         android:name="com.kostrzewa.cechini.ui.mystores.detail.MyStoreDetailFragment"
+        android:label="Sklep"
         tools:layout="@layout/fragment_mystores_detail" />
 
     <fragment
@@ -45,4 +46,16 @@
         android:name="com.kostrzewa.cechini.ui.send.SendFragment"
         android:label="@string/menu_send"
         tools:layout="@layout/fragment_send" />
+
+    <fragment
+        android:id="@+id/nav_report_create"
+        android:name="com.kostrzewa.cechini.ui.report.CreateReportFragment"
+        android:label="Kreator Raportu"
+        tools:layout="@layout/fragment_report_create" />
+
+    <fragment
+        android:id="@+id/nav_order_create"
+        android:name="com.kostrzewa.cechini.ui.order.CreateOrderFragment"
+        android:label="Kreator Zamówienia"
+        tools:layout="@layout/fragment_order_create" />
 </navigation>

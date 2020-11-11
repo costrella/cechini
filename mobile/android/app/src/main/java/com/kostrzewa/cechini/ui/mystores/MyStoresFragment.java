@@ -39,7 +39,7 @@ public class MyStoresFragment extends Fragment {
     private MyStoresRecyclerViewAdapter adapter;
     private SearchView searchView;
     private List<StoreDTO> storeDTOList;
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -74,14 +74,6 @@ public class MyStoresFragment extends Fragment {
         setHasOptionsMenu(true);
         storeDTOList = storeDataManager.getMyStores();
 
-//        CustomListener customListener = new CustomListener() {
-//            @Override
-//            public void refresh(List<StoreDTO> mValuesFiltered) {
-//                adapter = new MyStoresRecyclerViewAdapter(mValuesFiltered, mListener, this);
-//                recyclerView.setAdapter(adapter);
-//            }
-//        };
-
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
@@ -100,7 +92,6 @@ public class MyStoresFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.search_menu, menu);
-//        super.onCreateOptionsMenu(menu, inflater);
 
         SearchManager searchManager = (SearchManager) getContext().getSystemService(Context.SEARCH_SERVICE);
         searchView = (SearchView) menu.findItem(R.id.action_search)
@@ -156,7 +147,4 @@ public class MyStoresFragment extends Fragment {
         void onListFragmentInteraction(StoreDTO item);
     }
 
-    public interface CustomListener {
-        void refresh(List<StoreDTO> mValuesFiltered);
-    }
 }

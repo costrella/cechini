@@ -8,27 +8,49 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.kostrzewa.cechini.R;
 import com.kostrzewa.cechini.model.StoreDTO;
+import com.kostrzewa.cechini.ui.mystores.MyStoresFragment;
+import com.kostrzewa.cechini.util.Constants;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+import static com.kostrzewa.cechini.util.Constants.STORE_DTO;
 
 public class MyStoreDetailFragment extends Fragment {
     private static final String TAG = "MyStoreDetailFragment";
-    private MyStoreDetailViewModel mViewModel;
+    private StoreDTO storeDTO;
+    private NavController navController;
 
-    @BindView(R.id.mystores_detail_text1)
-    TextView textView;
+    @OnClick(R.id.btn_addReport)
+    void addReport(){
+        Bundle args = new Bundle();
+        args.putSerializable(STORE_DTO, storeDTO);
+        navController.navigate(R.id.nav_report_create, args);
+    }
+
+    @OnClick(R.id.btn_addOrder)
+    void addOrder(){
+        Bundle args = new Bundle();
+        args.putSerializable(STORE_DTO, storeDTO);
+        navController.navigate(R.id.nav_order_create, args);
+    }
+
 
     public static MyStoreDetailFragment newInstance() {
+        Log.d(TAG, "newInstance: ");
         return new MyStoreDetailFragment();
     }
 
@@ -38,24 +60,9 @@ public class MyStoreDetailFragment extends Fragment {
         Log.d(TAG, "onCreateView: " + savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_mystores_detail, container, false);
         ButterKnife.bind(this, view);
+        storeDTO = (StoreDTO) getArguments().getSerializable(STORE_DTO);
+        navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
         return view;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        Log.d(TAG, "onActivityCreated: " + savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(MyStoreDetailViewModel.class);
-        StoreDTO storeDTO = (StoreDTO) getArguments().getSerializable("storeDTO");
-        mViewModel.getmText().setValue("" + storeDTO.getId());
-        mViewModel.getmText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
-        // TODO: Use the ViewModel
-
     }
 
 }
