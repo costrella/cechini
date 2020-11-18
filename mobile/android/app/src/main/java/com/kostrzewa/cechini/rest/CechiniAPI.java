@@ -1,5 +1,6 @@
 package com.kostrzewa.cechini.rest;
 
+import com.kostrzewa.cechini.model.ProductDTO;
 import com.kostrzewa.cechini.model.StoreDTO;
 
 import java.util.List;
@@ -17,4 +18,7 @@ public interface CechiniAPI {
 
     @GET("stores/all")
     Call<List<StoreDTO>> getAllStores();
+
+    @GET("products/all")
+    Call<List<ProductDTO>> getAllProducts();
 }

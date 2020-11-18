@@ -17,6 +17,8 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
+import com.kostrzewa.cechini.data.ProductDataManager;
+import com.kostrzewa.cechini.data.ProductDataManagerImpl;
 import com.kostrzewa.cechini.data.StoreDataManager;
 import com.kostrzewa.cechini.data.StoreDataManagerImpl;
 import com.kostrzewa.cechini.model.StoreDTO;
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements MyStoresFragment.
     private static final String TAG = "MainActivity";
     private AppBarConfiguration mAppBarConfiguration;
     private StoreDataManager storeDataManager;
+    private ProductDataManager productDataManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +60,9 @@ public class MainActivity extends AppCompatActivity implements MyStoresFragment.
         NavigationUI.setupWithNavController(navigationView, navController);
 
         storeDataManager = new StoreDataManagerImpl(getApplicationContext());
+        productDataManager = new ProductDataManagerImpl(getApplicationContext());
         storeDataManager.downloadMyStores();
+        productDataManager.downloadProducts();
     }
 
     @Override
