@@ -98,6 +98,11 @@ public class ProductResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+    @GetMapping("/products/all")
+    public ResponseEntity<List<ProductDTO>> getAllProducts() {
+        return ResponseEntity.ok().body(productService.findAll());
+    }
+
     /**
      * {@code GET  /products/:id} : get the "id" product.
      *

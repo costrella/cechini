@@ -12,7 +12,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing {@link Product}.
@@ -56,6 +58,12 @@ public class ProductService {
         log.debug("Request to get all Products");
         return productRepository.findAll(pageable)
             .map(productMapper::toDto);
+    }
+
+    @Transactional(readOnly = true)
+    public List<ProductDTO> findAll() {
+        return productRepository.findAll().stream()
+            .map(productMapper::toDto).collect(Collectors.toList());
     }
 
 
