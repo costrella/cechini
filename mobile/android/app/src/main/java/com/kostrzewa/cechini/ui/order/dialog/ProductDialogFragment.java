@@ -79,6 +79,7 @@ public class ProductDialogFragment extends DialogFragment implements
         EditText packCountTV = form.findViewById(R.id.order_packCount);
         OrderItemDTO orderItemDTO = new OrderItemDTO();
         orderItemDTO.setId(selectedProduct.getId());
+        orderItemDTO.setProductId(selectedProduct.getId());
         orderItemDTO.setProductName(selectedProduct.getName());
         orderItemDTO.setProductCapacity(selectedProduct.getCapacity());
 //        orderItemDTO.setProductArtCountPalette(selectedProduct.getArtCountPalette());

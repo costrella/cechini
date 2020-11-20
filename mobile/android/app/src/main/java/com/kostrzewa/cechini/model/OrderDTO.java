@@ -1,24 +1,17 @@
-package com.costrella.cechini.service.dto;
+package com.kostrzewa.cechini.model;
 
-import java.time.Instant;
-import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.List;
 
-/**
- * A DTO for the {@link com.costrella.cechini.domain.Order} entity.
- */
 public class OrderDTO implements Serializable {
 
     private Long id;
 
-//    @NotNull
     private Instant orderDate;
 
-//    @NotNull
     private Instant deliveryDate;
 
-    @Size(max = 2000)
     private String comment;
 
     private List<OrderItemDTO> orderItems;
@@ -174,14 +167,14 @@ public class OrderDTO implements Serializable {
     @Override
     public String toString() {
         return "OrderDTO{" +
-            "id=" + getId() +
-            ", orderDate='" + getOrderDate() + "'" +
-            ", deliveryDate='" + getDeliveryDate() + "'" +
-            ", comment='" + getComment() + "'" +
-            ", warehouseId=" + getWarehouseId() +
-            ", warehouseName='" + getWarehouseName() + "'" +
-            ", statusId=" + getStatusId() +
-            ", statusName='" + getStatusName() + "'" +
-            "}";
+                "id=" + getId() +
+                ", orderDate='" + getOrderDate() + "'" +
+                ", deliveryDate='" + getDeliveryDate() + "'" +
+                ", comment='" + getComment() + "'" +
+                ", warehouseId=" + getWarehouseId() +
+                ", warehouseName='" + getWarehouseName() + "'" +
+                ", statusId=" + getStatusId() +
+                ", statusName='" + getStatusName() + "'" +
+                "}";
     }
 }

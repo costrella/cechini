@@ -29,9 +29,9 @@ public class RetrofitClient {
     }
 
     RetrofitClient() {
-        Gson gson = new GsonBuilder().registerTypeHierarchyAdapter(byte[].class,
-                new ByteArrayToBase64TypeAdapter())
+        Gson gson = new GsonBuilder().registerTypeHierarchyAdapter(byte[].class, new ByteArrayToBase64TypeAdapter())
 //                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
                 .create();
 
         Retrofit retrofit = new Retrofit.Builder()

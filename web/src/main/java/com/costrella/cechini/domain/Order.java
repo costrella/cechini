@@ -25,12 +25,12 @@ public class Order implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @NotNull
-    @Column(name = "order_date", nullable = false)
+//    @NotNull
+    @Column(name = "order_date", nullable = true)
     private Instant orderDate;
 
-    @NotNull
-    @Column(name = "delivery_date", nullable = false)
+//    @NotNull
+    @Column(name = "delivery_date", nullable = true)
     private Instant deliveryDate;
 
     @Size(max = 2000)
