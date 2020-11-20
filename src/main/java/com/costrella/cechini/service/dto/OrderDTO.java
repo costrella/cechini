@@ -12,10 +12,10 @@ public class OrderDTO implements Serializable {
 
     private Long id;
 
-    @NotNull
+//    @NotNull
     private Instant orderDate;
 
-    @NotNull
+//    @NotNull
     private Instant deliveryDate;
 
     @Size(max = 2000)
