@@ -16,6 +16,7 @@ package com.kostrzewa.cechini.ui.order.dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,6 +33,8 @@ import com.kostrzewa.cechini.R;
 import com.kostrzewa.cechini.data.ProductDataManager;
 import com.kostrzewa.cechini.model.OrderItemDTO;
 import com.kostrzewa.cechini.model.ProductDTO;
+import com.kostrzewa.cechini.model.StoreDTO;
+import com.kostrzewa.cechini.ui.mystores.MyStoresFragment;
 import com.kostrzewa.cechini.ui.order.OrderItemAdapter;
 
 import java.util.List;
@@ -44,11 +47,15 @@ public class ProductDialogFragment extends DialogFragment implements
     OrderItemAdapter adapter;
     Spinner spinner;
     ProductDTO selectedProduct;
+    final StoreDTO storeDTO;
     private ProductAdapter productAdapter;
     final ProductDataManager productDataManager;
+    private MyStoresFragment.OnListFragmentInteractionListener mListener;
 
 
-    public ProductDialogFragment(List<OrderItemDTO> orderItemsList, OrderItemAdapter adapter, ProductDataManager productDataManager) {
+
+    public ProductDialogFragment(StoreDTO storeDTO, List<OrderItemDTO> orderItemsList, OrderItemAdapter adapter, ProductDataManager productDataManager) {
+        this.storeDTO = storeDTO;
         this.adapter = adapter;
         this.orderItemsList = orderItemsList;
         this.productDataManager = productDataManager;
@@ -64,7 +71,7 @@ public class ProductDialogFragment extends DialogFragment implements
         spinner = form.findViewById(R.id.order_item_dialog_product_spinner);
         spinner.setOnItemSelectedListener(this);
         productsList = productDataManager.getAllProducts();
-        productAdapter = new ProductAdapter(productsList);
+        productAdapter = new ProductAdapter(storeDTO, productsList);
         spinner.setAdapter(productAdapter);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
@@ -95,6 +102,14 @@ public class ProductDialogFragment extends DialogFragment implements
 
         orderItemsList.add(orderItemDTO);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof MyStoresFragment.OnListFragmentInteractionListener) {
+            mListener = (MyStoresFragment.OnListFragmentInteractionListener) context;
+        }
     }
 
     @Override

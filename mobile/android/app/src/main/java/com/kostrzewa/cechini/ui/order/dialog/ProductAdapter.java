@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.kostrzewa.cechini.R;
 import com.kostrzewa.cechini.model.ProductDTO;
+import com.kostrzewa.cechini.model.StoreDTO;
 import com.kostrzewa.cechini.ui.mystores.MyStoresFragment.OnListFragmentInteractionListener;
 
 import java.util.List;
@@ -24,13 +25,15 @@ import java.util.List;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> implements SpinnerAdapter {
     private static final String TAG = "ProductAdapter";
     private final List<ProductDTO> mValues;
+    final StoreDTO storeDTO;
 
     public List<ProductDTO> getData() {
         return mValues;
     }
 
 
-    public ProductAdapter(List<ProductDTO> items) {
+    public ProductAdapter(StoreDTO storeDTO, List<ProductDTO> items) {
+        this.storeDTO = storeDTO;
         mValues = items;
     }
 

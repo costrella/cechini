@@ -8,10 +8,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,6 +26,7 @@ import com.kostrzewa.cechini.model.OrderDTO;
 import com.kostrzewa.cechini.model.OrderItemDTO;
 import com.kostrzewa.cechini.model.StoreDTO;
 import com.kostrzewa.cechini.rest.RetrofitClient;
+import com.kostrzewa.cechini.ui.mystores.MyStoresFragment;
 import com.kostrzewa.cechini.ui.order.dialog.ProductDialogFragment;
 
 import java.time.Instant;
@@ -43,11 +47,16 @@ public class CreateOrderFragment extends Fragment {
     private RecyclerView recyclerView;
     private List<OrderItemDTO> orderItemsList;
     private FloatingActionButton sendBtn;
+    NavController navController;
+    private MyStoresFragment.OnListFragmentInteractionListener mListener;
+
     int tmp = 0;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         orderItemsList = new ArrayList<>();
+        navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
+
         FloatingActionButton btn = getActivity().findViewById(R.id.fab);
         sendBtn = getActivity().findViewById(R.id.orderItem_add);
 
@@ -55,7 +64,7 @@ public class CreateOrderFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: ");
-                new ProductDialogFragment(orderItemsList, adapter, productDataManager).show(getFragmentManager(), "sample");
+                new ProductDialogFragment(storeDTO, orderItemsList, adapter, productDataManager).show(getFragmentManager(), "sample");
 
             }
         });
@@ -73,6 +82,9 @@ public class CreateOrderFragment extends Fragment {
                     @Override
                     public void onResponse(Call<OrderDTO> call, Response<OrderDTO> response) {
                         Log.d(TAG, "onResponse: " + response.code());
+                        Toast.makeText(getActivity(), "Wysłano poprawnie", Toast.LENGTH_SHORT).show();
+//                        navController.navigate(R.id.nav_mystores_detail);
+                        mListener.onListFragmentInteraction(storeDTO);
                     }
 
                     @Override
@@ -106,6 +118,14 @@ public class CreateOrderFragment extends Fragment {
 //        adapter.notifyDataSetChanged();
 //
 //    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof MyStoresFragment.OnListFragmentInteractionListener) {
+            mListener = (MyStoresFragment.OnListFragmentInteractionListener) context;
+        }
+    }
 
     @SuppressLint("RestrictedApi")
     @Override

@@ -8,9 +8,9 @@ public class OrderDTO implements Serializable {
 
     private Long id;
 
-    private Instant orderDate;
-
-    private Instant deliveryDate;
+//    private Instant orderDate;
+//
+//    private Instant deliveryDate;
 
     private String comment;
 
@@ -50,21 +50,21 @@ public class OrderDTO implements Serializable {
         this.id = id;
     }
 
-    public Instant getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(Instant orderDate) {
-        this.orderDate = orderDate;
-    }
-
-    public Instant getDeliveryDate() {
-        return deliveryDate;
-    }
-
-    public void setDeliveryDate(Instant deliveryDate) {
-        this.deliveryDate = deliveryDate;
-    }
+//    public Instant getOrderDate() {
+//        return orderDate;
+//    }
+//
+//    public void setOrderDate(Instant orderDate) {
+//        this.orderDate = orderDate;
+//    }
+//
+//    public Instant getDeliveryDate() {
+//        return deliveryDate;
+//    }
+//
+//    public void setDeliveryDate(Instant deliveryDate) {
+//        this.deliveryDate = deliveryDate;
+//    }
 
     public String getComment() {
         return comment;
@@ -168,8 +168,8 @@ public class OrderDTO implements Serializable {
     public String toString() {
         return "OrderDTO{" +
                 "id=" + getId() +
-                ", orderDate='" + getOrderDate() + "'" +
-                ", deliveryDate='" + getDeliveryDate() + "'" +
+//                ", orderDate='" + getOrderDate() + "'" +
+//                ", deliveryDate='" + getDeliveryDate() + "'" +
                 ", comment='" + getComment() + "'" +
                 ", warehouseId=" + getWarehouseId() +
                 ", warehouseName='" + getWarehouseName() + "'" +
