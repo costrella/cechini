@@ -35,7 +35,8 @@ public class Report implements Serializable {
     @Column(name = "manager_note", length = 2000)
     private String managerNote;
 
-    @OneToOne
+    //    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "order")
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(unique = true)
     private Order order;
 

@@ -32,21 +32,7 @@ public interface OrderMapper extends EntityMapper<OrderDTO, Order> {
 //    Order toEntity(OrderDTO orderDTO);
 
     default Order toEntity(OrderDTO orderDTO) {
-        Order order = new Order();
-        order.setId(orderDTO.getId());
-        order.setDeliveryDate(orderDTO.getDeliveryDate());
-        order.setOrderDate(orderDTO.getOrderDate());
-        order.setStatus(new Status().id(orderDTO.getStatusId()));
-        order.setWarehouse(new Warehouse().id(orderDTO.getWarehouseId()));
-        order.setReport(new Report().id(orderDTO.getReportId()));
-        orderDTO.getOrderItems().stream().forEach(orderItemDTO -> {
-            OrderItem orderItem = new OrderItem().artCount(orderItemDTO.getArtCount()).packCount(orderItemDTO.getPackCount());
-            orderItem.setProduct(new Product().id(orderItemDTO.getProductId()));
-            order.addOrderItem(orderItem);
-        });
-//        throw new RuntimeException("test crash");
-        return order;
-
+        return OrderMapperCustom.toEntity(orderDTO);
     }
 
     default Order fromId(Long id) {

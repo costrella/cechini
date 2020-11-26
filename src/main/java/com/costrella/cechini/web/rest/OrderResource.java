@@ -60,12 +60,6 @@ public class OrderResource {
         if (orderDTO.getId() != null) {
             throw new BadRequestAlertException("A new order cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        orderDTO.setStatusId(1L); //todo
-        orderDTO.setWorkerId(1L); //todo
-        orderDTO.setWarehouseId(1L); //todo
-        orderDTO.setReportId(1L); //todo
-        orderDTO.setOrderDate(Instant.now()); //todo
-        orderDTO.setDeliveryDate(Instant.now()); //todo
         OrderDTO result = orderService.save(orderDTO);
         return ResponseEntity.created(new URI("/api/orders/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))

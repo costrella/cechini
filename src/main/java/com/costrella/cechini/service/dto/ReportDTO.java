@@ -31,6 +31,16 @@ public class ReportDTO implements Serializable {
 
     private String storeName;
 
+    private OrderDTO orderDTO;
+
+    public OrderDTO getOrderDTO() {
+        return orderDTO;
+    }
+
+    public void setOrderDTO(OrderDTO orderDTO) {
+        this.orderDTO = orderDTO;
+    }
+
     public Long getId() {
         return id;
     }
