@@ -2,6 +2,7 @@ package com.kostrzewa.cechini.model;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDTO implements Serializable {
@@ -14,7 +15,7 @@ public class OrderDTO implements Serializable {
 
     private String comment;
 
-    private List<OrderItemDTO> orderItems;
+    private List<OrderItemDTO> orderItems = new ArrayList<>();
 
     public List<OrderItemDTO> getOrderItems() {
         return orderItems;

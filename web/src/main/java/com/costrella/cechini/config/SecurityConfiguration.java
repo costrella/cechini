@@ -72,6 +72,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/test/**")
             .antMatchers( "/api/orders")
             .antMatchers( "/api/orders/**")
+            .antMatchers( "/api/reports")
+            .antMatchers( "/api/reports/**")
             .antMatchers( "/api/stores/all")
             .antMatchers( "/api/products/all");
     }

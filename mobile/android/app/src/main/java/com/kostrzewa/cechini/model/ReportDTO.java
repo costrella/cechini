@@ -1,22 +1,16 @@
-package com.costrella.cechini.service.dto;
+package com.kostrzewa.cechini.model;
 
-import java.time.Instant;
-import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.time.Instant;
 
-/**
- * A DTO for the {@link com.costrella.cechini.domain.Report} entity.
- */
 public class ReportDTO implements Serializable {
 
     private Long id;
 
     private Instant reportDate;
 
-    @Size(max = 2000)
     private String desc;
 
-    @Size(max = 2000)
     private String managerNote;
 
     private int photosCount;

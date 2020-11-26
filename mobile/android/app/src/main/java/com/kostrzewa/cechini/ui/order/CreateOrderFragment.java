@@ -28,6 +28,7 @@ import com.kostrzewa.cechini.model.StoreDTO;
 import com.kostrzewa.cechini.rest.RetrofitClient;
 import com.kostrzewa.cechini.ui.mystores.MyStoresFragment;
 import com.kostrzewa.cechini.ui.order.dialog.ProductDialogFragment;
+import com.kostrzewa.cechini.ui.report.CreateReportFragment;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -45,7 +46,7 @@ public class CreateOrderFragment extends Fragment {
     private ProductDataManager productDataManager;
     private OrderItemAdapter adapter;
     private RecyclerView recyclerView;
-    private List<OrderItemDTO> orderItemsList;
+//    private List<OrderItemDTO> orderItemsList;
     private FloatingActionButton sendBtn;
     NavController navController;
     private MyStoresFragment.OnListFragmentInteractionListener mListener;
@@ -54,7 +55,7 @@ public class CreateOrderFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        orderItemsList = new ArrayList<>();
+//        orderItemsList = new ArrayList<>();
         navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
 
         FloatingActionButton btn = getActivity().findViewById(R.id.fab);
@@ -64,7 +65,7 @@ public class CreateOrderFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: ");
-                new ProductDialogFragment(storeDTO, orderItemsList, adapter, productDataManager).show(getFragmentManager(), "sample");
+                new ProductDialogFragment(storeDTO, CreateReportFragment.orderDTO.getOrderItems(), adapter, productDataManager).show(getFragmentManager(), "sample");
 
             }
         });
@@ -74,7 +75,7 @@ public class CreateOrderFragment extends Fragment {
             public void onClick(View v) {
 
                 OrderDTO orderDTO = new OrderDTO();
-                orderDTO.setOrderItems(orderItemsList);
+                orderDTO.setOrderItems(CreateReportFragment.orderDTO.getOrderItems());
 //                orderDTO.setDeliveryDate(Instant.now());
 //                orderDTO.setOrderDate(Instant.now());
                 orderDTO.toString();
@@ -96,14 +97,16 @@ public class CreateOrderFragment extends Fragment {
         });
         View view = inflater.inflate(R.layout.fragment_order_create, container, false);
 
-        storeDTO = (StoreDTO) getArguments().getSerializable(STORE_DTO);
+//        orderItemsList = (List<OrderItemDTO>) getArguments().getSerializable("test");
+
+//        storeDTO = (StoreDTO) getArguments().getSerializable(STORE_DTO); todo
         productDataManager = new ProductDataManagerImpl(getContext());
         Log.d(TAG, "onCreateView: " + productDataManager.getAllProducts());
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            adapter = new OrderItemAdapter(orderItemsList);
+            adapter = new OrderItemAdapter(CreateReportFragment.orderDTO.getOrderItems());
             recyclerView.setAdapter(adapter);
         }
 //        createEmptyOrderItemDTO();

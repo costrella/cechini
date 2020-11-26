@@ -2,6 +2,7 @@ package com.kostrzewa.cechini.rest;
 
 import com.kostrzewa.cechini.model.OrderDTO;
 import com.kostrzewa.cechini.model.ProductDTO;
+import com.kostrzewa.cechini.model.ReportDTO;
 import com.kostrzewa.cechini.model.StoreDTO;
 
 import java.util.List;
@@ -27,4 +28,7 @@ public interface CechiniAPI {
 
     @POST("orders")
     Call<OrderDTO> sendOrder(@Body OrderDTO orderDTO);
+
+    @POST("reports")
+    Call<ReportDTO> sendReport(@Body ReportDTO reportDTO);
 }
