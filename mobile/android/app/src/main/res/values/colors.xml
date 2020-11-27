@@ -11,4 +11,5 @@
 
     <color name="black">#000000</color>
     <color name="red">#FF0000</color>
+    <color name="recycler_view_empty_text">#757575</color>
 </resources>

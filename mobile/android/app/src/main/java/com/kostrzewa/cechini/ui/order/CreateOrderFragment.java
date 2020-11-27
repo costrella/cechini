@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,6 +35,9 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -45,30 +49,27 @@ public class CreateOrderFragment extends Fragment {
     private StoreDTO storeDTO;
     private ProductDataManager productDataManager;
     private OrderItemAdapter adapter;
-    private RecyclerView recyclerView;
-//    private List<OrderItemDTO> orderItemsList;
     private FloatingActionButton sendBtn;
     NavController navController;
     private MyStoresFragment.OnListFragmentInteractionListener mListener;
 
-    int tmp = 0;
+
+    @OnClick(R.id.fragment_order_addProductBtn)
+    void addProduct() {
+        new ProductDialogFragment(storeDTO, CreateReportFragment.orderDTO.getOrderItems(), adapter, productDataManager).show(getFragmentManager(), "sample");
+    }
+
+    @BindView(R.id.fragment_order_recyclerview_emptyTV)
+    TextView emptyTV;
+    @BindView(R.id.fragment_order_recyclerview)
+    RecyclerView recyclerView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-//        orderItemsList = new ArrayList<>();
         navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
 
-        FloatingActionButton btn = getActivity().findViewById(R.id.fab);
         sendBtn = getActivity().findViewById(R.id.orderItem_add);
 
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "onClick: ");
-                new ProductDialogFragment(storeDTO, CreateReportFragment.orderDTO.getOrderItems(), adapter, productDataManager).show(getFragmentManager(), "sample");
-
-            }
-        });
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
@@ -96,31 +97,51 @@ public class CreateOrderFragment extends Fragment {
             }
         });
         View view = inflater.inflate(R.layout.fragment_order_create, container, false);
+        ButterKnife.bind(this, view);
 
 //        orderItemsList = (List<OrderItemDTO>) getArguments().getSerializable("test");
 
 //        storeDTO = (StoreDTO) getArguments().getSerializable(STORE_DTO); todo
         productDataManager = new ProductDataManagerImpl(getContext());
         Log.d(TAG, "onCreateView: " + productDataManager.getAllProducts());
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            recyclerView = (RecyclerView) view;
-            recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            adapter = new OrderItemAdapter(CreateReportFragment.orderDTO.getOrderItems());
-            recyclerView.setAdapter(adapter);
-        }
+        Context context = view.getContext();
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        adapter = new OrderItemAdapter(CreateReportFragment.orderDTO.getOrderItems());
+        refresh();
+        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                refresh();
+            }
+
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                super.onItemRangeInserted(positionStart, itemCount);
+                refresh();
+            }
+
+            @Override
+            public void onItemRangeRemoved(int positionStart, int itemCount) {
+                super.onItemRangeRemoved(positionStart, itemCount);
+                refresh();
+            }
+
+        });
+        recyclerView.setAdapter(adapter);
 //        createEmptyOrderItemDTO();
         return view;
     }
 
-//    private void createEmptyOrderItemDTO() {
-//        OrderItemDTO orderItemDTO = new OrderItemDTO();
-//        tmp++;
-//        orderItemDTO.setProductName("empty " + tmp);
-//        orderItemsList.add(orderItemDTO);
-//        adapter.notifyDataSetChanged();
-//
-//    }
+    private void refresh() {
+        if (CreateReportFragment.orderDTO.getOrderItems().isEmpty()) {
+            emptyTV.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+        } else {
+            emptyTV.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+        }
+    }
 
     @Override
     public void onAttach(Context context) {
