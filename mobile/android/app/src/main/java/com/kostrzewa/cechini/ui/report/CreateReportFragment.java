@@ -62,7 +62,7 @@ public class CreateReportFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_report_create, container, false);
         ButterKnife.bind(this, root);
         navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
-        storeDTO = (StoreDTO) getArguments().getSerializable(STORE_DTO);
+//        storeDTO = (StoreDTO) getArguments().getSerializable(STORE_DTO); //todo
 
         return root;
     }
