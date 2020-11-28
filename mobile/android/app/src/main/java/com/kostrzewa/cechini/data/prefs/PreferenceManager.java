@@ -16,4 +16,8 @@ public interface PreferenceManager {
     Set<String> getAllWarehouses();
 
     void setAllWarehouses(Set<String> myset);
+
+    void setReportsNotSend(Set<String> myset);
+
+    Set<String> getReportsNotSend();
 }
