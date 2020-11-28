@@ -4,6 +4,7 @@ import com.kostrzewa.cechini.model.OrderDTO;
 import com.kostrzewa.cechini.model.ProductDTO;
 import com.kostrzewa.cechini.model.ReportDTO;
 import com.kostrzewa.cechini.model.StoreDTO;
+import com.kostrzewa.cechini.model.WarehouseDTO;
 
 import java.util.List;
 
@@ -25,6 +26,9 @@ public interface CechiniAPI {
 
     @GET("products/all")
     Call<List<ProductDTO>> getAllProducts();
+
+    @GET("warehouses/all")
+    Call<List<WarehouseDTO>> getAllWarehouses();
 
     @POST("orders")
     Call<OrderDTO> sendOrder(@Body OrderDTO orderDTO);

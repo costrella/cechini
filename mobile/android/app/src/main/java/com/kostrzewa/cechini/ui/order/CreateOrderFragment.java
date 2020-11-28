@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,12 +24,15 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kostrzewa.cechini.R;
 import com.kostrzewa.cechini.data.ProductDataManager;
 import com.kostrzewa.cechini.data.ProductDataManagerImpl;
+import com.kostrzewa.cechini.data.WarehouseDataManager;
+import com.kostrzewa.cechini.data.WarehouseDataManagerImpl;
 import com.kostrzewa.cechini.model.OrderDTO;
 import com.kostrzewa.cechini.model.OrderItemDTO;
 import com.kostrzewa.cechini.model.StoreDTO;
 import com.kostrzewa.cechini.rest.RetrofitClient;
 import com.kostrzewa.cechini.ui.mystores.MyStoresFragment;
 import com.kostrzewa.cechini.ui.order.dialog.ProductDialogFragment;
+import com.kostrzewa.cechini.ui.order.warehouse.WarehouseAdapter;
 import com.kostrzewa.cechini.ui.report.CreateReportFragment;
 
 import java.time.Instant;
@@ -48,6 +52,7 @@ public class CreateOrderFragment extends Fragment {
     private static final String TAG = "CreateOrderFragment";
     private StoreDTO storeDTO;
     private ProductDataManager productDataManager;
+    private WarehouseDataManager warehouseDataManager;
     private OrderItemAdapter adapter;
     private FloatingActionButton sendBtn;
     NavController navController;
@@ -63,11 +68,17 @@ public class CreateOrderFragment extends Fragment {
     TextView emptyTV;
     @BindView(R.id.fragment_order_recyclerview)
     RecyclerView recyclerView;
+    @BindView(R.id.fragment_order_warehouseSpinner)
+    Spinner warehouseSpinner;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_order_create, container, false);
+        ButterKnife.bind(this, view);
         navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
 
+        warehouseDataManager = new WarehouseDataManagerImpl(getContext());
+        warehouseSpinner.setAdapter(new WarehouseAdapter(warehouseDataManager.getAllWarehouses()));
         sendBtn = getActivity().findViewById(R.id.orderItem_add);
 
         sendBtn.setOnClickListener(new View.OnClickListener() {
@@ -96,8 +107,7 @@ public class CreateOrderFragment extends Fragment {
                 });
             }
         });
-        View view = inflater.inflate(R.layout.fragment_order_create, container, false);
-        ButterKnife.bind(this, view);
+
 
 //        orderItemsList = (List<OrderItemDTO>) getArguments().getSerializable("test");
 
@@ -137,9 +147,11 @@ public class CreateOrderFragment extends Fragment {
         if (CreateReportFragment.orderDTO.getOrderItems().isEmpty()) {
             emptyTV.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
+            warehouseSpinner.setVisibility(View.GONE);
         } else {
             emptyTV.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
+            warehouseSpinner.setVisibility(View.VISIBLE);
         }
     }
 

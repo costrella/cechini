@@ -21,6 +21,8 @@ import com.kostrzewa.cechini.data.ProductDataManager;
 import com.kostrzewa.cechini.data.ProductDataManagerImpl;
 import com.kostrzewa.cechini.data.StoreDataManager;
 import com.kostrzewa.cechini.data.StoreDataManagerImpl;
+import com.kostrzewa.cechini.data.WarehouseDataManager;
+import com.kostrzewa.cechini.data.WarehouseDataManagerImpl;
 import com.kostrzewa.cechini.model.StoreDTO;
 import com.kostrzewa.cechini.ui.mystores.MyStoresFragment;
 
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements MyStoresFragment.
     private AppBarConfiguration mAppBarConfiguration;
     private StoreDataManager storeDataManager;
     private ProductDataManager productDataManager;
+    private WarehouseDataManager warehouseDataManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +64,10 @@ public class MainActivity extends AppCompatActivity implements MyStoresFragment.
 
         storeDataManager = new StoreDataManagerImpl(getApplicationContext());
         productDataManager = new ProductDataManagerImpl(getApplicationContext());
+        warehouseDataManager = new WarehouseDataManagerImpl(getApplicationContext());
         storeDataManager.downloadMyStores();
         productDataManager.downloadProducts();
+        warehouseDataManager.downloadWarehouse();
     }
 
     @Override

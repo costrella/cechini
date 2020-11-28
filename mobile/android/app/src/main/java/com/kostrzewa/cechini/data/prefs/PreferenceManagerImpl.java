@@ -34,5 +34,13 @@ public class PreferenceManagerImpl implements PreferenceManager {
         sharedPreferences.edit().putStringSet("allProducts", products).apply();
     }
 
+    @Override
+    public Set<String> getAllWarehouses() {
+        return sharedPreferences.getStringSet("allWarehouses", new HashSet<>());
+    }
 
+    @Override
+    public void setAllWarehouses(Set<String> myset) {
+        sharedPreferences.edit().putStringSet("allWarehouses", myset).apply();
+    }
 }

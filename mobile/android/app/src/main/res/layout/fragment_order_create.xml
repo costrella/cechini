@@ -35,6 +35,12 @@
 
     </TextView>
 
+    <Spinner
+        android:id="@+id/fragment_order_warehouseSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"/>
+
     <Button
         android:id="@+id/fragment_order_addProductBtn"
         android:layout_width="match_parent"
