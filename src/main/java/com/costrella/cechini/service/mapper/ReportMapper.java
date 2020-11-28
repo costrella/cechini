@@ -1,12 +1,11 @@
 package com.costrella.cechini.service.mapper;
 
 
-import com.costrella.cechini.domain.*;
+import com.costrella.cechini.domain.Report;
+import com.costrella.cechini.domain.Store;
+import com.costrella.cechini.domain.Worker;
 import com.costrella.cechini.service.dto.ReportDTO;
-
-import org.mapstruct.*;
-
-import java.util.Random;
+import org.mapstruct.Mapper;
 
 /**
  * Mapper for the entity {@link Report} and its DTO {@link ReportDTO}.
@@ -30,12 +29,15 @@ public interface ReportMapper extends EntityMapper<ReportDTO, Report> {
 //    @Mapping(source = "storeId", target = "store")
 //    Report toEntity(ReportDTO reportDTO);
 
-    default Report toEntity(ReportDTO reportDTO){
+    default Report toEntity(ReportDTO reportDTO) {
         Report report = new Report();
         report.setId(reportDTO.getId());
         report.setWorker(new Worker().id(reportDTO.getWorkerId()));
         report.setStore(new Store().id(reportDTO.getStoreId()));
-        report.setOrder(OrderMapperCustom.toEntity(reportDTO.getOrderDTO()));
+        report.setDesc(reportDTO.getDesc());
+        if (reportDTO.getOrderDTO() != null) {
+            report.setOrder(OrderMapperCustom.toEntity(reportDTO.getOrderDTO()));
+        }
         return report;
     }
 
