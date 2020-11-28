@@ -1,10 +1,12 @@
 package com.kostrzewa.cechini.data;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.kostrzewa.cechini.data.events.ReportSentFailed;
 import com.kostrzewa.cechini.data.events.ReportSentSuccess;
 import com.kostrzewa.cechini.model.ReportDTO;
+import com.kostrzewa.cechini.model.ReportsDTO;
 import com.kostrzewa.cechini.rest.RetrofitClient;
 import com.kostrzewa.cechini.ui.report.data.ReportData;
 
@@ -21,14 +23,13 @@ import retrofit2.Response;
 
 public class ReportDataManagerImpl extends AbstractDataManager implements ReportDataManager {
     private static final String TAG = "ReportDataManagerImpl";
-
     public ReportDataManagerImpl(Context context) {
         super(context);
     }
 
     @Override
     public void send(ReportDTO reportDTO) {
-        if(reportDTO.getOrderDTO().getOrderItems().isEmpty()){
+        if (reportDTO.getOrderDTO().getOrderItems().isEmpty()) {
             reportDTO.setOrderDTO(null);
         }
 
@@ -54,6 +55,27 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
 
             }
         });
+    }
+
+    @Override
+    public void sendReportNotSent() {
+        List<ReportDTO> notSendReports = new ArrayList<>();
+        preferenceManager.getReportsNotSend().stream().forEach(s -> notSendReports.add(gson.fromJson(s, ReportDTO.class)));
+        if (!notSendReports.isEmpty()) {
+            ReportsDTO reportsDTO = new ReportsDTO();
+            reportsDTO.setReportsDTOS(notSendReports);
+            RetrofitClient.getInstance().getService().sendManyReports(reportsDTO).enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    Log.d(TAG, "onResponse: " + response.code());
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    Log.d(TAG, "onFailure: ");
+                }
+            });
+        }
     }
 
     private void saveNotSentReport(ReportDTO reportDTO) {

@@ -19,6 +19,8 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.kostrzewa.cechini.data.ProductDataManager;
 import com.kostrzewa.cechini.data.ProductDataManagerImpl;
+import com.kostrzewa.cechini.data.ReportDataManager;
+import com.kostrzewa.cechini.data.ReportDataManagerImpl;
 import com.kostrzewa.cechini.data.StoreDataManager;
 import com.kostrzewa.cechini.data.StoreDataManagerImpl;
 import com.kostrzewa.cechini.data.WarehouseDataManager;
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements MyStoresFragment.
     private StoreDataManager storeDataManager;
     private ProductDataManager productDataManager;
     private WarehouseDataManager warehouseDataManager;
+    private ReportDataManager reportDataManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,9 +68,11 @@ public class MainActivity extends AppCompatActivity implements MyStoresFragment.
         storeDataManager = new StoreDataManagerImpl(getApplicationContext());
         productDataManager = new ProductDataManagerImpl(getApplicationContext());
         warehouseDataManager = new WarehouseDataManagerImpl(getApplicationContext());
+        reportDataManager = new ReportDataManagerImpl(getApplicationContext());
         storeDataManager.downloadMyStores();
         productDataManager.downloadProducts();
         warehouseDataManager.downloadWarehouse();
+        reportDataManager.sendReportNotSent();
     }
 
     @Override

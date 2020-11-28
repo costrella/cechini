@@ -1,9 +1,9 @@
 package com.costrella.cechini.web.rest;
 
 import com.costrella.cechini.service.ReportService;
-import com.costrella.cechini.web.rest.errors.BadRequestAlertException;
 import com.costrella.cechini.service.dto.ReportDTO;
-
+import com.costrella.cechini.service.dto.ReportsDTO;
+import com.costrella.cechini.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -13,9 +13,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -60,6 +61,19 @@ public class ReportResource {
         return ResponseEntity.created(new URI("/api/reports/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+
+    @Transactional
+    @PostMapping("/reports/many")
+    public ResponseEntity createManyReports(@Valid @RequestBody ReportsDTO reportsDTO) {
+        for (ReportDTO r : reportsDTO.getReportsDTOS()) {
+            if (r.getId() != null) {
+                throw new BadRequestAlertException("A new report cannot already have an ID", ENTITY_NAME, "idexists");
+            }
+            reportService.save(r);
+        }
+        return ResponseEntity.ok().build();
+
     }
 
     /**
