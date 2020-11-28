@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,11 +18,14 @@ import com.kostrzewa.cechini.data.ReportDataManager;
 import com.kostrzewa.cechini.data.ReportDataManagerImpl;
 import com.kostrzewa.cechini.data.events.ReportSentFailed;
 import com.kostrzewa.cechini.data.events.ReportSentSuccess;
+import com.kostrzewa.cechini.model.WarehouseDTO;
+import com.kostrzewa.cechini.ui.order.CreateOrderFragment;
 import com.kostrzewa.cechini.ui.report.data.ReportData;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -29,6 +33,9 @@ public class ReportSendFragment extends Fragment {
     private static final String TAG = "ReportSendFragment";
     private NavController navController;
     private ReportDataManager reportDataManager;
+
+    @BindView(R.id.fragment_report_sendBtn)
+    Button sendBtn;
 
     @OnClick(R.id.fragment_report_sendBtn)
     void sendReport() {

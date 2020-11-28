@@ -27,11 +27,6 @@ public class CreateReportFragment extends Fragment {
     @BindView(R.id.report_desc_et)
     EditText descET;
 
-    @OnClick(R.id.report_addOrder_btn)
-    void addOrder() {
-        navController.navigate(R.id.nav_order_create);
-    }
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_report_create, container, false);

@@ -32,12 +32,12 @@ public class MyStoreDetailFragment extends Fragment {
         navController.navigate(R.id.nav_report_create, args);
     }
 
-    @OnClick(R.id.btn_addOrder)
-    void addOrder(){
-        Bundle args = new Bundle();
-        args.putSerializable(STORE_DTO, storeDTO);
-        navController.navigate(R.id.nav_order_create, args);
-    }
+//    @OnClick(R.id.btn_addOrder)
+//    void addOrder(){
+//        Bundle args = new Bundle();
+//        args.putSerializable(STORE_DTO, storeDTO);
+//        navController.navigate(R.id.nav_order_create, args);
+//    }
 
 
     public static MyStoreDetailFragment newInstance() {

@@ -1,6 +1,7 @@
 package com.kostrzewa.cechini.ui.order.warehouse;
 
 import android.database.DataSetObserver;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,6 +66,7 @@ public class WarehouseAdapter extends RecyclerView.Adapter<WarehouseAdapter.View
 
     @Override
     public Object getItem(int position) {
+        Log.d(TAG, "getItem: ");
         return null;
     }
 

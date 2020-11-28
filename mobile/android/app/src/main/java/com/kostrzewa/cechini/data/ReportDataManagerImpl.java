@@ -28,6 +28,10 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
 
     @Override
     public void send(ReportDTO reportDTO) {
+        if(reportDTO.getOrderDTO().getOrderItems().isEmpty()){
+            reportDTO.setOrderDTO(null);
+        }
+
         RetrofitClient.getInstance().getService().sendReport(ReportData.reportDTO).enqueue(new Callback<ReportDTO>() {
             @Override
             public void onResponse(Call<ReportDTO> call, Response<ReportDTO> response) {
