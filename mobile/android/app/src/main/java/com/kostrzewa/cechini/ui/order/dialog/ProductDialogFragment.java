@@ -47,15 +47,13 @@ public class ProductDialogFragment extends DialogFragment implements
     OrderItemAdapter adapter;
     Spinner spinner;
     ProductDTO selectedProduct;
-    final StoreDTO storeDTO;
     private ProductAdapter productAdapter;
     final ProductDataManager productDataManager;
     private MyStoresFragment.OnListFragmentInteractionListener mListener;
 
 
 
-    public ProductDialogFragment(StoreDTO storeDTO, List<OrderItemDTO> orderItemsList, OrderItemAdapter adapter, ProductDataManager productDataManager) {
-        this.storeDTO = storeDTO;
+    public ProductDialogFragment(List<OrderItemDTO> orderItemsList, OrderItemAdapter adapter, ProductDataManager productDataManager) {
         this.adapter = adapter;
         this.orderItemsList = orderItemsList;
         this.productDataManager = productDataManager;
@@ -71,7 +69,7 @@ public class ProductDialogFragment extends DialogFragment implements
         spinner = form.findViewById(R.id.order_item_dialog_product_spinner);
         spinner.setOnItemSelectedListener(this);
         productsList = productDataManager.getAllProducts();
-        productAdapter = new ProductAdapter(storeDTO, productsList);
+        productAdapter = new ProductAdapter(productsList);
         spinner.setAdapter(productAdapter);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 

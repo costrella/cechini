@@ -7,13 +7,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.kostrzewa.cechini.ui.order.CreateOrderFragment;
-import com.kostrzewa.cechini.ui.tools.DemoObjectFragment;
-import com.kostrzewa.cechini.ui.tools.DemoObjectFragment2;
+import com.kostrzewa.cechini.ui.report.send.ReportSendFragment;
 
-// Since this is an object collection, use a FragmentStatePagerAdapter,
-// and NOT a FragmentPagerAdapter.
 public class ReportPagerAdapter extends FragmentStatePagerAdapter {
-    private static final String TAG = "DemoCollectionPagerAdap";
+    private static final String TAG = "ReportPagerAdapter";
 
     public ReportPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -27,19 +24,15 @@ public class ReportPagerAdapter extends FragmentStatePagerAdapter {
                 return new CreateReportFragment();
             case 1:
                 return new CreateOrderFragment();
+            case 2:
+                return new ReportSendFragment();
         }
         return null;
-//        Fragment fragment = DemoObjectFragment.getInstance();
-//        Bundle args = new Bundle();
-//        // Our object is just an integer :-P
-//        args.putInt(DemoObjectFragment.ARG_OBJECT, i + 1);
-//        fragment.setArguments(args);
-//        return fragment;
     }
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 
     @Override
@@ -49,6 +42,8 @@ public class ReportPagerAdapter extends FragmentStatePagerAdapter {
                 return "Raport";
             case 1:
                 return "Zamówienie";
+            case 2:
+                return "Realizacja";
         }
         return null;
     }

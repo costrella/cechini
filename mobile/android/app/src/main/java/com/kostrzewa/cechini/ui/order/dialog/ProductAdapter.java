@@ -17,23 +17,16 @@ import com.kostrzewa.cechini.ui.mystores.MyStoresFragment.OnListFragmentInteract
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link ProductDTO} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> implements SpinnerAdapter {
     private static final String TAG = "ProductAdapter";
     private final List<ProductDTO> mValues;
-    final StoreDTO storeDTO;
 
     public List<ProductDTO> getData() {
         return mValues;
     }
 
 
-    public ProductAdapter(StoreDTO storeDTO, List<ProductDTO> items) {
-        this.storeDTO = storeDTO;
+    public ProductAdapter(List<ProductDTO> items) {
         mValues = items;
     }
 
