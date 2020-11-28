@@ -98,6 +98,12 @@ public class WarehouseResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+    @GetMapping("/warehouses/all")
+    public ResponseEntity<List<WarehouseDTO>> getAllWarehouses() {
+        log.debug("REST request to get a page of Warehouses");
+        return ResponseEntity.ok().body(warehouseService.findAll());
+    }
+
     /**
      * {@code GET  /warehouses/:id} : get the "id" warehouse.
      *
