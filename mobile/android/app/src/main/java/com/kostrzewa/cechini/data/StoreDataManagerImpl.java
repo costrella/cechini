@@ -3,8 +3,11 @@ package com.kostrzewa.cechini.data;
 import android.content.Context;
 import android.util.Log;
 
+import com.kostrzewa.cechini.data.events.StoreSentFailed;
 import com.kostrzewa.cechini.model.StoreDTO;
 import com.kostrzewa.cechini.rest.RetrofitClient;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -21,6 +24,38 @@ public class StoreDataManagerImpl extends AbstractDataManager implements StoreDa
 
     public StoreDataManagerImpl(Context context) {
         super(context);
+    }
+
+    @Override
+    public void addNewStore(StoreDTO storeDTO) {
+        RetrofitClient.getInstance().getService().addStore(storeDTO).enqueue(new Callback<StoreDTO>() {
+            @Override
+            public void onResponse(Call<StoreDTO> call, Response<StoreDTO> response) {
+                Log.d(TAG, "onResponse: " + response.code());
+                if (response.isSuccessful()) {
+                    StoreDTO body = response.body();
+
+                    List<StoreDTO> currentStores = new ArrayList<>();
+                    preferenceManager.getMyStores().stream().forEach(s -> currentStores.add(gson.fromJson(s, StoreDTO.class)));
+                    currentStores.add(body);
+
+                    //save
+                    Set<String> myset = new HashSet<>();
+                    currentStores.stream().forEach(storeDTO -> myset.add(gson.toJson(storeDTO)));
+                    preferenceManager.setMyStores(myset);
+
+                    EventBus.getDefault().post(body);
+                } else {
+                    EventBus.getDefault().post(new StoreSentFailed("Błąd: " + response.code()));
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<StoreDTO> call, Throwable t) {
+                EventBus.getDefault().post(new StoreSentFailed("błąd todo"));
+            }
+        });
     }
 
     @Override

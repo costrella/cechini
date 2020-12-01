@@ -23,6 +23,8 @@ import com.kostrzewa.cechini.data.ReportDataManager;
 import com.kostrzewa.cechini.data.ReportDataManagerImpl;
 import com.kostrzewa.cechini.data.StoreDataManager;
 import com.kostrzewa.cechini.data.StoreDataManagerImpl;
+import com.kostrzewa.cechini.data.StoreGroupDataManager;
+import com.kostrzewa.cechini.data.StoreGroupDataManagerImpl;
 import com.kostrzewa.cechini.data.WarehouseDataManager;
 import com.kostrzewa.cechini.data.WarehouseDataManagerImpl;
 import com.kostrzewa.cechini.model.StoreDTO;
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements MyStoresFragment.
     private ProductDataManager productDataManager;
     private WarehouseDataManager warehouseDataManager;
     private ReportDataManager reportDataManager;
+    private StoreGroupDataManager storeGroupDataManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,10 +72,12 @@ public class MainActivity extends AppCompatActivity implements MyStoresFragment.
         productDataManager = new ProductDataManagerImpl(getApplicationContext());
         warehouseDataManager = new WarehouseDataManagerImpl(getApplicationContext());
         reportDataManager = new ReportDataManagerImpl(getApplicationContext());
+        storeGroupDataManager = new StoreGroupDataManagerImpl(getApplicationContext());
         storeDataManager.downloadMyStores();
         productDataManager.downloadProducts();
         warehouseDataManager.downloadWarehouse();
         reportDataManager.sendReportNotSent();
+        storeGroupDataManager.downloadStoreGroups();
     }
 
     @Override

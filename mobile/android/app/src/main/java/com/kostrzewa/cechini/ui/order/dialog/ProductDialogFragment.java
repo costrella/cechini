@@ -24,7 +24,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
@@ -33,7 +32,6 @@ import com.kostrzewa.cechini.R;
 import com.kostrzewa.cechini.data.ProductDataManager;
 import com.kostrzewa.cechini.model.OrderItemDTO;
 import com.kostrzewa.cechini.model.ProductDTO;
-import com.kostrzewa.cechini.model.StoreDTO;
 import com.kostrzewa.cechini.ui.mystores.MyStoresFragment;
 import com.kostrzewa.cechini.ui.order.OrderItemAdapter;
 
@@ -64,7 +62,7 @@ public class ProductDialogFragment extends DialogFragment implements
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         form =
                 getActivity().getLayoutInflater()
-                        .inflate(R.layout.dialog, null);
+                        .inflate(R.layout.fragment_order_dialog_product, null);
 
         spinner = form.findViewById(R.id.order_item_dialog_product_spinner);
         spinner.setOnItemSelectedListener(this);

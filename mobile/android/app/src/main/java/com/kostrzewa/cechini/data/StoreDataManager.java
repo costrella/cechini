@@ -9,4 +9,6 @@ public interface StoreDataManager {
     List<StoreDTO> getMyStores();
 
     void downloadMyStores();
+
+    void addNewStore(StoreDTO storeDTO);
 }

@@ -75,9 +75,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers( "/api/reports")
             .antMatchers( "/api/reports/many")
             .antMatchers( "/api/reports/**")
+            .antMatchers( "/api/stores")
             .antMatchers( "/api/stores/all")
             .antMatchers( "/api/products/all")
-            .antMatchers( "/api/warehouses/all");
+            .antMatchers( "/api/warehouses/all")
+            .antMatchers( "/api/store-groups")
+            .antMatchers( "/api/store-groups/all")
+
+        ;
     }
 
     @Override

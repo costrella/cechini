@@ -19,8 +19,15 @@ import com.kostrzewa.cechini.R;
 import com.kostrzewa.cechini.data.StoreDataManager;
 import com.kostrzewa.cechini.data.StoreDataManagerImpl;
 import com.kostrzewa.cechini.model.StoreDTO;
+import com.kostrzewa.cechini.ui.mystores.dialog.AddStoreDialogFragment;
+import com.kostrzewa.cechini.ui.order.dialog.ProductDialogFragment;
+import com.kostrzewa.cechini.ui.report.data.ReportData;
 
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * A fragment representing a list of Items.
@@ -39,7 +46,15 @@ public class MyStoresFragment extends Fragment {
     private MyStoresRecyclerViewAdapter adapter;
     private SearchView searchView;
     private List<StoreDTO> storeDTOList;
-    private RecyclerView recyclerView;
+
+    @BindView(R.id.fragment_mystores_recyclerView)
+    RecyclerView recyclerView;
+
+    @OnClick(R.id.fragment_mystores_addStoreBtn)
+    public void addStore(){
+        new AddStoreDialogFragment()
+                .show(getFragmentManager(), "sample");
+    }
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -71,21 +86,15 @@ public class MyStoresFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mystores_list, container, false);
+        ButterKnife.bind(this, view);
         setHasOptionsMenu(true);
         storeDTOList = storeDataManager.getMyStores();
 
         // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            adapter = new MyStoresRecyclerViewAdapter(storeDataManager, storeDTOList, mListener);
-            recyclerView.setAdapter(adapter);
-        }
+        Context context = view.getContext();
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        adapter = new MyStoresRecyclerViewAdapter(storeDataManager, storeDTOList, mListener);
+        recyclerView.setAdapter(adapter);
         return view;
     }
 

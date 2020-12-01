@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_margin="4dp"
+		android:orientation="horizontal">
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Grupa sklepu: "/>
+		<Spinner
+			android:id="@+id/fragment_mystores_dialog_storeGroupSpinner"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+		</Spinner>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_margin="4dp"
+		android:orientation="horizontal">
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Nazwa sklepu: "/>
+		<EditText
+			android:id="@+id/fragment_mystores_dialog_store_nameET"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:inputType="text"/>
+	</LinearLayout>
+
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_margin="4dp"
+		android:orientation="horizontal">
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Adres: "/>
+		<EditText
+			android:id="@+id/fragment_mystores_dialog_store_addressET"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:inputType="text"/>
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_margin="4dp"
+		android:orientation="horizontal">
+
+
+
+		<Button
+			android:id="@+id/fragment_mystores_dialog_store_okBtn"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="DODAJ "/>
+
+		<ProgressBar
+			android:id="@+id/fragment_mystores_dialog_store_progressBar"
+			style="?android:attr/progressBarStyle"
+			android:visibility="gone"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"/>
+	</LinearLayout>
+</LinearLayout>

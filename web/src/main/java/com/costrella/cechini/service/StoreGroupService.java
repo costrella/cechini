@@ -12,7 +12,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing {@link StoreGroup}.
@@ -58,6 +60,12 @@ public class StoreGroupService {
             .map(storeGroupMapper::toDto);
     }
 
+    @Transactional(readOnly = true)
+    public List<StoreGroupDTO> findAll() {
+        log.debug("Request to get all StoreGroups");
+        return storeGroupRepository.findAll().stream()
+            .map(storeGroupMapper::toDto).collect(Collectors.toList());
+    }
 
     /**
      * Get one storeGroup by id.

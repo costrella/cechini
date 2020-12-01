@@ -20,4 +20,8 @@ public interface PreferenceManager {
     void setReportsNotSend(Set<String> myset);
 
     Set<String> getReportsNotSend();
+
+    void setAllStoreGroups(Set<String> myset);
+
+    Set<String> getAllStoreGroups();
 }

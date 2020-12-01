@@ -9,7 +9,10 @@
 		android:layout_height="wrap_content"
 		android:layout_margin="4dp"
 		android:orientation="horizontal">
-
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Grupa sklepu: "/>
 		<Spinner
 			android:id="@+id/order_item_dialog_product_spinner"
 			android:layout_width="wrap_content"
@@ -29,7 +32,6 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="Ilość zgrzewek: "/>
-		order_packCount
 		<EditText
 			android:id="@+id/order_packCount"
 			android:layout_width="match_parent"

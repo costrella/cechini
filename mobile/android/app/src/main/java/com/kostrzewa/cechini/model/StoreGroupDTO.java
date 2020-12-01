@@ -2,23 +2,11 @@ package com.kostrzewa.cechini.model;
 
 import java.io.Serializable;
 
-public class StoreDTO implements Serializable {
-    
+public class StoreGroupDTO implements Serializable {
+
     private Long id;
 
     private String name;
-
-    private String address;
-
-    private Long storegroupId;
-
-    public Long getStoregroupId() {
-        return storegroupId;
-    }
-
-    public void setStoregroupId(Long storegroupId) {
-        this.storegroupId = storegroupId;
-    }
 
     public Long getId() {
         return id;
@@ -36,24 +24,16 @@ public class StoreDTO implements Serializable {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof StoreDTO)) {
+        if (!(o instanceof StoreGroupDTO)) {
             return false;
         }
 
-        return id != null && id.equals(((StoreDTO) o).id);
+        return id != null && id.equals(((StoreGroupDTO) o).id);
     }
 
     @Override
@@ -61,4 +41,9 @@ public class StoreDTO implements Serializable {
         return 31;
     }
 
+    // prettier-ignore
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

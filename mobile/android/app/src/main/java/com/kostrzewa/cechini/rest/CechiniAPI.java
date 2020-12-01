@@ -5,6 +5,7 @@ import com.kostrzewa.cechini.model.ProductDTO;
 import com.kostrzewa.cechini.model.ReportDTO;
 import com.kostrzewa.cechini.model.ReportsDTO;
 import com.kostrzewa.cechini.model.StoreDTO;
+import com.kostrzewa.cechini.model.StoreGroupDTO;
 import com.kostrzewa.cechini.model.WarehouseDTO;
 
 import java.util.List;
@@ -24,6 +25,12 @@ public interface CechiniAPI {
 
     @GET("stores/all")
     Call<List<StoreDTO>> getAllStores();
+
+    @POST("stores")
+    Call<StoreDTO> addStore(@Body StoreDTO storeDTO);
+
+    @GET("store-groups/all")
+    Call<List<StoreGroupDTO>> getAllStoreGroups();
 
     @GET("products/all")
     Call<List<ProductDTO>> getAllProducts();
