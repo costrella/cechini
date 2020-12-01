@@ -98,6 +98,11 @@ public class StoreGroupResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+    @GetMapping("/store-groups/all")
+    public ResponseEntity<List<StoreGroupDTO>> getAllStoreGroups() {
+        return ResponseEntity.ok().body(storeGroupService.findAll());
+    }
+
     /**
      * {@code GET  /store-groups/:id} : get the "id" storeGroup.
      *
