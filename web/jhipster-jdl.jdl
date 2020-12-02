@@ -44,7 +44,7 @@ entity OrderItem {
 }
 
 entity Product {
-	name String required unique,
+	name String required,
 	capacity Integer,
     eanArt String,
     eanPack String,

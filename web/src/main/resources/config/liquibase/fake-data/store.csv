@@ -1,46 +1,4 @@
 id;name;nip;jhi_desc;visited;storegroup_id;worker_id;address
-1;Sklep 01;12312123431;Dynamic Administrator teal;false;3;1;Piłsudskiego 1, Kraków
-2;Sklep 02;12312123431;Shirt;false;5;2;Kraszewskiego 20, Krynica
-3;Sklep 03;12312123431;standardization Serbia Books;false;6;3;Pileckiego 1, Łódź
-4;Sklep 04;12312123431;Fantastic;false;7;3;Andersa 2, Kraków
-5;Sklep 05;12312123431;parse black Tuna;false;3;4;Dywizjonu 303, Kraków
-6;Sklep 06;12312123431;initiatives;true;2;4;"Powstańców Warszawskich 1,
-  Warszawa"
-7;Sklep 07;12312123431;partnerships Buckinghamshire;false;3;5;Bohaterów Getta 3, Kraków
-8;Sklep 08;12312123431;Senior;false;6;1;Kolejowa 1, Muszyna
-9;Sklep 09;12312123431;Global Ergonomic Bacon;false;9;7;Nikifora Krynickiego 2, Krynica
-10;Sklep Ala;12312123431;applications;false;7;8;Sobieskiego 3, Sandomierz
-11;Sklep Mały;12312123431;Dynamic Administrator teal;false;3;1;Sportowa 1, Kraków
-12;Sklep Duży;12312123431;Shirt;false;5;2;Nadbrzeżna 2, Warszawa
-13;Sklep Testowy;12312123431;standardization Serbia Books;false;6;3;Portowa 2, Gdynia
-14;Sklep Spożywczy;12312123431;Fantastic;false;7;3;Piękna 5, Sopot
-15;Sklep 001;12312123431;parse black Tuna;false;3;4;Piekarzy 6, Wadowice
-16;Sklep 006;12312123431;initiatives;true;2;4;Fieldorfa Nila 4, Kraków
-17;Sklep 007;12312123431;partnerships Buckinghamshire;false;3;5;Inki 5, Kraków
-18;Sklep 008;12312123431;Senior;false;6;1;Żelaznego 44, Krynica
-19;Sklep 009;12312123431;Global Ergonomic Bacon;false;9;7;Jana Pawła II 55, Kraków
-20;Sklep 100;12312123431;applications;false;7;8;
-21;Sklep 01;12312123431;Dynamic Administrator teal;false;3;1;Piłsudskiego 1, Kraków
-22;Sklep 02;12312123431;Shirt;false;5;2;Kraszewskiego 20, Krynica
-23;Sklep 03;12312123431;standardization Serbia Books;false;6;3;Pileckiego 1, Łódź
-24;Sklep 04;12312123431;Fantastic;false;7;3;Andersa 2, Kraków
-25;Sklep 05;12312123431;parse black Tuna;false;3;4;Dywizjonu 303, Kraków
-26;Sklep 06;12312123431;initiatives;true;2;4;"Powstańców Warszawskich 1,
-  Warszawa"
-27;Sklep 07;12312123431;partnerships Buckinghamshire;false;3;5;Bohaterów Getta 3, Kraków
-28;Sklep 08;12312123431;Senior;false;6;1;Kolejowa 1, Muszyna
-29;Sklep 09;12312123431;Global Ergonomic Bacon;false;9;7;Nikifora Krynickiego 2, Krynica
-30;Sklep Ala;12312123431;applications;false;7;8;Sobieskiego 3, Sandomierz
-31;Sklep Mały;12312123431;Dynamic Administrator teal;false;3;1;Sportowa 1, Kraków
-32;Sklep Duży;12312123431;Shirt;false;5;2;Nadbrzeżna 2, Warszawa
-33;Sklep Testowy;12312123431;standardization Serbia Books;false;6;3;Portowa 2, Gdynia
-34;Sklep Spożywczy;12312123431;Fantastic;false;7;3;Piękna 5, Sopot
-35;Sklep 001;12312123431;parse black Tuna;false;3;4;Piekarzy 6, Wadowice
-36;Sklep 006;12312123431;initiatives;true;2;4;Fieldorfa Nila 4, Kraków
-37;Sklep 007;12312123431;partnerships Buckinghamshire;false;3;5;Inki 5, Kraków
-38;Sklep 008;12312123431;Senior;false;6;1;Żelaznego 44, Krynica
-39;Sklep 009;12312123431;Global Ergonomic Bacon;false;9;7;Jana Pawła II 55, Kraków
-40;Sklep 100;12312123431;applications;false;7;8;Jana Pawła II 55, Kraków
 41;Sklep 01;12312123432;applications;false;7;8;Jana Pawła II 55, Kraków
 42;Sklep 02;12312123433;applications;false;7;8;Jana Pawła II 55, Kraków
 43;Sklep 03;12312123434;applications;false;7;8;Jana Pawła II 55, Kraków
