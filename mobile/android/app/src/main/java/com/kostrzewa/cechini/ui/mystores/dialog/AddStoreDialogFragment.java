@@ -29,6 +29,8 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 
 import androidx.fragment.app.DialogFragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.kostrzewa.cechini.R;
 import com.kostrzewa.cechini.data.StoreDataManager;
@@ -40,6 +42,7 @@ import com.kostrzewa.cechini.model.OrderItemDTO;
 import com.kostrzewa.cechini.model.StoreDTO;
 import com.kostrzewa.cechini.model.StoreGroupDTO;
 import com.kostrzewa.cechini.ui.mystores.MyStoresFragment;
+import com.kostrzewa.cechini.ui.mystores.MyStoresRecyclerViewAdapter;
 import com.kostrzewa.cechini.ui.order.OrderItemAdapter;
 import com.kostrzewa.cechini.ui.order.dialog.ProductAdapter;
 
@@ -47,6 +50,8 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
+
+import static com.kostrzewa.cechini.util.Constants.STORE_DTO;
 
 public class AddStoreDialogFragment extends DialogFragment implements
         DialogInterface.OnClickListener, AdapterView.OnItemSelectedListener, View.OnClickListener {
@@ -61,6 +66,13 @@ public class AddStoreDialogFragment extends DialogFragment implements
     ProgressBar progressBar;
     private MyStoresFragment.OnListFragmentInteractionListener mListener;
     Button okBtn;
+    List<StoreDTO> storeDTOList;
+    MyStoresRecyclerViewAdapter adapter;
+
+    public AddStoreDialogFragment(List<StoreDTO> storeDTOList, MyStoresRecyclerViewAdapter adapter) {
+        this.storeDTOList = storeDTOList;
+        this.adapter = adapter;
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -155,12 +167,24 @@ public class AddStoreDialogFragment extends DialogFragment implements
     public void onDismiss(DialogInterface dialog) {
         EventBus.getDefault().unregister(this);
         super.onDismiss(dialog);
+
     }
 
     @Subscribe
     public void onStoreAdded(StoreDTO storeDTO) {
         progressBar.setVisibility(View.GONE);
         Log.d(TAG, "onStoreAdded: ");
+        storeDTOList.add(storeDTO);
+//        adapter.selectAfterAdded(storeDTO);
+        adapter.notifyDataSetChanged();
+        getDialog().dismiss();
+
+        Bundle args = new Bundle();
+        args.putSerializable(STORE_DTO, storeDTO);
+        NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
+        navController.navigate(R.id.nav_mystores_detail, args);
+
+
 
     }
 

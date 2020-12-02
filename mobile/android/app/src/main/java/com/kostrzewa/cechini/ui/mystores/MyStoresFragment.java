@@ -52,7 +52,7 @@ public class MyStoresFragment extends Fragment {
 
     @OnClick(R.id.fragment_mystores_addStoreBtn)
     public void addStore(){
-        new AddStoreDialogFragment()
+        new AddStoreDialogFragment(storeDTOList, adapter)
                 .show(getFragmentManager(), "sample");
     }
 
@@ -93,7 +93,7 @@ public class MyStoresFragment extends Fragment {
         // Set the adapter
         Context context = view.getContext();
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        adapter = new MyStoresRecyclerViewAdapter(storeDataManager, storeDTOList, mListener);
+        adapter = new MyStoresRecyclerViewAdapter(getContext(), storeDataManager, storeDTOList, mListener);
         recyclerView.setAdapter(adapter);
         return view;
     }

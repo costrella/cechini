@@ -1,5 +1,6 @@
 package com.kostrzewa.cechini.ui.mystores;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,15 +31,22 @@ public class MyStoresRecyclerViewAdapter extends RecyclerView.Adapter<MyStoresRe
     private List<StoreDTO> mValuesFiltered;
     private final OnListFragmentInteractionListener mListener;
     private StoreDataManager storeDataManager;
+    private StoreDTO storeToSelect = null;
+    Context context;
 
     public List<StoreDTO> getData() {
         return mValues;
     }
 
-    public MyStoresRecyclerViewAdapter(StoreDataManager storeDataManager, List<StoreDTO> items, OnListFragmentInteractionListener listener) {
+    public MyStoresRecyclerViewAdapter(Context context, StoreDataManager storeDataManager, List<StoreDTO> items, OnListFragmentInteractionListener listener) {
         this.storeDataManager = storeDataManager;
         mValues = items;
         mListener = listener;
+        this.context = context;
+    }
+
+    public void selectAfterAdded(StoreDTO storeDTO){
+        this.storeToSelect = storeDTO;
     }
 
     @Override
@@ -51,6 +59,9 @@ public class MyStoresRecyclerViewAdapter extends RecyclerView.Adapter<MyStoresRe
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
+        if(storeToSelect != null &&  holder.mItem.getId().equals(storeToSelect.getId())){
+            holder.mContentView.setTextColor(context.getResources().getColor(R.color.red));
+        } 
         holder.mIdView.setText("" + mValues.get(position).getId());
         holder.mContentView.setText(mValues.get(position).getName() + " " + mValues.get(position).getAddress());
 

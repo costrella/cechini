@@ -6,6 +6,7 @@ import com.costrella.cechini.service.dto.StoreDTO;
 import com.costrella.cechini.service.dto.StoreDTOSimple;
 import com.costrella.cechini.service.mapper.StoreMapper;
 import com.costrella.cechini.service.mapper.StoreMapperSimple;
+import org.postgresql.util.PSQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -44,7 +46,7 @@ public class StoreService {
      * @param storeDTO the entity to save.
      * @return the persisted entity.
      */
-    public StoreDTO save(StoreDTO storeDTO) {
+    public StoreDTO save(StoreDTO storeDTO)  {
         log.debug("Request to save Store : {}", storeDTO);
         Store store = storeMapper.toEntity(storeDTO);
         store = storeRepository.save(store);
