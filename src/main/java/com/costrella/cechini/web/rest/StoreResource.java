@@ -1,29 +1,30 @@
 package com.costrella.cechini.web.rest;
 
 import com.costrella.cechini.service.StoreService;
-import com.costrella.cechini.service.dto.ReportDTO;
-import com.costrella.cechini.service.dto.StoreDTOSimple;
-import com.costrella.cechini.service.dto.WorkerDTO;
-import com.costrella.cechini.web.rest.errors.BadRequestAlertException;
 import com.costrella.cechini.service.dto.StoreDTO;
-
+import com.costrella.cechini.service.dto.StoreDTOSimple;
+import com.costrella.cechini.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import org.hibernate.exception.ConstraintViolationException;
+import org.postgresql.util.PSQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.BatchUpdateException;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,6 +62,16 @@ public class StoreResource {
             throw new BadRequestAlertException("A new store cannot already have an ID", ENTITY_NAME, "idexists");
         }
         StoreDTO result = storeService.save(storeDTO);
+//        try {
+//            result = storeService.save(storeDTO);
+//        } catch (DataIntegrityViolationException e2) {
+//            return ResponseEntity
+//
+//                .created(new URI("/api/stores/" + result.getId()))
+//                .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+//                .body(result);
+//        }
+
         return ResponseEntity.created(new URI("/api/stores/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -76,7 +87,7 @@ public class StoreResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/stores")
-    public ResponseEntity<StoreDTO> updateStore(@Valid @RequestBody StoreDTO storeDTO) throws URISyntaxException {
+    public ResponseEntity<StoreDTO> updateStore(@Valid @RequestBody StoreDTO storeDTO) throws URISyntaxException, PSQLException {
         log.debug("REST request to update Store : {}", storeDTO);
         if (storeDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
