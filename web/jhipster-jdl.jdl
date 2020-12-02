@@ -15,7 +15,7 @@ entity Worker {
 }
 
 entity Store {
-	name String required,
+	name String required unique,
     nip String,
     desc String maxlength(2000),
     visited Boolean,
@@ -23,7 +23,7 @@ entity Store {
 }
 
 entity StoreGroup {
-	name String required
+	name String required unique
 }
 
 entity Manager {
@@ -44,7 +44,7 @@ entity OrderItem {
 }
 
 entity Product {
-	name String required,
+	name String required unique,
 	capacity Integer,
     eanArt String,
     eanPack String,
@@ -54,7 +54,7 @@ entity Product {
 }
 
 entity Warehouse {
-	name String required
+	name String required unique
 }
 
 entity Report {
