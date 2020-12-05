@@ -24,7 +24,7 @@ public class Store implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "name", nullable = false, unique = true)
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "nip")
@@ -37,7 +37,8 @@ public class Store implements Serializable {
     @Column(name = "visited")
     private Boolean visited;
 
-    @Column(name = "address")
+    @NotNull
+    @Column(name = "address", nullable = false)
     private String address;
 
     @OneToMany(mappedBy = "store")

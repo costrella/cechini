@@ -4,7 +4,7 @@
     {
       "fieldName": "name",
       "fieldType": "String",
-      "fieldValidateRules": ["required", "unique"]
+      "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "nip",
@@ -22,7 +22,8 @@
     },
     {
       "fieldName": "address",
-      "fieldType": "String"
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
     }
   ],
   "relationships": [

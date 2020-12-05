@@ -15,11 +15,11 @@ entity Worker {
 }
 
 entity Store {
-	name String required unique,
+	name String required,
     nip String,
     desc String maxlength(2000),
     visited Boolean,
-	address String,
+	address String required,
 }
 
 entity StoreGroup {

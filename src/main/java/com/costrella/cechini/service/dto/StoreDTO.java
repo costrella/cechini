@@ -20,6 +20,7 @@ public class StoreDTO implements Serializable {
 
     private Boolean visited;
 
+    @NotNull
     private String address;
 
 

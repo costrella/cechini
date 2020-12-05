@@ -32,7 +32,7 @@ export class StoreUpdateComponent implements OnInit {
     nip: [],
     desc: [null, [Validators.maxLength(2000)]],
     visited: [],
-    address: [],
+    address: [null, [Validators.required]],
     workerId: [],
     locationId: [],
     storegroupId: [],
