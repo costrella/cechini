@@ -166,6 +166,26 @@ public class StoreResourceIT {
 
     @Test
     @Transactional
+    public void checkAddressIsRequired() throws Exception {
+        int databaseSizeBeforeTest = storeRepository.findAll().size();
+        // set the field null
+        store.setAddress(null);
+
+        // Create the Store, which fails.
+        StoreDTO storeDTO = storeMapper.toDto(store);
+
+
+        restStoreMockMvc.perform(post("/api/stores").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(storeDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Store> storeList = storeRepository.findAll();
+        assertThat(storeList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllStores() throws Exception {
         // Initialize the database
         storeRepository.saveAndFlush(store);

@@ -16,7 +16,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(255)">
-                <constraints nullable="false" unique="true" uniqueConstraintName="ux_store_name" />
+                <constraints nullable="false" />
             </column>
             <column name="nip" type="varchar(255)">
                 <constraints nullable="true" />
@@ -28,7 +28,7 @@
                 <constraints nullable="true" />
             </column>
             <column name="address" type="varchar(255)">
-                <constraints nullable="true" />
+                <constraints nullable="false" />
             </column>
             <column name="worker_id" type="bigint">
                 <constraints nullable="true" />
