@@ -112,4 +112,10 @@ public class StoreService {
             .map(storeMapper::toDto);
     }
 
+    @Transactional(readOnly = true)
+    public List<StoreDTO> findAllByWorkerId(Long id) {
+        return storeRepository.findAllByWorkerId(id).stream()
+            .map(storeMapper::toDto).collect(Collectors.toList());
+    }
+
 }
