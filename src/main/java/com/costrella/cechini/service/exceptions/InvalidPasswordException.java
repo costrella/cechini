@@ -1,4 +1,4 @@
-package com.costrella.cechini.service;
+package com.costrella.cechini.service.exceptions;
 
 public class InvalidPasswordException extends RuntimeException {
 

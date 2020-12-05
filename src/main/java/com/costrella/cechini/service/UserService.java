@@ -10,6 +10,9 @@ import com.costrella.cechini.security.AuthoritiesConstants;
 import com.costrella.cechini.security.SecurityUtils;
 import com.costrella.cechini.service.dto.UserDTO;
 
+import com.costrella.cechini.service.exceptions.EmailAlreadyUsedException;
+import com.costrella.cechini.service.exceptions.InvalidPasswordException;
+import com.costrella.cechini.service.exceptions.UsernameAlreadyUsedException;
 import io.github.jhipster.security.RandomUtil;
 
 import org.slf4j.Logger;
