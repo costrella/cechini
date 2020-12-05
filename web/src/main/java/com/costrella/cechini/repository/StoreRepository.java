@@ -8,6 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Spring Data  repository for the Store entity.
  */
@@ -16,5 +18,8 @@ import org.springframework.stereotype.Repository;
 public interface StoreRepository extends JpaRepository<Store, Long> {
 
     Page<Store> findAllByWorkerId(Long id, Pageable pageable);
+
+    List<Store> findAllByWorkerId(Long id);
+
 
 }

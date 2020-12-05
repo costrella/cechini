@@ -8,10 +8,8 @@ import com.kostrzewa.cechini.model.StoreDTO;
 import com.kostrzewa.cechini.rest.RetrofitClient;
 
 import org.greenrobot.eventbus.EventBus;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -24,9 +22,11 @@ import retrofit2.Response;
 public class StoreDataManagerImpl extends AbstractDataManager implements StoreDataManager {
 
     private static final String TAG = "StoreDataManagerImpl";
+    private WorkerDataManager workerDataManager;
 
     public StoreDataManagerImpl(Context context) {
         super(context);
+        workerDataManager = new WorkerDataManagerImpl(context);
     }
 
     @Override
@@ -77,22 +77,23 @@ public class StoreDataManagerImpl extends AbstractDataManager implements StoreDa
 
     @Override
     public void downloadMyStores() {
-        RetrofitClient.getInstance().getService().getAllStores().enqueue(new Callback<List<StoreDTO>>() { //todo change to mystores
-            @Override
-            public void onResponse(Call<List<StoreDTO>> call, Response<List<StoreDTO>> response) {
-                Log.d(TAG, "onResponse: " + response.code());
-                if (response.isSuccessful()) {
-                    Set<String> myset = new HashSet<>();
-                    response.body().stream().forEach(storeDTO -> myset.add(gson.toJson(storeDTO)));
-                    preferenceManager.setMyStores(myset);
-                }
-            }
+        RetrofitClient.getInstance().getService().getMyStores(workerDataManager.getWorker().getId())
+                .enqueue(new Callback<List<StoreDTO>>() {
+                    @Override
+                    public void onResponse(Call<List<StoreDTO>> call, Response<List<StoreDTO>> response) {
+                        Log.d(TAG, "onResponse: " + response.code());
+                        if (response.isSuccessful()) {
+                            Set<String> myset = new HashSet<>();
+                            response.body().stream().forEach(storeDTO -> myset.add(gson.toJson(storeDTO)));
+                            preferenceManager.setMyStores(myset);
+                        }
+                    }
 
-            @Override
-            public void onFailure(Call<List<StoreDTO>> call, Throwable t) {
-                Log.d(TAG, "onFailure: ");
-            }
-        });
+                    @Override
+                    public void onFailure(Call<List<StoreDTO>> call, Throwable t) {
+                        Log.d(TAG, "onFailure: ");
+                    }
+                });
 
     }
 

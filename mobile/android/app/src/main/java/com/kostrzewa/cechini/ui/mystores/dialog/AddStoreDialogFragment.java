@@ -38,6 +38,8 @@ import com.kostrzewa.cechini.data.StoreDataManager;
 import com.kostrzewa.cechini.data.StoreDataManagerImpl;
 import com.kostrzewa.cechini.data.StoreGroupDataManager;
 import com.kostrzewa.cechini.data.StoreGroupDataManagerImpl;
+import com.kostrzewa.cechini.data.WorkerDataManager;
+import com.kostrzewa.cechini.data.WorkerDataManagerImpl;
 import com.kostrzewa.cechini.data.events.StoreSentFailed;
 import com.kostrzewa.cechini.model.OrderItemDTO;
 import com.kostrzewa.cechini.model.StoreDTO;
@@ -63,6 +65,7 @@ public class AddStoreDialogFragment extends DialogFragment implements
     StoreGroupDTO selectedStoreGroup;
     StoreGroupDataManager storeGroupDataManager;
     StoreDataManager storeDataManager;
+    WorkerDataManager workerDataManager;
     ArrayAdapter<StoreGroupDTO> spinnerArrayAdapter;
     ProgressBar progressBar;
     private MyStoresFragment.OnListFragmentInteractionListener mListener;
@@ -89,6 +92,7 @@ public class AddStoreDialogFragment extends DialogFragment implements
         spinner.setOnItemSelectedListener(this);
         storeDataManager = new StoreDataManagerImpl(getContext());
         storeGroupDataManager = new StoreGroupDataManagerImpl(getContext());
+        workerDataManager = new WorkerDataManagerImpl(getContext());
         storeGroupDTOList = storeGroupDataManager.getStoreGroups();
 //        StoreGroupDTO[] tab = (StoreGroupDTO[]) storeGroupDTOList.toArray();
 //        productAdapter = new ProductAdapter(storeGroupDTOList);
@@ -161,6 +165,7 @@ public class AddStoreDialogFragment extends DialogFragment implements
         storeDTO.setName(name.getText().toString());
         storeDTO.setAddress(address.getText().toString());
         storeDTO.setStoregroupId(selectedStoreGroup.getId());
+        storeDTO.setWorkerId(workerDataManager.getWorker().getId());
         storeDataManager.addNewStore(storeDTO);
     }
 
@@ -184,7 +189,6 @@ public class AddStoreDialogFragment extends DialogFragment implements
         args.putSerializable(STORE_DTO, storeDTO);
         NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
         navController.navigate(R.id.nav_mystores_detail, args);
-
 
 
     }

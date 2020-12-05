@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.kostrzewa.cechini.R;
 import com.kostrzewa.cechini.data.StoreDataManager;
-import com.kostrzewa.cechini.data.StoreDataManagerImpl;
 import com.kostrzewa.cechini.model.StoreDTO;
 import com.kostrzewa.cechini.ui.mystores.MyStoresFragment.OnListFragmentInteractionListener;
 
@@ -25,7 +24,8 @@ import java.util.List;
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class MyStoresRecyclerViewAdapter extends RecyclerView.Adapter<MyStoresRecyclerViewAdapter.ViewHolder> implements Filterable {
+public class MyStoresRecyclerViewAdapter extends RecyclerView.Adapter<MyStoresRecyclerViewAdapter.ViewHolder>
+        implements Filterable {
     private static final String TAG = "MyStoresRecyclerViewAda";
     private final List<StoreDTO> mValues;
     private List<StoreDTO> mValuesFiltered;
@@ -45,7 +45,7 @@ public class MyStoresRecyclerViewAdapter extends RecyclerView.Adapter<MyStoresRe
         this.context = context;
     }
 
-    public void selectAfterAdded(StoreDTO storeDTO){
+    public void selectAfterAdded(StoreDTO storeDTO) {
         this.storeToSelect = storeDTO;
     }
 
@@ -59,9 +59,9 @@ public class MyStoresRecyclerViewAdapter extends RecyclerView.Adapter<MyStoresRe
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        if(storeToSelect != null &&  holder.mItem.getId().equals(storeToSelect.getId())){
+        if (storeToSelect != null && holder.mItem.getId().equals(storeToSelect.getId())) {
             holder.mContentView.setTextColor(context.getResources().getColor(R.color.red));
-        } 
+        }
         holder.mIdView.setText("" + mValues.get(position).getId());
         holder.mContentView.setText(mValues.get(position).getName() + " " + mValues.get(position).getAddress());
 
@@ -99,7 +99,8 @@ public class MyStoresRecyclerViewAdapter extends RecyclerView.Adapter<MyStoresRe
                         // here we are looking for name or phone number match
 
 //                        if (row.getName().toLowerCase().contains(charString.toLowerCase()) || row.getAddress().toLowerCase().contains(charString.toLowerCase())) {
-                        if (row.getName() != null && row.getName().toLowerCase().contains(charString.toLowerCase())) {
+                        if (row.getName().toLowerCase().contains(charString.toLowerCase())
+                                || row.getAddress().toLowerCase().contains(charString.toLowerCase())) {
                             filteredList.add(row);
                         }
                     }

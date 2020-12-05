@@ -12,6 +12,16 @@ public class StoreDTO implements Serializable {
 
     private Long storegroupId;
 
+    private Long workerId;
+
+    public Long getWorkerId() {
+        return workerId;
+    }
+
+    public void setWorkerId(Long workerId) {
+        this.workerId = workerId;
+    }
+
     public Long getStoregroupId() {
         return storegroupId;
     }

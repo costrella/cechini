@@ -119,6 +119,11 @@ public class StoreResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+    @GetMapping("/stores/worker/{id}/mystores")
+    public ResponseEntity<List<StoreDTO>> getAllByWorkerId(@PathVariable Long id) {
+        return ResponseEntity.ok().body(storeService.findAllByWorkerId(id));
+    }
+
     @GetMapping("/stores/all")
     public ResponseEntity<List<StoreDTOSimple>> getAllStores() {
         log.debug("REST request to get a page of Workers");

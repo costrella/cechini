@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.kostrzewa.cechini.MainActivity;
 import com.kostrzewa.cechini.R;
 import com.kostrzewa.cechini.model.StoreDTO;
 
@@ -26,18 +27,11 @@ public class MyStoreDetailFragment extends Fragment {
     private NavController navController;
 
     @OnClick(R.id.btn_addReport)
-    void addReport(){
+    void addReport() {
         Bundle args = new Bundle();
         args.putSerializable(STORE_DTO, storeDTO);
         navController.navigate(R.id.nav_report_create, args);
     }
-
-//    @OnClick(R.id.btn_addOrder)
-//    void addOrder(){
-//        Bundle args = new Bundle();
-//        args.putSerializable(STORE_DTO, storeDTO);
-//        navController.navigate(R.id.nav_order_create, args);
-//    }
 
 
     public static MyStoreDetailFragment newInstance() {
@@ -53,6 +47,7 @@ public class MyStoreDetailFragment extends Fragment {
         ButterKnife.bind(this, view);
         storeDTO = (StoreDTO) getArguments().getSerializable(STORE_DTO);
         navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle(storeDTO.getName() + " " + storeDTO.getAddress());
         return view;
     }
 

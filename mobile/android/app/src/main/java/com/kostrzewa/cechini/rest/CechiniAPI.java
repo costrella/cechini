@@ -24,8 +24,8 @@ public interface CechiniAPI {
     @GET("stores/{storeId}")
     Call<StoreDTO> getStore(@Path("storeId") String storeId);
 
-    @GET("stores/all")
-    Call<List<StoreDTO>> getAllStores();
+    @GET("stores/worker/{id}/mystores")
+    Call<List<StoreDTO>> getMyStores(@Path("id") Long id);
 
     @POST("stores")
     Call<StoreDTO> addStore(@Body StoreDTO storeDTO);
