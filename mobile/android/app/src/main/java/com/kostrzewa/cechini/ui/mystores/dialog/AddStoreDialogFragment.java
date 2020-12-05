@@ -27,6 +27,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.navigation.NavController;
@@ -192,6 +193,9 @@ public class AddStoreDialogFragment extends DialogFragment implements
     public void onStoreSentFailed(StoreSentFailed sentFailed) {
         progressBar.setVisibility(View.GONE);
         Log.d(TAG, "onStoreSentFailed: ");
+        Toast.makeText(getActivity(), sentFailed.getText(), Toast.LENGTH_LONG).show();
+
+
     }
 
 

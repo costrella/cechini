@@ -8,7 +8,10 @@ import com.kostrzewa.cechini.model.StoreDTO;
 import com.kostrzewa.cechini.rest.RetrofitClient;
 
 import org.greenrobot.eventbus.EventBus;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -46,7 +49,13 @@ public class StoreDataManagerImpl extends AbstractDataManager implements StoreDa
 
                     EventBus.getDefault().post(body);
                 } else {
-                    EventBus.getDefault().post(new StoreSentFailed("Błąd: " + response.code()));
+                    try {
+                        JSONObject jObjError = new JSONObject(response.errorBody().string());
+                        EventBus.getDefault().post(new StoreSentFailed(jObjError.getString("title")));
+                    } catch (Exception e) {
+                        EventBus.getDefault().post(new StoreSentFailed("Błąd: " + response.code()));
+                    }
+
 
                 }
             }
