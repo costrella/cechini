@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -64,6 +65,13 @@ public class MainActivity extends AppCompatActivity implements MyStoresFragment.
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
+
+        View headerView = navigationView.getHeaderView(0);
+        TextView navLogin = (TextView) headerView.findViewById(R.id.header_main_text);
+        TextView navName = (TextView) headerView.findViewById(R.id.header_second_text);
+        navLogin.setText("Login: " + workerDataManager.getWorker().getLogin());
+        navName.setText(workerDataManager.getWorker().getName() + " " + workerDataManager.getWorker().getSurname());
+
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_mystores, R.id.nav_slideshow,
                 R.id.nav_tools, R.id.nav_share, R.id.nav_send)
