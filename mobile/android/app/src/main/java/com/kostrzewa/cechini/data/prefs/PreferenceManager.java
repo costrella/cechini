@@ -24,4 +24,8 @@ public interface PreferenceManager {
     void setAllStoreGroups(Set<String> myset);
 
     Set<String> getAllStoreGroups();
+
+    void setWorker(String worker);
+
+    String getWorker();
 }

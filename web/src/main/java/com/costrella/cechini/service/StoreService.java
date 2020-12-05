@@ -4,22 +4,18 @@ import com.costrella.cechini.domain.Store;
 import com.costrella.cechini.repository.StoreRepository;
 import com.costrella.cechini.service.dto.StoreDTO;
 import com.costrella.cechini.service.dto.StoreDTOSimple;
+import com.costrella.cechini.service.exceptions.StoreExistException;
 import com.costrella.cechini.service.mapper.StoreMapper;
 import com.costrella.cechini.service.mapper.StoreMapperSimple;
-import org.hibernate.exception.ConstraintViolationException;
-import org.postgresql.util.PSQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.zalando.problem.violations.ConstraintViolationProblem;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

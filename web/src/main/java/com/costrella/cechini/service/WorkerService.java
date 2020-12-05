@@ -79,6 +79,18 @@ public class WorkerService {
             .map(workerMapper::toDto);
     }
 
+    @Transactional(readOnly = true)
+    public Optional<WorkerDTO> findByLogin(String login) {
+        return workerRepository.findByLogin(login)
+            .map(workerMapper::toDto);
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<WorkerDTO> findByLoginAndPassword(String login, String password) {
+        return workerRepository.findByLoginAndPassword(login, password)
+            .map(workerMapper::toDto);
+    }
+
     /**
      * Delete the worker by id.
      *

@@ -1,10 +1,10 @@
 package com.kostrzewa.cechini;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -27,6 +27,8 @@ import com.kostrzewa.cechini.data.StoreGroupDataManager;
 import com.kostrzewa.cechini.data.StoreGroupDataManagerImpl;
 import com.kostrzewa.cechini.data.WarehouseDataManager;
 import com.kostrzewa.cechini.data.WarehouseDataManagerImpl;
+import com.kostrzewa.cechini.data.WorkerDataManager;
+import com.kostrzewa.cechini.data.WorkerDataManagerImpl;
 import com.kostrzewa.cechini.model.StoreDTO;
 import com.kostrzewa.cechini.ui.mystores.MyStoresFragment;
 
@@ -40,10 +42,13 @@ public class MainActivity extends AppCompatActivity implements MyStoresFragment.
     private WarehouseDataManager warehouseDataManager;
     private ReportDataManager reportDataManager;
     private StoreGroupDataManager storeGroupDataManager;
+    private WorkerDataManager workerDataManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (!isWorkerExist()) return;
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -78,6 +83,17 @@ public class MainActivity extends AppCompatActivity implements MyStoresFragment.
         warehouseDataManager.downloadWarehouse();
         reportDataManager.sendReportNotSent();
         storeGroupDataManager.downloadStoreGroups();
+    }
+
+    private boolean isWorkerExist() {
+        workerDataManager = new WorkerDataManagerImpl(getApplicationContext());
+        if (workerDataManager.getWorker() == null) {
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            return false;
+        }
+        return true;
     }
 
     @Override

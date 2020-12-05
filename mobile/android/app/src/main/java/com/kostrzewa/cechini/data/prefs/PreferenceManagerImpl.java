@@ -63,4 +63,14 @@ public class PreferenceManagerImpl implements PreferenceManager {
     public Set<String> getAllStoreGroups() {
         return sharedPreferences.getStringSet("allStoreGroups", new HashSet<>());
     }
+
+    @Override
+    public void setWorker(String worker) {
+        sharedPreferences.edit().putString("worker", worker).apply();
+    }
+
+    @Override
+    public String getWorker() {
+        return sharedPreferences.getString("worker", null);
+    }
 }

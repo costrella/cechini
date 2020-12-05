@@ -1,9 +1,11 @@
 package com.costrella.cechini.web.rest;
 
+import com.costrella.cechini.domain.Worker;
 import com.costrella.cechini.service.WorkerService;
-import com.costrella.cechini.web.rest.errors.BadRequestAlertException;
 import com.costrella.cechini.service.dto.WorkerDTO;
-
+import com.costrella.cechini.service.exceptions.WorkerLoginNotFoundException;
+import com.costrella.cechini.service.exceptions.WorkerWrongPassException;
+import com.costrella.cechini.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -13,10 +15,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -115,6 +116,19 @@ public class WorkerResource {
         log.debug("REST request to get Worker : {}", id);
         Optional<WorkerDTO> workerDTO = workerService.findOne(id);
         return ResponseUtil.wrapOrNotFound(workerDTO);
+    }
+
+    @PostMapping("/workers/login")
+    public ResponseEntity<WorkerDTO> getWorker(@RequestBody Worker requestWorker) {
+        if (!workerService.findByLogin(requestWorker.getLogin()).isPresent()) {
+            throw new WorkerLoginNotFoundException();
+        }
+        Optional<WorkerDTO> worker = workerService.findByLoginAndPassword(requestWorker.getLogin(), requestWorker.getPassword());
+        if (!worker.isPresent()) {
+            throw new WorkerWrongPassException();
+        } else {
+            return ResponseUtil.wrapOrNotFound(worker);
+        }
     }
 
     /**

@@ -7,6 +7,7 @@ import com.kostrzewa.cechini.model.ReportsDTO;
 import com.kostrzewa.cechini.model.StoreDTO;
 import com.kostrzewa.cechini.model.StoreGroupDTO;
 import com.kostrzewa.cechini.model.WarehouseDTO;
+import com.kostrzewa.cechini.model.WorkerDTO;
 
 import java.util.List;
 
@@ -46,4 +47,7 @@ public interface CechiniAPI {
 
     @POST("reports/many")
     Call<Void> sendManyReports(@Body ReportsDTO reportsDTO);
+
+    @POST("workers/login")
+    Call<WorkerDTO> login(@Body WorkerDTO workerDTO);
 }
