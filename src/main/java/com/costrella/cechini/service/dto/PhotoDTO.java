@@ -6,18 +6,27 @@ import java.io.Serializable;
  * A DTO for the {@link com.costrella.cechini.domain.Photo} entity.
  */
 public class PhotoDTO implements Serializable {
-    
+
     private Long id;
 
     private String uri;
 
     private String valueContentType;
 
-
     private Long fileId;
 
     private Long reportId;
-    
+
+    private PhotoFileDTO photoFileDTO;
+
+    public PhotoFileDTO getPhotoFileDTO() {
+        return photoFileDTO;
+    }
+
+    public void setPhotoFileDTO(PhotoFileDTO photoFileDTO) {
+        this.photoFileDTO = photoFileDTO;
+    }
+
     public Long getId() {
         return id;
     }

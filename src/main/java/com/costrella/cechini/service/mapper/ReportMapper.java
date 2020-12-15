@@ -1,11 +1,16 @@
 package com.costrella.cechini.service.mapper;
 
 
-import com.costrella.cechini.domain.Report;
-import com.costrella.cechini.domain.Store;
-import com.costrella.cechini.domain.Worker;
+import com.costrella.cechini.domain.*;
+import com.costrella.cechini.service.dto.PhotoDTO;
 import com.costrella.cechini.service.dto.ReportDTO;
+import com.costrella.cechini.service.dto.ReportDTOWithPhotos;
 import org.mapstruct.Mapper;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Mapper for the entity {@link Report} and its DTO {@link ReportDTO}.
@@ -41,6 +46,27 @@ public interface ReportMapper extends EntityMapper<ReportDTO, Report> {
         return report;
     }
 
+    default Report toEntityWithPhotos(ReportDTOWithPhotos reportDTO) {
+        Report report = toEntity(reportDTO);
+        Set<Photo> photos = new HashSet<>();
+        if (!reportDTO.getPhotosList().isEmpty()) {
+            for (PhotoDTO photoDTO : reportDTO.getPhotosList()) {
+                if (photoDTO.getPhotoFileDTO() != null && photoDTO.getPhotoFileDTO().getValue() != null) {
+                    Photo photo = new Photo();
+                    PhotoFile photoFile = new PhotoFile();
+                    photoFile.setValue(photoDTO.getPhotoFileDTO().getValue());
+                    photoFile.setValueContentType("image/png");
+                    photo.setFile(photoFile);
+                    photo.setReport(report);
+                    photos.add(photo);
+                }
+            }
+        }
+        if(!photos.isEmpty()){
+            report.setPhotos(photos);
+        }
+        return report;
+    }
 
     default Report fromId(Long id) {
         if (id == null) {

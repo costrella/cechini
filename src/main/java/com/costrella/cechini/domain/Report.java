@@ -40,7 +40,7 @@ public class Report implements Serializable {
     @JoinColumn(unique = true)
     private Order order;
 
-    @OneToMany(mappedBy = "report")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "report")
     private Set<Photo> photos = new HashSet<>();
 
     @OneToMany(mappedBy = "report")
