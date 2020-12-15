@@ -1,10 +1,7 @@
-package com.costrella.cechini.service.dto;
+package com.kostrzewa.cechini.model;
 
 import java.io.Serializable;
 
-/**
- * A DTO for the {@link com.costrella.cechini.domain.Photo} entity.
- */
 public class PhotoDTO implements Serializable {
 
     private Long id;

@@ -3,6 +3,7 @@ package com.kostrzewa.cechini.rest;
 import com.kostrzewa.cechini.model.OrderDTO;
 import com.kostrzewa.cechini.model.ProductDTO;
 import com.kostrzewa.cechini.model.ReportDTO;
+import com.kostrzewa.cechini.model.ReportDTOWithPhotos;
 import com.kostrzewa.cechini.model.ReportsDTO;
 import com.kostrzewa.cechini.model.StoreDTO;
 import com.kostrzewa.cechini.model.StoreGroupDTO;
@@ -43,7 +44,7 @@ public interface CechiniAPI {
     Call<OrderDTO> sendOrder(@Body OrderDTO orderDTO);
 
     @POST("reports")
-    Call<ReportDTO> sendReport(@Body ReportDTO reportDTO);
+    Call<ReportDTO> sendReport(@Body ReportDTOWithPhotos reportDTO);
 
     @POST("reports/many")
     Call<Void> sendManyReports(@Body ReportsDTO reportsDTO);

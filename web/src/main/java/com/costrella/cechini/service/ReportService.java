@@ -5,6 +5,7 @@ import com.costrella.cechini.domain.Store;
 import com.costrella.cechini.domain.Worker;
 import com.costrella.cechini.repository.ReportRepository;
 import com.costrella.cechini.service.dto.ReportDTO;
+import com.costrella.cechini.service.dto.ReportDTOWithPhotos;
 import com.costrella.cechini.service.mapper.ReportMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,6 +46,13 @@ public class ReportService {
     public ReportDTO save(ReportDTO reportDTO) {
         log.debug("Request to save Report : {}", reportDTO);
         Report report = reportMapper.toEntity(reportDTO);
+        report = reportRepository.save(report);
+        return reportMapper.toDto(report);
+    }
+
+    public ReportDTO saveWithPhotos (ReportDTOWithPhotos reportDTO) {
+        log.debug("Request to save Report : {}", reportDTO);
+        Report report = reportMapper.toEntityWithPhotos(reportDTO);
         report = reportRepository.save(report);
         return reportMapper.toDto(report);
     }

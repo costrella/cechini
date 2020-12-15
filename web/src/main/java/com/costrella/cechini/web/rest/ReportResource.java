@@ -2,6 +2,7 @@ package com.costrella.cechini.web.rest;
 
 import com.costrella.cechini.service.ReportService;
 import com.costrella.cechini.service.dto.ReportDTO;
+import com.costrella.cechini.service.dto.ReportDTOWithPhotos;
 import com.costrella.cechini.service.dto.ReportsDTO;
 import com.costrella.cechini.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.web.util.HeaderUtil;
@@ -52,12 +53,12 @@ public class ReportResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/reports")
-    public ResponseEntity<ReportDTO> createReport(@Valid @RequestBody ReportDTO reportDTO) throws URISyntaxException {
+    public ResponseEntity<ReportDTO> createReport(@Valid @RequestBody ReportDTOWithPhotos reportDTO) throws URISyntaxException {
         log.debug("REST request to save Report : {}", reportDTO);
         if (reportDTO.getId() != null) {
             throw new BadRequestAlertException("A new report cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        ReportDTO result = reportService.save(reportDTO);
+        ReportDTO result = reportService.saveWithPhotos(reportDTO);
         return ResponseEntity.created(new URI("/api/reports/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);

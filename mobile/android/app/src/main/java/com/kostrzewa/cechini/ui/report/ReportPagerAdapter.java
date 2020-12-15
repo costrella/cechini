@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.kostrzewa.cechini.ui.order.CreateOrderFragment;
+import com.kostrzewa.cechini.ui.report.photo.PhotosFragment;
 import com.kostrzewa.cechini.ui.report.send.ReportSendFragment;
 
 public class ReportPagerAdapter extends FragmentStatePagerAdapter {
@@ -23,8 +24,10 @@ public class ReportPagerAdapter extends FragmentStatePagerAdapter {
             case 0:
                 return new CreateReportFragment();
             case 1:
-                return new CreateOrderFragment();
+                return new PhotosFragment();
             case 2:
+                return new CreateOrderFragment();
+            case 3:
                 return new ReportSendFragment();
         }
         return null;
@@ -32,7 +35,7 @@ public class ReportPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 
     @Override
@@ -41,8 +44,10 @@ public class ReportPagerAdapter extends FragmentStatePagerAdapter {
             case 0:
                 return "Raport";
             case 1:
-                return "Zamówienie";
+                return "Zdjęcia";
             case 2:
+                return "Zamówienie";
+            case 3:
                 return "Realizacja";
         }
         return null;

@@ -39,7 +39,6 @@ public class ReportSendFragment extends Fragment {
 
     @OnClick(R.id.fragment_report_sendBtn)
     void sendReport() {
-        ReportData.reportDTO.setWorkerId(1L); //todo
         reportDataManager.send(ReportData.reportDTO);
     }
 

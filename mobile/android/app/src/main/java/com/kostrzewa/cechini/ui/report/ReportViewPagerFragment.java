@@ -16,6 +16,7 @@ import com.kostrzewa.cechini.data.WorkerDataManager;
 import com.kostrzewa.cechini.data.WorkerDataManagerImpl;
 import com.kostrzewa.cechini.model.OrderDTO;
 import com.kostrzewa.cechini.model.ReportDTO;
+import com.kostrzewa.cechini.model.ReportDTOWithPhotos;
 import com.kostrzewa.cechini.model.StoreDTO;
 import com.kostrzewa.cechini.ui.report.data.ReportData;
 
@@ -39,7 +40,7 @@ public class ReportViewPagerFragment extends Fragment {
     }
 
     private void createBaseReport(StoreDTO currentStore) {
-        ReportData.reportDTO = new ReportDTO();
+        ReportData.reportDTO = new ReportDTOWithPhotos();
         ReportData.reportDTO.setOrderDTO(new OrderDTO());
         ReportData.reportDTO.setStoreId(currentStore.getId());
         ReportData.reportDTO.setWorkerId(workerDataManager.getWorker().getId());
@@ -54,7 +55,7 @@ public class ReportViewPagerFragment extends Fragment {
         reportPagerAdapter = new ReportPagerAdapter(getChildFragmentManager());
         viewPager = view.findViewById(R.id.pager);
         viewPager.setAdapter(reportPagerAdapter);
-
+        viewPager.setOffscreenPageLimit(10);
         TabLayout tabLayout = view.findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
     }

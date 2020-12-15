@@ -1,8 +1,8 @@
 package com.kostrzewa.cechini.ui.report.data;
 
-import com.kostrzewa.cechini.model.ReportDTO;
+import com.kostrzewa.cechini.model.ReportDTOWithPhotos;
 
 public class ReportData {
 
-    public static ReportDTO reportDTO;
+    public static ReportDTOWithPhotos reportDTO;
 }
