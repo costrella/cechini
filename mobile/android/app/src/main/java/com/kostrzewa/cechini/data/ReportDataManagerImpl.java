@@ -37,10 +37,10 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
             @Override
             public void onResponse(Call<ReportDTO> call, Response<ReportDTO> response) {
                 if (response.isSuccessful()) {
-                    EventBus.getDefault().post(new ReportSentSuccess("Raport wysłany ! Możesz oglądać swoje raporty i zamówienia w zakładce 'Moje raporty' / 'Moje zamówienia'"));
+                    EventBus.getDefault().post(new ReportSentSuccess("Raport wysłany !"));
                 } else {
                     saveNotSentReport(reportDTO);
-                    EventBus.getDefault().post(new ReportSentFailed("Raport nie został wysłany. Zapisano raport w pamięci telefonu! Kod błędu: " + response.code()));
+                    EventBus.getDefault().post(new ReportSentFailed("Raport NIE został wysłany! Zapisano w pamięci! Kod błędu: " + response.code()));
                 }
             }
 
@@ -48,9 +48,9 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
             public void onFailure(Call<ReportDTO> call, Throwable t) {
                 saveNotSentReport(reportDTO);
                 if (!isNetworkConnected()) {
-                    EventBus.getDefault().post(new ReportSentFailed("Brak dostępu do internetu. Zapisano raport w pamięci telefonu! "));
+                    EventBus.getDefault().post(new ReportSentFailed("Brak dostępu do internetu. Zapisano w pamięci ! "));
                 } else {
-                    EventBus.getDefault().post(new ReportSentFailed("Wystąpił problem. Zapisano raport w pamięci telefonu! "));
+                    EventBus.getDefault().post(new ReportSentFailed("Wystąpił problem. Zapisano w pamięci ! "));
                 }
 
             }

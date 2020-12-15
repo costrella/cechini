@@ -180,9 +180,12 @@ public class AddStoreDialogFragment extends DialogFragment implements
     public void onStoreAdded(StoreDTO storeDTO) {
         progressBar.setVisibility(View.GONE);
         Log.d(TAG, "onStoreAdded: ");
-        storeDTOList.add(storeDTO);
-//        adapter.selectAfterAdded(storeDTO);
-        adapter.notifyDataSetChanged();
+        if (storeDTOList != null) {
+            storeDTOList.add(storeDTO);
+        }
+        if (adapter != null) {
+            adapter.notifyDataSetChanged();
+        }
         getDialog().dismiss();
 
         Bundle args = new Bundle();
