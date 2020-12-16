@@ -4,6 +4,7 @@ package com.costrella.cechini.service.mapper;
 import com.costrella.cechini.domain.*;
 import com.costrella.cechini.service.dto.PhotoDTO;
 import com.costrella.cechini.service.dto.ReportDTO;
+import com.costrella.cechini.service.dto.ReportDTOSimple;
 import com.costrella.cechini.service.dto.ReportDTOWithPhotos;
 import org.mapstruct.Mapper;
 
@@ -40,6 +41,7 @@ public interface ReportMapper extends EntityMapper<ReportDTO, Report> {
         report.setWorker(new Worker().id(reportDTO.getWorkerId()));
         report.setStore(new Store().id(reportDTO.getStoreId()));
         report.setDesc(reportDTO.getDesc());
+        report.setManagerNote(reportDTO.getManagerNote());
         if (reportDTO.getOrderDTO() != null) {
             report.setOrder(OrderMapperCustom.toEntity(reportDTO.getOrderDTO()));
         }
@@ -100,6 +102,23 @@ public interface ReportMapper extends EntityMapper<ReportDTO, Report> {
         if (report.getOrder() != null) {
             reportDTO.setOrderId(report.getOrder().getId());
         }
+        reportDTO.setPhotosCount(report.getPhotos().size());
+        return reportDTO;
+    }
+
+    default ReportDTOSimple toDtoSimple(Report report) {
+        if (report == null) return null;
+        ReportDTOSimple reportDTO = new ReportDTOSimple();
+        reportDTO.setId(report.getId());
+        reportDTO.setDesc(report.getDesc());
+        reportDTO.setManagerNote(report.getManagerNote());
+//        reportDTO.setReportDate(report.getReportDate());
+        if (report.getStore() != null) {
+            reportDTO.setStoreName(report.getStore().getName());
+        }
+//        if (report.getOrder() != null) {
+//            reportDTO.setOrderId(report.getOrder().getId());
+//        }
         reportDTO.setPhotosCount(report.getPhotos().size());
         return reportDTO;
     }

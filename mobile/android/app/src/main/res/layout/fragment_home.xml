@@ -26,17 +26,19 @@
         />
 
     <Button
+        android:id="@+id/btn_my_reports"
         android:layout_width="200dp"
         android:layout_height="150dp"
-        android:text=""
+        android:text="MOJE RAPORTY"
         android:layout_column="0"
         android:layout_row="1" />
 
     <Button
+        android:id="@+id/btn_my_orders"
         android:layout_width="200dp"
         android:layout_height="150dp"
+        android:text="MOJE ZAMÓWIENIA"
         android:layout_row="1"
-        android:layout_column="1"
-        android:text="" />
+        android:layout_column="1"/>
 
 </GridLayout>

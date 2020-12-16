@@ -2,6 +2,7 @@ package com.costrella.cechini.web.rest;
 
 import com.costrella.cechini.service.ReportService;
 import com.costrella.cechini.service.dto.ReportDTO;
+import com.costrella.cechini.service.dto.ReportDTOSimple;
 import com.costrella.cechini.service.dto.ReportDTOWithPhotos;
 import com.costrella.cechini.service.dto.ReportsDTO;
 import com.costrella.cechini.web.rest.errors.BadRequestAlertException;
@@ -117,6 +118,12 @@ public class ReportResource {
         Page<ReportDTO> page = reportService.findAllByWorkerId(pageable, id);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    @GetMapping("/reports/worker/{id}/all")
+    public ResponseEntity<List<ReportDTOSimple>> getAllReportsByWorkerId(@PathVariable Long id) {
+        List<ReportDTOSimple> list = reportService.findAllByWorkerId(id);
+        return ResponseEntity.ok().body(list);
     }
 
     @GetMapping("/reports/worker/{workerId}/store/{storeId}")

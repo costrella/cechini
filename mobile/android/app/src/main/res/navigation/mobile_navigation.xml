@@ -24,16 +24,10 @@
         tools:layout="@layout/fragment_mystores_detail" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.kostrzewa.cechini.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
-
-    <fragment
-        android:id="@+id/nav_tools"
-        android:name="com.kostrzewa.cechini.ui.tools.ToolsFragment"
-        android:label="@string/menu_tools"
-        tools:layout="@layout/fragment_tools" />
+        android:id="@+id/nav_myorders"
+        android:name="com.kostrzewa.cechini.ui.order.myorders.MyOrdersFragment"
+        android:label="Moje zamówienia"
+        tools:layout="@layout/fragment_myorders_list" />
 
     <fragment
         android:id="@+id/nav_share"
@@ -64,4 +58,10 @@
         android:name="com.kostrzewa.cechini.ui.LogoutFragment"
         android:label="Wyloguj"
         tools:layout="@layout/fragment_logout" />
+
+    <fragment
+        android:id="@+id/nav_myreports"
+        android:name="com.kostrzewa.cechini.ui.report.myreports.MyReportsFragment"
+        android:label="Moje raporty"
+        tools:layout="@layout/fragment_myreports_list" />
 </navigation>

@@ -13,13 +13,13 @@
             android:icon="@drawable/ic_menu_gallery"
             android:title="@string/menu_mystores" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_myreports"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:title="@string/menu_myreports" />
         <item
-            android:id="@+id/nav_tools"
+            android:id="@+id/nav_myorders"
             android:icon="@drawable/ic_menu_manage"
-            android:title="@string/menu_tools" />
+            android:title="Moje zamówienia" />
     </group>
 
     <item android:title="Communicate">

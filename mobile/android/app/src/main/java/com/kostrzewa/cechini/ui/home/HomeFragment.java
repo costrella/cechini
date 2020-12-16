@@ -1,17 +1,13 @@
 package com.kostrzewa.cechini.ui.home;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -27,23 +23,34 @@ import org.greenrobot.eventbus.Subscribe;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.kostrzewa.cechini.util.Constants.STORE_DTO;
-
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
 
     @OnClick(R.id.btn_mystores)
-    public void onClick1(){
+    public void onClick1() {
         NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
         navController.navigate(R.id.nav_mystores);
     }
 
     @OnClick(R.id.btn_add_store)
-    public void onClick2(){
+    public void onClick2() {
         new AddStoreDialogFragment(null, null)
                 .show(getFragmentManager(), "sample");
     }
+
+    @OnClick(R.id.btn_my_reports)
+    public void onClick3() {
+        NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
+        navController.navigate(R.id.nav_myreports);
+    }
+
+    @OnClick(R.id.btn_my_orders)
+    public void onClick4() {
+        NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
+        navController.navigate(R.id.nav_myorders);
+    }
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {

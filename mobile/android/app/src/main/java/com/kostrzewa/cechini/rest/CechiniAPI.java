@@ -40,6 +40,9 @@ public interface CechiniAPI {
     @GET("warehouses/all")
     Call<List<WarehouseDTO>> getAllWarehouses();
 
+    @GET("reports/worker/{id}/all")
+    Call<List<ReportDTO>> getMyReports(@Path("id") Long id);
+
     @POST("orders")
     Call<OrderDTO> sendOrder(@Body OrderDTO orderDTO);
 
@@ -51,4 +54,7 @@ public interface CechiniAPI {
 
     @POST("workers/login")
     Call<WorkerDTO> login(@Body WorkerDTO workerDTO);
+
+    @GET("orders/worker/{id}/all")
+    Call<List<OrderDTO>> getMyOrders(@Path("id") Long workerId);
 }

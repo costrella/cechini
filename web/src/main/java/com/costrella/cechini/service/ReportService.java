@@ -5,6 +5,7 @@ import com.costrella.cechini.domain.Store;
 import com.costrella.cechini.domain.Worker;
 import com.costrella.cechini.repository.ReportRepository;
 import com.costrella.cechini.service.dto.ReportDTO;
+import com.costrella.cechini.service.dto.ReportDTOSimple;
 import com.costrella.cechini.service.dto.ReportDTOWithPhotos;
 import com.costrella.cechini.service.mapper.ReportMapper;
 import org.slf4j.Logger;
@@ -18,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing {@link Report}.
@@ -75,6 +77,12 @@ public class ReportService {
         log.debug("Request to get all Reports by worker id");
         return reportRepository.findAllByWorkerId(id, pageable)
             .map(reportMapper::toDto);
+    }
+
+    @Transactional(readOnly = true)
+    public List<ReportDTOSimple> findAllByWorkerId(Long id) {
+        return reportRepository.findAllByWorkerId(id).stream()
+            .map(reportMapper::toDtoSimple).collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
