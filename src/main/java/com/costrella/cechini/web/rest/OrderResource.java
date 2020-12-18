@@ -114,6 +114,12 @@ public class OrderResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+    @GetMapping("/orders/worker/{id}/all")
+    public ResponseEntity<List<OrderDTO>> getAllByWorkerId(@PathVariable Long id) {
+        List<OrderDTO> list = orderService.findAllByWorkerId( id);
+        return ResponseEntity.ok().body(list);
+    }
+
     @GetMapping("/ordersList")
     public ResponseEntity<List<OrderDTO>> getAllOrdersList() {
         return ResponseEntity.ok().body(orderService.findAll());

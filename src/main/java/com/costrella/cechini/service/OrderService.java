@@ -1,7 +1,6 @@
 package com.costrella.cechini.service;
 
 import com.costrella.cechini.domain.Order;
-import com.costrella.cechini.domain.Product;
 import com.costrella.cechini.domain.Report;
 import com.costrella.cechini.domain.Worker;
 import com.costrella.cechini.repository.OrderRepository;
@@ -16,7 +15,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -121,5 +119,17 @@ public class OrderService {
         order.setReport(new Report().worker(new Worker().id(id)));
         return orderRepository.findAll(Example.of(order), pageable)
             .map(v -> orderMapper.toDtoCustom(v, orderItemMapper));
+    }
+
+
+    @Transactional(readOnly = true)
+    public List<OrderDTO> findAllByWorkerId(Long id) {
+        Order order = new Order();
+        order.setReport(new Report().worker(new Worker().id(id)));
+
+        return orderRepository.findAll(Example.of(order)).stream()
+            .map(v -> orderMapper.toDtoCustom(v, orderItemMapper)).collect(Collectors.toList());
+//        return orderRepository.findTop10AllByWorkerId(id).stream()
+//            .map(v -> orderMapper.toDtoCustom(v, orderItemMapper)).collect(Collectors.toList());
     }
 }
