@@ -40,7 +40,10 @@ public class MyOrdersRecyclerViewAdapter extends RecyclerView.Adapter<MyOrdersRe
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.mIdView.setText("" + mValues.get(position).getId());
-//        holder.mContentView.setText(mValues.get(position).getDesc());//todo dataaa
+        holder.mContentView.setText(mValues.get(position).getStoreName()
+                + ", hurtownia: " + mValues.get(position).getWarehouseName()
+                + ", pozycje: " + mValues.get(position).getOrderItems().size());
+        //todo dataaa
 //        if (holder.mItem.getManagerNote() != null) {
 //            holder.managerNoteTV.setVisibility(View.VISIBLE);
 //            holder.managerNoteTV.setText(holder.mItem.getManagerNote());

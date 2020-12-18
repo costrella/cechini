@@ -40,15 +40,14 @@ public class MyReportsRecyclerViewAdapter extends RecyclerView.Adapter<MyReports
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.mIdView.setText("" + mValues.get(position).getId());
-        holder.mContentView.setText(mValues.get(position).getDesc());//todo dataaa
+        holder.mContentView.setText("Sklep: " + mValues.get(position).getStoreName()
+                + ", opis: " + mValues.get(position).getDesc());//todo dataaa
         if (holder.mItem.getManagerNote() != null) {
             holder.managerNoteTV.setVisibility(View.VISIBLE);
             holder.managerNoteTV.setText(holder.mItem.getManagerNote());
         } else {
             holder.managerNoteTV.setVisibility(View.GONE);
         }
-        holder.mContentView.setText(mValues.get(position).getDesc());
-
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

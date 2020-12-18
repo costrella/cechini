@@ -22,6 +22,7 @@
         android:padding="15dp"
         android:background="@color/white"
         android:textColor="@color/red"
+        android:visibility="gone"
         tool:text="Testowy sklep"
         android:textAppearance="?attr/textAppearanceListItem" />
 
