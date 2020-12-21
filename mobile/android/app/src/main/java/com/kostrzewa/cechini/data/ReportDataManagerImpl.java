@@ -12,10 +12,12 @@ import com.kostrzewa.cechini.model.ReportDTOWithPhotos;
 import com.kostrzewa.cechini.model.ReportsDTO;
 import com.kostrzewa.cechini.rest.RetrofitClient;
 import com.kostrzewa.cechini.ui.report.data.ReportData;
+import com.kostrzewa.cechini.util.DateUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

@@ -20,7 +20,7 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
 //
 //    List<Report> findByNumber(String number);
 
-    List<Report> findAllByWorkerId(Long id);
+    List<Report> findAllByWorkerIdOrderByReportDateDesc(Long id);
 
     List<Report> findAllByWorkerIdAndStoreId(Long id, Long storeId);
 

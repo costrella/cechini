@@ -29,16 +29,16 @@ public class RetrofitClient {
     }
 
     RetrofitClient() {
-        Gson gson = new GsonBuilder().registerTypeHierarchyAdapter(byte[].class, new ByteArrayToBase64TypeAdapter())
+        Gson gson = new GsonBuilder()
+                //.registerTypeHierarchyAdapter(byte[].class, new ByteArrayToBase64TypeAdapter())
 //                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
-                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
-                .create();
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(CechiniAPI.ENDPOINT)
-                .addConverterFactory(GsonConverterFactory.create())
+//                .addConverterFactory(GsonConverterFactory.create())
 
-//                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
         service = retrofit.create(CechiniAPI.class);

@@ -16,6 +16,7 @@ import com.kostrzewa.cechini.R;
 import com.kostrzewa.cechini.data.ReportDataManager;
 import com.kostrzewa.cechini.model.ReportDTO;
 import com.kostrzewa.cechini.model.ReportDTOWithPhotos;
+import com.kostrzewa.cechini.util.DateUtils;
 
 import java.util.List;
 
@@ -47,15 +48,15 @@ public class MyReportsRecyclerViewAdapter extends RecyclerView.Adapter<MyReports
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        ReportDTO r = mValues.get(position);
-        holder.mItem = r;
-        holder.orderExistTV.setVisibility(r.getOrderDTO() == null ? View.GONE : View.VISIBLE);
-        holder.mIdView.setText("" + r.getId());
-        holder.mContentView.setText("Sklep: " + r.getStoreName()
-                + ", opis: " + r.getDesc());//todo dataaa
-        if (r.getManagerNote() != null) {
+        ReportDTO reportDTO = mValues.get(position);
+        holder.mItem = reportDTO;
+        holder.orderExistTV.setVisibility(reportDTO.getOrderDTO() == null ? View.GONE : View.VISIBLE);
+        holder.date.setText(DateUtils.parse(reportDTO.getReportDate()));
+
+        holder.mContentView.setText("Sklep: " + reportDTO.getStoreName()
+                + ", opis: " + reportDTO.getDesc());
+        if (reportDTO.getManagerNote() != null) {
             holder.managerNoteTV.setVisibility(View.VISIBLE);
-            holder.managerNoteTV.setText(holder.mItem.getManagerNote());
         } else {
             holder.managerNoteTV.setVisibility(View.GONE);
         }
@@ -77,7 +78,7 @@ public class MyReportsRecyclerViewAdapter extends RecyclerView.Adapter<MyReports
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
+        public final TextView date;
         public final TextView mContentView;
         public final TextView managerNoteTV;
         public final TextView orderExistTV;
@@ -87,7 +88,7 @@ public class MyReportsRecyclerViewAdapter extends RecyclerView.Adapter<MyReports
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
+            date = (TextView) view.findViewById(R.id.item_date);
             mContentView = (TextView) view.findViewById(R.id.content);
             managerNoteTV = (TextView) view.findViewById(R.id.item_managerNote);
             orderExistTV = (TextView) view.findViewById(R.id.item_orderExist);

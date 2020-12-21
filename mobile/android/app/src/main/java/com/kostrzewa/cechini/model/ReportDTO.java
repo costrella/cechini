@@ -2,12 +2,13 @@ package com.kostrzewa.cechini.model;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Date;
 
 public class ReportDTO implements Serializable {
 
     private Long id;
 
-    private Instant reportDate;
+    private Date reportDate;
 
     private String desc;
 
@@ -43,11 +44,11 @@ public class ReportDTO implements Serializable {
         this.id = id;
     }
 
-    public Instant getReportDate() {
+    public Date getReportDate() {
         return reportDate;
     }
 
-    public void setReportDate(Instant reportDate) {
+    public void setReportDate(Date reportDate) {
         this.reportDate = reportDate;
     }
 
