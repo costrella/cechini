@@ -19,6 +19,7 @@ import com.kostrzewa.cechini.data.WorkerDataManagerImpl;
 import com.kostrzewa.cechini.data.events.MyReportsDownloadFailed;
 import com.kostrzewa.cechini.data.events.MyReportsDownloadSuccess;
 import com.kostrzewa.cechini.model.ReportDTO;
+import com.kostrzewa.cechini.model.ReportDTOWithPhotos;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -33,7 +34,7 @@ public class MyReportsFragment extends Fragment {
     private ReportDataManager reportDataManager;
     private WorkerDataManager workerDataManager;
     private MyReportsRecyclerViewAdapter adapter;
-    private List<ReportDTO> reportDTOList;
+    private List<ReportDTOWithPhotos> reportDTOList;
 
     @BindView(R.id.fragment_myreports_recyclerView)
     RecyclerView recyclerView;
@@ -92,7 +93,7 @@ public class MyReportsFragment extends Fragment {
     @Subscribe
     public void onSuccess(MyReportsDownloadSuccess s) {
         reportDTOList = s.getList();
-        adapter = new MyReportsRecyclerViewAdapter(getContext(), reportDataManager, reportDTOList);
+        adapter = new MyReportsRecyclerViewAdapter(getContext(), getActivity(), reportDataManager, reportDTOList);
         recyclerView.setAdapter(adapter);
 //        adapter.notifyDataSetChanged();
     }

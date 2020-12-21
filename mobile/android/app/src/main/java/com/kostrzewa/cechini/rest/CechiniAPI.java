@@ -41,7 +41,7 @@ public interface CechiniAPI {
     Call<List<WarehouseDTO>> getAllWarehouses();
 
     @GET("reports/worker/{id}/all")
-    Call<List<ReportDTO>> getMyReports(@Path("id") Long id);
+    Call<List<ReportDTOWithPhotos>> getMyReports(@Path("id") Long id);
 
     @POST("orders")
     Call<OrderDTO> sendOrder(@Body OrderDTO orderDTO);

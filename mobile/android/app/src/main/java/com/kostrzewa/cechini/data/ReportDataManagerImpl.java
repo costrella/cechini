@@ -8,6 +8,7 @@ import com.kostrzewa.cechini.data.events.MyReportsDownloadSuccess;
 import com.kostrzewa.cechini.data.events.ReportSentFailed;
 import com.kostrzewa.cechini.data.events.ReportSentSuccess;
 import com.kostrzewa.cechini.model.ReportDTO;
+import com.kostrzewa.cechini.model.ReportDTOWithPhotos;
 import com.kostrzewa.cechini.model.ReportsDTO;
 import com.kostrzewa.cechini.rest.RetrofitClient;
 import com.kostrzewa.cechini.ui.report.data.ReportData;
@@ -93,9 +94,9 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
 
     @Override
     public void downloadMyReports(Long workerId) {
-        RetrofitClient.getInstance().getService().getMyReports(workerId).enqueue(new Callback<List<ReportDTO>>() {
+        RetrofitClient.getInstance().getService().getMyReports(workerId).enqueue(new Callback<List<ReportDTOWithPhotos>>() {
             @Override
-            public void onResponse(Call<List<ReportDTO>> call, Response<List<ReportDTO>> response) {
+            public void onResponse(Call<List<ReportDTOWithPhotos>> call, Response<List<ReportDTOWithPhotos>> response) {
                 if (response.isSuccessful()) {
                     EventBus.getDefault().post(new MyReportsDownloadSuccess(response.body()));
                 } else {
@@ -104,7 +105,7 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
             }
 
             @Override
-            public void onFailure(Call<List<ReportDTO>> call, Throwable t) {
+            public void onFailure(Call<List<ReportDTOWithPhotos>> call, Throwable t) {
                 EventBus.getDefault().post(new MyReportsDownloadFailed("Wystąpił problem"));
             }
         });

@@ -8,9 +8,7 @@ import com.costrella.cechini.service.dto.ReportDTOSimple;
 import com.costrella.cechini.service.dto.ReportDTOWithPhotos;
 import org.mapstruct.Mapper;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -18,22 +16,6 @@ import java.util.Set;
  */
 @Mapper(componentModel = "spring", uses = {OrderMapper.class, WorkerMapper.class, StoreMapper.class})
 public interface ReportMapper extends EntityMapper<ReportDTO, Report> {
-//    @Mapping(source = "order.id", target = "orderId")
-//    @Mapping(source = "worker.id", target = "workerId")
-//    @Mapping(source = "worker.surname", target = "workerSurname")
-//    @Mapping(source = "store.id", target = "storeId")
-//    @Mapping(source = "store.name", target = "storeName")
-////    @Mapping(source = "photos.size", target = "photosCount")
-//    ReportDTO toDto(Report report);
-
-//    @Mapping(source = "orderId", target = "order")
-//    @Mapping(target = "photos", ignore = true)
-//    @Mapping(target = "removePhotos", ignore = true)
-//    @Mapping(target = "notes", ignore = true)
-//    @Mapping(target = "removeNote", ignore = true)
-//    @Mapping(source = "workerId", target = "worker")
-//    @Mapping(source = "storeId", target = "store")
-//    Report toEntity(ReportDTO reportDTO);
 
     default Report toEntity(ReportDTO reportDTO) {
         Report report = new Report();
@@ -64,7 +46,7 @@ public interface ReportMapper extends EntityMapper<ReportDTO, Report> {
                 }
             }
         }
-        if(!photos.isEmpty()){
+        if (!photos.isEmpty()) {
             report.setPhotos(photos);
         }
         return report;
@@ -79,18 +61,13 @@ public interface ReportMapper extends EntityMapper<ReportDTO, Report> {
         return report;
     }
 
-    //    @Mapping(source = "order.id", target = "orderId")
-//    @Mapping(source = "worker.id", target = "reportDTO.workerId")
-//    @Mapping(source = "worker.surname", target = "reportDTO.workerSurname")
-//    @Mapping(source = "store.id", target = "storeId")
-//    @Mapping(source = "store.name", target = "storeName")
     default ReportDTO toDto(Report report) {
         if (report == null) return null;
         ReportDTO reportDTO = new ReportDTO();
         reportDTO.setId(report.getId());
         reportDTO.setDesc(report.getDesc());
         reportDTO.setManagerNote(report.getManagerNote());
-        reportDTO.setReportDate(report.getReportDate());
+//        reportDTO.setReportDate(report.getReportDate()); //todo
         if (report.getWorker() != null) {
             reportDTO.setWorkerId(report.getWorker().getId());
             reportDTO.setWorkerSurname(report.getWorker().getSurname());
@@ -103,6 +80,14 @@ public interface ReportMapper extends EntityMapper<ReportDTO, Report> {
             reportDTO.setOrderId(report.getOrder().getId());
         }
         reportDTO.setPhotosCount(report.getPhotos().size());
+        return reportDTO;
+    }
+
+    default ReportDTO toDtoWithOrders(Report report, OrderMapper orderMapper, OrderItemMapper orderItemMapper) {
+        ReportDTO reportDTO = toDto(report);
+        if (report.getOrder() != null) {
+            reportDTO.setOrderDTO(orderMapper.toDtoCustom(report.getOrder(), orderItemMapper));
+        }
         return reportDTO;
     }
 

@@ -20,6 +20,7 @@ import com.kostrzewa.cechini.model.ReportDTOWithPhotos;
 import com.kostrzewa.cechini.model.StoreDTO;
 import com.kostrzewa.cechini.ui.report.data.ReportData;
 
+import static com.kostrzewa.cechini.util.Constants.REPORT_DTO;
 import static com.kostrzewa.cechini.util.Constants.STORE_DTO;
 
 public class ReportViewPagerFragment extends Fragment {
@@ -34,16 +35,27 @@ public class ReportViewPagerFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         StoreDTO currentStore = (StoreDTO) getArguments().getSerializable(STORE_DTO);
+        ReportDTO reportDTO = (ReportDTO) getArguments().getSerializable(REPORT_DTO);
         workerDataManager = new WorkerDataManagerImpl(getContext());
-        createBaseReport(currentStore);
+        createBaseReport(reportDTO, currentStore);
         return inflater.inflate(R.layout.fragment_report_viewpager, container, false);
     }
 
-    private void createBaseReport(StoreDTO currentStore) {
-        ReportData.reportDTO = new ReportDTOWithPhotos();
-        ReportData.reportDTO.setOrderDTO(new OrderDTO());
-        ReportData.reportDTO.setStoreId(currentStore.getId());
-        ReportData.reportDTO.setWorkerId(workerDataManager.getWorker().getId());
+    private void createBaseReport(ReportDTO reportDTO, StoreDTO currentStore) {
+        if (reportDTO == null && currentStore != null) {
+            ReportData.reportDTO = new ReportDTOWithPhotos();
+            ReportData.reportDTO.setReadOnly(false);
+            ReportData.reportDTO.setOrderDTO(new OrderDTO());
+            ReportData.reportDTO.setStoreId(currentStore.getId());
+            ReportData.reportDTO.setWorkerId(workerDataManager.getWorker().getId());
+        } else {
+            ReportData.reportDTO = (ReportDTOWithPhotos) reportDTO;
+            ReportData.reportDTO.setReadOnly(true);
+            if(ReportData.reportDTO.getOrderDTO() == null){
+                ReportData.reportDTO.setOrderDTO(new OrderDTO());
+            }
+        }
+
     }
 
     private void removeBaseReport() {

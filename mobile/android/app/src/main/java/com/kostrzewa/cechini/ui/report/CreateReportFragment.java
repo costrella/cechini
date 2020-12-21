@@ -27,12 +27,21 @@ public class CreateReportFragment extends Fragment {
     @BindView(R.id.report_desc_et)
     EditText descET;
 
+    private void init(){
+        if(ReportData.reportDTO.isReadOnly()) fillData();
+    }
+
+    private void fillData(){
+        descET.setText(ReportData.reportDTO.getDesc());
+        descET.setEnabled(false);
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_report_create, container, false);
         ButterKnife.bind(this, root);
+        init();
         navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
-
         descET.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

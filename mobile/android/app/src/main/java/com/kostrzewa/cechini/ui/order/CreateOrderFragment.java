@@ -46,6 +46,13 @@ public class CreateOrderFragment extends Fragment {
     NavController navController;
     private MyStoresFragment.OnListFragmentInteractionListener mListener;
 
+    private void init(){
+        if(ReportData.reportDTO.isReadOnly()) fillData();
+    }
+
+    private void fillData(){
+        refresh();
+    }
 
     @OnClick(R.id.fragment_order_addProductBtn)
     void addProduct() {
@@ -66,6 +73,7 @@ public class CreateOrderFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_order_create, container, false);
         ButterKnife.bind(this, view);
+        init();
         navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
         warehouseDataManager = new WarehouseDataManagerImpl(getContext());
         List<WarehouseDTO> warehouseDTOS = warehouseDataManager.getAllWarehouses();
@@ -106,21 +114,6 @@ public class CreateOrderFragment extends Fragment {
             }
 
         });
-//        warehouseAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-//            @Override
-//            public void onChanged() {
-//                Log.d(TAG, "onChanged: ");
-//                super.onChanged();
-//            }
-//        });
-//        warehouseAdapter.registerDataSetObserver(new DataSetObserver() {
-//            @Override
-//            public void onChanged() {
-//                Log.d(TAG, "onChanged: ");
-//                super.onChanged();
-//                ReportData.reportDTO.getOrderDTO().setWarehouseId(((WarehouseDTO) warehouseSpinner.getSelectedItem()).getId());
-//            }
-//        });
         recyclerView.setAdapter(adapter);
         return view;
     }

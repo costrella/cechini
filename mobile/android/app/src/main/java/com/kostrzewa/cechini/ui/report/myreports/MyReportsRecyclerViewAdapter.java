@@ -1,32 +1,41 @@
 package com.kostrzewa.cechini.ui.report.myreports;
 
+import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kostrzewa.cechini.R;
 import com.kostrzewa.cechini.data.ReportDataManager;
 import com.kostrzewa.cechini.model.ReportDTO;
+import com.kostrzewa.cechini.model.ReportDTOWithPhotos;
 
 import java.util.List;
 
+import static com.kostrzewa.cechini.util.Constants.REPORT_DTO;
+
 public class MyReportsRecyclerViewAdapter extends RecyclerView.Adapter<MyReportsRecyclerViewAdapter.ViewHolder> {
-    private final List<ReportDTO> mValues;
+    private final List<ReportDTOWithPhotos> mValues;
     private ReportDataManager reportDataManager;
+    private Activity activity;
     Context context;
 
-    public List<ReportDTO> getData() {
+    public List<ReportDTOWithPhotos> getData() {
         return mValues;
     }
 
-    public MyReportsRecyclerViewAdapter(Context context, ReportDataManager reportDataManager, List<ReportDTO> items) {
+    public MyReportsRecyclerViewAdapter(Context context, Activity activity, ReportDataManager reportDataManager, List<ReportDTOWithPhotos> items) {
         this.reportDataManager = reportDataManager;
         mValues = items;
         this.context = context;
+        this.activity = activity;
     }
 
     @Override
@@ -51,6 +60,10 @@ public class MyReportsRecyclerViewAdapter extends RecyclerView.Adapter<MyReports
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle args = new Bundle();
+                args.putSerializable(REPORT_DTO, holder.mItem);
+                NavController navController = Navigation.findNavController(activity, R.id.nav_host_fragment);
+                navController.navigate(R.id.nav_report_create, args);
             }
         });
     }

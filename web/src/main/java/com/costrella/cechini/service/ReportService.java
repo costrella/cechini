@@ -5,12 +5,12 @@ import com.costrella.cechini.domain.Store;
 import com.costrella.cechini.domain.Worker;
 import com.costrella.cechini.repository.ReportRepository;
 import com.costrella.cechini.service.dto.ReportDTO;
-import com.costrella.cechini.service.dto.ReportDTOSimple;
 import com.costrella.cechini.service.dto.ReportDTOWithPhotos;
+import com.costrella.cechini.service.mapper.OrderItemMapper;
+import com.costrella.cechini.service.mapper.OrderMapper;
 import com.costrella.cechini.service.mapper.ReportMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,9 +34,15 @@ public class ReportService {
 
     private final ReportMapper reportMapper;
 
-    public ReportService(ReportRepository reportRepository, ReportMapper reportMapper) {
+    private final OrderMapper orderMapper;
+
+    private final OrderItemMapper orderItemMapper;
+
+    public ReportService(ReportRepository reportRepository, ReportMapper reportMapper, OrderMapper orderMapper, OrderItemMapper orderItemMapper) {
         this.reportRepository = reportRepository;
         this.reportMapper = reportMapper;
+        this.orderMapper = orderMapper;
+        this.orderItemMapper = orderItemMapper;
     }
 
     /**
@@ -52,7 +58,7 @@ public class ReportService {
         return reportMapper.toDto(report);
     }
 
-    public ReportDTO saveWithPhotos (ReportDTOWithPhotos reportDTO) {
+    public ReportDTO saveWithPhotos(ReportDTOWithPhotos reportDTO) {
         log.debug("Request to save Report : {}", reportDTO);
         Report report = reportMapper.toEntityWithPhotos(reportDTO);
         report = reportRepository.save(report);
@@ -80,22 +86,22 @@ public class ReportService {
     }
 
     @Transactional(readOnly = true)
-    public List<ReportDTOSimple> findAllByWorkerId(Long id) {
+    public List<ReportDTO> findAllByWorkerId(Long id) {
         return reportRepository.findAllByWorkerId(id).stream()
-            .map(reportMapper::toDtoSimple).collect(Collectors.toList());
+            .map(report -> reportMapper.toDtoWithOrders(report, orderMapper, orderItemMapper)).collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
     public Page<ReportDTO> findAllByWorkerIdAndStoreId(Pageable pageable, Long id, Long storeId) {
-        return reportRepository.findAllByWorkerIdAndStoreId(id, storeId,  pageable)
+        return reportRepository.findAllByWorkerIdAndStoreId(id, storeId, pageable)
             .map(reportMapper::toDto);
     }
 
     @Transactional(readOnly = true)
     public Page<ReportDTO> findByStoreAndWorker(Pageable pageable, Long workerId, Long storeId) {
         Report report = new Report();
-        if(storeId != 0) report.setStore(new Store().id(storeId));
-        if(workerId != 0) report.setWorker(new Worker().id(workerId));
+        if (storeId != 0) report.setStore(new Store().id(storeId));
+        if (workerId != 0) report.setWorker(new Worker().id(workerId));
         return reportRepository.findAll(Example.of(report), pageable).map(reportMapper::toDto);
     }
 

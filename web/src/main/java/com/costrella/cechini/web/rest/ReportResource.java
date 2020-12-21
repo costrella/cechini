@@ -121,8 +121,8 @@ public class ReportResource {
     }
 
     @GetMapping("/reports/worker/{id}/all")
-    public ResponseEntity<List<ReportDTOSimple>> getAllReportsByWorkerId(@PathVariable Long id) {
-        List<ReportDTOSimple> list = reportService.findAllByWorkerId(id);
+    public ResponseEntity<List<ReportDTO>> getAllReportsByWorkerId(@PathVariable Long id) {
+        List<ReportDTO> list = reportService.findAllByWorkerId(id);
         return ResponseEntity.ok().body(list);
     }
 
