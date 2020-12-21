@@ -92,6 +92,12 @@ public class ReportService {
     }
 
     @Transactional(readOnly = true)
+    public List<ReportDTO> findAllByWorkerIdAndStoreId(Long workerId, Long storeId) {
+        return reportRepository.findAllByWorkerIdAndStoreId(workerId, storeId).stream()
+            .map(report -> reportMapper.toDtoWithOrders(report, orderMapper, orderItemMapper)).collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
     public Page<ReportDTO> findAllByWorkerIdAndStoreId(Pageable pageable, Long id, Long storeId) {
         return reportRepository.findAllByWorkerIdAndStoreId(id, storeId, pageable)
             .map(reportMapper::toDto);

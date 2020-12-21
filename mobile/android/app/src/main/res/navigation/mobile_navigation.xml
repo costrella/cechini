@@ -64,4 +64,10 @@
         android:name="com.kostrzewa.cechini.ui.report.myreports.MyReportsFragment"
         android:label="Moje raporty"
         tools:layout="@layout/fragment_myreports_list" />
+
+    <fragment
+        android:id="@+id/nav_myreportsOfStore"
+        android:name="com.kostrzewa.cechini.ui.report.myreports.MyReportsFragment"
+        android:label="Raporty sklepu"
+        tools:layout="@layout/fragment_myreports_list" />
 </navigation>

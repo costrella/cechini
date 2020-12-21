@@ -110,4 +110,23 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
             }
         });
     }
+
+    @Override
+    public void downloadMyReportsByStoreId(Long workerId, Long storeId) {
+        RetrofitClient.getInstance().getService().getMyReportsByStoreId(workerId, storeId).enqueue(new Callback<List<ReportDTOWithPhotos>>() {
+            @Override
+            public void onResponse(Call<List<ReportDTOWithPhotos>> call, Response<List<ReportDTOWithPhotos>> response) {
+                if (response.isSuccessful()) {
+                    EventBus.getDefault().post(new MyReportsDownloadSuccess(response.body()));
+                } else {
+                    EventBus.getDefault().post(new MyReportsDownloadFailed("Wystąpił problem"));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ReportDTOWithPhotos>> call, Throwable t) {
+                EventBus.getDefault().post(new MyReportsDownloadFailed("Wystąpił problem"));
+            }
+        });
+    }
 }

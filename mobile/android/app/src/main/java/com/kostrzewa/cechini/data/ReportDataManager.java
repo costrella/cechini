@@ -14,4 +14,6 @@ public interface ReportDataManager {
     void sendReportNotSent();
 
     void downloadMyReports(Long workerId);
+
+    void downloadMyReportsByStoreId(Long workerId, Long storeId);
 }

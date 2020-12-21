@@ -126,6 +126,13 @@ public class ReportResource {
         return ResponseEntity.ok().body(list);
     }
 
+    @GetMapping("/reports/worker/{workerId}/store/{storeId}/all")
+    public ResponseEntity<List<ReportDTO>>
+    getAllReportsByWorkerIdAndStoreId(@PathVariable Long workerId, @PathVariable Long storeId) {
+        List<ReportDTO> list = reportService.findAllByWorkerIdAndStoreId(workerId, storeId);
+        return ResponseEntity.ok().body(list);
+    }
+
     @GetMapping("/reports/worker/{workerId}/store/{storeId}")
     public ResponseEntity<List<ReportDTO>> getReportsByWorkerAndStore(Pageable pageable, @PathVariable Long workerId, @PathVariable Long storeId) {
         Page<ReportDTO> page = reportService.findByStoreAndWorker(pageable, workerId, storeId);

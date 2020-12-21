@@ -22,6 +22,8 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
 
     List<Report> findAllByWorkerId(Long id);
 
+    List<Report> findAllByWorkerIdAndStoreId(Long id, Long storeId);
+
     Page<Report> findAllByWorkerId(Long id, Pageable pageable);
 
     Page<Report> findAllByWorkerIdAndStoreId(Long id, Long storeId, Pageable pageable);

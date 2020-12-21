@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.kostrzewa.cechini.MainActivity;
 import com.kostrzewa.cechini.R;
 import com.kostrzewa.cechini.data.ReportDataManager;
 import com.kostrzewa.cechini.data.ReportDataManagerImpl;
@@ -18,8 +19,8 @@ import com.kostrzewa.cechini.data.WorkerDataManager;
 import com.kostrzewa.cechini.data.WorkerDataManagerImpl;
 import com.kostrzewa.cechini.data.events.MyReportsDownloadFailed;
 import com.kostrzewa.cechini.data.events.MyReportsDownloadSuccess;
-import com.kostrzewa.cechini.model.ReportDTO;
 import com.kostrzewa.cechini.model.ReportDTOWithPhotos;
+import com.kostrzewa.cechini.model.StoreDTO;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -29,8 +30,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.kostrzewa.cechini.util.Constants.STORE_DTO;
+
 public class MyReportsFragment extends Fragment {
-    private static final String ARG_COLUMN_COUNT = "column-count";
     private ReportDataManager reportDataManager;
     private WorkerDataManager workerDataManager;
     private MyReportsRecyclerViewAdapter adapter;
@@ -39,21 +41,7 @@ public class MyReportsFragment extends Fragment {
     @BindView(R.id.fragment_myreports_recyclerView)
     RecyclerView recyclerView;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
     public MyReportsFragment() {
-    }
-
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
-    public static MyReportsFragment newInstance(int columnCount) {
-        MyReportsFragment fragment = new MyReportsFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
@@ -81,8 +69,14 @@ public class MyReportsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_myreports_list, container, false);
         ButterKnife.bind(this, view);
         setHasOptionsMenu(true);
-        reportDataManager.downloadMyReports(workerDataManager.getWorker().getId());
+        if (getArguments() != null && (StoreDTO) getArguments().getSerializable(STORE_DTO) != null) {
+            StoreDTO storeDTO = (StoreDTO) getArguments().getSerializable(STORE_DTO);
+            reportDataManager.downloadMyReportsByStoreId(workerDataManager.getWorker().getId(), storeDTO.getId());
+            ((MainActivity) getActivity()).getSupportActionBar().setTitle("Raporty sklepu: " + storeDTO.getName() + " " + storeDTO.getAddress());
 
+        } else {
+            reportDataManager.downloadMyReports(workerDataManager.getWorker().getId());
+        }
         // Set the adapter
         Context context = view.getContext();
         recyclerView.setLayoutManager(new LinearLayoutManager(context));

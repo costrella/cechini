@@ -33,6 +33,12 @@ public class MyStoreDetailFragment extends Fragment {
         navController.navigate(R.id.nav_report_create, args);
     }
 
+    @OnClick(R.id.btn_storeReports)
+    void storeReports() {
+        Bundle args = new Bundle();
+        args.putSerializable(STORE_DTO, storeDTO);
+        navController.navigate(R.id.nav_myreportsOfStore, args);
+    }
 
     public static MyStoreDetailFragment newInstance() {
         Log.d(TAG, "newInstance: ");

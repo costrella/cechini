@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -29,6 +30,9 @@ public class CreateReportFragment extends Fragment {
     @BindView(R.id.report_manager_et)
     EditText reportManagerET;
 
+    @BindView(R.id.report_photoCount_tv)
+    TextView photoCountTV;
+
     private void init(){
         if(ReportData.reportDTO.isReadOnly()) fillDataReadOnly();
     }
@@ -39,6 +43,9 @@ public class CreateReportFragment extends Fragment {
 
         reportManagerET.setText("Komentarz kierownika: " + ReportData.reportDTO.getManagerNote());
         reportManagerET.setEnabled(false);
+
+        photoCountTV.setText("liczba przesłanych zdjęć: " + ReportData.reportDTO.getPhotosCount());
+        photoCountTV.setEnabled(false);
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
