@@ -19,6 +19,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,6 +28,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
@@ -41,26 +43,23 @@ import com.kostrzewa.cechini.data.StoreGroupDataManagerImpl;
 import com.kostrzewa.cechini.data.WorkerDataManager;
 import com.kostrzewa.cechini.data.WorkerDataManagerImpl;
 import com.kostrzewa.cechini.data.events.StoreSentFailed;
-import com.kostrzewa.cechini.model.OrderItemDTO;
 import com.kostrzewa.cechini.model.StoreDTO;
 import com.kostrzewa.cechini.model.StoreGroupDTO;
 import com.kostrzewa.cechini.ui.mystores.MyStoresFragment;
 import com.kostrzewa.cechini.ui.mystores.MyStoresRecyclerViewAdapter;
-import com.kostrzewa.cechini.ui.order.OrderItemAdapter;
-import com.kostrzewa.cechini.ui.order.dialog.ProductAdapter;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.kostrzewa.cechini.util.Constants.STORE_DTO;
 
-public class AddStoreDialogFragment extends DialogFragment implements
-        DialogInterface.OnClickListener, AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class AddStoreDialogFragment extends DialogFragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
     private static final String TAG = "AddStoreDialogFragment";
     private View form = null;
-    List<StoreGroupDTO> storeGroupDTOList;
+    List<StoreGroupDTO> storeGroupDTOList = new ArrayList<>();
     Spinner spinner;
     StoreGroupDTO selectedStoreGroup;
     StoreGroupDataManager storeGroupDataManager;
@@ -94,15 +93,13 @@ public class AddStoreDialogFragment extends DialogFragment implements
         storeGroupDataManager = new StoreGroupDataManagerImpl(getContext());
         workerDataManager = new WorkerDataManagerImpl(getContext());
         storeGroupDTOList = storeGroupDataManager.getStoreGroups();
-//        StoreGroupDTO[] tab = (StoreGroupDTO[]) storeGroupDTOList.toArray();
-//        productAdapter = new ProductAdapter(storeGroupDTOList);
+
         spinnerArrayAdapter = new ArrayAdapter<StoreGroupDTO>
                 (getContext(), android.R.layout.simple_spinner_dropdown_item,
                         storeGroupDTOList);
         spinner.setAdapter(spinnerArrayAdapter);
         spinner.setOnItemSelectedListener(this);
 
-//        spinner.setAdapter(new ArrayAdapter<StoreGroupDTO>());
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         return (builder.setTitle("Dodaj sklep").setView(form)
@@ -112,29 +109,6 @@ public class AddStoreDialogFragment extends DialogFragment implements
                 .create());
     }
 
-
-    @Override
-    public void onClick(DialogInterface dialog, int which) {
-
-//        OrderItemDTO orderItemDTO = new OrderItemDTO();
-//        orderItemDTO.setId(selectedStoreGroup.getId());
-//        orderItemDTO.setProductId(selectedStoreGroup.getId());
-//        orderItemDTO.setProductName(selectedStoreGroup.getName());
-////        orderItemDTO.setProductCapacity(selectedStoreGroup.getCapacity());
-////        orderItemDTO.setProductArtCountPalette(selectedStoreGroup.getArtCountPalette());
-////        orderItemDTO.setProductLayerCountPalette(selectedStoreGroup.getLayerCountPalette());
-////        orderItemDTO.setProductPackCountPalette(selectedStoreGroup.getPackCountPalette());
-//
-//        String packCountString = packCountTV.getText().toString();
-//        if (packCountString == null || packCountString.equals("")) {
-//            Toast.makeText(getActivity(), "Wypełnij ilość zgrzewek !", Toast.LENGTH_LONG).show();
-//            return;
-//        }
-//        orderItemDTO.setPackCount(Integer.valueOf(packCountString));
-//
-//        orderItemsList.add(orderItemDTO);
-//        adapter.notifyDataSetChanged();
-    }
 
     @Override
     public void onAttach(Context context) {
@@ -154,19 +128,52 @@ public class AddStoreDialogFragment extends DialogFragment implements
         selectedStoreGroup = null;
     }
 
+    EditText nameET;
+    EditText addressET;
+    TextView storeGroupTV;
+
     @Override
     public void onClick(View v) {
-        progressBar.setVisibility(View.VISIBLE);
-        Log.d(TAG, "onClick: ");
-        EditText name = form.findViewById(R.id.fragment_mystores_dialog_store_nameET);
-        EditText address = form.findViewById(R.id.fragment_mystores_dialog_store_addressET);
+        nameET = form.findViewById(R.id.fragment_mystores_dialog_store_nameET);
+        addressET = form.findViewById(R.id.fragment_mystores_dialog_store_addressET);
+        storeGroupTV = form.findViewById(R.id.fragment_mystores_dialog_storeGroupSpinner_label);
 
-        StoreDTO storeDTO = new StoreDTO();
-        storeDTO.setName(name.getText().toString());
-        storeDTO.setAddress(address.getText().toString());
-        storeDTO.setStoregroupId(selectedStoreGroup.getId());
-        storeDTO.setWorkerId(workerDataManager.getWorker().getId());
-        storeDataManager.addNewStore(storeDTO);
+        if(isValid()){
+            progressBar.setVisibility(View.VISIBLE);
+            StoreDTO storeDTO = new StoreDTO();
+            storeDTO.setName(nameET.getText().toString());
+            storeDTO.setAddress(addressET.getText().toString());
+            storeDTO.setStoregroupId(selectedStoreGroup.getId());
+            storeDTO.setWorkerId(workerDataManager.getWorker().getId());
+            storeDataManager.addNewStore(storeDTO);
+        }
+    }
+
+    private boolean isValid() {
+
+        View focusView = null;
+
+        String name = nameET.getText().toString();
+        String address = addressET.getText().toString();
+        if (selectedStoreGroup == null) {
+            storeGroupTV.setError("Wybierz grupę sklepu");
+            focusView = storeGroupTV;
+            focusView.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(name)) {
+            nameET.setError("Wypełnij pole");
+            focusView = nameET;
+            focusView.requestFocus();
+            return false;
+        }
+        if (TextUtils.isEmpty(address)) {
+            addressET.setError("Wypełnij pole");
+            focusView = addressET;
+            focusView.requestFocus();
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -192,8 +199,6 @@ public class AddStoreDialogFragment extends DialogFragment implements
         args.putSerializable(STORE_DTO, storeDTO);
         NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
         navController.navigate(R.id.nav_mystores_detail, args);
-
-
     }
 
     @Subscribe
@@ -201,8 +206,6 @@ public class AddStoreDialogFragment extends DialogFragment implements
         progressBar.setVisibility(View.GONE);
         Log.d(TAG, "onStoreSentFailed: ");
         Toast.makeText(getActivity(), sentFailed.getText(), Toast.LENGTH_LONG).show();
-
-
     }
 
 
