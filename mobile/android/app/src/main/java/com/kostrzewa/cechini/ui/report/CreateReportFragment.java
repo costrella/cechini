@@ -18,7 +18,6 @@ import com.kostrzewa.cechini.ui.report.data.ReportData;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class CreateReportFragment extends Fragment {
     private static final String TAG = "CreateReportFragment";
@@ -27,13 +26,19 @@ public class CreateReportFragment extends Fragment {
     @BindView(R.id.report_desc_et)
     EditText descET;
 
+    @BindView(R.id.report_manager_et)
+    EditText reportManagerET;
+
     private void init(){
-        if(ReportData.reportDTO.isReadOnly()) fillData();
+        if(ReportData.reportDTO.isReadOnly()) fillDataReadOnly();
     }
 
-    private void fillData(){
-        descET.setText(ReportData.reportDTO.getDesc());
+    private void fillDataReadOnly(){
+        descET.setText("Mój opis: " + ReportData.reportDTO.getDesc());
         descET.setEnabled(false);
+
+        reportManagerET.setText("Komentarz kierownika: " + ReportData.reportDTO.getManagerNote());
+        reportManagerET.setEnabled(false);
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
