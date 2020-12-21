@@ -16,6 +16,16 @@
         android:textAppearance="?attr/textAppearanceListItem" />
 
     <TextView
+        android:id="@+id/item_orderExist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:background="@color/white"
+        android:textColor="@color/colorPrimary"
+        android:text="Z"
+        android:textAppearance="?attr/textAppearanceListItem" />
+
+    <TextView
         android:id="@+id/item_managerNote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

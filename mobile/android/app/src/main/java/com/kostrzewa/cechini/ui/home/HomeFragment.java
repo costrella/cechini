@@ -45,11 +45,11 @@ public class HomeFragment extends Fragment {
         navController.navigate(R.id.nav_myreports);
     }
 
-    @OnClick(R.id.btn_my_orders)
-    public void onClick4() {
-        NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
-        navController.navigate(R.id.nav_myorders);
-    }
+//    @OnClick(R.id.btn_my_orders)
+//    public void onClick4() {
+//        NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
+//        navController.navigate(R.id.nav_myorders);
+//    }
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,

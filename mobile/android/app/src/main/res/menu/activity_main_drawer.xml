@@ -16,10 +16,10 @@
             android:id="@+id/nav_myreports"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_myreports" />
-        <item
-            android:id="@+id/nav_myorders"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Moje zamówienia" />
+<!--        <item-->
+<!--            android:id="@+id/nav_myorders"-->
+<!--            android:icon="@drawable/ic_menu_manage"-->
+<!--            android:title="Moje zamówienia" />-->
     </group>
 
     <item android:title="Communicate">

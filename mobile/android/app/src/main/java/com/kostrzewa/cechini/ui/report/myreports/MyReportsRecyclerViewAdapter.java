@@ -47,11 +47,13 @@ public class MyReportsRecyclerViewAdapter extends RecyclerView.Adapter<MyReports
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mIdView.setText("" + mValues.get(position).getId());
-        holder.mContentView.setText("Sklep: " + mValues.get(position).getStoreName()
-                + ", opis: " + mValues.get(position).getDesc());//todo dataaa
-        if (holder.mItem.getManagerNote() != null) {
+        ReportDTO r = mValues.get(position);
+        holder.mItem = r;
+        holder.orderExistTV.setVisibility(r.getOrderDTO() == null ? View.GONE : View.VISIBLE);
+        holder.mIdView.setText("" + r.getId());
+        holder.mContentView.setText("Sklep: " + r.getStoreName()
+                + ", opis: " + r.getDesc());//todo dataaa
+        if (r.getManagerNote() != null) {
             holder.managerNoteTV.setVisibility(View.VISIBLE);
             holder.managerNoteTV.setText(holder.mItem.getManagerNote());
         } else {
@@ -78,6 +80,7 @@ public class MyReportsRecyclerViewAdapter extends RecyclerView.Adapter<MyReports
         public final TextView mIdView;
         public final TextView mContentView;
         public final TextView managerNoteTV;
+        public final TextView orderExistTV;
 
         public ReportDTO mItem;
 
@@ -87,6 +90,7 @@ public class MyReportsRecyclerViewAdapter extends RecyclerView.Adapter<MyReports
             mIdView = (TextView) view.findViewById(R.id.item_number);
             mContentView = (TextView) view.findViewById(R.id.content);
             managerNoteTV = (TextView) view.findViewById(R.id.item_managerNote);
+            orderExistTV = (TextView) view.findViewById(R.id.item_orderExist);
 
         }
 
