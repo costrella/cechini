@@ -17,6 +17,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></Button>
 
+    <TextView
+        android:id="@+id/fragment_report_send_validError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_report_sendBtn"></TextView>
+
     <ProgressBar
         android:id="@+id/fragment_report_sendProgressBar"
         android:layout_width="wrap_content"

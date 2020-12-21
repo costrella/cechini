@@ -3,11 +3,13 @@ package com.kostrzewa.cechini.ui.report.send;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,8 +22,6 @@ import com.kostrzewa.cechini.data.ReportDataManager;
 import com.kostrzewa.cechini.data.ReportDataManagerImpl;
 import com.kostrzewa.cechini.data.events.ReportSentFailed;
 import com.kostrzewa.cechini.data.events.ReportSentSuccess;
-import com.kostrzewa.cechini.model.WarehouseDTO;
-import com.kostrzewa.cechini.ui.order.CreateOrderFragment;
 import com.kostrzewa.cechini.ui.report.data.ReportData;
 
 import org.greenrobot.eventbus.EventBus;
@@ -40,14 +40,36 @@ public class ReportSendFragment extends Fragment {
     @BindView(R.id.fragment_report_sendBtn)
     Button sendBtn;
 
+    @BindView(R.id.fragment_report_send_validError)
+    TextView validTV;
+
     @BindView(R.id.fragment_report_sendProgressBar)
     ProgressBar progressBar;
 
     @OnClick(R.id.fragment_report_sendBtn)
     void sendReport() {
-        progressBar.setVisibility(View.VISIBLE);
-        sendBtn.setVisibility(View.GONE);
-        handler.postDelayed(() -> reportDataManager.send(ReportData.reportDTO), 1500);
+        if (valid()) {
+            progressBar.setVisibility(View.VISIBLE);
+            sendBtn.setVisibility(View.GONE);
+            handler.postDelayed(() -> reportDataManager.send(ReportData.reportDTO), 1500);
+        }
+    }
+
+    private boolean valid() {
+        View focusView = null;
+        validTV.setText("");
+        if (ReportData.reportDTO.getOrderDTO().getOrderItems() == null
+                || ReportData.reportDTO.getOrderDTO().getOrderItems().isEmpty()) {
+            //raport bez zamowienia:
+            if (TextUtils.isEmpty(ReportData.reportDTO.getDesc())) {
+                validTV.setText("Opis raportu jest pusty :( \n Wymagamy go tylko wtedy, kiedy nie dodajesz zamówienia");
+                sendBtn.setError("");
+                focusView = sendBtn;
+                focusView.requestFocus();
+                return false;
+            }
+        }
+        return true;
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
