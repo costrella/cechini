@@ -1,14 +1,12 @@
 package com.kostrzewa.cechini.ui.order;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.database.DataSetObserver;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -19,7 +17,6 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kostrzewa.cechini.R;
 import com.kostrzewa.cechini.data.ProductDataManager;
 import com.kostrzewa.cechini.data.ProductDataManagerImpl;
@@ -46,12 +43,18 @@ public class CreateOrderFragment extends Fragment {
     NavController navController;
     private MyStoresFragment.OnListFragmentInteractionListener mListener;
 
-    private void init(){
-        if(ReportData.reportDTO.isReadOnly()) fillData();
+    private void init() {
+        if (ReportData.reportDTO.isReadOnly()) fillData();
     }
 
-    private void fillData(){
-        refresh();
+    private void fillData() {
+//        refresh();
+        warehouseSpinner.setEnabled(false);
+        warehouseTV.setText("Hurtownia");
+        recyclerView.setLayoutFrozen(true);
+        recyclerView.setEnabled(false);
+        recyclerView.setActivated(false);
+        addProductBtn.setEnabled(false);
     }
 
     @OnClick(R.id.fragment_order_addProductBtn)
@@ -60,6 +63,8 @@ public class CreateOrderFragment extends Fragment {
                 .show(getFragmentManager(), "sample");
     }
 
+    @BindView(R.id.fragment_order_addProductBtn)
+    Button addProductBtn;
     @BindView(R.id.fragment_order_recyclerview_emptyTV)
     TextView emptyTV;
     @BindView(R.id.fragment_order_warehouseTV)
@@ -92,7 +97,7 @@ public class CreateOrderFragment extends Fragment {
         productDataManager = new ProductDataManagerImpl(getContext());
         Context context = view.getContext();
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        adapter = new OrderItemAdapter(ReportData.reportDTO.getOrderDTO().getOrderItems());
+        adapter = new OrderItemAdapter(ReportData.reportDTO.getOrderDTO().getOrderItems(), ReportData.reportDTO.isReadOnly());
         refresh();
         adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override

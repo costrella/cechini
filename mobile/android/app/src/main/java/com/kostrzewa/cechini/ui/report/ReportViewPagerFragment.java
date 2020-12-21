@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.kostrzewa.cechini.MainActivity;
 import com.kostrzewa.cechini.R;
 import com.kostrzewa.cechini.data.WorkerDataManager;
 import com.kostrzewa.cechini.data.WorkerDataManagerImpl;
@@ -54,6 +55,7 @@ public class ReportViewPagerFragment extends Fragment {
             if(ReportData.reportDTO.getOrderDTO() == null){
                 ReportData.reportDTO.setOrderDTO(new OrderDTO());
             }
+            ((MainActivity) getActivity()).getSupportActionBar().setTitle("Podgląd raportu");
         }
 
     }

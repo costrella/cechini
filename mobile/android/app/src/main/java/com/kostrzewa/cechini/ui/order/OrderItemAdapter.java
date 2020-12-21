@@ -23,14 +23,16 @@ import java.util.List;
 public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.ViewHolder> implements android.widget.Checkable {
     private static final String TAG = "MyStoresRecyclerViewAda";
     private final List<OrderItemDTO> mValues;
+    private final boolean isReadOnly;
 
     public List<OrderItemDTO> getData() {
         return mValues;
     }
 
 
-    public OrderItemAdapter(List<OrderItemDTO> items) {
+    public OrderItemAdapter(List<OrderItemDTO> items, boolean isReadOnly) {
         mValues = items;
+        this.isReadOnly = isReadOnly;
     }
 
     @Override
@@ -53,6 +55,8 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
 //        holder.val3.setText("" + o.getProductPackCountPalette());//todo upewnic sie
 
 //        holder.mContentView.setText(mValues.get(position).getProductName());
+
+        holder.removeBtn.setVisibility(isReadOnly ? View.GONE : View.VISIBLE);
 
         holder.removeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
