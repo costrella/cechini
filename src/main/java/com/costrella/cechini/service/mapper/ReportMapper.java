@@ -8,6 +8,7 @@ import com.costrella.cechini.service.dto.ReportDTOSimple;
 import com.costrella.cechini.service.dto.ReportDTOWithPhotos;
 import org.mapstruct.Mapper;
 
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,6 +21,7 @@ public interface ReportMapper extends EntityMapper<ReportDTO, Report> {
     default Report toEntity(ReportDTO reportDTO) {
         Report report = new Report();
         report.setId(reportDTO.getId());
+        report.setReportDate(Instant.now());
         report.setWorker(new Worker().id(reportDTO.getWorkerId()));
         report.setStore(new Store().id(reportDTO.getStoreId()));
         report.setDesc(reportDTO.getDesc());
@@ -67,7 +69,7 @@ public interface ReportMapper extends EntityMapper<ReportDTO, Report> {
         reportDTO.setId(report.getId());
         reportDTO.setDesc(report.getDesc());
         reportDTO.setManagerNote(report.getManagerNote());
-//        reportDTO.setReportDate(report.getReportDate()); //todo
+        reportDTO.setReportDate(report.getReportDate()); //todo
         if (report.getWorker() != null) {
             reportDTO.setWorkerId(report.getWorker().getId());
             reportDTO.setWorkerSurname(report.getWorker().getSurname());
