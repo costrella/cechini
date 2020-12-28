@@ -45,12 +45,9 @@
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="orderDate"><span jhiTranslate="cechiniApp.order.orderDate">Order Date</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="deliveryDate"><span jhiTranslate="cechiniApp.order.deliveryDate">Delivery Date</span> <fa-icon icon="sort"></fa-icon></th>
-                    <!-- <th scope="col"  jhiSortBy="comment"><span jhiTranslate="cechiniApp.order.comment">Comment</span> <fa-icon icon="sort"></fa-icon></th> -->
                     <th scope="col"  jhiSortBy="storeName"><span jhiTranslate="cechiniApp.order.store">Store</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="warehouseName"><span jhiTranslate="cechiniApp.order.warehouse">Warehouse</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"><span jhiTranslate="cechiniApp.worker.detail.title">Worker</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="statusName"><span jhiTranslate="cechiniApp.order.status">Status</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -58,8 +55,6 @@
                 <tr *ngFor="let order of orders ;trackBy: trackId">
                     <td><a [routerLink]="['/order', order.id, 'view']">{{ order.id }}</a></td>
                     <td>{{ order.orderDate | date:'dd/MM/yyyy' }}</td>
-                    <td>{{ order.deliveryDate | date:'dd/MM/yyyy' }}</td>
-                    <!-- <td>{{ order.comment }}</td> -->
                     <td>
                         <div *ngIf="order.storeId">
                             <a [routerLink]="['/store', order.storeId , 'view']" >{{ order.storeName }}</a>
@@ -73,11 +68,6 @@
                     <td>
                         <div *ngIf="order.workerId">
                             <a [routerLink]="['/worker', order.workerId , 'view']" >{{ order.workerSurname }}</a>
-                        </div>
-                    </td>
-                    <td>
-                        <div *ngIf="order.statusId">
-                            <a [routerLink]="['/status', order.statusId , 'view']" >{{ order.statusName }}</a>
                         </div>
                     </td>
                     <td class="text-right">

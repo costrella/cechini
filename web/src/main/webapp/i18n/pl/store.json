@@ -25,7 +25,8 @@
       "report": "Raport",
       "worker": "Przedstawiciel",
       "location": "Lokalizacja",
-      "storegroup": "Grupa sklepu"
+      "storegroup": "Grupa sklepu",
+      "address": "Adres"
     }
   }
 }

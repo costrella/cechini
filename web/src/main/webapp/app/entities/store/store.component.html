@@ -49,24 +49,17 @@
                     <th scope="col" jhiSortBy="name"><span jhiTranslate="cechiniApp.store.name">Name</span>
                         <fa-icon icon="sort"></fa-icon>
                     </th>
-                    <th scope="col" jhiSortBy="nip"><span jhiTranslate="cechiniApp.store.nip">Nip</span>
-                        <fa-icon icon="sort"></fa-icon>
-                    </th>
-                    <th scope="col" jhiSortBy="desc"><span jhiTranslate="cechiniApp.store.desc">Desc</span>
-                        <fa-icon icon="sort"></fa-icon>
-                    </th>
-                    <th scope="col" jhiSortBy="visited"><span jhiTranslate="cechiniApp.store.visited">Visited</span>
-                        <fa-icon icon="sort"></fa-icon>
-                    </th>
-                    <th scope="col" jhiSortBy="workerSurname"><span jhiTranslate="cechiniApp.store.worker">Worker</span>
-                        <fa-icon icon="sort"></fa-icon>
-                    </th>
-                    <th scope="col" jhiSortBy="locationId"><span
-                            jhiTranslate="cechiniApp.store.location">Location</span>
+                    <th scope="col" jhiSortBy="address"><span jhiTranslate="cechiniApp.store.address">Address</span>
                         <fa-icon icon="sort"></fa-icon>
                     </th>
                     <th scope="col" jhiSortBy="storegroupName"><span
                             jhiTranslate="cechiniApp.store.storegroup">Storegroup</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="nip"><span jhiTranslate="cechiniApp.store.nip">Nip</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
+                    <th scope="col" jhiSortBy="workerSurname"><span jhiTranslate="cechiniApp.store.worker">Worker</span>
                         <fa-icon icon="sort"></fa-icon>
                     </th>
                     <th scope="col"></th>
@@ -76,24 +69,16 @@
                 <tr *ngFor="let store of stores ;trackBy: trackId">
                     <td><a [routerLink]="['/store', store.id, 'view']">{{ store.id }}</a></td>
                     <td>{{ store.name }}</td>
+                    <td>{{ store.address }}</td>
+                    <td>
+                        <div *ngIf="store.storegroupId">
+                            <a [routerLink]="['/store-group', store.storegroupId , 'view']">{{ store.storegroupName }}</a>
+                        </div>
+                    </td>
                     <td>{{ store.nip }}</td>
-                    <td>{{ store.desc }}</td>
-                    <td>{{ store.visited }}</td>
                     <td>
                         <div *ngIf="store.workerId">
                             <a [routerLink]="['/worker', store.workerId , 'view']">{{ store.workerSurname }}</a>
-                        </div>
-                    </td>
-                    <td>
-                        <div *ngIf="store.locationId">
-                            <!-- <a [routerLink]="['/location', store.locationId , 'view']">{{ store.locationId }}</a> -->
-                            {{store.locationId}}
-                        </div>
-                    </td>
-                    <td>
-                        <div *ngIf="store.storegroupId">
-                            <a
-                                [routerLink]="['/store-group', store.storegroupId , 'view']">{{ store.storegroupName }}</a>
                         </div>
                     </td>
                     <td class="text-right">

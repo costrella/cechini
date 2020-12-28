@@ -2,10 +2,10 @@
   "cechiniApp": {
     "report": {
       "home": {
-        "title": "Report",
-        "createLabel": "Dodaj Report",
-        "createOrEditLabel": "Dodaj lub edytuj: Report",
-        "notFound": "No Reports found"
+        "title": "Raporty",
+        "createLabel": "Dodaj Raport",
+        "createOrEditLabel": "Dodaj lub edytuj: Raport",
+        "notFound": "Nie znaleziono raportów"
       },
       "created": "Utworzono nowy obiekt typu Report z identyfikatorem {{ param }}",
       "updated": "Uaktualniono obiekt typu Report z identyfikatorem {{ param }}",
