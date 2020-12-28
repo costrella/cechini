@@ -24,7 +24,10 @@ public class OrderMapperCustom {
         order.setWarehouse(new Warehouse().id(orderDTO.getWarehouseId()));
         orderDTO.getOrderItems().stream().forEach(orderItemDTO -> {
             OrderItem orderItem = new OrderItem().artCount(orderItemDTO.getArtCount()).packCount(orderItemDTO.getPackCount());
-            orderItem.setProduct(new Product().id(orderItemDTO.getProductId()));
+            orderItem.setProduct(new Product().id(orderItemDTO.getProductId())
+                .name(orderItemDTO.getProductName())
+                .capacity(orderItemDTO.getProductCapacity())
+                .eanPack(orderItemDTO.getProductEanPack()));
             order.addOrderItem(orderItem);
         });
 //        throw new RuntimeException("test crash");

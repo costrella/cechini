@@ -6,20 +6,39 @@ import java.io.Serializable;
  * A DTO for the {@link com.costrella.cechini.domain.OrderItem} entity.
  */
 public class OrderItemDTO implements Serializable {
-    
+
     private Long id;
 
     private Integer artCount;
 
     private Integer packCount;
 
-
     private Long productId;
 
     private String productName;
 
+    private Integer productCapacity;
+
+    private String productEanPack;
+
     private Long orderId;
-    
+
+    public Integer getProductCapacity() {
+        return productCapacity;
+    }
+
+    public void setProductCapacity(Integer productCapacity) {
+        this.productCapacity = productCapacity;
+    }
+
+    public String getProductEanPack() {
+        return productEanPack;
+    }
+
+    public void setProductEanPack(String productEanPack) {
+        this.productEanPack = productEanPack;
+    }
+
     public Long getId() {
         return id;
     }

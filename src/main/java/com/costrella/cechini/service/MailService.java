@@ -1,14 +1,9 @@
 package com.costrella.cechini.service;
 
+import com.costrella.cechini.domain.Order;
+import com.costrella.cechini.domain.OrderItem;
 import com.costrella.cechini.domain.User;
-
 import io.github.jhipster.config.JHipsterProperties;
-
-import java.nio.charset.StandardCharsets;
-import java.util.Locale;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
@@ -19,6 +14,18 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Service for sending emails.
@@ -34,6 +41,8 @@ public class MailService {
 
     private static final String BASE_URL = "baseUrl";
 
+    private static final String CSV_FILE_NAME = "CSV_FILE.csv";
+
     private final JHipsterProperties jHipsterProperties;
 
     private final JavaMailSender javaMailSender;
@@ -43,7 +52,7 @@ public class MailService {
     private final SpringTemplateEngine templateEngine;
 
     public MailService(JHipsterProperties jHipsterProperties, JavaMailSender javaMailSender,
-            MessageSource messageSource, SpringTemplateEngine templateEngine) {
+                       MessageSource messageSource, SpringTemplateEngine templateEngine) {
 
         this.jHipsterProperties = jHipsterProperties;
         this.javaMailSender = javaMailSender;
@@ -51,8 +60,57 @@ public class MailService {
         this.templateEngine = templateEngine;
     }
 
-    @Async
-    public void sendEmail(String to, String subject, String content, boolean isMultipart, boolean isHtml) {
+    public boolean sendEmailWithOrder(Order order) {
+        String mail = "michal.kostrzewa89@gmail.com";
+        String subject = "Cechini. Zamówienie";
+        String content = subject;
+        return sendEmail(order, mail, subject, content, true, true);
+    }
+
+    public List<String[]> test(Order order) {
+        List<String[]> dataLines = new ArrayList<>();
+        dataLines.add(new String[]
+            {"Lp", "Produkt", "Pojemność", "EAN", "Ilość"});
+        int lp = 1;
+        for(OrderItem oi : order.getOrderItems()){
+            dataLines.add(new String[]
+                {""+lp, oi.getProduct().getName(), ""+oi.getProduct().getCapacity(), ""+oi.getProduct().getEanPack(), ""+oi.getPackCount()});
+            lp ++;
+        }
+
+//        dataLines.add(new String[]
+//            {"Jane", "Doe, Jr.", "19", "She said \"I'm being quoted\""});
+        return dataLines;
+    }
+
+    public String escapeSpecialCharacters(String data) {
+        if(data == null) return "";
+        String escapedData = data.replaceAll("\\R", " ");
+        if (data.contains(",") || data.contains("\"") || data.contains("'")) {
+            data = data.replace("\"", "\"\"");
+            escapedData = "\"" + data + "\"";
+        }
+        return escapedData;
+    }
+
+    public String convertToCSV(String[] data) {
+        return Stream.of(data)
+            .map(this::escapeSpecialCharacters)
+            .collect(Collectors.joining(","));
+    }
+
+    public File generateFile(List<String[]> dataLines) throws IOException {
+        File csvOutputFile = new File(CSV_FILE_NAME);
+        try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
+            dataLines.stream()
+                .map(this::convertToCSV)
+                .forEach(pw::println);
+        }
+        if (csvOutputFile.exists()) return csvOutputFile;
+        return null;
+    }
+
+    public boolean sendEmail(Order order, String to, String subject, String content, boolean isMultipart, boolean isHtml) {
         log.debug("Send email[multipart '{}' and html '{}'] to '{}' with subject '{}' and content={}",
             isMultipart, isHtml, to, subject, content);
 
@@ -61,13 +119,19 @@ public class MailService {
         try {
             MimeMessageHelper message = new MimeMessageHelper(mimeMessage, isMultipart, StandardCharsets.UTF_8.name());
             message.setTo(to);
+            message.addCc("misiek_mk@tlen.pl");
             message.setFrom(jHipsterProperties.getMail().getFrom());
             message.setSubject(subject);
             message.setText(content, isHtml);
+            if(order != null){
+                message.addAttachment("zamowienie_testowe.csv", generateFile(test(order)));
+            }
             javaMailSender.send(mimeMessage);
             log.debug("Sent email to User '{}'", to);
-        }  catch (MailException | MessagingException e) {
+            return true;
+        } catch (MailException | MessagingException | IOException e) {
             log.warn("Email could not be sent to user '{}'", to, e);
+            return false;
         }
     }
 
@@ -83,7 +147,7 @@ public class MailService {
         context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
         String content = templateEngine.process(templateName, context);
         String subject = messageSource.getMessage(titleKey, null, locale);
-        sendEmail(user.getEmail(), subject, content, false, true);
+        sendEmail(null, user.getEmail(), subject, content, false, true);
     }
 
     @Async

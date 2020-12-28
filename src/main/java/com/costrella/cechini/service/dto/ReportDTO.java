@@ -33,6 +33,16 @@ public class ReportDTO implements Serializable {
 
     private OrderDTO orderDTO;
 
+    private boolean sentMail;
+
+    public boolean isSentMail() {
+        return sentMail;
+    }
+
+    public void setSentMail(boolean sentMail) {
+        this.sentMail = sentMail;
+    }
+
     public OrderDTO getOrderDTO() {
         return orderDTO;
     }
