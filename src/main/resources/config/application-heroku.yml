@@ -24,3 +24,5 @@ spring:
     password: ${JDBC_DATABASE_PASSWORD}
     hikari:
       maximumPoolSize: 8
+  liquibase:
+    contexts: prod
