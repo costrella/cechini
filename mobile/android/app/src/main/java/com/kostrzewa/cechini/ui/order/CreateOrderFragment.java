@@ -87,7 +87,9 @@ public class CreateOrderFragment extends Fragment {
         warehouseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ReportData.reportDTO.getOrderDTO().setWarehouseId(warehouseDTOS.get(position).getId());
+                WarehouseDTO warehouseDTO = warehouseDTOS.get(position);
+                ReportData.reportDTO.getOrderDTO().setWarehouseId(warehouseDTO.getId());
+                ReportData.reportDTO.getOrderDTO().setWarehouseName(warehouseDTO.getName());
             }
 
             @Override

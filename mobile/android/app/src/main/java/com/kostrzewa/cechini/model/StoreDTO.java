@@ -3,16 +3,26 @@ package com.kostrzewa.cechini.model;
 import java.io.Serializable;
 
 public class StoreDTO implements Serializable {
-    
+
     private Long id;
 
     private String name;
+
+    private String nip;
 
     private String address;
 
     private Long storegroupId;
 
     private Long workerId;
+
+    public String getNip() {
+        return nip;
+    }
+
+    public void setNip(String nip) {
+        this.nip = nip;
+    }
 
     public Long getWorkerId() {
         return workerId;

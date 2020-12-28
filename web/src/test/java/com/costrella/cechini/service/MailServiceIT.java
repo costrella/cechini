@@ -4,6 +4,8 @@ import com.costrella.cechini.config.Constants;
 
 import com.costrella.cechini.CechiniApp;
 import com.costrella.cechini.domain.User;
+import com.costrella.cechini.repository.StoreRepository;
+import com.costrella.cechini.repository.WorkerRepository;
 import io.github.jhipster.config.JHipsterProperties;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -60,6 +62,12 @@ public class MailServiceIT {
     @Autowired
     private SpringTemplateEngine templateEngine;
 
+    @Autowired
+    private WorkerRepository workerRepository;
+
+    @Autowired
+    private StoreRepository storeRepository;
+
     @Spy
     private JavaMailSenderImpl javaMailSender;
 
@@ -72,7 +80,7 @@ public class MailServiceIT {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         doNothing().when(javaMailSender).send(any(MimeMessage.class));
-        mailService = new MailService(jHipsterProperties, javaMailSender, messageSource, templateEngine);
+        mailService = new MailService(jHipsterProperties, javaMailSender, messageSource, templateEngine, workerRepository, storeRepository);
     }
 
     @Test

@@ -67,7 +67,7 @@ public class ReportService {
         report = reportRepository.save(report);
         boolean sentMail = false;
         if(report.getOrder() != null){
-            sentMail = mailService.sendEmailWithOrder(report.getOrder());
+            sentMail = mailService.sendEmailWithOrder(report);
         }
         ReportDTO respone = reportMapper.toDto(report);
         respone.setSentMail(sentMail);

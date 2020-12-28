@@ -130,6 +130,7 @@ public class AddStoreDialogFragment extends DialogFragment implements AdapterVie
 
     EditText nameET;
     EditText addressET;
+    EditText nipET;
     TextView storeGroupTV;
 
     @Override
@@ -137,12 +138,15 @@ public class AddStoreDialogFragment extends DialogFragment implements AdapterVie
         nameET = form.findViewById(R.id.fragment_mystores_dialog_store_nameET);
         addressET = form.findViewById(R.id.fragment_mystores_dialog_store_addressET);
         storeGroupTV = form.findViewById(R.id.fragment_mystores_dialog_storeGroupSpinner_label);
+        nipET = form.findViewById(R.id.fragment_mystores_dialog_store_nipET);
 
-        if(isValid()){
+        if (isValid()) {
             progressBar.setVisibility(View.VISIBLE);
             StoreDTO storeDTO = new StoreDTO();
             storeDTO.setName(nameET.getText().toString());
             storeDTO.setAddress(addressET.getText().toString());
+            storeDTO.setNip(nipET.getText().toString());
+            storeDTO.setStoregroupId(selectedStoreGroup.getId());
             storeDTO.setStoregroupId(selectedStoreGroup.getId());
             storeDTO.setWorkerId(workerDataManager.getWorker().getId());
             storeDataManager.addNewStore(storeDTO);
