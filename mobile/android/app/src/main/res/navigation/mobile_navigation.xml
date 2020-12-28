@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.kostrzewa.cechini.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_mystores"
+        android:name="com.kostrzewa.cechini.ui.mystores.MyStoresFragment"
+        android:label="@string/menu_mystores"
+        tools:layout="@layout/fragment_mystores_list_item" />
+
+    <fragment
+        android:id="@+id/nav_mystores_detail"
+        android:name="com.kostrzewa.cechini.ui.mystores.detail.MyStoreDetailFragment"
+        android:label="Sklep"
+        tools:layout="@layout/fragment_mystores_detail" />
+
+    <fragment
+        android:id="@+id/nav_myorders"
+        android:name="com.kostrzewa.cechini.ui.order.myorders.MyOrdersFragment"
+        android:label="Moje zamówienia"
+        tools:layout="@layout/fragment_myorders_list" />
+
+    <fragment
+        android:id="@+id/nav_share"
+        android:name="com.kostrzewa.cechini.ui.share.ShareFragment"
+        android:label="@string/menu_share"
+        tools:layout="@layout/fragment_share" />
+
+    <fragment
+        android:id="@+id/nav_send"
+        android:name="com.kostrzewa.cechini.ui.send.SendFragment"
+        android:label="@string/menu_send"
+        tools:layout="@layout/fragment_send" />
+
+    <fragment
+        android:id="@+id/nav_report_create"
+        android:name="com.kostrzewa.cechini.ui.report.ReportViewPagerFragment"
+        android:label="Kreator Raportu"
+        tools:layout="@layout/fragment_report_create" />
+
+    <fragment
+        android:id="@+id/nav_order_create"
+        android:name="com.kostrzewa.cechini.ui.order.CreateOrderFragment"
+        android:label="Kreator Zamówienia"
+        tools:layout="@layout/fragment_order_create" />
+
+    <fragment
+        android:id="@+id/nav_logout"
+        android:name="com.kostrzewa.cechini.ui.LogoutFragment"
+        android:label="Wyloguj"
+        tools:layout="@layout/fragment_logout" />
+
+    <fragment
+        android:id="@+id/nav_myreports"
+        android:name="com.kostrzewa.cechini.ui.report.myreports.MyReportsFragment"
+        android:label="Moje raporty"
+        tools:layout="@layout/fragment_myreports_list" />
+
+    <fragment
+        android:id="@+id/nav_myreportsOfStore"
+        android:name="com.kostrzewa.cechini.ui.report.myreports.MyReportsFragment"
+        android:label="Raporty sklepu"
+        tools:layout="@layout/fragment_myreports_list" />
+</navigation>

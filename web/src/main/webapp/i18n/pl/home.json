@@ -1,0 +1,19 @@
+{
+  "home": {
+    "title": "Cechini 2.0",
+    "subtitle": "Aplikacja wersja testerska",
+    "logged": {
+      "message": "Jesteś zalogowany jako użytkownik \"{{username}}\"."
+    },
+    "question": "Wszystkie uwagi, modyfikacje proszę podesłać na maila. Jest to idealny moment na wszelkie poprawki, ponieważ bazę danych można teraz w łatwy sposób przeprojektować. Później oczywiście też jest to możliwe, jednak nakład pracy jest nieco większy.",
+    "link": {
+      "homepage": "Strona domowa JHipster",
+      "stackoverflow": "JHipster na Stack Overflow",
+      "bugtracker": "JHipster bug tracker",
+      "chat": "Publiczny chat room JHipster",
+      "follow": "skontaktuj się z @jhipster na Twitterze"
+    },
+    "like": "Jeśli lubisz JHipster, nie zapomnij dać nam gwiazdki na",
+    "github": "GitHubie"
+  }
+}

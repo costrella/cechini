@@ -1,0 +1,38 @@
+{
+  "name": "Location",
+  "fields": [
+    {
+      "fieldName": "lat",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lng",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "store",
+      "otherEntityRelationshipName": "location",
+      "relationshipName": "store"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "track",
+      "otherEntityRelationshipName": "location",
+      "relationshipName": "track"
+    }
+  ],
+  "changelogDate": "20200921171236",
+  "entityTableName": "location",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

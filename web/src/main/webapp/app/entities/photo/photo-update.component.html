@@ -1,0 +1,54 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-photo-heading" jhiTranslate="cechiniApp.photo.home.createOrEditLabel">Create or edit a Photo</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cechiniApp.photo.uri" for="field_uri">Uri</label>
+                    <input type="text" class="form-control" name="uri" id="field_uri"
+                           formControlName="uri"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cechiniApp.photo.valueContentType" for="field_valueContentType">Value Content Type</label>
+                    <input type="text" class="form-control" name="valueContentType" id="field_valueContentType"
+                           formControlName="valueContentType"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cechiniApp.photo.file" for="field_file">File</label>
+                    <select class="form-control" id="field_file" name="file" formControlName="fileId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="photoFileOption.id" *ngFor="let photoFileOption of files; trackBy: trackById">{{ photoFileOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cechiniApp.photo.report" for="field_report">Report</label>
+                    <select class="form-control" id="field_report" name="report" formControlName="reportId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="reportOption.id" *ngFor="let reportOption of reports; trackBy: trackById">{{ reportOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

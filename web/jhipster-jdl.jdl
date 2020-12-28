@@ -1,0 +1,140 @@
+	/**
+	* Pomysły: notyfikacje
+	*/
+
+entity Worker {
+	name String required,
+    surname String required,
+    hiredDate Instant,
+    desc String maxlength(2000),
+    phone String,
+    login String,
+    password String,
+    target Long,
+    active Boolean
+}
+
+entity Store {
+	name String required,
+    nip String,
+    desc String maxlength(2000),
+    visited Boolean,
+	address String required,
+}
+
+entity StoreGroup {
+	name String required unique
+}
+
+entity Manager {
+	name String required,
+    surname String required,
+    hiredDate Instant,
+}
+
+entity Order {
+    orderDate Instant required,
+    deliveryDate Instant required,
+    comment String maxlength(2000),
+}
+
+entity OrderItem {
+    artCount Integer,
+    packCount Integer,
+}
+
+entity Product {
+	name String required,
+	capacity Integer,
+    eanArt String,
+    eanPack String,
+    packCountPalette Integer,
+	artCountPalette Integer,
+	layerCountPalette Integer,
+}
+
+entity Warehouse {
+	name String required unique
+}
+
+entity Report {
+    reportDate Instant,
+    desc String maxlength(2000), //todo uzyc Note
+    managerNote String maxlength(2000), //todo uzyc Note
+}
+
+entity Track {
+	name String
+}
+
+entity Location {
+    lat String,
+    lng String,
+}
+
+entity Status {
+    name String required
+}
+
+entity Photo {
+    uri String,
+    valueContentType String,
+}
+
+entity PhotoFile {
+     value ImageBlob
+}
+
+entity Note {
+    value String maxlength(2000),
+    date Instant,
+}
+
+relationship ManyToMany {
+	Manager{worker(surname)} to Worker{manager(surname)}
+}
+
+relationship OneToOne {
+ 	Report{order} to Order{report},
+ 	Photo{file} to PhotoFile{photo}
+}
+
+relationship OneToMany {
+	Report{photos} to Photo{report},
+
+    Store to Note{store},
+    Worker to Note{workerNote},
+    Manager to Note{managerNote},
+    Report to Note{report},
+
+    Worker to Store{worker(surname)},
+    Location to Store{location},
+    StoreGroup to Store{storegroup(name)},
+
+    Worker to Report{worker(surname) required},
+    Store to Report{store(name) required},
+
+    Warehouse to Order{warehouse(name)},
+    Status to Order{status(name) required},
+
+    Product to OrderItem{product(name)},
+    Order to OrderItem{order},
+
+    Worker to Track{worker(surname)},
+    Location to Track{location},
+
+}
+
+
+// Set pagination options
+//paginate JobHistory, Employee with infinite-scroll
+paginate Worker, Store, StoreGroup, Manager, Order, OrderItem, Product, Warehouse, Report, Track, Location, Status, Photo, Note with pagination
+
+// Use Data Transfert Objects (DTO)
+dto * with mapstruct
+
+// Set service options to all except few
+//service all with serviceImpl //except Employee, Job
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    app:columnCount="2"
+    tools:context=".ui.mystores.detail.MyStoreDetailFragment">
+
+    <Button
+        android:id="@+id/btn_addReport"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:text="DODAJ RAPORT"
+        app:layout_column="0"
+        app:layout_row="0" />
+
+    <Button
+        android:id="@+id/btn_storeReports"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:text="RAPORTY SKLEPU"
+        android:layout_row="0"
+        android:layout_column="1"
+        />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:text=""
+        android:layout_column="0"
+        android:layout_row="1" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:layout_row="1"
+        android:layout_column="1"
+        android:text="" />
+
+</GridLayout>

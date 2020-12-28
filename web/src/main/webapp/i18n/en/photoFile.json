@@ -1,0 +1,23 @@
+{
+  "cechiniApp": {
+    "photoFile": {
+      "home": {
+        "title": "Photo Files",
+        "createLabel": "Create a new Photo File",
+        "createOrEditLabel": "Create or edit a Photo File",
+        "notFound": "No Photo Files found"
+      },
+      "created": "A new Photo File is created with identifier {{ param }}",
+      "updated": "A Photo File is updated with identifier {{ param }}",
+      "deleted": "A Photo File is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Photo File {{ id }}?"
+      },
+      "detail": {
+        "title": "Photo File"
+      },
+      "value": "Value",
+      "photo": "Photo"
+    }
+  }
+}
