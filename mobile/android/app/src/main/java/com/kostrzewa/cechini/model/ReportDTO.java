@@ -1,7 +1,6 @@
 package com.kostrzewa.cechini.model;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.util.Date;
 
 public class ReportDTO implements Serializable {
@@ -27,6 +26,16 @@ public class ReportDTO implements Serializable {
     private String storeName;
 
     private OrderDTO orderDTO;
+
+    private boolean sentMail;
+
+    public boolean isSentMail() {
+        return sentMail;
+    }
+
+    public void setSentMail(boolean sentMail) {
+        this.sentMail = sentMail;
+    }
 
     public OrderDTO getOrderDTO() {
         return orderDTO;
@@ -137,15 +146,15 @@ public class ReportDTO implements Serializable {
     @Override
     public String toString() {
         return "ReportDTO{" +
-            "id=" + getId() +
-            ", reportDate='" + getReportDate() + "'" +
-            ", desc='" + getDesc() + "'" +
-            ", managerNote='" + getManagerNote() + "'" +
-            ", orderId=" + getOrderId() +
-            ", workerId=" + getWorkerId() +
-            ", workerSurname='" + getWorkerSurname() + "'" +
-            ", storeId=" + getStoreId() +
-            ", storeName='" + getStoreName() + "'" +
-            "}";
+                "id=" + getId() +
+                ", reportDate='" + getReportDate() + "'" +
+                ", desc='" + getDesc() + "'" +
+                ", managerNote='" + getManagerNote() + "'" +
+                ", orderId=" + getOrderId() +
+                ", workerId=" + getWorkerId() +
+                ", workerSurname='" + getWorkerSurname() + "'" +
+                ", storeId=" + getStoreId() +
+                ", storeName='" + getStoreName() + "'" +
+                "}";
     }
 }

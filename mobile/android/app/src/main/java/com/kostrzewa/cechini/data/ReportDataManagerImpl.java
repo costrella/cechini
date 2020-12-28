@@ -12,12 +12,10 @@ import com.kostrzewa.cechini.model.ReportDTOWithPhotos;
 import com.kostrzewa.cechini.model.ReportsDTO;
 import com.kostrzewa.cechini.rest.RetrofitClient;
 import com.kostrzewa.cechini.ui.report.data.ReportData;
-import com.kostrzewa.cechini.util.DateUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -43,7 +41,7 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
             @Override
             public void onResponse(Call<ReportDTO> call, Response<ReportDTO> response) {
                 if (response.isSuccessful()) {
-                    EventBus.getDefault().post(new ReportSentSuccess("Raport wysłany !"));
+                    EventBus.getDefault().post(new ReportSentSuccess("Raport wysłany ! " + response.body().isSentMail()));
                 } else {
                     saveNotSentReport(reportDTO);
                     EventBus.getDefault().post(new ReportSentFailed("Raport NIE został wysłany! Zapisano w pamięci! Kod błędu: " + response.code()));

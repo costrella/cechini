@@ -85,6 +85,7 @@ public class ProductDialogFragment extends DialogFragment implements
         orderItemDTO.setProductId(selectedProduct.getId());
         orderItemDTO.setProductName(selectedProduct.getName());
         orderItemDTO.setProductCapacity(selectedProduct.getCapacity());
+        orderItemDTO.setProductEanPack(selectedProduct.getEanPack());
 //        orderItemDTO.setProductArtCountPalette(selectedProduct.getArtCountPalette());
 //        orderItemDTO.setProductLayerCountPalette(selectedProduct.getLayerCountPalette());
 //        orderItemDTO.setProductPackCountPalette(selectedProduct.getPackCountPalette());

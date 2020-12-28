@@ -17,6 +17,8 @@ public class OrderItemDTO implements Serializable {
     //todo
     private Integer productCapacity;
 
+    private String productEanPack;
+
     private Integer productPackCountPalette;
 
     private Integer productArtCountPalette;
@@ -31,6 +33,14 @@ public class OrderItemDTO implements Serializable {
 
     public void setProductCapacity(Integer productCapacity) {
         this.productCapacity = productCapacity;
+    }
+
+    public String getProductEanPack() {
+        return productEanPack;
+    }
+
+    public void setProductEanPack(String productEanPack) {
+        this.productEanPack = productEanPack;
     }
 
     public Integer getProductPackCountPalette() {

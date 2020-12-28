@@ -38,11 +38,14 @@ public class ReportService {
 
     private final OrderItemMapper orderItemMapper;
 
-    public ReportService(ReportRepository reportRepository, ReportMapper reportMapper, OrderMapper orderMapper, OrderItemMapper orderItemMapper) {
+    private final MailService mailService;
+
+    public ReportService(ReportRepository reportRepository, ReportMapper reportMapper, OrderMapper orderMapper, OrderItemMapper orderItemMapper, MailService mailService) {
         this.reportRepository = reportRepository;
         this.reportMapper = reportMapper;
         this.orderMapper = orderMapper;
         this.orderItemMapper = orderItemMapper;
+        this.mailService = mailService;
     }
 
     /**
@@ -62,7 +65,13 @@ public class ReportService {
         log.debug("Request to save Report : {}", reportDTO);
         Report report = reportMapper.toEntityWithPhotos(reportDTO);
         report = reportRepository.save(report);
-        return reportMapper.toDto(report);
+        boolean sentMail = false;
+        if(report.getOrder() != null){
+            sentMail = mailService.sendEmailWithOrder(report.getOrder());
+        }
+        ReportDTO respone = reportMapper.toDto(report);
+        respone.setSentMail(sentMail);
+        return respone;
     }
 
     /**
