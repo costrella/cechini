@@ -1,8 +1,8 @@
 package com.costrella.cechini.service;
 
-import com.costrella.cechini.domain.Order;
-import com.costrella.cechini.domain.OrderItem;
-import com.costrella.cechini.domain.User;
+import com.costrella.cechini.domain.*;
+import com.costrella.cechini.repository.StoreRepository;
+import com.costrella.cechini.repository.WorkerRepository;
 import io.github.jhipster.config.JHipsterProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,10 +17,10 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -51,35 +51,54 @@ public class MailService {
 
     private final SpringTemplateEngine templateEngine;
 
+    private final WorkerRepository workerRepository;
+
+    private final StoreRepository storeRepository;
+
     public MailService(JHipsterProperties jHipsterProperties, JavaMailSender javaMailSender,
-                       MessageSource messageSource, SpringTemplateEngine templateEngine) {
+                       MessageSource messageSource, SpringTemplateEngine templateEngine, WorkerRepository workerRepository, StoreRepository storeRepository) {
 
         this.jHipsterProperties = jHipsterProperties;
         this.javaMailSender = javaMailSender;
         this.messageSource = messageSource;
         this.templateEngine = templateEngine;
+        this.workerRepository = workerRepository;
+        this.storeRepository = storeRepository;
     }
 
-    public boolean sendEmailWithOrder(Order order) {
+    public boolean sendEmailWithOrder(Report report) {
         String mail = "michal.kostrzewa89@gmail.com";
         String subject = "Cechini. Zamówienie";
         String content = subject;
-        return sendEmail(order, mail, subject, content, true, true);
+        return sendEmail(report, mail, subject, content, true, true);
     }
 
-    public List<String[]> test(Order order) {
+    public List<String[]> test(Report report) {
+        Worker worker = workerRepository.getOne(report.getWorker().getId());
+        Store store = storeRepository.getOne(report.getStore().getId());
         List<String[]> dataLines = new ArrayList<>();
+        DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+            .withZone(ZoneId.systemDefault());
+
         dataLines.add(new String[]
-            {"Lp", "Produkt", "Pojemność", "EAN", "Ilość"});
+            {"Odbiorca: ", store.getName() + " " +  store.getAddress()});
+        dataLines.add(new String[]
+            {"Odbiorca NIP: ", store.getNip()});
+        dataLines.add(new String[]
+            {"Data wystawienia: ", DATE_TIME_FORMATTER.format(report.getReportDate())});
+        dataLines.add(new String[]
+            {"Dostawca: ", report.getOrder().getWarehouse().getName()});
+        dataLines.add(new String[]
+            {"Przedstawiciel handlowy: ", worker.getName() + " " + worker.getSurname(), "tel.:" + worker.getPhone()});
+        dataLines.add(new String[]
+            {"Lp", "Produkt", "Pojemnosc", "EAN", "Ilosc"});
         int lp = 1;
-        for(OrderItem oi : order.getOrderItems()){
+        for(OrderItem oi : report.getOrder().getOrderItems()){
             dataLines.add(new String[]
-                {""+lp, oi.getProduct().getName(), ""+oi.getProduct().getCapacity(), ""+oi.getProduct().getEanPack(), ""+oi.getPackCount()});
+                {""+lp, oi.getProduct().getName(), ""+oi.getProduct().getCapacity() + "L", ""+oi.getProduct().getEanPack(), ""+oi.getPackCount()});
             lp ++;
         }
 
-//        dataLines.add(new String[]
-//            {"Jane", "Doe, Jr.", "19", "She said \"I'm being quoted\""});
         return dataLines;
     }
 
@@ -101,6 +120,18 @@ public class MailService {
 
     public File generateFile(List<String[]> dataLines) throws IOException {
         File csvOutputFile = new File(CSV_FILE_NAME);
+//
+//        try (FileOutputStream fos = new FileOutputStream(csvOutputFile); //todo utf-8 ?
+//             OutputStreamWriter osw = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
+//             BufferedWriter writer = new BufferedWriter(osw)) {
+//
+////            writer.append(line);
+//            for (String[] dataLine : dataLines) {
+//                String s = convertToCSV(dataLine);
+//                writer.write(s);
+//            }
+//        }
+
         try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
             dataLines.stream()
                 .map(this::convertToCSV)
@@ -110,7 +141,7 @@ public class MailService {
         return null;
     }
 
-    public boolean sendEmail(Order order, String to, String subject, String content, boolean isMultipart, boolean isHtml) {
+    public boolean sendEmail(Report report, String to, String subject, String content, boolean isMultipart, boolean isHtml) {
         log.debug("Send email[multipart '{}' and html '{}'] to '{}' with subject '{}' and content={}",
             isMultipart, isHtml, to, subject, content);
 
@@ -123,8 +154,8 @@ public class MailService {
             message.setFrom(jHipsterProperties.getMail().getFrom());
             message.setSubject(subject);
             message.setText(content, isHtml);
-            if(order != null){
-                message.addAttachment("zamowienie_testowe.csv", generateFile(test(order)));
+            if(report.getOrder() != null){
+                message.addAttachment("zamowienie_testowe.csv", generateFile(test(report)));
             }
             javaMailSender.send(mimeMessage);
             log.debug("Sent email to User '{}'", to);
