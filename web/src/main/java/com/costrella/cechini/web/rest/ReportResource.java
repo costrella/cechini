@@ -68,11 +68,11 @@ public class ReportResource {
     @Transactional
     @PostMapping("/reports/many")
     public ResponseEntity createManyReports(@Valid @RequestBody ReportsDTO reportsDTO) { //todo ta sama metoda zapisu !
-        for (ReportDTO r : reportsDTO.getReportsDTOS()) {
+        for (ReportDTOWithPhotos r : reportsDTO.getReportsDTOS()) {
             if (r.getId() != null) {
                 throw new BadRequestAlertException("A new report cannot already have an ID", ENTITY_NAME, "idexists");
             }
-            reportService.save(r);
+            reportService.saveWithPhotos(r);
         }
         return ResponseEntity.ok().build();
 
