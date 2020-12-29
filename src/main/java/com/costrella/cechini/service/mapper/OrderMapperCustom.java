@@ -9,7 +9,7 @@ public class OrderMapperCustom {
 
     public static Order toEntity(OrderDTO orderDTO) {
         //todo
-        orderDTO.setStatusId(1L); //todo
+//        orderDTO.setStatusId(1L); //todo
 //        orderDTO.setWorkerId(1L); //todo
         orderDTO.setOrderDate(Instant.now()); //todo
         orderDTO.setDeliveryDate(Instant.now()); //todo

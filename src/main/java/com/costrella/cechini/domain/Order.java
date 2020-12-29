@@ -48,8 +48,7 @@ public class Order implements Serializable {
     @JsonIgnoreProperties(value = "orders", allowSetters = true)
     private Warehouse warehouse;
 
-    @ManyToOne(optional = false)
-    @NotNull
+    @ManyToOne
     @JsonIgnoreProperties(value = "orders", allowSetters = true)
     private Status status;
 

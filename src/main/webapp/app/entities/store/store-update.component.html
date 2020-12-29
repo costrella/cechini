@@ -11,6 +11,14 @@
                     <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
                 </div>
 
+                <!-- <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cechiniApp.store.storegroup" for="field_storegroup">Storegroup</label>
+                    <select class="form-control" id="field_storegroup" name="storegroup" formControlName="storegroupId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="storeGroupOption.id" *ngFor="let storeGroupOption of storegroups; trackBy: trackById">{{ storeGroupOption.name }}</option>
+                    </select>
+                </div> -->
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="cechiniApp.store.name" for="field_name">Name</label>
                     <input type="text" class="form-control" name="name" id="field_name"
@@ -45,7 +53,8 @@
                     <label class="form-control-label" jhiTranslate="cechiniApp.store.worker" for="field_worker">Worker</label>
                     <select class="form-control" id="field_worker" name="worker" formControlName="workerId">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="workerOption.id" *ngFor="let workerOption of workers; trackBy: trackById">{{ workerOption.surname }}</option>
+                        <option [ngValue]="workerOption.id" *ngFor="let workerOption of workers; trackBy: trackById">
+                            {{ workerOption.surname }} {{ workerOption.name }}</option>
                     </select>
                 </div>
 
@@ -56,14 +65,6 @@
                         <option [ngValue]="locationOption.id" *ngFor="let locationOption of locations; trackBy: trackById">{{ locationOption.id }}</option>
                     </select>
                 </div> -->
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cechiniApp.store.storegroup" for="field_storegroup">Storegroup</label>
-                    <select class="form-control" id="field_storegroup" name="storegroup" formControlName="storegroupId">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="storeGroupOption.id" *ngFor="let storeGroupOption of storegroups; trackBy: trackById">{{ storeGroupOption.name }}</option>
-                    </select>
-                </div>
             </div>
 
             <div>
