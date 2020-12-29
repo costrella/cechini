@@ -87,6 +87,19 @@
         android:layout_margin="8dp"
         android:orientation="horizontal">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pole NIP jest niewymagane, natomiast będzie potrzebne przy ewentualnym tworzeniu zamówienia " />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:orientation="horizontal">
+
 
         <Button
             android:id="@+id/fragment_mystores_dialog_store_okBtn"

@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +17,7 @@ import com.kostrzewa.cechini.MainActivity;
 import com.kostrzewa.cechini.R;
 import com.kostrzewa.cechini.model.StoreDTO;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -25,6 +27,9 @@ public class MyStoreDetailFragment extends Fragment {
     private static final String TAG = "MyStoreDetailFragment";
     private StoreDTO storeDTO;
     private NavController navController;
+
+    @BindView(R.id.storeDetailTV)
+    TextView storeDetailTV;
 
     @OnClick(R.id.btn_addReport)
     void addReport() {
@@ -54,7 +59,17 @@ public class MyStoreDetailFragment extends Fragment {
         storeDTO = (StoreDTO) getArguments().getSerializable(STORE_DTO);
         navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
         ((MainActivity) getActivity()).getSupportActionBar().setTitle("Sklep:" + storeDTO.getName() + " " + storeDTO.getAddress());
+        fillStoreDetail();
         return view;
+    }
+
+    private void fillStoreDetail() {
+        String value = "Szczegoły sklepu";
+        value += "\nnazwa: " + storeDTO.getName();
+        value += "\nadres: " + storeDTO.getAddress();
+        value += "\ngrupa sklepu: " + storeDTO.getStoregroupName();
+        value += "\nNIP: " + storeDTO.getNip();
+        storeDetailTV.setText(value);
     }
 
 }

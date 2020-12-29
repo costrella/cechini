@@ -14,7 +14,17 @@ public class StoreDTO implements Serializable {
 
     private Long storegroupId;
 
+    private String storegroupName;
+
     private Long workerId;
+
+    public String getStoregroupName() {
+        return storegroupName;
+    }
+
+    public void setStoregroupName(String storegroupName) {
+        this.storegroupName = storegroupName;
+    }
 
     public String getNip() {
         return nip;
