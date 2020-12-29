@@ -18,9 +18,9 @@ export class ProductUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     name: [null, [Validators.required]],
-    capacity: [],
+    capacity: [null, [Validators.required]],
     eanArt: [],
-    eanPack: [],
+    eanPack: [null, [Validators.required]],
     packCountPalette: [],
     artCountPalette: [],
     layerCountPalette: [],
