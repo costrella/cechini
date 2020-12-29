@@ -1,7 +1,8 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-worker-heading" jhiTranslate="cechiniApp.worker.home.createOrEditLabel">Create or edit a Worker</h2>
+            <h2 id="jhi-worker-heading" jhiTranslate="cechiniApp.worker.home.createOrEditLabel">Create or edit a Worker
+            </h2>
 
             <div>
                 <jhi-alert-error></jhi-alert-error>
@@ -12,64 +13,92 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cechiniApp.worker.name" for="field_name">Name</label>
-                    <input type="text" class="form-control" name="name" id="field_name"
-                           formControlName="name"/>
-                    <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
+                    <label class="form-control-label" jhiTranslate="cechiniApp.worker.name"
+                        for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name" formControlName="name" />
+                    <div
+                        *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+                        <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required"
+                            jhiTranslate="entity.validation.required">
+                            This field is required.
                         </small>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cechiniApp.worker.surname" for="field_surname">Surname</label>
+                    <label class="form-control-label" jhiTranslate="cechiniApp.worker.surname"
+                        for="field_surname">Surname</label>
                     <input type="text" class="form-control" name="surname" id="field_surname"
-                           formControlName="surname"/>
-                    <div *ngIf="editForm.get('surname')!.invalid && (editForm.get('surname')!.dirty || editForm.get('surname')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('surname')?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
+                        formControlName="surname" />
+                    <div
+                        *ngIf="editForm.get('surname')!.invalid && (editForm.get('surname')!.dirty || editForm.get('surname')!.touched)">
+                        <small class="form-text text-danger" *ngIf="editForm.get('surname')?.errors?.required"
+                            jhiTranslate="entity.validation.required">
+                            This field is required.
                         </small>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cechiniApp.worker.hiredDate" for="field_hiredDate">Hired Date</label>
+                    <label class="form-control-label" jhiTranslate="cechiniApp.worker.hiredDate"
+                        for="field_hiredDate">Hired Date</label>
                     <div class="d-flex">
-                        <input id="field_hiredDate" type="datetime-local" class="form-control" name="hiredDate" formControlName="hiredDate" placeholder="YYYY-MM-DD HH:mm"/>
+                        <input id="field_hiredDate" type="datetime-local" class="form-control" name="hiredDate"
+                            formControlName="hiredDate" placeholder="YYYY-MM-DD HH:mm" />
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cechiniApp.worker.desc" for="field_desc">Desc</label>
-                    <input type="text" class="form-control" name="desc" id="field_desc"
-                           formControlName="desc"/>
-                    <div *ngIf="editForm.get('desc')!.invalid && (editForm.get('desc')!.dirty || editForm.get('desc')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('desc')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 2000 }">
-                        This field cannot be longer than 2000 characters.
+                    <label class="form-control-label" jhiTranslate="cechiniApp.worker.desc"
+                        for="field_desc">Desc</label>
+                    <input type="text" class="form-control" name="desc" id="field_desc" formControlName="desc" />
+                    <div
+                        *ngIf="editForm.get('desc')!.invalid && (editForm.get('desc')!.dirty || editForm.get('desc')!.touched)">
+                        <small class="form-text text-danger" *ngIf="editForm.get('desc')?.errors?.maxlength"
+                            jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 2000 }">
+                            This field cannot be longer than 2000 characters.
                         </small>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cechiniApp.worker.phone" for="field_phone">Phone</label>
-                    <input type="text" class="form-control" name="phone" id="field_phone"
-                           formControlName="phone"/>
+                    <label class="form-control-label" jhiTranslate="cechiniApp.worker.phone"
+                        for="field_phone">Phone</label>
+                    <input type="text" class="form-control" name="phone" id="field_phone" formControlName="phone" />
+                    <div
+                        *ngIf="editForm.get('phone')!.invalid && (editForm.get('phone')!.dirty || editForm.get('phone')!.touched)">
+                        <small class="form-text text-danger" *ngIf="editForm.get('phone')?.errors?.required"
+                            jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cechiniApp.worker.login" for="field_login">Login</label>
-                    <input type="text" class="form-control" name="login" id="field_login"
-                           formControlName="login"/>
+                    <label class="form-control-label"
+                        for="field_login">Login do aplikacji mobilnej</label>
+                    <input type="text" class="form-control" name="login" id="field_login" formControlName="login" />
+                    <div
+                        *ngIf="editForm.get('login')!.invalid && (editForm.get('login')!.dirty || editForm.get('login')!.touched)">
+                        <small class="form-text text-danger" *ngIf="editForm.get('login')?.errors?.required"
+                            jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cechiniApp.worker.password" for="field_password">Password</label>
+                    <label class="form-control-label"
+                        for="field_password">Hasło do aplikacji mobilnej</label>
                     <input type="text" class="form-control" name="password" id="field_password"
-                           formControlName="password"/>
+                        formControlName="password" />
+                    <div
+                        *ngIf="editForm.get('password')!.invalid && (editForm.get('password')!.dirty || editForm.get('password')!.touched)">
+                        <small class="form-text text-danger" *ngIf="editForm.get('password')?.errors?.required"
+                            jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
                 </div>
 
             </div>
@@ -79,7 +108,8 @@
                     <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
 
-                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving"
+                    class="btn btn-primary">
                     <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>
