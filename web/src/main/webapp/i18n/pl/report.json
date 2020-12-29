@@ -8,23 +8,23 @@
         "notFound": "Nie znaleziono raportów",
         "filter": "Filtruj"
       },
-      "created": "Utworzono nowy obiekt typu Report z identyfikatorem {{ param }}",
-      "updated": "Uaktualniono obiekt typu Report z identyfikatorem {{ param }}",
-      "deleted": "Usunięto obiekt typu Report z identyfikatorem {{ param }}",
+      "created": "Utworzono nowy obiekt typu Raport z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Raport z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Raport z identyfikatorem {{ param }}",
       "delete": {
-        "question": "Czy na pewno chcesz usunąć Report {{ id }}?"
+        "question": "Czy na pewno chcesz usunąć Raport {{ id }}?"
       },
       "detail": {
-        "title": "Report"
+        "title": "Raport"
       },
-      "reportDate": "Report Date",
-      "desc": "Desc",
-      "managerNote": "Manager Note",
-      "order": "Order",
-      "photos": "Photos",
+      "reportDate": "Data utworzenia",
+      "desc": "Opis",
+      "managerNote": "Twój komentarz",
+      "order": "Zamówienie",
+      "photos": "Zdjęcia",
       "note": "Note",
-      "worker": "Worker",
-      "store": "Store"
+      "worker": "PH",
+      "store": "Sklep"
     }
   }
 }

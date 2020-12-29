@@ -2,10 +2,10 @@
   "cechiniApp": {
     "orderItem": {
       "home": {
-        "title": "Order Item",
+        "title": "Pozycje zamówienia",
         "createLabel": "Dodaj Order Item",
         "createOrEditLabel": "Dodaj lub edytuj: Order Item",
-        "notFound": "No Order Items found"
+        "notFound": "Brak pozycji zamówień"
       },
       "created": "Utworzono nowy obiekt typu Order Item z identyfikatorem {{ param }}",
       "updated": "Uaktualniono obiekt typu Order Item z identyfikatorem {{ param }}",
@@ -14,11 +14,11 @@
         "question": "Czy na pewno chcesz usunąć Order Item {{ id }}?"
       },
       "detail": {
-        "title": "Order Item"
+        "title": "Pozycje zamówienia"
       },
       "artCount": "Art Count",
-      "packCount": "Pack Count",
-      "product": "Product",
+      "packCount": "Ilość zgrzewek",
+      "product": "Produkt",
       "order": "Order"
     }
   }
