@@ -63,8 +63,8 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
 
     @Override
     public void sendReportNotSent() {
-        List<ReportDTO> notSendReports = new ArrayList<>();
-        preferenceManager.getReportsNotSend().stream().forEach(s -> notSendReports.add(gson.fromJson(s, ReportDTO.class)));
+        List<ReportDTOWithPhotos> notSendReports = new ArrayList<>();
+        preferenceManager.getReportsNotSend().stream().forEach(s -> notSendReports.add(gson.fromJson(s, ReportDTOWithPhotos.class)));
         if (!notSendReports.isEmpty()) {
             ReportsDTO reportsDTO = new ReportsDTO();
             reportsDTO.setReportsDTOS(notSendReports);
