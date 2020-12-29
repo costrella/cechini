@@ -46,7 +46,7 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
     public void onBindViewHolder(final ViewHolder holder, int position) {
         OrderItemDTO o = mValues.get(position);
         holder.mItem = o;
-        holder.nameTV.setText(o.getProductName() + " (poj.: " + o.getProductCapacity() + ")");
+        holder.nameTV.setText(o.getProductName() + " " + o.getProductCapacity() + "L");
         int lp = position + 1;
         holder.mIdView.setText("" + lp);
         holder.mPackCount.setText("" + o.getPackCount());

@@ -12,7 +12,7 @@
 		<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Grupa sklepu: "/>
+			android:text="Produkt: "/>
 		<Spinner
 			android:id="@+id/order_item_dialog_product_spinner"
 			android:layout_width="wrap_content"
