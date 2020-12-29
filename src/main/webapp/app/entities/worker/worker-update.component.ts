@@ -23,9 +23,9 @@ export class WorkerUpdateComponent implements OnInit {
     surname: [null, [Validators.required]],
     hiredDate: [],
     desc: [null, [Validators.maxLength(2000)]],
-    phone: [],
-    login: [],
-    password: [],
+    phone: [null, [Validators.required]],
+    login: [null, [Validators.required]],
+    password: [null, [Validators.required]],
     target: [],
     active: [],
   });
