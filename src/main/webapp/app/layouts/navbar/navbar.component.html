@@ -179,7 +179,7 @@
                     <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
                 </ul>
             </li>
-            <li ngbDropdown class="nav-item dropdown pointer" display="dynamic" *ngIf="languages && languages.length > 1">
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'" ngbDropdown class="nav-item dropdown pointer" display="dynamic">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="languagesnavBarDropdown">
                     <span>
                         <fa-icon icon="flag"></fa-icon>
@@ -205,19 +205,19 @@
                     </span>
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="account-menu">
-                    <li *ngSwitchCase="true">
+                    <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
                         <a class="dropdown-item" routerLink="account/settings" routerLinkActive="active" (click)="collapseNavbar()">
                             <fa-icon icon="wrench" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.account.settings">Settings</span>
                         </a>
                     </li>
-                    <li *ngSwitchCase="true">
+                    <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
                         <a class="dropdown-item" routerLink="account/password" routerLinkActive="active" (click)="collapseNavbar()">
                             <fa-icon icon="lock" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.account.password">Password</span>
                         </a>
                     </li>
-                    <li *ngSwitchCase="true">
+                    <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
                         <a class="dropdown-item" routerLink="account/sessions" routerLinkActive="active" (click)="collapseNavbar()">
                             <fa-icon icon="cloud" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.account.sessions">Sessions</span>
@@ -235,7 +235,7 @@
                             <span jhiTranslate="global.menu.account.login">Sign in</span>
                         </a>
                     </li>
-                    <li *ngSwitchCase="false">
+                    <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
                         <a class="dropdown-item" routerLink="account/register" routerLinkActive="active" (click)="collapseNavbar()">
                             <fa-icon icon="user-plus" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.account.register">Register</span>
