@@ -67,7 +67,7 @@ public class MyStoreDetailFragment extends Fragment {
         String value = "Szczegoły sklepu";
         value += "\nnazwa: " + storeDTO.getName();
         value += "\nadres: " + storeDTO.getAddress();
-        value += "\ngrupa sklepu: " + storeDTO.getStoregroupName();
+//        value += "\ngrupa sklepu: " + storeDTO.getStoregroupName();
         value += "\nNIP: " + storeDTO.getNip();
         storeDetailTV.setText(value);
     }

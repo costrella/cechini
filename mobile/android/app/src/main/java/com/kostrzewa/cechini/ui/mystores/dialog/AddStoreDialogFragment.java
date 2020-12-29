@@ -146,8 +146,7 @@ public class AddStoreDialogFragment extends DialogFragment implements AdapterVie
             storeDTO.setName(nameET.getText().toString());
             storeDTO.setAddress(addressET.getText().toString());
             storeDTO.setNip(nipET.getText().toString());
-            storeDTO.setStoregroupId(selectedStoreGroup.getId());
-            storeDTO.setStoregroupId(selectedStoreGroup.getId());
+//            storeDTO.setStoregroupId(selectedStoreGroup.getId());
             storeDTO.setWorkerId(workerDataManager.getWorker().getId());
             storeDataManager.addNewStore(storeDTO);
         }

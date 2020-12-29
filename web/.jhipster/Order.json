@@ -43,7 +43,6 @@
       "relationshipType": "many-to-one",
       "otherEntityName": "status",
       "otherEntityRelationshipName": "order",
-      "relationshipValidateRules": "required",
       "relationshipName": "status",
       "otherEntityField": "name"
     }

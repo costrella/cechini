@@ -115,7 +115,7 @@ relationship OneToMany {
     Store to Report{store(name) required},
 
     Warehouse to Order{warehouse(name)},
-    Status to Order{status(name) required},
+    Status to Order{status(name)},
 
     Product to OrderItem{product(name)},
     Order to OrderItem{order},

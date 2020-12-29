@@ -52,10 +52,10 @@
                     <th scope="col" jhiSortBy="address"><span jhiTranslate="cechiniApp.store.address">Address</span>
                         <fa-icon icon="sort"></fa-icon>
                     </th>
-                    <th scope="col" jhiSortBy="storegroupName"><span
+                    <!-- <th scope="col" jhiSortBy="storegroupName"><span
                             jhiTranslate="cechiniApp.store.storegroup">Storegroup</span>
                         <fa-icon icon="sort"></fa-icon>
-                    </th>
+                    </th> -->
                     <th scope="col" jhiSortBy="nip"><span jhiTranslate="cechiniApp.store.nip">Nip</span>
                         <fa-icon icon="sort"></fa-icon>
                     </th>
@@ -70,11 +70,11 @@
                     <td><a [routerLink]="['/store', store.id, 'view']">{{ store.id }}</a></td>
                     <td>{{ store.name }}</td>
                     <td>{{ store.address }}</td>
-                    <td>
+                    <!-- <td>
                         <div *ngIf="store.storegroupId">
                             <a [routerLink]="['/store-group', store.storegroupId , 'view']">{{ store.storegroupName }}</a>
                         </div>
-                    </td>
+                    </td> -->
                     <td>{{ store.nip }}</td>
                     <td>
                         <div *ngIf="store.workerId">
