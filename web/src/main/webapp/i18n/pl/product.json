@@ -2,24 +2,24 @@
   "cechiniApp": {
     "product": {
       "home": {
-        "title": "Product",
-        "createLabel": "Dodaj Product",
-        "createOrEditLabel": "Dodaj lub edytuj: Product",
-        "notFound": "No Products found"
+        "title": "Produkty",
+        "createLabel": "Dodaj Produkt",
+        "createOrEditLabel": "Dodaj lub edytuj: Produkt",
+        "notFound": "Nie znaleziono Produktów"
       },
-      "created": "Utworzono nowy obiekt typu Product z identyfikatorem {{ param }}",
-      "updated": "Uaktualniono obiekt typu Product z identyfikatorem {{ param }}",
-      "deleted": "Usunięto obiekt typu Product z identyfikatorem {{ param }}",
+      "created": "Utworzono nowy obiekt typu Produkt z identyfikatorem {{ param }}",
+      "updated": "Uaktualniono obiekt typu Produkt z identyfikatorem {{ param }}",
+      "deleted": "Usunięto obiekt typu Produkt z identyfikatorem {{ param }}",
       "delete": {
-        "question": "Czy na pewno chcesz usunąć Product {{ id }}?"
+        "question": "Czy na pewno chcesz usunąć Produkt {{ id }}?"
       },
       "detail": {
-        "title": "Product"
+        "title": "Produkt"
       },
-      "name": "Name",
-      "capacity": "Capacity",
-      "eanArt": "Ean Art",
-      "eanPack": "Ean Pack",
+      "name": "Nazwa",
+      "capacity": "Pojemność (L)",
+      "eanArt": "ean Art",
+      "eanPack": "Numer EAN Zgrzewki",
       "packCountPalette": "Pack Count Palette",
       "artCountPalette": "Art Count Palette",
       "layerCountPalette": "Layer Count Palette",

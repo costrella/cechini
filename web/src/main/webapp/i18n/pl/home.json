@@ -5,7 +5,7 @@
     "logged": {
       "message": "Jesteś zalogowany jako użytkownik \"{{username}}\"."
     },
-    "question": "Wszystkie uwagi, modyfikacje proszę podesłać na maila. Jest to idealny moment na wszelkie poprawki, ponieważ bazę danych można teraz w łatwy sposób przeprojektować. Później oczywiście też jest to możliwe, jednak nakład pracy jest nieco większy.",
+    "question": "1. Dodaj Przedstawicieli Handlowych /n 2. Dodaj Produkty \n 3. Dodaj Grupy Sklepów \n 4. Dodaj Hurtownie  ",
     "link": {
       "homepage": "Strona domowa JHipster",
       "stackoverflow": "JHipster na Stack Overflow",
