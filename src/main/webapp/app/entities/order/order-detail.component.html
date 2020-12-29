@@ -44,14 +44,6 @@
                         <a [routerLink]="['/warehouse', order.warehouseId, 'view']">{{ order.warehouseName }}</a>
                     </div>
                 </dd>
-                <dt><span jhiTranslate="cechiniApp.order.status">Status</span></dt>
-                <dd>
-                    <div *ngIf="order.statusId">
-                        <a [routerLink]="['/status', order.statusId, 'view']">
-                            {{ order.statusName }}
-                        </a>
-                    </div>
-                </dd>
             </dl>
 
             <button type="submit" (click)="previousState()" class="btn btn-info">

@@ -82,6 +82,9 @@
                     <th scope="col"><span jhiTranslate="cechiniApp.report.photos">Photos</span>
                         <fa-icon icon="sort"></fa-icon>
                     </th>
+                    <th scope="col"><span jhiTranslate="cechiniApp.report.managerNote">managerNote</span>
+                        <fa-icon icon="sort"></fa-icon>
+                    </th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -113,6 +116,7 @@
                     <td>
                         <!-- {{report.photos.size}},  -->
                         {{report.photosCount}}</td>
+                    <td>{{ report.managerNote }}</td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

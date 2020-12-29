@@ -20,7 +20,7 @@ public class OrderMapperCustom {
         order.setId(orderDTO.getId());
         order.setDeliveryDate(orderDTO.getDeliveryDate());
         order.setOrderDate(orderDTO.getOrderDate());
-        order.setStatus(new Status().id(orderDTO.getStatusId()));
+//        order.setStatus(new Status().id(orderDTO.getStatusId()));
         order.setWarehouse(new Warehouse().id(orderDTO.getWarehouseId()).name(orderDTO.getWarehouseName()));
         orderDTO.getOrderItems().stream().forEach(orderItemDTO -> {
             OrderItem orderItem = new OrderItem().artCount(orderItemDTO.getArtCount()).packCount(orderItemDTO.getPackCount());
