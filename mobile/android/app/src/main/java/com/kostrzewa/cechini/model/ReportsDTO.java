@@ -5,13 +5,13 @@ import java.util.List;
 
 public class ReportsDTO implements Serializable {
 
-    private List<ReportDTO> reportsDTOS;
+    private List<ReportDTOWithPhotos> reportsDTOS;
 
-    public List<ReportDTO> getReportsDTOS() {
+    public List<ReportDTOWithPhotos> getReportsDTOS() {
         return reportsDTOS;
     }
 
-    public void setReportsDTOS(List<ReportDTO> reportsDTOS) {
+    public void setReportsDTOS(List<ReportDTOWithPhotos> reportsDTOS) {
         this.reportsDTOS = reportsDTOS;
     }
 }

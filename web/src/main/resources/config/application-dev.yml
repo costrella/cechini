@@ -37,7 +37,7 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/cc2
+    url: jdbc:postgresql://localhost:5432/cc3
     username: postgres
     password: postgres
     hikari:
@@ -48,7 +48,7 @@ spring:
     show-sql: true
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
-    contexts: dev, faker
+    contexts: dev
   mail:
     host: smtp.gmail.com
     port: 587
