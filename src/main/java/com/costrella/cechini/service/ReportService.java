@@ -12,9 +12,7 @@ import com.costrella.cechini.service.mapper.PhotoFileMapper;
 import com.costrella.cechini.service.mapper.ReportMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -70,7 +68,7 @@ public class ReportService {
         Report report = reportMapper.toEntityWithPhotos(reportDTO);
         report = reportRepository.save(report);
         boolean sentMail = false;
-        if(report.getOrder() != null){
+        if (report.getOrder() != null) {
             sentMail = mailService.sendEmailWithOrder(report);
         }
         ReportDTO respone = reportMapper.toDto(report);
@@ -87,14 +85,15 @@ public class ReportService {
     @Transactional(readOnly = true)
     public Page<ReportDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Reports");
-        return reportRepository.findAll(pageable)
+        return reportRepository
+            .findAll(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Direction.DESC, "reportDate")))
             .map(reportMapper::toDto);
     }
 
     @Transactional(readOnly = true)
     public Page<ReportDTO> findAllByWorkerId(Pageable pageable, Long id) {
         log.debug("Request to get all Reports by worker id");
-        return reportRepository.findAllByWorkerId(id, pageable)
+        return reportRepository.findAllByWorkerIdOrderByReportDateDesc(id, pageable)
             .map(reportMapper::toDto);
     }
 
@@ -106,13 +105,13 @@ public class ReportService {
 
     @Transactional(readOnly = true)
     public List<ReportDTO> findAllByWorkerIdAndStoreId(Long workerId, Long storeId) {
-        return reportRepository.findAllByWorkerIdAndStoreId(workerId, storeId).stream()
+        return reportRepository.findAllByWorkerIdAndStoreIdOrderByReportDateDesc(workerId, storeId).stream()
             .map(report -> reportMapper.toDtoWithOrders(report, orderMapper, orderItemMapper)).collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
     public Page<ReportDTO> findAllByWorkerIdAndStoreId(Pageable pageable, Long id, Long storeId) {
-        return reportRepository.findAllByWorkerIdAndStoreId(id, storeId, pageable)
+        return reportRepository.findAllByWorkerIdAndStoreIdOrderByReportDateDesc(id, storeId, pageable)
             .map(reportMapper::toDto);
     }
 
@@ -121,13 +120,15 @@ public class ReportService {
         Report report = new Report();
         if (storeId != 0) report.setStore(new Store().id(storeId));
         if (workerId != 0) report.setWorker(new Worker().id(workerId));
-        return reportRepository.findAll(Example.of(report), pageable).map(reportMapper::toDto);
+        return reportRepository.findAll(Example.of(report),
+            PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Direction.DESC, "reportDate"))
+        ).map(reportMapper::toDto);
     }
 
     @Transactional(readOnly = true)
     public Page<ReportDTO> findAllByStoreId(Pageable pageable, Long id) {
         log.debug("Request to get all Reports by store id");
-        return reportRepository.findAllByStoreId(id, pageable)
+        return reportRepository.findAllByStoreIdOrderByReportDateDesc(id, pageable)
             .map(reportMapper::toDto);
     }
 

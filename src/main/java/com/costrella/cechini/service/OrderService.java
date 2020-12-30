@@ -9,9 +9,7 @@ import com.costrella.cechini.service.mapper.OrderItemMapper;
 import com.costrella.cechini.service.mapper.OrderMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -64,7 +62,8 @@ public class OrderService {
     @Transactional(readOnly = true)
     public Page<OrderDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Orders");
-        return orderRepository.findAll(pageable)
+        return orderRepository
+            .findAll(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Direction.DESC, "orderDate")))
             .map(orderMapper::toDto);
     }
 
