@@ -12,10 +12,6 @@
                 <dd>
                     <span>{{ order.orderDate | date:'dd/MM/yyyy HH:mm' }}</span>
                 </dd>
-                <dt><span jhiTranslate="cechiniApp.order.deliveryDate">Delivery Date</span></dt>
-                <dd>
-                    <span>{{ order.deliveryDate | date:'dd/MM/yyyy' }}</span>
-                </dd>
                 <dt><span jhiTranslate="cechiniApp.worker.detail.title">Worker</span></dt>
                 <dd>
                     <div *ngIf="order.workerId">
