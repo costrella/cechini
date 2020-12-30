@@ -28,4 +28,24 @@ public interface PreferenceManager {
     void setWorker(String worker);
 
     String getWorker();
+
+    void setSychroTimeMyStores();
+
+    String getSychroTimeMyStores();
+
+    String getSychroTimeProducts();
+
+    String getSychroTimeMyReports();
+
+    String getSychroTimeWarehouses();
+
+    String getSychroTimeOrders();
+
+    void setSychroTimeWarehouses();
+
+    void setSychroTimeMyReports();
+
+    void setSychroTimeProducts();
+
+    void setSychroTimeMyOrders();
 }

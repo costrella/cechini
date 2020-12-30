@@ -3,6 +3,9 @@ package com.kostrzewa.cechini.data.prefs;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.kostrzewa.cechini.util.DateUtils;
+
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -72,5 +75,55 @@ public class PreferenceManagerImpl implements PreferenceManager {
     @Override
     public String getWorker() {
         return sharedPreferences.getString("worker", null);
+    }
+
+    @Override
+    public void setSychroTimeMyStores() {
+        sharedPreferences.edit().putString("synchroTimeMyStores", DateUtils.parse(new Date())).apply();
+    }
+
+    @Override
+    public String getSychroTimeMyStores() {
+        return sharedPreferences.getString("synchroTimeMyStores", "brak");
+    }
+
+    @Override
+    public void setSychroTimeProducts() {
+        sharedPreferences.edit().putString("synchroTimeProducts", DateUtils.parse(new Date())).apply();
+    }
+
+    @Override
+    public String getSychroTimeProducts() {
+        return sharedPreferences.getString("synchroTimeProducts", "brak");
+    }
+
+    @Override
+    public void setSychroTimeMyReports() {
+        sharedPreferences.edit().putString("synchroTimeMyReports", DateUtils.parse(new Date())).apply();
+    }
+
+    @Override
+    public String getSychroTimeMyReports() {
+        return sharedPreferences.getString("synchroTimeMyReports", "brak");
+    }
+
+    @Override
+    public void setSychroTimeMyOrders() {
+        sharedPreferences.edit().putString("synchroTimeMyOrders", DateUtils.parse(new Date())).apply();
+    }
+
+    @Override
+    public String getSychroTimeOrders() {
+        return sharedPreferences.getString("synchroTimeMyOrders", "brak");
+    }
+
+    @Override
+    public void setSychroTimeWarehouses() {
+        sharedPreferences.edit().putString("synchroTimeWarehouses", DateUtils.parse(new Date())).apply();
+    }
+
+    @Override
+    public String getSychroTimeWarehouses() {
+        return sharedPreferences.getString("synchroTimeWarehouses", "brak");
     }
 }

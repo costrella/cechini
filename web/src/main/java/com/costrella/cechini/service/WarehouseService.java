@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -62,7 +63,7 @@ public class WarehouseService {
     @Transactional(readOnly = true)
     public List<WarehouseDTO> findAll() {
         log.debug("Request to get all Warehouses");
-        return warehouseRepository.findAll().stream()
+        return warehouseRepository.findAll(Sort.by(Sort.Direction.DESC, "name")).stream()
             .map(warehouseMapper::toDto).collect(Collectors.toList());
     }
 

@@ -99,6 +99,7 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
             public void onResponse(Call<List<ReportDTOWithPhotos>> call, Response<List<ReportDTOWithPhotos>> response) {
                 if (response.isSuccessful()) {
                     EventBus.getDefault().post(new MyReportsDownloadSuccess(response.body()));
+                    preferenceManager.setSychroTimeMyReports();
                 } else {
                     EventBus.getDefault().post(new MyReportsDownloadFailed("Wystąpił problem"));
                 }

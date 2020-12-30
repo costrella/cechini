@@ -35,6 +35,7 @@ public class OrderDataManagerImpl extends AbstractDataManager implements OrderDa
                     public void onResponse(Call<List<OrderDTO>> call, Response<List<OrderDTO>> response) {
                         if (response.isSuccessful()) {
                             EventBus.getDefault().post(new MyOrdersDownloadSuccess(response.body()));
+                            preferenceManager.setSychroTimeMyOrders();
                         } else {
                             EventBus.getDefault().post(new MyOrdersDownloadFailed("Wystpił błąd!"));
                         }

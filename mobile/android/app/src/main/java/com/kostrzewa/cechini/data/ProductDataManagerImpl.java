@@ -3,8 +3,12 @@ package com.kostrzewa.cechini.data;
 import android.content.Context;
 import android.util.Log;
 
+import com.kostrzewa.cechini.data.events.ProductsDownloadFailed;
+import com.kostrzewa.cechini.data.events.ProductsDownloadSuccess;
 import com.kostrzewa.cechini.model.ProductDTO;
 import com.kostrzewa.cechini.rest.RetrofitClient;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -39,12 +43,15 @@ public class ProductDataManagerImpl extends AbstractDataManager implements Produ
                     Set<String> myset = new HashSet<>();
                     response.body().stream().forEach(v -> myset.add(gson.toJson(v)));
                     preferenceManager.setAllProducts(myset);
+                    EventBus.getDefault().post(new ProductsDownloadSuccess());
+                    preferenceManager.setSychroTimeProducts();
                 }
             }
 
             @Override
             public void onFailure(Call<List<ProductDTO>> call, Throwable t) {
                 Log.d(TAG, "onFailure: ");
+                EventBus.getDefault().post(new ProductsDownloadFailed());
             }
         });
 

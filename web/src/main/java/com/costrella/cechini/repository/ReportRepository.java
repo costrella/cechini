@@ -22,12 +22,12 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
 
     List<Report> findAllByWorkerIdOrderByReportDateDesc(Long id);
 
-    List<Report> findAllByWorkerIdAndStoreId(Long id, Long storeId);
+    List<Report> findAllByWorkerIdAndStoreIdOrderByReportDateDesc(Long id, Long storeId);
 
-    Page<Report> findAllByWorkerId(Long id, Pageable pageable);
+    Page<Report> findAllByWorkerIdOrderByReportDateDesc(Long id, Pageable pageable);
 
-    Page<Report> findAllByWorkerIdAndStoreId(Long id, Long storeId, Pageable pageable);
+    Page<Report> findAllByWorkerIdAndStoreIdOrderByReportDateDesc(Long id, Long storeId, Pageable pageable);
 
-    Page<Report> findAllByStoreId(Long id, Pageable pageable);
+    Page<Report> findAllByStoreIdOrderByReportDateDesc(Long id, Pageable pageable);
 
 }

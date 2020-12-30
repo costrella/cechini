@@ -43,11 +43,11 @@
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
-                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="orderDate"><span jhiTranslate="cechiniApp.order.orderDate">Order Date</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="storeName"><span jhiTranslate="cechiniApp.order.store">Store</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="warehouseName"><span jhiTranslate="cechiniApp.order.warehouse">Warehouse</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"><span jhiTranslate="cechiniApp.worker.detail.title">Worker</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"><span jhiTranslate="global.field.id">ID</span> </th>
+                    <th scope="col"><span jhiTranslate="cechiniApp.order.orderDate">Order Date</span> </th>
+                    <th scope="col"><span jhiTranslate="cechiniApp.order.store">Store</span> </th>
+                    <th scope="col"><span jhiTranslate="cechiniApp.order.warehouse">Warehouse</span> </th>
+                    <th scope="col"><span jhiTranslate="cechiniApp.worker.detail.title">Worker</span> </th>
                     <th scope="col"></th>
                 </tr>
             </thead>

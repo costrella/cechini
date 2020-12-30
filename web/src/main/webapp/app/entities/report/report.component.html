@@ -56,34 +56,25 @@
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
-                    <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span>
-                        <fa-icon icon="sort"></fa-icon>
+                    <th scope="col"><span jhiTranslate="global.field.id">ID</span>
                     </th>
                     <!-- <th scope="col" jhiSortBy="number"><span jhiTranslate="cechiniApp.report.number">Number</span>
                         <fa-icon icon="sort"></fa-icon>
                     </th> -->
-                    <th scope="col" jhiSortBy="reportDate"><span jhiTranslate="cechiniApp.report.reportDate">Report
+                    <th scope="col"><span jhiTranslate="cechiniApp.report.reportDate">Report
                             Date</span>
-                        <fa-icon icon="sort"></fa-icon>
                     </th>
-                    <th scope="col" jhiSortBy="desc"><span jhiTranslate="cechiniApp.report.desc">Desc</span>
-                        <fa-icon icon="sort"></fa-icon>
+                    <th scope="col"><span jhiTranslate="cechiniApp.report.desc">Desc</span>
                     </th>
-                    <th scope="col" jhiSortBy="orderId"><span jhiTranslate="cechiniApp.report.order">Order</span>
-                        <fa-icon icon="sort"></fa-icon>
+                    <th scope="col"><span jhiTranslate="cechiniApp.report.order">Order</span>
                     </th>
-                    <th scope="col" jhiSortBy="workerSurname"><span
-                            jhiTranslate="cechiniApp.report.worker">Worker</span>
-                        <fa-icon icon="sort"></fa-icon>
+                    <th scope="col"><span jhiTranslate="cechiniApp.report.worker">Worker</span>
                     </th>
-                    <th scope="col" jhiSortBy="storeName"><span jhiTranslate="cechiniApp.report.store">Store</span>
-                        <fa-icon icon="sort"></fa-icon>
+                    <th scope="col"><span jhiTranslate="cechiniApp.report.store">Store</span>
                     </th>
                     <th scope="col"><span jhiTranslate="cechiniApp.report.photos">Photos</span>
-                        <fa-icon icon="sort"></fa-icon>
                     </th>
                     <th scope="col"><span jhiTranslate="cechiniApp.report.managerNote">managerNote</span>
-                        <fa-icon icon="sort"></fa-icon>
                     </th>
                     <th scope="col"></th>
                 </tr>
@@ -100,7 +91,8 @@
                     <td>{{ report.desc }}</td>
                     <td>
                         <div *ngIf="report.orderId">
-                            <a style="color: #00a6ff" (click)="clickItem(['/order/', report.orderId , '/view'])">zobacz</a>
+                            <a style="color: #00a6ff"
+                                (click)="clickItem(['/order/', report.orderId , '/view'])">zobacz</a>
                         </div>
                         <div *ngIf="!report.orderId">
                             <span>brak</span>
@@ -108,12 +100,14 @@
                     </td>
                     <td>
                         <div *ngIf="report.workerId">
-                            <a style="color: #00a6ff" (click)="clickItem(['/worker/', report.workerId , '/view'])">{{ report.workerSurname }}</a>
+                            <a style="color: #00a6ff"
+                                (click)="clickItem(['/worker/', report.workerId , '/view'])">{{ report.workerSurname }}</a>
                         </div>
                     </td>
                     <td>
                         <div *ngIf="report.storeId">
-                            <a style="color: #00a6ff" (click)="clickItem(['/store/', report.storeId , '/view'])">{{ report.storeName }}</a>
+                            <a style="color: #00a6ff"
+                                (click)="clickItem(['/store/', report.storeId , '/view'])">{{ report.storeName }}</a>
                         </div>
                     </td>
                     <td>
@@ -122,16 +116,14 @@
                     <td>{{ report.managerNote }}</td>
                     <td class="text-right">
                         <div class="btn-group">
-                            <button type="submit"
-                                    (click)="clickItem(['/report/', report.id, '/view'])"
-                                    class="btn btn-info btn-sm">
+                            <button type="submit" (click)="clickItem(['/report/', report.id, '/view'])"
+                                class="btn btn-info btn-sm">
                                 <fa-icon icon="eye"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                             </button>
 
-                            <button type="submit"
-                                    (click)="clickItem(['/report/', report.id, '/edit'])"
-                                    class="btn btn-primary btn-sm">
+                            <button type="submit" (click)="clickItem(['/report/', report.id, '/edit'])"
+                                class="btn btn-primary btn-sm">
                                 <fa-icon icon="pencil-alt"></fa-icon>
                                 <span class="d-none d-md-inline">Dodaj komentarz</span>
                             </button>

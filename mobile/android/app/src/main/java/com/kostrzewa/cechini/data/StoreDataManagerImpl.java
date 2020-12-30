@@ -3,6 +3,8 @@ package com.kostrzewa.cechini.data;
 import android.content.Context;
 import android.util.Log;
 
+import com.kostrzewa.cechini.data.events.MyStoreDownloadFailed;
+import com.kostrzewa.cechini.data.events.MyStoreDownloadSuccess;
 import com.kostrzewa.cechini.data.events.StoreSentFailed;
 import com.kostrzewa.cechini.model.StoreDTO;
 import com.kostrzewa.cechini.rest.RetrofitClient;
@@ -86,12 +88,15 @@ public class StoreDataManagerImpl extends AbstractDataManager implements StoreDa
                             Set<String> myset = new HashSet<>();
                             response.body().stream().forEach(storeDTO -> myset.add(gson.toJson(storeDTO)));
                             preferenceManager.setMyStores(myset);
+                            EventBus.getDefault().post(new MyStoreDownloadSuccess());
+                            preferenceManager.setSychroTimeMyStores();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<List<StoreDTO>> call, Throwable t) {
                         Log.d(TAG, "onFailure: ");
+                        EventBus.getDefault().post(new MyStoreDownloadFailed());
                     }
                 });
 
