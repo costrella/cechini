@@ -43,7 +43,11 @@ public class OrderDataManagerImpl extends AbstractDataManager implements OrderDa
 
                     @Override
                     public void onFailure(Call<List<OrderDTO>> call, Throwable t) {
-                        EventBus.getDefault().post(new MyOrdersDownloadFailed("Wystpił błąd!"));
+                        if (!isNetworkConnected()) {
+                            EventBus.getDefault().post(new MyOrdersDownloadFailed("Brak internetu!"));
+                        } else {
+                            EventBus.getDefault().post(new MyOrdersDownloadFailed("Wystpił błąd!"));
+                        }
                     }
                 });
     }

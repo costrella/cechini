@@ -32,6 +32,8 @@ import com.kostrzewa.cechini.data.events.MyStoreDownloadFailed;
 import com.kostrzewa.cechini.data.events.MyStoreDownloadSuccess;
 import com.kostrzewa.cechini.data.events.ProductsDownloadFailed;
 import com.kostrzewa.cechini.data.events.ProductsDownloadSuccess;
+import com.kostrzewa.cechini.data.events.ReportSentFailed;
+import com.kostrzewa.cechini.data.events.ReportSentSuccess;
 import com.kostrzewa.cechini.data.events.WarehouseDownloadFailed;
 import com.kostrzewa.cechini.data.events.WarehouseDownloadSuccess;
 import com.kostrzewa.cechini.data.prefs.PreferenceManager;
@@ -82,6 +84,11 @@ public class ShareFragment extends Fragment {
     @BindView(R.id.synchroWarehouseProgress)
     ProgressBar synchroWarehouseProgress;
 
+    @BindView(R.id.synchroReportsNotSentText)
+    TextView synchroReportsNotSent;
+    @BindView(R.id.synchroReportsNotSentProgress)
+    ProgressBar synchroReportsNotSentProgress;
+
     @OnClick(R.id.synchroAllBtn)
     public void synchroAllBtn() {
         synchroStoreProgress.setVisibility(View.VISIBLE);
@@ -89,6 +96,7 @@ public class ShareFragment extends Fragment {
         synchroReportProgress.setVisibility(View.VISIBLE);
         synchroOrdersProgress.setVisibility(View.VISIBLE);
         synchroWarehouseProgress.setVisibility(View.VISIBLE);
+        synchroReportsNotSentProgress.setVisibility(View.VISIBLE);
         storeDataManager.downloadMyStores();
         productDataManager.downloadProducts();
         warehouseDataManager.downloadWarehouse();
@@ -108,6 +116,7 @@ public class ShareFragment extends Fragment {
         synchroReportTime.setText(LAST_SYNCHRO + preferenceManager.getSychroTimeMyReports());
         synchroWarehouseTime.setText(LAST_SYNCHRO + preferenceManager.getSychroTimeWarehouses());
         synchroOrdersTime.setText(LAST_SYNCHRO + preferenceManager.getSychroTimeOrders());
+        synchroReportsNotSent.setText(""+preferenceManager.getReportsNotSend().size());
         return root;
     }
 
@@ -222,6 +231,24 @@ public class ShareFragment extends Fragment {
             synchroProductProgress.setVisibility(View.GONE);
             synchroProductTime.setVisibility(View.VISIBLE);
             synchroProductTime.setText(SYNCHRO_ERROR);
+        }, 1500);
+    }
+
+    @Subscribe
+    public void sub(ReportSentSuccess s) {
+        handler.postDelayed(() -> {
+            synchroReportsNotSentProgress.setVisibility(View.GONE);
+            synchroReportsNotSent.setVisibility(View.VISIBLE);
+            synchroReportsNotSent.setText(""+preferenceManager.getReportsNotSend().size());
+        }, 1500);
+    }
+
+    @Subscribe
+    public void sub(ReportSentFailed s) {
+        handler.postDelayed(() -> {
+            synchroReportsNotSentProgress.setVisibility(View.GONE);
+            synchroReportsNotSent.setVisibility(View.VISIBLE);
+            synchroReportsNotSent.setText(SYNCHRO_ERROR);
         }, 1500);
     }
 }

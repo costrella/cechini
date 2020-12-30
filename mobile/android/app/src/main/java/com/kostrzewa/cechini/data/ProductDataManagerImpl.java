@@ -3,6 +3,7 @@ package com.kostrzewa.cechini.data;
 import android.content.Context;
 import android.util.Log;
 
+import com.kostrzewa.cechini.data.events.MyOrdersDownloadFailed;
 import com.kostrzewa.cechini.data.events.ProductsDownloadFailed;
 import com.kostrzewa.cechini.data.events.ProductsDownloadSuccess;
 import com.kostrzewa.cechini.model.ProductDTO;
@@ -50,8 +51,11 @@ public class ProductDataManagerImpl extends AbstractDataManager implements Produ
 
             @Override
             public void onFailure(Call<List<ProductDTO>> call, Throwable t) {
-                Log.d(TAG, "onFailure: ");
-                EventBus.getDefault().post(new ProductsDownloadFailed());
+                if (!isNetworkConnected()) {
+                    EventBus.getDefault().post(new ProductsDownloadFailed("Brak internetu!"));
+                } else {
+                    EventBus.getDefault().post(new ProductsDownloadFailed("bład"));
+                }
             }
         });
 

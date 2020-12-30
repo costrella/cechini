@@ -52,7 +52,7 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
             public void onFailure(Call<ReportDTO> call, Throwable t) {
                 saveNotSentReport(reportDTO);
                 if (!isNetworkConnected()) {
-                    EventBus.getDefault().post(new ReportSentFailed("Brak dostępu do internetu. Zapisano w pamięci ! "));
+                    EventBus.getDefault().post(new ReportSentFailed("Brak internetu. Zapisano w pamięci ! "));
                 } else {
                     EventBus.getDefault().post(new ReportSentFailed("Wystąpił problem. Zapisano w pamięci ! "));
                 }
@@ -72,10 +72,13 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     Log.d(TAG, "onResponse: " + response.code());
+                    preferenceManager.setReportsNotSend(new HashSet<>());
+                    EventBus.getDefault().post(new ReportSentSuccess("ok"));
                 }
 
                 @Override
                 public void onFailure(Call<Void> call, Throwable t) {
+                    EventBus.getDefault().post(new ReportSentFailed("error"));
                     Log.d(TAG, "onFailure: ");
                 }
             });

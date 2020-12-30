@@ -134,6 +134,32 @@
         </ProgressBar>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:textSize="20dp"
+            android:text="Niewysłane raporty"></TextView>
+        <TextView
+            android:id="@+id/synchroReportsNotSentText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="15dp"
+            android:text="0"></TextView>
+        <ProgressBar
+            android:id="@+id/synchroReportsNotSentProgress"
+            android:layout_width="wrap_content"
+            android:visibility="gone"
+            android:layout_height="30dp">
+        </ProgressBar>
+    </LinearLayout>
+
 
 
 
