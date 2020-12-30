@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
-    <div class="col-8">
+    <div class="col-10">
         <div *ngIf="report">
-            <h2><span jhiTranslate="cechiniApp.report.detail.title">Report</span> {{ report.id }}</h2>
+            <h2><span jhiTranslate="cechiniApp.report.detail.title">Report</span></h2>
 
             <hr>
 
@@ -10,20 +10,33 @@
             <dl class="row-md jh-entity-details">
                 <dt><span jhiTranslate="cechiniApp.report.reportDate">Report Date</span></dt>
                 <dd>
-                    <span>{{ report.reportDate }}</span>
+                    <span>{{ report.reportDate | date:'dd/MM/yyyy HH:mm:ss' }}</span>
                 </dd>
                 <dt><span jhiTranslate="cechiniApp.report.desc">Desc</span></dt>
                 <dd>
-                    <span>{{ report.desc }}</span>
+                    <div *ngIf="report.desc">
+                        <span>{{ report.desc }}</span>
+                    </div>
+                    <div *ngIf="!report.desc">
+                        <span>brak</span>
+                    </div>
                 </dd>
                 <dt><span jhiTranslate="cechiniApp.report.managerNote">Manager Note</span></dt>
                 <dd>
-                    <span>{{ report.managerNote }}</span>
+                    <div *ngIf="report.managerNote">
+                        <span>{{ report.managerNote }}</span>
+                    </div>
+                    <div *ngIf="!report.managerNote">
+                        <span>brak</span>
+                    </div>
                 </dd>
                 <dt><span jhiTranslate="cechiniApp.report.order">Order</span></dt>
                 <dd>
                     <div *ngIf="report.orderId">
-                        <a [routerLink]="['/order', report.orderId, 'view']">{{ report.orderId }}</a>
+                        <a [routerLink]="['/order', report.orderId, 'view']">zobacz</a>
+                    </div>
+                    <div *ngIf="!report.orderId">
+                        <span>brak</span>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="cechiniApp.report.worker">Worker</span></dt>
@@ -40,17 +53,24 @@
                 </dd>
             </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
+            <button type="submit" (click)="previousState()" class="btn btn-info">
                 <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
             </button>
 
-            <button type="button"
-                    [routerLink]="['/report', report.id, 'edit']"
-                    class="btn btn-primary">
+            <button type="button" [routerLink]="['/report', report.id, 'edit']" class="btn btn-primary">
                 <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
             </button>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Zdjęcia</span></dt>
+                <dd *ngFor="let photoFile of report.photos">
+                    <div *ngIf="photoFile.value">
+                        <img [src]="'data:' + photoFile.valueContentType + ';base64,' + photoFile.value"
+                            style="max-width: 100%;" alt="photoFile image" />
+                    </div>
+                </dd>
+            </dl>
+
         </div>
     </div>
 </div>
