@@ -3,6 +3,7 @@ package com.costrella.cechini.service.dto;
 import java.time.Instant;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * A DTO for the {@link com.costrella.cechini.domain.Report} entity.
@@ -34,6 +35,16 @@ public class ReportDTO implements Serializable {
     private OrderDTO orderDTO;
 
     private boolean sentMail;
+
+    private List<PhotoFileDTO> photos;
+
+    public List<PhotoFileDTO> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<PhotoFileDTO> photos) {
+        this.photos = photos;
+    }
 
     public boolean isSentMail() {
         return sentMail;

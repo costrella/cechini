@@ -100,7 +100,10 @@
                     <td>{{ report.desc }}</td>
                     <td>
                         <div *ngIf="report.orderId">
-                            <a style="color: #00a6ff" (click)="clickItem(['/order/', report.orderId , '/view'])">{{ report.orderId }}</a>
+                            <a style="color: #00a6ff" (click)="clickItem(['/order/', report.orderId , '/view'])">zobacz</a>
+                        </div>
+                        <div *ngIf="!report.orderId">
+                            <span>brak</span>
                         </div>
                     </td>
                     <td>

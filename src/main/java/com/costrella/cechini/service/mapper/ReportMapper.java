@@ -2,14 +2,13 @@ package com.costrella.cechini.service.mapper;
 
 
 import com.costrella.cechini.domain.*;
-import com.costrella.cechini.service.dto.PhotoDTO;
-import com.costrella.cechini.service.dto.ReportDTO;
-import com.costrella.cechini.service.dto.ReportDTOSimple;
-import com.costrella.cechini.service.dto.ReportDTOWithPhotos;
+import com.costrella.cechini.service.dto.*;
 import org.mapstruct.Mapper;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -90,6 +89,20 @@ public interface ReportMapper extends EntityMapper<ReportDTO, Report> {
         if (report.getOrder() != null) {
             reportDTO.setOrderDTO(orderMapper.toDtoCustom(report.getOrder(), orderItemMapper));
         }
+        return reportDTO;
+    }
+
+    default ReportDTO toDtoWithPhotos(Report report, OrderMapper orderMapper, OrderItemMapper orderItemMapper, PhotoFileMapper photoFileMapper) {
+        ReportDTO reportDTO = toDtoWithOrders(report, orderMapper, orderItemMapper);
+        List<PhotoFile> photoFiles = new ArrayList<>();
+        report.getPhotos().forEach(photo -> {
+            photoFiles.add(photo.getFile());
+        });
+        List<PhotoFileDTO> photoFileDTOS = new ArrayList<>();
+        photoFiles.forEach(photoFile -> {
+            photoFileDTOS.add(photoFileMapper.toDto(photoFile));
+        });
+        reportDTO.setPhotos(photoFileDTOS);
         return reportDTO;
     }
 

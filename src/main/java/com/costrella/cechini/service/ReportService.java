@@ -8,6 +8,7 @@ import com.costrella.cechini.service.dto.ReportDTO;
 import com.costrella.cechini.service.dto.ReportDTOWithPhotos;
 import com.costrella.cechini.service.mapper.OrderItemMapper;
 import com.costrella.cechini.service.mapper.OrderMapper;
+import com.costrella.cechini.service.mapper.PhotoFileMapper;
 import com.costrella.cechini.service.mapper.ReportMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,13 +39,16 @@ public class ReportService {
 
     private final OrderItemMapper orderItemMapper;
 
+    private final PhotoFileMapper photoFileMapper;
+
     private final MailService mailService;
 
-    public ReportService(ReportRepository reportRepository, ReportMapper reportMapper, OrderMapper orderMapper, OrderItemMapper orderItemMapper, MailService mailService) {
+    public ReportService(ReportRepository reportRepository, ReportMapper reportMapper, OrderMapper orderMapper, OrderItemMapper orderItemMapper, PhotoFileMapper photoFileMapper, MailService mailService) {
         this.reportRepository = reportRepository;
         this.reportMapper = reportMapper;
         this.orderMapper = orderMapper;
         this.orderItemMapper = orderItemMapper;
+        this.photoFileMapper = photoFileMapper;
         this.mailService = mailService;
     }
 
@@ -137,7 +141,7 @@ public class ReportService {
     public Optional<ReportDTO> findOne(Long id) {
         log.debug("Request to get Report : {}", id);
         return reportRepository.findById(id)
-            .map(reportMapper::toDto);
+            .map(report -> reportMapper.toDtoWithPhotos(report, orderMapper, orderItemMapper, photoFileMapper));
     }
 
     /**

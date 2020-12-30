@@ -15,7 +15,7 @@
                 <dt><span jhiTranslate="cechiniApp.worker.detail.title">Worker</span></dt>
                 <dd>
                     <div *ngIf="order.workerId">
-                        <a [routerLink]="['/worker', order.workerId, 'view']">{{ order.workerSurname }}</a>
+                        <a [routerLink]="['/worker', order.workerId, 'view']">{{ order.workerSurname }} {{ order.name }}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="cechiniApp.store.detail.title">Store</span></dt>
@@ -27,7 +27,10 @@
                 <dt><span jhiTranslate="cechiniApp.order.report">Report</span></dt>
                 <dd>
                     <div *ngIf="order.reportId">
-                        <a [routerLink]="['/report', order.reportId, 'view']">{{ order.reportId }}</a>
+                        <a [routerLink]="['/report', order.reportId, 'view']">zobacz</a>
+                    </div>
+                    <div *ngIf="!order.reportId">
+                        <span>brak</span>
                     </div>
                 </dd>
                 <!-- <dt><span jhiTranslate="cechiniApp.order.comment">Comment</span></dt>
