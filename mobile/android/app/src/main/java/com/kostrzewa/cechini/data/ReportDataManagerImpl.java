@@ -93,6 +93,13 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
     }
 
     @Override
+    public List<ReportDTOWithPhotos> getMyReports() {
+        List<ReportDTOWithPhotos> reportDTOS = new ArrayList<>();
+        preferenceManager.getMyReports().stream().forEach(s -> reportDTOS.add(gson.fromJson(s, ReportDTOWithPhotos.class)));
+        return reportDTOS;
+    }
+
+    @Override
     public void downloadMyReports(Long workerId) {
         RetrofitClient.getInstance().getService().getMyReports(workerId).enqueue(new Callback<List<ReportDTOWithPhotos>>() {
             @Override
@@ -100,6 +107,10 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
                 if (response.isSuccessful()) {
                     EventBus.getDefault().post(new MyReportsDownloadSuccess(response.body()));
                     preferenceManager.setSychroTimeMyReports();
+
+                    Set<String> myset = new HashSet<>();
+                    response.body().stream().forEach(v -> myset.add(gson.toJson(v)));
+                    preferenceManager.setMyReports(myset);
                 } else {
                     EventBus.getDefault().post(new MyReportsDownloadFailed("Wystąpił problem"));
                 }

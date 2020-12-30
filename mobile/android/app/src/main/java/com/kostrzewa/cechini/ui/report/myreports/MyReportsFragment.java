@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -37,9 +38,13 @@ public class MyReportsFragment extends Fragment {
     private WorkerDataManager workerDataManager;
     private MyReportsRecyclerViewAdapter adapter;
     private List<ReportDTOWithPhotos> reportDTOList;
+    private boolean isReportsOfStoreMode = false;
 
     @BindView(R.id.fragment_myreports_recyclerView)
     RecyclerView recyclerView;
+
+    @BindView(R.id.fragment_mystores_progressBar)
+    ProgressBar progressBar;
 
     public MyReportsFragment() {
     }
@@ -70,11 +75,13 @@ public class MyReportsFragment extends Fragment {
         ButterKnife.bind(this, view);
         setHasOptionsMenu(true);
         if (getArguments() != null && (StoreDTO) getArguments().getSerializable(STORE_DTO) != null) {
+            isReportsOfStoreMode = true;
             StoreDTO storeDTO = (StoreDTO) getArguments().getSerializable(STORE_DTO);
             reportDataManager.downloadMyReportsByStoreId(workerDataManager.getWorker().getId(), storeDTO.getId());
             ((MainActivity) getActivity()).getSupportActionBar().setTitle("Raporty sklepu: " + storeDTO.getName() + " " + storeDTO.getAddress());
 
         } else {
+            isReportsOfStoreMode = false;
             reportDataManager.downloadMyReports(workerDataManager.getWorker().getId());
         }
         // Set the adapter
@@ -86,15 +93,24 @@ public class MyReportsFragment extends Fragment {
 
     @Subscribe
     public void onSuccess(MyReportsDownloadSuccess s) {
+        progressBar.setVisibility(View.GONE);
         reportDTOList = s.getList();
-        adapter = new MyReportsRecyclerViewAdapter(getContext(), getActivity(), reportDataManager, reportDTOList);
-        recyclerView.setAdapter(adapter);
-//        adapter.notifyDataSetChanged();
+        refresh();
     }
 
     @Subscribe
     public void onFailed(MyReportsDownloadFailed f) {
+        progressBar.setVisibility(View.GONE);
         Toast.makeText(getActivity(), f.getText(), Toast.LENGTH_LONG).show();
+        if (!isReportsOfStoreMode) {
+            reportDTOList = reportDataManager.getMyReports();
+            refresh();
+        }
+    }
+
+    private void refresh() {
+        adapter = new MyReportsRecyclerViewAdapter(getContext(), getActivity(), reportDataManager, reportDTOList);
+        recyclerView.setAdapter(adapter);
     }
 
 }

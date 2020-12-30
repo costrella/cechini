@@ -25,6 +25,10 @@ public interface PreferenceManager {
 
     Set<String> getAllStoreGroups();
 
+    void setMyReports(Set<String> myset);
+
+    Set<String> getMyReports();
+
     void setWorker(String worker);
 
     String getWorker();

@@ -68,6 +68,16 @@ public class PreferenceManagerImpl implements PreferenceManager {
     }
 
     @Override
+    public void setMyReports(Set<String> myset) {
+        sharedPreferences.edit().putStringSet("myReports", myset).apply();
+    }
+
+    @Override
+    public Set<String> getMyReports() {
+        return sharedPreferences.getStringSet("myReports", new HashSet<>());
+    }
+
+    @Override
     public void setWorker(String worker) {
         sharedPreferences.edit().putString("worker", worker).apply();
     }
