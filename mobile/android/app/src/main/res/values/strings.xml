@@ -11,7 +11,7 @@
     <string name="menu_mystores">Moje sklepy</string>
     <string name="menu_myreports">Moje raporty</string>
     <string name="menu_tools">Tools</string>
-    <string name="menu_share">Share</string>
+    <string name="menu_synchro">Synchronizacja</string>
     <string name="menu_send">Send</string>
     <string name="menu_logout">Wyloguj</string>
 

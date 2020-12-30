@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements MyStoresFragment.
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_mystores, R.id.nav_myreports,
-                R.id.nav_myorders, R.id.nav_share, R.id.nav_send)
+                R.id.nav_myorders, R.id.nav_synchro, R.id.nav_send)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);

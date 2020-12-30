@@ -1,6 +1,7 @@
 package com.kostrzewa.cechini.ui.share;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,8 +52,9 @@ public class ShareFragment extends Fragment {
     private ReportDataManager reportDataManager;
     private OrderDataManager orderDataManager;
     private WorkerDataManager workerDataManager;
+    Handler handler = new Handler();
 
-    String LAST_SYNCHRO = "ostatnie synchro: ";
+    String LAST_SYNCHRO = "dane z: ";
     String SYNCHRO_ERROR = "błąd";
 
     @BindView(R.id.synchroStoreTime)
@@ -82,6 +84,11 @@ public class ShareFragment extends Fragment {
 
     @OnClick(R.id.synchroAllBtn)
     public void synchroAllBtn() {
+        synchroStoreProgress.setVisibility(View.VISIBLE);
+        synchroProductProgress.setVisibility(View.VISIBLE);
+        synchroReportProgress.setVisibility(View.VISIBLE);
+        synchroOrdersProgress.setVisibility(View.VISIBLE);
+        synchroWarehouseProgress.setVisibility(View.VISIBLE);
         storeDataManager.downloadMyStores();
         productDataManager.downloadProducts();
         warehouseDataManager.downloadWarehouse();
@@ -92,7 +99,7 @@ public class ShareFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_share, container, false);
+        View root = inflater.inflate(R.layout.fragment_synchro, container, false);
         ButterKnife.bind(this, root);
         preferenceManager = new PreferenceManagerImpl(getContext());
         init();
@@ -127,74 +134,94 @@ public class ShareFragment extends Fragment {
 
     @Subscribe
     public void sub(MyStoreDownloadSuccess s) {
-        synchroStoreProgress.setVisibility(View.GONE);
-        synchroStoreTime.setVisibility(View.VISIBLE);
-        synchroStoreTime.setText(LAST_SYNCHRO + preferenceManager.getSychroTimeMyStores());
+        handler.postDelayed(() -> {
+            synchroStoreProgress.setVisibility(View.GONE);
+            synchroStoreTime.setVisibility(View.VISIBLE);
+            synchroStoreTime.setText(LAST_SYNCHRO + preferenceManager.getSychroTimeMyStores());
+        }, 1500);
     }
 
     @Subscribe
     public void sub(MyStoreDownloadFailed s) {
-        synchroStoreProgress.setVisibility(View.GONE);
-        synchroStoreTime.setVisibility(View.VISIBLE);
-        synchroStoreTime.setText(SYNCHRO_ERROR);
+        handler.postDelayed(() -> {
+            synchroStoreProgress.setVisibility(View.GONE);
+            synchroStoreTime.setVisibility(View.VISIBLE);
+            synchroStoreTime.setText(SYNCHRO_ERROR);
+        }, 1500);
     }
 
 
     @Subscribe
     public void sub(MyOrdersDownloadSuccess s) {
-        synchroOrdersProgress.setVisibility(View.GONE);
-        synchroOrdersTime.setVisibility(View.VISIBLE);
-        synchroOrdersTime.setText(LAST_SYNCHRO + preferenceManager.getSychroTimeOrders());
+        handler.postDelayed(() -> {
+            synchroOrdersProgress.setVisibility(View.GONE);
+            synchroOrdersTime.setVisibility(View.VISIBLE);
+            synchroOrdersTime.setText(LAST_SYNCHRO + preferenceManager.getSychroTimeOrders());
+        }, 1500);
     }
 
     @Subscribe
     public void sub(MyOrdersDownloadFailed s) {
-        synchroOrdersProgress.setVisibility(View.GONE);
-        synchroOrdersTime.setVisibility(View.VISIBLE);
-        synchroOrdersTime.setText(SYNCHRO_ERROR);
+        handler.postDelayed(() -> {
+            synchroOrdersProgress.setVisibility(View.GONE);
+            synchroOrdersTime.setVisibility(View.VISIBLE);
+            synchroOrdersTime.setText(SYNCHRO_ERROR);
+        }, 1500);
     }
 
 
     @Subscribe
     public void sub(MyReportsDownloadSuccess s) {
-        synchroReportProgress.setVisibility(View.GONE);
-        synchroReportTime.setVisibility(View.VISIBLE);
-        synchroReportTime.setText(LAST_SYNCHRO + preferenceManager.getSychroTimeMyReports());
+        handler.postDelayed(() -> {
+            synchroReportProgress.setVisibility(View.GONE);
+            synchroReportTime.setVisibility(View.VISIBLE);
+            synchroReportTime.setText(LAST_SYNCHRO + preferenceManager.getSychroTimeMyReports());
+        }, 1500);
     }
 
     @Subscribe
     public void sub(MyReportsDownloadFailed s) {
-        synchroReportProgress.setVisibility(View.GONE);
-        synchroReportTime.setVisibility(View.VISIBLE);
-        synchroReportTime.setText(SYNCHRO_ERROR);
+        handler.postDelayed(() -> {
+            synchroReportProgress.setVisibility(View.GONE);
+            synchroReportTime.setVisibility(View.VISIBLE);
+            synchroReportTime.setText(SYNCHRO_ERROR);
+        }, 1500);
     }
 
 
     @Subscribe
     public void sub(WarehouseDownloadSuccess s) {
-        synchroWarehouseProgress.setVisibility(View.GONE);
-        synchroWarehouseTime.setVisibility(View.VISIBLE);
-        synchroWarehouseTime.setText(LAST_SYNCHRO + preferenceManager.getSychroTimeWarehouses());
+        handler.postDelayed(() -> {
+            synchroWarehouseProgress.setVisibility(View.GONE);
+            synchroWarehouseTime.setVisibility(View.VISIBLE);
+            synchroWarehouseTime.setText(LAST_SYNCHRO + preferenceManager.getSychroTimeWarehouses());
+        }, 1500);
     }
 
     @Subscribe
     public void sub(WarehouseDownloadFailed s) {
-        synchroWarehouseProgress.setVisibility(View.GONE);
-        synchroWarehouseTime.setVisibility(View.VISIBLE);
-        synchroWarehouseTime.setText(SYNCHRO_ERROR);
+        handler.postDelayed(() -> {
+            synchroWarehouseProgress.setVisibility(View.GONE);
+            synchroWarehouseTime.setVisibility(View.VISIBLE);
+            synchroWarehouseTime.setText(SYNCHRO_ERROR);
+        }, 1500);
     }
 
     @Subscribe
     public void sub(ProductsDownloadSuccess s) {
-        synchroProductProgress.setVisibility(View.GONE);
-        synchroProductTime.setVisibility(View.VISIBLE);
-        synchroProductTime.setText(LAST_SYNCHRO + preferenceManager.getSychroTimeProducts());
+        handler.postDelayed(() -> {
+            synchroProductProgress.setVisibility(View.GONE);
+            synchroProductTime.setVisibility(View.VISIBLE);
+            synchroProductTime.setText(LAST_SYNCHRO + preferenceManager.getSychroTimeProducts());
+        }, 1500);
     }
 
     @Subscribe
     public void sub(ProductsDownloadFailed s) {
-        synchroProductProgress.setVisibility(View.GONE);
-        synchroProductTime.setVisibility(View.VISIBLE);
-        synchroProductTime.setText(SYNCHRO_ERROR);
+        handler.postDelayed(() -> {
+            synchroProductProgress.setVisibility(View.GONE);
+            synchroProductTime.setVisibility(View.VISIBLE);
+            synchroProductTime.setText(SYNCHRO_ERROR);
+        }, 1500);
     }
 }
