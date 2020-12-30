@@ -52,9 +52,11 @@ public class MyReportsRecyclerViewAdapter extends RecyclerView.Adapter<MyReports
         holder.mItem = reportDTO;
         holder.orderExistTV.setVisibility(reportDTO.getOrderDTO() == null ? View.GONE : View.VISIBLE);
         holder.date.setText(DateUtils.parse(reportDTO.getReportDate()));
-
-        holder.mContentView.setText("Sklep: " + reportDTO.getStoreName()
-                + ", opis: " + reportDTO.getDesc());
+        String recordText = "Sklep: " + reportDTO.getStoreName();
+        if(reportDTO.getDesc() != null){
+            recordText +=", opis: " + reportDTO.getDesc();
+        }
+        holder.mContentView.setText(recordText);
         if (reportDTO.getManagerNote() != null) {
             holder.managerNoteTV.setVisibility(View.VISIBLE);
         } else {

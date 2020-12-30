@@ -33,16 +33,21 @@ public class CreateReportFragment extends Fragment {
     @BindView(R.id.report_photoCount_tv)
     TextView photoCountTV;
 
-    private void init(){
-        if(ReportData.reportDTO.isReadOnly()) fillDataReadOnly();
+    private void init() {
+        if (ReportData.reportDTO.isReadOnly()) fillDataReadOnly();
     }
 
-    private void fillDataReadOnly(){
-        descET.setText("Mój opis: " + ReportData.reportDTO.getDesc());
+    private void fillDataReadOnly() {
+        descET.setText("Mój opis: " + ReportData.reportDTO.getDesc() != null ? ReportData.reportDTO.getDesc() : "");
         descET.setEnabled(false);
 
-        reportManagerET.setText("Komentarz kierownika: " + ReportData.reportDTO.getManagerNote());
+        if (ReportData.reportDTO.getManagerNote() != null) {
+            reportManagerET.setText("Komentarz managera: " + ReportData.reportDTO.getManagerNote());
+        } else {
+            reportManagerET.setText("");
+        }
         reportManagerET.setEnabled(false);
+        reportManagerET.setVisibility(View.VISIBLE);
 
         photoCountTV.setText("liczba przesłanych zdjęć: " + ReportData.reportDTO.getPhotosCount());
         photoCountTV.setEnabled(false);

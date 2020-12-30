@@ -158,12 +158,12 @@ public class AddStoreDialogFragment extends DialogFragment implements AdapterVie
 
         String name = nameET.getText().toString();
         String address = addressET.getText().toString();
-        if (selectedStoreGroup == null) {
-            storeGroupTV.setError("Wybierz grupę sklepu");
-            focusView = storeGroupTV;
-            focusView.requestFocus();
-            return false;
-        }
+//        if (selectedStoreGroup == null) {
+//            storeGroupTV.setError("Wybierz grupę sklepu");
+//            focusView = storeGroupTV;
+//            focusView.requestFocus();
+//            return false;
+//        }
         if (TextUtils.isEmpty(name)) {
             nameET.setError("Wypełnij pole");
             focusView = nameET;

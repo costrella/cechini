@@ -54,7 +54,7 @@
             <tbody>
                 <tr *ngFor="let order of orders ;trackBy: trackId">
                     <td><a [routerLink]="['/order', order.id, 'view']">{{ order.id }}</a></td>
-                    <td>{{ order.orderDate | date:'dd/MM/yyyy' }}</td>
+                    <td>{{ order.orderDate | date:'dd/MM/yyyy HH:mm' }}</td>
                     <td>
                         <div *ngIf="order.storeId">
                             <a [routerLink]="['/store', order.storeId , 'view']" >{{ order.storeName }}</a>

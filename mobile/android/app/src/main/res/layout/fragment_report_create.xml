@@ -30,6 +30,8 @@
         android:textAlignment="textStart"
         android:textSize="20sp"
         android:enabled="false"
+        android:visibility="gone"
+        android:textColor="@color/red"
         android:text="Komentarz managera: "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
