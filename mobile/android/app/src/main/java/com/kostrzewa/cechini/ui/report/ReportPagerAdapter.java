@@ -22,11 +22,16 @@ public class ReportPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int i) {
         Log.d(TAG, "getItem: " + i);
         if (ReportData.reportDTO.isReadOnly()) {
-            switch (i) {
-                case 0:
-                    return new CreateReportFragment();
-                case 1:
-                    return new CreateOrderFragment();
+
+            if (ReportData.reportDTO.getOrderDTO() == null) {
+                return new CreateReportFragment();
+            } else {
+                switch (i) {
+                    case 0:
+                        return new CreateReportFragment();
+                    case 1:
+                        return new CreateOrderFragment();
+                }
             }
         } else {
             switch (i) {
@@ -45,7 +50,15 @@ public class ReportPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return ReportData.reportDTO.isReadOnly() ? 2 : 4;
+        if(ReportData.reportDTO.isReadOnly()){
+            if (ReportData.reportDTO.getOrderDTO() == null) {
+                return 1;
+            } else {
+                return 2;
+            }
+        } else {
+            return 4;
+        }
     }
 
     @Override

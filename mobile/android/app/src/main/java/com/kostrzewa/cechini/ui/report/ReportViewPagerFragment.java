@@ -52,9 +52,9 @@ public class ReportViewPagerFragment extends Fragment {
         } else {
             ReportData.reportDTO = (ReportDTOWithPhotos) reportDTO;
             ReportData.reportDTO.setReadOnly(true);
-            if(ReportData.reportDTO.getOrderDTO() == null){
-                ReportData.reportDTO.setOrderDTO(new OrderDTO());
-            }
+//            if(ReportData.reportDTO.getOrderDTO() == null){
+//                ReportData.reportDTO.setOrderDTO(new OrderDTO());
+//            }
             ((MainActivity) getActivity()).getSupportActionBar().setTitle("Podgląd raportu");
         }
 
