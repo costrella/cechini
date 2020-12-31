@@ -16,6 +16,7 @@ import com.kostrzewa.cechini.ui.report.data.ReportData;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -54,7 +55,7 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
                 if (!isNetworkConnected()) {
                     EventBus.getDefault().post(new ReportSentFailed("Brak internetu. Zapisano w pamięci ! "));
                 } else {
-                    EventBus.getDefault().post(new ReportSentFailed("Wystąpił problem. Zapisano w pamięci ! "));
+                    EventBus.getDefault().post(new ReportSentFailed("Wystąpił problem a06. Zapisano w pamięci ! "));
                 }
 
             }
@@ -99,6 +100,7 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
     public List<ReportDTOWithPhotos> getMyReports() {
         List<ReportDTOWithPhotos> reportDTOS = new ArrayList<>();
         preferenceManager.getMyReports().stream().forEach(s -> reportDTOS.add(gson.fromJson(s, ReportDTOWithPhotos.class)));
+        reportDTOS.sort((o1, o2) -> o2.getReportDate().compareTo(o1.getReportDate()));
         return reportDTOS;
     }
 
@@ -115,13 +117,17 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
                     response.body().stream().forEach(v -> myset.add(gson.toJson(v)));
                     preferenceManager.setMyReports(myset);
                 } else {
-                    EventBus.getDefault().post(new MyReportsDownloadFailed("Wystąpił problem"));
+                    EventBus.getDefault().post(new MyReportsDownloadFailed("Wystąpił problem a07"));
                 }
             }
 
             @Override
             public void onFailure(Call<List<ReportDTOWithPhotos>> call, Throwable t) {
-                EventBus.getDefault().post(new MyReportsDownloadFailed("Wystąpił problem"));
+                if (!isNetworkConnected()) {
+                    EventBus.getDefault().post(new MyReportsDownloadFailed("Brak internetu. Wczytuję raporty z pamięci."));
+                } else {
+                    EventBus.getDefault().post(new MyReportsDownloadFailed("Wystąpił problem a08"));
+                }
             }
         });
     }
@@ -134,13 +140,17 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
                 if (response.isSuccessful()) {
                     EventBus.getDefault().post(new MyReportsDownloadSuccess(response.body()));
                 } else {
-                    EventBus.getDefault().post(new MyReportsDownloadFailed("Wystąpił problem"));
+                    EventBus.getDefault().post(new MyReportsDownloadFailed("Wystąpił problem a09"));
                 }
             }
 
             @Override
             public void onFailure(Call<List<ReportDTOWithPhotos>> call, Throwable t) {
-                EventBus.getDefault().post(new MyReportsDownloadFailed("Wystąpił problem"));
+                if (!isNetworkConnected()) {
+                    EventBus.getDefault().post(new MyReportsDownloadFailed("Ta operacja wymaga internetu!"));
+                } else {
+                    EventBus.getDefault().post(new MyReportsDownloadFailed("Wystąpił problem a10"));
+                }
             }
         });
     }

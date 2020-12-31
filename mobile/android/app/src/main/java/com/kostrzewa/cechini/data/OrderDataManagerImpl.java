@@ -37,7 +37,7 @@ public class OrderDataManagerImpl extends AbstractDataManager implements OrderDa
                             EventBus.getDefault().post(new MyOrdersDownloadSuccess(response.body()));
                             preferenceManager.setSychroTimeMyOrders();
                         } else {
-                            EventBus.getDefault().post(new MyOrdersDownloadFailed("Wystpił błąd!"));
+                            EventBus.getDefault().post(new MyOrdersDownloadFailed("Wystpił błąd a03!"));
                         }
                     }
 
@@ -46,7 +46,7 @@ public class OrderDataManagerImpl extends AbstractDataManager implements OrderDa
                         if (!isNetworkConnected()) {
                             EventBus.getDefault().post(new MyOrdersDownloadFailed("Brak internetu!"));
                         } else {
-                            EventBus.getDefault().post(new MyOrdersDownloadFailed("Wystpił błąd!"));
+                            EventBus.getDefault().post(new MyOrdersDownloadFailed("Wystpił błąd a04!"));
                         }
                     }
                 });

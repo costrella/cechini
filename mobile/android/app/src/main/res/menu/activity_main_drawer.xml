@@ -6,7 +6,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_menu_gallery"
             android:title="@string/menu_home" />
         <item
             android:id="@+id/nav_mystores"
@@ -22,16 +22,16 @@
 <!--            android:title="Moje zamówienia" />-->
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Ustawienia">
         <menu>
             <item
                 android:id="@+id/nav_synchro"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/ic_menu_manage"
                 android:title="@string/menu_synchro" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="@string/menu_send" />
+<!--            <item-->
+<!--                android:id="@+id/nav_send"-->
+<!--                android:icon="@drawable/ic_menu_send"-->
+<!--                android:title="@string/menu_send" />-->
 
             <item
                 android:id="@+id/nav_logout"

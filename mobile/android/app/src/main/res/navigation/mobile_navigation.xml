@@ -62,7 +62,7 @@
     <fragment
         android:id="@+id/nav_myreports"
         android:name="com.kostrzewa.cechini.ui.report.myreports.MyReportsFragment"
-        android:label="Moje raporty"
+        android:label="Moje wysłane raporty"
         tools:layout="@layout/fragment_myreports_list" />
 
     <fragment

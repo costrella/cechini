@@ -1,5 +1,7 @@
 package com.kostrzewa.cechini.ui.share;
 
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -89,6 +91,9 @@ public class ShareFragment extends Fragment {
     @BindView(R.id.synchroReportsNotSentProgress)
     ProgressBar synchroReportsNotSentProgress;
 
+    @BindView(R.id.version)
+    TextView version;
+
     @OnClick(R.id.synchroAllBtn)
     public void synchroAllBtn() {
         synchroStoreProgress.setVisibility(View.VISIBLE);
@@ -111,6 +116,7 @@ public class ShareFragment extends Fragment {
         ButterKnife.bind(this, root);
         preferenceManager = new PreferenceManagerImpl(getContext());
         init();
+        version.setText("Wersja aplikacji: " + getVersionApp());
         synchroStoreTime.setText(LAST_SYNCHRO + preferenceManager.getSychroTimeMyStores());
         synchroProductTime.setText(LAST_SYNCHRO + preferenceManager.getSychroTimeProducts());
         synchroReportTime.setText(LAST_SYNCHRO + preferenceManager.getSychroTimeMyReports());
@@ -118,6 +124,16 @@ public class ShareFragment extends Fragment {
         synchroOrdersTime.setText(LAST_SYNCHRO + preferenceManager.getSychroTimeOrders());
         synchroReportsNotSent.setText(""+preferenceManager.getReportsNotSend().size());
         return root;
+    }
+
+    private String getVersionApp(){
+        try {
+            PackageInfo pInfo = getContext().getPackageManager().getPackageInfo(getContext().getPackageName(), 0);
+            return pInfo.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return "error";
+        }
     }
 
     private void init() {

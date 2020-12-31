@@ -55,7 +55,7 @@ public class StoreDataManagerImpl extends AbstractDataManager implements StoreDa
                         JSONObject jObjError = new JSONObject(response.errorBody().string());
                         EventBus.getDefault().post(new StoreSentFailed(jObjError.getString("title")));
                     } catch (Exception e) {
-                        EventBus.getDefault().post(new StoreSentFailed("Błąd: " + response.code()));
+                        EventBus.getDefault().post(new StoreSentFailed("Błąd a01: " + response.code()));
                     }
 
 
@@ -64,7 +64,11 @@ public class StoreDataManagerImpl extends AbstractDataManager implements StoreDa
 
             @Override
             public void onFailure(Call<StoreDTO> call, Throwable t) {
-                EventBus.getDefault().post(new StoreSentFailed("błąd todo"));
+                if (!isNetworkConnected()) {
+                    EventBus.getDefault().post(new StoreSentFailed("Ta operacja wymaga internetu!"));
+                } else {
+                    EventBus.getDefault().post(new StoreSentFailed("błąd a02"));
+                }
             }
         });
     }

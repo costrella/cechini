@@ -37,7 +37,7 @@ public class WorkerDataManagerImpl extends AbstractDataManager implements Worker
                         JSONObject jObjError = new JSONObject(response.errorBody().string());
                         EventBus.getDefault().post(new LoginFailed(jObjError.getString("title")));
                     } catch (Exception e) {
-                        EventBus.getDefault().post(new LoginFailed("Błąd: " + response.code()));
+                        EventBus.getDefault().post(new LoginFailed("Błąd a05: " + response.code()));
                     }
                 }
             }

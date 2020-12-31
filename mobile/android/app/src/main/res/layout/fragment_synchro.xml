@@ -8,174 +8,199 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:textSize="20dp"
-            android:text="Sklepy"></TextView>
+            android:text="Sklepy"
+            android:textSize="20dp"></TextView>
+
         <TextView
             android:id="@+id/synchroStoreTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="15dp"
-            android:text="Last synchro"></TextView>
+            android:text="Last synchro"
+            android:textSize="15dp"></TextView>
+
         <ProgressBar
             android:id="@+id/synchroStoreProgress"
             android:layout_width="wrap_content"
-            android:visibility="gone"
-            android:layout_height="30dp">
-        </ProgressBar>
+            android:layout_height="30dp"
+            android:visibility="gone"></ProgressBar>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:textSize="20dp"
-            android:text="Produkty"></TextView>
+            android:text="Produkty"
+            android:textSize="20dp"></TextView>
+
         <TextView
             android:id="@+id/synchroProductTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="15dp"
-            android:text="Last synchro"></TextView>
+            android:text="Last synchro"
+            android:textSize="15dp"></TextView>
+
         <ProgressBar
             android:id="@+id/synchroProductProgress"
             android:layout_width="wrap_content"
-            android:visibility="gone"
-            android:layout_height="30dp">
-        </ProgressBar>
+            android:layout_height="30dp"
+            android:visibility="gone"></ProgressBar>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:textSize="20dp"
-            android:text="Raporty"></TextView>
+            android:text="Raporty"
+            android:textSize="20dp"></TextView>
+
         <TextView
             android:id="@+id/synchroReportTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="15dp"
-            android:text="Last synchro"></TextView>
+            android:text="Last synchro"
+            android:textSize="15dp"></TextView>
+
         <ProgressBar
             android:id="@+id/synchroReportProgress"
             android:layout_width="wrap_content"
-            android:visibility="gone"
-            android:layout_height="30dp">
-        </ProgressBar>
+            android:layout_height="30dp"
+            android:visibility="gone"></ProgressBar>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:textSize="20dp"
-            android:text="Zamówienia"></TextView>
+            android:text="Zamówienia"
+            android:textSize="20dp"></TextView>
+
         <TextView
             android:id="@+id/synchroOrdersTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="15dp"
-            android:text="Last synchro"></TextView>
+            android:text="Last synchro"
+            android:textSize="15dp"></TextView>
+
         <ProgressBar
             android:id="@+id/synchroOrdersProgress"
             android:layout_width="wrap_content"
-            android:visibility="gone"
-            android:layout_height="30dp">
-        </ProgressBar>
+            android:layout_height="30dp"
+            android:visibility="gone"></ProgressBar>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:textSize="20dp"
-            android:text="Hurtownie"></TextView>
+            android:text="Hurtownie"
+            android:textSize="20dp"></TextView>
+
         <TextView
             android:id="@+id/synchroWarehouseTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="15dp"
-            android:text="Last synchro"></TextView>
+            android:text="Last synchro"
+            android:textSize="15dp"></TextView>
+
         <ProgressBar
             android:id="@+id/synchroWarehouseProgress"
             android:layout_width="wrap_content"
-            android:visibility="gone"
-            android:layout_height="30dp">
-        </ProgressBar>
+            android:layout_height="30dp"
+            android:visibility="gone"></ProgressBar>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:textSize="20dp"
-            android:text="Niewysłane raporty"></TextView>
+            android:text="Niewysłane raporty"
+            android:textSize="20dp"></TextView>
+
         <TextView
             android:id="@+id/synchroReportsNotSentText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="15dp"
-            android:text="0"></TextView>
+            android:text="0"
+            android:textSize="15dp"></TextView>
+
         <ProgressBar
             android:id="@+id/synchroReportsNotSentProgress"
             android:layout_width="wrap_content"
-            android:visibility="gone"
-            android:layout_height="30dp">
-        </ProgressBar>
+            android:layout_height="30dp"
+            android:visibility="gone"></ProgressBar>
     </LinearLayout>
-
-
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp">
+
         <Button
             android:id="@+id/synchroAllBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
-            android:textColor="@color/white"
-            android:text="Synchronizuj wszystko">
+            android:text="Synchronizuj wszystko"
+            android:textColor="@color/white">
 
         </Button>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:id="@+id/version"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="wersja aplikacji: ">
+
+        </TextView>
     </LinearLayout>
 
 
