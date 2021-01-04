@@ -56,6 +56,13 @@ public class StoreService {
         return storeMapper.toDto(store);
     }
 
+    public StoreDTO update(StoreDTO storeDTO) {
+        log.debug("Request to save Store : {}", storeDTO);
+        Store store = storeMapper.toEntity(storeDTO);
+        store = storeRepository.save(store);
+        return storeMapper.toDto(store);
+    }
+
     private boolean ifExistStoreWithSameNameAndAddress(Store store) {
         Store example = new Store();
         example.setName(store.getName());

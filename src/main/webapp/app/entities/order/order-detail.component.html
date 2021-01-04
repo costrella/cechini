@@ -15,7 +15,7 @@
                 <dt><span jhiTranslate="cechiniApp.worker.detail.title">Worker</span></dt>
                 <dd>
                     <div *ngIf="order.workerId">
-                        <a [routerLink]="['/worker', order.workerId, 'view']">{{ order.workerSurname }} {{ order.name }}</a>
+                        <a [routerLink]="['/worker', order.workerId, 'view']">{{ order.workerSurname }}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="cechiniApp.store.detail.title">Store</span></dt>
