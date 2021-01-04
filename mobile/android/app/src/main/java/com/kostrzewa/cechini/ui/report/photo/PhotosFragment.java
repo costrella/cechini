@@ -134,7 +134,7 @@ public class PhotosFragment extends Fragment {
 
     private byte[] getImage(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 30, baos);
         byte[] byteArray = baos.toByteArray();
         return byteArray;
     }

@@ -92,7 +92,7 @@ public class StoreResource {
         if (storeDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        StoreDTO result = storeService.save(storeDTO);
+        StoreDTO result = storeService.update(storeDTO);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, storeDTO.getId().toString()))
             .body(result);

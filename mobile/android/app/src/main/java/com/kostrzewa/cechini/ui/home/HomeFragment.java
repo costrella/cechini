@@ -35,7 +35,7 @@ public class HomeFragment extends Fragment {
 
     @OnClick(R.id.btn_add_store)
     public void onClick2() {
-        new AddStoreDialogFragment(null, null)
+        new AddStoreDialogFragment(null, null, null)
                 .show(getFragmentManager(), "sample");
     }
 

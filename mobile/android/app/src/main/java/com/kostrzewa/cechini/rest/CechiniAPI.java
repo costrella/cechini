@@ -16,12 +16,13 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface CechiniAPI {
 
-//    String ENDPOINT = "https://cechini.herokuapp.com/api/";
-    String ENDPOINT = "http://10.0.2.2:8080/api/";
+    String ENDPOINT = "https://cechini.herokuapp.com/api/";
+//    String ENDPOINT = "http://10.0.2.2:8080/api/";
 
     @GET("stores/{storeId}")
     Call<StoreDTO> getStore(@Path("storeId") String storeId);
@@ -31,6 +32,9 @@ public interface CechiniAPI {
 
     @POST("stores")
     Call<StoreDTO> addStore(@Body StoreDTO storeDTO);
+
+    @PUT("stores")
+    Call<StoreDTO> editStore(@Body StoreDTO storeDTO);
 
     @GET("store-groups/all")
     Call<List<StoreGroupDTO>> getAllStoreGroups();

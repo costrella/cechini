@@ -42,6 +42,7 @@ import com.kostrzewa.cechini.data.StoreGroupDataManager;
 import com.kostrzewa.cechini.data.StoreGroupDataManagerImpl;
 import com.kostrzewa.cechini.data.WorkerDataManager;
 import com.kostrzewa.cechini.data.WorkerDataManagerImpl;
+import com.kostrzewa.cechini.data.events.StoreEditSuccess;
 import com.kostrzewa.cechini.data.events.StoreSentFailed;
 import com.kostrzewa.cechini.model.StoreDTO;
 import com.kostrzewa.cechini.model.StoreGroupDTO;
@@ -53,6 +54,9 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import static com.kostrzewa.cechini.util.Constants.STORE_DTO;
 
@@ -71,10 +75,12 @@ public class AddStoreDialogFragment extends DialogFragment implements AdapterVie
     Button okBtn;
     List<StoreDTO> storeDTOList;
     MyStoresRecyclerViewAdapter adapter;
+    StoreDTO editStore;
 
-    public AddStoreDialogFragment(List<StoreDTO> storeDTOList, MyStoresRecyclerViewAdapter adapter) {
+    public AddStoreDialogFragment(List<StoreDTO> storeDTOList, MyStoresRecyclerViewAdapter adapter, StoreDTO storeDTO) {
         this.storeDTOList = storeDTOList;
         this.adapter = adapter;
+        this.editStore = storeDTO;
     }
 
     @Override
@@ -83,7 +89,7 @@ public class AddStoreDialogFragment extends DialogFragment implements AdapterVie
         form =
                 getActivity().getLayoutInflater()
                         .inflate(R.layout.fragment_mystores_dialog_store, null);
-
+        ButterKnife.bind(this, form);
         spinner = form.findViewById(R.id.fragment_mystores_dialog_storeGroupSpinner);
         okBtn = form.findViewById(R.id.fragment_mystores_dialog_store_okBtn);
         progressBar = form.findViewById(R.id.fragment_mystores_dialog_store_progressBar);
@@ -101,8 +107,15 @@ public class AddStoreDialogFragment extends DialogFragment implements AdapterVie
         spinner.setOnItemSelectedListener(this);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        String dialogTitle = "Dodaj sklep";
+        if (editStore != null) {
+            nameET.setText(editStore.getName());
+            addressET.setText(editStore.getAddress());
+            nipET.setText(editStore.getNip());
+            dialogTitle = "Edytuj sklep";
+        }
 
-        return (builder.setTitle("Dodaj sklep").setView(form)
+        return (builder.setTitle(dialogTitle).setView(form)
 //                .setNeutralButton(android.R.string.ok, this)
 //                .setPositiveButton(android.R.string.ok, this)
                 .setNegativeButton(android.R.string.cancel, null)
@@ -128,18 +141,16 @@ public class AddStoreDialogFragment extends DialogFragment implements AdapterVie
         selectedStoreGroup = null;
     }
 
+    @BindView(R.id.fragment_mystores_dialog_store_nameET)
     EditText nameET;
+    @BindView(R.id.fragment_mystores_dialog_store_addressET)
     EditText addressET;
+    @BindView(R.id.fragment_mystores_dialog_store_nipET)
     EditText nipET;
-    TextView storeGroupTV;
+//    TextView storeGroupTV;
 
     @Override
     public void onClick(View v) {
-        nameET = form.findViewById(R.id.fragment_mystores_dialog_store_nameET);
-        addressET = form.findViewById(R.id.fragment_mystores_dialog_store_addressET);
-        storeGroupTV = form.findViewById(R.id.fragment_mystores_dialog_storeGroupSpinner_label);
-        nipET = form.findViewById(R.id.fragment_mystores_dialog_store_nipET);
-
         if (isValid()) {
             progressBar.setVisibility(View.VISIBLE);
             StoreDTO storeDTO = new StoreDTO();
@@ -148,7 +159,13 @@ public class AddStoreDialogFragment extends DialogFragment implements AdapterVie
             storeDTO.setNip(nipET.getText().toString());
 //            storeDTO.setStoregroupId(selectedStoreGroup.getId());
             storeDTO.setWorkerId(workerDataManager.getWorker().getId());
-            storeDataManager.addNewStore(storeDTO);
+
+            if (editStore != null) {
+                storeDTO.setId(editStore.getId());
+                storeDataManager.editStore(storeDTO, editStore);
+            } else {
+                storeDataManager.addNewStore(storeDTO);
+            }
         }
     }
 
@@ -202,6 +219,17 @@ public class AddStoreDialogFragment extends DialogFragment implements AdapterVie
         args.putSerializable(STORE_DTO, storeDTO);
         NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
         navController.navigate(R.id.nav_mystores_detail, args);
+    }
+
+
+    @Subscribe
+    public void onStoreAdded(StoreEditSuccess s) {
+        progressBar.setVisibility(View.GONE);
+        getDialog().dismiss();
+
+        Bundle args = new Bundle();
+        NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
+        navController.navigate(R.id.nav_mystores);
     }
 
     @Subscribe

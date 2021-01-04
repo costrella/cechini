@@ -11,4 +11,6 @@ public interface StoreDataManager {
     void downloadMyStores();
 
     void addNewStore(StoreDTO storeDTO);
+
+    void editStore(StoreDTO storeDTO, StoreDTO old);
 }

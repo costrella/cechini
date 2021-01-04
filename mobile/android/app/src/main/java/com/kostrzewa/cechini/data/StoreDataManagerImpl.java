@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.kostrzewa.cechini.data.events.MyStoreDownloadFailed;
 import com.kostrzewa.cechini.data.events.MyStoreDownloadSuccess;
+import com.kostrzewa.cechini.data.events.StoreEditSuccess;
 import com.kostrzewa.cechini.data.events.StoreSentFailed;
 import com.kostrzewa.cechini.model.StoreDTO;
 import com.kostrzewa.cechini.rest.RetrofitClient;
@@ -50,6 +51,49 @@ public class StoreDataManagerImpl extends AbstractDataManager implements StoreDa
                     preferenceManager.setMyStores(myset);
 
                     EventBus.getDefault().post(body);
+                } else {
+                    try {
+                        JSONObject jObjError = new JSONObject(response.errorBody().string());
+                        EventBus.getDefault().post(new StoreSentFailed(jObjError.getString("title")));
+                    } catch (Exception e) {
+                        EventBus.getDefault().post(new StoreSentFailed("Błąd a01: " + response.code()));
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<StoreDTO> call, Throwable t) {
+                if (!isNetworkConnected()) {
+                    EventBus.getDefault().post(new StoreSentFailed("Ta operacja wymaga internetu!"));
+                } else {
+                    EventBus.getDefault().post(new StoreSentFailed("błąd a02"));
+                }
+            }
+        });
+    }
+
+    @Override
+    public void editStore(StoreDTO storeDTO, StoreDTO old) {
+        RetrofitClient.getInstance().getService().editStore(storeDTO).enqueue(new Callback<StoreDTO>() {
+            @Override
+            public void onResponse(Call<StoreDTO> call, Response<StoreDTO> response) {
+                Log.d(TAG, "onResponse: " + response.code());
+                if (response.isSuccessful()) {
+                    StoreDTO body = response.body();
+
+                    List<StoreDTO> currentStores = new ArrayList<>();
+                    preferenceManager.getMyStores().stream().forEach(s -> currentStores.add(gson.fromJson(s, StoreDTO.class)));
+                    currentStores.add(body);
+                    currentStores.remove(old);
+
+                    //save
+                    Set<String> myset = new HashSet<>();
+                    currentStores.stream().forEach(storeDTO -> myset.add(gson.toJson(storeDTO)));
+                    preferenceManager.setMyStores(myset);
+
+                    EventBus.getDefault().post(new StoreEditSuccess());
                 } else {
                     try {
                         JSONObject jObjError = new JSONObject(response.errorBody().string());

@@ -16,6 +16,7 @@ import androidx.navigation.Navigation;
 import com.kostrzewa.cechini.MainActivity;
 import com.kostrzewa.cechini.R;
 import com.kostrzewa.cechini.model.StoreDTO;
+import com.kostrzewa.cechini.ui.mystores.dialog.AddStoreDialogFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,6 +44,12 @@ public class MyStoreDetailFragment extends Fragment {
         Bundle args = new Bundle();
         args.putSerializable(STORE_DTO, storeDTO);
         navController.navigate(R.id.nav_myreportsOfStore, args);
+    }
+
+    @OnClick(R.id.btn_editStore)
+    void editStore() {
+        new AddStoreDialogFragment(null, null, storeDTO)
+                .show(getFragmentManager(), "sample");
     }
 
     public static MyStoreDetailFragment newInstance() {

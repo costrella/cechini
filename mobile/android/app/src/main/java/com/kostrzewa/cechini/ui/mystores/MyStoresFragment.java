@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.SearchView;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,8 +19,6 @@ import com.kostrzewa.cechini.data.StoreDataManager;
 import com.kostrzewa.cechini.data.StoreDataManagerImpl;
 import com.kostrzewa.cechini.model.StoreDTO;
 import com.kostrzewa.cechini.ui.mystores.dialog.AddStoreDialogFragment;
-import com.kostrzewa.cechini.ui.order.dialog.ProductDialogFragment;
-import com.kostrzewa.cechini.ui.report.data.ReportData;
 
 import java.util.List;
 
@@ -52,7 +49,7 @@ public class MyStoresFragment extends Fragment {
 
     @OnClick(R.id.fragment_mystores_addStoreBtn)
     public void addStore(){
-        new AddStoreDialogFragment(storeDTOList, adapter)
+        new AddStoreDialogFragment(storeDTOList, adapter, null)
                 .show(getFragmentManager(), "sample");
     }
 
