@@ -1,6 +1,6 @@
 import { Moment } from 'moment';
-import { IPhoto } from 'app/shared/model/photo.model';
 import { INote } from 'app/shared/model/note.model';
+import { IPhotoFile } from './photo-file.model';
 
 export interface IReport {
   id?: number;
@@ -8,7 +8,7 @@ export interface IReport {
   desc?: string;
   managerNote?: string;
   orderId?: number;
-  photos?: IPhoto[];
+  photos?: IPhotoFile[];
   notes?: INote[];
   workerSurname?: string;
   workerId?: number;
@@ -24,7 +24,7 @@ export class Report implements IReport {
     public desc?: string,
     public managerNote?: string,
     public orderId?: number,
-    public photos?: IPhoto[],
+    public photos?: IPhotoFile[],
     public notes?: INote[],
     public workerSurname?: string,
     public workerId?: number,
