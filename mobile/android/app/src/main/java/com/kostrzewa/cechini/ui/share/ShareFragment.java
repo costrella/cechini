@@ -101,13 +101,15 @@ public class ShareFragment extends Fragment {
         synchroReportProgress.setVisibility(View.VISIBLE);
         synchroOrdersProgress.setVisibility(View.VISIBLE);
         synchroWarehouseProgress.setVisibility(View.VISIBLE);
-        synchroReportsNotSentProgress.setVisibility(View.VISIBLE);
         storeDataManager.downloadMyStores();
         productDataManager.downloadProducts();
         warehouseDataManager.downloadWarehouse();
         reportDataManager.downloadMyReports(workerDataManager.getWorker().getId());
         orderDataManager.downloadMyOrders(workerDataManager.getWorker().getId());
-        reportDataManager.sendReportNotSent(); //todo
+        if (!preferenceManager.getReportsNotSend().isEmpty()) {
+            synchroReportsNotSentProgress.setVisibility(View.VISIBLE);
+            reportDataManager.sendReportNotSent();
+        }
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -122,11 +124,11 @@ public class ShareFragment extends Fragment {
         synchroReportTime.setText(LAST_SYNCHRO + preferenceManager.getSychroTimeMyReports());
         synchroWarehouseTime.setText(LAST_SYNCHRO + preferenceManager.getSychroTimeWarehouses());
         synchroOrdersTime.setText(LAST_SYNCHRO + preferenceManager.getSychroTimeOrders());
-        synchroReportsNotSent.setText(""+preferenceManager.getReportsNotSend().size());
+        synchroReportsNotSent.setText("" + preferenceManager.getReportsNotSend().size());
         return root;
     }
 
-    private String getVersionApp(){
+    private String getVersionApp() {
         try {
             PackageInfo pInfo = getContext().getPackageManager().getPackageInfo(getContext().getPackageName(), 0);
             return pInfo.versionName;
@@ -255,7 +257,7 @@ public class ShareFragment extends Fragment {
         handler.postDelayed(() -> {
             synchroReportsNotSentProgress.setVisibility(View.GONE);
             synchroReportsNotSent.setVisibility(View.VISIBLE);
-            synchroReportsNotSent.setText(""+preferenceManager.getReportsNotSend().size());
+            synchroReportsNotSent.setText("" + preferenceManager.getReportsNotSend().size());
         }, 1500);
     }
 
