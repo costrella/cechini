@@ -65,9 +65,14 @@ public class MyStoreDetailFragment extends Fragment {
         ButterKnife.bind(this, view);
         storeDTO = (StoreDTO) getArguments().getSerializable(STORE_DTO);
         navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         ((MainActivity) getActivity()).getSupportActionBar().setTitle("Sklep:" + storeDTO.getName() + " " + storeDTO.getAddress());
         fillStoreDetail();
-        return view;
     }
 
     private void fillStoreDetail() {

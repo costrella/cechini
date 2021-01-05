@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -63,6 +64,7 @@ public class PhotosFragment extends Fragment {
 
     private static final int PERMISSION_CODE = 1000;
     private static final int IMAGE_CAPTURE_CODE = 1001;
+    private int scale = 3;
 
     Uri image_uri;
 
@@ -105,10 +107,27 @@ public class PhotosFragment extends Fragment {
         }
     }
 
+    private Bitmap scale (Bitmap bitmap){
+        return Bitmap.createScaledBitmap(bitmap, bitmap.getWidth() / scale, bitmap.getHeight() / scale, true);
+    }
+
+    private Bitmap rotate(float angle, Bitmap bitmap){
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+
+        Bitmap rotated = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(),
+                matrix, true);
+        bitmap = rotated;
+
+        return bitmap;
+    }
+
     private void setPicture(int index, Bitmap bitmap, ImageView imageView) {
         try {
             bitmap = MediaStore.Images.Media.getBitmap(
                     getActivity().getContentResolver(), image_uri);
+            bitmap = scale(bitmap);
+            bitmap = rotate(90, bitmap);
             PhotoFileDTO photoFileDTO = new PhotoFileDTO();
             photoFileDTO.setValue(getImage(bitmap));
 
@@ -134,7 +153,7 @@ public class PhotosFragment extends Fragment {
 
     private byte[] getImage(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 30, baos);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
         byte[] byteArray = baos.toByteArray();
         return byteArray;
     }

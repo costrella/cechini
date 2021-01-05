@@ -29,13 +29,14 @@ public class ReportViewPagerFragment extends Fragment {
     ReportPagerAdapter reportPagerAdapter;
     ViewPager viewPager;
     WorkerDataManager workerDataManager;
+    StoreDTO currentStore;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        StoreDTO currentStore = (StoreDTO) getArguments().getSerializable(STORE_DTO);
+        currentStore = (StoreDTO) getArguments().getSerializable(STORE_DTO);
         ReportDTO reportDTO = (ReportDTO) getArguments().getSerializable(REPORT_DTO);
         workerDataManager = new WorkerDataManagerImpl(getContext());
         createBaseReport(reportDTO, currentStore);
@@ -66,7 +67,7 @@ public class ReportViewPagerFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        reportPagerAdapter = new ReportPagerAdapter(getChildFragmentManager());
+        reportPagerAdapter = new ReportPagerAdapter(getChildFragmentManager(), currentStore);
         viewPager = view.findViewById(R.id.pager);
         viewPager.setAdapter(reportPagerAdapter);
         viewPager.setOffscreenPageLimit(10);

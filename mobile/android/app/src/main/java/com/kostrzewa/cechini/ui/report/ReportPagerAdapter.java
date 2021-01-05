@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
+import com.kostrzewa.cechini.model.StoreDTO;
 import com.kostrzewa.cechini.ui.order.CreateOrderFragment;
 import com.kostrzewa.cechini.ui.report.data.ReportData;
 import com.kostrzewa.cechini.ui.report.photo.PhotosFragment;
@@ -13,9 +14,11 @@ import com.kostrzewa.cechini.ui.report.send.ReportSendFragment;
 
 public class ReportPagerAdapter extends FragmentStatePagerAdapter {
     private static final String TAG = "ReportPagerAdapter";
+    private final StoreDTO storeDTO;
 
-    public ReportPagerAdapter(FragmentManager fm) {
+    public ReportPagerAdapter(FragmentManager fm, StoreDTO storeDTO) {
         super(fm);
+        this.storeDTO = storeDTO;
     }
 
     @Override
@@ -42,7 +45,7 @@ public class ReportPagerAdapter extends FragmentStatePagerAdapter {
                 case 2:
                     return new CreateOrderFragment();
                 case 3:
-                    return new ReportSendFragment();
+                    return new ReportSendFragment(storeDTO);
             }
         }
         return null;

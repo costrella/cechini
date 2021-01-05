@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Opis: "
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/fragment_report_preview_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                tools:text="Opis: Testowy"></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Zdjęcia: "
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/fragment_report_preview_photoCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                tools:text="2"></TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Zamówienie: "
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/fragment_report_preview_order"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                tools:text="brak"></TextView>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/fragment_report_preview_mailInfoTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:visibility="gone"
+            android:text="System wyśle również e-mail z zamówieniem na odpowiedni adres"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"></TextView>
+
+        <Button
+            android:id="@+id/fragment_report_preview_sendBtn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:background="@color/colorPrimary"
+            android:text="Wyślij"
+            android:textColor="@color/white"></Button>
+
+
+        <ProgressBar
+            android:id="@+id/fragment_report_previewProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"></ProgressBar>
+    </LinearLayout>
+</ScrollView>

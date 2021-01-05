@@ -42,7 +42,13 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
             @Override
             public void onResponse(Call<ReportDTO> call, Response<ReportDTO> response) {
                 if (response.isSuccessful()) {
-                    EventBus.getDefault().post(new ReportSentSuccess("Raport wysłany ! " + response.body().isSentMail()));
+//                    String mailInfo = "";
+//                    if(response.body().isSentMail() ){
+//                        mailInfo= "E-mail z również !";
+//                    }else {
+//                        mailInfo= "E-mail nie dotarł !";
+//                    }
+                    EventBus.getDefault().post(new ReportSentSuccess("Raport wysłany!"));
                 } else {
                     saveNotSentReport(reportDTO);
                     EventBus.getDefault().post(new ReportSentFailed("Raport NIE został wysłany! Zapisano w pamięci! Kod błędu: " + response.code()));
