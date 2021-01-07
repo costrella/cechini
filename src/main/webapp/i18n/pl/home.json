@@ -1,7 +1,7 @@
 {
   "home": {
     "title": "Cechini 2.0",
-    "subtitle": "Aplikacja wersja testerska",
+    "subtitle": "Kontrola sprzedaży",
     "logged": {
       "message": "Jesteś zalogowany jako użytkownik \"{{username}}\"."
     },
