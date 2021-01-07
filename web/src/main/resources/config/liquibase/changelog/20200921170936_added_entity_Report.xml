@@ -6,7 +6,7 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    
+
     <!--
         Added the entity Report.
     -->
@@ -51,20 +51,20 @@
           This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
           Spring Boot configuration key.
     -->
-    <changeSet id="20200921170936-1-data" author="jhipster" context="faker">
-        <loadData
-                  file="config/liquibase/fake-data/report.csv"
-                  separator=";"
-                  tableName="report">
-            <column name="id" type="numeric"/>
-            <column name="report_date" type="datetime"/>
-            <column name="jhi_desc" type="string"/>
-            <column name="manager_note" type="string"/>
-            <column name="worker_id" type="numeric"/>
-            <column name="store_id" type="numeric"/>
-            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
-            <column name="order_id" type="numeric"/>
-        </loadData>
-    </changeSet>
+<!--    <changeSet id="20200921170936-1-data" author="jhipster" context="faker">-->
+<!--        <loadData-->
+<!--                  file="config/liquibase/fake-data/report.csv"-->
+<!--                  separator=";"-->
+<!--                  tableName="report">-->
+<!--            <column name="id" type="numeric"/>-->
+<!--            <column name="report_date" type="datetime"/>-->
+<!--            <column name="jhi_desc" type="string"/>-->
+<!--            <column name="manager_note" type="string"/>-->
+<!--            <column name="worker_id" type="numeric"/>-->
+<!--            <column name="store_id" type="numeric"/>-->
+<!--            &lt;!&ndash; jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here &ndash;&gt;-->
+<!--            <column name="order_id" type="numeric"/>-->
+<!--        </loadData>-->
+<!--    </changeSet>-->
 
 </databaseChangeLog>
