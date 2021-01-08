@@ -16,6 +16,7 @@ import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -41,13 +42,16 @@ public class ReportService {
 
     private final MailService mailService;
 
-    public ReportService(ReportRepository reportRepository, ReportMapper reportMapper, OrderMapper orderMapper, OrderItemMapper orderItemMapper, PhotoFileMapper photoFileMapper, MailService mailService) {
+    private final OrderFileService orderFileService;
+
+    public ReportService(ReportRepository reportRepository, ReportMapper reportMapper, OrderMapper orderMapper, OrderItemMapper orderItemMapper, PhotoFileMapper photoFileMapper, MailService mailService, OrderFileService orderFileService) {
         this.reportRepository = reportRepository;
         this.reportMapper = reportMapper;
         this.orderMapper = orderMapper;
         this.orderItemMapper = orderItemMapper;
         this.photoFileMapper = photoFileMapper;
         this.mailService = mailService;
+        this.orderFileService = orderFileService;
     }
 
     /**
@@ -63,17 +67,24 @@ public class ReportService {
         return reportMapper.toDto(report);
     }
 
+    public ReportDTO save(Report report) {
+        report = reportRepository.save(report);
+        return reportMapper.toDto(report);
+    }
+
     public ReportDTO saveWithPhotos(ReportDTOWithPhotos reportDTO) {
         log.debug("Request to save Report : {}", reportDTO);
         Report report = reportMapper.toEntityWithPhotos(reportDTO);
         report = reportRepository.save(report);
-        boolean sentMail = false;
+
         if (report.getOrder() != null) {
-            sentMail = mailService.sendEmailWithOrder(report);
+            try {
+                mailService.sendEmailWithOrder(orderFileService.generateFile(report));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        ReportDTO respone = reportMapper.toDto(report);
-        respone.setSentMail(sentMail);
-        return respone;
+        return reportMapper.toDto(report);
     }
 
     /**
@@ -143,6 +154,12 @@ public class ReportService {
         log.debug("Request to get Report : {}", id);
         return reportRepository.findById(id)
             .map(report -> reportMapper.toDtoWithPhotos(report, orderMapper, orderItemMapper, photoFileMapper));
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<Report> findOneEntity(Long id) {
+        log.debug("Request to get Report : {}", id);
+        return reportRepository.findById(id);
     }
 
     /**

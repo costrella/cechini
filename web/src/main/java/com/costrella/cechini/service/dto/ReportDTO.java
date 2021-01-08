@@ -34,8 +34,6 @@ public class ReportDTO implements Serializable {
 
     private OrderDTO orderDTO;
 
-    private boolean sentMail;
-
     private List<PhotoFileDTO> photos;
 
     public List<PhotoFileDTO> getPhotos() {
@@ -44,14 +42,6 @@ public class ReportDTO implements Serializable {
 
     public void setPhotos(List<PhotoFileDTO> photos) {
         this.photos = photos;
-    }
-
-    public boolean isSentMail() {
-        return sentMail;
-    }
-
-    public void setSentMail(boolean sentMail) {
-        this.sentMail = sentMail;
     }
 
     public OrderDTO getOrderDTO() {
