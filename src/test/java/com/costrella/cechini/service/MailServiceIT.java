@@ -1,8 +1,7 @@
 package com.costrella.cechini.service;
 
-import com.costrella.cechini.config.Constants;
-
 import com.costrella.cechini.CechiniApp;
+import com.costrella.cechini.config.Constants;
 import com.costrella.cechini.domain.User;
 import com.costrella.cechini.repository.StoreRepository;
 import com.costrella.cechini.repository.WorkerRepository;
@@ -35,7 +34,8 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -62,12 +62,6 @@ public class MailServiceIT {
     @Autowired
     private SpringTemplateEngine templateEngine;
 
-    @Autowired
-    private WorkerRepository workerRepository;
-
-    @Autowired
-    private StoreRepository storeRepository;
-
     @Spy
     private JavaMailSenderImpl javaMailSender;
 
@@ -80,12 +74,12 @@ public class MailServiceIT {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         doNothing().when(javaMailSender).send(any(MimeMessage.class));
-        mailService = new MailService(jHipsterProperties, javaMailSender, messageSource, templateEngine, workerRepository, storeRepository);
+        mailService = new MailService(jHipsterProperties, javaMailSender, messageSource, templateEngine);
     }
 
     @Test
     public void testSendEmail() throws Exception {
-        mailService.sendEmail(null, "john.doe@example.com", "testSubject", "testContent", false, false);
+        mailService.sendEmail("john.doe@example.com", "testSubject", "testContent", false, true, null);
         verify(javaMailSender).send(messageCaptor.capture());
         MimeMessage message = messageCaptor.getValue();
         assertThat(message.getSubject()).isEqualTo("testSubject");
@@ -98,7 +92,7 @@ public class MailServiceIT {
 
     @Test
     public void testSendHtmlEmail() throws Exception {
-        mailService.sendEmail(null, "john.doe@example.com", "testSubject", "testContent", false, true);
+        mailService.sendEmail("john.doe@example.com", "testSubject", "testContent", false, true, null);
         verify(javaMailSender).send(messageCaptor.capture());
         MimeMessage message = messageCaptor.getValue();
         assertThat(message.getSubject()).isEqualTo("testSubject");
@@ -111,7 +105,7 @@ public class MailServiceIT {
 
     @Test
     public void testSendMultipartEmail() throws Exception {
-        mailService.sendEmail(null, "john.doe@example.com", "testSubject", "testContent", true, false);
+        mailService.sendEmail("john.doe@example.com", "testSubject", "testContent", true, false, null);
         verify(javaMailSender).send(messageCaptor.capture());
         MimeMessage message = messageCaptor.getValue();
         MimeMultipart mp = (MimeMultipart) message.getContent();
@@ -128,7 +122,7 @@ public class MailServiceIT {
 
     @Test
     public void testSendMultipartHtmlEmail() throws Exception {
-        mailService.sendEmail(null, "john.doe@example.com", "testSubject", "testContent", true, true);
+        mailService.sendEmail( "john.doe@example.com", "testSubject", "testContent", true, true, null);
         verify(javaMailSender).send(messageCaptor.capture());
         MimeMessage message = messageCaptor.getValue();
         MimeMultipart mp = (MimeMultipart) message.getContent();
@@ -208,7 +202,7 @@ public class MailServiceIT {
     public void testSendEmailWithException() {
         doThrow(MailSendException.class).when(javaMailSender).send(any(MimeMessage.class));
         try {
-            mailService.sendEmail(null, "john.doe@example.com", "testSubject", "testContent", false, false);
+            mailService.sendEmail("john.doe@example.com", "testSubject", "testContent", false, false, null);
         } catch (Exception e) {
             fail("Exception shouldn't have been thrown");
         }
@@ -244,7 +238,7 @@ public class MailServiceIT {
         String javaLangKey = langKey;
         Matcher matcher2 = PATTERN_LOCALE_2.matcher(langKey);
         if (matcher2.matches()) {
-            javaLangKey = matcher2.group(1) + "_"+ matcher2.group(2).toUpperCase();
+            javaLangKey = matcher2.group(1) + "_" + matcher2.group(2).toUpperCase();
         }
         Matcher matcher3 = PATTERN_LOCALE_3.matcher(langKey);
         if (matcher3.matches()) {

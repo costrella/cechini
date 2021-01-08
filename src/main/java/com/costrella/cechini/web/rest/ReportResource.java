@@ -1,5 +1,6 @@
 package com.costrella.cechini.web.rest;
 
+import com.costrella.cechini.domain.Report;
 import com.costrella.cechini.service.ReportService;
 import com.costrella.cechini.service.dto.ReportDTO;
 import com.costrella.cechini.service.dto.ReportDTOSimple;
@@ -25,6 +26,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+
+import static org.hibernate.id.IdentifierGenerator.ENTITY_NAME;
 
 /**
  * REST controller for managing {@link com.costrella.cechini.domain.Report}.
@@ -88,12 +91,14 @@ public class ReportResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/reports")
-    public ResponseEntity<ReportDTO> updateReport(@Valid @RequestBody ReportDTO reportDTO) throws URISyntaxException {
+    public ResponseEntity<ReportDTO> addCommentToReport(@Valid @RequestBody ReportDTO reportDTO) throws URISyntaxException { //todo update report, this is only desc edit
         log.debug("REST request to update Report : {}", reportDTO);
         if (reportDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        ReportDTO result = reportService.save(reportDTO);
+        Report reportEntity = reportService.findOneEntity(reportDTO.getId()).orElseThrow(() -> new BadRequestAlertException("Cannot find report", ENTITY_NAME, ""+reportDTO.getId() ));
+        reportEntity.setDesc(reportDTO.getDesc());
+        ReportDTO result = reportService.save(reportEntity);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, reportDTO.getId().toString()))
             .body(result);
