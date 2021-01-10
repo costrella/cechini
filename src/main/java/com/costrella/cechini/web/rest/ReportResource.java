@@ -97,7 +97,7 @@ public class ReportResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         Report reportEntity = reportService.findOneEntity(reportDTO.getId()).orElseThrow(() -> new BadRequestAlertException("Cannot find report", ENTITY_NAME, ""+reportDTO.getId() ));
-        reportEntity.setDesc(reportDTO.getDesc());
+        reportEntity.setManagerNote(reportDTO.getManagerNote());
         ReportDTO result = reportService.save(reportEntity);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, reportDTO.getId().toString()))
