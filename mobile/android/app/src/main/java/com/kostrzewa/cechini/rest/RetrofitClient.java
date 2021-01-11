@@ -32,7 +32,8 @@ public class RetrofitClient {
         Gson gson = new GsonBuilder()
                 //.registerTypeHierarchyAdapter(byte[].class, new ByteArrayToBase64TypeAdapter())
 //                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
-                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+//                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+                .create();
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(CechiniAPI.ENDPOINT)

@@ -2,7 +2,7 @@ package com.kostrzewa.cechini.model;
 
 import java.io.Serializable;
 
-public class StoreDTO implements Serializable {
+public class StoreDTO implements Serializable, Comparable<StoreDTO> {
 
     private Long id;
 
@@ -12,19 +12,7 @@ public class StoreDTO implements Serializable {
 
     private String address;
 
-    private Long storegroupId;
-
-    private String storegroupName;
-
     private Long workerId;
-
-    public String getStoregroupName() {
-        return storegroupName;
-    }
-
-    public void setStoregroupName(String storegroupName) {
-        this.storegroupName = storegroupName;
-    }
 
     public String getNip() {
         return nip;
@@ -40,14 +28,6 @@ public class StoreDTO implements Serializable {
 
     public void setWorkerId(Long workerId) {
         this.workerId = workerId;
-    }
-
-    public Long getStoregroupId() {
-        return storegroupId;
-    }
-
-    public void setStoregroupId(Long storegroupId) {
-        this.storegroupId = storegroupId;
     }
 
     public Long getId() {
@@ -91,4 +71,8 @@ public class StoreDTO implements Serializable {
         return 31;
     }
 
+    @Override
+    public int compareTo(StoreDTO o) {
+        return this.getName().compareTo(o.getName());
+    }
 }

@@ -41,6 +41,7 @@ public class CreateOrderFragment extends Fragment {
     private OrderItemAdapter adapter;
     private WarehouseAdapter warehouseAdapter;
     NavController navController;
+    List<WarehouseDTO> warehouseDTOS;
     private MyStoresFragment.OnListFragmentInteractionListener mListener;
 
     private void init() {
@@ -48,7 +49,16 @@ public class CreateOrderFragment extends Fragment {
     }
 
     private void fillData() {
-//        refresh();
+        if (ReportData.reportDTO.getOrderDTO() != null && !ReportData.reportDTO.getOrderDTO().getOrderItems().isEmpty()) {
+            for (int i = 0; i < warehouseDTOS.size(); i++) {
+                if (ReportData.reportDTO.getOrderDTO().getWarehouseId().equals(
+                        warehouseDTOS.get(i).getId()
+                )
+                ) {
+                    warehouseSpinner.setSelection(i);
+                }
+            }
+        }
         warehouseSpinner.setEnabled(false);
         warehouseTV.setText("Hurtownia");
         recyclerView.setLayoutFrozen(true);
@@ -78,12 +88,12 @@ public class CreateOrderFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_order_create, container, false);
         ButterKnife.bind(this, view);
-        init();
         navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
         warehouseDataManager = new WarehouseDataManagerImpl(getContext());
-        List<WarehouseDTO> warehouseDTOS = warehouseDataManager.getAllWarehouses();
+        warehouseDTOS = warehouseDataManager.getAllWarehouses();
         warehouseAdapter = new WarehouseAdapter(warehouseDTOS);
         warehouseSpinner.setAdapter(warehouseAdapter);
+        init();
         warehouseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

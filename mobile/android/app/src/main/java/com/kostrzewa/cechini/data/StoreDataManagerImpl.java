@@ -14,6 +14,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -120,8 +121,8 @@ public class StoreDataManagerImpl extends AbstractDataManager implements StoreDa
     @Override
     public List<StoreDTO> getMyStores() {
         List<StoreDTO> storeDTOS = new ArrayList<>();
-
         preferenceManager.getMyStores().stream().forEach(s -> storeDTOS.add(gson.fromJson(s, StoreDTO.class)));
+        Collections.sort(storeDTOS);
         return storeDTOS;
     }
 
