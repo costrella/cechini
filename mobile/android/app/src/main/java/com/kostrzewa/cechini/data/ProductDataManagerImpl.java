@@ -30,7 +30,9 @@ public class ProductDataManagerImpl extends AbstractDataManager implements Produ
     @Override
     public List<ProductDTO> getAllProducts() {
         List<ProductDTO> productDTOS = new ArrayList<>();
-        preferenceManager.getAllProducts().stream().forEach(s -> productDTOS.add(gson.fromJson(s, ProductDTO.class)));
+        for (String s : preferenceManager.getAllProducts()) {
+            productDTOS.add(gson.fromJson(s, ProductDTO.class));
+        }
         return productDTOS;
     }
 
@@ -42,7 +44,9 @@ public class ProductDataManagerImpl extends AbstractDataManager implements Produ
                 Log.d(TAG, "onResponse: " + response.code());
                 if (response.isSuccessful()) {
                     Set<String> myset = new HashSet<>();
-                    response.body().stream().forEach(v -> myset.add(gson.toJson(v)));
+                    for (ProductDTO v : response.body()) {
+                        myset.add(gson.toJson(v));
+                    }
                     preferenceManager.setAllProducts(myset);
                     EventBus.getDefault().post(new ProductsDownloadSuccess());
                     preferenceManager.setSychroTimeProducts();

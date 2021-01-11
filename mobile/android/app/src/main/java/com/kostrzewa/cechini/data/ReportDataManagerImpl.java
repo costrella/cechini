@@ -71,7 +71,9 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
     @Override
     public void sendReportNotSent() {
         List<ReportDTOWithPhotos> notSendReports = new ArrayList<>();
-        preferenceManager.getReportsNotSend().stream().forEach(s -> notSendReports.add(gson.fromJson(s, ReportDTOWithPhotos.class)));
+        for (String s : preferenceManager.getReportsNotSend()) {
+            notSendReports.add(gson.fromJson(s, ReportDTOWithPhotos.class));
+        }
         if (!notSendReports.isEmpty()) {
             ReportsDTO reportsDTO = new ReportsDTO();
             reportsDTO.setReportsDTOS(notSendReports);
@@ -94,18 +96,24 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
 
     private void saveNotSentReport(ReportDTO reportDTO) {
         List<ReportDTO> notSendReports = new ArrayList<>();
-        preferenceManager.getReportsNotSend().stream().forEach(s -> notSendReports.add(gson.fromJson(s, ReportDTO.class)));
+        for (String s : preferenceManager.getReportsNotSend()) {
+            notSendReports.add(gson.fromJson(s, ReportDTO.class));
+        }
         notSendReports.add(reportDTO);
 
         Set<String> myset = new HashSet<>();
-        notSendReports.stream().forEach(v -> myset.add(gson.toJson(v)));
+        for (ReportDTO v : notSendReports) {
+            myset.add(gson.toJson(v));
+        }
         preferenceManager.setReportsNotSend(myset);
     }
 
     @Override
     public List<ReportDTOWithPhotos> getMyReports() {
         List<ReportDTOWithPhotos> reportDTOS = new ArrayList<>();
-        preferenceManager.getMyReports().stream().forEach(s -> reportDTOS.add(gson.fromJson(s, ReportDTOWithPhotos.class)));
+        for (String s : preferenceManager.getMyReports()) {
+            reportDTOS.add(gson.fromJson(s, ReportDTOWithPhotos.class));
+        }
         reportDTOS.sort((o1, o2) -> o2.getReportDate().compareTo(o1.getReportDate()));
         return reportDTOS;
     }
@@ -120,7 +128,9 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
                     preferenceManager.setSychroTimeMyReports();
 
                     Set<String> myset = new HashSet<>();
-                    response.body().stream().forEach(v -> myset.add(gson.toJson(v)));
+                    for (ReportDTOWithPhotos v : response.body()) {
+                        myset.add(gson.toJson(v));
+                    }
                     preferenceManager.setMyReports(myset);
                 } else {
                     EventBus.getDefault().post(new MyReportsDownloadFailed("Wystąpił problem a07"));

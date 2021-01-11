@@ -30,7 +30,9 @@ public class WarehouseDataManagerImpl extends AbstractDataManager implements War
     @Override
     public List<WarehouseDTO> getAllWarehouses() {
         List<WarehouseDTO> warehouseDTOS = new ArrayList<>();
-        preferenceManager.getAllWarehouses().stream().forEach(s -> warehouseDTOS.add(gson.fromJson(s, WarehouseDTO.class)));
+        for (String s : preferenceManager.getAllWarehouses()) {
+            warehouseDTOS.add(gson.fromJson(s, WarehouseDTO.class));
+        }
         return warehouseDTOS;
     }
 
@@ -42,7 +44,9 @@ public class WarehouseDataManagerImpl extends AbstractDataManager implements War
                 Log.d(TAG, "onResponse: " + response.code());
                 if (response.isSuccessful()) {
                     Set<String> myset = new HashSet<>();
-                    response.body().stream().forEach(v -> myset.add(gson.toJson(v)));
+                    for (WarehouseDTO v : response.body()) {
+                        myset.add(gson.toJson(v));
+                    }
                     preferenceManager.setAllWarehouses(myset);
                     EventBus.getDefault().post(new WarehouseDownloadSuccess());
                     preferenceManager.setSychroTimeWarehouses();

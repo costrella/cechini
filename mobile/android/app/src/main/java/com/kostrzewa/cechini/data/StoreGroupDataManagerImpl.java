@@ -27,7 +27,9 @@ public class StoreGroupDataManagerImpl extends AbstractDataManager implements St
     public List<StoreGroupDTO> getStoreGroups() {
         List<StoreGroupDTO> storeGroupDTOS = new ArrayList<>();
 
-        preferenceManager.getAllStoreGroups().stream().forEach(s -> storeGroupDTOS.add(gson.fromJson(s, StoreGroupDTO.class)));
+        for (String s : preferenceManager.getAllStoreGroups()) {
+            storeGroupDTOS.add(gson.fromJson(s, StoreGroupDTO.class));
+        }
         return storeGroupDTOS;
     }
 
@@ -39,7 +41,9 @@ public class StoreGroupDataManagerImpl extends AbstractDataManager implements St
                 Log.d(TAG, "onResponse: " + response.code());
                 if (response.isSuccessful()) {
                     Set<String> myset = new HashSet<>();
-                    response.body().stream().forEach(storeDTO -> myset.add(gson.toJson(storeDTO)));
+                    for (StoreGroupDTO storeDTO : response.body()) {
+                        myset.add(gson.toJson(storeDTO));
+                    }
                     preferenceManager.setAllStoreGroups(myset);
                 }
             }

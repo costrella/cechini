@@ -43,12 +43,16 @@ public class StoreDataManagerImpl extends AbstractDataManager implements StoreDa
                     StoreDTO body = response.body();
 
                     List<StoreDTO> currentStores = new ArrayList<>();
-                    preferenceManager.getMyStores().stream().forEach(s -> currentStores.add(gson.fromJson(s, StoreDTO.class)));
+                    for (String s : preferenceManager.getMyStores()) {
+                        currentStores.add(gson.fromJson(s, StoreDTO.class));
+                    }
                     currentStores.add(body);
 
                     //save
                     Set<String> myset = new HashSet<>();
-                    currentStores.stream().forEach(storeDTO -> myset.add(gson.toJson(storeDTO)));
+                    for (StoreDTO currentStore : currentStores) {
+                        myset.add(gson.toJson(currentStore));
+                    }
                     preferenceManager.setMyStores(myset);
 
                     EventBus.getDefault().post(body);
@@ -85,13 +89,17 @@ public class StoreDataManagerImpl extends AbstractDataManager implements StoreDa
                     StoreDTO body = response.body();
 
                     List<StoreDTO> currentStores = new ArrayList<>();
-                    preferenceManager.getMyStores().stream().forEach(s -> currentStores.add(gson.fromJson(s, StoreDTO.class)));
+                    for (String s : preferenceManager.getMyStores()) {
+                        currentStores.add(gson.fromJson(s, StoreDTO.class));
+                    }
                     currentStores.add(body);
                     currentStores.remove(old);
 
                     //save
                     Set<String> myset = new HashSet<>();
-                    currentStores.stream().forEach(storeDTO -> myset.add(gson.toJson(storeDTO)));
+                    for (StoreDTO currentStore : currentStores) {
+                        myset.add(gson.toJson(currentStore));
+                    }
                     preferenceManager.setMyStores(myset);
 
                     EventBus.getDefault().post(new StoreEditSuccess());
@@ -121,7 +129,9 @@ public class StoreDataManagerImpl extends AbstractDataManager implements StoreDa
     @Override
     public List<StoreDTO> getMyStores() {
         List<StoreDTO> storeDTOS = new ArrayList<>();
-        preferenceManager.getMyStores().stream().forEach(s -> storeDTOS.add(gson.fromJson(s, StoreDTO.class)));
+        for (String s : preferenceManager.getMyStores()) {
+            storeDTOS.add(gson.fromJson(s, StoreDTO.class));
+        }
         Collections.sort(storeDTOS);
         return storeDTOS;
     }
@@ -135,7 +145,9 @@ public class StoreDataManagerImpl extends AbstractDataManager implements StoreDa
                         Log.d(TAG, "onResponse: " + response.code());
                         if (response.isSuccessful()) {
                             Set<String> myset = new HashSet<>();
-                            response.body().stream().forEach(storeDTO -> myset.add(gson.toJson(storeDTO)));
+                            for (StoreDTO storeDTO : response.body()) {
+                                myset.add(gson.toJson(storeDTO));
+                            }
                             preferenceManager.setMyStores(myset);
                             EventBus.getDefault().post(new MyStoreDownloadSuccess());
                             preferenceManager.setSychroTimeMyStores();
