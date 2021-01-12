@@ -8,9 +8,7 @@ import com.costrella.cechini.repository.StoreRepository;
 import com.costrella.cechini.repository.WorkerRepository;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -34,11 +32,30 @@ public class OrderFileService {
         List<String[]> dataLines = generateContent(report);
         File csvOutputFile = new File(CSV_FILE_NAME);
 
-        try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
-            dataLines.stream()
-                .map(this::convertToCSV)
-                .forEach(pw::println);
+        Writer out = new BufferedWriter(new OutputStreamWriter(
+            new FileOutputStream(csvOutputFile), "UTF-8"));
+        try {
+            for (String[] strings : dataLines) {
+                int i = 0;
+                for (String s : strings) {
+                    out.write(escapeSpecialCharacters(s));
+                    if (i != strings.length - 1) {
+                        out.write(",");
+                    }
+                    i++;
+                }
+                out.write("\n");
+            }
+        } finally {
+            out.close();
         }
+
+
+//        try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
+//            dataLines.stream()
+//                .map(this::convertToCSV)
+//                .forEach(pw::println);
+//        }
         if (csvOutputFile.exists()) return csvOutputFile;
         return null;
     }
@@ -51,17 +68,17 @@ public class OrderFileService {
             .withZone(ZoneId.systemDefault());
 
         dataLines.add(new String[]
-            {"Odbiorca: ", store.getName() + " " + store.getAddress()});
+            {"Odbiorca:", store.getName() + " " + store.getAddress()});
         dataLines.add(new String[]
-            {"Odbiorca NIP: ", store.getNip()});
+            {"Odbiorca NIP:", store.getNip()});
         dataLines.add(new String[]
-            {"Data wystawienia: ", DATE_TIME_FORMATTER.format(report.getReportDate())});
+            {"Data wystawienia:", DATE_TIME_FORMATTER.format(report.getReportDate())});
         dataLines.add(new String[]
-            {"Dostawca: ", report.getOrder().getWarehouse().getName()});
+            {"Dostawca:", report.getOrder().getWarehouse().getName()});
         dataLines.add(new String[]
-            {"Przedstawiciel handlowy: ", worker.getName() + " " + worker.getSurname(), "tel.:" + worker.getPhone()});
+            {"Przedstawiciel handlowy:", worker.getName() + " " + worker.getSurname(), "tel:" + worker.getPhone()});
         dataLines.add(new String[]
-            {"Lp", "Produkt", "Pojemnosc", "EAN", "Ilosc"});
+            {"Lp", "Produkt", "Pojemność", "EAN", "Ilość"});
         int lp = 1;
         for (OrderItem oi : report.getOrder().getOrderItems()) {
             dataLines.add(new String[]
