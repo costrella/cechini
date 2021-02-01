@@ -13,7 +13,7 @@ public class ProductDTO implements Serializable {
     @NotNull
     private String name;
 
-    private Integer capacity;
+    private Double capacity;
 
     private String eanArt;
 
@@ -42,11 +42,11 @@ public class ProductDTO implements Serializable {
         this.name = name;
     }
 
-    public Integer getCapacity() {
+    public Double getCapacity() {
         return capacity;
     }
 
-    public void setCapacity(Integer capacity) {
+    public void setCapacity(Double capacity) {
         this.capacity = capacity;
     }
 

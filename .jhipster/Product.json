@@ -8,7 +8,7 @@
     },
     {
       "fieldName": "capacity",
-      "fieldType": "Integer"
+      "fieldType": "Double"
     },
     {
       "fieldName": "eanArt",
