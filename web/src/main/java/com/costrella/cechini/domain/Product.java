@@ -27,7 +27,7 @@ public class Product implements Serializable {
     private String name;
 
     @Column(name = "capacity")
-    private Integer capacity;
+    private Double capacity;
 
     @Column(name = "ean_art")
     private String eanArt;
@@ -74,16 +74,16 @@ public class Product implements Serializable {
         this.name = name;
     }
 
-    public Integer getCapacity() {
+    public Double getCapacity() {
         return capacity;
     }
 
-    public Product capacity(Integer capacity) {
+    public Product capacity(Double capacity) {
         this.capacity = capacity;
         return this;
     }
 
-    public void setCapacity(Integer capacity) {
+    public void setCapacity(Double capacity) {
         this.capacity = capacity;
     }
 

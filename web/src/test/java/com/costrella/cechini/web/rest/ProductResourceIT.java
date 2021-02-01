@@ -36,8 +36,8 @@ public class ProductResourceIT {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final Integer DEFAULT_CAPACITY = 1;
-    private static final Integer UPDATED_CAPACITY = 2;
+    private static final Double DEFAULT_CAPACITY = 1D;
+    private static final Double UPDATED_CAPACITY = 2D;
 
     private static final String DEFAULT_EAN_ART = "AAAAAAAAAA";
     private static final String UPDATED_EAN_ART = "BBBBBBBBBB";
@@ -188,7 +188,7 @@ public class ProductResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(product.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].capacity").value(hasItem(DEFAULT_CAPACITY)))
+            .andExpect(jsonPath("$.[*].capacity").value(hasItem(DEFAULT_CAPACITY.doubleValue())))
             .andExpect(jsonPath("$.[*].eanArt").value(hasItem(DEFAULT_EAN_ART)))
             .andExpect(jsonPath("$.[*].eanPack").value(hasItem(DEFAULT_EAN_PACK)))
             .andExpect(jsonPath("$.[*].packCountPalette").value(hasItem(DEFAULT_PACK_COUNT_PALETTE)))
@@ -208,7 +208,7 @@ public class ProductResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(product.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
-            .andExpect(jsonPath("$.capacity").value(DEFAULT_CAPACITY))
+            .andExpect(jsonPath("$.capacity").value(DEFAULT_CAPACITY.doubleValue()))
             .andExpect(jsonPath("$.eanArt").value(DEFAULT_EAN_ART))
             .andExpect(jsonPath("$.eanPack").value(DEFAULT_EAN_PACK))
             .andExpect(jsonPath("$.packCountPalette").value(DEFAULT_PACK_COUNT_PALETTE))

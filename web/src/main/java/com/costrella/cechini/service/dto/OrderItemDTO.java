@@ -17,17 +17,17 @@ public class OrderItemDTO implements Serializable {
 
     private String productName;
 
-    private Integer productCapacity;
+    private Double productCapacity;
 
     private String productEanPack;
 
     private Long orderId;
 
-    public Integer getProductCapacity() {
+    public Double getProductCapacity() {
         return productCapacity;
     }
 
-    public void setProductCapacity(Integer productCapacity) {
+    public void setProductCapacity(Double productCapacity) {
         this.productCapacity = productCapacity;
     }
 
