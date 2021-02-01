@@ -3,6 +3,7 @@ export interface IOrderItem {
   artCount?: number;
   packCount?: number;
   productName?: string;
+  productCapacity?: number;
   productId?: number;
   orderId?: number;
 }
@@ -13,6 +14,7 @@ export class OrderItem implements IOrderItem {
     public artCount?: number,
     public packCount?: number,
     public productName?: string,
+    public productCapacity?: number,
     public productId?: number,
     public orderId?: number
   ) {}

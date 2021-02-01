@@ -52,8 +52,7 @@
             <!-- <button type="button" [routerLink]="['/order', order.id, 'edit']" class="btn btn-primary">
                 <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
             </button> -->
-
-            <div *ngIf="order.id">
+            <div class="col-9" *ngIf="order.id">
                 <jhi-order-item [setOrderId]="order.id"></jhi-order-item>
             </div>
 
