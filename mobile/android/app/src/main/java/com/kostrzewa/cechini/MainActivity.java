@@ -90,7 +90,6 @@ public class MainActivity extends AppCompatActivity implements MyStoresFragment.
         productDataManager.downloadProducts();
         warehouseDataManager.downloadWarehouse();
         reportDataManager.sendReportNotSent();
-        storeGroupDataManager.downloadStoreGroups();
     }
 
     private boolean isWorkerExist() {

@@ -45,7 +45,12 @@ public class CreateOrderFragment extends Fragment {
     private MyStoresFragment.OnListFragmentInteractionListener mListener;
 
     private void init() {
-        if (ReportData.reportDTO.isReadOnly()) fillData();
+        if (ReportData.reportDTO.isReadOnly()){
+            fillData();
+            addProductBtn.setVisibility(View.GONE);
+        } else {
+            addProductBtn.setVisibility(View.VISIBLE);
+        }
     }
 
     private void fillData() {
