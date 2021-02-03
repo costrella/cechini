@@ -1,8 +1,6 @@
 package com.costrella.cechini.service;
 
 import com.costrella.cechini.domain.Report;
-import com.costrella.cechini.domain.Store;
-import com.costrella.cechini.domain.Worker;
 import com.costrella.cechini.repository.ReportRepository;
 import com.costrella.cechini.service.dto.ReportDTO;
 import com.costrella.cechini.service.dto.ReportDTOWithPhotos;
@@ -12,11 +10,15 @@ import com.costrella.cechini.service.mapper.PhotoFileMapper;
 import com.costrella.cechini.service.mapper.ReportMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -127,11 +129,29 @@ public class ReportService {
     }
 
     @Transactional(readOnly = true)
-    public Page<ReportDTO> findByStoreAndWorker(Pageable pageable, Long workerId, Long storeId) {
-        Report report = new Report();
-        if (storeId != 0) report.setStore(new Store().id(storeId));
-        if (workerId != 0) report.setWorker(new Worker().id(workerId));
-        return reportRepository.findAll(Example.of(report),
+    public Page<ReportDTO> findByStoreAndWorkerAndDate(Pageable pageable, Long workerId, Long storeId, Instant from, Instant to) {
+        if (storeId != 0 && workerId != 0) { //worker i store NIEPUSTE
+            return reportRepository.findAllByStoreIdAndWorkerIdAndReportDateBetween(storeId, workerId, from, to,
+                PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Direction.DESC, "reportDate"))
+            ).map(reportMapper::toDto);
+        }
+        if (storeId == 0 && workerId == 0) { //worker i store PUSTE
+            return reportRepository.findAllByReportDateBetween(from, to,
+                PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Direction.DESC, "reportDate"))
+            ).map(reportMapper::toDto);
+        }
+        if (workerId != 0 && storeId == 0) { //storeId PUSTE
+            return reportRepository.findAllByWorkerIdAndReportDateBetween(workerId, from, to,
+                PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Direction.DESC, "reportDate"))
+            ).map(reportMapper::toDto);
+        }
+        if (storeId != 0 && workerId == 0) { //workerId PUSTE
+            return reportRepository.findAllByStoreIdAndReportDateBetween(storeId, from, to,
+                PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Direction.DESC, "reportDate"))
+            ).map(reportMapper::toDto);
+        }
+
+        return reportRepository.findAllByReportDateBetween(from, to,
             PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Direction.DESC, "reportDate"))
         ).map(reportMapper::toDto);
     }

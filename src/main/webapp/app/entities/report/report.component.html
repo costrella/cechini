@@ -45,6 +45,21 @@
                     </option>
                 </select>
             </div>
+
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" jhiTranslate="audits.filter.from">from</span>
+                </div>
+                <input type="date" class="form-control" name="start" [(ngModel)]="fromDate" (ngModelChange)="filter()"
+                    required />
+
+                <div class="input-group-append">
+                    <span class="input-group-text" jhiTranslate="audits.filter.to">To</span>
+                </div>
+                <input type="date" class="form-control" name="end" [(ngModel)]="toDate" (ngModelChange)="filter()"
+                    required />
+            </div>
         </div>
     </div>
 
@@ -112,7 +127,8 @@
                     </td>
                     <td>
                         <!-- {{report.photos.size}},  -->
-                        {{report.photosCount}}</td>
+                        {{report.photosCount}}
+                    </td>
                     <td>{{ report.managerNote }}</td>
                     <td class="text-right">
                         <div class="btn-group">

@@ -3,7 +3,6 @@ package com.costrella.cechini.web.rest;
 import com.costrella.cechini.domain.Report;
 import com.costrella.cechini.service.ReportService;
 import com.costrella.cechini.service.dto.ReportDTO;
-import com.costrella.cechini.service.dto.ReportDTOSimple;
 import com.costrella.cechini.service.dto.ReportDTOWithPhotos;
 import com.costrella.cechini.service.dto.ReportsDTO;
 import com.costrella.cechini.web.rest.errors.BadRequestAlertException;
@@ -24,10 +23,11 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
-
-import static org.hibernate.id.IdentifierGenerator.ENTITY_NAME;
 
 /**
  * REST controller for managing {@link com.costrella.cechini.domain.Report}.
@@ -96,7 +96,7 @@ public class ReportResource {
         if (reportDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        Report reportEntity = reportService.findOneEntity(reportDTO.getId()).orElseThrow(() -> new BadRequestAlertException("Cannot find report", ENTITY_NAME, ""+reportDTO.getId() ));
+        Report reportEntity = reportService.findOneEntity(reportDTO.getId()).orElseThrow(() -> new BadRequestAlertException("Cannot find report", ENTITY_NAME, "" + reportDTO.getId()));
         reportEntity.setManagerNote(reportDTO.getManagerNote());
         ReportDTO result = reportService.save(reportEntity);
         return ResponseEntity.ok()
@@ -138,9 +138,15 @@ public class ReportResource {
         return ResponseEntity.ok().body(list);
     }
 
-    @GetMapping("/reports/worker/{workerId}/store/{storeId}")
-    public ResponseEntity<List<ReportDTO>> getReportsByWorkerAndStore(Pageable pageable, @PathVariable Long workerId, @PathVariable Long storeId) {
-        Page<ReportDTO> page = reportService.findByStoreAndWorker(pageable, workerId, storeId);
+    @GetMapping(value = "/reports/worker/{workerId}/store/{storeId}", params = {"fromDate", "toDate"})
+    public ResponseEntity<List<ReportDTO>> getReportsByWorkerAndStore(Pageable pageable, @PathVariable Long workerId, @PathVariable Long storeId,
+                                                                      @RequestParam(value = "fromDate") LocalDate fromDate, @RequestParam(value = "toDate") LocalDate toDate) {
+        log.debug("from date:" + fromDate);
+        log.debug("from todate:" + toDate);
+        Instant from = fromDate.atStartOfDay(ZoneId.systemDefault()).toInstant();
+        Instant to = toDate.atStartOfDay(ZoneId.systemDefault()).plusDays(1).toInstant();
+
+        Page<ReportDTO> page = reportService.findByStoreAndWorkerAndDate(pageable, workerId, storeId, from, to);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

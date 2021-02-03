@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Data, ParamMap, Router } from '@angular/router';
@@ -39,6 +40,9 @@ export class ReportComponent implements OnInit, OnDestroy {
   type?: ReportPageType;
   storeId?: number;
   workerId?: number;
+  fromDate = '';
+  toDate = '';
+  private dateFormat = 'yyyy-MM-dd';
 
   constructor(
     protected reportService: ReportService,
@@ -47,7 +51,8 @@ export class ReportComponent implements OnInit, OnDestroy {
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal,
     protected workerService: WorkerService,
-    protected storeService: StoreService
+    protected storeService: StoreService,
+    private datePipe: DatePipe
   ) {}
 
   @Input()
@@ -75,10 +80,12 @@ export class ReportComponent implements OnInit, OnDestroy {
     const storeId = this.store?.id || 0;
 
     this.reportService
-      .findByStoreAndWorker(storeId, workerId, {
+      .findByStoreAndWorker(storeId, workerId, { //todo
         page: 0,
         size: this.itemsPerPage,
         sort: this.sort(),
+        fromDate: this.fromDate,
+        toDate: this.toDate,
       })
       .subscribe(
         (res: HttpResponse<IReport[]>) => this.onSuccess(res.body, res.headers, pageToLoad, false),
@@ -132,6 +139,8 @@ export class ReportComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.toDate = this.today();
+    this.fromDate = this.previousMonth();
     this.handleNavigation();
     this.registerChangeInReports();
     this.initFilter();
@@ -216,5 +225,22 @@ export class ReportComponent implements OnInit, OnDestroy {
 
   protected onError(): void {
     this.ngbPaginationPage = this.page ?? 1;
+  }
+
+  private previousMonth(): string {
+    let date = new Date();
+    if (date.getMonth() === 0) {
+      date = new Date(date.getFullYear() - 1, 11, date.getDate());
+    } else {
+      date = new Date(date.getFullYear(), date.getMonth() - 1, date.getDate());
+    }
+    return this.datePipe.transform(date, this.dateFormat)!;
+  }
+
+  private today(): string {
+    // Today + 1 day - needed if the current day must be included
+    const date = new Date();
+    date.setDate(date.getDate() + 1);
+    return this.datePipe.transform(date, this.dateFormat)!;
   }
 }
