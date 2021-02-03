@@ -2,11 +2,13 @@ package com.costrella.cechini.repository;
 
 import com.costrella.cechini.domain.Report;
 
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
+import java.time.Instant;
 import java.util.List;
 
 /**
@@ -29,5 +31,14 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
     Page<Report> findAllByWorkerIdAndStoreIdOrderByReportDateDesc(Long id, Long storeId, Pageable pageable);
 
     Page<Report> findAllByStoreIdOrderByReportDateDesc(Long id, Pageable pageable);
+
+
+    Page<Report> findAllByReportDateBetween(Instant fromDate, Instant toDate, Pageable pageable);
+
+    Page<Report> findAllByStoreIdAndReportDateBetween(Long id, Instant fromDate, Instant toDate, Pageable pageable);
+
+    Page<Report> findAllByWorkerIdAndReportDateBetween(Long id, Instant fromDate, Instant toDate, Pageable pageable);
+
+    Page<Report> findAllByStoreIdAndWorkerIdAndReportDateBetween(Long storeId, Long workerId, Instant fromDate, Instant toDate, Pageable pageable);
 
 }
