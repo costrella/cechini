@@ -18,7 +18,8 @@
       },
       "name": "Nazwa",
       "order": "Zamówienie",
-      "location": "Lokalizacja"
+      "location": "Lokalizacja",
+      "mail": "Mail"
     }
   }
 }

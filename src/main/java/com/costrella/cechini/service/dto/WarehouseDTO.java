@@ -13,6 +13,9 @@ public class WarehouseDTO implements Serializable {
     @NotNull
     private String name;
 
+    @Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
+    private String mail;
+
     
     public Long getId() {
         return id;
@@ -28,6 +31,14 @@ public class WarehouseDTO implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     @Override
@@ -53,6 +64,7 @@ public class WarehouseDTO implements Serializable {
         return "WarehouseDTO{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", mail='" + getMail() + "'" +
             "}";
     }
 }

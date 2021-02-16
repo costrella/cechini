@@ -17,6 +17,7 @@
         "title": "Warehouse"
       },
       "name": "Name",
+      "mail": "Mail",
       "order": "Order"
     }
   }

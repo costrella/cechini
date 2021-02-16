@@ -51,8 +51,7 @@ public class MailService {
     }
 
     @Async
-    public void sendEmailWithOrder(File orderFile) {
-        String mail = "ula.bukowska@cechini-muszyna.pl";
+    public void sendEmailWithOrder(String mail, File orderFile) {
         String subject = "Cechini. Zamówienie";
         String content = subject;
         sendEmail(mail, subject, content, true, true, orderFile);
@@ -68,6 +67,7 @@ public class MailService {
         try {
             MimeMessageHelper message = new MimeMessageHelper(mimeMessage, isMultipart, StandardCharsets.UTF_8.name());
             message.setTo(to);
+            message.addCc("ula.bukowska@cechini-muszyna.pl");
             message.setFrom(jHipsterProperties.getMail().getFrom());
             message.setSubject(subject);
             message.setText(content, isHtml);
