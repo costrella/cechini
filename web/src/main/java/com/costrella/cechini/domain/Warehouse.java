@@ -26,6 +26,10 @@ public class Warehouse implements Serializable {
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
+    @Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
+    @Column(name = "mail")
+    private String mail;
+
     @OneToMany(mappedBy = "warehouse")
     private Set<Order> orders = new HashSet<>();
 
@@ -54,6 +58,19 @@ public class Warehouse implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public Warehouse mail(String mail) {
+        this.mail = mail;
+        return this;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     public Set<Order> getOrders() {
@@ -104,6 +121,7 @@ public class Warehouse implements Serializable {
         return "Warehouse{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", mail='" + getMail() + "'" +
             "}";
     }
 }

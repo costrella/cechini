@@ -20,7 +20,7 @@ describe('Service Tests', () => {
       service = injector.get(WarehouseService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Warehouse(0, 'AAAAAAA');
+      elemDefault = new Warehouse(0, 'AAAAAAA', 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -55,6 +55,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             name: 'BBBBBB',
+            mail: 'BBBBBB',
           },
           elemDefault
         );
@@ -72,6 +73,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             name: 'BBBBBB',
+            mail: 'BBBBBB',
           },
           elemDefault
         );

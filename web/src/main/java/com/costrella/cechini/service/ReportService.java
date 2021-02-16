@@ -4,6 +4,7 @@ import com.costrella.cechini.domain.Report;
 import com.costrella.cechini.repository.ReportRepository;
 import com.costrella.cechini.service.dto.ReportDTO;
 import com.costrella.cechini.service.dto.ReportDTOWithPhotos;
+import com.costrella.cechini.service.dto.WarehouseDTO;
 import com.costrella.cechini.service.mapper.OrderItemMapper;
 import com.costrella.cechini.service.mapper.OrderMapper;
 import com.costrella.cechini.service.mapper.PhotoFileMapper;
@@ -46,7 +47,9 @@ public class ReportService {
 
     private final OrderFileService orderFileService;
 
-    public ReportService(ReportRepository reportRepository, ReportMapper reportMapper, OrderMapper orderMapper, OrderItemMapper orderItemMapper, PhotoFileMapper photoFileMapper, MailService mailService, OrderFileService orderFileService) {
+    private final WarehouseService warehouseService;
+
+    public ReportService(ReportRepository reportRepository, ReportMapper reportMapper, OrderMapper orderMapper, OrderItemMapper orderItemMapper, PhotoFileMapper photoFileMapper, MailService mailService, OrderFileService orderFileService, WarehouseService warehouseService) {
         this.reportRepository = reportRepository;
         this.reportMapper = reportMapper;
         this.orderMapper = orderMapper;
@@ -54,6 +57,7 @@ public class ReportService {
         this.photoFileMapper = photoFileMapper;
         this.mailService = mailService;
         this.orderFileService = orderFileService;
+        this.warehouseService = warehouseService;
     }
 
     /**
@@ -79,11 +83,16 @@ public class ReportService {
         Report report = reportMapper.toEntityWithPhotos(reportDTO);
         report = reportRepository.save(report);
 
-        if (report.getOrder() != null) {
-            try {
-                mailService.sendEmailWithOrder(orderFileService.generateFile(report));
-            } catch (IOException e) {
-                e.printStackTrace();
+        if (report.getOrder() != null
+            && report.getOrder().getWarehouse() != null
+            && report.getOrder().getWarehouse().getId() != null) {
+            Optional<WarehouseDTO> warehouse = warehouseService.findOne(report.getOrder().getWarehouse().getId());
+            if (warehouse.isPresent() && warehouse.get().getMail() != null) {
+                try {
+                    mailService.sendEmailWithOrder(warehouse.get().getMail(), orderFileService.generateFile(report));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
         return reportMapper.toDto(report);

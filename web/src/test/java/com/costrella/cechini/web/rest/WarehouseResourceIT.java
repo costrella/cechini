@@ -36,6 +36,9 @@ public class WarehouseResourceIT {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
+    private static final String DEFAULT_MAIL = "Y8@kV_9.Rtv.8Vq";
+    private static final String UPDATED_MAIL = "PEd@K-tl.A1.gANpN.P.Po";
+
     @Autowired
     private WarehouseRepository warehouseRepository;
 
@@ -61,7 +64,8 @@ public class WarehouseResourceIT {
      */
     public static Warehouse createEntity(EntityManager em) {
         Warehouse warehouse = new Warehouse()
-            .name(DEFAULT_NAME);
+            .name(DEFAULT_NAME)
+            .mail(DEFAULT_MAIL);
         return warehouse;
     }
     /**
@@ -72,7 +76,8 @@ public class WarehouseResourceIT {
      */
     public static Warehouse createUpdatedEntity(EntityManager em) {
         Warehouse warehouse = new Warehouse()
-            .name(UPDATED_NAME);
+            .name(UPDATED_NAME)
+            .mail(UPDATED_MAIL);
         return warehouse;
     }
 
@@ -97,6 +102,7 @@ public class WarehouseResourceIT {
         assertThat(warehouseList).hasSize(databaseSizeBeforeCreate + 1);
         Warehouse testWarehouse = warehouseList.get(warehouseList.size() - 1);
         assertThat(testWarehouse.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testWarehouse.getMail()).isEqualTo(DEFAULT_MAIL);
     }
 
     @Test
@@ -151,7 +157,8 @@ public class WarehouseResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(warehouse.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].mail").value(hasItem(DEFAULT_MAIL)));
     }
     
     @Test
@@ -165,7 +172,8 @@ public class WarehouseResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(warehouse.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
+            .andExpect(jsonPath("$.mail").value(DEFAULT_MAIL));
     }
     @Test
     @Transactional
@@ -188,7 +196,8 @@ public class WarehouseResourceIT {
         // Disconnect from session so that the updates on updatedWarehouse are not directly saved in db
         em.detach(updatedWarehouse);
         updatedWarehouse
-            .name(UPDATED_NAME);
+            .name(UPDATED_NAME)
+            .mail(UPDATED_MAIL);
         WarehouseDTO warehouseDTO = warehouseMapper.toDto(updatedWarehouse);
 
         restWarehouseMockMvc.perform(put("/api/warehouses").with(csrf())
@@ -201,6 +210,7 @@ public class WarehouseResourceIT {
         assertThat(warehouseList).hasSize(databaseSizeBeforeUpdate);
         Warehouse testWarehouse = warehouseList.get(warehouseList.size() - 1);
         assertThat(testWarehouse.getName()).isEqualTo(UPDATED_NAME);
+        assertThat(testWarehouse.getMail()).isEqualTo(UPDATED_MAIL);
     }
 
     @Test
