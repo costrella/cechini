@@ -36,9 +36,13 @@ import butterknife.OnClick;
 import static android.app.Activity.RESULT_OK;
 
 public class PhotosFragment extends Fragment {
+    private static final String TAG = "PhotosFragment";
     int pictureNo;
     Bitmap bitmap1, bitmap2, bitmap3;
     List<PhotoDTO> photosList = new ArrayList<>();
+
+    private static final int ACTION_TAKE_PHOTO_6 = 6;
+    public static final int PICK_IMAGE = 1;
 
     @BindView(R.id.photo_iv1)
     ImageView imageView1;
@@ -60,6 +64,30 @@ public class PhotosFragment extends Fragment {
     @OnClick(R.id.photo_btn3)
     public void click3() {
         dispatchTakePictureIntent(3);
+    }
+
+    @OnClick(R.id.photo_media_btn1)
+    public void click1Media() {
+        goToMediaStore(1);
+    }
+
+    @OnClick(R.id.photo_media_btn2)
+    public void click2Media() {
+        goToMediaStore(2);
+    }
+
+    @OnClick(R.id.photo_media_btn3)
+    public void click3Media() {
+        goToMediaStore(3);
+    }
+
+
+    private void goToMediaStore(int value) {
+        pictureNo = value;
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
     }
 
     private static final int PERMISSION_CODE = 1000;
@@ -89,29 +117,37 @@ public class PhotosFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         //called when image was captured from camera
 
-        if (resultCode == RESULT_OK) {
-            //set the image captured to our ImageView
-
-            switch (pictureNo) {
-                case 1:
-                    setPicture(pictureNo - 1, bitmap1, imageView1);
-                    break;
-                case 2:
-                    setPicture(pictureNo - 1, bitmap2, imageView2);
-                    break;
-                case 3:
-                    setPicture(pictureNo - 1, bitmap3, imageView3);
-                    break;
+        if (requestCode == PICK_IMAGE) {
+            if (data != null && data.getData() != null) {
+                image_uri = data.getData();
+                setImage();
             }
+        }
 
+        if (resultCode == RESULT_OK) {
+            setImage();
         }
     }
 
-    private Bitmap scale (Bitmap bitmap){
+    private void setImage() {
+        switch (pictureNo) {
+            case 1:
+                setPicture(pictureNo - 1, bitmap1, imageView1);
+                break;
+            case 2:
+                setPicture(pictureNo - 1, bitmap2, imageView2);
+                break;
+            case 3:
+                setPicture(pictureNo - 1, bitmap3, imageView3);
+                break;
+        }
+    }
+
+    private Bitmap scale(Bitmap bitmap) {
         return Bitmap.createScaledBitmap(bitmap, bitmap.getWidth() / scale, bitmap.getHeight() / scale, true);
     }
 
-    private Bitmap rotate(float angle, Bitmap bitmap){
+    private Bitmap rotate(float angle, Bitmap bitmap) {
         Matrix matrix = new Matrix();
         matrix.postRotate(angle);
 

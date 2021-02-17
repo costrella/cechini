@@ -11,20 +11,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:text="Dodaj"
+        android:text="APARAT"
         android:layout_margin="20dp"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/photo_iv1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/photo_iv1" />
 
+    <Button
+        android:id="@+id/photo_media_btn1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:layout_marginTop="10dp"
+        android:text="GALERIA"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@+id/photo_btn1"
+        app:layout_constraintTop_toBottomOf="@+id/photo_btn1" />
 
     <Button
         android:id="@+id/photo_btn2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:text="Dodaj"
+        android:text="APARAT"
         android:layout_margin="20dp"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/photo_iv2"
@@ -32,16 +42,38 @@
         app:layout_constraintTop_toTopOf="@+id/photo_iv2" />
 
     <Button
+        android:id="@+id/photo_media_btn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:layout_marginTop="10dp"
+        android:text="GALERIA"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@+id/photo_btn2"
+        app:layout_constraintTop_toBottomOf="@+id/photo_btn2" />
+
+    <Button
         android:id="@+id/photo_btn3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:text="Dodaj"
+        android:text="APARAT"
         android:layout_margin="20dp"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/photo_iv3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/photo_iv3" />
+
+    <Button
+        android:id="@+id/photo_media_btn3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:layout_marginTop="10dp"
+        android:text="GALERIA"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="@+id/photo_btn3"
+        app:layout_constraintTop_toBottomOf="@+id/photo_btn3" />
 
     <ImageView
         android:id="@+id/photo_iv1"
