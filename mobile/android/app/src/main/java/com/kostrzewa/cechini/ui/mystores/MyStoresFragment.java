@@ -17,8 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.kostrzewa.cechini.R;
 import com.kostrzewa.cechini.data.StoreDataManager;
 import com.kostrzewa.cechini.data.StoreDataManagerImpl;
+import com.kostrzewa.cechini.data.events.MyStoreDownloadSuccess;
 import com.kostrzewa.cechini.model.StoreDTO;
 import com.kostrzewa.cechini.ui.mystores.dialog.AddStoreDialogFragment;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -48,7 +52,7 @@ public class MyStoresFragment extends Fragment {
     RecyclerView recyclerView;
 
     @OnClick(R.id.fragment_mystores_addStoreBtn)
-    public void addStore(){
+    public void addStore() {
         new AddStoreDialogFragment(storeDTOList, adapter, null)
                 .show(getFragmentManager(), "sample");
     }
@@ -85,6 +89,10 @@ public class MyStoresFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_mystores_list, container, false);
         ButterKnife.bind(this, view);
         setHasOptionsMenu(true);
+
+        if (getArguments() != null && getArguments().getSerializable("doRefresh") != null) {
+            storeDataManager.downloadMyStores();
+        }
         storeDTOList = storeDataManager.getMyStores();
 
         // Set the adapter
@@ -93,6 +101,13 @@ public class MyStoresFragment extends Fragment {
         adapter = new MyStoresRecyclerViewAdapter(getContext(), storeDataManager, storeDTOList, mListener);
         recyclerView.setAdapter(adapter);
         return view;
+    }
+
+    @Subscribe
+    public void sub(MyStoreDownloadSuccess s) {
+        storeDTOList = storeDataManager.getMyStores();
+        adapter = new MyStoresRecyclerViewAdapter(getContext(), storeDataManager, storeDTOList, mListener);
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -136,6 +151,18 @@ public class MyStoresFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 
     /**

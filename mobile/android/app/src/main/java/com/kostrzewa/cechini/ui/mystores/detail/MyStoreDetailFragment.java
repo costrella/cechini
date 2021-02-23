@@ -32,6 +32,9 @@ public class MyStoreDetailFragment extends Fragment {
     @BindView(R.id.storeDetailTV)
     TextView storeDetailTV;
 
+    @BindView(R.id.visitedTV)
+    TextView visitedTV;
+
     @OnClick(R.id.btn_addReport)
     void addReport() {
         Bundle args = new Bundle();
@@ -73,6 +76,13 @@ public class MyStoreDetailFragment extends Fragment {
         super.onResume();
         ((MainActivity) getActivity()).getSupportActionBar().setTitle("Sklep:" + storeDTO.getName() + " " + storeDTO.getAddress());
         fillStoreDetail();
+        if (storeDTO.isMonthVisited()) {
+            visitedTV.setText("Byłeś tu już w tym miesiącu");
+            visitedTV.setTextColor(getResources().getColor(R.color.green));
+        } else {
+            visitedTV.setText("Nie było Cię tu w tym miesiącu");
+            visitedTV.setTextColor(getResources().getColor(R.color.black));
+        }
     }
 
     private void fillStoreDetail() {

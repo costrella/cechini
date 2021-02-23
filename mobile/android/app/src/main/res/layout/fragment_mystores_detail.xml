@@ -43,11 +43,20 @@
         android:text="" />
 
     <TextView
-        android:id="@+id/storeDetailTV"
+        android:id="@+id/visitedTV"
         android:layout_width="200dp"
         android:layout_row="2"
         android:layout_column="0"
         android:padding="5dp"
+        tools:text="Byłeś tu już w tym miesiącu !"></TextView>
+
+    <TextView
+        android:id="@+id/storeDetailTV"
+        android:layout_width="200dp"
+        android:layout_row="3"
+        android:layout_column="0"
+        android:padding="5dp"
+        android:textColor="@color/black"
         tools:text="Szczegoly sklepu
 Szczegoly sklepu
 Szczegoly sklepu "></TextView>

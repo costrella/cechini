@@ -145,10 +145,10 @@ public class ReportPreviewDialog extends DialogFragment {
             getDialog().dismiss();
 
             Bundle args = new Bundle();
-            args.putSerializable(STORE_DTO, storeDTO);
+            args.putSerializable("doRefresh", true);
             NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
             navController.popBackStack();
-            navController.navigate(R.id.nav_mystores_detail, args);
+            navController.navigate(R.id.nav_mystores, args);
         }
 
         @Override

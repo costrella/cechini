@@ -14,6 +14,16 @@ public class StoreDTO implements Serializable, Comparable<StoreDTO> {
 
     private Long workerId;
 
+    private boolean monthVisited;
+
+    public boolean isMonthVisited() {
+        return monthVisited;
+    }
+
+    public void setMonthVisited(boolean monthVisited) {
+        this.monthVisited = monthVisited;
+    }
+
     public String getNip() {
         return nip;
     }

@@ -64,7 +64,9 @@ public class MyStoresRecyclerViewAdapter extends RecyclerView.Adapter<MyStoresRe
         }
         holder.mIdView.setText("" + mValues.get(position).getId());
         holder.mContentView.setText(mValues.get(position).getName() + " " + mValues.get(position).getAddress());
-
+        if(holder.mItem.isMonthVisited()){
+            holder.mContentView.setTextColor(context.getResources().getColor(R.color.green));
+        }
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
