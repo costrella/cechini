@@ -105,6 +105,7 @@ public class CreateOrderFragment extends Fragment {
                 WarehouseDTO warehouseDTO = warehouseDTOS.get(position);
                 ReportData.reportDTO.getOrderDTO().setWarehouseId(warehouseDTO.getId());
                 ReportData.reportDTO.getOrderDTO().setWarehouseName(warehouseDTO.getName());
+                ReportData.reportDTO.getOrderDTO().setWarehouseMail(warehouseDTO.getMail());
             }
 
             @Override

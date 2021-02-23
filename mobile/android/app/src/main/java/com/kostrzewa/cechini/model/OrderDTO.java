@@ -29,6 +29,8 @@ public class OrderDTO implements Serializable {
 
     private String warehouseName;
 
+    private String warehouseMail;
+
     private Long statusId;
 
     private String statusName;
@@ -89,6 +91,14 @@ public class OrderDTO implements Serializable {
 
     public void setWarehouseName(String warehouseName) {
         this.warehouseName = warehouseName;
+    }
+
+    public String getWarehouseMail() {
+        return warehouseMail;
+    }
+
+    public void setWarehouseMail(String warehouseMail) {
+        this.warehouseMail = warehouseMail;
     }
 
     public Long getStatusId() {

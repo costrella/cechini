@@ -34,8 +34,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.kostrzewa.cechini.util.Constants.STORE_DTO;
-
 public class ReportPreviewDialog extends DialogFragment {
     Handler handler = new Handler();
     private View form;
@@ -102,59 +100,66 @@ public class ReportPreviewDialog extends DialogFragment {
             return "brak";
         } else {
             mailInfoTV.setVisibility(View.VISIBLE);
-            if (TextUtils.isEmpty(storeDTO.getNip())) {
-                mailInfoTV.setText("Z powodu braku NIP, system nie wyśle e-mail z zamówieniem.");
-                mailInfoTV.setTextColor(getResources().getColor(R.color.red));
+            String warehouseMail = ReportData.reportDTO.getOrderDTO().getWarehouseMail();
+            if (!TextUtils.isEmpty(warehouseMail)) {
+                if (TextUtils.isEmpty(storeDTO.getNip())) {
+                    mailInfoTV.setText("Z powodu braku NIP, system nie wyśle e-mail z zamówieniem na adres: " + warehouseMail);
+                    mailInfoTV.setTextColor(getResources().getColor(R.color.red));
+                } else {
+                    mailInfoTV.setText("System wyśle również e-mail z zamówieniem na adres hurtowni: " + warehouseMail);
+                    mailInfoTV.setTextColor(getResources().getColor(R.color.colorPrimary));
+                }
             } else {
-                mailInfoTV.setText("System wyśle również e-mail z zamówieniem na odpowiedni adres");
-                mailInfoTV.setTextColor(getResources().getColor(R.color.colorPrimary));
+                mailInfoTV.setText("Brak adresu mailowego dla wybranej Hurtowni");
+                mailInfoTV.setTextColor(getResources().getColor(R.color.recycler_view_empty_text));
             }
-            }
-            String value = "";
-            int i = 1;
-            for (OrderItemDTO item : ReportData.reportDTO.getOrderDTO().getOrderItems()) {
-                value += "\n" + i + ") " + item.getProductName() + " " + item.getProductCapacity() + "L" + ", zgrzewek:" + item.getPackCount();
-                i++;
-            }
-            value += "\n ";
-            value += "\n Sklep: " + storeDTO.getName() + ", adres: " + storeDTO.getAddress();
-            value += "\n Sklep NIP: " + storeDTO.getNip();
-            value += "\n ";
-            value += "\n Hurtownia: " + ReportData.reportDTO.getOrderDTO().getWarehouseName();
-            return value;
-        }
-
-        @Subscribe
-        public void onReportSentSuccess (ReportSentSuccess r){
-            progressBar.setVisibility(View.GONE);
-            sendBtn.setVisibility(View.VISIBLE);
-            Toast.makeText(getActivity(), r.getText(), Toast.LENGTH_LONG).show();
-            end();
 
         }
-
-        @Subscribe
-        public void onReportSentFailed (ReportSentFailed r){
-            progressBar.setVisibility(View.GONE);
-            sendBtn.setVisibility(View.VISIBLE);
-            Toast.makeText(getActivity(), r.getText(), Toast.LENGTH_LONG).show();
-            end();
+        String value = "";
+        int i = 1;
+        for (OrderItemDTO item : ReportData.reportDTO.getOrderDTO().getOrderItems()) {
+            value += "\n" + i + ") " + item.getProductName() + " " + item.getProductCapacity() + "L" + ", zgrzewek:" + item.getPackCount();
+            i++;
         }
-
-        private void end () {
-            getDialog().dismiss();
-
-            Bundle args = new Bundle();
-            args.putSerializable("doRefresh", true);
-            NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
-            navController.popBackStack();
-            navController.navigate(R.id.nav_mystores, args);
-        }
-
-        @Override
-        public void onDismiss (DialogInterface dialog){
-            EventBus.getDefault().unregister(this);
-            super.onDismiss(dialog);
-
-        }
+        value += "\n ";
+        value += "\n Sklep: " + storeDTO.getName() + ", adres: " + storeDTO.getAddress();
+        value += "\n Sklep NIP: " + storeDTO.getNip();
+        value += "\n ";
+        value += "\n Hurtownia: " + ReportData.reportDTO.getOrderDTO().getWarehouseName();
+        return value;
     }
+
+    @Subscribe
+    public void onReportSentSuccess(ReportSentSuccess r) {
+        progressBar.setVisibility(View.GONE);
+        sendBtn.setVisibility(View.VISIBLE);
+        Toast.makeText(getActivity(), r.getText(), Toast.LENGTH_LONG).show();
+        end();
+
+    }
+
+    @Subscribe
+    public void onReportSentFailed(ReportSentFailed r) {
+        progressBar.setVisibility(View.GONE);
+        sendBtn.setVisibility(View.VISIBLE);
+        Toast.makeText(getActivity(), r.getText(), Toast.LENGTH_LONG).show();
+        end();
+    }
+
+    private void end() {
+        getDialog().dismiss();
+
+        Bundle args = new Bundle();
+        args.putSerializable("doRefresh", true);
+        NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
+        navController.popBackStack();
+        navController.navigate(R.id.nav_mystores, args);
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        EventBus.getDefault().unregister(this);
+        super.onDismiss(dialog);
+
+    }
+}
