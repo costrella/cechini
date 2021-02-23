@@ -7,7 +7,7 @@ import java.io.Serializable;
  * A DTO for the {@link com.costrella.cechini.domain.Store} entity.
  */
 public class StoreDTO implements Serializable {
-    
+
     private Long id;
 
     @NotNull
@@ -19,6 +19,8 @@ public class StoreDTO implements Serializable {
     private String desc;
 
     private Boolean visited;
+
+    private boolean monthVisited;
 
     @NotNull
     private String address;
@@ -33,7 +35,15 @@ public class StoreDTO implements Serializable {
     private Long storegroupId;
 
     private String storegroupName;
-    
+
+    public boolean isMonthVisited() {
+        return monthVisited;
+    }
+
+    public void setMonthVisited(boolean monthVisited) {
+        this.monthVisited = monthVisited;
+    }
+
     public Long getId() {
         return id;
     }

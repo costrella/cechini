@@ -1,6 +1,7 @@
 package com.costrella.cechini.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -22,6 +23,9 @@ public class Store implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
+
+    @Formula("(select exists (select r.id from Report r where r.store_id = id and date_part('month', r.report_date) = date_part('month', current_date) and date_part('year', r.report_date) = date_part('year', current_date)))")
+    private boolean monthVisited;
 
     @NotNull
     @Column(name = "name", nullable = false)
@@ -58,6 +62,14 @@ public class Store implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties(value = "stores", allowSetters = true)
     private StoreGroup storegroup;
+
+    public boolean isMonthVisited() {
+        return monthVisited;
+    }
+
+    public void setMonthVisited(boolean monthVisited) {
+        this.monthVisited = monthVisited;
+    }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
