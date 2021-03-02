@@ -31,21 +31,23 @@
 
     <Button
         android:id="@+id/photo_rotate_left_btn1"
-        android:layout_width="50dp"
+        android:layout_width="45dp"
         android:layout_height="wrap_content"
         android:text="+90"
+        android:layout_marginBottom="5dp"
         android:background="@android:drawable/ic_menu_rotate"
-        app:layout_constraintBottom_toBottomOf="@id/photo_iv1"
-        app:layout_constraintEnd_toStartOf="@+id/photo_iv1" />
+        app:layout_constraintBottom_toTopOf="@id/photo_btn1"
+        app:layout_constraintStart_toStartOf="@+id/photo_btn1" />
 
     <Button
         android:id="@+id/photo_rotate_right_btn1"
-        android:layout_width="50dp"
+        android:layout_width="45dp"
         android:layout_height="wrap_content"
         android:text="-90"
+        android:layout_marginBottom="5dp"
         android:background="@android:drawable/ic_menu_rotate"
-        app:layout_constraintBottom_toBottomOf="@id/photo_iv1"
-        app:layout_constraintStart_toEndOf="@+id/photo_iv1" />
+        app:layout_constraintBottom_toTopOf="@id/photo_btn1"
+        app:layout_constraintStart_toEndOf="@+id/photo_rotate_left_btn1" />
 
     <Button
         android:id="@+id/photo_btn2"
@@ -72,21 +74,23 @@
 
     <Button
         android:id="@+id/photo_rotate_left_btn2"
-        android:layout_width="50dp"
+        android:layout_width="45dp"
         android:layout_height="wrap_content"
         android:text="+90"
+        android:layout_marginBottom="5dp"
         android:background="@android:drawable/ic_menu_rotate"
-        app:layout_constraintBottom_toBottomOf="@id/photo_iv2"
-        app:layout_constraintEnd_toStartOf="@+id/photo_iv2" />
+        app:layout_constraintBottom_toTopOf="@id/photo_btn2"
+        app:layout_constraintStart_toStartOf="@+id/photo_btn2" />
 
     <Button
         android:id="@+id/photo_rotate_right_btn2"
-        android:layout_width="50dp"
+        android:layout_width="45dp"
         android:layout_height="wrap_content"
         android:text="-90"
+        android:layout_marginBottom="5dp"
         android:background="@android:drawable/ic_menu_rotate"
-        app:layout_constraintBottom_toBottomOf="@id/photo_iv2"
-        app:layout_constraintStart_toEndOf="@+id/photo_iv2" />
+        app:layout_constraintBottom_toTopOf="@id/photo_btn2"
+        app:layout_constraintStart_toEndOf="@+id/photo_rotate_left_btn2" />
 
     <Button
         android:id="@+id/photo_btn3"
@@ -113,21 +117,23 @@
 
     <Button
         android:id="@+id/photo_rotate_left_btn3"
-        android:layout_width="50dp"
+        android:layout_width="45dp"
         android:layout_height="wrap_content"
         android:text="+90"
+        android:layout_marginBottom="5dp"
         android:background="@android:drawable/ic_menu_rotate"
-        app:layout_constraintBottom_toBottomOf="@id/photo_iv3"
-        app:layout_constraintEnd_toStartOf="@+id/photo_iv3" />
+        app:layout_constraintBottom_toTopOf="@id/photo_btn3"
+        app:layout_constraintStart_toStartOf="@+id/photo_btn3" />
 
     <Button
         android:id="@+id/photo_rotate_right_btn3"
-        android:layout_width="50dp"
+        android:layout_width="45dp"
         android:layout_height="wrap_content"
         android:text="-90"
+        android:layout_marginBottom="5dp"
         android:background="@android:drawable/ic_menu_rotate"
-        app:layout_constraintBottom_toBottomOf="@id/photo_iv3"
-        app:layout_constraintStart_toEndOf="@+id/photo_iv3" />
+        app:layout_constraintBottom_toTopOf="@id/photo_btn3"
+        app:layout_constraintStart_toEndOf="@+id/photo_rotate_left_btn3" />
 
     <ImageView
         android:id="@+id/photo_iv1"
