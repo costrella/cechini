@@ -99,34 +99,34 @@ public class PhotosFragment extends Fragment {
 
     @OnClick(R.id.photo_rotate_left_btn1)
     public void click1RotateLeft() {
-        bitmap1 = rotate(-90, bitmap1, imageView1);
+        bitmap1 = rotate(1, -90, bitmap1, imageView1);
     }
 
     @OnClick(R.id.photo_rotate_right_btn1)
     public void click1RotateRight() {
-        bitmap1 = rotate(90, bitmap1, imageView1);
+        bitmap1 = rotate(1, 90, bitmap1, imageView1);
     }
 
 
     @OnClick(R.id.photo_rotate_left_btn2)
     public void click2RotateLeft() {
-        bitmap2 = rotate(-90, bitmap2, imageView2);
+        bitmap2 = rotate(2, -90, bitmap2, imageView2);
     }
 
     @OnClick(R.id.photo_rotate_right_btn2)
     public void click2RotateRight() {
-        bitmap2 = rotate(90, bitmap2, imageView2);
+        bitmap2 = rotate(2, 90, bitmap2, imageView2);
     }
 
 
     @OnClick(R.id.photo_rotate_left_btn3)
     public void click3RotateLeft() {
-        bitmap3 = rotate(-90, bitmap3, imageView3);
+        bitmap3 = rotate(3, -90, bitmap3, imageView3);
     }
 
     @OnClick(R.id.photo_rotate_right_btn3)
     public void click3RotateRight() {
-        bitmap3 = rotate(90, bitmap3, imageView3);
+        bitmap3 = rotate(3, 90, bitmap3, imageView3);
     }
 
 
@@ -180,17 +180,17 @@ public class PhotosFragment extends Fragment {
     private void setImage() {
         switch (pictureNo) {
             case 1:
-                bitmap1 = setPicture(pictureNo - 1, bitmap1, imageView1);
+                bitmap1 = setPicture(pictureNo, imageView1);
                 photo_rotate_left_btn1.setVisibility(View.VISIBLE);
                 photo_rotate_right_btn1.setVisibility(View.VISIBLE);
                 break;
             case 2:
-                bitmap2 = setPicture(pictureNo - 1, bitmap2, imageView2);
+                bitmap2 = setPicture(pictureNo, imageView2);
                 photo_rotate_left_btn2.setVisibility(View.VISIBLE);
                 photo_rotate_right_btn2.setVisibility(View.VISIBLE);
                 break;
             case 3:
-                bitmap3 = setPicture(pictureNo - 1, bitmap3, imageView3);
+                bitmap3 = setPicture(pictureNo, imageView3);
                 photo_rotate_left_btn3.setVisibility(View.VISIBLE);
                 photo_rotate_right_btn3.setVisibility(View.VISIBLE);
                 break;
@@ -201,7 +201,7 @@ public class PhotosFragment extends Fragment {
         return Bitmap.createScaledBitmap(bitmap, bitmap.getWidth() / scale, bitmap.getHeight() / scale, true);
     }
 
-    private Bitmap rotate(float angle, Bitmap bitmap, ImageView imageView) {
+    private Bitmap rotate(int index, float angle, Bitmap bitmap, ImageView imageView) {
         Matrix matrix = new Matrix();
         matrix.postRotate(angle);
 
@@ -209,31 +209,36 @@ public class PhotosFragment extends Fragment {
                 matrix, true);
         bitmap = rotated;
         imageView.setImageBitmap(bitmap);
-
+        refreshDTO(index, bitmap);
         return bitmap;
     }
 
-    private Bitmap setPicture(int index, Bitmap bitmap, ImageView imageView) {
+    private Bitmap setPicture(int index, ImageView imageView) {
         try {
-            bitmap = MediaStore.Images.Media.getBitmap(
+            Bitmap bitmap = MediaStore.Images.Media.getBitmap(
                     getActivity().getContentResolver(), image_uri);
             bitmap = scale(bitmap);
-            PhotoFileDTO photoFileDTO = new PhotoFileDTO();
-            photoFileDTO.setValue(getImage(bitmap));
-
-            PhotoDTO photoDTO = new PhotoDTO();
-            photoDTO.setPhotoFileDTO(photoFileDTO);
-            if (photosList.size() > index && photosList.get(index) != null) {
-                photosList.remove(index);
-            }
-            photosList.add(photoDTO);
-            ReportData.reportDTO.setPhotosList(photosList);
+            refreshDTO(index, bitmap);
             imageView.setImageBitmap(bitmap);
             return bitmap;
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private void refreshDTO(int index, Bitmap bitmap) {
+        PhotoFileDTO photoFileDTO = new PhotoFileDTO();
+        photoFileDTO.setValue(getImage(bitmap));
+
+        PhotoDTO photoDTO = new PhotoDTO();
+        photoDTO.setPhotoFileDTO(photoFileDTO);
+
+        if (photosList.size() >= index && photosList.get(index - 1) != null) {
+            photosList.remove(index - 1);
+        }
+        photosList.add(index - 1, photoDTO);
+        ReportData.reportDTO.setPhotosList(photosList);
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -246,6 +251,10 @@ public class PhotosFragment extends Fragment {
         photo_rotate_right_btn2.setVisibility(View.INVISIBLE);
         photo_rotate_left_btn3.setVisibility(View.INVISIBLE);
         photo_rotate_right_btn3.setVisibility(View.INVISIBLE);
+
+        photosList.add(0, new PhotoDTO());
+        photosList.add(1, new PhotoDTO());
+        photosList.add(2, new PhotoDTO());
 
         return root;
     }
