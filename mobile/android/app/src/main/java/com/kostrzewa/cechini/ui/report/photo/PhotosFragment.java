@@ -13,6 +13,7 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -51,6 +52,21 @@ public class PhotosFragment extends Fragment {
     @BindView(R.id.photo_iv3)
     ImageView imageView3;
 
+    @BindView(R.id.photo_rotate_left_btn1)
+    Button photo_rotate_left_btn1;
+    @BindView(R.id.photo_rotate_left_btn2)
+    Button photo_rotate_left_btn2;
+    @BindView(R.id.photo_rotate_left_btn3)
+    Button photo_rotate_left_btn3;
+
+    @BindView(R.id.photo_rotate_right_btn1)
+    Button photo_rotate_right_btn1;
+    @BindView(R.id.photo_rotate_right_btn2)
+    Button photo_rotate_right_btn2;
+    @BindView(R.id.photo_rotate_right_btn3)
+    Button photo_rotate_right_btn3;
+
+
     @OnClick(R.id.photo_btn1)
     public void click1() {
         dispatchTakePictureIntent(1);
@@ -79,6 +95,38 @@ public class PhotosFragment extends Fragment {
     @OnClick(R.id.photo_media_btn3)
     public void click3Media() {
         goToMediaStore(3);
+    }
+
+    @OnClick(R.id.photo_rotate_left_btn1)
+    public void click1RotateLeft() {
+        bitmap1 = rotate(-90, bitmap1, imageView1);
+    }
+
+    @OnClick(R.id.photo_rotate_right_btn1)
+    public void click1RotateRight() {
+        bitmap1 = rotate(90, bitmap1, imageView1);
+    }
+
+
+    @OnClick(R.id.photo_rotate_left_btn2)
+    public void click2RotateLeft() {
+        bitmap2 = rotate(-90, bitmap2, imageView2);
+    }
+
+    @OnClick(R.id.photo_rotate_right_btn2)
+    public void click2RotateRight() {
+        bitmap2 = rotate(90, bitmap2, imageView2);
+    }
+
+
+    @OnClick(R.id.photo_rotate_left_btn3)
+    public void click3RotateLeft() {
+        bitmap3 = rotate(-90, bitmap3, imageView3);
+    }
+
+    @OnClick(R.id.photo_rotate_right_btn3)
+    public void click3RotateRight() {
+        bitmap3 = rotate(90, bitmap3, imageView3);
     }
 
 
@@ -132,13 +180,19 @@ public class PhotosFragment extends Fragment {
     private void setImage() {
         switch (pictureNo) {
             case 1:
-                setPicture(pictureNo - 1, bitmap1, imageView1);
+                bitmap1 = setPicture(pictureNo - 1, bitmap1, imageView1);
+                photo_rotate_left_btn1.setVisibility(View.VISIBLE);
+                photo_rotate_right_btn1.setVisibility(View.VISIBLE);
                 break;
             case 2:
-                setPicture(pictureNo - 1, bitmap2, imageView2);
+                bitmap2 = setPicture(pictureNo - 1, bitmap2, imageView2);
+                photo_rotate_left_btn2.setVisibility(View.VISIBLE);
+                photo_rotate_right_btn2.setVisibility(View.VISIBLE);
                 break;
             case 3:
-                setPicture(pictureNo - 1, bitmap3, imageView3);
+                bitmap3 = setPicture(pictureNo - 1, bitmap3, imageView3);
+                photo_rotate_left_btn3.setVisibility(View.VISIBLE);
+                photo_rotate_right_btn3.setVisibility(View.VISIBLE);
                 break;
         }
     }
@@ -147,23 +201,23 @@ public class PhotosFragment extends Fragment {
         return Bitmap.createScaledBitmap(bitmap, bitmap.getWidth() / scale, bitmap.getHeight() / scale, true);
     }
 
-    private Bitmap rotate(float angle, Bitmap bitmap) {
+    private Bitmap rotate(float angle, Bitmap bitmap, ImageView imageView) {
         Matrix matrix = new Matrix();
         matrix.postRotate(angle);
 
         Bitmap rotated = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(),
                 matrix, true);
         bitmap = rotated;
+        imageView.setImageBitmap(bitmap);
 
         return bitmap;
     }
 
-    private void setPicture(int index, Bitmap bitmap, ImageView imageView) {
+    private Bitmap setPicture(int index, Bitmap bitmap, ImageView imageView) {
         try {
             bitmap = MediaStore.Images.Media.getBitmap(
                     getActivity().getContentResolver(), image_uri);
             bitmap = scale(bitmap);
-            bitmap = rotate(90, bitmap);
             PhotoFileDTO photoFileDTO = new PhotoFileDTO();
             photoFileDTO.setValue(getImage(bitmap));
 
@@ -175,15 +229,24 @@ public class PhotosFragment extends Fragment {
             photosList.add(photoDTO);
             ReportData.reportDTO.setPhotosList(photosList);
             imageView.setImageBitmap(bitmap);
+            return bitmap;
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_photos, container, false);
         ButterKnife.bind(this, root);
+        photo_rotate_left_btn1.setVisibility(View.INVISIBLE);
+        photo_rotate_right_btn1.setVisibility(View.INVISIBLE);
+        photo_rotate_left_btn2.setVisibility(View.INVISIBLE);
+        photo_rotate_right_btn2.setVisibility(View.INVISIBLE);
+        photo_rotate_left_btn3.setVisibility(View.INVISIBLE);
+        photo_rotate_right_btn3.setVisibility(View.INVISIBLE);
+
         return root;
     }
 
