@@ -25,17 +25,20 @@ public class Order implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-//    @NotNull
+    //    @NotNull
     @Column(name = "order_date", nullable = true)
     private Instant orderDate;
 
-//    @NotNull
+    //    @NotNull
     @Column(name = "delivery_date", nullable = true)
     private Instant deliveryDate;
 
     @Size(max = 2000)
     @Column(name = "comment", length = 2000)
     private String comment;
+
+    @Column(name = "number", unique = true)
+    private String number;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "order")
     private Set<OrderItem> orderItems = new HashSet<>();
@@ -98,6 +101,19 @@ public class Order implements Serializable {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public Order number(String number) {
+        this.number = number;
+        return this;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     public Set<OrderItem> getOrderItems() {
@@ -189,6 +205,7 @@ public class Order implements Serializable {
             ", orderDate='" + getOrderDate() + "'" +
             ", deliveryDate='" + getDeliveryDate() + "'" +
             ", comment='" + getComment() + "'" +
+            ", number='" + getNumber() + "'" +
             "}";
     }
 }

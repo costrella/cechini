@@ -8,6 +8,10 @@
             <jhi-alert-error></jhi-alert-error>
 
             <dl class="row-md jh-entity-details">
+                <dt><span>Numer zamówienia</span></dt>
+                <dd>
+                    <span>{{ order.number }}</span>
+                </dd>
                 <dt><span jhiTranslate="cechiniApp.order.orderDate">Order Date</span></dt>
                 <dd>
                     <span>{{ order.orderDate | date:'dd/MM/yyyy HH:mm' }}</span>

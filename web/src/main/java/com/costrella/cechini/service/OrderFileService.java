@@ -9,6 +9,7 @@ import com.costrella.cechini.repository.WorkerRepository;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class OrderFileService {
         File csvOutputFile = new File(CSV_FILE_NAME);
 
         Writer out = new BufferedWriter(new OutputStreamWriter(
-            new FileOutputStream(csvOutputFile), "UTF-8"));
+            new FileOutputStream(csvOutputFile), StandardCharsets.UTF_8));
         try {
             for (String[] strings : dataLines) {
                 int i = 0;
@@ -72,7 +73,10 @@ public class OrderFileService {
         dataLines.add(new String[]
             {"Odbiorca NIP:", store.getNip()});
         dataLines.add(new String[]
-            {"Data wystawienia:", DATE_TIME_FORMATTER.format(report.getReportDate())});
+            {"Data wystawienia:", DATE_TIME_FORMATTER.format(report.getReportDate()),
+            "",
+                "Nr zamówienia:", report.getOrder().getNumber()
+            });
         dataLines.add(new String[]
             {"Dostawca:", report.getOrder().getWarehouse().getName()});
         dataLines.add(new String[]

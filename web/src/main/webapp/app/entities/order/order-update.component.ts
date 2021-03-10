@@ -30,6 +30,7 @@ export class OrderUpdateComponent implements OnInit {
     orderDate: [null, [Validators.required]],
     deliveryDate: [null, [Validators.required]],
     comment: [null, [Validators.maxLength(2000)]],
+    number: [],
     warehouseId: [],
     statusId: [null, Validators.required],
   });
@@ -64,6 +65,7 @@ export class OrderUpdateComponent implements OnInit {
       orderDate: order.orderDate ? order.orderDate.format(DATE_TIME_FORMAT) : null,
       deliveryDate: order.deliveryDate ? order.deliveryDate.format(DATE_TIME_FORMAT) : null,
       comment: order.comment,
+      number: order.number,
       warehouseId: order.warehouseId,
       statusId: order.statusId,
     });
@@ -92,6 +94,7 @@ export class OrderUpdateComponent implements OnInit {
         ? moment(this.editForm.get(['deliveryDate'])!.value, DATE_TIME_FORMAT)
         : undefined,
       comment: this.editForm.get(['comment'])!.value,
+      number: this.editForm.get(['number'])!.value,
       warehouseId: this.editForm.get(['warehouseId'])!.value,
       statusId: this.editForm.get(['statusId'])!.value,
     };

@@ -23,6 +23,9 @@ public class OrderDTO implements Serializable {
 
     private List<OrderItemDTO> orderItems;
 
+    @NotNull
+    private String number;
+
     public List<OrderItemDTO> getOrderItems() {
         return orderItems;
     }
@@ -79,6 +82,14 @@ public class OrderDTO implements Serializable {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     public Long getWarehouseId() {
@@ -178,6 +189,7 @@ public class OrderDTO implements Serializable {
             ", orderDate='" + getOrderDate() + "'" +
             ", deliveryDate='" + getDeliveryDate() + "'" +
             ", comment='" + getComment() + "'" +
+            ", number='" + getNumber() + "'" +
             ", warehouseId=" + getWarehouseId() +
             ", warehouseName='" + getWarehouseName() + "'" +
             ", statusId=" + getStatusId() +
