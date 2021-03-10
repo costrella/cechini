@@ -50,6 +50,7 @@ public interface OrderMapper extends EntityMapper<OrderDTO, Order> {
         }
         OrderDTO orderDTO = new OrderDTO();
         orderDTO.setId(order.getId());
+        orderDTO.setNumber(order.getNumber());
         orderDTO.setComment(order.getComment());
         orderDTO.setDeliveryDate(order.getDeliveryDate());
         orderDTO.setOrderDate(order.getOrderDate());

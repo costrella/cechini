@@ -6,6 +6,7 @@ export interface IOrder {
   orderDate?: Moment;
   deliveryDate?: Moment;
   comment?: string;
+  number?: string;
   orderItems?: IOrderItem[];
   reportId?: number;
   warehouseName?: string;
@@ -24,6 +25,7 @@ export class Order implements IOrder {
     public orderDate?: Moment,
     public deliveryDate?: Moment,
     public comment?: string,
+    public number?: string,
     public orderItems?: IOrderItem[],
     public reportId?: number,
     public warehouseName?: string,

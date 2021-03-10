@@ -20,6 +20,7 @@
       "orderDate": "Order Date",
       "deliveryDate": "Delivery Date",
       "comment": "Comment",
+      "number": "Number",
       "orderItem": "Order Item",
       "report": "Report",
       "warehouse": "Warehouse",
