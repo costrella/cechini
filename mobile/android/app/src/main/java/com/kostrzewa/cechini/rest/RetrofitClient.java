@@ -11,6 +11,7 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
+import com.kostrzewa.cechini.BuildConfig;
 
 import java.lang.reflect.Type;
 
@@ -36,7 +37,7 @@ public class RetrofitClient {
                 .create();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(CechiniAPI.ENDPOINT)
+                .baseUrl(BuildConfig.SERVER_URL)
 //                .addConverterFactory(GsonConverterFactory.create())
 
                 .addConverterFactory(GsonConverterFactory.create(gson))

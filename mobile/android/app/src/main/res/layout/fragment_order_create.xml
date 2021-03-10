@@ -35,6 +35,13 @@
 
     </TextView>
 
+    <TextView
+        android:id="@+id/fragment_order_numberTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:textColor="@color/colorPrimary"
+        android:text="Numer zamówienia: " />
 
     <TextView
         android:id="@+id/fragment_order_warehouseTV"

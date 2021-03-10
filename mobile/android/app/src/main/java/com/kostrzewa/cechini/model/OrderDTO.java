@@ -1,7 +1,6 @@
 package com.kostrzewa.cechini.model;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,12 +44,22 @@ public class OrderDTO implements Serializable {
 
     private String workerSurname;
 
+    private String number;
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 
 //    public Instant getOrderDate() {

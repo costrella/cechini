@@ -45,16 +45,24 @@ public class CreateOrderFragment extends Fragment {
     private MyStoresFragment.OnListFragmentInteractionListener mListener;
 
     private void init() {
-        if (ReportData.reportDTO.isReadOnly()){
+        if (ReportData.reportDTO.isReadOnly()) {
             fillData();
             addProductBtn.setVisibility(View.GONE);
+            orderNumberTV.setVisibility(View.VISIBLE);
         } else {
             addProductBtn.setVisibility(View.VISIBLE);
+            orderNumberTV.setVisibility(View.GONE);
         }
     }
 
     private void fillData() {
         if (ReportData.reportDTO.getOrderDTO() != null && !ReportData.reportDTO.getOrderDTO().getOrderItems().isEmpty()) {
+
+            if (ReportData.reportDTO.getOrderDTO().getNumber() != null) {
+                orderNumberTV.setText("Numer zamówienia: " + ReportData.reportDTO.getOrderDTO().getNumber());
+            } else {
+                orderNumberTV.setText("Numer zamówienia: brak");
+            }
             for (int i = 0; i < warehouseDTOS.size(); i++) {
                 if (ReportData.reportDTO.getOrderDTO().getWarehouseId().equals(
                         warehouseDTOS.get(i).getId()
@@ -84,6 +92,8 @@ public class CreateOrderFragment extends Fragment {
     TextView emptyTV;
     @BindView(R.id.fragment_order_warehouseTV)
     TextView warehouseTV;
+    @BindView(R.id.fragment_order_numberTV)
+    TextView orderNumberTV;
     @BindView(R.id.fragment_order_recyclerview)
     RecyclerView recyclerView;
     @BindView(R.id.fragment_order_warehouseSpinner)
