@@ -2,7 +2,7 @@ package com.kostrzewa.cechini.model;
 
 import java.io.Serializable;
 
-public class WarehouseDTO implements Serializable {
+public class WarehouseDTO implements Serializable, Comparable<WarehouseDTO> {
 
     private Long id;
 
@@ -58,5 +58,10 @@ public class WarehouseDTO implements Serializable {
                 "id=" + getId() +
                 ", name='" + getName() + "'" +
                 "}";
+    }
+
+    @Override
+    public int compareTo(WarehouseDTO o) {
+        return this.name.toLowerCase().compareTo(o.name.toLowerCase());
     }
 }

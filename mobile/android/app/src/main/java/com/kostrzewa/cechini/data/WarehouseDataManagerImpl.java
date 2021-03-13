@@ -12,6 +12,7 @@ import com.kostrzewa.cechini.rest.RetrofitClient;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -21,8 +22,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class WarehouseDataManagerImpl extends AbstractDataManager implements WarehouseDataManager {
-    private static final String TAG = "WarehouseDataManagerImpl";
-
+    private static final String TAG = "WarehouseDataManagerImp";
     public WarehouseDataManagerImpl(Context context) {
         super(context);
     }
@@ -33,6 +33,7 @@ public class WarehouseDataManagerImpl extends AbstractDataManager implements War
         for (String s : preferenceManager.getAllWarehouses()) {
             warehouseDTOS.add(gson.fromJson(s, WarehouseDTO.class));
         }
+        Collections.sort(warehouseDTOS);
         return warehouseDTOS;
     }
 
