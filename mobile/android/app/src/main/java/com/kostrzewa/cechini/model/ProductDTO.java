@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 
 import java.io.Serializable;
 
-public class ProductDTO implements Serializable {
+public class ProductDTO implements Serializable, Comparable<ProductDTO> {
 
     private Long id;
 
@@ -123,5 +123,10 @@ public class ProductDTO implements Serializable {
     @Override
     public String toString() {
         return getName();
+    }
+
+    @Override
+    public int compareTo(ProductDTO o) {
+        return this.capacity.compareTo(o.capacity);
     }
 }
