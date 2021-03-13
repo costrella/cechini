@@ -118,14 +118,13 @@ public class ReportPreviewDialog extends DialogFragment {
         String value = "";
         int i = 1;
         for (OrderItemDTO item : ReportData.reportDTO.getOrderDTO().getOrderItems()) {
-            value += "\n" + i + ") " + item.getProductName() + " " + item.getProductCapacity() + "L" + ", zgrzewek:" + item.getPackCount();
+            value += ""+i + ") " + item.getProductName() + "\n\t" + item.getProductCapacity() + "L" + ", zgrzewek: " + item.getPackCount() + "\n";
             i++;
         }
-        value += "\n ";
-        value += "\n Sklep: " + storeDTO.getName() + ", adres: " + storeDTO.getAddress();
-        value += "\n Sklep NIP: " + storeDTO.getNip();
-        value += "\n ";
-        value += "\n Hurtownia: " + ReportData.reportDTO.getOrderDTO().getWarehouseName();
+        value += "\nSklep: " + storeDTO.getName() + "\n\tadres: " + storeDTO.getAddress();
+        value += "\nSklep NIP: " + storeDTO.getNip();
+        value += "\n";
+        value += "\nHurtownia: " + ReportData.reportDTO.getOrderDTO().getWarehouseName();
         return value;
     }
 

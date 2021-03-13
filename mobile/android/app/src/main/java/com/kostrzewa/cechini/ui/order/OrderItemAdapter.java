@@ -49,10 +49,10 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
     public void onBindViewHolder(final ViewHolder holder, int position) {
         OrderItemDTO o = mValues.get(position);
         holder.mItem = o;
-        holder.nameTV.setText(o.getProductName() + " " + o.getProductCapacity() + "L");
+        holder.nameTV.setText(o.getProductName() + "\n\t" + o.getProductCapacity() + "L"
+        + ", zgrzewek: " + o.getPackCount());
         int lp = position + 1;
         holder.mIdView.setText("" + lp);
-        holder.mPackCount.setText("" + o.getPackCount());
 
         holder.removeBtn.setVisibility(isReadOnly ? View.GONE : View.VISIBLE);
 
@@ -66,8 +66,6 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
         holder.editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onLongClick: " + v.getId());
-
                 EventBus.getDefault().post(new EditOrderItem(o));
             }
         });
@@ -96,7 +94,6 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView mIdView;
-        public final TextView mPackCount;
         public final TextView nameTV;
         public final Button removeBtn;
         public final Button editBtn;
@@ -108,7 +105,6 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
             super(view);
             mView = view;
             mIdView = (TextView) view.findViewById(R.id.item_number);
-            mPackCount = (TextView) view.findViewById(R.id.orderItem_packCount);
             removeBtn = (Button) view.findViewById(R.id.orderItem_remove);
             editBtn = (Button) view.findViewById(R.id.orderItem_edit);
 
