@@ -2,6 +2,7 @@ package com.kostrzewa.cechini.ui.order;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,11 +23,15 @@ import com.kostrzewa.cechini.data.ProductDataManager;
 import com.kostrzewa.cechini.data.ProductDataManagerImpl;
 import com.kostrzewa.cechini.data.WarehouseDataManager;
 import com.kostrzewa.cechini.data.WarehouseDataManagerImpl;
+import com.kostrzewa.cechini.model.EditOrderItem;
 import com.kostrzewa.cechini.model.WarehouseDTO;
 import com.kostrzewa.cechini.ui.mystores.MyStoresFragment;
 import com.kostrzewa.cechini.ui.order.dialog.ProductDialogFragment;
 import com.kostrzewa.cechini.ui.order.warehouse.WarehouseAdapter;
 import com.kostrzewa.cechini.ui.report.data.ReportData;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -86,6 +91,14 @@ public class CreateOrderFragment extends Fragment {
                 .show(getFragmentManager(), "sample");
     }
 
+    @Subscribe
+    public void onEditOrderItem(EditOrderItem editOrderItem){
+        Log.d(TAG, "onEditOrderItem: ");
+        new ProductDialogFragment(ReportData.reportDTO.getOrderDTO().getOrderItems(), adapter, productDataManager, editOrderItem)
+                .show(getFragmentManager(), "sample");
+
+    }
+
     @BindView(R.id.fragment_order_addProductBtn)
     Button addProductBtn;
     @BindView(R.id.fragment_order_recyclerview_emptyTV)
@@ -98,6 +111,7 @@ public class CreateOrderFragment extends Fragment {
     RecyclerView recyclerView;
     @BindView(R.id.fragment_order_warehouseSpinner)
     public Spinner warehouseSpinner;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -173,4 +187,15 @@ public class CreateOrderFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
 }

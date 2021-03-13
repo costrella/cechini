@@ -56,6 +56,16 @@
 
     </LinearLayout>
 
+
+    <Button
+        android:id="@+id/orderItem_edit"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="4dp"
+        android:layout_gravity="center"
+        android:background="@drawable/ic_edit_black_24dp"
+        />
+
     <Button
         android:id="@+id/orderItem_remove"
         android:layout_width="30dp"

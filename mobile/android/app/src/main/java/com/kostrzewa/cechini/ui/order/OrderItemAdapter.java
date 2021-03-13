@@ -10,8 +10,11 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kostrzewa.cechini.R;
+import com.kostrzewa.cechini.model.EditOrderItem;
 import com.kostrzewa.cechini.model.OrderItemDTO;
 import com.kostrzewa.cechini.ui.mystores.MyStoresFragment.OnListFragmentInteractionListener;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -50,11 +53,6 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
         int lp = position + 1;
         holder.mIdView.setText("" + lp);
         holder.mPackCount.setText("" + o.getPackCount());
-//        holder.val1.setText("" + o.getProductArtCountPalette());//todo upewnic sie
-//        holder.val2.setText("" + o.getProductLayerCountPalette());//todo upewnic sie
-//        holder.val3.setText("" + o.getProductPackCountPalette());//todo upewnic sie
-
-//        holder.mContentView.setText(mValues.get(position).getProductName());
 
         holder.removeBtn.setVisibility(isReadOnly ? View.GONE : View.VISIBLE);
 
@@ -65,16 +63,14 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
                 notifyDataSetChanged();
             }
         });
-//        holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
-//            @Override
-//            public boolean onLongClick(View v) {
-//                Log.d(TAG, "onLongClick: " + v.getId());
-//                getData().remove(position);
-//                notifyDataSetChanged();
-////                notifyItemRemoved(position);
-//                return false;
-//            }
-//        });
+        holder.editBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onLongClick: " + v.getId());
+
+                EventBus.getDefault().post(new EditOrderItem(o));
+            }
+        });
     }
 
     @Override
@@ -103,9 +99,8 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
         public final TextView mPackCount;
         public final TextView nameTV;
         public final Button removeBtn;
-//        public final TextView val1;
-//        public final TextView val2;
-//        public final TextView val3;
+        public final Button editBtn;
+
 
         public OrderItemDTO mItem;
 
@@ -115,9 +110,7 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
             mIdView = (TextView) view.findViewById(R.id.item_number);
             mPackCount = (TextView) view.findViewById(R.id.orderItem_packCount);
             removeBtn = (Button) view.findViewById(R.id.orderItem_remove);
-//            val1 = (TextView) view.findViewById(R.id.product_item_val01);
-//            val2 = (TextView) view.findViewById(R.id.product_item_val02);
-//            val3 = (TextView) view.findViewById(R.id.product_item_val03);
+            editBtn = (Button) view.findViewById(R.id.orderItem_edit);
 
             nameTV = view.findViewById(R.id.name);
         }
