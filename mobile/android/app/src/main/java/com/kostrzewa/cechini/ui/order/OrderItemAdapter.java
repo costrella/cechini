@@ -55,6 +55,7 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
         holder.mIdView.setText("" + lp);
 
         holder.removeBtn.setVisibility(isReadOnly ? View.GONE : View.VISIBLE);
+        holder.editBtn.setVisibility(isReadOnly ? View.GONE : View.VISIBLE);
 
         holder.removeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
