@@ -25,6 +25,7 @@
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="name"><span jhiTranslate="cechiniApp.warehouse.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="mail"><span jhiTranslate="cechiniApp.warehouse.mail">Mail</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="orderFileType"><span jhiTranslate="cechiniApp.warehouse.orderFileType">Order File Type</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -33,6 +34,7 @@
                     <td><a [routerLink]="['/warehouse', warehouse.id, 'view']">{{ warehouse.id }}</a></td>
                     <td>{{ warehouse.name }}</td>
                     <td>{{ warehouse.mail }}</td>
+                    <td jhiTranslate="{{ 'cechiniApp.OrderFileType.' + warehouse.orderFileType }}">{{ warehouse.orderFileType }}</td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

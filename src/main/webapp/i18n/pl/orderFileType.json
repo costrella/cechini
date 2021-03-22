@@ -1,0 +1,9 @@
+{
+  "cechiniApp": {
+    "OrderFileType": {
+      "null": "",
+      "EXCEL": "EXCEL",
+      "CSV": "CSV"
+    }
+  }
+}

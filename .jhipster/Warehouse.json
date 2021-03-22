@@ -11,6 +11,11 @@
       "fieldType": "String",
       "fieldValidateRules": ["pattern"],
       "fieldValidateRulesPattern": "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"
+    },
+    {
+      "fieldName": "orderFileType",
+      "fieldType": "OrderFileType",
+      "fieldValues": "EXCEL,CSV"
     }
   ],
   "relationships": [

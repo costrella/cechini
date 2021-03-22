@@ -18,6 +18,7 @@
       },
       "name": "Name",
       "mail": "Mail",
+      "orderFileType": "Order File Type",
       "order": "Order"
     }
   }

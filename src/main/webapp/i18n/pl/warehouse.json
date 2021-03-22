@@ -19,6 +19,7 @@
       "name": "Nazwa",
       "order": "Zamówienie",
       "location": "Lokalizacja",
+      "orderFileType": "Typ pliku z zamówieniem",
       "mail": "Mail"
     }
   }

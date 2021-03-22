@@ -2,6 +2,7 @@ import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { WarehouseService } from 'app/entities/warehouse/warehouse.service';
 import { IWarehouse, Warehouse } from 'app/shared/model/warehouse.model';
+import { OrderFileType } from 'app/shared/model/enumerations/order-file-type.model';
 
 describe('Service Tests', () => {
   describe('Warehouse Service', () => {
@@ -20,7 +21,7 @@ describe('Service Tests', () => {
       service = injector.get(WarehouseService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Warehouse(0, 'AAAAAAA', 'AAAAAAA');
+      elemDefault = new Warehouse(0, 'AAAAAAA', 'AAAAAAA', OrderFileType.EXCEL);
     });
 
     describe('Service methods', () => {
@@ -56,6 +57,7 @@ describe('Service Tests', () => {
           {
             name: 'BBBBBB',
             mail: 'BBBBBB',
+            orderFileType: 'BBBBBB',
           },
           elemDefault
         );
@@ -74,6 +76,7 @@ describe('Service Tests', () => {
           {
             name: 'BBBBBB',
             mail: 'BBBBBB',
+            orderFileType: 'BBBBBB',
           },
           elemDefault
         );

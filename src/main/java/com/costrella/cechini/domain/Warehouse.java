@@ -8,6 +8,8 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.costrella.cechini.domain.enumeration.OrderFileType;
+
 /**
  * A Warehouse.
  */
@@ -29,6 +31,10 @@ public class Warehouse implements Serializable {
     @Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
     @Column(name = "mail")
     private String mail;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "order_file_type")
+    private OrderFileType orderFileType;
 
     @OneToMany(mappedBy = "warehouse")
     private Set<Order> orders = new HashSet<>();
@@ -71,6 +77,19 @@ public class Warehouse implements Serializable {
 
     public void setMail(String mail) {
         this.mail = mail;
+    }
+
+    public OrderFileType getOrderFileType() {
+        return orderFileType;
+    }
+
+    public Warehouse orderFileType(OrderFileType orderFileType) {
+        this.orderFileType = orderFileType;
+        return this;
+    }
+
+    public void setOrderFileType(OrderFileType orderFileType) {
+        this.orderFileType = orderFileType;
     }
 
     public Set<Order> getOrders() {
@@ -122,6 +141,7 @@ public class Warehouse implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", mail='" + getMail() + "'" +
+            ", orderFileType='" + getOrderFileType() + "'" +
             "}";
     }
 }

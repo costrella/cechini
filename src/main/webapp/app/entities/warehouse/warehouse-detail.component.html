@@ -16,6 +16,10 @@
                 <dd>
                     <span>{{ warehouse.mail }}</span>
                 </dd>
+                <dt><span jhiTranslate="cechiniApp.warehouse.orderFileType">Order File Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'cechiniApp.OrderFileType.' + warehouse.orderFileType }}">{{ warehouse.orderFileType }}</span>
+                </dd>
             </dl>
 
             <button type="submit"

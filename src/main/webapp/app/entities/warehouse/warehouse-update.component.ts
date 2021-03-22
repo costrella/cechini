@@ -19,6 +19,7 @@ export class WarehouseUpdateComponent implements OnInit {
     id: [],
     name: [null, [Validators.required]],
     mail: [null, [Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')]],
+    orderFileType: [],
   });
 
   constructor(protected warehouseService: WarehouseService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -34,6 +35,7 @@ export class WarehouseUpdateComponent implements OnInit {
       id: warehouse.id,
       name: warehouse.name,
       mail: warehouse.mail,
+      orderFileType: warehouse.orderFileType,
     });
   }
 
@@ -57,6 +59,7 @@ export class WarehouseUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       name: this.editForm.get(['name'])!.value,
       mail: this.editForm.get(['mail'])!.value,
+      orderFileType: this.editForm.get(['orderFileType'])!.value,
     };
   }
 
