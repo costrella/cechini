@@ -45,18 +45,21 @@ public class ReportService {
 
     private final MailService mailService;
 
-    private final OrderFileService orderFileService;
+    private final OrderCSVFileService orderCSVFileService;
+
+    private final OrderExcelFileService orderExcelFileService;
 
     private final WarehouseService warehouseService;
 
-    public ReportService(ReportRepository reportRepository, ReportMapper reportMapper, OrderMapper orderMapper, OrderItemMapper orderItemMapper, PhotoFileMapper photoFileMapper, MailService mailService, OrderFileService orderFileService, WarehouseService warehouseService) {
+    public ReportService(ReportRepository reportRepository, ReportMapper reportMapper, OrderMapper orderMapper, OrderItemMapper orderItemMapper, PhotoFileMapper photoFileMapper, MailService mailService, OrderCSVFileService orderCSVFileService, OrderExcelFileService orderExcelFileService, WarehouseService warehouseService) {
         this.reportRepository = reportRepository;
         this.reportMapper = reportMapper;
         this.orderMapper = orderMapper;
         this.orderItemMapper = orderItemMapper;
         this.photoFileMapper = photoFileMapper;
         this.mailService = mailService;
-        this.orderFileService = orderFileService;
+        this.orderCSVFileService = orderCSVFileService;
+        this.orderExcelFileService = orderExcelFileService;
         this.warehouseService = warehouseService;
     }
 
@@ -89,7 +92,8 @@ public class ReportService {
             Optional<WarehouseDTO> warehouse = warehouseService.findOne(report.getOrder().getWarehouse().getId());
             if (warehouse.isPresent() && warehouse.get().getMail() != null) {
                 try {
-                    mailService.sendEmailWithOrder(warehouse.get().getMail(), orderFileService.generateFile(report));
+                    mailService.sendEmailWithOrder(warehouse.get().getMail(), orderExcelFileService.generateFile(report));
+//                    mailService.sendEmailWithOrder(warehouse.get().getMail(), orderCSVFileService.generateFile(report));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
