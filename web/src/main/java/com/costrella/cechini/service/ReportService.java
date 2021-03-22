@@ -18,6 +18,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.List;
@@ -92,8 +93,21 @@ public class ReportService {
             Optional<WarehouseDTO> warehouse = warehouseService.findOne(report.getOrder().getWarehouse().getId());
             if (warehouse.isPresent() && warehouse.get().getMail() != null) {
                 try {
-                    mailService.sendEmailWithOrder(warehouse.get().getMail(), orderExcelFileService.generateFile(report));
-//                    mailService.sendEmailWithOrder(warehouse.get().getMail(), orderCSVFileService.generateFile(report));
+                    File file;
+                    if (warehouse.get().getOrderFileType() == null) {
+                        file = orderExcelFileService.generateFile(report);
+                    } else {
+                        switch (warehouse.get().getOrderFileType()) {
+                            case CSV:
+                                file = orderCSVFileService.generateFile(report);
+                                break;
+                            case EXCEL:
+                            default:
+                                file = orderExcelFileService.generateFile(report);
+                                break;
+                        }
+                    }
+                    mailService.sendEmailWithOrder(report.getOrder().getNumber(), warehouse.get().getMail(), warehouse.get().getOrderFileType(), file);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

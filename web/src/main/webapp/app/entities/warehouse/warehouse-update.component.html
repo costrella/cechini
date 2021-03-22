@@ -34,6 +34,14 @@
                         </small>
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cechiniApp.warehouse.orderFileType" for="field_orderFileType">Order File Type</label>
+                    <select class="form-control" name="orderFileType" formControlName="orderFileType" id="field_orderFileType">
+                        <option value="EXCEL">{{ 'cechiniApp.OrderFileType.EXCEL' | translate }}</option>
+                        <option value="CSV">{{ 'cechiniApp.OrderFileType.CSV' | translate }}</option>
+                    </select>
+                </div>
             </div>
 
             <div>

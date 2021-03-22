@@ -2,6 +2,7 @@ package com.costrella.cechini.service.dto;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import com.costrella.cechini.domain.enumeration.OrderFileType;
 
 /**
  * A DTO for the {@link com.costrella.cechini.domain.Warehouse} entity.
@@ -15,6 +16,8 @@ public class WarehouseDTO implements Serializable {
 
     @Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
     private String mail;
+
+    private OrderFileType orderFileType;
 
     
     public Long getId() {
@@ -41,6 +44,14 @@ public class WarehouseDTO implements Serializable {
         this.mail = mail;
     }
 
+    public OrderFileType getOrderFileType() {
+        return orderFileType;
+    }
+
+    public void setOrderFileType(OrderFileType orderFileType) {
+        this.orderFileType = orderFileType;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -65,6 +76,7 @@ public class WarehouseDTO implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", mail='" + getMail() + "'" +
+            ", orderFileType='" + getOrderFileType() + "'" +
             "}";
     }
 }

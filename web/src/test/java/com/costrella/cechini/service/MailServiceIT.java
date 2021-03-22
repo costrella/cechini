@@ -3,8 +3,6 @@ package com.costrella.cechini.service;
 import com.costrella.cechini.CechiniApp;
 import com.costrella.cechini.config.Constants;
 import com.costrella.cechini.domain.User;
-import com.costrella.cechini.repository.StoreRepository;
-import com.costrella.cechini.repository.WorkerRepository;
 import io.github.jhipster.config.JHipsterProperties;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -79,7 +77,7 @@ public class MailServiceIT {
 
     @Test
     public void testSendEmail() throws Exception {
-        mailService.sendEmail("john.doe@example.com", "testSubject", "testContent", false, true, null);
+        mailService.sendEmail("john.doe@example.com", "testSubject", "testContent", false, true, null, null, null);
         verify(javaMailSender).send(messageCaptor.capture());
         MimeMessage message = messageCaptor.getValue();
         assertThat(message.getSubject()).isEqualTo("testSubject");
@@ -92,7 +90,7 @@ public class MailServiceIT {
 
     @Test
     public void testSendHtmlEmail() throws Exception {
-        mailService.sendEmail("john.doe@example.com", "testSubject", "testContent", false, true, null);
+        mailService.sendEmail("john.doe@example.com", "testSubject", "testContent", false, true, null, null, null);
         verify(javaMailSender).send(messageCaptor.capture());
         MimeMessage message = messageCaptor.getValue();
         assertThat(message.getSubject()).isEqualTo("testSubject");
@@ -105,7 +103,7 @@ public class MailServiceIT {
 
     @Test
     public void testSendMultipartEmail() throws Exception {
-        mailService.sendEmail("john.doe@example.com", "testSubject", "testContent", true, false, null);
+        mailService.sendEmail("john.doe@example.com", "testSubject", "testContent", true, false, null, null, null);
         verify(javaMailSender).send(messageCaptor.capture());
         MimeMessage message = messageCaptor.getValue();
         MimeMultipart mp = (MimeMultipart) message.getContent();
@@ -122,7 +120,7 @@ public class MailServiceIT {
 
     @Test
     public void testSendMultipartHtmlEmail() throws Exception {
-        mailService.sendEmail( "john.doe@example.com", "testSubject", "testContent", true, true, null);
+        mailService.sendEmail( "john.doe@example.com", "testSubject", "testContent", true, true, null, null, null);
         verify(javaMailSender).send(messageCaptor.capture());
         MimeMessage message = messageCaptor.getValue();
         MimeMultipart mp = (MimeMultipart) message.getContent();
@@ -202,7 +200,7 @@ public class MailServiceIT {
     public void testSendEmailWithException() {
         doThrow(MailSendException.class).when(javaMailSender).send(any(MimeMessage.class));
         try {
-            mailService.sendEmail("john.doe@example.com", "testSubject", "testContent", false, false, null);
+            mailService.sendEmail("john.doe@example.com", "testSubject", "testContent", false, false, null, null, null);
         } catch (Exception e) {
             fail("Exception shouldn't have been thrown");
         }

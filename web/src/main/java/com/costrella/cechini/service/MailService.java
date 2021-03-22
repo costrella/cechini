@@ -1,6 +1,7 @@
 package com.costrella.cechini.service;
 
 import com.costrella.cechini.domain.User;
+import com.costrella.cechini.domain.enumeration.OrderFileType;
 import io.github.jhipster.config.JHipsterProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,14 +52,14 @@ public class MailService {
     }
 
     @Async
-    public void sendEmailWithOrder(String mail, File orderFile) {
-        String subject = "Cechini. Zamówienie";
+    public void sendEmailWithOrder(String number, String mail, OrderFileType orderFileType, File orderFile) {
+        String subject = "Cechini. Zamówienie nr.: " + number;
         String content = subject;
-        sendEmail(mail, subject, content, true, true, orderFile);
+        sendEmail(mail, subject, content, true, true, orderFileType, orderFile, number);
     }
 
     @Async
-    public void sendEmail(String to, String subject, String content, boolean isMultipart, boolean isHtml, File file) {
+    public void sendEmail(String to, String subject, String content, boolean isMultipart, boolean isHtml, OrderFileType orderFileType, File file, String number) {
         log.debug("Send email[multipart '{}' and html '{}'] to '{}' with subject '{}' and content={}",
             isMultipart, isHtml, to, subject, content);
 
@@ -71,7 +72,22 @@ public class MailService {
             message.setFrom(jHipsterProperties.getMail().getFrom());
             message.setSubject(subject);
             message.setText(content, isHtml);
-            message.addAttachment("zamowienie_cechini.csv", file);
+
+            if (orderFileType == null) {
+                message.addAttachment("zamowienie_cechini_" + number + ".xls", file);
+            } else {
+                switch (orderFileType) {
+                    case CSV:
+                        message.addAttachment("zamowienie_cechini_" + number + ".csv", file);
+                        break;
+                    case EXCEL:
+                    default:
+                        message.addAttachment("zamowienie_cechini_" + number + ".xls", file);
+
+                        break;
+                }
+            }
+
             javaMailSender.send(mimeMessage);
             log.debug("Sent email to User '{}'", to);
 //            return true;

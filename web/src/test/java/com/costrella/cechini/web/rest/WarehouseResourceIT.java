@@ -25,6 +25,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.costrella.cechini.domain.enumeration.OrderFileType;
 /**
  * Integration tests for the {@link WarehouseResource} REST controller.
  */
@@ -36,8 +37,11 @@ public class WarehouseResourceIT {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final String DEFAULT_MAIL = "Y8@kV_9.Rtv.8Vq";
-    private static final String UPDATED_MAIL = "PEd@K-tl.A1.gANpN.P.Po";
+    private static final String DEFAULT_MAIL = "q.JzPb@pWYyR.Wj73";
+    private static final String UPDATED_MAIL = "bWC@mr.G.MURL.U1n.n5";
+
+    private static final OrderFileType DEFAULT_ORDER_FILE_TYPE = OrderFileType.EXCEL;
+    private static final OrderFileType UPDATED_ORDER_FILE_TYPE = OrderFileType.CSV;
 
     @Autowired
     private WarehouseRepository warehouseRepository;
@@ -65,7 +69,8 @@ public class WarehouseResourceIT {
     public static Warehouse createEntity(EntityManager em) {
         Warehouse warehouse = new Warehouse()
             .name(DEFAULT_NAME)
-            .mail(DEFAULT_MAIL);
+            .mail(DEFAULT_MAIL)
+            .orderFileType(DEFAULT_ORDER_FILE_TYPE);
         return warehouse;
     }
     /**
@@ -77,7 +82,8 @@ public class WarehouseResourceIT {
     public static Warehouse createUpdatedEntity(EntityManager em) {
         Warehouse warehouse = new Warehouse()
             .name(UPDATED_NAME)
-            .mail(UPDATED_MAIL);
+            .mail(UPDATED_MAIL)
+            .orderFileType(UPDATED_ORDER_FILE_TYPE);
         return warehouse;
     }
 
@@ -103,6 +109,7 @@ public class WarehouseResourceIT {
         Warehouse testWarehouse = warehouseList.get(warehouseList.size() - 1);
         assertThat(testWarehouse.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testWarehouse.getMail()).isEqualTo(DEFAULT_MAIL);
+        assertThat(testWarehouse.getOrderFileType()).isEqualTo(DEFAULT_ORDER_FILE_TYPE);
     }
 
     @Test
@@ -158,7 +165,8 @@ public class WarehouseResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(warehouse.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].mail").value(hasItem(DEFAULT_MAIL)));
+            .andExpect(jsonPath("$.[*].mail").value(hasItem(DEFAULT_MAIL)))
+            .andExpect(jsonPath("$.[*].orderFileType").value(hasItem(DEFAULT_ORDER_FILE_TYPE.toString())));
     }
     
     @Test
@@ -173,7 +181,8 @@ public class WarehouseResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(warehouse.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
-            .andExpect(jsonPath("$.mail").value(DEFAULT_MAIL));
+            .andExpect(jsonPath("$.mail").value(DEFAULT_MAIL))
+            .andExpect(jsonPath("$.orderFileType").value(DEFAULT_ORDER_FILE_TYPE.toString()));
     }
     @Test
     @Transactional
@@ -197,7 +206,8 @@ public class WarehouseResourceIT {
         em.detach(updatedWarehouse);
         updatedWarehouse
             .name(UPDATED_NAME)
-            .mail(UPDATED_MAIL);
+            .mail(UPDATED_MAIL)
+            .orderFileType(UPDATED_ORDER_FILE_TYPE);
         WarehouseDTO warehouseDTO = warehouseMapper.toDto(updatedWarehouse);
 
         restWarehouseMockMvc.perform(put("/api/warehouses").with(csrf())
@@ -211,6 +221,7 @@ public class WarehouseResourceIT {
         Warehouse testWarehouse = warehouseList.get(warehouseList.size() - 1);
         assertThat(testWarehouse.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testWarehouse.getMail()).isEqualTo(UPDATED_MAIL);
+        assertThat(testWarehouse.getOrderFileType()).isEqualTo(UPDATED_ORDER_FILE_TYPE);
     }
 
     @Test
