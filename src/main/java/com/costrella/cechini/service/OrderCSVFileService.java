@@ -18,13 +18,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
-public class OrderFileService {
+public class OrderCSVFileService {
     private static final String CSV_FILE_NAME = "CSV_FILE.csv";
     private final WorkerRepository workerRepository;
 
     private final StoreRepository storeRepository;
 
-    public OrderFileService(WorkerRepository workerRepository, StoreRepository storeRepository) {
+    public OrderCSVFileService(WorkerRepository workerRepository, StoreRepository storeRepository) {
         this.workerRepository = workerRepository;
         this.storeRepository = storeRepository;
     }
