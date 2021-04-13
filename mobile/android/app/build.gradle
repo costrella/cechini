@@ -9,8 +9,8 @@ android {
         applicationId "com.kostrzewa.cechini"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 20210718 //podalem zly version code, do lipca inkrementujemy :d
-        versionName "1.0.23"
+        versionCode 20210719 //podalem zly version code, do lipca inkrementujemy :d
+        versionName "1.0.24"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
