@@ -138,8 +138,8 @@ public class ReportService {
     }
 
     @Transactional(readOnly = true)
-    public List<ReportDTO> findAllByWorkerId(Long id) {
-        return reportRepository.findAllByWorkerIdOrderByReportDateDesc(id).stream()
+    public List<ReportDTO> findAllByWorkerIdLastMonth(Long id, Instant from, Instant to) {
+        return reportRepository.findAllByWorkerIdAndReportDateBetweenOrderByReportDateDesc(id, from, to).stream()
             .map(report -> reportMapper.toDtoWithOrders(report, orderMapper, orderItemMapper)).collect(Collectors.toList());
     }
 

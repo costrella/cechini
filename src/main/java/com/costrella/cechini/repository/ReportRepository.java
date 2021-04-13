@@ -1,11 +1,9 @@
 package com.costrella.cechini.repository;
 
 import com.costrella.cechini.domain.Report;
-
-import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.*;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.time.Instant;
@@ -18,11 +16,7 @@ import java.util.List;
 @Repository
 public interface ReportRepository extends JpaRepository<Report, Long> {
 
-//    List<Report> findAllByNumber(String number);
-//
-//    List<Report> findByNumber(String number);
-
-    List<Report> findAllByWorkerIdOrderByReportDateDesc(Long id);
+    List<Report> findAllByWorkerIdAndReportDateBetweenOrderByReportDateDesc(Long id, Instant fromDate, Instant toDate);
 
     List<Report> findAllByWorkerIdAndStoreIdOrderByReportDateDesc(Long id, Long storeId);
 

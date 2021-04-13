@@ -25,6 +25,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
@@ -127,7 +128,10 @@ public class ReportResource {
 
     @GetMapping("/reports/worker/{id}/all")
     public ResponseEntity<List<ReportDTO>> getAllReportsByWorkerId(@PathVariable Long id) {
-        List<ReportDTO> list = reportService.findAllByWorkerId(id);
+        LocalDate from = YearMonth.from(Instant.now().atZone(ZoneId.systemDefault())).atDay(1);
+        Instant instantFrom = from.atStartOfDay(ZoneId.systemDefault()).toInstant();
+
+        List<ReportDTO> list = reportService.findAllByWorkerIdLastMonth(id, instantFrom, Instant.now());
         return ResponseEntity.ok().body(list);
     }
 
