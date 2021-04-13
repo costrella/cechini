@@ -1,5 +1,6 @@
 package com.costrella.cechini.service;
 
+import com.costrella.cechini.config.ApplicationProperties;
 import com.costrella.cechini.domain.User;
 import com.costrella.cechini.domain.enumeration.OrderFileType;
 import io.github.jhipster.config.JHipsterProperties;
@@ -42,13 +43,16 @@ public class MailService {
 
     private final SpringTemplateEngine templateEngine;
 
+    private final ApplicationProperties applicationProperties;
+
     public MailService(JHipsterProperties jHipsterProperties, JavaMailSender javaMailSender,
-                       MessageSource messageSource, SpringTemplateEngine templateEngine) {
+                       MessageSource messageSource, SpringTemplateEngine templateEngine, ApplicationProperties applicationProperties) {
 
         this.jHipsterProperties = jHipsterProperties;
         this.javaMailSender = javaMailSender;
         this.messageSource = messageSource;
         this.templateEngine = templateEngine;
+        this.applicationProperties = applicationProperties;
     }
 
     @Async
@@ -68,7 +72,9 @@ public class MailService {
         try {
             MimeMessageHelper message = new MimeMessageHelper(mimeMessage, isMultipart, StandardCharsets.UTF_8.name());
             message.setTo(to);
-            message.addCc("ula.bukowska@cechini-muszyna.pl");
+            if (applicationProperties.getCc() != null && applicationProperties.getCc() != "") {
+                message.addCc(applicationProperties.getCc());
+            }
             message.setFrom(jHipsterProperties.getMail().getFrom());
             message.setSubject(subject);
             message.setText(content, isHtml);
