@@ -10,4 +10,6 @@ public interface WorkerDataManager {
 
     void setWorker(WorkerDTO workerDTO);
 
+    void updateFwVersion(Long workerId, String fwVersion);
+
 }

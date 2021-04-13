@@ -60,6 +60,9 @@ public interface CechiniAPI {
     @POST("workers/login")
     Call<WorkerDTO> login(@Body WorkerDTO workerDTO);
 
+    @PUT("worker/updateFwVersion/{workerId}/{fwVersion}")
+    Call<WorkerDTO> updateFwVersion(@Path("workerId") Long workerId, @Path("fwVersion") String fwVersion);
+
     @GET("orders/worker/{id}/all")
     Call<List<OrderDTO>> getMyOrders(@Path("id") Long workerId);
 }

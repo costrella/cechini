@@ -85,6 +85,22 @@ public class WorkerResource {
             .body(result);
     }
 
+    @PutMapping("/worker/updateFwVersion/{workerId}/{fwVersion}")
+    public ResponseEntity<WorkerDTO> updateWorkerFirmwareVersion(@PathVariable Long workerId, @PathVariable String fwVersion) {
+        Optional<WorkerDTO> optional = workerService.findOne(workerId);
+        if (optional.isPresent()) {
+            WorkerDTO workerDTO = optional.get();
+            workerDTO.setDesc(fwVersion);
+            WorkerDTO result = workerService.save(workerDTO);
+            return ResponseEntity.ok()
+                .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, workerDTO.getId().toString()))
+                .body(result);
+        } else {
+            return null;
+        }
+
+    }
+
     /**
      * {@code GET  /workers} : get all the workers.
      *

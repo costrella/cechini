@@ -1,6 +1,8 @@
 package com.kostrzewa.cechini;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -42,7 +44,6 @@ public class MainActivity extends AppCompatActivity implements MyStoresFragment.
     private ProductDataManager productDataManager;
     private WarehouseDataManager warehouseDataManager;
     private ReportDataManager reportDataManager;
-    private StoreGroupDataManager storeGroupDataManager;
     private WorkerDataManager workerDataManager;
 
 
@@ -85,11 +86,11 @@ public class MainActivity extends AppCompatActivity implements MyStoresFragment.
         productDataManager = new ProductDataManagerImpl(getApplicationContext());
         warehouseDataManager = new WarehouseDataManagerImpl(getApplicationContext());
         reportDataManager = new ReportDataManagerImpl(getApplicationContext());
-        storeGroupDataManager = new StoreGroupDataManagerImpl(getApplicationContext());
         storeDataManager.downloadMyStores();
         productDataManager.downloadProducts();
         warehouseDataManager.downloadWarehouse();
         reportDataManager.sendReportNotSent();
+        workerDataManager.updateFwVersion(workerDataManager.getWorker().getId(), getVersionApp());
     }
 
     private boolean isWorkerExist() {
@@ -126,5 +127,15 @@ public class MainActivity extends AppCompatActivity implements MyStoresFragment.
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         navController.navigate(R.id.nav_mystores_detail, args);
 
+    }
+
+    private String getVersionApp() {
+        try {
+            PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            return pInfo.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return "error";
+        }
     }
 }

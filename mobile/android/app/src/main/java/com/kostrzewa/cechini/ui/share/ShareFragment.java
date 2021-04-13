@@ -110,6 +110,7 @@ public class ShareFragment extends Fragment {
             synchroReportsNotSentProgress.setVisibility(View.VISIBLE);
             reportDataManager.sendReportNotSent();
         }
+        workerDataManager.updateFwVersion(workerDataManager.getWorker().getId(), getVersionApp());
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
