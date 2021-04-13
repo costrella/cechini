@@ -125,3 +125,5 @@ jhipster:
 # ===================================================================
 
 # application:
+application:
+  cc: ula.bukowska@cechini-muszyna.pl
