@@ -5,9 +5,10 @@ import { ActivatedRoute, Data, ParamMap, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { IReport } from 'app/shared/model/report.model';
-import { IStore, Store } from 'app/shared/model/store.model';
+import { IStore } from 'app/shared/model/store.model';
 import { IWorker, Worker } from 'app/shared/model/worker.model';
 import { JhiEventManager } from 'ng-jhipster';
+import { CookieService } from 'ngx-cookie-service';
 import { combineLatest, Subscription } from 'rxjs';
 import { StoreService } from '../store/store.service';
 import { WorkerService } from '../worker/worker.service';
@@ -52,7 +53,8 @@ export class ReportComponent implements OnInit, OnDestroy {
     protected modalService: NgbModal,
     protected workerService: WorkerService,
     protected storeService: StoreService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private cookieService: CookieService
   ) {}
 
   @Input()
@@ -74,26 +76,16 @@ export class ReportComponent implements OnInit, OnDestroy {
   }
 
   filter(): void {
-    const pageToLoad = 1;
+    console.log('CCC filter');
 
     const workerId = this.worker?.id || 0;
-    const storeId = this.store?.id || 0;
+    this.cookieService.set('workerId', '' + workerId);
 
-    this.reportService
-      .findByStoreAndWorker(storeId, workerId, { //todo
-        page: 0,
-        size: this.itemsPerPage,
-        sort: this.sort(),
-        fromDate: this.fromDate,
-        toDate: this.toDate,
-      })
-      .subscribe(
-        (res: HttpResponse<IReport[]>) => this.onSuccess(res.body, res.headers, pageToLoad, false),
-        () => this.onError()
-      );
+    this.handleNavigation(true);
   }
 
   loadPage(page?: number, dontNavigate?: boolean): void {
+    console.log('CCC loadPage');
     const pageToLoad: number = page || this.page || 1;
 
     if (this.internal) {
@@ -125,11 +117,16 @@ export class ReportComponent implements OnInit, OnDestroy {
           break;
       }
     } else {
+      const workerId = this.worker?.id || 0;
+      const storeId = this.store?.id || 0;
+
       this.reportService
-        .query({
+        .findByStoreAndWorker(storeId, workerId, {
           page: pageToLoad - 1,
           size: this.itemsPerPage,
           sort: this.sort(),
+          fromDate: this.fromDate,
+          toDate: this.toDate,
         })
         .subscribe(
           (res: HttpResponse<IReport[]>) => this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate),
@@ -139,42 +136,47 @@ export class ReportComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    console.log('CCC ngOnInit');
     this.toDate = this.today();
     this.fromDate = this.previousMonth();
-    this.handleNavigation();
+    // this.handleNavigation();
     this.registerChangeInReports();
     this.initFilter();
   }
 
   initFilter(): void {
-    this.worker = new Worker();
+    const workerId: string = this.cookieService.get('workerId');
+    console.log('CCC cookie workerId: ' + workerId);
     this.workerService.findAll().subscribe(
       (res: HttpResponse<IWorker[]>) => {
         this.workers = res.body || [];
-      },
-      () => this.onError()
-    );
-
-    this.store = new Store();
-    this.storeService.findAll().subscribe(
-      (res: HttpResponse<IStore[]>) => {
-        this.stores = res.body || [];
+        this.worker = this.workers.find(x => x.id === Number(workerId));
+        if (this.worker != null) {
+          this.filter();
+        } else {
+          this.handleNavigation();
+        }
       },
       () => this.onError()
     );
   }
 
-  protected handleNavigation(): void {
+  protected handleNavigation(isFilter?: boolean): void {
+    console.log('CCC handleNavigation');
     combineLatest(this.activatedRoute.data, this.activatedRoute.queryParamMap, (data: Data, params: ParamMap) => {
       const page = params.get('page');
       const pageNumber = page !== null ? +page : 1;
       const sort = this.internal ? ['id', 'asc'] : (params.get('sort') ?? data['defaultSort']).split(',');
       const predicate = sort[0];
       const ascending = sort[1] === 'asc';
-      if (pageNumber !== this.page || predicate !== this.predicate || ascending !== this.ascending) {
+      if (isFilter || pageNumber !== this.page || predicate !== this.predicate || ascending !== this.ascending) {
         this.predicate = predicate;
         this.ascending = ascending;
+        console.log('CCC handleNavigation loadPage');
+
         this.loadPage(pageNumber, true);
+      } else {
+        console.log('CCC handleNavigation do nothing');
       }
     }).subscribe();
   }
@@ -191,6 +193,7 @@ export class ReportComponent implements OnInit, OnDestroy {
   }
 
   registerChangeInReports(): void {
+    console.log('CCC registerChangeInReports');
     this.eventSubscriber = this.eventManager.subscribe('reportListModification', () => this.loadPage());
   }
 
@@ -210,6 +213,7 @@ export class ReportComponent implements OnInit, OnDestroy {
   protected onSuccess(data: IReport[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.page = page;
+    console.log('CCC onSuccess_navigate: ' + navigate);
     if (navigate) {
       this.router.navigate(['/report'], {
         queryParams: {
@@ -220,6 +224,7 @@ export class ReportComponent implements OnInit, OnDestroy {
       });
     }
     this.reports = data || [];
+    console.log('CCC reports size: ' + this.reports.length);
     this.ngbPaginationPage = this.page;
   }
 
