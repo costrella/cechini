@@ -6,7 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { IReport } from 'app/shared/model/report.model';
 import { IStore } from 'app/shared/model/store.model';
-import { IWorker, Worker } from 'app/shared/model/worker.model';
+import { IWorker } from 'app/shared/model/worker.model';
 import { JhiEventManager } from 'ng-jhipster';
 import { CookieService } from 'ngx-cookie-service';
 import { combineLatest, Subscription } from 'rxjs';
@@ -43,6 +43,7 @@ export class ReportComponent implements OnInit, OnDestroy {
   workerId?: number;
   fromDate = '';
   toDate = '';
+  reportIdRow?: number;
   private dateFormat = 'yyyy-MM-dd';
 
   constructor(
@@ -72,6 +73,7 @@ export class ReportComponent implements OnInit, OnDestroy {
   }
 
   clickItem(array: any[]): void {
+    this.cookieService.set('reportId_row', '' + array[3]);
     this.router.navigate([array[0] + array[1] + array[2]]);
   }
 
@@ -137,6 +139,11 @@ export class ReportComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     console.log('CCC ngOnInit');
+    const reportIdRowString = this.cookieService.get('reportId_row');
+    if (reportIdRowString != null) {
+      this.reportIdRow = Number(reportIdRowString);
+    }
+
     this.toDate = this.today();
     this.fromDate = this.previousMonth();
     // this.handleNavigation();
