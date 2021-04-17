@@ -27,7 +27,8 @@
                 </div>
 
                 <select [(ngModel)]="worker" name="worker" #name="ngModel" (ngModelChange)="filter()"
-                    class="form-control">
+                    class="form-control"
+                    [ngStyle]="{'background-color': (worker != null && worker?.id != null) ? '#cce6ff' : undefined}">
                     <option value=""></option>
                     <option *ngFor="let w of workers" [ngValue]="w">
                         {{w.surname}} {{w.name}}
@@ -83,9 +84,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let report of reports ;trackBy: trackId">
+                <tr *ngFor="let report of reports ;trackBy: trackId"
+                [ngStyle]="{'background-color': (report.id === reportIdRow) ? '#cce6ff' : undefined}">
                     <td>
-                        <a style="color: #00a6ff" (click)="clickItem(['/report/', report.id, '/view'])">
+                        <a style="color: #00a6ff" (click)="clickItem(['/report/', report.id, '/view', report.id])">
                             {{ report.id }}
                         </a>
                     </td>
@@ -95,7 +97,7 @@
                     <td>
                         <div *ngIf="report.orderId">
                             <a style="color: #00a6ff"
-                                (click)="clickItem(['/order/', report.orderId , '/view'])">zobacz</a>
+                                (click)="clickItem(['/order/', report.orderId , '/view', report.id])">zobacz</a>
                         </div>
                         <div *ngIf="!report.orderId">
                             <span>brak</span>
@@ -104,13 +106,13 @@
                     <td>
                         <div *ngIf="report.workerId">
                             <a style="color: #00a6ff"
-                                (click)="clickItem(['/worker/', report.workerId , '/view'])">{{ report.workerSurname }}</a>
+                                (click)="clickItem(['/worker/', report.workerId , '/view', report.id])">{{ report.workerSurname }}</a>
                         </div>
                     </td>
                     <td>
                         <div *ngIf="report.storeId">
                             <a style="color: #00a6ff"
-                                (click)="clickItem(['/store/', report.storeId , '/view'])">{{ report.storeName }}</a>
+                                (click)="clickItem(['/store/', report.storeId , '/view', report.id])">{{ report.storeName }}</a>
                         </div>
                     </td>
                     <td>
@@ -120,13 +122,13 @@
                     <td>{{ report.managerNote }}</td>
                     <td class="text-right">
                         <div class="btn-group">
-                            <button type="submit" (click)="clickItem(['/report/', report.id, '/view'])"
+                            <button type="submit" (click)="clickItem(['/report/', report.id, '/view', report.id])"
                                 class="btn btn-info btn-sm">
                                 <fa-icon icon="eye"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                             </button>
 
-                            <button type="submit" (click)="clickItem(['/report/', report.id, '/edit'])"
+                            <button type="submit" (click)="clickItem(['/report/', report.id, '/edit', report.id])"
                                 class="btn btn-primary btn-sm">
                                 <fa-icon icon="pencil-alt"></fa-icon>
                                 <span class="d-none d-md-inline">Dodaj komentarz</span>
