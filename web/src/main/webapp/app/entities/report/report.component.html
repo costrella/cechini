@@ -14,6 +14,9 @@
 
     <jhi-alert></jhi-alert>
 
+{{worker?.name}} {{worker?.name}}
+
+
     <div *ngIf="!internal" class="row">
         <div class="col-md-5">
             <h4 jhiTranslate="cechiniApp.report.home.filter">Filter</h4>
@@ -31,21 +34,6 @@
                     </option>
                 </select>
             </div>
-
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" jhiTranslate="cechiniApp.store.home.title">Stores</span>
-                </div>
-
-                <select [(ngModel)]="store" name="store" #name="ngModel" (ngModelChange)="filter()"
-                    class="form-control">
-                    <option value=""></option>
-                    <option *ngFor="let s of stores" [ngValue]="s">
-                        {{s.name}} {{s.address}}
-                    </option>
-                </select>
-            </div>
-
 
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
