@@ -14,8 +14,7 @@ import { IWorker, Worker } from 'app/shared/model/worker.model';
 import { WorkerService } from '../worker/worker.service';
 import * as Chart from 'chart.js';
 
-declare var myExtObject: any;
-declare var webGlObject: any;
+declare let myExtObject: any;
 
 @Component({
   selector: 'jhi-store',
@@ -43,21 +42,21 @@ export class StoreComponent implements OnInit, OnDestroy, AfterViewInit {
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal,
     protected workerService: WorkerService
-  ) {
-    // webGlObject.init();
-  }
+  ) {}
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.canvas = document.getElementById('myChart');
     this.ctx = this.canvas.getContext('2d');
     // eslint-disable-next-line no-unused-vars
-    let myChart = new Chart(this.ctx, {
+    const data01 = [15339, 21345, 18483, 24003, 23489, 24092, 12034];
+    const data02 = [25339, 11345, 28483, 14003, 13489, 24092, 12034];
+    const myChart = new Chart(this.ctx, {
       type: 'line',
       data: {
         labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
         datasets: [
           {
-            data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
+            data: data01,
             lineTension: 0,
             backgroundColor: 'transparent',
             borderColor: '#007bff',
@@ -65,7 +64,7 @@ export class StoreComponent implements OnInit, OnDestroy, AfterViewInit {
             pointBackgroundColor: '#007bff',
           },
           {
-            data: [25339, 11345, 28483, 14003, 13489, 24092, 12034],
+            data: data02,
             lineTension: 0,
             backgroundColor: 'transparent',
             borderColor: '#007bff',
@@ -91,11 +90,11 @@ export class StoreComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  callFunction1() {
+  callFunction1(): void {
     myExtObject.func1();
   }
 
-  callFunction2() {
+  callFunction2(): void {
     myExtObject.func2();
   }
 
