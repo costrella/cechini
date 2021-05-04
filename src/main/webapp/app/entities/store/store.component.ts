@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, ParamMap, Router, Data } from '@angular/router';
 import { Subscription, combineLatest } from 'rxjs';
@@ -12,12 +12,16 @@ import { StoreService } from './store.service';
 import { StoreDeleteDialogComponent } from './store-delete-dialog.component';
 import { IWorker, Worker } from 'app/shared/model/worker.model';
 import { WorkerService } from '../worker/worker.service';
+import * as Chart from 'chart.js';
+
+declare var myExtObject: any;
+declare var webGlObject: any;
 
 @Component({
   selector: 'jhi-store',
   templateUrl: './store.component.html',
 })
-export class StoreComponent implements OnInit, OnDestroy {
+export class StoreComponent implements OnInit, OnDestroy, AfterViewInit {
   stores?: IStore[];
   workers?: IWorker[];
   worker?: IWorker;
@@ -29,6 +33,9 @@ export class StoreComponent implements OnInit, OnDestroy {
   ascending!: boolean;
   ngbPaginationPage = 1;
 
+  canvas: any;
+  ctx: any;
+
   constructor(
     protected storeService: StoreService,
     protected activatedRoute: ActivatedRoute,
@@ -36,7 +43,61 @@ export class StoreComponent implements OnInit, OnDestroy {
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal,
     protected workerService: WorkerService
-  ) {}
+  ) {
+    // webGlObject.init();
+  }
+
+  ngAfterViewInit() {
+    this.canvas = document.getElementById('myChart');
+    this.ctx = this.canvas.getContext('2d');
+    // eslint-disable-next-line no-unused-vars
+    let myChart = new Chart(this.ctx, {
+      type: 'line',
+      data: {
+        labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+        datasets: [
+          {
+            data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
+            lineTension: 0,
+            backgroundColor: 'transparent',
+            borderColor: '#007bff',
+            borderWidth: 4,
+            pointBackgroundColor: '#007bff',
+          },
+          {
+            data: [25339, 11345, 28483, 14003, 13489, 24092, 12034],
+            lineTension: 0,
+            backgroundColor: 'transparent',
+            borderColor: '#007bff',
+            borderWidth: 4,
+            pointBackgroundColor: '#007bff',
+          },
+        ],
+      },
+      options: {
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: false,
+              },
+            },
+          ],
+        },
+        legend: {
+          display: false,
+        },
+      },
+    });
+  }
+
+  callFunction1() {
+    myExtObject.func1();
+  }
+
+  callFunction2() {
+    myExtObject.func2();
+  }
 
   filter(): void {
     const pageToLoad = 1;
