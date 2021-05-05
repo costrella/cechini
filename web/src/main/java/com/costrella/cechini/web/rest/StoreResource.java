@@ -1,6 +1,8 @@
 package com.costrella.cechini.web.rest;
 
 import com.costrella.cechini.service.StoreService;
+import com.costrella.cechini.service.dto.Chart01DTO;
+import com.costrella.cechini.service.dto.ChartDetail01DTO;
 import com.costrella.cechini.service.dto.StoreDTO;
 import com.costrella.cechini.service.dto.StoreDTOSimple;
 import com.costrella.cechini.web.rest.errors.BadRequestAlertException;
@@ -25,6 +27,8 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.BatchUpdateException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,6 +50,32 @@ public class StoreResource {
 
     public StoreResource(StoreService storeService) {
         this.storeService = storeService;
+    }
+
+
+    @GetMapping("/stores/chart01")
+    public ResponseEntity<Chart01DTO> getChart01() {
+        Chart01DTO chart01DTO = new Chart01DTO();
+
+        ChartDetail01DTO chartDetail01DTO = new ChartDetail01DTO();
+        chartDetail01DTO.data = new ArrayList<>();
+        chartDetail01DTO.data.add(100);
+        chartDetail01DTO.data.add(200);
+        chartDetail01DTO.data.add(400);
+        chartDetail01DTO.label = "Marian 01";
+
+        ChartDetail01DTO chartDetail02DTO = new ChartDetail01DTO();
+        chartDetail02DTO.data = new ArrayList<>();
+        chartDetail02DTO.data.add(300);
+        chartDetail02DTO.data.add(400);
+        chartDetail02DTO.data.add(100);
+        chartDetail02DTO.label = "Marian 02";
+
+        chart01DTO.details = new ArrayList<>();
+        chart01DTO.details.add(chartDetail01DTO);
+        chart01DTO.details.add(chartDetail02DTO);
+        chart01DTO.monthsName = Arrays.asList(new String[]{"Lipiec", "Sierpien", "Wrzesien"});
+        return ResponseUtil.wrapOrNotFound(Optional.of(chart01DTO));
     }
 
     /**

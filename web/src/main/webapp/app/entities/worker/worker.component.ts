@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, ParamMap, Router, Data } from '@angular/router';
 import { Subscription, combineLatest } from 'rxjs';
@@ -10,12 +10,14 @@ import { IWorker } from 'app/shared/model/worker.model';
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { WorkerService } from './worker.service';
 import { WorkerDeleteDialogComponent } from './worker-delete-dialog.component';
+import { IChart01 } from 'app/shared/model/chart01.model';
+import * as Chart from 'chart.js';
 
 @Component({
   selector: 'jhi-worker',
   templateUrl: './worker.component.html',
 })
-export class WorkerComponent implements OnInit, OnDestroy {
+export class WorkerComponent implements OnInit, OnDestroy, AfterViewInit {
   workers?: IWorker[];
   eventSubscriber?: Subscription;
   totalItems = 0;
@@ -24,6 +26,8 @@ export class WorkerComponent implements OnInit, OnDestroy {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
+  canvas: any;
+  ctx: any;
 
   constructor(
     protected workerService: WorkerService,
@@ -32,6 +36,45 @@ export class WorkerComponent implements OnInit, OnDestroy {
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal
   ) {}
+
+  ngAfterViewInit(): void {
+    this.canvas = document.getElementById('myChart');
+    this.ctx = this.canvas.getContext('2d');
+    // eslint-disable-next-line no-unused-vars
+
+    this.workerService.chart01().subscribe(
+      (res: HttpResponse<IChart01>) => {
+        const months = res.body?.monthsName;
+
+        const myChart = new Chart(this.ctx, {
+          type: 'line',
+          data: {
+            labels: months,
+            datasets: res.body?.details,
+          },
+          options: {
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
+                    beginAtZero: true,
+                  },
+                },
+              ],
+            },
+            legend: {
+              display: true,
+            },
+            title: {
+              display: true,
+              text: 'Wykres 01',
+            },
+          },
+        });
+      },
+      () => this.onError()
+    );
+  }
 
   loadPage(page?: number, dontNavigate?: boolean): void {
     const pageToLoad: number = page || this.page || 1;

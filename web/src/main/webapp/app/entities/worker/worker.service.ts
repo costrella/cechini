@@ -7,15 +7,21 @@ import * as moment from 'moment';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { IWorker } from 'app/shared/model/worker.model';
+import { IChart01 } from 'app/shared/model/chart01.model';
 
 type EntityResponseType = HttpResponse<IWorker>;
 type EntityArrayResponseType = HttpResponse<IWorker[]>;
+type EntityResponseTypeChart = HttpResponse<IChart01>;
 
 @Injectable({ providedIn: 'root' })
 export class WorkerService {
   public resourceUrl = SERVER_API_URL + 'api/workers';
 
   constructor(protected http: HttpClient) {}
+
+  chart01(): Observable<EntityResponseTypeChart> {
+    return this.http.get<IChart01>(`${this.resourceUrl}/chart01`, { observe: 'response' });
+  }
 
   create(worker: IWorker): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(worker);
