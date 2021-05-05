@@ -41,10 +41,15 @@ public class WorkerService {
         chart.details = new ArrayList<>();
         chart.monthsName = new ArrayList<>();
         LocalDate now = LocalDate.now();
+        Random obj = new Random();
+        int rand_num;
         List<Worker> workers = workerRepository.findAll();
         boolean fillMonths = true;
         for (Worker worker : workers) {
             ChartDetail01DTO chartDetail = new ChartDetail01DTO();
+            rand_num = obj.nextInt(0xffffff + 1);
+            String colorCode = String.format("#%06x", rand_num);
+            chartDetail.borderColor = colorCode;
             chartDetail.data = new ArrayList<>();
             for (int i = monthsAgo; i >= 0; i--) {
                 chartDetail.data.add(workerRepository.getNumberOfReportsFromXMonthAgo(worker.getId(), "" + i));
