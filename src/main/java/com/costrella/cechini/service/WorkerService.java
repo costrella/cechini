@@ -36,39 +36,29 @@ public class WorkerService {
         this.workerMapper = workerMapper;
     }
 
-    public Chart01DTO getChart01() {
+    public Chart01DTO getChart01(int monthsAgo) {
         Chart01DTO chart = new Chart01DTO();
         chart.details = new ArrayList<>();
+        chart.monthsName = new ArrayList<>();
+        LocalDate now = LocalDate.now();
         List<Worker> workers = workerRepository.findAll();
+        boolean fillMonths = true;
         for (Worker worker : workers) {
             ChartDetail01DTO chartDetail = new ChartDetail01DTO();
             chartDetail.data = new ArrayList<>();
-            chartDetail.data.add(workerRepository.getNumberOfReportsFromThreeMonthAgo(worker.getId()));
-            chartDetail.data.add(workerRepository.getNumberOfReportsFromTwoMonthAgo(worker.getId()));
-            chartDetail.data.add(workerRepository.getNumberOfReportsFromOneMonthAgo(worker.getId()));
-            chartDetail.data.add(workerRepository.getNumberOfReportsFromCurrentMonthAgo(worker.getId()));
+            for (int i = monthsAgo; i >= 0; i--) {
+                chartDetail.data.add(workerRepository.getNumberOfReportsFromXMonthAgo(worker.getId(), "" + i));
+                if (fillMonths)
+                    chart.monthsName.add(now.minusMonths(i).getMonth().getDisplayName(
+                        TextStyle.FULL_STANDALONE,
+                        Locale.forLanguageTag("PL")
+                    ));
+            }
+
             chartDetail.label = worker.getSurname() + " " + worker.getName();
             chart.details.add(chartDetail);
+            fillMonths = false;
         }
-        LocalDate now = LocalDate.now();
-
-        chart.monthsName = Arrays.asList(new String[]{
-            now.minusMonths(3).getMonth().getDisplayName(
-                TextStyle.FULL_STANDALONE,
-                Locale.forLanguageTag("PL")
-            ),
-            now.minusMonths(2).getMonth().getDisplayName(
-                TextStyle.FULL_STANDALONE,
-                Locale.forLanguageTag("PL")
-            ),
-            now.minusMonths(1).getMonth().getDisplayName(
-                TextStyle.FULL_STANDALONE,
-                Locale.forLanguageTag("PL")
-            ),
-            now.getMonth().getDisplayName(
-                TextStyle.FULL_STANDALONE,
-                Locale.forLanguageTag("PL")
-            )});
 
         return chart;
     }
