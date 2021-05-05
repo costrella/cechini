@@ -1,12 +1,14 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { SERVER_API_URL } from 'app/app.constants';
+import { IChart01 } from 'app/shared/model/chart01.model';
+import { IStore } from 'app/shared/model/store.model';
+import { createRequestOption } from 'app/shared/util/request-util';
 import { Observable } from 'rxjs';
 
-import { SERVER_API_URL } from 'app/app.constants';
-import { createRequestOption } from 'app/shared/util/request-util';
-import { IStore } from 'app/shared/model/store.model';
-
 type EntityResponseType = HttpResponse<IStore>;
+type EntityResponseTypeChart = HttpResponse<IChart01>;
+
 type EntityArrayResponseType = HttpResponse<IStore[]>;
 
 @Injectable({ providedIn: 'root' })
@@ -25,6 +27,10 @@ export class StoreService {
 
   find(id: number): Observable<EntityResponseType> {
     return this.http.get<IStore>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  chart01(): Observable<EntityResponseTypeChart> {
+    return this.http.get<IChart01>(`${this.resourceUrl}/chart01`, { observe: 'response' });
   }
 
   findAllByWorker(workerId: number, req?: any): Observable<EntityArrayResponseType> {

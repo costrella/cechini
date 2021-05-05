@@ -1,18 +1,17 @@
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
-import { ActivatedRoute, ParamMap, Router, Data } from '@angular/router';
-import { Subscription, combineLatest } from 'rxjs';
-import { JhiEventManager } from 'ng-jhipster';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Data, ParamMap, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
-import { IStore } from 'app/shared/model/store.model';
-
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
-import { StoreService } from './store.service';
-import { StoreDeleteDialogComponent } from './store-delete-dialog.component';
+import { IChart01 } from 'app/shared/model/chart01.model';
+import { IStore } from 'app/shared/model/store.model';
 import { IWorker, Worker } from 'app/shared/model/worker.model';
-import { WorkerService } from '../worker/worker.service';
 import * as Chart from 'chart.js';
+import { JhiEventManager } from 'ng-jhipster';
+import { combineLatest, Subscription } from 'rxjs';
+import { WorkerService } from '../worker/worker.service';
+import { StoreDeleteDialogComponent } from './store-delete-dialog.component';
+import { StoreService } from './store.service';
 
 declare let myExtObject: any;
 
@@ -45,49 +44,47 @@ export class StoreComponent implements OnInit, OnDestroy, AfterViewInit {
   ) {}
 
   ngAfterViewInit(): void {
+    let months;
+
     this.canvas = document.getElementById('myChart');
     this.ctx = this.canvas.getContext('2d');
     // eslint-disable-next-line no-unused-vars
     const data01 = [15339, 21345, 18483, 24003, 23489, 24092, 12034];
     const data02 = [25339, 11345, 28483, 14003, 13489, 24092, 12034];
-    const myChart = new Chart(this.ctx, {
-      type: 'line',
-      data: {
-        labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-        datasets: [
-          {
-            data: data01,
-            lineTension: 0,
-            backgroundColor: 'transparent',
-            borderColor: '#007bff',
-            borderWidth: 4,
-            pointBackgroundColor: '#007bff',
+    // const labels = Utils.months({count: 7});
+
+    this.storeService.chart01().subscribe(
+      (res: HttpResponse<IChart01>) => {
+        months = res.body?.monthsName;
+
+        const myChart = new Chart(this.ctx, {
+          type: 'line',
+          data: {
+            labels: months,
+            datasets: res.body?.details,
           },
-          {
-            data: data02,
-            lineTension: 0,
-            backgroundColor: 'transparent',
-            borderColor: '#007bff',
-            borderWidth: 4,
-            pointBackgroundColor: '#007bff',
-          },
-        ],
-      },
-      options: {
-        scales: {
-          yAxes: [
-            {
-              ticks: {
-                beginAtZero: false,
-              },
+          options: {
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
+                    beginAtZero: true,
+                  },
+                },
+              ],
             },
-          ],
-        },
-        legend: {
-          display: false,
-        },
+            legend: {
+              display: true,
+            },
+            title: {
+              display: true,
+              text: 'Wykres 01',
+            },
+          },
+        });
       },
-    });
+      () => this.onError()
+    );
   }
 
   callFunction1(): void {

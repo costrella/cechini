@@ -2,6 +2,7 @@ package com.costrella.cechini.web.rest;
 
 import com.costrella.cechini.domain.Worker;
 import com.costrella.cechini.service.WorkerService;
+import com.costrella.cechini.service.dto.Chart01DTO;
 import com.costrella.cechini.service.dto.WorkerDTO;
 import com.costrella.cechini.service.exceptions.WorkerLoginNotFoundException;
 import com.costrella.cechini.service.exceptions.WorkerWrongPassException;
@@ -132,6 +133,11 @@ public class WorkerResource {
         log.debug("REST request to get Worker : {}", id);
         Optional<WorkerDTO> workerDTO = workerService.findOne(id);
         return ResponseUtil.wrapOrNotFound(workerDTO);
+    }
+
+    @GetMapping("/workers/chart01")
+    public ResponseEntity<Chart01DTO> getChart01() {
+        return ResponseUtil.wrapOrNotFound(Optional.of(workerService.getChart01()));
     }
 
     @PostMapping("/workers/login")
