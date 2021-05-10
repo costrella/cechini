@@ -91,7 +91,7 @@ export class StatsComponent implements OnInit, OnDestroy, AfterViewInit {
             },
             title: {
               display: true,
-              text: 'Wykres ilości przesłanych raportów',
+              text: 'Wykres ilości przesłanych zamówień',
             },
           },
         });
