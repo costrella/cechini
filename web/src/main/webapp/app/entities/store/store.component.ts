@@ -1,25 +1,21 @@
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Data, ParamMap, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
-import { IChart01 } from 'app/shared/model/chart01.model';
 import { IStore } from 'app/shared/model/store.model';
 import { IWorker, Worker } from 'app/shared/model/worker.model';
-import * as Chart from 'chart.js';
 import { JhiEventManager } from 'ng-jhipster';
 import { combineLatest, Subscription } from 'rxjs';
 import { WorkerService } from '../worker/worker.service';
 import { StoreDeleteDialogComponent } from './store-delete-dialog.component';
 import { StoreService } from './store.service';
 
-declare let myExtObject: any;
-
 @Component({
   selector: 'jhi-store',
   templateUrl: './store.component.html',
 })
-export class StoreComponent implements OnInit, OnDestroy, AfterViewInit {
+export class StoreComponent implements OnInit, OnDestroy {
   stores?: IStore[];
   workers?: IWorker[];
   worker?: IWorker;
@@ -42,58 +38,6 @@ export class StoreComponent implements OnInit, OnDestroy, AfterViewInit {
     protected modalService: NgbModal,
     protected workerService: WorkerService
   ) {}
-
-  ngAfterViewInit(): void {
-    let months;
-
-    this.canvas = document.getElementById('myChart');
-    this.ctx = this.canvas.getContext('2d');
-    // eslint-disable-next-line no-unused-vars
-    const data01 = [15339, 21345, 18483, 24003, 23489, 24092, 12034];
-    const data02 = [25339, 11345, 28483, 14003, 13489, 24092, 12034];
-    // const labels = Utils.months({count: 7});
-
-    this.storeService.chart01().subscribe(
-      (res: HttpResponse<IChart01>) => {
-        months = res.body?.monthsName;
-
-        const myChart = new Chart(this.ctx, {
-          type: 'line',
-          data: {
-            labels: months,
-            datasets: res.body?.details,
-          },
-          options: {
-            scales: {
-              yAxes: [
-                {
-                  ticks: {
-                    beginAtZero: true,
-                  },
-                },
-              ],
-            },
-            legend: {
-              display: true,
-            },
-            title: {
-              display: true,
-              text: 'Wykres 01',
-            },
-          },
-        });
-      },
-      () => this.onError()
-    );
-  }
-
-  callFunction1(): void {
-    myExtObject.func1();
-  }
-
-  callFunction2(): void {
-    myExtObject.func2();
-  }
 
   filter(): void {
     const pageToLoad = 1;
