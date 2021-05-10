@@ -29,10 +29,6 @@ export class StoreService {
     return this.http.get<IStore>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  chart01(): Observable<EntityResponseTypeChart> {
-    return this.http.get<IChart01>(`${this.resourceUrl}/chart01`, { observe: 'response' });
-  }
-
   findAllByWorker(workerId: number, req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http.get<IStore[]>(`${this.resourceUrl}/worker/${workerId}`, { params: options, observe: 'response' });
