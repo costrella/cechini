@@ -23,6 +23,10 @@ export class WorkerService {
     return this.http.get<IChart01>(`${this.resourceUrl}/chart01`, { observe: 'response' });
   }
 
+  chart02(): Observable<EntityResponseTypeChart> {
+    return this.http.get<IChart01>(`${this.resourceUrl}/chart02`, { observe: 'response' });
+  }
+
   create(worker: IWorker): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(worker);
     return this.http

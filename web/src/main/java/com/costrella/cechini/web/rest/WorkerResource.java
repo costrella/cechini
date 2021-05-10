@@ -137,7 +137,12 @@ public class WorkerResource {
 
     @GetMapping("/workers/chart01")
     public ResponseEntity<Chart01DTO> getChart01() {
-        return ResponseUtil.wrapOrNotFound(Optional.of(workerService.getChart01(7)));
+        return ResponseUtil.wrapOrNotFound(Optional.of(workerService.getReportsChart(7)));
+    }
+
+    @GetMapping("/workers/chart02")
+    public ResponseEntity<Chart01DTO> getOrdersChart() {
+        return ResponseUtil.wrapOrNotFound(Optional.of(workerService.getOrdersChart(7)));
     }
 
     @PostMapping("/workers/login")

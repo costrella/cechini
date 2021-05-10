@@ -27,7 +27,9 @@ export class WorkerComponent implements OnInit, OnDestroy, AfterViewInit {
   ascending!: boolean;
   ngbPaginationPage = 1;
   canvas: any;
+  canvas02: any;
   ctx: any;
+  ctx02: any;
 
   constructor(
     protected workerService: WorkerService,
@@ -37,7 +39,7 @@ export class WorkerComponent implements OnInit, OnDestroy, AfterViewInit {
     protected modalService: NgbModal
   ) {}
 
-  ngAfterViewInit(): void {
+  chart01(): void {
     this.canvas = document.getElementById('myChart');
     this.ctx = this.canvas.getContext('2d');
     // eslint-disable-next-line no-unused-vars
@@ -67,13 +69,57 @@ export class WorkerComponent implements OnInit, OnDestroy, AfterViewInit {
             },
             title: {
               display: true,
-              text: 'Wykres 01',
+              text: 'Wykres ilości przesłanych raportów',
             },
           },
         });
       },
       () => this.onError()
     );
+  }
+
+  chart02(): void {
+    this.canvas02 = document.getElementById('myChart02');
+    this.ctx02 = this.canvas02.getContext('2d');
+    // eslint-disable-next-line no-unused-vars
+
+    this.workerService.chart02().subscribe(
+      (res: HttpResponse<IChart01>) => {
+        const months = res.body?.monthsName;
+
+        const myChart = new Chart(this.ctx02, {
+          type: 'line',
+          data: {
+            labels: months,
+            datasets: res.body?.details,
+          },
+          options: {
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
+                    beginAtZero: true,
+                  },
+                },
+              ],
+            },
+            legend: {
+              display: true,
+            },
+            title: {
+              display: true,
+              text: 'Wykres ilości przesłanych raportów',
+            },
+          },
+        });
+      },
+      () => this.onError()
+    );
+  }
+
+  ngAfterViewInit(): void {
+    this.chart01();
+    this.chart02();
   }
 
   loadPage(page?: number, dontNavigate?: boolean): void {
