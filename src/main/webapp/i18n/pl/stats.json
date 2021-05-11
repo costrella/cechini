@@ -2,7 +2,7 @@
   "cechiniApp": {
     "stats": {
       "home": {
-        "title": "Stats",
+        "title": "Statystyki",
         "createLabel": "Dodaj Stats",
         "createOrEditLabel": "Dodaj lub edytuj: Stats",
         "notFound": "No Stats found"
