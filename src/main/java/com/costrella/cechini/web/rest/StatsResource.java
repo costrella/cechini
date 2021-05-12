@@ -32,7 +32,7 @@ public class StatsResource {
 
     @GetMapping("/stats/chart03")
     public ResponseEntity<Chart01DTO> getSumOfPackCountOfProducts() {
-        return ResponseUtil.wrapOrNotFound(Optional.of(statsService.getSumOfPackCountOfProducts(7)));
+        return ResponseUtil.wrapOrNotFound(Optional.of(statsService.getSumOfPackCountOfProducts(5)));
     }
 
 }
