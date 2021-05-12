@@ -22,4 +22,13 @@ public interface StatsRepository extends JpaRepository<Worker, Long> {
 
     @Query(value = queryOrders, nativeQuery = true)
     Integer getNumberOfOrdersFromXMonthAgo(@Param("id") Long id, @Param("toTime") String toTime);
+
+    @Query(value = "select sum(oi.pack_count) from report r inner join jhi_order o on r.order_id = o.id\n" +
+        "inner join order_item oi on oi.order_id = o.id\n" +
+        "inner join product p on oi.product_id = p.id where p.id = :id\n" +
+        "and date_part('month', r.report_date) = date_part('month', current_date - ( :toTime || 'months')\\:\\:interval)\n" +
+        "and date_part('year', r.report_date) = date_part('year', current_date - ( :toTime || 'months' )\\:\\:interval)\n" +
+        "\n", nativeQuery = true)
+    Integer getSumOfPackCountOfProduct(@Param("id") Long id, @Param("toTime") String toTime);
+
 }
