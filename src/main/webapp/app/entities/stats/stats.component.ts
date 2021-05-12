@@ -16,8 +16,10 @@ export class StatsComponent implements OnInit, OnDestroy, AfterViewInit {
   eventSubscriber?: Subscription;
   canvas: any;
   canvas02: any;
+  canvas03: any;
   ctx: any;
   ctx02: any;
+  ctx03: any;
 
   constructor(protected statsService: StatsService, protected eventManager: JhiEventManager) {}
 
@@ -99,9 +101,49 @@ export class StatsComponent implements OnInit, OnDestroy, AfterViewInit {
     );
   }
 
+  chart03(): void {
+    this.canvas03 = document.getElementById('myChart03');
+    this.ctx03 = this.canvas03.getContext('2d');
+    // eslint-disable-next-line no-unused-vars
+
+    this.statsService.chart03().subscribe(
+      (res: HttpResponse<IChart01>) => {
+        const months = res.body?.monthsName;
+
+        const myChart = new Chart(this.ctx03, {
+          type: 'line',
+          data: {
+            labels: months,
+            datasets: res.body?.details,
+          },
+          options: {
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
+                    beginAtZero: true,
+                  },
+                },
+              ],
+            },
+            legend: {
+              display: true,
+            },
+            title: {
+              display: true,
+              text: 'Wykres ilości sprzedaży zgrzewek produktów',
+            },
+          },
+        });
+      },
+      () => this.onError()
+    );
+  }
+
   ngAfterViewInit(): void {
     this.chart01();
     this.chart02();
+    this.chart03();
   }
 
   loadAll(): void {

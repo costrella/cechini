@@ -30,4 +30,9 @@ public class StatsResource {
         return ResponseUtil.wrapOrNotFound(Optional.of(statsService.getOrdersChart(7)));
     }
 
+    @GetMapping("/stats/chart03")
+    public ResponseEntity<Chart01DTO> getSumOfPackCountOfProducts() {
+        return ResponseUtil.wrapOrNotFound(Optional.of(statsService.getSumOfPackCountOfProducts(7)));
+    }
+
 }

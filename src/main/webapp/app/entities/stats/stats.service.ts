@@ -25,6 +25,10 @@ export class StatsService {
     return this.http.get<IChart01>(`${this.resourceUrl}/chart02`, { observe: 'response' });
   }
 
+  chart03(): Observable<EntityResponseTypeChart> {
+    return this.http.get<IChart01>(`${this.resourceUrl}/chart03`, { observe: 'response' });
+  }
+
   find(id: number): Observable<EntityResponseType> {
     return this.http.get<IStats>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
