@@ -34,6 +34,7 @@
                         {{w.surname}} {{w.name}}
                     </option>
                 </select>
+                <button (click)="clear()">Wyczyść</button>
             </div>
 
             <div class="input-group mb-3">
@@ -41,12 +42,14 @@
                     <span class="input-group-text" jhiTranslate="audits.filter.from">from</span>
                 </div>
                 <input type="date" class="form-control" name="start" [(ngModel)]="fromDate" (ngModelChange)="filter()"
+                    [ngStyle]="{'background-color': (fromDate != previousMonthDate) ? '#cce6ff' : undefined}"
                     required />
 
                 <div class="input-group-append">
                     <span class="input-group-text" jhiTranslate="audits.filter.to">To</span>
                 </div>
                 <input type="date" class="form-control" name="end" [(ngModel)]="toDate" (ngModelChange)="filter()"
+                    [ngStyle]="{'background-color': (toDate != todayDate) ? '#cce6ff' : undefined}"
                     required />
             </div>
         </div>

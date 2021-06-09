@@ -43,6 +43,8 @@ export class ReportComponent implements OnInit, OnDestroy {
   workerId?: number;
   fromDate = '';
   toDate = '';
+  previousMonthDate = '';
+  todayDate = '';
   reportIdRow?: number;
   private dateFormat = 'yyyy-MM-dd';
 
@@ -78,8 +80,6 @@ export class ReportComponent implements OnInit, OnDestroy {
   }
 
   filter(): void {
-    console.log('CCC filter');
-
     const workerId = this.worker?.id || 0;
     this.cookieService.set('workerId', '' + workerId);
     this.cookieService.set('fromDate', '' + this.fromDate);
@@ -154,24 +154,37 @@ export class ReportComponent implements OnInit, OnDestroy {
   }
 
   initDate(): void {
+    this.previousMonthDate = this.previousMonth();
     const fromDateCookie = this.cookieService.get('fromDate');
     if (fromDateCookie !== '') {
       this.fromDate = fromDateCookie;
     } else {
-      this.fromDate = this.previousMonth();
+      this.fromDate = this.previousMonthDate;
     }
 
+    this.todayDate = this.today();
     const toDateCookie = this.cookieService.get('toDate');
     if (toDateCookie !== '') {
       this.toDate = toDateCookie;
     } else {
-      this.toDate = this.today();
+      this.toDate = this.todayDate;
     }
+  }
+
+  clear(): void {
+    this.toDate = this.todayDate;
+    this.fromDate = this.previousMonthDate;
+    this.worker = undefined;
+
+    this.cookieService.set('workerId', '');
+    this.cookieService.set('fromDate', '');
+    this.cookieService.set('toDate', '');
+
+    this.filter();
   }
 
   initFilter(): void {
     const workerId: string = this.cookieService.get('workerId');
-    console.log('CCC cookie workerId: ' + workerId);
     this.workerService.findAll().subscribe(
       (res: HttpResponse<IWorker[]>) => {
         this.workers = res.body || [];
