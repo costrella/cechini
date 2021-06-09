@@ -26,7 +26,7 @@
                     <span class="input-group-text" jhiTranslate="cechiniApp.worker.detail.title">Workers</span>
                 </div>
 
-                <select [(ngModel)]="worker" name="worker" #name="ngModel" (ngModelChange)="filter()"
+                <select [(ngModel)]="worker" name="worker" (ngModelChange)="filter()"
                     class="form-control"
                     [ngStyle]="{'background-color': (worker != null && worker?.id != null) ? '#cce6ff' : undefined}">
                     <option value=""></option>
