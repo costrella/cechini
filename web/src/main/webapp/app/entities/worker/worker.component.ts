@@ -1,21 +1,19 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
-import { ActivatedRoute, ParamMap, Router, Data } from '@angular/router';
-import { Subscription, combineLatest } from 'rxjs';
-import { JhiEventManager } from 'ng-jhipster';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Data, ParamMap, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
-import { IWorker } from 'app/shared/model/worker.model';
-
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
-import { WorkerService } from './worker.service';
+import { IWorker } from 'app/shared/model/worker.model';
+import { JhiEventManager } from 'ng-jhipster';
+import { combineLatest, Subscription } from 'rxjs';
 import { WorkerDeleteDialogComponent } from './worker-delete-dialog.component';
+import { WorkerService } from './worker.service';
 
 @Component({
   selector: 'jhi-worker',
   templateUrl: './worker.component.html',
 })
-export class WorkerComponent implements OnInit, OnDestroy {
+export class WorkerComponent implements OnInit, OnDestroy, AfterViewInit {
   workers?: IWorker[];
   eventSubscriber?: Subscription;
   totalItems = 0;
@@ -32,6 +30,8 @@ export class WorkerComponent implements OnInit, OnDestroy {
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal
   ) {}
+
+  ngAfterViewInit(): void {}
 
   loadPage(page?: number, dontNavigate?: boolean): void {
     const pageToLoad: number = page || this.page || 1;
