@@ -82,6 +82,8 @@ export class ReportComponent implements OnInit, OnDestroy {
 
     const workerId = this.worker?.id || 0;
     this.cookieService.set('workerId', '' + workerId);
+    this.cookieService.set('fromDate', '' + this.fromDate);
+    this.cookieService.set('toDate', '' + this.toDate);
 
     this.handleNavigation(true);
   }
@@ -144,11 +146,27 @@ export class ReportComponent implements OnInit, OnDestroy {
       this.reportIdRow = Number(reportIdRowString);
     }
 
-    this.toDate = this.today();
-    this.fromDate = this.previousMonth();
+    this.initDate();
+
     // this.handleNavigation();
     this.registerChangeInReports();
     this.initFilter();
+  }
+
+  initDate(): void {
+    const fromDateCookie = this.cookieService.get('fromDate');
+    if (fromDateCookie !== '') {
+      this.fromDate = fromDateCookie;
+    } else {
+      this.fromDate = this.previousMonth();
+    }
+
+    const toDateCookie = this.cookieService.get('toDate');
+    if (toDateCookie !== '') {
+      this.toDate = toDateCookie;
+    } else {
+      this.toDate = this.today();
+    }
   }
 
   initFilter(): void {
