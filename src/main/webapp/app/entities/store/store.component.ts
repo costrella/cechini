@@ -1,17 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
-import { ActivatedRoute, ParamMap, Router, Data } from '@angular/router';
-import { Subscription, combineLatest } from 'rxjs';
-import { JhiEventManager } from 'ng-jhipster';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Data, ParamMap, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
-import { IStore } from 'app/shared/model/store.model';
-
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
-import { StoreService } from './store.service';
-import { StoreDeleteDialogComponent } from './store-delete-dialog.component';
+import { IStore } from 'app/shared/model/store.model';
 import { IWorker, Worker } from 'app/shared/model/worker.model';
+import { JhiEventManager } from 'ng-jhipster';
+import { combineLatest, Subscription } from 'rxjs';
 import { WorkerService } from '../worker/worker.service';
+import { StoreDeleteDialogComponent } from './store-delete-dialog.component';
+import { StoreService } from './store.service';
 
 @Component({
   selector: 'jhi-store',
@@ -28,6 +26,9 @@ export class StoreComponent implements OnInit, OnDestroy {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
+
+  canvas: any;
+  ctx: any;
 
   constructor(
     protected storeService: StoreService,

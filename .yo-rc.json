@@ -40,6 +40,7 @@
     "blueprints": [],
     "herokuAppName": "cechini",
     "herokuDeployType": "git",
-    "herokuJavaVersion": "12"
+    "herokuJavaVersion": "12",
+    "lastLiquibaseTimestamp": 1620670145000
   }
 }

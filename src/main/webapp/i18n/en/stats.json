@@ -1,0 +1,21 @@
+{
+  "cechiniApp": {
+    "stats": {
+      "home": {
+        "title": "Stats",
+        "createLabel": "Create a new Stats",
+        "createOrEditLabel": "Create or edit a Stats",
+        "notFound": "No Stats found"
+      },
+      "created": "A new Stats is created with identifier {{ param }}",
+      "updated": "A Stats is updated with identifier {{ param }}",
+      "deleted": "A Stats is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Stats {{ id }}?"
+      },
+      "detail": {
+        "title": "Stats"
+      }
+    }
+  }
+}

@@ -23,6 +23,7 @@
         "note": "Notyfikacje",
         "photoFile": "Photo File",
         "warehouse": "Hurtownie",
+        "stats": "Statystyki",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
