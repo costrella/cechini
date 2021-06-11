@@ -6,7 +6,14 @@
             <hr>
 
             <jhi-alert-error></jhi-alert-error>
+            <button type="submit" (click)="previousState()" class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
 
+            <button type="button" [routerLink]="['/store', store.id, 'edit']" class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+            <br>
             <dl class="row-md jh-entity-details">
                 <dt><span jhiTranslate="cechiniApp.store.name">Name</span></dt>
                 <dd>
@@ -20,31 +27,86 @@
                 <dd>
                     <span>{{ store.address }}</span>
                 </dd>
-                <dt><span jhiTranslate="cechiniApp.store.worker">Worker</span></dt>
+                <dt><span>PH</span></dt>
                 <dd>
                     <div *ngIf="store.workerId">
                         <a [routerLink]="['/worker', store.workerId, 'view']">{{ store.workerSurname }}</a>
                     </div>
                 </dd>
-                <!-- <dt><span jhiTranslate="cechiniApp.store.storegroup">Storegroup</span></dt>
-                <dd>
-                    <div *ngIf="store.storegroupId">
-                        <a [routerLink]="['/store-group', store.storegroupId, 'view']">{{ store.storegroupName }}</a>
-                    </div>
-                </dd> -->
             </dl>
+        </div>
+        <div>
+            <div class="alert alert-warning">
+                Historia raportów będzie dostępna na okres próbny przez 7 dni.
+            </div>
+            <h2><span>Historia Raportów</span></h2>
+            <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+                <li *ngFor="let report of reports" [ngbNavItem]="report">
+                    <a ngbNavLink>
+                        {{ report.reportDate | date:'dd/MM/yyyy'}}
+                    </a>
+                    <ng-template ngbNavContent>
+                        <div *ngIf="report">
+                            <dl class="row-md jh-entity-details">
+                                <dt><span jhiTranslate="cechiniApp.report.reportDate">Report Date</span></dt>
+                                <dd>
+                                    <span>{{ report.reportDate | date:'dd/MM/yyyy HH:mm:ss' }}</span>
+                                </dd>
+                                <dt><span jhiTranslate="cechiniApp.report.desc">Desc</span></dt>
+                                <dd>
+                                    <div *ngIf="report.desc">
+                                        <span>{{ report.desc }}</span>
+                                    </div>
+                                    <div *ngIf="!report.desc">
+                                        <span>brak</span>
+                                    </div>
+                                </dd>
+                                <dt><span jhiTranslate="cechiniApp.report.managerNote">Manager Note</span></dt>
+                                <dd>
+                                    <div *ngIf="report.managerNote">
+                                        <span>{{ report.managerNote }}</span>
+                                    </div>
+                                    <div *ngIf="!report.managerNote">
+                                        <span>brak</span>
+                                    </div>
+                                </dd>
+                                <dt><span jhiTranslate="cechiniApp.report.order">Order</span></dt>
+                                <dd>
+                                    <div *ngIf="report.orderId">
+                                        <a [routerLink]="['/order', report.orderId, 'view']">zobacz</a>
+                                    </div>
+                                    <div *ngIf="!report.orderId">
+                                        <span>brak</span>
+                                    </div>
+                                </dd>
+                                <dt><span jhiTranslate="cechiniApp.report.worker">Worker</span></dt>
+                                <dd>
+                                    <div *ngIf="report.workerId">
+                                        <a
+                                            [routerLink]="['/worker', report.workerId, 'view']">{{ report.workerSurname }}</a>
+                                    </div>
+                                </dd>
+                            </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-            </button>
+                            <dl class="row-md jh-entity-details">
+                                <dt><span>Zdjęcia</span></dt>
+                                <dd *ngFor="let photoFile of report.photos">
+                                    <div *ngIf="photoFile.value">
+                                        <img [src]="'data:' + photoFile.valueContentType + ';base64,' + photoFile.value"
+                                            style="max-width: 100%;" alt="photoFile image" />
+                                    </div>
+                                </dd>
+                            </dl>
 
-            <button type="button"
-                    [routerLink]="['/store', store.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-            </button>
+                        </div>
+
+
+
+                    </ng-template>
+                </li>
+            </ul>
+
+            <div [ngbNavOutlet]="nav" class="mt-2"></div>
         </div>
     </div>
 </div>

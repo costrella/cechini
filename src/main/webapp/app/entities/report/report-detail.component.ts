@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { IReport } from 'app/shared/model/report.model';
@@ -18,5 +18,10 @@ export class ReportDetailComponent implements OnInit {
 
   previousState(): void {
     window.history.back();
+  }
+
+  @Input()
+  set setReport(report: IReport) {
+    this.report = report;
   }
 }

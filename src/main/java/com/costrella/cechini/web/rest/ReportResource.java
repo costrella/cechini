@@ -175,6 +175,12 @@ public class ReportResource {
         return ResponseUtil.wrapOrNotFound(reportDTO);
     }
 
+    @GetMapping("/reports/store/{id}/{months}")
+    public ResponseEntity<List<ReportDTO>> getReportsByStore(@PathVariable Long id, @PathVariable int months) {
+        List<ReportDTO> list = reportService.findReportsByStoreIdAndXMonthAgo(id, months);
+        return ResponseEntity.ok().body(list);
+    }
+
     /**
      * {@code DELETE  /reports/:id} : delete the "id" report.
      *
