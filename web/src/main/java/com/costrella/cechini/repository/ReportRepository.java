@@ -18,6 +18,8 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
 
     List<Report> findAllByWorkerIdAndReportDateBetweenOrderByReportDateDesc(Long id, Instant fromDate, Instant toDate);
 
+    List<Report> findAllByStoreIdAndReportDateBetweenOrderByReportDateDesc(Long id, Instant fromDate, Instant toDate);
+
     List<Report> findAllByWorkerIdAndStoreIdOrderByReportDateDesc(Long id, Long storeId);
 
     Page<Report> findAllByWorkerIdOrderByReportDateDesc(Long id, Pageable pageable);

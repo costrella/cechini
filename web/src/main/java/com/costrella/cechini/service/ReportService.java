@@ -218,4 +218,13 @@ public class ReportService {
         log.debug("Request to delete Report : {}", id);
         reportRepository.deleteById(id);
     }
+
+    @Transactional(readOnly = true)
+    public List<ReportDTO> findReportsByStoreIdAndXMonthAgo(Long id, int monthsAgo) {
+        Instant lastXMonths = Instant.now();
+        return reportRepository.findAllByStoreIdAndReportDateBetweenOrderByReportDateDesc(id, lastXMonths.minusSeconds(60 * 60 * 24 * 31 * monthsAgo), Instant.now())
+            .stream()
+            .map(report -> reportMapper.toDtoWithPhotos(report, orderMapper, orderItemMapper, photoFileMapper))
+            .collect(Collectors.toList());
+    }
 }
