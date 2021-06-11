@@ -18,7 +18,7 @@ export class StoreDetailComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ store }) => (this.store = store));
 
-    this.reportService.findAllByStoreIdAndMonth(this.store?.id || 0, 2).subscribe(
+    this.reportService.findAllByStoreIdAndMonth(this.store?.id || 0, 3).subscribe(
       (res: HttpResponse<IReport[]>) => {
         this.reports = res.body;
         // if (this.reports)
