@@ -46,16 +46,12 @@ spring:
   liquibase:
     contexts: prod
   mail:
-    host: smtp.gmail.com
+    host: s151.cyber-folks.pl
     port: 587
-    username: cechini.zamowienia@gmail.com
+    username: cechini.zamowienia@misiekmk.linuxpl.info
     password: 1qaz@WSX3edc
     protocol: smtp
-    tls: true
-    properties.mail.smtp:
-      auth: true
-      starttls.enable: true
-      ssl.trust: smtp.gmail.com
+
   thymeleaf:
     cache: true
 
