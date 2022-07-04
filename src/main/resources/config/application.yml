@@ -141,7 +141,7 @@ jhipster:
   #     allow-credentials: true
   #     max-age: 1800
   mail:
-    from: cechini@localhost
+    from: cechini.zamowienia@misiekmk.linuxpl.info
   swagger:
     default-include-pattern: /api/.*
     title: cechini API

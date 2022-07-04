@@ -79,18 +79,21 @@ public class MailService {
             message.setSubject(subject);
             message.setText(content, isHtml);
 
-            if (orderFileType == null) {
-                message.addAttachment("zamowienie_cechini_" + number + ".xls", file);
-            } else {
-                switch (orderFileType) {
-                    case CSV:
-                        message.addAttachment("zamowienie_cechini_" + number + ".csv", file);
-                        break;
-                    case EXCEL:
-                    default:
-                        message.addAttachment("zamowienie_cechini_" + number + ".xls", file);
 
-                        break;
+            if(file != null) {
+                if (orderFileType == null) {
+                    message.addAttachment("zamowienie_cechini_" + number + ".xls", file);
+                } else {
+                    switch (orderFileType) {
+                        case CSV:
+                            message.addAttachment("zamowienie_cechini_" + number + ".csv", file);
+                            break;
+                        case EXCEL:
+                        default:
+                            message.addAttachment("zamowienie_cechini_" + number + ".xls", file);
+
+                            break;
+                    }
                 }
             }
 
