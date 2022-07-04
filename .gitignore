@@ -2,3 +2,6 @@
 # IntelliJ
 ######################
 .idea/
+/node_modules/
+/target/
+/cechini.iml
