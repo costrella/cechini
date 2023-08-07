@@ -1,6 +1,7 @@
 package com.costrella.cechini.service.dto;
 
 import java.time.Instant;
+import javax.persistence.Column;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.List;
@@ -35,6 +36,36 @@ public class ReportDTO implements Serializable {
     private OrderDTO orderDTO;
 
     private List<PhotoFileDTO> photos;
+
+    private List<NoteDTO> notes;
+
+    public List<NoteDTO> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<NoteDTO> notes) {
+        this.notes = notes;
+    }
+
+    private Boolean readByWorker;
+
+    private Boolean readByManager;
+
+    public Boolean getReadByWorker() {
+        return readByWorker;
+    }
+
+    public void setReadByWorker(Boolean readByWorker) {
+        this.readByWorker = readByWorker;
+    }
+
+    public Boolean getReadByManager() {
+        return readByManager;
+    }
+
+    public void setReadByManager(Boolean readByManager) {
+        this.readByManager = readByManager;
+    }
 
     public List<PhotoFileDTO> getPhotos() {
         return photos;

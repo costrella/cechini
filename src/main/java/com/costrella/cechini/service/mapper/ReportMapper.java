@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Mapper for the entity {@link Report} and its DTO {@link ReportDTO}.
@@ -81,6 +82,18 @@ public interface ReportMapper extends EntityMapper<ReportDTO, Report> {
             reportDTO.setOrderId(report.getOrder().getId());
         }
         reportDTO.setPhotosCount(report.getPhotos().size());
+        reportDTO.setReadByManager(report.getReadByManager());
+        reportDTO.setReadByWorker(report.getReadByWorker());
+        //todo
+        //todo notify
+        reportDTO.setNotes(report.getNotes().stream().map(n -> {
+            NoteDTO dto = new NoteDTO();
+            dto.setDate(n.getDate());
+            dto.setValue(n.getValue());
+            dto.setNoteType(n.getNoteType());
+            //todo readed...
+            return dto;
+        }).collect(Collectors.toList()));
         return reportDTO;
     }
 
@@ -96,7 +109,7 @@ public interface ReportMapper extends EntityMapper<ReportDTO, Report> {
         ReportDTO reportDTO = toDtoWithOrders(report, orderMapper, orderItemMapper);
         List<PhotoFile> photoFiles = new ArrayList<>();
         report.getPhotos().forEach(photo -> {
-            photoFiles.add(photo.getFile());
+            photoFiles.add(photo.getFile()); //todo mozna zmienic
         });
         List<PhotoFileDTO> photoFileDTOS = new ArrayList<>();
         photoFiles.forEach(photoFile -> {

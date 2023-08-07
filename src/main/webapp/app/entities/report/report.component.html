@@ -91,7 +91,7 @@
                 [ngStyle]="{'background-color': (report.id === reportIdRow) ? '#cce6ff' : undefined}">
                     <td>
                         <a style="color: #00a6ff" (click)="clickItem(['/report/', report.id, '/view', report.id])">
-                            {{ report.id }}
+                            {{ report.id }}, {{report.readByWorker}}, {{report.readByManager}}
                         </a>
                     </td>
                     <!-- <td>{{ report.number }}</td> -->

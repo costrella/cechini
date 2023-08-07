@@ -43,7 +43,7 @@ public class Report implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "report")
     private Set<Photo> photos = new HashSet<>();
 
-    @OneToMany(mappedBy = "report")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "report")
     private Set<Note> notes = new HashSet<>();
 
     @ManyToOne(optional = false)
@@ -55,6 +55,28 @@ public class Report implements Serializable {
     @NotNull
     @JsonIgnoreProperties(value = "reports", allowSetters = true)
     private Store store;
+
+    @Column(name = "read_by_worker")
+    private Boolean readByWorker;
+
+    @Column(name = "read_by_manager")
+    private Boolean readByManager;
+
+    public Boolean getReadByWorker() {
+        return readByWorker;
+    }
+
+    public void setReadByWorker(Boolean readByWorker) {
+        this.readByWorker = readByWorker;
+    }
+
+    public Boolean getReadByManager() {
+        return readByManager;
+    }
+
+    public void setReadByManager(Boolean readByManager) {
+        this.readByManager = readByManager;
+    }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {

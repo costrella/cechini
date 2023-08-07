@@ -1,6 +1,9 @@
 package com.costrella.cechini.web.rest;
 
+import com.costrella.cechini.domain.Note;
 import com.costrella.cechini.domain.Report;
+import com.costrella.cechini.domain.Worker;
+import com.costrella.cechini.domain.enumeration.NoteType;
 import com.costrella.cechini.service.ReportService;
 import com.costrella.cechini.service.dto.ReportDTO;
 import com.costrella.cechini.service.dto.ReportDTOWithPhotos;
@@ -94,15 +97,53 @@ public class ReportResource {
     @PutMapping("/reports")
     public ResponseEntity<ReportDTO> addCommentToReport(@Valid @RequestBody ReportDTO reportDTO) throws URISyntaxException { //todo update report, this is only desc edit
         log.debug("REST request to update Report : {}", reportDTO);
-        if (reportDTO.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        Report reportEntity = reportService.findOneEntity(reportDTO.getId()).orElseThrow(() -> new BadRequestAlertException("Cannot find report", ENTITY_NAME, "" + reportDTO.getId()));
-        reportEntity.setManagerNote(reportDTO.getManagerNote());
+        Report reportEntity = addCommentToReportCommon(reportDTO, false);
         ReportDTO result = reportService.save(reportEntity);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, reportDTO.getId().toString()))
             .body(result);
+    }
+
+    private Report addCommentToReportCommon(ReportDTO reportDTO, boolean fromMobile){
+        if (reportDTO.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+        Report reportEntity = reportService.findOneEntity(reportDTO.getId()).orElseThrow(() -> new BadRequestAlertException("Cannot find report", ENTITY_NAME, "" + reportDTO.getId()));
+        Note newNote = new Note();
+        newNote.setReport(reportEntity);
+        newNote.setDate(Instant.now());
+
+//        if(fromMobile){
+//            newNote.setValue();
+//        }
+//        newNote.setValue(reportDTO.getManagerNote());
+        newNote.setValue("TEST");
+        newNote.setNoteType(fromMobile ? NoteType.BY_WORKER : NoteType.BY_MANGER);
+        reportEntity.setReadByManager(false);
+        reportEntity.setReadByWorker(false);
+        reportEntity.addNote(newNote);
+        return reportEntity;
+    }
+
+    @PutMapping("/reports/addCommentToReportMobile")
+    public ResponseEntity<ReportDTO> addCommentToReportMobile(@Valid @RequestBody ReportDTO reportDTO) throws URISyntaxException { //todo update report, this is only desc edit
+        log.debug("REST request to update Report, addCommentToReportMobile : {}", reportDTO);
+        Report reportEntity = addCommentToReportCommon(reportDTO, true);
+        ReportDTO result = reportService.save(reportEntity);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, reportDTO.getId().toString()))
+            .body(result);
+    }
+
+    @Transactional
+    @PostMapping("/reports/addCommentToReportMobile/many")
+    public ResponseEntity addCommentToReportMobileMany(@Valid @RequestBody ReportsDTO reportsDTO) {
+        for (ReportDTO r : reportsDTO.getReportsDTOS()) {
+            Report reportEntity = addCommentToReportCommon(r, true);
+            reportService.save(reportEntity);
+        }
+        return ResponseEntity.ok().build();
+
     }
 
     /**
@@ -169,7 +210,7 @@ public class ReportResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the reportDTO, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/reports/{id}")
-    public ResponseEntity<ReportDTO> getReport(@PathVariable Long id) {
+    public ResponseEntity<ReportDTO> getReport(@PathVariable Long id) {//todo tutaj dac readByManager na TRUE , tylko czy z tej samej metody korzusta mobilka?
         log.debug("REST request to get Report : {}", id);
         Optional<ReportDTO> reportDTO = reportService.findOne(id);
         return ResponseUtil.wrapOrNotFound(reportDTO);
