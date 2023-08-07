@@ -62,6 +62,18 @@
             </button>
 
             <dl class="row-md jh-entity-details">
+                <dt><span>Komentarze</span></dt>
+                <dd *ngFor="let note of report.notes">
+                    <div *ngIf="note.value">
+                      
+
+                        
+                        <span>{{note.date}}</span>, <span>{{note.value}}</span>, noteType <span>{{note.noteType}}</span>
+                    </div>
+                </dd>
+            </dl>
+
+            <dl class="row-md jh-entity-details">
                 <dt><span>Zdjęcia</span></dt>
                 <dd *ngFor="let photoFile of report.photos">
                     <div *ngIf="photoFile.value">

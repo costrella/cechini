@@ -84,6 +84,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers( "/api/stats/**")
             .antMatchers( "/api/mail/**")
             .antMatchers( "/api/worker/updateFwVersion/**")
+            .antMatchers( "/api/reports/addCommentToReportMobile")
+            .antMatchers( "/api/reports/addCommentToReportMobile/**")
 
 
         ;

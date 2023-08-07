@@ -1,5 +1,7 @@
 package com.costrella.cechini.domain;
 
+import com.costrella.cechini.domain.enumeration.NoteType;
+import com.costrella.cechini.domain.enumeration.OrderFileType;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -45,6 +47,10 @@ public class Note implements Serializable {
     @JsonIgnoreProperties(value = "notes", allowSetters = true)
     private Report report;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "note_type")
+    private NoteType noteType;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -65,6 +71,14 @@ public class Note implements Serializable {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public NoteType getNoteType() {
+        return noteType;
+    }
+
+    public void setNoteType(NoteType noteType) {
+        this.noteType = noteType;
     }
 
     public Instant getDate() {

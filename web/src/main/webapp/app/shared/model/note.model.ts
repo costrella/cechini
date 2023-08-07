@@ -8,6 +8,7 @@ export interface INote {
   workerNoteId?: number;
   managerNoteId?: number;
   reportId?: number;
+  noteType?: string;
 }
 
 export class Note implements INote {

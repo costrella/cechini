@@ -15,6 +15,8 @@ export interface IReport {
   storeName?: string;
   storeId?: number;
   photosCount?: number;
+  readByWorker?: boolean;
+  readByManager?: boolean;
 }
 
 export class Report implements IReport {

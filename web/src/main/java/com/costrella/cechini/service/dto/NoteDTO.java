@@ -1,5 +1,7 @@
 package com.costrella.cechini.service.dto;
 
+import com.costrella.cechini.domain.enumeration.NoteType;
+
 import java.time.Instant;
 import javax.validation.constraints.*;
 import java.io.Serializable;
@@ -8,7 +10,7 @@ import java.io.Serializable;
  * A DTO for the {@link com.costrella.cechini.domain.Note} entity.
  */
 public class NoteDTO implements Serializable {
-    
+
     private Long id;
 
     @Size(max = 2000)
@@ -24,7 +26,17 @@ public class NoteDTO implements Serializable {
     private Long managerNoteId;
 
     private Long reportId;
-    
+
+    private NoteType noteType;
+
+    public NoteType getNoteType() {
+        return noteType;
+    }
+
+    public void setNoteType(NoteType noteType) {
+        this.noteType = noteType;
+    }
+
     public Long getId() {
         return id;
     }
