@@ -1,5 +1,6 @@
 package com.kostrzewa.cechini.data;
 
+import com.kostrzewa.cechini.model.NoteDTO;
 import com.kostrzewa.cechini.model.ReportDTO;
 import com.kostrzewa.cechini.model.ReportDTOWithPhotos;
 import com.kostrzewa.cechini.model.ReportsDTO;
@@ -14,9 +15,13 @@ public interface ReportDataManager {
 
     void sendReportNotSent();
 
+    void sendCommentsNotSent();
+
     void downloadMyReports(Long workerId);
 
     List<ReportDTOWithPhotos> getMyReports();
 
     void downloadMyReportsByStoreId(Long workerId, Long storeId);
+
+    void addNewComment(ReportDTO reportDTO);
 }

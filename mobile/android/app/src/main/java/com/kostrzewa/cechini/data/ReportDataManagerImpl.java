@@ -1,12 +1,16 @@
 package com.kostrzewa.cechini.data;
 
 import android.content.Context;
+import android.os.Build;
 import android.util.Log;
 
+import com.kostrzewa.cechini.data.events.CommentAddedFailed;
+import com.kostrzewa.cechini.data.events.CommentAddedSuccess;
 import com.kostrzewa.cechini.data.events.MyReportsDownloadFailed;
 import com.kostrzewa.cechini.data.events.MyReportsDownloadSuccess;
 import com.kostrzewa.cechini.data.events.ReportSentFailed;
 import com.kostrzewa.cechini.data.events.ReportSentSuccess;
+import com.kostrzewa.cechini.model.NoteDTO;
 import com.kostrzewa.cechini.model.ReportDTO;
 import com.kostrzewa.cechini.model.ReportDTOWithPhotos;
 import com.kostrzewa.cechini.model.ReportsDTO;
@@ -30,6 +34,34 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
 
     public ReportDataManagerImpl(Context context) {
         super(context);
+    }
+
+    @Override
+    public void addNewComment(ReportDTO reportDTO) {
+
+        //todo problem z tymi datami
+        reportDTO.setReportDate(null);
+        RetrofitClient.getInstance().getService().addCommentToReportMobile(reportDTO).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    EventBus.getDefault().post(new CommentAddedSuccess("Komentarz dodany!"));
+                } else {
+                    saveNotSentComment(reportDTO);
+                    EventBus.getDefault().post(new CommentAddedFailed("Komentarz NIE został dodany! Zapisano w pamięci! Kod błędu: " + response.code()));
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                if (!isNetworkConnected()) {
+                    EventBus.getDefault().post(new CommentAddedFailed("Ta operacja wymaga internetu!"));
+                } else {
+                    EventBus.getDefault().post(new CommentAddedFailed("Wystąpił problem a11"));
+                }
+            }
+        });
     }
 
     @Override
@@ -80,14 +112,56 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
             RetrofitClient.getInstance().getService().sendManyReports(reportsDTO).enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
-                    Log.d(TAG, "onResponse: " + response.code());
-                    preferenceManager.setReportsNotSend(new HashSet<>());
-                    EventBus.getDefault().post(new ReportSentSuccess("ok"));
+                    if (response.isSuccessful()) {
+                        Log.d(TAG, "onResponse: " + response.code());
+                        preferenceManager.setReportsNotSend(new HashSet<>());
+                        EventBus.getDefault().post(new ReportSentSuccess("ok"));
+                    } else {
+                        EventBus.getDefault().post(new ReportSentFailed("synchro ReportSentFailed, code:" + response.code()));
+                    }
                 }
 
                 @Override
                 public void onFailure(Call<Void> call, Throwable t) {
                     EventBus.getDefault().post(new ReportSentFailed("error"));
+                    Log.d(TAG, "onFailure: ");
+                }
+            });
+        }
+    }
+
+    @Override
+    public void sendCommentsNotSent() {
+        List<ReportDTOWithPhotos> notSendComments = new ArrayList<>();
+        for (String s : preferenceManager.getCommentsNotSend()) {
+            notSendComments.add(gson.fromJson(s, ReportDTOWithPhotos.class));
+        }
+        //todo to remove
+        for(ReportDTO r : notSendComments){
+            r.setReportDate(null);
+            for(NoteDTO n : r.getNotes()){
+                n.setDate(null);
+            }
+        }
+
+        if (!notSendComments.isEmpty()) {
+            ReportsDTO reportsDTO = new ReportsDTO();
+            reportsDTO.setReportsDTOS(notSendComments);
+            RetrofitClient.getInstance().getService().addCommentToReportMobileMany(reportsDTO).enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (response.isSuccessful()) {
+                        Log.d(TAG, "onResponse: " + response.code());
+                        preferenceManager.setCommentsNotSend(new HashSet<>());
+                        EventBus.getDefault().post(new CommentAddedSuccess("ok"));
+                    } else {
+                        EventBus.getDefault().post(new CommentAddedFailed("synchro CommentAddedFailed, code:" + response.code()));
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    EventBus.getDefault().post(new CommentAddedFailed("synchro CommentAddedFailed"));
                     Log.d(TAG, "onFailure: ");
                 }
             });
@@ -108,13 +182,29 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
         preferenceManager.setReportsNotSend(myset);
     }
 
+    private void saveNotSentComment(ReportDTO reportDTO) {
+        List<ReportDTO> notSendComments = new ArrayList<>();
+        for (String s : preferenceManager.getCommentsNotSend()) {
+            notSendComments.add(gson.fromJson(s, ReportDTO.class));
+        }
+        notSendComments.add(reportDTO);
+
+        Set<String> myset = new HashSet<>();
+        for (ReportDTO v : notSendComments) {
+            myset.add(gson.toJson(v));
+        }
+        preferenceManager.setCommentsNotSend(myset);
+    }
+
     @Override
     public List<ReportDTOWithPhotos> getMyReports() {
         List<ReportDTOWithPhotos> reportDTOS = new ArrayList<>();
         for (String s : preferenceManager.getMyReports()) {
             reportDTOS.add(gson.fromJson(s, ReportDTOWithPhotos.class));
         }
-        reportDTOS.sort((o1, o2) -> o2.getReportDate().compareTo(o1.getReportDate()));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            reportDTOS.sort((o1, o2) -> o2.getReportDate().compareTo(o1.getReportDate()));
+        }
         return reportDTOS;
     }
 

@@ -1,7 +1,9 @@
 package com.kostrzewa.cechini.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class ReportDTO implements Serializable {
 
@@ -26,6 +28,37 @@ public class ReportDTO implements Serializable {
     private String storeName;
 
     private OrderDTO orderDTO;
+
+    private List<NoteDTO> notes = new ArrayList<>();
+
+    public List<NoteDTO> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<NoteDTO> notes) {
+        this.notes = notes;
+    }
+
+    private Boolean readByWorker;
+
+    private Boolean readByManager;
+
+    public Boolean getReadByWorker() {
+        return readByWorker;
+    }
+
+    public void setReadByWorker(Boolean readByWorker) {
+        this.readByWorker = readByWorker;
+    }
+
+    public Boolean getReadByManager() {
+        return readByManager;
+    }
+
+    public void setReadByManager(Boolean readByManager) {
+        this.readByManager = readByManager;
+    }
+
 
     public OrderDTO getOrderDTO() {
         return orderDTO;

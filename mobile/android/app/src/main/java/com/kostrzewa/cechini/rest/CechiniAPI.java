@@ -65,4 +65,10 @@ public interface CechiniAPI {
 
     @GET("orders/worker/{id}/all")
     Call<List<OrderDTO>> getMyOrders(@Path("id") Long workerId);
+
+    @PUT("reports/addCommentToReportMobile")
+    Call<Void> addCommentToReportMobile(@Body ReportDTO reportDTO);
+
+    @POST("reports/addCommentToReportMobile/many")
+    Call<Void> addCommentToReportMobileMany(@Body ReportsDTO reportDTOs);
 }

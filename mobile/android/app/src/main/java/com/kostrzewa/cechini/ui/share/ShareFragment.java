@@ -26,6 +26,8 @@ import com.kostrzewa.cechini.data.WarehouseDataManager;
 import com.kostrzewa.cechini.data.WarehouseDataManagerImpl;
 import com.kostrzewa.cechini.data.WorkerDataManager;
 import com.kostrzewa.cechini.data.WorkerDataManagerImpl;
+import com.kostrzewa.cechini.data.events.CommentAddedFailed;
+import com.kostrzewa.cechini.data.events.CommentAddedSuccess;
 import com.kostrzewa.cechini.data.events.MyOrdersDownloadFailed;
 import com.kostrzewa.cechini.data.events.MyOrdersDownloadSuccess;
 import com.kostrzewa.cechini.data.events.MyReportsDownloadFailed;
@@ -91,6 +93,12 @@ public class ShareFragment extends Fragment {
     @BindView(R.id.synchroReportsNotSentProgress)
     ProgressBar synchroReportsNotSentProgress;
 
+
+    @BindView(R.id.synchroCommentsNotSentText)
+    TextView synchroCommentsNotSent;
+    @BindView(R.id.synchroCommentsNotSentProgress)
+    ProgressBar synchroCommentsNotSentProgress;
+
     @BindView(R.id.version)
     TextView version;
 
@@ -110,6 +118,10 @@ public class ShareFragment extends Fragment {
             synchroReportsNotSentProgress.setVisibility(View.VISIBLE);
             reportDataManager.sendReportNotSent();
         }
+        if (!preferenceManager.getCommentsNotSend().isEmpty()) {
+            synchroCommentsNotSentProgress.setVisibility(View.VISIBLE);
+            reportDataManager.sendCommentsNotSent();
+        }
         workerDataManager.updateFwVersion(workerDataManager.getWorker().getId(), getVersionApp());
     }
 
@@ -126,6 +138,8 @@ public class ShareFragment extends Fragment {
         synchroWarehouseTime.setText(LAST_SYNCHRO + preferenceManager.getSychroTimeWarehouses());
         synchroOrdersTime.setText(LAST_SYNCHRO + preferenceManager.getSychroTimeOrders());
         synchroReportsNotSent.setText("" + preferenceManager.getReportsNotSend().size());
+        synchroCommentsNotSent.setText("" + preferenceManager.getCommentsNotSend().size());
+
         return root;
     }
 
@@ -268,6 +282,24 @@ public class ShareFragment extends Fragment {
             synchroReportsNotSentProgress.setVisibility(View.GONE);
             synchroReportsNotSent.setVisibility(View.VISIBLE);
             synchroReportsNotSent.setText(SYNCHRO_ERROR);
+        }, 1500);
+    }
+
+    @Subscribe
+    public void sub(CommentAddedSuccess s) {
+        handler.postDelayed(() -> {
+            synchroCommentsNotSentProgress.setVisibility(View.GONE);
+            synchroCommentsNotSent.setVisibility(View.VISIBLE);
+            synchroCommentsNotSent.setText("" + preferenceManager.getCommentsNotSend().size());
+        }, 1500);
+    }
+
+    @Subscribe
+    public void sub(CommentAddedFailed s) {
+        handler.postDelayed(() -> {
+            synchroCommentsNotSentProgress.setVisibility(View.GONE);
+            synchroCommentsNotSent.setVisibility(View.VISIBLE);
+            synchroCommentsNotSent.setText(SYNCHRO_ERROR);
         }, 1500);
     }
 }

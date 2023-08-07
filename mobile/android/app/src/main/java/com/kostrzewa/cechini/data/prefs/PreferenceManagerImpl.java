@@ -58,6 +58,16 @@ public class PreferenceManagerImpl implements PreferenceManager {
     }
 
     @Override
+    public Set<String> getCommentsNotSend() {
+        return sharedPreferences.getStringSet("commentsNotSend", new HashSet<>());
+    }
+
+    @Override
+    public void setCommentsNotSend(Set<String> myset) {
+        sharedPreferences.edit().putStringSet("commentsNotSend", myset).apply();
+    }
+
+    @Override
     public void setAllStoreGroups(Set<String> myset) {
         sharedPreferences.edit().putStringSet("allStoreGroups", myset).apply();
     }
