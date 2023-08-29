@@ -23,5 +23,5 @@ public interface ReportDataManager {
 
     void downloadMyReportsByStoreId(Long workerId, Long storeId);
 
-    void addNewComment(ReportDTO reportDTO);
+    void addNewComment(NoteDTO noteDTO);
 }

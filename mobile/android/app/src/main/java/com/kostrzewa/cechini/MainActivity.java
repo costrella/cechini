@@ -46,6 +46,10 @@ public class MainActivity extends AppCompatActivity implements MyStoresFragment.
     private ReportDataManager reportDataManager;
     private WorkerDataManager workerDataManager;
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements MyStoresFragment.
         productDataManager.downloadProducts();
         warehouseDataManager.downloadWarehouse();
         reportDataManager.sendReportNotSent();
+        reportDataManager.sendCommentsNotSent();
         workerDataManager.updateFwVersion(workerDataManager.getWorker().getId(), getVersionApp());
     }
 

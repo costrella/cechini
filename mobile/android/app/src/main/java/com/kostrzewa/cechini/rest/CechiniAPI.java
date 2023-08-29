@@ -1,5 +1,7 @@
 package com.kostrzewa.cechini.rest;
 
+import com.kostrzewa.cechini.model.NoteDTO;
+import com.kostrzewa.cechini.model.NotesDTO;
 import com.kostrzewa.cechini.model.OrderDTO;
 import com.kostrzewa.cechini.model.ProductDTO;
 import com.kostrzewa.cechini.model.ReportDTO;
@@ -67,8 +69,8 @@ public interface CechiniAPI {
     Call<List<OrderDTO>> getMyOrders(@Path("id") Long workerId);
 
     @PUT("reports/addCommentToReportMobile")
-    Call<Void> addCommentToReportMobile(@Body ReportDTO reportDTO);
+    Call<Void> addCommentToReportMobile(@Body NoteDTO noteDTO);
 
     @POST("reports/addCommentToReportMobile/many")
-    Call<Void> addCommentToReportMobileMany(@Body ReportsDTO reportDTOs);
+    Call<Void> addCommentToReportMobileMany(@Body NotesDTO notesDTO);
 }

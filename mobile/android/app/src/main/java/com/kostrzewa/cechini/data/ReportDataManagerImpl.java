@@ -11,6 +11,7 @@ import com.kostrzewa.cechini.data.events.MyReportsDownloadSuccess;
 import com.kostrzewa.cechini.data.events.ReportSentFailed;
 import com.kostrzewa.cechini.data.events.ReportSentSuccess;
 import com.kostrzewa.cechini.model.NoteDTO;
+import com.kostrzewa.cechini.model.NotesDTO;
 import com.kostrzewa.cechini.model.ReportDTO;
 import com.kostrzewa.cechini.model.ReportDTOWithPhotos;
 import com.kostrzewa.cechini.model.ReportsDTO;
@@ -37,17 +38,15 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
     }
 
     @Override
-    public void addNewComment(ReportDTO reportDTO) {
+    public void addNewComment(NoteDTO noteDTO) {
 
-        //todo problem z tymi datami
-        reportDTO.setReportDate(null);
-        RetrofitClient.getInstance().getService().addCommentToReportMobile(reportDTO).enqueue(new Callback<Void>() {
+        RetrofitClient.getInstance().getService().addCommentToReportMobile(noteDTO).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     EventBus.getDefault().post(new CommentAddedSuccess("Komentarz dodany!"));
                 } else {
-                    saveNotSentComment(reportDTO);
+                    saveNotSentComment(noteDTO);
                     EventBus.getDefault().post(new CommentAddedFailed("Komentarz NIE został dodany! Zapisano w pamięci! Kod błędu: " + response.code()));
 
                 }
@@ -55,10 +54,11 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
+                saveNotSentComment(noteDTO);
                 if (!isNetworkConnected()) {
-                    EventBus.getDefault().post(new CommentAddedFailed("Ta operacja wymaga internetu!"));
+                    EventBus.getDefault().post(new CommentAddedFailed("Ta operacja wymaga internetu! Zapisano w pamięci."));
                 } else {
-                    EventBus.getDefault().post(new CommentAddedFailed("Wystąpił problem a11"));
+                    EventBus.getDefault().post(new CommentAddedFailed("Wystąpił problem a11, Zapisano w pamięci"));
                 }
             }
         });
@@ -132,22 +132,15 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
 
     @Override
     public void sendCommentsNotSent() {
-        List<ReportDTOWithPhotos> notSendComments = new ArrayList<>();
+        List<NoteDTO> notSendComments = new ArrayList<>();
         for (String s : preferenceManager.getCommentsNotSend()) {
-            notSendComments.add(gson.fromJson(s, ReportDTOWithPhotos.class));
-        }
-        //todo to remove
-        for(ReportDTO r : notSendComments){
-            r.setReportDate(null);
-            for(NoteDTO n : r.getNotes()){
-                n.setDate(null);
-            }
+            notSendComments.add(gson.fromJson(s, NoteDTO.class));
         }
 
         if (!notSendComments.isEmpty()) {
-            ReportsDTO reportsDTO = new ReportsDTO();
-            reportsDTO.setReportsDTOS(notSendComments);
-            RetrofitClient.getInstance().getService().addCommentToReportMobileMany(reportsDTO).enqueue(new Callback<Void>() {
+            NotesDTO notesDTO = new NotesDTO();
+            notesDTO.setNoteDTOS(notSendComments);
+            RetrofitClient.getInstance().getService().addCommentToReportMobileMany(notesDTO).enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
@@ -182,15 +175,15 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
         preferenceManager.setReportsNotSend(myset);
     }
 
-    private void saveNotSentComment(ReportDTO reportDTO) {
-        List<ReportDTO> notSendComments = new ArrayList<>();
+    private void saveNotSentComment(NoteDTO noteDTO) {
+        List<NoteDTO> notSendComments = new ArrayList<>();
         for (String s : preferenceManager.getCommentsNotSend()) {
-            notSendComments.add(gson.fromJson(s, ReportDTO.class));
+            notSendComments.add(gson.fromJson(s, NoteDTO.class));
         }
-        notSendComments.add(reportDTO);
+        notSendComments.add(noteDTO);
 
         Set<String> myset = new HashSet<>();
-        for (ReportDTO v : notSendComments) {
+        for (NoteDTO v : notSendComments) {
             myset.add(gson.toJson(v));
         }
         preferenceManager.setCommentsNotSend(myset);

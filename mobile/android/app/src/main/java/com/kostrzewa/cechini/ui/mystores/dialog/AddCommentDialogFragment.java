@@ -163,13 +163,9 @@ public class AddCommentDialogFragment extends DialogFragment implements AdapterV
 //            noteDTO.setDate(new Date());
             noteDTO.setNoteType(NoteType.BY_WORKER);
             noteDTO.setValue(comment.getText().toString());
-
-            for(NoteDTO noteDTO1 : editReportDTO.getNotes()){
-                noteDTO1.setDate(null);//todo dlatego ze jest problem z parsowaniem dat,
-            }
+            noteDTO.setReportId(editReportDTO.getId());
             editReportDTO.getNotes().add(noteDTO);
-
-            reportDataManager.addNewComment(editReportDTO);
+            reportDataManager.addNewComment(noteDTO);
 
 //            if (editReportDTO != null) {
 //                storeDTO.setId(editReportDTO.getId());
@@ -224,6 +220,8 @@ public class AddCommentDialogFragment extends DialogFragment implements AdapterV
 
     @Subscribe
     public void onStoreAdded(CommentAddedSuccess s) {
+        Toast.makeText(getActivity(), s.getText(), Toast.LENGTH_LONG).show();
+
         progressBar.setVisibility(View.GONE);
         getDialog().dismiss();
 

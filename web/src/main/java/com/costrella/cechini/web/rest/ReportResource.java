@@ -5,9 +5,7 @@ import com.costrella.cechini.domain.Report;
 import com.costrella.cechini.domain.Worker;
 import com.costrella.cechini.domain.enumeration.NoteType;
 import com.costrella.cechini.service.ReportService;
-import com.costrella.cechini.service.dto.ReportDTO;
-import com.costrella.cechini.service.dto.ReportDTOWithPhotos;
-import com.costrella.cechini.service.dto.ReportsDTO;
+import com.costrella.cechini.service.dto.*;
 import com.costrella.cechini.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
@@ -88,36 +86,34 @@ public class ReportResource {
     /**
      * {@code PUT  /reports} : Updates an existing report.
      *
-     * @param reportDTO the reportDTO to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated reportDTO,
      * or with status {@code 400 (Bad Request)} if the reportDTO is not valid,
      * or with status {@code 500 (Internal Server Error)} if the reportDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/reports")
-    public ResponseEntity<ReportDTO> addCommentToReport(@Valid @RequestBody ReportDTO reportDTO) throws URISyntaxException { //todo update report, this is only desc edit
-        log.debug("REST request to update Report : {}", reportDTO);
-        Report reportEntity = addCommentToReportCommon(reportDTO, false);
+    public ResponseEntity<ReportDTO> addCommentToReport(@Valid @RequestBody NoteDTO noteDTO) throws URISyntaxException {
+        log.debug("REST request to update Report : {}", noteDTO.getReportId());
+        Report reportEntity = addCommentToReportCommon(noteDTO, false);
         ReportDTO result = reportService.save(reportEntity);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, reportDTO.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, reportEntity.getId().toString()))
             .body(result);
     }
 
-    private Report addCommentToReportCommon(ReportDTO reportDTO, boolean fromMobile){
-        if (reportDTO.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+    private Report addCommentToReportCommon(NoteDTO noteDTO, boolean fromMobile) {
+        Long reportId = fromMobile ? noteDTO.getReportId() : noteDTO.getId();
+        if (fromMobile && noteDTO.getReportId() == null) {
+            throw new BadRequestAlertException("Comment has null report ID", ENTITY_NAME, "idnull");
         }
-        Report reportEntity = reportService.findOneEntity(reportDTO.getId()).orElseThrow(() -> new BadRequestAlertException("Cannot find report", ENTITY_NAME, "" + reportDTO.getId()));
+        if (!fromMobile && noteDTO.getId() == null) { //!!!!noteDTO.getId() traktujemy jako reportId
+            throw new BadRequestAlertException("Comment has null report ID", ENTITY_NAME, "idnull");
+        }
+        Report reportEntity = reportService.findOneEntity(reportId).orElseThrow(() -> new BadRequestAlertException("Cannot find report", ENTITY_NAME, "" + reportId));
         Note newNote = new Note();
         newNote.setReport(reportEntity);
         newNote.setDate(Instant.now());
-
-//        if(fromMobile){
-//            newNote.setValue();
-//        }
-//        newNote.setValue(reportDTO.getManagerNote());
-        newNote.setValue("TEST");
+        newNote.setValue(fromMobile ? noteDTO.getValue() : noteDTO.getManagerNote());
         newNote.setNoteType(fromMobile ? NoteType.BY_WORKER : NoteType.BY_MANGER);
         reportEntity.setReadByManager(false);
         reportEntity.setReadByWorker(false);
@@ -126,20 +122,20 @@ public class ReportResource {
     }
 
     @PutMapping("/reports/addCommentToReportMobile")
-    public ResponseEntity<ReportDTO> addCommentToReportMobile(@Valid @RequestBody ReportDTO reportDTO) throws URISyntaxException { //todo update report, this is only desc edit
-        log.debug("REST request to update Report, addCommentToReportMobile : {}", reportDTO);
-        Report reportEntity = addCommentToReportCommon(reportDTO, true);
+    public ResponseEntity<ReportDTO> addCommentToReportMobile(@Valid @RequestBody NoteDTO noteDTO) throws URISyntaxException {
+        log.debug("REST request to update Report, addCommentToReportMobile : {}", noteDTO.getReportId());
+        Report reportEntity = addCommentToReportCommon(noteDTO, true);
         ReportDTO result = reportService.save(reportEntity);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, reportDTO.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, noteDTO.getReportId().toString()))
             .body(result);
     }
 
     @Transactional
     @PostMapping("/reports/addCommentToReportMobile/many")
-    public ResponseEntity addCommentToReportMobileMany(@Valid @RequestBody ReportsDTO reportsDTO) {
-        for (ReportDTO r : reportsDTO.getReportsDTOS()) {
-            Report reportEntity = addCommentToReportCommon(r, true);
+    public ResponseEntity addCommentToReportMobileMany(@Valid @RequestBody NotesDTO notesDTO) {
+        for (NoteDTO n : notesDTO.getNoteDTOS()) {
+            Report reportEntity = addCommentToReportCommon(n, true);
             reportService.save(reportEntity);
         }
         return ResponseEntity.ok().build();
