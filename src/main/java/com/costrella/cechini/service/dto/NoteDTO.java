@@ -16,6 +16,16 @@ public class NoteDTO implements Serializable {
     @Size(max = 2000)
     private String value;
 
+    private String managerNote;//tylko dla weba! /nie trzeba bylo robic formatki nowej/
+
+    public String getManagerNote() {
+        return managerNote;
+    }
+
+    public void setManagerNote(String managerNote) {
+        this.managerNote = managerNote;
+    }
+
     private Instant date;
 
 
