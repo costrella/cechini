@@ -57,7 +57,7 @@ public class MyReportsRecyclerViewAdapter extends RecyclerView.Adapter<MyReports
             recordText +=", opis: " + reportDTO.getDesc();
         }
         holder.mContentView.setText(recordText);
-        if (reportDTO.getManagerNote() != null) {
+        if (reportDTO.getReadByWorker() != null && !reportDTO.getReadByWorker().booleanValue()) {
             holder.managerNoteTV.setVisibility(View.VISIBLE);
         } else {
             holder.managerNoteTV.setVisibility(View.GONE);

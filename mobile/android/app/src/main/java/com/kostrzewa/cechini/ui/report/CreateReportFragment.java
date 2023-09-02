@@ -40,6 +40,9 @@ public class CreateReportFragment extends Fragment {
     @BindView(R.id.report_photoCount_tv)
     TextView photoCountTV;
 
+    @BindView(R.id.btn_addComment)
+    Button addCommentBtn;
+
     @OnClick(R.id.btn_addComment)
     void addComment() {
         new AddCommentDialogFragment(null, null, ReportData.reportDTO)
@@ -47,7 +50,11 @@ public class CreateReportFragment extends Fragment {
     }
 
     private void init() {
-        if (ReportData.reportDTO.isReadOnly()) fillDataReadOnly();
+        if (ReportData.reportDTO.isReadOnly()){
+            fillDataReadOnly();
+        } else {
+            addCommentBtn.setVisibility(View.GONE);
+        }
     }
 
     private void fillDataReadOnly() {
