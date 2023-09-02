@@ -77,6 +77,32 @@ public class ReportService {
         return reportMapper.toDto(report);
     }
 
+    public ReportDTO setReportReadByManager(Long reportId, Boolean read) {
+        log.debug("Request setReportReadByManager : {}", reportId);
+        Optional<Report> optionalReport = reportRepository.findById(reportId);
+        if(optionalReport.isPresent()){
+            Report report = optionalReport.get();
+            report.setReadByManager(read);
+            report = reportRepository.save(report);
+            return reportMapper.toDto(report);
+        } else {
+            return null;
+        }
+    }
+
+    public ReportDTO setReportReadByWorker(Long reportId, Boolean read) {
+        log.debug("Request setReportReadByWorker : {}", reportId);
+        Optional<Report> optionalReport = reportRepository.findById(reportId);
+        if(optionalReport.isPresent()){
+            Report report = optionalReport.get();
+            report.setReadByWorker(read);
+            report = reportRepository.save(report);
+            return reportMapper.toDto(report);
+        } else {
+            return null;
+        }
+    }
+
     public ReportDTO save(Report report) {
         report = reportRepository.save(report);
         return reportMapper.toDto(report);
