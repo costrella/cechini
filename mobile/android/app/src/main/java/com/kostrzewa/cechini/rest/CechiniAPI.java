@@ -73,4 +73,7 @@ public interface CechiniAPI {
 
     @POST("reports/addCommentToReportMobile/many")
     Call<Void> addCommentToReportMobileMany(@Body NotesDTO notesDTO);
+
+    @PUT("reports/setReportReadByWorker/{reportId}")
+    Call<Void> setReportReadByWorker(@Path("reportId") Long reportId);
 }

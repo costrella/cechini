@@ -115,8 +115,8 @@ public class ReportResource {
         newNote.setDate(Instant.now());
         newNote.setValue(fromMobile ? noteDTO.getValue() : noteDTO.getManagerNote());
         newNote.setNoteType(fromMobile ? NoteType.BY_WORKER : NoteType.BY_MANGER);
-        reportEntity.setReadByManager(false);
-        reportEntity.setReadByWorker(false);
+        reportEntity.setReadByManager(!fromMobile);
+        reportEntity.setReadByWorker(fromMobile);
         reportEntity.addNote(newNote);
         return reportEntity;
     }
@@ -140,6 +140,19 @@ public class ReportResource {
         }
         return ResponseEntity.ok().build();
 
+    }
+
+    @PutMapping("/reports/setReportReadByWorker/{reportId}")
+    public ResponseEntity<Void> setReportReadByWorker(@PathVariable Long reportId) throws URISyntaxException {
+        log.debug("REST request to setReportReadByWorker : {}", reportId);
+        Optional<ReportDTO> reportDTO = reportService.findOne(reportId);
+        if(reportDTO.isPresent() && reportDTO.get().getReadByWorker() != null && !reportDTO.get().getReadByWorker().booleanValue()){
+            ReportDTO reportDTO1 = reportService.setReportReadByWorker(reportDTO.get().getId(), true);
+            if(reportDTO1 != null){
+                return ResponseEntity.ok().build();
+            }
+        }
+        return  ResponseEntity.notFound().build();
     }
 
     /**
@@ -209,6 +222,12 @@ public class ReportResource {
     public ResponseEntity<ReportDTO> getReport(@PathVariable Long id) {//todo tutaj dac readByManager na TRUE , tylko czy z tej samej metody korzusta mobilka?
         log.debug("REST request to get Report : {}", id);
         Optional<ReportDTO> reportDTO = reportService.findOne(id);
+        if(reportDTO.isPresent() && reportDTO.get().getReadByManager() != null && !reportDTO.get().getReadByManager().booleanValue()){
+            ReportDTO reportDTO1 = reportService.setReportReadByManager(reportDTO.get().getId(), true);
+            if(reportDTO1 != null){
+                return ResponseUtil.wrapOrNotFound(Optional.of(reportDTO1));
+            }
+        }
         return ResponseUtil.wrapOrNotFound(reportDTO);
     }
 

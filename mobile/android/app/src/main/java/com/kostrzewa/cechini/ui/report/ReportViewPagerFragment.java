@@ -13,6 +13,8 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.kostrzewa.cechini.MainActivity;
 import com.kostrzewa.cechini.R;
+import com.kostrzewa.cechini.data.ReportDataManager;
+import com.kostrzewa.cechini.data.ReportDataManagerImpl;
 import com.kostrzewa.cechini.data.WorkerDataManager;
 import com.kostrzewa.cechini.data.WorkerDataManagerImpl;
 import com.kostrzewa.cechini.model.OrderDTO;
@@ -29,6 +31,8 @@ public class ReportViewPagerFragment extends Fragment {
     ReportPagerAdapter reportPagerAdapter;
     ViewPager viewPager;
     WorkerDataManager workerDataManager;
+
+    ReportDataManager reportDataManager;
     StoreDTO currentStore;
 
     @Nullable
@@ -57,8 +61,16 @@ public class ReportViewPagerFragment extends Fragment {
 //                ReportData.reportDTO.setOrderDTO(new OrderDTO());
 //            }
             ((MainActivity) getActivity()).getSupportActionBar().setTitle("Podgląd raportu");
+            setReportReadByWorker(ReportData.reportDTO);
         }
 
+    }
+
+    private void setReportReadByWorker(ReportDTO reportDTO){
+        if(reportDTO.getReadByWorker() != null && !reportDTO.getReadByWorker().booleanValue()){
+            reportDataManager = new ReportDataManagerImpl(getContext());
+            reportDataManager.setReportReadByWorker(reportDTO.getId());
+        }
     }
 
     private void removeBaseReport() {

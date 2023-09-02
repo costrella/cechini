@@ -253,4 +253,27 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
             }
         });
     }
+
+    @Override
+    public void setReportReadByWorker(Long reportID) {
+        if (!isNetworkConnected()) {
+            return;
+        }
+        RetrofitClient.getInstance().getService().setReportReadByWorker(reportID).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    System.out.println("ok");
+                }else  {
+                    System.out.println("nie ok");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                System.out.println();
+            }
+        });
+
+    }
 }
