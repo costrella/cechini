@@ -60,21 +60,29 @@
             <button type="button" [routerLink]="['/report', report.id, 'edit']" class="btn btn-primary">
                 <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Dodaj komentarz</span>
             </button>
-
+            <p></p>    
             <dl class="row-md jh-entity-details">
-                <dt><span>Komentarze</span></dt>
+                <dt><h4>Komentarze</h4></dt>
                 <dd *ngFor="let note of report.notes">
                     <div *ngIf="note.value">
                       
 
-                        
-                        <span>{{note.date}}</span>, <span>{{note.value}}</span>, noteType <span>{{note.noteType}}</span>
+                        <span *ngIf="note.noteType == 'BY_WORKER'">
+                            <span *ngIf="report.workerId">
+                                <a [routerLink]="['/worker', report.workerId, 'view']">{{ report.workerSurname }}</a>: {{note.value}}
+                            </div>
+                        </span>
+                        <span *ngIf="note.noteType != 'BY_WORKER'">
+                            Ty: {{note.value}}
+                        </span>
+                        <h6>{{note.date | date:'HH:mm dd/MM/yyyy'}}</h6>
                     </div>
                 </dd>
             </dl>
-
+            <p></p>
+            <p></p>
             <dl class="row-md jh-entity-details">
-                <dt><span>Zdjęcia</span></dt>
+                <dt><h4>Zdjęcia</h4></dt>
                 <dd *ngFor="let photoFile of report.photos">
                     <div *ngIf="photoFile.value">
                         <img [src]="'data:' + photoFile.valueContentType + ';base64,' + photoFile.value"
