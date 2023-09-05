@@ -8,6 +8,16 @@ public class PhotoFileDTO implements Serializable {
 
     private byte[] value;
 
+    //    private String value;
+    //
+    //    public String getValue() {
+    //        return value;
+    //    }
+    //
+    //    public void setValue(String value) {
+    //        this.value = value;
+    //    }
+
     private String valueContentType;
 
     public Long getId() {
@@ -56,7 +66,7 @@ public class PhotoFileDTO implements Serializable {
     public String toString() {
         return "PhotoFileDTO{" +
                 "id=" + getId() +
-                ", value='" + getValue() + "'" +
+//                ", value='" + getValue() + "'" +
                 "}";
     }
 }

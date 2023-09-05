@@ -211,7 +211,7 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
                     preferenceManager.setSychroTimeMyReports();
 
                     Set<String> myset = new HashSet<>();
-                    for (ReportDTOWithPhotos v : response.body()) {
+                    for (ReportDTO v : response.body()) {
                         myset.add(gson.toJson(v));
                     }
                     preferenceManager.setMyReports(myset);
@@ -222,7 +222,7 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
 
             @Override
             public void onFailure(Call<List<ReportDTOWithPhotos>> call, Throwable t) {
-                if (!isNetworkConnected()) {
+               if (!isNetworkConnected()) {
                     EventBus.getDefault().post(new MyReportsDownloadFailed("Brak internetu. Wczytuję raporty z pamięci."));
                 } else {
                     EventBus.getDefault().post(new MyReportsDownloadFailed("Wystąpił problem a08"));

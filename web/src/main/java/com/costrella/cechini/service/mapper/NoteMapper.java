@@ -14,13 +14,14 @@ public interface NoteMapper extends EntityMapper<NoteDTO, Note> {
 
     @Mapping(source = "store.id", target = "storeId")
     @Mapping(source = "workerNote.id", target = "workerNoteId")
-    @Mapping(source = "managerNote.id", target = "managerNoteId")
+    @Mapping(source = "managerNote.id", target = "managerNoteId", ignore = true)
     @Mapping(source = "report.id", target = "reportId")
+    @Mapping(source = "managerNote", target = "managerNote", ignore = true)
     NoteDTO toDto(Note note);
 
     @Mapping(source = "storeId", target = "store")
     @Mapping(source = "workerNoteId", target = "workerNote")
-    @Mapping(source = "managerNoteId", target = "managerNote")
+    @Mapping(source = "managerNoteId", target = "managerNote", ignore = true)
     @Mapping(source = "reportId", target = "report")
     Note toEntity(NoteDTO noteDTO);
 

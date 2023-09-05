@@ -166,7 +166,7 @@ public class ReportService {
     @Transactional(readOnly = true)
     public List<ReportDTO> findAllByWorkerIdLastMonth(Long id, Instant from, Instant to) {
         return reportRepository.findAllByWorkerIdAndReportDateBetweenOrderByReportDateDesc(id, from, to).stream()
-            .map(report -> reportMapper.toDtoWithOrders(report, orderMapper, orderItemMapper)).collect(Collectors.toList());
+            .map(report -> reportMapper.toDtoWithPhotos(report, orderMapper, orderItemMapper, photoFileMapper)).collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)

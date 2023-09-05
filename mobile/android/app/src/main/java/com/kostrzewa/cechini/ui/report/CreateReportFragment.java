@@ -1,13 +1,17 @@
 package com.kostrzewa.cechini.ui.report;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,6 +46,15 @@ public class CreateReportFragment extends Fragment {
 
     @BindView(R.id.btn_addComment)
     Button addCommentBtn;
+
+    @BindView(R.id.report_preview_photo_1)
+    ImageView reportPreviewPhoto1;
+
+    @BindView(R.id.report_preview_photo_2)
+    ImageView reportPreviewPhoto2;
+
+    @BindView(R.id.report_preview_photo_3)
+    ImageView reportPreviewPhoto3;
 
     @OnClick(R.id.btn_addComment)
     void addComment() {
@@ -81,7 +94,57 @@ public class CreateReportFragment extends Fragment {
 
         photoCountTV.setText("liczba przesłanych zdjęć: " + ReportData.reportDTO.getPhotosCount());
         photoCountTV.setEnabled(false);
+
+        if (ReportData.reportDTO.getPhotos() != null
+                && !ReportData.reportDTO.getPhotos().isEmpty()) {
+
+            if (ReportData.reportDTO.getPhotos().size() >= 1 && ReportData.reportDTO.getPhotos().get(0) != null) {
+                Bitmap bitmap = byteToBitMap(ReportData.reportDTO.getPhotos().get(0).getValue());
+                if (bitmap != null) {
+                    reportPreviewPhoto1.setImageBitmap(bitmap);
+                }
+            }
+
+            if (ReportData.reportDTO.getPhotos().size() >= 2 && ReportData.reportDTO.getPhotos().get(1) != null) {
+                Bitmap bitmap = byteToBitMap(ReportData.reportDTO.getPhotos().get(1).getValue());
+                if (bitmap != null) {
+                    reportPreviewPhoto2.setImageBitmap(bitmap);
+                }
+            }
+
+            if (ReportData.reportDTO.getPhotos().size() >= 3 && ReportData.reportDTO.getPhotos().get(2) != null) {
+                Bitmap bitmap = byteToBitMap(ReportData.reportDTO.getPhotos().get(2).getValue());
+                if (bitmap != null) {
+                    reportPreviewPhoto3.setImageBitmap(bitmap);
+                }
+            }
+
+        }
     }
+
+    public Bitmap byteToBitMap(byte[] bytes){
+        try{
+            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            return bitmap;
+        }
+        catch(Exception e){
+            e.getMessage();
+            return null;
+        }
+    }
+
+    public Bitmap stringToBitMap(String encodedString){
+        try{
+            byte [] encodeByte = Base64.decode(encodedString,Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        }
+        catch(Exception e){
+            e.getMessage();
+            return null;
+        }
+    }
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {

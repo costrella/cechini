@@ -31,6 +31,16 @@ public class ReportDTO implements Serializable {
 
     private List<NoteDTO> notes = new ArrayList<>();
 
+    public List<PhotoFileDTO> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<PhotoFileDTO> photos) {
+        this.photos = photos;
+    }
+
+    private List<PhotoFileDTO> photos = new ArrayList<>();
+
     public List<NoteDTO> getNotes() {
         return notes;
     }
