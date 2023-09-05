@@ -79,19 +79,22 @@
                     </th>
                     <th scope="col"><span jhiTranslate="cechiniApp.report.store">Store</span>
                     </th>
-                    <th scope="col"><span jhiTranslate="cechiniApp.report.photos">Photos</span>
+                    <th scope="col" style="text-align: center;"><span jhiTranslate="cechiniApp.report.photos">Photos</span>
                     </th>
-                    <th scope="col"><span jhiTranslate="cechiniApp.report.managerNote">managerNote</span>
+                    <th scope="col" style="text-align: center;"><span jhiTranslate="cechiniApp.report.managerNote">managerNote</span>
                     </th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let report of reports ;trackBy: trackId"
-                [ngStyle]="{'background-color': (report.id === reportIdRow) ? '#cce6ff' : undefined}">
+                <tr
+                 *ngFor="let report of reports ;trackBy: trackId"
+                [ngStyle]="{'background-color': (report.id === reportIdRow) ? '#cce6ff' : undefined}"
+                    >
                     <td>
                         <a style="color: #00a6ff" (click)="clickItem(['/report/', report.id, '/view', report.id])">
-                            {{ report.id }}, {{report.readByWorker}}, {{report.readByManager}}
+                            {{ report.id }}
+                            <!-- , {{report.readByWorker}}, {{report.readByManager}} -->
                         </a>
                     </td>
                     <!-- <td>{{ report.number }}</td> -->
@@ -118,11 +121,13 @@
                                 (click)="clickItem(['/store/', report.storeId , '/view', report.id])">{{ report.storeName }}</a>
                         </div>
                     </td>
-                    <td>
+                    <td style="text-align: center;">
                         <!-- {{report.photos.size}},  -->
                         {{report.photosCount}}
                     </td>
-                    <td>{{ report.managerNote }}</td>
+                    <td style="text-align: center;" [ngStyle]="{'background-color':  
+                    report.readByManager == null ? undefined : (!report.readByManager ? '#cfc7fc' : undefined)
+                        }">{{ report.notes.length }}</td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit" (click)="clickItem(['/report/', report.id, '/view', report.id])"

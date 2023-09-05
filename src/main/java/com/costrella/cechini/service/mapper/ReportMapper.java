@@ -6,10 +6,7 @@ import com.costrella.cechini.service.dto.*;
 import org.mapstruct.Mapper;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -93,7 +90,7 @@ public interface ReportMapper extends EntityMapper<ReportDTO, Report> {
             dto.setNoteType(n.getNoteType());
             //todo readed...
             return dto;
-        }).collect(Collectors.toList()));
+        }).sorted(Comparator.comparing(NoteDTO::getDate)).collect(Collectors.toList()));
         return reportDTO;
     }
 
