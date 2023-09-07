@@ -38,6 +38,9 @@ public class CreateReportFragment extends Fragment {
     @BindView(R.id.report_desc_et)
     EditText descET;
 
+    @BindView(R.id.reportId_tv)
+    TextView reportId_tv;
+
     @BindView(R.id.report_manager_et)
     EditText reportManagerET;
 
@@ -67,10 +70,18 @@ public class CreateReportFragment extends Fragment {
             fillDataReadOnly();
         } else {
             addCommentBtn.setVisibility(View.GONE);
+            reportId_tv.setVisibility(View.GONE);
         }
     }
 
     private void fillDataReadOnly() {
+        if (ReportData.reportDTO.getId() != null) {
+            reportId_tv.setText("ID: " + ReportData.reportDTO.getId());
+            reportId_tv.setVisibility(View.VISIBLE);
+        }else{
+            reportId_tv.setVisibility(View.GONE);
+        }
+
         descET.setText("Mój opis: " + ReportData.reportDTO.getDesc() != null ? ReportData.reportDTO.getDesc() : "");
         descET.setEnabled(false);
 

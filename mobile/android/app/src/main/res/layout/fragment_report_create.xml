@@ -10,6 +10,13 @@
         android:orientation="vertical"
         android:padding="5dp">
 
+        <TextView
+            android:id="@+id/reportId_tv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="ID: 252455"
+            tools:text="111001" />
+
 
     <EditText
         android:id="@+id/report_desc_et"
