@@ -66,6 +66,18 @@
         tools:layout="@layout/fragment_myreports_list" />
 
     <fragment
+        android:id="@+id/nav_unread_reports"
+        android:name="com.kostrzewa.cechini.ui.report.myreports.MyReportsFragment"
+        android:label="Nieprzeczytane komentarze"
+        tools:layout="@layout/fragment_myreports_list"
+        >
+        <argument
+            android:name="IS_UNREAD_REPORTS_FRAGMENT"
+            app:argType="boolean"
+            android:defaultValue="true" />
+    </fragment>
+
+    <fragment
         android:id="@+id/nav_myreportsOfStore"
         android:name="com.kostrzewa.cechini.ui.report.myreports.MyReportsFragment"
         android:label="Raporty sklepu"

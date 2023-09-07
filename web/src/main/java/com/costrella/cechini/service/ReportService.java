@@ -168,6 +168,11 @@ public class ReportService {
         return reportRepository.findAllByWorkerIdAndReportDateBetweenOrderByReportDateDesc(id, from, to).stream()
             .map(report -> reportMapper.toDtoWithPhotos(report, orderMapper, orderItemMapper, photoFileMapper)).collect(Collectors.toList());
     }
+    @Transactional(readOnly = true)
+    public List<ReportDTO> findAllByWorkerIdAndReadByWorkerIsFalseOrderByReportDateDesc(Long id) {
+        return reportRepository.findAllByWorkerIdAndReadByWorkerIsFalseOrderByReportDateDesc(id).stream()
+            .map(report -> reportMapper.toDtoWithPhotos(report, orderMapper, orderItemMapper, photoFileMapper)).collect(Collectors.toList());
+    }
 
     @Transactional(readOnly = true)
     public List<ReportDTO> findAllByWorkerIdAndStoreId(Long workerId, Long storeId) {

@@ -121,13 +121,16 @@
                                 (click)="clickItem(['/store/', report.storeId , '/view', report.id])">{{ report.storeName }}</a>
                         </div>
                     </td>
+
+                    
+
                     <td style="text-align: center;">
                         <!-- {{report.photos.size}},  -->
                         {{report.photosCount}}
                     </td>
                     <td style="text-align: center;" [ngStyle]="{'background-color':  
                     report.readByManager == null ? undefined : (!report.readByManager ? '#cfc7fc' : undefined)
-                        }">{{ report.notes.length }}</td>
+                        }">{{ report?.notes?.length }}</td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit" (click)="clickItem(['/report/', report.id, '/view', report.id])"

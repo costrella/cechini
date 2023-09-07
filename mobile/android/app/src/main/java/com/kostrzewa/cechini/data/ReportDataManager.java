@@ -21,6 +21,10 @@ public interface ReportDataManager {
 
     List<ReportDTOWithPhotos> getMyReports();
 
+    void downloadMyUnreadReportsByWorkerId(Long workerId);
+
+//    Long getMyUnreadReportsByWorkerIdCount(Long workerId);
+
     void downloadMyReportsByStoreId(Long workerId, Long storeId);
 
     void addNewComment(NoteDTO noteDTO);

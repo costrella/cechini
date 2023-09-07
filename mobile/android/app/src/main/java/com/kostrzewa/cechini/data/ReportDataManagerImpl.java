@@ -10,6 +10,8 @@ import com.kostrzewa.cechini.data.events.MyReportsDownloadFailed;
 import com.kostrzewa.cechini.data.events.MyReportsDownloadSuccess;
 import com.kostrzewa.cechini.data.events.ReportSentFailed;
 import com.kostrzewa.cechini.data.events.ReportSentSuccess;
+import com.kostrzewa.cechini.data.events.UnreadReportsDownloadFailed;
+import com.kostrzewa.cechini.data.events.UnreadReportsDownloadSuccess;
 import com.kostrzewa.cechini.model.NoteDTO;
 import com.kostrzewa.cechini.model.NotesDTO;
 import com.kostrzewa.cechini.model.ReportDTO;
@@ -200,6 +202,30 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
         }
         return reportDTOS;
     }
+
+    @Override
+    public void downloadMyUnreadReportsByWorkerId(Long workerId) {
+        RetrofitClient.getInstance().getService().getAllUnreadReportsByWorkerId(workerId).enqueue(new Callback<List<ReportDTOWithPhotos>>() {
+            @Override
+            public void onResponse(Call<List<ReportDTOWithPhotos>> call, Response<List<ReportDTOWithPhotos>> response) {
+                if (response.isSuccessful()) {
+                    EventBus.getDefault().post(new UnreadReportsDownloadSuccess(response.body()));
+                } else {
+                    EventBus.getDefault().post(new UnreadReportsDownloadFailed("Wystąpił problem U01"));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ReportDTOWithPhotos>> call, Throwable t) {
+                if (!isNetworkConnected()) {
+                    EventBus.getDefault().post(new UnreadReportsDownloadFailed("Brak internetu. U03"));
+                } else {
+                    EventBus.getDefault().post(new UnreadReportsDownloadFailed("Wystąpił problem U02"));
+                }
+            }
+        });
+    }
+
 
     @Override
     public void downloadMyReports(Long workerId) {
