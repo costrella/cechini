@@ -16,6 +16,8 @@ import java.util.List;
 @Repository
 public interface ReportRepository extends JpaRepository<Report, Long> {
 
+
+    List<Report> findAllByWorkerIdAndReadByWorkerIsFalseOrderByReportDateDesc(Long id);
     List<Report> findAllByWorkerIdAndReportDateBetweenOrderByReportDateDesc(Long id, Instant fromDate, Instant toDate);
 
     List<Report> findAllByStoreIdAndReportDateBetweenOrderByReportDateDesc(Long id, Instant fromDate, Instant toDate);

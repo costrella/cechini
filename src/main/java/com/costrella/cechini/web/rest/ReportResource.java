@@ -185,6 +185,18 @@ public class ReportResource {
         return ResponseEntity.ok().body(list);
     }
 
+    @GetMapping("/reports/worker/{workerId}/unread")
+    public ResponseEntity<List<ReportDTO>> getAllUnreadReportsByWorkerId(@PathVariable Long workerId) {
+        List<ReportDTO> list = reportService.findAllByWorkerIdAndReadByWorkerIsFalseOrderByReportDateDesc(workerId);
+        return ResponseEntity.ok().body(list);
+    }
+
+    @GetMapping("/reports/worker/{workerId}/unread/count")
+    public Long getAllUnreadReportsByWorkerIdCount(@PathVariable Long workerId) {
+        List<ReportDTO> list = reportService.findAllByWorkerIdAndReadByWorkerIsFalseOrderByReportDateDesc(workerId);
+        return Long.valueOf(list.size());
+    }
+
     @GetMapping("/reports/worker/{workerId}/store/{storeId}/all")
     public ResponseEntity<List<ReportDTO>>
     getAllReportsByWorkerIdAndStoreId(@PathVariable Long workerId, @PathVariable Long storeId) {

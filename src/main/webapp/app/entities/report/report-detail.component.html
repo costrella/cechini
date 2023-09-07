@@ -83,12 +83,14 @@
             <p></p>
             <dl class="row-md jh-entity-details">
                 <dt><h4>Zdjęcia</h4></dt>
-                <dd *ngFor="let photoFile of report.photos">
-                    <div *ngIf="photoFile.value">
-                        <img [src]="'data:' + photoFile.valueContentType + ';base64,' + photoFile.value"
-                            style="max-width: 100%;" alt="photoFile image" />
-                    </div>
-                </dd>
+                
+                    <dd *ngFor="let photoFile of report?.photos">
+                        <div *ngIf="photoFile.value">
+                            <img [src]="'data:' + photoFile.valueContentType + ';base64,' + photoFile.value"
+                                style="max-width: 100%;" alt="photoFile image" />
+                        </div>
+                    </dd>
+                
             </dl>
 
         </div>
