@@ -3,6 +3,7 @@ package com.costrella.cechini.service;
 import com.costrella.cechini.domain.Report;
 import com.costrella.cechini.repository.ReportRepository;
 import com.costrella.cechini.service.dto.ReportDTO;
+import com.costrella.cechini.service.dto.ReportDTOSimple;
 import com.costrella.cechini.service.dto.ReportDTOWithPhotos;
 import com.costrella.cechini.service.dto.WarehouseDTO;
 import com.costrella.cechini.service.mapper.OrderItemMapper;
@@ -163,21 +164,22 @@ public class ReportService {
             .map(reportMapper::toDto);
     }
 
-    @Transactional(readOnly = true)
-    public List<ReportDTO> findAllByWorkerIdLastMonth(Long id, Instant from, Instant to) {
-        return reportRepository.findAllByWorkerIdAndReportDateBetweenOrderByReportDateDesc(id, from, to).stream()
-            .map(report -> reportMapper.toDtoWithPhotos(report, orderMapper, orderItemMapper, photoFileMapper)).collect(Collectors.toList());
-    }
-    @Transactional(readOnly = true)
-    public List<ReportDTO> findAllByWorkerIdAndReadByWorkerIsFalseOrderByReportDateDesc(Long id) {
-        return reportRepository.findAllByWorkerIdAndReadByWorkerIsFalseOrderByReportDateDesc(id).stream()
-            .map(report -> reportMapper.toDtoWithPhotos(report, orderMapper, orderItemMapper, photoFileMapper)).collect(Collectors.toList());
+    @Transactional(readOnly = true)//mobile
+    public List<ReportDTOSimple> findAllByWorkerIdLastMonthMobile(Long id, Instant from, Instant to) {
+        return reportRepository.customByWorkerIdAndReportDateBetweenOrderByReportDateDesc(id, from, to)
+            .map(report -> reportMapper.toDtoMobile(report)).collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
-    public List<ReportDTO> findAllByWorkerIdAndStoreId(Long workerId, Long storeId) {
-        return reportRepository.findAllByWorkerIdAndStoreIdOrderByReportDateDesc(workerId, storeId).stream()
-            .map(report -> reportMapper.toDtoWithOrders(report, orderMapper, orderItemMapper)).collect(Collectors.toList());
+    public List<ReportDTOSimple> findAllByWorkerIdAndReadByWorkerIsFalseOrderByReportDateDesc(Long id) {
+        return reportRepository.customFindAllByWorkerIdAndReadByWorkerIsFalseOrderByReportDateDesc(id)
+            .map(report -> reportMapper.toDtoMobile(report)).collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<ReportDTOSimple> findAllByWorkerIdAndStoreId(Long workerId, Long storeId) {
+        return reportRepository.customFindAllByWorkerIdAndStoreIdOrderByReportDateDesc(workerId, storeId)
+            .map(reportMapper::toDtoMobile).collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
@@ -237,7 +239,10 @@ public class ReportService {
     @Transactional(readOnly = true)
     public Optional<Report> findOneEntity(Long id) {
         log.debug("Request to get Report : {}", id);
-        return reportRepository.findById(id);
+        return Optional.ofNullable(reportRepository.customFindById(id));
+
+        //        return Optional.of(reportRepository.findById(id)
+        //            .map(reportMapper::getReportWithAll).get());
     }
 
     /**
