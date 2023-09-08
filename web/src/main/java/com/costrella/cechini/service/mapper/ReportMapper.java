@@ -65,8 +65,7 @@ public interface ReportMapper extends EntityMapper<ReportDTO, Report> {
         ReportDTO reportDTO = new ReportDTO();
         reportDTO.setId(report.getId());
         reportDTO.setDesc(report.getDesc());
-        reportDTO.setManagerNote(report.getManagerNote());
-        reportDTO.setReportDate(report.getReportDate()); //todo
+        reportDTO.setReportDate(report.getReportDate());
         if (report.getWorker() != null) {
             reportDTO.setWorkerId(report.getWorker().getId());
             reportDTO.setWorkerSurname(report.getWorker().getSurname());
@@ -81,14 +80,12 @@ public interface ReportMapper extends EntityMapper<ReportDTO, Report> {
         reportDTO.setPhotosCount(report.getPhotos().size());
         reportDTO.setReadByManager(report.getReadByManager());
         reportDTO.setReadByWorker(report.getReadByWorker());
-        //todo
-        //todo notify
+
         reportDTO.setNotes(report.getNotes().stream().map(n -> {
             NoteDTO dto = new NoteDTO();
             dto.setDate(n.getDate());
             dto.setValue(n.getValue());
             dto.setNoteType(n.getNoteType());
-            //todo readed...
             return dto;
         }).sorted(Comparator.comparing(NoteDTO::getDate)).collect(Collectors.toList()));
         return reportDTO;
@@ -116,20 +113,22 @@ public interface ReportMapper extends EntityMapper<ReportDTO, Report> {
         return reportDTO;
     }
 
-    default ReportDTOSimple toDtoSimple(Report report) {
+    default ReportDTOSimple toDtoMobile(Report report) {
         if (report == null) return null;
         ReportDTOSimple reportDTO = new ReportDTOSimple();
         reportDTO.setId(report.getId());
         reportDTO.setDesc(report.getDesc());
-        reportDTO.setManagerNote(report.getManagerNote());
-//        reportDTO.setReportDate(report.getReportDate());
+        reportDTO.setReportDate(report.getReportDate());
+        reportDTO.setReadByManager(report.getReadByManager());
+        reportDTO.setReadByWorker(report.getReadByWorker());
+        reportDTO.setNotesExist(!report.getNotes().isEmpty());
         if (report.getStore() != null) {
             reportDTO.setStoreName(report.getStore().getName());
         }
-//        if (report.getOrder() != null) {
-//            reportDTO.setOrderId(report.getOrder().getId());
-//        }
-        reportDTO.setPhotosCount(report.getPhotos().size());
+        if (report.getOrder() != null) {
+            reportDTO.setOrderId(report.getOrder().getId());
+        }
         return reportDTO;
     }
+
 }

@@ -8,6 +8,8 @@ import com.kostrzewa.cechini.data.events.CommentAddedFailed;
 import com.kostrzewa.cechini.data.events.CommentAddedSuccess;
 import com.kostrzewa.cechini.data.events.MyReportsDownloadFailed;
 import com.kostrzewa.cechini.data.events.MyReportsDownloadSuccess;
+import com.kostrzewa.cechini.data.events.OneReportFailed;
+import com.kostrzewa.cechini.data.events.OneReportSuccess;
 import com.kostrzewa.cechini.data.events.ReportSentFailed;
 import com.kostrzewa.cechini.data.events.ReportSentSuccess;
 import com.kostrzewa.cechini.data.events.UnreadReportsDownloadFailed;
@@ -23,7 +25,6 @@ import com.kostrzewa.cechini.ui.report.data.ReportData;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -301,5 +302,27 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
             }
         });
 
+    }
+
+    @Override
+    public void downloadOneReport(Long id) {
+        if (!isNetworkConnected()) {
+            return;
+        }
+        RetrofitClient.getInstance().getService().getReport(id).enqueue(new Callback<ReportDTOWithPhotos>() {
+            @Override
+            public void onResponse(Call<ReportDTOWithPhotos> call, Response<ReportDTOWithPhotos> response) {
+                if (response.isSuccessful()) {
+                    EventBus.getDefault().post(new OneReportSuccess(response.body()));
+                } else {
+                    EventBus.getDefault().post(new OneReportFailed("Wystąpił problem O1"));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ReportDTOWithPhotos> call, Throwable t) {
+                EventBus.getDefault().post(new OneReportFailed("Wystąpił problem O2"));
+            }
+        });
     }
 }

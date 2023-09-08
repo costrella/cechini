@@ -10,6 +10,7 @@ import com.costrella.cechini.web.rest.errors.BadRequestAlertException;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,6 +31,7 @@ import java.time.YearMonth;
 import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * REST controller for managing {@link com.costrella.cechini.domain.Report}.
@@ -176,31 +178,32 @@ public class ReportResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
-    @GetMapping("/reports/worker/{id}/all")
-    public ResponseEntity<List<ReportDTO>> getAllReportsByWorkerId(@PathVariable Long id) {
+    @GetMapping("/reports/worker/{id}/all")//mobile
+    public ResponseEntity<List<ReportDTOSimple>> getAllReportsByWorkerIdMobile(@PathVariable Long id) {
         LocalDate from = YearMonth.from(Instant.now().atZone(ZoneId.systemDefault())).atDay(1);
         Instant instantFrom = from.atStartOfDay(ZoneId.systemDefault()).toInstant();
 
-        List<ReportDTO> list = reportService.findAllByWorkerIdLastMonth(id, instantFrom, Instant.now());
+        List<ReportDTOSimple> list = reportService.findAllByWorkerIdLastMonthMobile(id, instantFrom, Instant.now());
+
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping("/reports/worker/{workerId}/unread")
-    public ResponseEntity<List<ReportDTO>> getAllUnreadReportsByWorkerId(@PathVariable Long workerId) {
-        List<ReportDTO> list = reportService.findAllByWorkerIdAndReadByWorkerIsFalseOrderByReportDateDesc(workerId);
+    public ResponseEntity<List<ReportDTOSimple>> getAllUnreadReportsByWorkerId(@PathVariable Long workerId) {
+        List<ReportDTOSimple> list = reportService.findAllByWorkerIdAndReadByWorkerIsFalseOrderByReportDateDesc(workerId);
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping("/reports/worker/{workerId}/unread/count")
     public Long getAllUnreadReportsByWorkerIdCount(@PathVariable Long workerId) {
-        List<ReportDTO> list = reportService.findAllByWorkerIdAndReadByWorkerIsFalseOrderByReportDateDesc(workerId);
+        List<ReportDTOSimple> list = reportService.findAllByWorkerIdAndReadByWorkerIsFalseOrderByReportDateDesc(workerId);
         return Long.valueOf(list.size());
     }
 
     @GetMapping("/reports/worker/{workerId}/store/{storeId}/all")
-    public ResponseEntity<List<ReportDTO>>
+    public ResponseEntity<List<ReportDTOSimple>>
     getAllReportsByWorkerIdAndStoreId(@PathVariable Long workerId, @PathVariable Long storeId) {
-        List<ReportDTO> list = reportService.findAllByWorkerIdAndStoreId(workerId, storeId);
+        List<ReportDTOSimple> list = reportService.findAllByWorkerIdAndStoreId(workerId, storeId);
         return ResponseEntity.ok().body(list);
     }
 
@@ -240,6 +243,13 @@ public class ReportResource {
                 return ResponseUtil.wrapOrNotFound(Optional.of(reportDTO1));
             }
         }
+        return ResponseUtil.wrapOrNotFound(reportDTO);
+    }
+
+    @GetMapping("/reports/{id}/mobile")
+    public ResponseEntity<ReportDTO> getReportMobile(@PathVariable Long id) {
+        log.debug("RgetReportMobile : {}", id);
+        Optional<ReportDTO> reportDTO = reportService.findOne(id);
         return ResponseUtil.wrapOrNotFound(reportDTO);
     }
 

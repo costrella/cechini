@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,6 +18,8 @@ import com.kostrzewa.cechini.data.ReportDataManager;
 import com.kostrzewa.cechini.data.ReportDataManagerImpl;
 import com.kostrzewa.cechini.data.WorkerDataManager;
 import com.kostrzewa.cechini.data.WorkerDataManagerImpl;
+import com.kostrzewa.cechini.data.events.OneReportFailed;
+import com.kostrzewa.cechini.data.events.OneReportSuccess;
 import com.kostrzewa.cechini.model.OrderDTO;
 import com.kostrzewa.cechini.model.ReportDTO;
 import com.kostrzewa.cechini.model.ReportDTOWithPhotos;
@@ -26,6 +29,9 @@ import com.kostrzewa.cechini.ui.report.data.ReportData;
 import static com.kostrzewa.cechini.util.Constants.REPORT_DTO;
 import static com.kostrzewa.cechini.util.Constants.STORE_DTO;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 public class ReportViewPagerFragment extends Fragment {
 
     ReportPagerAdapter reportPagerAdapter;
@@ -34,6 +40,9 @@ public class ReportViewPagerFragment extends Fragment {
 
     ReportDataManager reportDataManager;
     StoreDTO currentStore;
+    private View view;
+
+
 
     @Nullable
     @Override
@@ -43,6 +52,7 @@ public class ReportViewPagerFragment extends Fragment {
         currentStore = (StoreDTO) getArguments().getSerializable(STORE_DTO);
         ReportDTO reportDTO = (ReportDTO) getArguments().getSerializable(REPORT_DTO);
         workerDataManager = new WorkerDataManagerImpl(getContext());
+        reportDataManager = new ReportDataManagerImpl(getContext());
         createBaseReport(reportDTO, currentStore);
         return inflater.inflate(R.layout.fragment_report_viewpager, container, false);
     }
@@ -62,8 +72,21 @@ public class ReportViewPagerFragment extends Fragment {
 //            }
             ((MainActivity) getActivity()).getSupportActionBar().setTitle("Podgląd raportu");
             setReportReadByWorker(ReportData.reportDTO);
+
+            reportDataManager.downloadOneReport(ReportData.reportDTO.getId());
         }
 
+    }
+    @Subscribe
+    public void oneReportSuccess(OneReportSuccess oneReportSuccess) {
+        ReportData.reportDTO = oneReportSuccess.getReportDTOWithPhotos();
+        ReportData.reportDTO.setReadOnly(true);
+        load();
+    }
+
+    @Subscribe
+    public void oneReportFailed(OneReportFailed oneReportFailed) {
+        Toast.makeText(getActivity(), "Error: " + oneReportFailed.getText(), Toast.LENGTH_SHORT).show();
     }
 
     private void setReportReadByWorker(ReportDTO reportDTO){
@@ -79,6 +102,11 @@ public class ReportViewPagerFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        this.view = view;
+        load();
+    }
+
+    private void load(){
         reportPagerAdapter = new ReportPagerAdapter(getChildFragmentManager(), currentStore);
         viewPager = view.findViewById(R.id.pager);
         viewPager.setAdapter(reportPagerAdapter);
@@ -96,6 +124,18 @@ public class ReportViewPagerFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         removeBaseReport();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 
 }
