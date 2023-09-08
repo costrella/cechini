@@ -82,4 +82,7 @@ public interface CechiniAPI {
 
     @PUT("reports/setReportReadByWorker/{reportId}")
     Call<Void> setReportReadByWorker(@Path("reportId") Long reportId);
+
+    @GET("reports/{reportId}/mobile")
+    Call<ReportDTOWithPhotos> getReport(@Path("reportId") Long reportId);
 }

@@ -29,4 +29,6 @@ public interface ReportDataManager {
 
     void addNewComment(NoteDTO noteDTO);
     void setReportReadByWorker(Long reportID);
+
+    void downloadOneReport(Long id);
 }

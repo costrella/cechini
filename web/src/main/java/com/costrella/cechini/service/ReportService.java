@@ -167,7 +167,7 @@ public class ReportService {
     @Transactional(readOnly = true)//mobile
     public List<ReportDTOSimple> findAllByWorkerIdLastMonthMobile(Long id, Instant from, Instant to) {
         return reportRepository.customByWorkerIdAndReportDateBetweenOrderByReportDateDesc(id, from, to)
-            .map(report -> reportMapper.toDtoMobile(report)).collect(Collectors.toList());
+            .map(reportMapper::toDtoMobile).collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
