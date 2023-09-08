@@ -246,6 +246,13 @@ public class ReportResource {
         return ResponseUtil.wrapOrNotFound(reportDTO);
     }
 
+    @GetMapping("/reports/{id}/mobile")
+    public ResponseEntity<ReportDTO> getReportMobile(@PathVariable Long id) {
+        log.debug("RgetReportMobile : {}", id);
+        Optional<ReportDTO> reportDTO = reportService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(reportDTO);
+    }
+
     @GetMapping("/reports/store/{id}/{months}")
     public ResponseEntity<List<ReportDTO>> getReportsByStore(@PathVariable Long id, @PathVariable int months) {
         List<ReportDTO> list = reportService.findReportsByStoreIdAndXMonthAgo(id, months);
