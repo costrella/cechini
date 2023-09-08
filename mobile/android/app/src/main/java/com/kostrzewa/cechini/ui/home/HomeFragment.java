@@ -121,11 +121,11 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<Long> call, Throwable t) {
-                if(!isNetworkConnected()){
-                    btn_unreadReport.setText("Brak internetu");
-                } else {
-                    btn_unreadReport.setText("U04");
-                }
+//                if(!isNetworkConnected()){
+//                    btn_unreadReport.setText("Brak internetu");
+//                } else {
+//                }
+                btn_unreadReport.setText("U04");
             }
         });
     }
