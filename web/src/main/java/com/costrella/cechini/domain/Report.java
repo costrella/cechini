@@ -1,6 +1,8 @@
 package com.costrella.cechini.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -36,14 +38,14 @@ public class Report implements Serializable {
     private String managerNote;
 
     //    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "order")
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(unique = true)
     private Order order;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "report")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "report", fetch = FetchType.LAZY)
     private Set<Photo> photos = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "report")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "report")
     private Set<Note> notes = new HashSet<>();
 
     @ManyToOne(optional = false)
@@ -51,7 +53,7 @@ public class Report implements Serializable {
     @JsonIgnoreProperties(value = "reports", allowSetters = true)
     private Worker worker;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @NotNull
     @JsonIgnoreProperties(value = "reports", allowSetters = true)
     private Store store;

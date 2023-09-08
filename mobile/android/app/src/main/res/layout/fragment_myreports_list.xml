@@ -41,12 +41,23 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textColor="@color/red"
+            android:textColor="@color/colorProductItemCapacity"
             android:text=" K"></TextView>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text=" - Nieodczytany komentarz"></TextView>
+            android:text=" - Komentarze"></TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/red"
+            android:text=" N"></TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text=" - Nieodczytany"></TextView>
     </LinearLayout>
 </LinearLayout>

@@ -14,12 +14,59 @@ public class ReportDTOSimple implements Serializable {
 
     private String desc;
 
-    private String managerNote;
+    private Instant reportDate;
 
     private int photosCount;
 
     private String storeName;
 
+    private Boolean readByWorker;
+
+    private Boolean readByManager;
+
+    private Long orderId;
+
+    private boolean notesExist;
+
+    public boolean isNotesExist() {
+        return notesExist;
+    }
+
+    public void setNotesExist(boolean notesExist) {
+        this.notesExist = notesExist;
+    }
+
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
+    }
+
+    public Boolean getReadByWorker() {
+        return readByWorker;
+    }
+
+    public void setReadByWorker(Boolean readByWorker) {
+        this.readByWorker = readByWorker;
+    }
+
+    public Boolean getReadByManager() {
+        return readByManager;
+    }
+
+    public void setReadByManager(Boolean readByManager) {
+        this.readByManager = readByManager;
+    }
+
+    public Instant getReportDate() {
+        return reportDate;
+    }
+
+    public void setReportDate(Instant reportDate) {
+        this.reportDate = reportDate;
+    }
 
     public Long getId() {
         return id;
@@ -27,10 +74,6 @@ public class ReportDTOSimple implements Serializable {
 
     public String getDesc() {
         return desc;
-    }
-
-    public String getManagerNote() {
-        return managerNote;
     }
 
     public int getPhotosCount() {
@@ -47,10 +90,6 @@ public class ReportDTOSimple implements Serializable {
 
     public void setDesc(String desc) {
         this.desc = desc;
-    }
-
-    public void setManagerNote(String managerNote) {
-        this.managerNote = managerNote;
     }
 
     public void setPhotosCount(int photosCount) {

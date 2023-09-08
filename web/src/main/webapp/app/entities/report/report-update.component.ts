@@ -57,31 +57,31 @@ export class ReportUpdateComponent implements OnInit {
 
       this.updateForm(report);
 
-      this.orderService
-        .query({ filter: 'report-is-null' })
-        .pipe(
-          map((res: HttpResponse<IOrder[]>) => {
-            return res.body || [];
-          })
-        )
-        .subscribe((resBody: IOrder[]) => {
-          if (!report.orderId) {
-            this.orders = resBody;
-          } else {
-            this.orderService
-              .find(report.orderId)
-              .pipe(
-                map((subRes: HttpResponse<IOrder>) => {
-                  return subRes.body ? [subRes.body].concat(resBody) : resBody;
-                })
-              )
-              .subscribe((concatRes: IOrder[]) => (this.orders = concatRes));
-          }
-        });
+      // this.orderService
+      //   .query({ filter: 'report-is-null' })
+      //   .pipe(
+      //     map((res: HttpResponse<IOrder[]>) => {
+      //       return res.body || [];
+      //     })
+      //   )
+      //   .subscribe((resBody: IOrder[]) => {
+      //     if (!report.orderId) {
+      //       this.orders = resBody;
+      //     } else {
+      //       this.orderService
+      //         .find(report.orderId)
+      //         .pipe(
+      //           map((subRes: HttpResponse<IOrder>) => {
+      //             return subRes.body ? [subRes.body].concat(resBody) : resBody;
+      //           })
+      //         )
+      //         .subscribe((concatRes: IOrder[]) => (this.orders = concatRes));
+      //     }
+      //   });
 
-      this.workerService.query().subscribe((res: HttpResponse<IWorker[]>) => (this.workers = res.body || []));
+      // this.workerService.query().subscribe((res: HttpResponse<IWorker[]>) => (this.workers = res.body || []));
 
-      this.storeService.query().subscribe((res: HttpResponse<IStore[]>) => (this.stores = res.body || []));
+      // this.storeService.query().subscribe((res: HttpResponse<IStore[]>) => (this.stores = res.body || []));
     });
   }
 

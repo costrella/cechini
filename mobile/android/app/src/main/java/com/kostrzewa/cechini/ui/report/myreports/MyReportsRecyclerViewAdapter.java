@@ -50,18 +50,21 @@ public class MyReportsRecyclerViewAdapter extends RecyclerView.Adapter<MyReports
     public void onBindViewHolder(final ViewHolder holder, int position) {
         ReportDTO reportDTO = mValues.get(position);
         holder.mItem = reportDTO;
-        holder.orderExistTV.setVisibility(reportDTO.getOrderDTO() == null ? View.GONE : View.VISIBLE);
+        holder.orderExistTV.setVisibility(reportDTO.getOrderId() == null ? View.GONE : View.VISIBLE);
         holder.date.setText(DateUtils.parse(reportDTO.getReportDate()));
-        String recordText = "Sklep: " + reportDTO.getStoreName();
+        String recordText = reportDTO.getStoreName();
         if(reportDTO.getDesc() != null){
-            recordText +=", opis: " + reportDTO.getDesc();
+            recordText +=" / \"" + reportDTO.getDesc() + "\"";
         }
         holder.mContentView.setText(recordText);
         if (reportDTO.getReadByWorker() != null && !reportDTO.getReadByWorker().booleanValue()) {
-            holder.managerNoteTV.setVisibility(View.VISIBLE);
+            holder.reportUnreadTV.setVisibility(View.VISIBLE);
         } else {
-            holder.managerNoteTV.setVisibility(View.GONE);
+            holder.reportUnreadTV.setVisibility(View.GONE);
         }
+
+        holder.managerNoteTV.setVisibility(reportDTO.isNotesExist() ? View.VISIBLE : View.GONE);
+
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,6 +87,7 @@ public class MyReportsRecyclerViewAdapter extends RecyclerView.Adapter<MyReports
         public final TextView mContentView;
         public final TextView managerNoteTV;
         public final TextView orderExistTV;
+        public final TextView reportUnreadTV;
 
         public ReportDTO mItem;
 
@@ -94,6 +98,7 @@ public class MyReportsRecyclerViewAdapter extends RecyclerView.Adapter<MyReports
             mContentView = (TextView) view.findViewById(R.id.content);
             managerNoteTV = (TextView) view.findViewById(R.id.item_managerNote);
             orderExistTV = (TextView) view.findViewById(R.id.item_orderExist);
+            reportUnreadTV = (TextView) view.findViewById(R.id.item_unread);
 
         }
 

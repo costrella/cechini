@@ -27,6 +27,8 @@ public class ReportDTO implements Serializable {
 
     private String storeName;
 
+    private boolean notesExist;
+
     private OrderDTO orderDTO;
 
     private List<NoteDTO> notes = new ArrayList<>();
@@ -43,6 +45,14 @@ public class ReportDTO implements Serializable {
 
     public List<NoteDTO> getNotes() {
         return notes;
+    }
+
+    public boolean isNotesExist() {
+        return notesExist;
+    }
+
+    public void setNotesExist(boolean notesExist) {
+        this.notesExist = notesExist;
     }
 
     public void setNotes(List<NoteDTO> notes) {
