@@ -141,7 +141,7 @@ jhipster:
   #     allow-credentials: true
   #     max-age: 1800
   mail:
-    from: cechini.zamowienia@misiekmk.linuxpl.info
+    from: orders@costrella.ovh
   swagger:
     default-include-pattern: /api/.*
     title: cechini API
