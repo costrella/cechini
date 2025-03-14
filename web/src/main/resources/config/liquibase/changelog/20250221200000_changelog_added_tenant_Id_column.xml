@@ -1,0 +1,208 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+
+
+    <changeSet id="20250210000000-0" author="mikostrz">
+        <createTable tableName="tenant">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20250210000000-1" author="mikostrz">
+        <addColumn tableName="jhi_user">
+            <column name="tenant_id" type="bigint"/>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="tenant_id"
+                                 baseTableName="jhi_user"
+                                 constraintName="fk_user_tenant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tenant"/>
+    </changeSet>
+
+    <changeSet author="mikostrz (generated)" id="20250210000000-2">
+        <addColumn tableName="report">
+            <column name="tenant_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="tenant_id"
+                                 baseTableName="report"
+                                 constraintName="fk_report_tenant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tenant"/>
+    </changeSet>
+    <changeSet author="mikostrz (generated)" id="20250210000000-3">
+        <addColumn tableName="worker">
+            <column name="tenant_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="tenant_id"
+                                 baseTableName="worker"
+                                 constraintName="fk_worker_tenant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tenant"/>
+    </changeSet>
+    <changeSet author="mikostrz (generated)" id="20250210000000-4">
+        <addColumn tableName="store">
+            <column name="tenant_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="tenant_id"
+                                 baseTableName="store"
+                                 constraintName="fk_store_tenant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tenant"/>
+    </changeSet>
+    <changeSet author="mikostrz (generated)" id="20250210000000-5">
+        <addColumn tableName="store_group">
+            <column name="tenant_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="tenant_id"
+                                 baseTableName="store_group"
+                                 constraintName="fk_store_group_tenant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tenant"/>
+    </changeSet>
+    <changeSet author="mikostrz (generated)" id="20250210000000-6">
+        <addColumn tableName="manager">
+            <column name="tenant_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="tenant_id"
+                                 baseTableName="manager"
+                                 constraintName="fk_manager_tenant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tenant"/>
+    </changeSet>
+    <changeSet author="mikostrz (generated)" id="20250210000000-7">
+        <addColumn tableName="jhi_order">
+            <column name="tenant_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="tenant_id"
+                                 baseTableName="jhi_order"
+                                 constraintName="fk_order_tenant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tenant"/>
+    </changeSet>
+    <changeSet author="mikostrz (generated)" id="20250210000000-8">
+        <addColumn tableName="order_item">
+            <column name="tenant_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="tenant_id"
+                                 baseTableName="order_item"
+                                 constraintName="fk_order_item_tenant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tenant"/>
+    </changeSet>
+    <changeSet author="mikostrz (generated)" id="20250210000000-9">
+        <addColumn tableName="product">
+            <column name="tenant_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="tenant_id"
+                                 baseTableName="product"
+                                 constraintName="fk_product_tenant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tenant"/>
+    </changeSet>
+    <changeSet author="mikostrz (generated)" id="20250210000000-10">
+        <addColumn tableName="warehouse">
+            <column name="tenant_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="tenant_id"
+                                 baseTableName="warehouse"
+                                 constraintName="fk_warehouse_tenant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tenant"/>
+    </changeSet>
+    <changeSet author="mikostrz (generated)" id="20250210000000-12">
+        <addColumn tableName="track">
+            <column name="tenant_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="tenant_id"
+                                 baseTableName="track"
+                                 constraintName="fk_track_tenant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tenant"/>
+    </changeSet>
+    <changeSet author="mikostrz (generated)" id="20250210000000-13">
+        <addColumn tableName="location">
+            <column name="tenant_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="tenant_id"
+                                 baseTableName="location"
+                                 constraintName="fk_location_tenant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tenant"/>
+    </changeSet>
+    <changeSet author="mikostrz (generated)" id="20250210000000-14">
+        <addColumn tableName="status">
+            <column name="tenant_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="tenant_id"
+                                 baseTableName="status"
+                                 constraintName="fk_status_tenant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tenant"/>
+    </changeSet>
+    <changeSet author="mikostrz (generated)" id="20250210000000-15">
+        <addColumn tableName="photo">
+            <column name="tenant_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="tenant_id"
+                                 baseTableName="photo"
+                                 constraintName="fk_photo_tenant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tenant"/>
+    </changeSet>
+    <changeSet author="mikostrz (generated)" id="20250210000000-16">
+        <addColumn tableName="note">
+            <column name="tenant_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="tenant_id"
+                                 baseTableName="note"
+                                 constraintName="fk_note_tenant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tenant"/>
+    </changeSet>
+    <changeSet author="mikostrz (generated)" id="20250210000000-17">
+        <addColumn tableName="photo_file">
+            <column name="tenant_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="tenant_id"
+                                 baseTableName="photo_file"
+                                 constraintName="fk_photo_file_tenant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tenant"/>
+    </changeSet>
+
+</databaseChangeLog>
