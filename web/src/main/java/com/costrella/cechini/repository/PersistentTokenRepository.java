@@ -2,9 +2,9 @@ package com.costrella.cechini.repository;
 
 import com.costrella.cechini.domain.PersistentToken;
 import com.costrella.cechini.domain.User;
-import java.time.LocalDate;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**

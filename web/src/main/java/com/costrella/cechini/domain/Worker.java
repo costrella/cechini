@@ -72,6 +72,17 @@ public class Worker implements Serializable {
     @JsonIgnore
     private Set<Manager> managers = new HashSet<>();
 
+    @ManyToOne
+    private Tenant tenant;
+
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
+    }
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
