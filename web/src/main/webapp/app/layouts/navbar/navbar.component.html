@@ -46,7 +46,7 @@
                             <span jhiTranslate="global.menu.entities.storeGroup">Store Group</span>
                         </a>
                     </li>
-                    <li *jhiHasAnyAuthority="'ROLE_ADMIN'"> 
+                    <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
                         <a class="dropdown-item" routerLink="manager" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.manager">Manager</span>
@@ -242,7 +242,7 @@
                             <span jhiTranslate="global.menu.account.login">Sign in</span>
                         </a>
                     </li>
-                    <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                    <li>
                         <a class="dropdown-item" routerLink="account/register" routerLinkActive="active" (click)="collapseNavbar()">
                             <fa-icon icon="user-plus" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.account.register">Register</span>

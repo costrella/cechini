@@ -15,6 +15,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Headers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,26 +29,42 @@ public class WorkerDataManagerImpl extends AbstractDataManager implements Worker
 
     @Override
     public void loginAsync(WorkerDTO workerDTO) {
-        RetrofitClient.getInstance().getService().login(workerDTO).enqueue(new Callback<WorkerDTO>() {
+
+        RetrofitClient.getInstance().getService().login2(workerDTO.getLogin(), workerDTO.getPassword()).enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<WorkerDTO> call, Response<WorkerDTO> response) {
-                if (response.isSuccessful()) {
-                    EventBus.getDefault().post(new LoginSuccess(response.body()));
-                } else {
-                    try {
-                        JSONObject jObjError = new JSONObject(response.errorBody().string());
-                        EventBus.getDefault().post(new LoginFailed(jObjError.getString("title")));
-                    } catch (Exception e) {
-                        EventBus.getDefault().post(new LoginFailed("Błąd a05: " + response.code()));
-                    }
-                }
+            public void onResponse(Call<Void> call, Response<Void> response) {
+//                Headers headers = response.headers();
+//                String token = headers.get("Set-Cookie");
+                EventBus.getDefault().post(new LoginSuccess(workerDTO));
             }
 
             @Override
-            public void onFailure(Call<WorkerDTO> call, Throwable t) {
-                EventBus.getDefault().post(new LoginFailed("" + t.getMessage()));
+            public void onFailure(Call<Void> call, Throwable throwable) {
+                EventBus.getDefault().post(new LoginFailed("" + throwable.getMessage()));
             }
         });
+
+
+//        RetrofitClient.getInstance().getService().login(workerDTO).enqueue(new Callback<WorkerDTO>() {
+//            @Override
+//            public void onResponse(Call<WorkerDTO> call, Response<WorkerDTO> response) {
+//                if (response.isSuccessful()) {
+//                    EventBus.getDefault().post(new LoginSuccess(response.body()));
+//                } else {
+//                    try {
+//                        JSONObject jObjError = new JSONObject(response.errorBody().string());
+//                        EventBus.getDefault().post(new LoginFailed(jObjError.getString("title")));
+//                    } catch (Exception e) {
+//                        EventBus.getDefault().post(new LoginFailed("Błąd a05: " + response.code()));
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<WorkerDTO> call, Throwable t) {
+//                EventBus.getDefault().post(new LoginFailed("" + t.getMessage()));
+//            }
+//        });
 
     }
 

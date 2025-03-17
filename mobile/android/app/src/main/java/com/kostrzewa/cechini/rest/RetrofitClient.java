@@ -14,7 +14,14 @@ import com.google.gson.JsonSerializer;
 import com.kostrzewa.cechini.BuildConfig;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
+import okhttp3.Cookie;
+import okhttp3.CookieJar;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -39,7 +46,9 @@ public class RetrofitClient {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BuildConfig.SERVER_URL)
 //                .addConverterFactory(GsonConverterFactory.create())
-
+                .client(
+                        new OkHttpClient().newBuilder()
+                                .cookieJar(new SessionCookieJar()).build())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 

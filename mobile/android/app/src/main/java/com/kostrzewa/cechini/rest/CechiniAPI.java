@@ -16,6 +16,8 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -30,10 +32,10 @@ public interface CechiniAPI {
     Call<List<StoreDTO>> getMyStores(@Path("id") Long id);
 
     @POST("stores")
-    Call<StoreDTO> addStore(@Body StoreDTO storeDTO);
+    Call<StoreDTO> addStore(@Body StoreDTO storeDTO);//todo by trzeba bylo dodac tenantId
 
     @PUT("stores")
-    Call<StoreDTO> editStore(@Body StoreDTO storeDTO);
+    Call<StoreDTO> editStore(@Body StoreDTO storeDTO);//todo by trzeba bylo dodac tenantId
 
     @GET("store-groups/all")
     Call<List<StoreGroupDTO>> getAllStoreGroups();
@@ -67,6 +69,10 @@ public interface CechiniAPI {
 
     @POST("workers/login")
     Call<WorkerDTO> login(@Body WorkerDTO workerDTO);
+
+    @POST("authentication")
+    @FormUrlEncoded
+    Call<Void> login2(@Field("username") String username, @Field("password") String password);
 
     @PUT("worker/updateFwVersion/{workerId}/{fwVersion}")
     Call<WorkerDTO> updateFwVersion(@Path("workerId") Long workerId, @Path("fwVersion") String fwVersion);

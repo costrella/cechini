@@ -76,11 +76,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers( "/api/reports/**")
             .antMatchers( "/api/stores")
             .antMatchers( "/api/stores/**")
-            .antMatchers( "/api/products/**")
+//            .antMatchers( "/api/products/**")
             .antMatchers( "/api/warehouses/**")
             .antMatchers( "/api/store-groups")
             .antMatchers( "/api/store-groups/**")
 //            .antMatchers( "/api/workers/**")
+//            .antMatchers( "/api/workers/login")
             .antMatchers( "/api/stats/**")
             .antMatchers( "/api/mail/**")
             .antMatchers( "/api/worker/updateFwVersion/**")
@@ -95,9 +96,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         // @formatter:off
         http
-            .csrf()
-            .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-        .and()
+            .csrf().disable()
             .addFilterBefore(corsFilter, CsrfFilter.class)
             .exceptionHandling()
                 .authenticationEntryPoint(problemSupport)
