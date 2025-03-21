@@ -1,5 +1,7 @@
 package com.costrella.cechini.service.dto;
 
+import com.costrella.cechini.domain.Tenant;
+
 import javax.validation.constraints.*;
 import java.io.Serializable;
 
@@ -35,6 +37,16 @@ public class StoreDTO implements Serializable {
     private Long storegroupId;
 
     private String storegroupName;
+
+    private Tenant tenant;
+
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
+    }
 
     public boolean isMonthVisited() {
         return monthVisited;

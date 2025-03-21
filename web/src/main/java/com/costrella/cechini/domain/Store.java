@@ -63,6 +63,16 @@ public class Store implements Serializable {
     @JsonIgnoreProperties(value = "stores", allowSetters = true)
     private StoreGroup storegroup;
 
+    @ManyToOne
+    private Tenant tenant;
+
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
+    }
     public boolean isMonthVisited() {
         return monthVisited;
     }

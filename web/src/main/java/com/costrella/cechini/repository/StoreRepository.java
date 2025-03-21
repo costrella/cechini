@@ -19,7 +19,13 @@ public interface StoreRepository extends JpaRepository<Store, Long> {
 
     Page<Store> findAllByWorkerId(Long id, Pageable pageable);
 
+    //for aspect
+    Page<Store> findAllByWorkerIdAndTenantId(Long workerId, Long tenantId, Pageable pageable);
+
     List<Store> findAllByWorkerId(Long id);
+
+    //for aspect
+    List<Store> findAllByWorkerIdAndTenantId(Long workerId, Long tenantId);
 
 
 }
