@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 /**
@@ -19,7 +20,7 @@ import java.util.stream.Stream;
 @Repository
 public interface ReportRepository extends JpaRepository<Report, Long> {
 
-    Report findByTenantIdAndId(Long tenantId, Long id);
+    Optional<Report> findByTenantIdAndId(Long tenantId, Long id);
 
     @Query("select r from Report r left join fetch r.notes where r.id = :id")
     Report customFindById(@Param("id") Long id);

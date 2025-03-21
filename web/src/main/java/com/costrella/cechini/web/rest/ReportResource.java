@@ -117,6 +117,7 @@ public class ReportResource {
         newNote.setDate(Instant.now());
         newNote.setValue(fromMobile ? noteDTO.getValue() : noteDTO.getManagerNote());
         newNote.setNoteType(fromMobile ? NoteType.BY_WORKER : NoteType.BY_MANGER);
+        newNote.setTenant(reportEntity.getTenant());
         reportEntity.setReadByManager(!fromMobile);
         reportEntity.setReadByWorker(fromMobile);
         reportEntity.addNote(newNote);

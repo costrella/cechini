@@ -51,6 +51,18 @@ public class Note implements Serializable {
     @Column(name = "note_type")
     private NoteType noteType;
 
+    @ManyToOne
+    private Tenant tenant;
+
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
+    }
+
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;

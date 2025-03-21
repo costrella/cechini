@@ -23,6 +23,7 @@ public interface ReportMapper extends EntityMapper<ReportDTO, Report> {
         report.setStore(new Store().id(reportDTO.getStoreId()));
         report.setDesc(reportDTO.getDesc());
         report.setManagerNote(reportDTO.getManagerNote());
+        report.setTenant(reportDTO.getTenant());
         if (reportDTO.getOrderDTO() != null) {
             report.setOrder(OrderMapperCustom.toEntity(reportDTO.getOrderDTO()));
         }
@@ -66,6 +67,7 @@ public interface ReportMapper extends EntityMapper<ReportDTO, Report> {
         reportDTO.setId(report.getId());
         reportDTO.setDesc(report.getDesc());
         reportDTO.setReportDate(report.getReportDate());
+        reportDTO.setTenant(report.getTenant());
         if (report.getWorker() != null) {
             reportDTO.setWorkerId(report.getWorker().getId());
             reportDTO.setWorkerSurname(report.getWorker().getSurname());
