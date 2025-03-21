@@ -7,6 +7,7 @@ import com.costrella.cechini.repository.UserRepository;
 import com.costrella.cechini.repository.WorkerRepository;
 import com.costrella.cechini.security.SecurityUtils;
 import com.costrella.cechini.service.dto.WorkerDTO;
+import com.costrella.cechini.service.mapper.WorkerMapper;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Aspect
 @Component
@@ -28,6 +30,9 @@ public class WorkerAspect {
 
     @Autowired
     private WorkerRepository workerRepository;
+
+    @Autowired
+    private WorkerMapper workerMapper;
 
     @Before(value = "execution(* com.costrella.cechini.service.WorkerService.save(..)) && args(workerDTO, ..)")
     public void onSave(JoinPoint joinPoint, WorkerDTO workerDTO) {
@@ -49,7 +54,7 @@ public class WorkerAspect {
             if (loggedInUser.getTenant() != null) {
                 Worker example = new Worker();
                 example.setTenant(loggedInUser.getTenant());
-                return workerRepository.findAll(Example.of(example), pageable);
+                return workerRepository.findAll(Example.of(example), pageable).map(workerMapper::toDto);
             }
         }
         return pjp.proceed();
@@ -63,7 +68,8 @@ public class WorkerAspect {
             if (loggedInUser.getTenant() != null) {
                 Worker example = new Worker();
                 example.setTenant(loggedInUser.getTenant());
-                return workerRepository.findAll(Example.of(example));
+                return workerRepository.findAll(Example.of(example)).stream()
+                    .map(workerMapper::toDto).collect(Collectors.toList());
             }
         }
         return pjp.proceed();
