@@ -1,5 +1,6 @@
 package com.costrella.cechini.service.dto;
 
+import com.costrella.cechini.domain.Tenant;
 import io.swagger.annotations.ApiModel;
 import java.time.Instant;
 import javax.validation.constraints.*;
@@ -10,7 +11,7 @@ import java.io.Serializable;
  */
 @ApiModel(description = "Pomysły: notyfikacje")
 public class WorkerDTO implements Serializable {
-    
+
     private Long id;
 
     @NotNull
@@ -34,7 +35,16 @@ public class WorkerDTO implements Serializable {
 
     private Boolean active;
 
-    
+    private Tenant tenant;
+
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
+    }
+
     public Long getId() {
         return id;
     }

@@ -39,6 +39,8 @@ public class WorkerService {
      * @param workerDTO the entity to save.
      * @return the persisted entity.
      */
+    //todo przy tworzeniu workera trzeba dodac usera
+    //ASPECT ADDED
     public WorkerDTO save(WorkerDTO workerDTO) {
         log.debug("Request to save Worker : {}", workerDTO);
         Worker worker = workerMapper.toEntity(workerDTO);
@@ -52,6 +54,7 @@ public class WorkerService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
+    //ASPECT ADDED
     @Transactional(readOnly = true)
     public Page<WorkerDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Workers");
@@ -59,6 +62,7 @@ public class WorkerService {
             .map(workerMapper::toDto);
     }
 
+    //ASPECT ADDED
     @Transactional(readOnly = true)
     public List<WorkerDTO> findAll() {
         return workerRepository.findAll().stream()
@@ -71,6 +75,7 @@ public class WorkerService {
      * @param id the id of the entity.
      * @return the entity.
      */
+    //ASPECT ADDED
     @Transactional(readOnly = true)
     public Optional<WorkerDTO> findOne(Long id) {
         log.debug("Request to get Worker : {}", id);
@@ -78,12 +83,14 @@ public class WorkerService {
             .map(workerMapper::toDto);
     }
 
+    //ASPECT ADDED
     @Transactional(readOnly = true)
     public Optional<WorkerDTO> findByLogin(String login) {
         return workerRepository.findByLogin(login)
             .map(workerMapper::toDto);
     }
 
+    //ASPECT ADDED
     @Transactional(readOnly = true)
     public Optional<WorkerDTO> findByLoginAndPassword(String login, String password) {
         return workerRepository.findByLoginAndPassword(login, password)

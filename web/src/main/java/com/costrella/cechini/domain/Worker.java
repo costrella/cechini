@@ -1,6 +1,9 @@
 package com.costrella.cechini.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
@@ -72,8 +75,9 @@ public class Worker implements Serializable {
     @JsonIgnore
     private Set<Manager> managers = new HashSet<>();
 
+    @JsonManagedReference
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id", updatable = false)
     private User user;
 
     @ManyToOne

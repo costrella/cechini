@@ -2,7 +2,9 @@ package com.costrella.cechini.domain;
 
 import com.costrella.cechini.config.Constants;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.BatchSize;
 
@@ -95,6 +97,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     private Set<PersistentToken> persistentTokens = new HashSet<>();
 
     @OneToOne(mappedBy = "user")
+    @JsonBackReference
     private Worker worker;
 
     @ManyToOne
