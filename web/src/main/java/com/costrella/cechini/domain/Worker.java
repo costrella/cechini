@@ -72,6 +72,10 @@ public class Worker implements Serializable {
     @JsonIgnore
     private Set<Manager> managers = new HashSet<>();
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
+
     @ManyToOne
     private Tenant tenant;
 
@@ -81,6 +85,14 @@ public class Worker implements Serializable {
 
     public void setTenant(Tenant tenant) {
         this.tenant = tenant;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

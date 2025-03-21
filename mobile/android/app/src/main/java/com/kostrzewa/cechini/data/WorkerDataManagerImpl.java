@@ -35,7 +35,32 @@ public class WorkerDataManagerImpl extends AbstractDataManager implements Worker
             public void onResponse(Call<Void> call, Response<Void> response) {
 //                Headers headers = response.headers();
 //                String token = headers.get("Set-Cookie");
-                EventBus.getDefault().post(new LoginSuccess(workerDTO));
+//                EventBus.getDefault().post(new LoginSuccess(workerDTO));
+                if(!response.isSuccessful()){
+                    EventBus.getDefault().post(new LoginFailed("Błąd a05A: " + response.code()));
+                    return;
+                }
+
+                RetrofitClient.getInstance().getService().login(workerDTO).enqueue(new Callback<WorkerDTO>() {
+                    @Override
+                    public void onResponse(Call<WorkerDTO> call, Response<WorkerDTO> response) {
+                        if (response.isSuccessful()) {
+                            EventBus.getDefault().post(new LoginSuccess(response.body()));
+                        } else {
+                            try {
+                                JSONObject jObjError = new JSONObject(response.errorBody().string());
+                                EventBus.getDefault().post(new LoginFailed(jObjError.getString("title")));
+                            } catch (Exception e) {
+                                EventBus.getDefault().post(new LoginFailed("Błąd a05: " + response.code()));
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<WorkerDTO> call, Throwable t) {
+                        EventBus.getDefault().post(new LoginFailed("" + t.getMessage()));
+                    }
+                });
             }
 
             @Override
@@ -44,27 +69,6 @@ public class WorkerDataManagerImpl extends AbstractDataManager implements Worker
             }
         });
 
-
-//        RetrofitClient.getInstance().getService().login(workerDTO).enqueue(new Callback<WorkerDTO>() {
-//            @Override
-//            public void onResponse(Call<WorkerDTO> call, Response<WorkerDTO> response) {
-//                if (response.isSuccessful()) {
-//                    EventBus.getDefault().post(new LoginSuccess(response.body()));
-//                } else {
-//                    try {
-//                        JSONObject jObjError = new JSONObject(response.errorBody().string());
-//                        EventBus.getDefault().post(new LoginFailed(jObjError.getString("title")));
-//                    } catch (Exception e) {
-//                        EventBus.getDefault().post(new LoginFailed("Błąd a05: " + response.code()));
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<WorkerDTO> call, Throwable t) {
-//                EventBus.getDefault().post(new LoginFailed("" + t.getMessage()));
-//            }
-//        });
 
     }
 

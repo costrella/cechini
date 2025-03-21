@@ -204,5 +204,17 @@
                                  referencedColumnNames="id"
                                  referencedTableName="tenant"/>
     </changeSet>
+    <changeSet author="mikostrz (generated)" id="20250210000000-18">
+        <addColumn tableName="worker">
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="worker"
+                                 constraintName="fk_worker_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+    </changeSet>
 
 </databaseChangeLog>

@@ -14,12 +14,19 @@ public class SessionCookieJar implements CookieJar {
 
     @Override
     public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
-        this.cookies.addAll(cookies);
+//        this.cookies.addAll(cookies);
+
+        if (url.encodedPath().endsWith("authentication")) {
+            this.cookies = new ArrayList<>(cookies);
+        }
     }
 
 
     @Override
     public List<Cookie> loadForRequest(HttpUrl url) {
-        return cookies;
+        if (!url.encodedPath().endsWith("authentication") && cookies != null) {
+            return cookies;
+        }
+        return Collections.emptyList();
     }
 }
