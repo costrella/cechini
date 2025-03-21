@@ -210,8 +210,8 @@ public class ReportResource {
     @GetMapping(value = "/reports/worker/{workerId}/store/{storeId}", params = {"fromDate", "toDate"})
     public ResponseEntity<List<ReportDTO>> getReportsByWorkerAndStore(Pageable pageable, @PathVariable Long workerId, @PathVariable Long storeId,
                                                                       @RequestParam(value = "fromDate") LocalDate fromDate, @RequestParam(value = "toDate") LocalDate toDate) {
-        log.debug("from date:" + fromDate);
-        log.debug("from todate:" + toDate);
+        log.info("from date:" + fromDate);
+        log.info("from todate:" + toDate);
         Instant from = fromDate.atStartOfDay(ZoneId.systemDefault()).toInstant();
         Instant to = toDate.atStartOfDay(ZoneId.systemDefault()).plusDays(1).toInstant();
 

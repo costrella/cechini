@@ -71,6 +71,7 @@ public class ReportService {
      * @param reportDTO the entity to save.
      * @return the persisted entity.
      */
+    //ASPECT ADDED
     public ReportDTO save(ReportDTO reportDTO) {
         log.debug("Request to save Report : {}", reportDTO);
         Report report = reportMapper.toEntity(reportDTO);
@@ -104,11 +105,13 @@ public class ReportService {
         }
     }
 
+    //ASPECT ADDED
     public ReportDTO save(Report report) {
         report = reportRepository.save(report);
         return reportMapper.toDto(report);
     }
 
+    //ASPECT ADDED
     public ReportDTO saveWithPhotos(ReportDTOWithPhotos reportDTO) {
         log.debug("Request to save Report : {}", reportDTO);
         Report report = reportMapper.toEntityWithPhotos(reportDTO);
@@ -149,6 +152,7 @@ public class ReportService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
+    //ASPECT ADDED to Repository
     @Transactional(readOnly = true)
     public Page<ReportDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Reports");
@@ -157,6 +161,7 @@ public class ReportService {
             .map(reportMapper::toDto);
     }
 
+    //ASPECT ADDED
     @Transactional(readOnly = true)
     public Page<ReportDTO> findAllByWorkerId(Pageable pageable, Long id) {
         log.debug("Request to get all Reports by worker id");
@@ -164,30 +169,35 @@ public class ReportService {
             .map(reportMapper::toDto);
     }
 
+    //ASPECT ADDED
     @Transactional(readOnly = true)//mobile
     public List<ReportDTOSimple> findAllByWorkerIdLastMonthMobile(Long id, Instant from, Instant to) {
         return reportRepository.customByWorkerIdAndReportDateBetweenOrderByReportDateDesc(id, from, to)
             .map(reportMapper::toDtoMobile).collect(Collectors.toList());
     }
 
+    //ASPECT ADDED
     @Transactional(readOnly = true)
     public List<ReportDTOSimple> findAllByWorkerIdAndReadByWorkerIsFalseOrderByReportDateDesc(Long id) {
         return reportRepository.customFindAllByWorkerIdAndReadByWorkerIsFalseOrderByReportDateDesc(id)
             .map(report -> reportMapper.toDtoMobile(report)).collect(Collectors.toList());
     }
 
+    //ASPECT ADDED
     @Transactional(readOnly = true)
     public List<ReportDTOSimple> findAllByWorkerIdAndStoreId(Long workerId, Long storeId) {
         return reportRepository.customFindAllByWorkerIdAndStoreIdOrderByReportDateDesc(workerId, storeId)
             .map(reportMapper::toDtoMobile).collect(Collectors.toList());
     }
 
+    //ASPECT ADDED
     @Transactional(readOnly = true)
     public Page<ReportDTO> findAllByWorkerIdAndStoreId(Pageable pageable, Long id, Long storeId) {
         return reportRepository.findAllByWorkerIdAndStoreIdOrderByReportDateDesc(id, storeId, pageable)
             .map(reportMapper::toDto);
     }
 
+    //ASPECT ADDED
     @Transactional(readOnly = true)
     public Page<ReportDTO> findByStoreAndWorkerAndDate(Pageable pageable, Long workerId, Long storeId, Instant from, Instant to) {
         if (storeId != 0 && workerId != 0) { //worker i store NIEPUSTE
@@ -216,6 +226,7 @@ public class ReportService {
         ).map(reportMapper::toDto);
     }
 
+    //ASPECT ADDED
     @Transactional(readOnly = true)
     public Page<ReportDTO> findAllByStoreId(Pageable pageable, Long id) {
         log.debug("Request to get all Reports by store id");
@@ -229,6 +240,7 @@ public class ReportService {
      * @param id the id of the entity.
      * @return the entity.
      */
+    //ASPECT ADDED
     @Transactional(readOnly = true)
     public Optional<ReportDTO> findOne(Long id) {
         log.debug("Request to get Report : {}", id);
@@ -236,6 +248,7 @@ public class ReportService {
             .map(report -> reportMapper.toDtoWithPhotos(report, orderMapper, orderItemMapper, photoFileMapper));
     }
 
+    //ASPECT ADDED
     @Transactional(readOnly = true)
     public Optional<Report> findOneEntity(Long id) {
         log.debug("Request to get Report : {}", id);
@@ -255,6 +268,7 @@ public class ReportService {
         reportRepository.deleteById(id);
     }
 
+    //ASPECT ADDED
     @Transactional(readOnly = true)
     public List<ReportDTO> findReportsByStoreIdAndXMonthAgo(Long id, int monthsAgo) {
         Instant lastXMonths = Instant.now();
