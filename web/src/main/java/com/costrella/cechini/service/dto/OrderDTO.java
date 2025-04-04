@@ -1,5 +1,7 @@
 package com.costrella.cechini.service.dto;
 
+import com.costrella.cechini.domain.Tenant;
+
 import java.time.Instant;
 import javax.validation.constraints.*;
 import java.io.Serializable;
@@ -51,6 +53,16 @@ public class OrderDTO implements Serializable {
     private Long workerId;
 
     private String workerSurname;
+
+    private Tenant tenant;
+
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
+    }
 
     public Long getId() {
         return id;

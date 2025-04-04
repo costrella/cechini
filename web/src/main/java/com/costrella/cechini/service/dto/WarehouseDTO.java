@@ -2,13 +2,15 @@ package com.costrella.cechini.service.dto;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
+
+import com.costrella.cechini.domain.Tenant;
 import com.costrella.cechini.domain.enumeration.OrderFileType;
 
 /**
  * A DTO for the {@link com.costrella.cechini.domain.Warehouse} entity.
  */
 public class WarehouseDTO implements Serializable {
-    
+
     private Long id;
 
     @NotNull
@@ -19,7 +21,16 @@ public class WarehouseDTO implements Serializable {
 
     private OrderFileType orderFileType;
 
-    
+    private Tenant tenant;
+
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
+    }
+
     public Long getId() {
         return id;
     }

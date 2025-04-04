@@ -1,5 +1,7 @@
 package com.costrella.cechini.service.dto;
 
+import com.costrella.cechini.domain.Tenant;
+
 import java.io.Serializable;
 
 /**
@@ -25,6 +27,16 @@ public class PhotoDTO implements Serializable {
 
     public void setPhotoFileDTO(PhotoFileDTO photoFileDTO) {
         this.photoFileDTO = photoFileDTO;
+    }
+
+    private Tenant tenant;
+
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
     }
 
     public Long getId() {

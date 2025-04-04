@@ -1,5 +1,7 @@
 package com.costrella.cechini.service.dto;
 
+import com.costrella.cechini.domain.Tenant;
+
 import java.io.Serializable;
 
 /**
@@ -22,6 +24,16 @@ public class OrderItemDTO implements Serializable {
     private String productEanPack;
 
     private Long orderId;
+
+    private Tenant tenant;
+
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
+    }
 
     public Double getProductCapacity() {
         return productCapacity;
