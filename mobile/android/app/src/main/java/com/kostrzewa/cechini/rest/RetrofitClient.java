@@ -1,5 +1,6 @@
 package com.kostrzewa.cechini.rest;
 
+import android.content.Context;
 import android.util.Base64;
 
 import com.google.gson.Gson;
@@ -14,13 +15,7 @@ import com.google.gson.JsonSerializer;
 import com.kostrzewa.cechini.BuildConfig;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
-import okhttp3.Cookie;
-import okhttp3.CookieJar;
-import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -29,14 +24,22 @@ public class RetrofitClient {
     private static RetrofitClient instance;
     private CechiniAPI service;
 
-    public static RetrofitClient getInstance() {
+    public static RetrofitClient getInstance(Context context) {
         if (instance == null) {
-            instance = new RetrofitClient();
+            instance = new RetrofitClient(context);
         }
         return instance;
     }
 
-    RetrofitClient() {
+//    //todo to remove
+//    public static RetrofitClient getInstance() {
+////        if (instance == null) {
+//            instance = new RetrofitClient(null);
+////        }
+//        return instance;
+//    }
+
+    RetrofitClient(Context context) {
         Gson gson = new GsonBuilder()
                 .registerTypeHierarchyAdapter(byte[].class, new ByteArrayToBase64TypeAdapter())
 //                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
@@ -48,7 +51,7 @@ public class RetrofitClient {
 //                .addConverterFactory(GsonConverterFactory.create())
                 .client(
                         new OkHttpClient().newBuilder()
-                                .cookieJar(new SessionCookieJar()).build())
+                                .cookieJar(new SessionCookieJar(context)).build())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 

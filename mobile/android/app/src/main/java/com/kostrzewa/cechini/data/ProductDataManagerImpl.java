@@ -3,7 +3,6 @@ package com.kostrzewa.cechini.data;
 import android.content.Context;
 import android.util.Log;
 
-import com.kostrzewa.cechini.data.events.MyOrdersDownloadFailed;
 import com.kostrzewa.cechini.data.events.ProductsDownloadFailed;
 import com.kostrzewa.cechini.data.events.ProductsDownloadSuccess;
 import com.kostrzewa.cechini.model.ProductDTO;
@@ -40,7 +39,7 @@ public class ProductDataManagerImpl extends AbstractDataManager implements Produ
 
     @Override
     public void downloadProducts() {
-        RetrofitClient.getInstance().getService().getAllProducts().enqueue(new Callback<List<ProductDTO>>() {
+        RetrofitClient.getInstance(getContext()).getService().getAllProducts().enqueue(new Callback<List<ProductDTO>>() {
             @Override
             public void onResponse(Call<List<ProductDTO>> call, Response<List<ProductDTO>> response) {
                 Log.d(TAG, "onResponse: " + response.code());

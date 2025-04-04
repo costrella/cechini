@@ -26,8 +26,6 @@ import com.kostrzewa.cechini.data.ReportDataManager;
 import com.kostrzewa.cechini.data.ReportDataManagerImpl;
 import com.kostrzewa.cechini.data.StoreDataManager;
 import com.kostrzewa.cechini.data.StoreDataManagerImpl;
-import com.kostrzewa.cechini.data.StoreGroupDataManager;
-import com.kostrzewa.cechini.data.StoreGroupDataManagerImpl;
 import com.kostrzewa.cechini.data.WarehouseDataManager;
 import com.kostrzewa.cechini.data.WarehouseDataManagerImpl;
 import com.kostrzewa.cechini.data.WorkerDataManager;

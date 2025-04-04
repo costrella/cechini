@@ -14,6 +14,10 @@ public abstract class AbstractDataManager {
     public final Gson gson;
     private Context context;
 
+    public Context getContext() {
+        return context;
+    }
+
     public AbstractDataManager(Context context) {
         this.context = context;
         preferenceManager = new PreferenceManagerImpl(context);

@@ -35,7 +35,7 @@ public class StoreGroupDataManagerImpl extends AbstractDataManager implements St
 
     @Override
     public void downloadStoreGroups() {
-        RetrofitClient.getInstance().getService().getAllStoreGroups().enqueue(new Callback<List<StoreGroupDTO>>() {
+        RetrofitClient.getInstance(getContext()).getService().getAllStoreGroups().enqueue(new Callback<List<StoreGroupDTO>>() {
             @Override
             public void onResponse(Call<List<StoreGroupDTO>> call, Response<List<StoreGroupDTO>> response) {
                 Log.d(TAG, "onResponse: " + response.code());

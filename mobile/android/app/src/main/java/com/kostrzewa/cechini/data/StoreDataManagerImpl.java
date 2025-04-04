@@ -35,7 +35,7 @@ public class StoreDataManagerImpl extends AbstractDataManager implements StoreDa
 
     @Override
     public void addNewStore(StoreDTO storeDTO) {
-        RetrofitClient.getInstance().getService().addStore(storeDTO).enqueue(new Callback<StoreDTO>() {
+        RetrofitClient.getInstance(getContext()).getService().addStore(storeDTO).enqueue(new Callback<StoreDTO>() {
             @Override
             public void onResponse(Call<StoreDTO> call, Response<StoreDTO> response) {
                 Log.d(TAG, "onResponse: " + response.code());
@@ -81,7 +81,7 @@ public class StoreDataManagerImpl extends AbstractDataManager implements StoreDa
 
     @Override
     public void editStore(StoreDTO storeDTO, StoreDTO old) {
-        RetrofitClient.getInstance().getService().editStore(storeDTO).enqueue(new Callback<StoreDTO>() {
+        RetrofitClient.getInstance(getContext()).getService().editStore(storeDTO).enqueue(new Callback<StoreDTO>() {
             @Override
             public void onResponse(Call<StoreDTO> call, Response<StoreDTO> response) {
                 Log.d(TAG, "onResponse: " + response.code());
@@ -138,7 +138,7 @@ public class StoreDataManagerImpl extends AbstractDataManager implements StoreDa
 
     @Override
     public void downloadMyStores() {
-        RetrofitClient.getInstance().getService().getMyStores(workerDataManager.getWorker().getId())
+        RetrofitClient.getInstance(getContext()).getService().getMyStores(workerDataManager.getWorker().getId())
                 .enqueue(new Callback<List<StoreDTO>>() {
                     @Override
                     public void onResponse(Call<List<StoreDTO>> call, Response<List<StoreDTO>> response) {

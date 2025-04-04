@@ -103,7 +103,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void getAllUnreadReportsByWorkerIdCount() {
-        RetrofitClient.getInstance().getService()
+        RetrofitClient.getInstance(getContext()).getService()
                 .getAllUnreadReportsByWorkerIdCount(workerDataManager.getWorker().getId()).enqueue(new Callback<Long>() {
             @Override
             public void onResponse(Call<Long> call, Response<Long> response) {

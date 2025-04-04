@@ -43,7 +43,7 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
     @Override
     public void addNewComment(NoteDTO noteDTO) {
 
-        RetrofitClient.getInstance().getService().addCommentToReportMobile(noteDTO).enqueue(new Callback<Void>() {
+        RetrofitClient.getInstance(getContext()).getService().addCommentToReportMobile(noteDTO).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
@@ -73,7 +73,7 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
             reportDTO.setOrderDTO(null);
         }
 
-        RetrofitClient.getInstance().getService().sendReport(ReportData.reportDTO).enqueue(new Callback<ReportDTO>() {
+        RetrofitClient.getInstance(getContext()).getService().sendReport(ReportData.reportDTO).enqueue(new Callback<ReportDTO>() {
             @Override
             public void onResponse(Call<ReportDTO> call, Response<ReportDTO> response) {
                 if (response.isSuccessful()) {
@@ -112,7 +112,7 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
         if (!notSendReports.isEmpty()) {
             ReportsDTO reportsDTO = new ReportsDTO();
             reportsDTO.setReportsDTOS(notSendReports);
-            RetrofitClient.getInstance().getService().sendManyReports(reportsDTO).enqueue(new Callback<Void>() {
+            RetrofitClient.getInstance(getContext()).getService().sendManyReports(reportsDTO).enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
@@ -143,7 +143,7 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
         if (!notSendComments.isEmpty()) {
             NotesDTO notesDTO = new NotesDTO();
             notesDTO.setNoteDTOS(notSendComments);
-            RetrofitClient.getInstance().getService().addCommentToReportMobileMany(notesDTO).enqueue(new Callback<Void>() {
+            RetrofitClient.getInstance(getContext()).getService().addCommentToReportMobileMany(notesDTO).enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
@@ -206,7 +206,7 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
 
     @Override
     public void downloadMyUnreadReportsByWorkerId(Long workerId) {
-        RetrofitClient.getInstance().getService().getAllUnreadReportsByWorkerId(workerId).enqueue(new Callback<List<ReportDTOWithPhotos>>() {
+        RetrofitClient.getInstance(getContext()).getService().getAllUnreadReportsByWorkerId(workerId).enqueue(new Callback<List<ReportDTOWithPhotos>>() {
             @Override
             public void onResponse(Call<List<ReportDTOWithPhotos>> call, Response<List<ReportDTOWithPhotos>> response) {
                 if (response.isSuccessful()) {
@@ -230,7 +230,7 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
 
     @Override
     public void downloadMyReports(Long workerId) {
-        RetrofitClient.getInstance().getService().getMyReports(workerId).enqueue(new Callback<List<ReportDTOWithPhotos>>() {
+        RetrofitClient.getInstance(getContext()).getService().getMyReports(workerId).enqueue(new Callback<List<ReportDTOWithPhotos>>() {
             @Override
             public void onResponse(Call<List<ReportDTOWithPhotos>> call, Response<List<ReportDTOWithPhotos>> response) {
                 if (response.isSuccessful()) {
@@ -260,7 +260,7 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
 
     @Override
     public void downloadMyReportsByStoreId(Long workerId, Long storeId) {
-        RetrofitClient.getInstance().getService().getMyReportsByStoreId(workerId, storeId).enqueue(new Callback<List<ReportDTOWithPhotos>>() {
+        RetrofitClient.getInstance(getContext()).getService().getMyReportsByStoreId(workerId, storeId).enqueue(new Callback<List<ReportDTOWithPhotos>>() {
             @Override
             public void onResponse(Call<List<ReportDTOWithPhotos>> call, Response<List<ReportDTOWithPhotos>> response) {
                 if (response.isSuccessful()) {
@@ -286,7 +286,7 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
         if (!isNetworkConnected()) {
             return;
         }
-        RetrofitClient.getInstance().getService().setReportReadByWorker(reportID).enqueue(new Callback<Void>() {
+        RetrofitClient.getInstance(getContext()).getService().setReportReadByWorker(reportID).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
@@ -309,7 +309,7 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
         if (!isNetworkConnected()) {
             return;
         }
-        RetrofitClient.getInstance().getService().getReport(id).enqueue(new Callback<ReportDTOWithPhotos>() {
+        RetrofitClient.getInstance(getContext()).getService().getReport(id).enqueue(new Callback<ReportDTOWithPhotos>() {
             @Override
             public void onResponse(Call<ReportDTOWithPhotos> call, Response<ReportDTOWithPhotos> response) {
                 if (response.isSuccessful()) {

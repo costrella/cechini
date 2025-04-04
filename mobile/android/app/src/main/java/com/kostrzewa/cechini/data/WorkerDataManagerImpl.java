@@ -1,21 +1,25 @@
 package com.kostrzewa.cechini.data;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.google.gson.reflect.TypeToken;
+import com.kostrzewa.cechini.LoginActivity;
 import com.kostrzewa.cechini.data.events.LoginFailed;
 import com.kostrzewa.cechini.data.events.LoginSuccess;
-import com.kostrzewa.cechini.model.WarehouseDTO;
 import com.kostrzewa.cechini.model.WorkerDTO;
 import com.kostrzewa.cechini.rest.RetrofitClient;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.Headers;
+import okhttp3.Cookie;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,9 +32,25 @@ public class WorkerDataManagerImpl extends AbstractDataManager implements Worker
     }
 
     @Override
+    public void saveCookies(String host, List<Cookie> cookies) {
+        String jsonCookies = gson.toJson(cookies);
+        preferenceManager.setCookies(host, jsonCookies);
+    }
+
+    @Override
+    public List<Cookie> getCookies(String host) {
+        String jsonCookies = preferenceManager.getCookies(host);
+        if (jsonCookies != null) {
+            Type type = new TypeToken<List<Cookie>>() {}.getType();
+            return gson.fromJson(jsonCookies, type);
+        }
+        return new ArrayList<>();
+    }
+
+    @Override
     public void loginAsync(WorkerDTO workerDTO) {
 
-        RetrofitClient.getInstance().getService().login2(workerDTO.getLogin(), workerDTO.getPassword()).enqueue(new Callback<Void>() {
+        RetrofitClient.getInstance(getContext()).getService().login2(workerDTO.getLogin(), workerDTO.getPassword()).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
 //                Headers headers = response.headers();
@@ -41,7 +61,7 @@ public class WorkerDataManagerImpl extends AbstractDataManager implements Worker
                     return;
                 }
 
-                RetrofitClient.getInstance().getService().login(workerDTO).enqueue(new Callback<WorkerDTO>() {
+                RetrofitClient.getInstance(getContext()).getService().login(workerDTO).enqueue(new Callback<WorkerDTO>() {
                     @Override
                     public void onResponse(Call<WorkerDTO> call, Response<WorkerDTO> response) {
                         if (response.isSuccessful()) {
@@ -84,10 +104,18 @@ public class WorkerDataManagerImpl extends AbstractDataManager implements Worker
 
     @Override
     public void updateFwVersion(Long workerId, String fwVersion) {
-        RetrofitClient.getInstance().getService().updateFwVersion(workerId, fwVersion).enqueue(new Callback<WorkerDTO>() {
+        RetrofitClient.getInstance(getContext()).getService().updateFwVersion(workerId, fwVersion).enqueue(new Callback<WorkerDTO>() {
             @Override
             public void onResponse(Call<WorkerDTO> call, Response<WorkerDTO> response) {
                 Log.d(TAG, "onResponse: " + response.code());
+                if(response.code() == 401){
+                    SharedPreferences settings = getContext().getSharedPreferences("cechini", Context.MODE_PRIVATE);
+                    settings.edit().clear().commit();
+
+                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    getContext().startActivity(intent);
+                }
             }
 
             @Override

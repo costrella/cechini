@@ -18,6 +18,16 @@ public class PreferenceManagerImpl implements PreferenceManager {
     }
 
     @Override
+    public String getCookies(String host) {
+        return sharedPreferences.getString(host, null);
+    }
+
+    @Override
+    public void setCookies(String host, String cookies) {
+        sharedPreferences.edit().putString(host, cookies).apply();
+    }
+
+    @Override
     public Set<String> getMyStores() {
         return sharedPreferences.getStringSet("myStores", new HashSet<>());
     }
