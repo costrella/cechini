@@ -1,5 +1,7 @@
 package com.costrella.cechini.service.dto;
 
+import com.costrella.cechini.domain.Tenant;
+
 import javax.validation.constraints.*;
 import java.io.Serializable;
 
@@ -7,7 +9,7 @@ import java.io.Serializable;
  * A DTO for the {@link com.costrella.cechini.domain.Product} entity.
  */
 public class ProductDTO implements Serializable {
-    
+
     private Long id;
 
     @NotNull
@@ -25,7 +27,17 @@ public class ProductDTO implements Serializable {
 
     private Integer layerCountPalette;
 
-    
+    private Tenant tenant;
+
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
+    }
+
+
     public Long getId() {
         return id;
     }
