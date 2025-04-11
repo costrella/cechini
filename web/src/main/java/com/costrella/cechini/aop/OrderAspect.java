@@ -41,6 +41,18 @@ public class OrderAspect {
         }
     }
 
+    @Before(value = "execution(* com.costrella.cechini.repository.OrderRepository.save(..)) && args(order, ..)")
+    public void onSave(JoinPoint joinPoint, Order order) {
+        Optional<String> login = SecurityUtils.getCurrentUserLogin();
+
+        if (login.isPresent()) {
+            User loggedInUser = userRepository.findOneByLogin(login.get()).get();
+            if (loggedInUser.getTenant() != null) {
+                order.setTenant(loggedInUser.getTenant());
+            }
+        }
+    }
+
     @Around("execution(* com.costrella.cechini.repository.OrderRepository.findAll(..)) && args(pageable))")
     public Object onFindAll(ProceedingJoinPoint pjp, Pageable pageable) throws Throwable {
         Optional<String> login = SecurityUtils.getCurrentUserLogin();

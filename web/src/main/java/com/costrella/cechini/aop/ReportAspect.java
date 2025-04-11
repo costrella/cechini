@@ -2,10 +2,12 @@ package com.costrella.cechini.aop;
 
 import com.costrella.cechini.domain.Report;
 import com.costrella.cechini.domain.Store;
+import com.costrella.cechini.domain.Tenant;
 import com.costrella.cechini.domain.User;
 import com.costrella.cechini.repository.ReportRepository;
 import com.costrella.cechini.repository.UserRepository;
 import com.costrella.cechini.security.SecurityUtils;
+import com.costrella.cechini.service.dto.OrderDTO;
 import com.costrella.cechini.service.dto.ReportDTO;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -58,8 +60,13 @@ public class ReportAspect {
         Optional<String> login = SecurityUtils.getCurrentUserLogin();
         if (login.isPresent()) {
             User loggedInUser = userRepository.findOneByLogin(login.get()).get();
-            if (loggedInUser.getTenant() != null) {
-                reportDTO.setTenant(loggedInUser.getTenant());
+            Tenant tenant = loggedInUser.getTenant();
+            if (tenant != null) {
+                reportDTO.setTenant(tenant);
+                OrderDTO orderDTO = reportDTO.getOrderDTO();
+                if(orderDTO != null){
+                    orderDTO.setTenant(tenant);
+                }
             }
         }
     }

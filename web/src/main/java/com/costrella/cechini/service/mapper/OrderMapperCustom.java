@@ -1,9 +1,6 @@
 package com.costrella.cechini.service.mapper;
 
-import com.costrella.cechini.domain.Order;
-import com.costrella.cechini.domain.OrderItem;
-import com.costrella.cechini.domain.Product;
-import com.costrella.cechini.domain.Warehouse;
+import com.costrella.cechini.domain.*;
 import com.costrella.cechini.service.dto.OrderDTO;
 
 import java.text.SimpleDateFormat;
@@ -22,10 +19,13 @@ public class OrderMapperCustom {
         order.setDeliveryDate(orderDTO.getDeliveryDate());
         order.setOrderDate(orderDTO.getOrderDate());
         order.setNumber(getOrderNumber());
+        Tenant tenant = orderDTO.getTenant();
+        order.setTenant(tenant);
 //        order.setStatus(new Status().id(orderDTO.getStatusId()));
         order.setWarehouse(new Warehouse().id(orderDTO.getWarehouseId()).name(orderDTO.getWarehouseName()));
         orderDTO.getOrderItems().stream().forEach(orderItemDTO -> {
             OrderItem orderItem = new OrderItem().artCount(orderItemDTO.getArtCount()).packCount(orderItemDTO.getPackCount());
+            orderItem.setTenant(tenant);
             orderItem.setProduct(new Product().id(orderItemDTO.getProductId())
                 .name(orderItemDTO.getProductName())
                 .capacity(orderItemDTO.getProductCapacity())
