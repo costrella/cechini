@@ -1,6 +1,8 @@
 package com.costrella.cechini.service;
 
+import com.costrella.cechini.domain.User;
 import com.costrella.cechini.domain.Worker;
+import com.costrella.cechini.repository.UserRepository;
 import com.costrella.cechini.repository.WorkerRepository;
 import com.costrella.cechini.service.dto.WorkerDTO;
 import com.costrella.cechini.service.mapper.WorkerMapper;
@@ -8,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,11 +29,17 @@ public class WorkerService {
 
     private final WorkerRepository workerRepository;
 
+    private final UserRepository userRepository;
+
     private final WorkerMapper workerMapper;
 
-    public WorkerService(WorkerRepository workerRepository, WorkerMapper workerMapper) {
+    private final PasswordEncoder passwordEncoder;
+
+    public WorkerService(WorkerRepository workerRepository, UserRepository userRepository, WorkerMapper workerMapper, PasswordEncoder passwordEncoder) {
         this.workerRepository = workerRepository;
+        this.userRepository = userRepository;
         this.workerMapper = workerMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     /**
@@ -39,11 +48,17 @@ public class WorkerService {
      * @param workerDTO the entity to save.
      * @return the persisted entity.
      */
-    //todo przy tworzeniu workera trzeba dodac usera
     //ASPECT ADDED
     public WorkerDTO save(WorkerDTO workerDTO) {
         log.debug("Request to save Worker : {}", workerDTO);
         Worker worker = workerMapper.toEntity(workerDTO);
+        User user = new User();
+        user.setLogin(worker.getLogin());
+        user.setTenant(worker.getTenant());
+        user.setActivated(true);
+        user.setPassword(passwordEncoder.encode(worker.getPassword()));
+        userRepository.save(user);
+        worker.setUser(user);
         worker = workerRepository.save(worker);
         return workerMapper.toDto(worker);
     }

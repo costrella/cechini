@@ -17,6 +17,8 @@ import java.util.List;
 @Repository
 public interface StoreRepository extends JpaRepository<Store, Long> {
 
+    Page<Store> findAllByTenantId(Long id, Pageable pageable);
+
     Page<Store> findAllByWorkerId(Long id, Pageable pageable);
 
     //for aspect

@@ -52,12 +52,17 @@ public class UserService {
 
     private final AuthorityRepository authorityRepository;
 
-    public UserService(UserRepository userRepository, TenantRepository tenantRepository, PasswordEncoder passwordEncoder, PersistentTokenRepository persistentTokenRepository, AuthorityRepository authorityRepository) {
+    private final ExampleDataService exampleDataService;
+
+
+
+    public UserService(UserRepository userRepository, TenantRepository tenantRepository, PasswordEncoder passwordEncoder, PersistentTokenRepository persistentTokenRepository, AuthorityRepository authorityRepository, ExampleDataService exampleDataService) {
         this.userRepository = userRepository;
         this.tenantRepository = tenantRepository;
         this.passwordEncoder = passwordEncoder;
         this.persistentTokenRepository = persistentTokenRepository;
         this.authorityRepository = authorityRepository;
+        this.exampleDataService = exampleDataService;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -78,10 +83,14 @@ public class UserService {
                 user.setTenant(newTenant);
                 user.setActivated(true);
                 user.setActivationKey(null);
+
+                exampleDataService.createReportWithWorkerAndOrder(newTenant);
                 log.debug("Activated user: {}", user);
                 return user;
             });
     }
+
+
 
     public Optional<User> completePasswordReset(String newPassword, String key) {
         log.debug("Reset user password for reset key {}", key);

@@ -68,9 +68,7 @@ public class StoreAspect {
         if (login.isPresent()) {
             User loggedInUser = userRepository.findOneByLogin(login.get()).get();
             if (loggedInUser.getTenant() != null) {
-                Store example = new Store();
-                example.setTenant(loggedInUser.getTenant());
-                return storeRepository.findAll(Example.of(example), pageable).map(storeMapper::toDto);
+                return storeRepository.findAllByTenantId(loggedInUser.getTenant().getId(), pageable).map(storeMapper::toDto);
             }
         }
         return pjp.proceed();
