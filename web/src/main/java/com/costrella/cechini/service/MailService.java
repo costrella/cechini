@@ -107,6 +107,31 @@ public class MailService {
     }
 
     @Async
+    public void sendActivationLinkEmail(String to, String subject, String content, boolean isMultipart, boolean isHtml) {
+        log.debug("sendActivationLinkEmail email[multipart '{}' and html '{}'] to '{}' with subject '{}' and content={}",
+            isMultipart, isHtml, to, subject, content);
+
+        // Prepare message using a Spring helper
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        try {
+            MimeMessageHelper message = new MimeMessageHelper(mimeMessage, isMultipart, StandardCharsets.UTF_8.name());
+            message.setTo(to);
+            if (applicationProperties.getCc() != null && applicationProperties.getCc() != "") {
+                message.addCc(applicationProperties.getCc());
+            }
+            message.setFrom(jHipsterProperties.getMail().getFrom());
+            message.setSubject(subject);
+            message.setText(content, isHtml);
+
+
+            javaMailSender.send(mimeMessage);
+            log.debug("Sent email to User '{}'", to);
+        } catch (MailException | MessagingException e) {
+            log.warn("Email could not be sent to user '{}'", to, e);
+        }
+    }
+
+    @Async
     public void sendEmailFromTemplate(User user, String templateName, String titleKey) {
         if (user.getEmail() == null) {
             log.debug("Email doesn't exist for user '{}'", user.getLogin());
@@ -118,7 +143,7 @@ public class MailService {
         context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
         String content = templateEngine.process(templateName, context);
         String subject = messageSource.getMessage(titleKey, null, locale);
-//        sendEmail(null, user.getEmail(), subject, content, false, true);
+        sendActivationLinkEmail(user.getEmail(), subject, content, false, true);
     }
 
     @Async
