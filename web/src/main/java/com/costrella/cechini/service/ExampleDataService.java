@@ -4,13 +4,23 @@ import com.costrella.cechini.domain.*;
 import com.costrella.cechini.repository.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StreamUtils;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.time.Instant;
+import java.util.Base64;
 import java.util.HashSet;
 import java.util.Set;
+
+import static com.costrella.cechini.domain.enumeration.NoteType.BY_MANGER;
+import static com.costrella.cechini.domain.enumeration.NoteType.BY_WORKER;
 
 /**
  * Service class for managing users.
@@ -35,9 +45,11 @@ public class ExampleDataService {
 
     private final ReportRepository reportRepository;
 
+    private final NoteRepository noteRepository;
+
     private final PasswordEncoder passwordEncoder;
 
-    public ExampleDataService(UserRepository userRepository, TenantRepository tenantRepository, ProductRepository productRepository, WarehouseRepository warehouseRepository, StoreRepository storeRepository, WorkerRepository workerRepository, ReportRepository reportRepository, PasswordEncoder passwordEncoder) {
+    public ExampleDataService(UserRepository userRepository, TenantRepository tenantRepository, ProductRepository productRepository, WarehouseRepository warehouseRepository, StoreRepository storeRepository, WorkerRepository workerRepository, ReportRepository reportRepository, NoteRepository noteRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.tenantRepository = tenantRepository;
         this.productRepository = productRepository;
@@ -45,21 +57,26 @@ public class ExampleDataService {
         this.storeRepository = storeRepository;
         this.workerRepository = workerRepository;
         this.reportRepository = reportRepository;
+        this.noteRepository = noteRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
     private Product createProductExampleOne(Tenant tenant) {
         Product product = new Product();
-        product.setName("Product Example " + tenant.getId());
+        product.setName("Product Example One");
         product.setCapacity(10d);
+        product.setPackCountPalette(10);
+        product.setArtCountPalette(10);
         product.setTenant(tenant);
         return productRepository.save(product);
     }
 
     private Product createProductExampleTwo(Tenant tenant) {
         Product product = new Product();
-        product.setName("Product Example " + tenant.getId());
-        product.setCapacity(10d);
+        product.setName("Product Example Two");
+        product.setCapacity(15d);
+        product.setPackCountPalette(15);
+        product.setArtCountPalette(15);
         product.setTenant(tenant);
         return productRepository.save(product);
     }
@@ -67,15 +84,15 @@ public class ExampleDataService {
 
     private Warehouse createWarehouseOne(Tenant tenant) {
         Warehouse warehouse = new Warehouse();
-        warehouse.setName("Warehouse Example " + tenant.getId());
+        warehouse.setName("Warehouse Example");
         warehouse.setTenant(tenant);
         return warehouseRepository.save(warehouse);
     }
 
     private Store createStoreOne(Tenant tenant, Worker worker) {
         Store store = new Store();
-        store.setName("Shop Example " + tenant.getId());
-        store.setAddress("Cracov, ul. Dietla 1");
+        store.setName("Shop Example");
+        store.setAddress("Krakow, ul. Dietla 1");
         store.setTenant(tenant);
         store.setWorker(worker);
         store.setDesc("Description of shop one");
@@ -91,7 +108,63 @@ public class ExampleDataService {
         report.setReportDate(Instant.now());
         report.setStore(createStoreOne(tenant, worker));
         report.setOrder(createOrder(tenant, createWarehouseOne(tenant)));
+        report.setNotes(createNotes(tenant, report, worker));
+        report.setReadByManager(false);
+        report.setReadByWorker(true);
+
+        report.setPhotos(createPhotos(tenant, report));
         reportRepository.save(report);
+    }
+
+    private Set<Photo> createPhotos(Tenant tenant, Report report){
+       Photo photo = new Photo();
+       photo.setTenant(tenant);
+       photo.setReport(report);
+
+       PhotoFile photoFile = new PhotoFile();
+       photoFile.setPhoto(photo);
+       photoFile.setTenant(tenant);
+        try {
+            photoFile.setValue(getImageAsByteArray("test.jpg"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        photoFile.setValueContentType("image/jpeg");
+        photo.setFile(photoFile);
+
+        Set<Photo> photos = new HashSet<>();
+        photos.add(photo);
+        return photos;
+    }
+
+
+    public byte[] getImageAsByteArray(String imageName) throws IOException {
+        ClassPathResource imgFile = new ClassPathResource("images/" + imageName);
+        return StreamUtils.copyToByteArray(imgFile.getInputStream());
+    }
+
+
+    private Set<Note> createNotes(Tenant tenant, Report report, Worker worker){
+        Note note = new Note();
+        note.setTenant(tenant);
+        note.setReport(report);
+        note.setDate(Instant.now());
+        note.setNoteType(BY_MANGER);
+        note.setValue("Example comment from Manager");
+        note = noteRepository.save(note);
+
+        Note note2 = new Note();
+        note2.setTenant(tenant);
+        note2.setReport(report);
+        note2.setDate(Instant.now());
+        note2.setNoteType(BY_WORKER);
+        note2.setValue("Example comment from Worker");
+        note2 = noteRepository.save(note2);
+
+        Set<Note> notes = new HashSet<>();
+        notes.add(note);
+        notes.add(note2);
+        return notes;
     }
 
     private Order createOrder(Tenant tenant, Warehouse warehouse) {
@@ -104,9 +177,13 @@ public class ExampleDataService {
         orderItem.setTenant(tenant);
         orderItem.setProduct(createProductExampleOne(tenant));
         orderItem.setOrder(order);
+        orderItem.setPackCount(15);
+        orderItem.setArtCount(10);
         OrderItem orderItem2 = new OrderItem();
         orderItem2.setTenant(tenant);
-        orderItem2.setProduct(createProductExampleOne(tenant));
+        orderItem2.setProduct(createProductExampleTwo(tenant));
+        orderItem2.setPackCount(10);
+        orderItem2.setArtCount(15);
         orderItem2.setOrder(order);
         Set<OrderItem> orderItems = new HashSet<>();
         orderItems.add(orderItem);
@@ -118,9 +195,11 @@ public class ExampleDataService {
     private Worker createWorker(Tenant tenant) {
         Worker worker = new Worker();
         worker.setName("Adam");
-        worker.setSurname("Surname Example");
+        worker.setSurname("Kowalski");
         worker.setPhone("123456789");
         worker.setActive(true);
+        worker.setHiredDate(Instant.now());
+        worker.setDesc("Example Worker");
         worker.setLogin("adam" + tenant.getId());
         worker.setPassword("1234");
         worker.setTenant(tenant);

@@ -217,4 +217,8 @@
                                  referencedTableName="jhi_user"/>
     </changeSet>
 
+    <changeSet author="mikostrz (generated)" id="20250210000000-19">
+        <dropUniqueConstraint tableName="warehouse" constraintName="ux_warehouse_name" />
+    </changeSet>
+
 </databaseChangeLog>
