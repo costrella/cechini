@@ -7,6 +7,7 @@ import com.costrella.cechini.repository.ProductRepository;
 import com.costrella.cechini.repository.UserRepository;
 import com.costrella.cechini.security.SecurityUtils;
 import com.costrella.cechini.service.dto.ProductDTO;
+import com.costrella.cechini.service.mapper.ProductMapper;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Aspect
 @Component
@@ -28,6 +30,9 @@ public class ProductAspect {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private ProductMapper productMapper;
 
     @Before(value = "execution(* com.costrella.cechini.service.ProductService.save(..)) && args(productDTO, ..)")
     public void onSave(JoinPoint joinPoint, ProductDTO productDTO) {
@@ -59,7 +64,8 @@ public class ProductAspect {
         if (login.isPresent()) {
             User loggedInUser = userRepository.findOneByLogin(login.get()).get();
             if (loggedInUser.getTenant() != null) {
-                return productRepository.findAllByTenantId(loggedInUser.getTenant().getId());
+                return productRepository.findAllByTenantId(loggedInUser.getTenant().getId()).stream()
+                    .map(productMapper::toDto).collect(Collectors.toList());
             }
         }
         return pjp.proceed();
