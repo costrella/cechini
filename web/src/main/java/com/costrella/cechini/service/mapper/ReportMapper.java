@@ -34,6 +34,7 @@ public interface ReportMapper extends EntityMapper<ReportDTO, Report> {
 
     default Report toEntityWithPhotos(ReportDTOWithPhotos reportDTO) {
         Report report = toEntity(reportDTO);
+        Tenant tenant = report.getTenant();
         Set<Photo> photos = new HashSet<>();
         if (!reportDTO.getPhotosList().isEmpty()) {
             for (PhotoDTO photoDTO : reportDTO.getPhotosList()) {
@@ -42,8 +43,10 @@ public interface ReportMapper extends EntityMapper<ReportDTO, Report> {
                     PhotoFile photoFile = new PhotoFile();
                     photoFile.setValue(photoDTO.getPhotoFileDTO().getValue());
                     photoFile.setValueContentType("image/png");
+                    photoFile.setTenant(tenant);
                     photo.setFile(photoFile);
                     photo.setReport(report);
+                    photo.setTenant(tenant);
                     photos.add(photo);
                 }
             }

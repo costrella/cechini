@@ -83,9 +83,9 @@ public class StatsService {
         LocalDate now = LocalDate.now();
         Random obj = new Random();
         int rand_num;
-        List<Worker> workers = statsRepository.findAll();
+        List<WorkerDTO> workers = workerService.findAll();
         boolean fillMonths = true;
-        for (Worker worker : workers) {
+        for (WorkerDTO worker : workers) {
             ChartDetail01DTO chartDetail = new ChartDetail01DTO();
             rand_num = obj.nextInt(0xffffff + 1);
             String colorCode = String.format("#%06x", rand_num);
