@@ -34,8 +34,8 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:postgresql://localhost:5432/cechini
-    username: cechini
-    password:
+    username: costrella
+    password: costrella
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -46,11 +46,14 @@ spring:
   liquibase:
     contexts: prod
   mail:
-    host: s151.cyber-folks.pl
-    port: 587
-    username: cechini.zamowienia@misiekmk.linuxpl.info
-    password: 1qaz@WSX3edc
+    host: ssl0.ovh.net
+    port: 465
+    username: orders@costrella.ovh
+    password: bee:s8PsPwZ8yEz
     protocol: smtp
+    properties:
+      'mail.smtp.ssl.enable': true
+      'mail.smtp.auth': true
 
   thymeleaf:
     cache: true
@@ -122,4 +125,4 @@ jhipster:
 
 # application:
 application:
-  cc: ula.bukowska@cechini-muszyna.pl
+  cc: misiek.mk@gmail.com

@@ -51,11 +51,14 @@ spring:
     contexts: dev
     #contexts: dev, faker
   mail:
-    host: s151.cyber-folks.pl
-    port: 587
-    username: cechini.zamowienia@misiekmk.linuxpl.info
-    password: 1qaz@WSX3edc
+    host: ssl0.ovh.net
+    port: 465
+    username: orders@costrella.ovh
+    password: bee:s8PsPwZ8yEz
     protocol: smtp
+    properties:
+      'mail.smtp.ssl.enable': true
+      'mail.smtp.auth': true
 
   messages:
     cache-duration: PT1S # 1 second, see the ISO 8601 standard
