@@ -111,6 +111,15 @@ spring:
   output:
     ansi:
       console-available: true
+  mail:
+    host: ssl0.ovh.net
+    port: 465
+    username: orders@costrella.ovh
+    password: bee:s8PsPwZ8yEz
+    protocol: smtp
+    properties:
+      'mail.smtp.ssl.enable': true
+      'mail.smtp.auth': true
 
 server:
   servlet:
