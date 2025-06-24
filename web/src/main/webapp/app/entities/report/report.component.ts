@@ -89,7 +89,6 @@ export class ReportComponent implements OnInit, OnDestroy {
   }
 
   loadPage(page?: number, dontNavigate?: boolean): void {
-    console.log('CCC loadPage');
     const pageToLoad: number = page || this.page || 1;
 
     if (this.internal) {
@@ -140,7 +139,6 @@ export class ReportComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log('CCC ngOnInit');
     const reportIdRowString = this.cookieService.get('reportId_row');
     if (reportIdRowString != null) {
       this.reportIdRow = Number(reportIdRowString);
@@ -200,7 +198,6 @@ export class ReportComponent implements OnInit, OnDestroy {
   }
 
   protected handleNavigation(isFilter?: boolean): void {
-    console.log('CCC handleNavigation');
     combineLatest(this.activatedRoute.data, this.activatedRoute.queryParamMap, (data: Data, params: ParamMap) => {
       const page = params.get('page');
       const pageNumber = page !== null ? +page : 1;
@@ -210,11 +207,9 @@ export class ReportComponent implements OnInit, OnDestroy {
       if (isFilter || pageNumber !== this.page || predicate !== this.predicate || ascending !== this.ascending) {
         this.predicate = predicate;
         this.ascending = ascending;
-        console.log('CCC handleNavigation loadPage');
 
         this.loadPage(pageNumber, true);
       } else {
-        console.log('CCC handleNavigation do nothing');
       }
     }).subscribe();
   }
@@ -231,7 +226,6 @@ export class ReportComponent implements OnInit, OnDestroy {
   }
 
   registerChangeInReports(): void {
-    console.log('CCC registerChangeInReports');
     this.eventSubscriber = this.eventManager.subscribe('reportListModification', () => this.loadPage());
   }
 
@@ -251,7 +245,6 @@ export class ReportComponent implements OnInit, OnDestroy {
   protected onSuccess(data: IReport[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.page = page;
-    console.log('CCC onSuccess_navigate: ' + navigate);
     if (navigate) {
       this.router.navigate(['/report'], {
         queryParams: {
@@ -262,7 +255,6 @@ export class ReportComponent implements OnInit, OnDestroy {
       });
     }
     this.reports = data || [];
-    console.log('CCC reports size: ' + this.reports.length);
     this.ngbPaginationPage = this.page;
   }
 

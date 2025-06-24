@@ -23,7 +23,6 @@ export class StoreDetailComponent implements OnInit {
         this.reports = res.body;
         // if (this.reports)
         //   this.active = this.reports[0].reportDate;
-        console.log('CCCC reports: ' + this.reports?.length);
       },
       () => ''
     );
