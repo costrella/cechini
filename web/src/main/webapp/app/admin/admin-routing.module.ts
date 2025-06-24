@@ -33,10 +33,10 @@ import { RouterModule } from '@angular/router';
         path: 'logs',
         loadChildren: () => import('./logs/logs.module').then(m => m.LogsModule),
       },
-      {
-        path: 'tracker',
-        loadChildren: () => import('./tracker/tracker.module').then(m => m.TrackerModule),
-      },
+      // {
+      //   path: 'tracker',
+      //   loadChildren: () => import('./tracker/tracker.module').then(m => m.TrackerModule),
+      // },
       {
         path: 'metrics',
         loadChildren: () => import('./metrics/metrics.module').then(m => m.MetricsModule),
