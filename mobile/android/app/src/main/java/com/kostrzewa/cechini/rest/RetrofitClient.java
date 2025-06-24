@@ -47,7 +47,14 @@ public class RetrofitClient {
                 .create();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BuildConfig.SERVER_URL)
+                .baseUrl("https://costrella.ovh/api/")
+//                .baseUrl("http://10.0.2.2:8080/api/")
+
+                //https://costrella.ovh/api/"
+                //.baseUrl("http://194.42.111.53:8089/api/")
+                //http://10.0.2.2:8080/api/
+                //"http://192.168.0.104:8080/api/"
+//                .baseUrl(BuildConfig.SERVER_URL)
 //                .addConverterFactory(GsonConverterFactory.create())
                 .client(
                         new OkHttpClient().newBuilder()

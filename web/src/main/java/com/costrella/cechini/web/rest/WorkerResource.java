@@ -91,7 +91,7 @@ public class WorkerResource {
         if (optional.isPresent()) {
             WorkerDTO workerDTO = optional.get();
             workerDTO.setDesc(fwVersion);
-            WorkerDTO result = workerService.save(workerDTO);
+            WorkerDTO result = workerService.updateFirmware(workerDTO);
             return ResponseEntity.ok()
                 .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, workerDTO.getId().toString()))
                 .body(result);

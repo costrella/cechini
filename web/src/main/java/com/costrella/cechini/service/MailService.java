@@ -57,7 +57,7 @@ public class MailService {
 
     @Async
     public void sendEmailWithOrder(String number, String mail, OrderFileType orderFileType, File orderFile) {
-        String subject = "Cechini. Zamówienie nr.: " + number;
+        String subject = "Order number: " + number;
         String content = subject;
         sendEmail(mail, subject, content, true, true, orderFileType, orderFile, number);
     }

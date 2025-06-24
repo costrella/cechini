@@ -4,6 +4,8 @@ import static com.kostrzewa.cechini.util.Constants.IS_UNREAD_REPORTS_FRAGMENT;
 import static com.kostrzewa.cechini.util.Constants.STORE_DTO;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,11 +20,16 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.kostrzewa.cechini.LoginActivity;
+import com.kostrzewa.cechini.MainActivity;
 import com.kostrzewa.cechini.R;
 import com.kostrzewa.cechini.data.WorkerDataManager;
 import com.kostrzewa.cechini.data.WorkerDataManagerImpl;
+import com.kostrzewa.cechini.data.events.LoginFailed;
+import com.kostrzewa.cechini.data.events.LoginSuccess;
 import com.kostrzewa.cechini.data.events.StoreSentFailed;
 import com.kostrzewa.cechini.model.StoreDTO;
+import com.kostrzewa.cechini.model.WorkerDTO;
 import com.kostrzewa.cechini.rest.RetrofitClient;
 import com.kostrzewa.cechini.ui.mystores.dialog.AddStoreDialogFragment;
 
@@ -107,6 +114,21 @@ public class HomeFragment extends Fragment {
                 .getAllUnreadReportsByWorkerIdCount(workerDataManager.getWorker().getId()).enqueue(new Callback<Long>() {
             @Override
             public void onResponse(Call<Long> call, Response<Long> response) {
+                if (response.code() == 401) {
+                    WorkerDTO worker = workerDataManager.getWorker();
+                    if (worker != null) {
+                        workerDataManager.loginAsync(worker);
+                    } else {
+                        SharedPreferences settings = getContext().getSharedPreferences("cechini", Context.MODE_PRIVATE);
+                        settings.edit().clear().commit();
+
+                        Intent intent = new Intent(getContext(), LoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        getContext().startActivity(intent);
+                    }
+                    return;
+                }
+
                 if(response.isSuccessful()){
                     Long count = response.body();
                     if(count != null && count > 0){
@@ -150,6 +172,15 @@ public class HomeFragment extends Fragment {
     @Subscribe
     public void onStoreSentFailed(StoreSentFailed sentFailed) {
         Toast.makeText(getActivity(), sentFailed.getText(), Toast.LENGTH_LONG).show();
+    }
+
+    @Subscribe
+    public void onLoginSuccess(LoginSuccess loginSuccess) {
+    }
+
+
+    @Subscribe
+    public void onLoginFailed(LoginFailed loginFailed) {
     }
 
 }

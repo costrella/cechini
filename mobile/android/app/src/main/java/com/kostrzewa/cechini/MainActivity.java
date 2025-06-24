@@ -1,5 +1,7 @@
 package com.kostrzewa.cechini;
 
+import static com.kostrzewa.cechini.util.Constants.STORE_DTO;
+
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -32,8 +34,6 @@ import com.kostrzewa.cechini.data.WorkerDataManager;
 import com.kostrzewa.cechini.data.WorkerDataManagerImpl;
 import com.kostrzewa.cechini.model.StoreDTO;
 import com.kostrzewa.cechini.ui.mystores.MyStoresFragment;
-
-import static com.kostrzewa.cechini.util.Constants.STORE_DTO;
 
 public class MainActivity extends AppCompatActivity implements MyStoresFragment.OnListFragmentInteractionListener {
     private static final String TAG = "MainActivity";

@@ -41,7 +41,8 @@ public class WorkerDataManagerImpl extends AbstractDataManager implements Worker
     public List<Cookie> getCookies(String host) {
         String jsonCookies = preferenceManager.getCookies(host);
         if (jsonCookies != null) {
-            Type type = new TypeToken<List<Cookie>>() {}.getType();
+            Type type = new TypeToken<List<Cookie>>() {
+            }.getType();
             return gson.fromJson(jsonCookies, type);
         }
         return new ArrayList<>();
@@ -49,14 +50,13 @@ public class WorkerDataManagerImpl extends AbstractDataManager implements Worker
 
     @Override
     public void loginAsync(WorkerDTO workerDTO) {
-
         RetrofitClient.getInstance(getContext()).getService().login2(workerDTO.getLogin(), workerDTO.getPassword()).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
 //                Headers headers = response.headers();
 //                String token = headers.get("Set-Cookie");
 //                EventBus.getDefault().post(new LoginSuccess(workerDTO));
-                if(!response.isSuccessful()){
+                if (!response.isSuccessful()) {
                     EventBus.getDefault().post(new LoginFailed("Błąd a05A: " + response.code()));
                     return;
                 }
@@ -109,12 +109,7 @@ public class WorkerDataManagerImpl extends AbstractDataManager implements Worker
             public void onResponse(Call<WorkerDTO> call, Response<WorkerDTO> response) {
                 Log.d(TAG, "onResponse: " + response.code());
                 if(response.code() == 401){
-                    SharedPreferences settings = getContext().getSharedPreferences("cechini", Context.MODE_PRIVATE);
-                    settings.edit().clear().commit();
-
-                    Intent intent = new Intent(getContext(), LoginActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    getContext().startActivity(intent);
+                    //do nothing. in HomeFragment check 401 and do loginAsync
                 }
             }
 

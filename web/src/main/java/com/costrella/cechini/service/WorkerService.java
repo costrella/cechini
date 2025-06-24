@@ -42,6 +42,13 @@ public class WorkerService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    public WorkerDTO updateFirmware(WorkerDTO workerDTO) {
+        log.debug("Request to save Worker : {}", workerDTO);
+        Worker worker = workerMapper.toEntity(workerDTO);
+        worker = workerRepository.save(worker);
+        return workerMapper.toDto(worker);
+    }
+
     /**
      * Save a worker.
      *
