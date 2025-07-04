@@ -50,6 +50,17 @@ public class CreateReportFragment extends Fragment {
     @BindView(R.id.btn_addComment)
     Button addCommentBtn;
 
+    @BindView(R.id.btn_report_readyDesc1)
+    Button btnReportReadyDesc1;
+    @BindView(R.id.btn_report_readyDesc2)
+    Button btnReportReadyDesc2;
+    @BindView(R.id.btn_report_readyDesc3)
+    Button btnReportReadyDesc3;
+    @BindView(R.id.btn_report_readyDesc4)
+    Button btnReportReadyDesc4;
+    @BindView(R.id.btn_report_readyDesc_clean)
+    Button btnReportReadyClean;
+
     @BindView(R.id.report_preview_photo_1)
     ImageView reportPreviewPhoto1;
 
@@ -65,16 +76,50 @@ public class CreateReportFragment extends Fragment {
                 .show(getFragmentManager(), "sample");
     }
 
+    @OnClick(R.id.btn_report_readyDesc1)
+    void addDesc1() {
+        descET.setText(descET.getText().toString() + getResources().getString(R.string.report_ready_desc_zamowienie) + " ");
+    }
+    @OnClick(R.id.btn_report_readyDesc2)
+    void addDesc2() {
+        descET.setText(descET.getText().toString() + getResources().getString(R.string.report_ready_desc_rozmowa_handlowa) + " ");
+    }
+    @OnClick(R.id.btn_report_readyDesc3)
+    void addDesc3() {
+        descET.setText(descET.getText().toString() + getResources().getString(R.string.report_ready_desc_merchandising) + " ");
+    }
+
+    @OnClick(R.id.btn_report_readyDesc4)
+    void addDesc4() {
+        descET.setText(descET.getText().toString() + getResources().getString(R.string.report_ready_desc_dostawa_towaru) + " ");
+    }
+
+    @OnClick(R.id.btn_report_readyDesc_clean)
+    void addDesc5() {
+        descET.setText("");
+    }
+
+
     private void init() {
         if (ReportData.reportDTO.isReadOnly()){
             fillDataReadOnly();
         } else {
             addCommentBtn.setVisibility(View.GONE);
             reportId_tv.setVisibility(View.GONE);
+            btnReportReadyDesc1.setVisibility(View.VISIBLE);
+            btnReportReadyDesc2.setVisibility(View.VISIBLE);
+            btnReportReadyDesc3.setVisibility(View.VISIBLE);
+            btnReportReadyDesc4.setVisibility(View.VISIBLE);
+            btnReportReadyClean.setVisibility(View.VISIBLE);
         }
     }
 
     private void fillDataReadOnly() {
+        btnReportReadyDesc1.setVisibility(View.GONE);
+        btnReportReadyDesc2.setVisibility(View.GONE);
+        btnReportReadyDesc3.setVisibility(View.GONE);
+        btnReportReadyDesc4.setVisibility(View.GONE);
+        btnReportReadyClean.setVisibility(View.GONE);
         if (ReportData.reportDTO.getId() != null) {
             reportId_tv.setText("ID: " + ReportData.reportDTO.getId());
             reportId_tv.setVisibility(View.VISIBLE);

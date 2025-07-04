@@ -27,11 +27,53 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:textAlignment="textStart"
-        android:tooltipText="Opis raportu"
-        android:hint="Opis raportu"
+        android:tooltipText="@string/report_opis_raportu"
+        android:hint="@string/report_opis_raportu"
         android:textColor="@color/black"
         android:textSize="20sp"
         />
+
+        <Button
+            android:id="@+id/btn_report_readyDesc_clean"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:text="@string/report_ready_desc__clean"
+            />
+        <Button
+            android:id="@+id/btn_report_readyDesc1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:text="@string/report_ready_desc_zamowienie"
+            />
+        <Button
+            android:id="@+id/btn_report_readyDesc2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:text="@string/report_ready_desc_rozmowa_handlowa"
+            />
+        <Button
+            android:id="@+id/btn_report_readyDesc3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:text="@string/report_ready_desc_merchandising"
+            />
+        <Button
+            android:id="@+id/btn_report_readyDesc4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:text="@string/report_ready_desc_dostawa_towaru"
+            />
 
     <EditText
         android:id="@+id/report_manager_et"
