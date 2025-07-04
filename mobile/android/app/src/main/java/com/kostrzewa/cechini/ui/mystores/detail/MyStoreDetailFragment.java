@@ -77,20 +77,20 @@ public class MyStoreDetailFragment extends Fragment {
         ((MainActivity) getActivity()).getSupportActionBar().setTitle("Sklep:" + storeDTO.getName() + " " + storeDTO.getAddress());
         fillStoreDetail();
         if (storeDTO.isMonthVisited()) {
-            visitedTV.setText("Byłeś tu już w tym miesiącu");
+            visitedTV.setText(getContext().getResources().getString(R.string.store_detail_bylesjuztu));
             visitedTV.setTextColor(getResources().getColor(R.color.green));
         } else {
-            visitedTV.setText("Nie było Cię tu w tym miesiącu");
+            visitedTV.setText(getContext().getResources().getString(R.string.store_detail_niebyles));
             visitedTV.setTextColor(getResources().getColor(R.color.black));
         }
     }
 
     private void fillStoreDetail() {
-        String value = "Szczegoły sklepu";
-        value += "\nnazwa: " + storeDTO.getName();
-        value += "\nadres: " + storeDTO.getAddress();
+        String value = getContext().getResources().getString(R.string.store_detail);
+        value += "\n" + getContext().getResources().getString(R.string.store_name) + " " + storeDTO.getName();
+        value += "\n" + getContext().getResources().getString(R.string.store_address) + " " +storeDTO.getAddress();
 //        value += "\ngrupa sklepu: " + storeDTO.getStoregroupName();
-        value += "\nNIP: " + (storeDTO.getNip() != null ? storeDTO.getNip() : "");
+        value += "\n" + getContext().getResources().getString(R.string.store_nip) + " " + (storeDTO.getNip() != null ? storeDTO.getNip() : "");
         storeDetailTV.setText(value);
     }
 

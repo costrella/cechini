@@ -23,6 +23,6 @@
         android:textColor="@color/colorPrimaryText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Dodaj Sklep"></Button>
+        android:text="@string/store_add"></Button>
 
 </LinearLayout>

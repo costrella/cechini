@@ -16,7 +16,7 @@
             android:id="@+id/fragment_mystores_dialog_storeGroupSpinner_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Grupa sklepu: " />
+            android:text="@string/store_group" />
 
         <Spinner
             android:id="@+id/fragment_mystores_dialog_storeGroupSpinner"
@@ -36,7 +36,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Komentarz: " />
+            android:text="@string/comment" />
 
         <EditText
             android:id="@+id/fragment_mystores_dialog_store_nameET"
@@ -63,7 +63,7 @@
             android:background="@color/colorPrimary"
             android:textColor="@color/white"
             android:layout_weight="1"
-            android:text="DODAJ " />
+            android:text="@string/add" />
 
         <ProgressBar
             android:id="@+id/fragment_mystores_dialog_store_progressBar"

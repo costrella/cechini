@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="100dp"
         android:layout_marginEnd="104dp"
-        android:text="TAK"
+        android:text="@string/yes"
         android:textSize="20dp"
 
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,7 +23,7 @@
         android:id="@+id/logout_noBtn"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
-        android:text="NIE"
+        android:text="@string/no"
         android:textSize="20dp"
         app:layout_constraintStart_toEndOf="@id/logout_yesBtn"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="80dp"
-        android:text="Czy na pewno chcesz się wylogować ?"
+        android:text="@string/logout_question"
 
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/logout_noBtn"

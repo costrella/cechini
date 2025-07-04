@@ -60,8 +60,8 @@ public class ShareFragment extends Fragment {
     private WorkerDataManager workerDataManager;
     Handler handler = new Handler();
 
-    String LAST_SYNCHRO = "dane z: ";
-    String SYNCHRO_ERROR = "błąd";
+    String LAST_SYNCHRO = getContext().getResources().getString(R.string.date_since);
+    String SYNCHRO_ERROR = getContext().getResources().getString(R.string.error);
 
     @BindView(R.id.synchroStoreTime)
     TextView synchroStoreTime;
@@ -131,7 +131,7 @@ public class ShareFragment extends Fragment {
         ButterKnife.bind(this, root);
         preferenceManager = new PreferenceManagerImpl(getContext());
         init();
-        version.setText("Wersja aplikacji: " + getVersionApp());
+        version.setText(getContext().getResources().getString(R.string.app_version_text) + " " + getVersionApp());
         synchroStoreTime.setText(LAST_SYNCHRO + preferenceManager.getSychroTimeMyStores());
         synchroProductTime.setText(LAST_SYNCHRO + preferenceManager.getSychroTimeProducts());
         synchroReportTime.setText(LAST_SYNCHRO + preferenceManager.getSychroTimeMyReports());

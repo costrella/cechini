@@ -85,7 +85,7 @@ public class HomeFragment extends Fragment {
         navController.navigate(R.id.nav_unread_reports, args);
     }
 
-    String text = "Nieprzeczytane komentarze do raportów";
+    String text = getContext().getResources().getString(R.string.unread_comments);
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -166,7 +166,7 @@ public class HomeFragment extends Fragment {
 
     @Subscribe
     public void onStoreAdded(StoreDTO storeDTO) {
-        Toast.makeText(getActivity(), "Dodano sklep!", Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity(), getContext().getResources().getString(R.string.store_added), Toast.LENGTH_LONG).show();
     }
 
     @Subscribe

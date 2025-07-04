@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="Sklepy"
+            android:text="@strore/sync_store"
             android:textSize="20dp"></TextView>
 
         <TextView
@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Last synchro"
+            android:text="@string/sync_last"
             android:textSize="15dp"></TextView>
 
         <ProgressBar
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="Produkty"
+            android:text="@string/sync_products"
             android:textSize="20dp"></TextView>
 
         <TextView
@@ -50,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Last synchro"
+            android:text="@string/sync_last"
             android:textSize="15dp"></TextView>
 
         <ProgressBar
@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="Raporty"
+            android:text="@string/sync_reports"
             android:textSize="20dp"></TextView>
 
         <TextView
@@ -78,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Last synchro"
+            android:text="@string/sync_last"
             android:textSize="15dp"></TextView>
 
         <ProgressBar
@@ -98,7 +98,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="Zamówienia"
+            android:text="@string/sync_orders"
             android:textSize="20dp"></TextView>
 
         <TextView
@@ -106,7 +106,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Last synchro"
+            android:text="@string/sync_last"
             android:textSize="15dp"></TextView>
 
         <ProgressBar
@@ -126,7 +126,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="Hurtownie"
+            android:text="@string/sync_warehouses"
             android:textSize="20dp"></TextView>
 
         <TextView
@@ -134,7 +134,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Last synchro"
+            android:text="@string/sync_last"
             android:textSize="15dp"></TextView>
 
         <ProgressBar
@@ -154,7 +154,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="Niewysłane raporty"
+            android:text="@string/sync_report_not_sync"
             android:textSize="20dp"></TextView>
 
         <TextView
@@ -182,7 +182,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="Niewysłane komentarze"
+            android:text="@string/sync_comments_not_sync"
             android:textSize="20dp"></TextView>
 
         <TextView
@@ -211,7 +211,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
-            android:text="Synchronizuj wszystko"
+            android:text="@string/sync_all"
             android:textColor="@color/white">
 
         </Button>
@@ -226,7 +226,7 @@
             android:id="@+id/version"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="wersja aplikacji: ">
+            android:text="@string/app_version_text">
 
         </TextView>
     </LinearLayout>

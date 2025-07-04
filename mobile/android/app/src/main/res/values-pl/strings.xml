@@ -6,6 +6,8 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="app_version_text">Wersja aplikacji:</string>
+
 
     <string name="menu_home">Home</string>
     <string name="menu_mystores">Moje sklepy</string>
@@ -41,4 +43,101 @@
     <string name="report_ready_desc_merchandising">Merchandising </string>
     <string name="report_ready_desc_dostawa_towaru">Dostawa towaru </string>
     <string name="report_ready_desc__clean">Wyczyść opis</string>
+    <string name="report_my_desc">Mój opis:</string>
+    <string name="report_comments">Komentarze:</string>
+    <string name="report_photos_sent">liczba przesłanych zdjęć:</string>
+    <string name="report_nip_mail">System wyśle również e-mail z zamówieniem na adres hurtowni:</string>
+    <string name="report_nip_not_mail">Z powodu braku NIP, system nie wyśle e-mail z zamówieniem na adres:</string>
+    <string name="report_not_mail_warehouse">Brak adresu mailowego dla wybranej Hurtowni</string>
+    <string name="report_desc_empty">Opis raportu jest pusty\nWymagamy go tylko wtedy, kiedy nie dodajesz zamówienia</string>
+
+
+    <string name="store_detail_bylesjuztu">Byłeś tu już w tym miesiącu</string>
+    <string name="store_detail_niebyles">Byłeś tu już w tym miesiącu</string>
+
+    <string name="order_number">Numer zamówienia:</string>
+    <string name="empty">Brak</string>
+
+    <string name="warehouse">Hurtownia</string>
+
+    <string name="log_in">Zaloguj</string>
+    <string name="my_stores">Moje sklepy</string>
+    <string name="add_store">Dodaj sklep</string>
+    <string name="my_sent_reports">Moje wysłane raporty</string>
+    <string name="sync">Synchronizacja</string>
+    <string name="unread_comments">Nieprzeczytane komentarze do raportów</string>
+    <string name="yes">Tak</string>
+    <string name="no">Nie</string>
+    <string name="logout_question">Czy na pewno chcesz się wylogować?</string>
+    <string name="test_store">Testowy sklep</string>
+
+    <string name="shortcut_order">Z</string>
+    <string name="shortcut_order_desc">- Zamówienie</string>
+    <string name="shortcut_comment">K</string>
+    <string name="shortcut_comment_desc">- Komentarze</string>
+    <string name="shortcut_comment_unread">N</string>
+    <string name="shortcut_comment_unread_desc">- Nieodczytany</string>
+
+    <string name="report_add">Dodaj raport / zamówienie</string>
+    <string name="report_show">Pokaż raporty dla tego sklepu</string>
+    <string name="report_edit">Edytuj sklep</string>
+    <string name="store_group">Grupa sklepu</string>
+    <string name="store_edit">Edytuj sklep</string>
+    <string name="store_name">Nazwa:</string>
+    <string name="store_address">Adres:</string>
+    <string name="store_nip">NIP:</string>
+    <string name="store_nip_req">Pole NIP jest niewymagane, natomiast będzie potrzebne przy ewentualnym tworzeniu zamówienia</string>
+    <string name="store_add">Dodaj sklep</string>
+    <string name="products_empty">Brak dodanych produktów. \nPamiętaj, że zamówienie nie jest wymagane</string>
+    <string name="select_warehouse">Wybierz hurtownie</string>
+    <string name="add_product">Dodaj Produkt</string>
+    <string name="product">Produkt:</string>
+    <string name="count">Ilość:</string>
+
+    <string name="camera">Aparat</string>
+    <string name="gallery">Galeria</string>
+
+    <string name="comment_manager">Komentarz managera:</string>
+    <string name="comment_add">Dodaj komentarz</string>
+    <string name="comment">Komentarz</string>
+    <string name="add">Dodaj</string>
+
+    <string name="preview_desc">Opis:</string>
+    <string name="preview_photos">Zdjęcia:</string>
+    <string name="preview_order">Zamówienie:</string>
+    <string name="preview_mail">System wyśle również e-mail z zamówieniem na odpowiedni adres</string>
+    <string name="preview_send">Wyślij</string>
+    <string name="preview_next">Dalej</string>
+
+    <string name="sync_store">Sklepy</string>
+    <string name="sync_last">Ostatni sync:</string>
+    <string name="sync_products">Produkty</string>
+    <string name="sync_reports">Raproty</string>
+    <string name="sync_orders">Zamówienia</string>
+    <string name="sync_warehouses">Hurtownie</string>
+    <string name="sync_report_not_sync">Niewysłane raporty</string>
+    <string name="sync_comments_not_sync">Niewysłane komentarze</string>
+    <string name="sync_all">Synchronizuj wszystko</string>
+
+    <string name="fill_field">Wypełnij pole</string>
+    <string name="store_added">Dodano sklep</string>
+    <string name="wrong_user_or_password">Nieprawidłowy login lub hasło</string>
+    <string name="store_detail">Szczegóły sklepu</string>
+    <string name="select_product">Wybierz produkt</string>
+    <string name="select_product_count">Wybierz ilość</string>
+    <string name="items">pozycje:</string>
+    <string name="capacity">pojemność:</string>
+    <string name="report_of_store">Raporty sklepu:</string>
+    <string name="report_preview">Podgląd raportu</string>
+
+    <string name="adapter_report">Raport</string>
+    <string name="adapter_order">Zamówienie</string>
+    <string name="adapter_photos">Zdjęcia</string>
+    <string name="adapter_realization">Realizacja</string>
+
+    <string name="date_since">dane z:</string>
+    <string name="error">błąd</string>
+
+
+
 </resources>

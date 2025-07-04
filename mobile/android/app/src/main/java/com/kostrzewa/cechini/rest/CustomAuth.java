@@ -3,6 +3,7 @@ package com.kostrzewa.cechini.rest;
 
 import android.content.Context;
 
+import com.kostrzewa.cechini.R;
 import com.kostrzewa.cechini.data.WorkerDataManager;
 import com.kostrzewa.cechini.data.WorkerDataManagerImpl;
 import com.kostrzewa.cechini.data.events.LoginFailed;
@@ -48,7 +49,7 @@ public class CustomAuth implements Authenticator {
                 throw new RuntimeException(e);
             }
         }
-        EventBus.getDefault().post(new LoginFailed("Nieprawidłowy login lub hasło"));
+        EventBus.getDefault().post(new LoginFailed(context.getResources().getString(R.string.wrong_user_or_password)));
         return null;
     }
 

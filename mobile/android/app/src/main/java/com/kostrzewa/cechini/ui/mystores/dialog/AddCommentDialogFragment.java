@@ -122,7 +122,7 @@ public class AddCommentDialogFragment extends DialogFragment implements AdapterV
 //            nameET.setText(editReportDTO.getName());
 //            addressET.setText(editReportDTO.getAddress());
 //            nipET.setText(editReportDTO.getNip());
-            dialogTitle = "Dodaj komentarz";
+            dialogTitle = getContext().getResources().getString(R.string.comment_add);
         }
 
         return (builder.setTitle(dialogTitle).setView(form)
@@ -184,7 +184,7 @@ public class AddCommentDialogFragment extends DialogFragment implements AdapterV
 
         String name = comment.getText().toString();
         if (TextUtils.isEmpty(name)) {
-            comment.setError("Wypełnij pole");
+            comment.setError(getContext().getResources().getString(R.string.fill_field));
             focusView = comment;
             focusView.requestFocus();
             return false;

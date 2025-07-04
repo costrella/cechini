@@ -78,20 +78,20 @@ public class CreateReportFragment extends Fragment {
 
     @OnClick(R.id.btn_report_readyDesc1)
     void addDesc1() {
-        descET.setText(descET.getText().toString() + getResources().getString(R.string.report_ready_desc_zamowienie) + " ");
+        descET.setText(descET.getText().toString() + getContext().getResources().getString(R.string.report_ready_desc_zamowienie) + " ");
     }
     @OnClick(R.id.btn_report_readyDesc2)
     void addDesc2() {
-        descET.setText(descET.getText().toString() + getResources().getString(R.string.report_ready_desc_rozmowa_handlowa) + " ");
+        descET.setText(descET.getText().toString() + getContext().getResources().getString(R.string.report_ready_desc_rozmowa_handlowa) + " ");
     }
     @OnClick(R.id.btn_report_readyDesc3)
     void addDesc3() {
-        descET.setText(descET.getText().toString() + getResources().getString(R.string.report_ready_desc_merchandising) + " ");
+        descET.setText(descET.getText().toString() + getContext().getResources().getString(R.string.report_ready_desc_merchandising) + " ");
     }
 
     @OnClick(R.id.btn_report_readyDesc4)
     void addDesc4() {
-        descET.setText(descET.getText().toString() + getResources().getString(R.string.report_ready_desc_dostawa_towaru) + " ");
+        descET.setText(descET.getText().toString() + getContext().getResources().getString(R.string.report_ready_desc_dostawa_towaru) + " ");
     }
 
     @OnClick(R.id.btn_report_readyDesc_clean)
@@ -127,7 +127,7 @@ public class CreateReportFragment extends Fragment {
             reportId_tv.setVisibility(View.GONE);
         }
 
-        descET.setText("Mój opis: " + ReportData.reportDTO.getDesc() != null ? ReportData.reportDTO.getDesc() : "");
+        descET.setText(getContext().getResources().getString(R.string.report_my_desc) + " " + ReportData.reportDTO.getDesc() != null ? ReportData.reportDTO.getDesc() : "");
         descET.setEnabled(false);
 
         if (ReportData.reportDTO.getNotes() != null && !ReportData.reportDTO.getNotes().isEmpty()) {
@@ -141,14 +141,14 @@ public class CreateReportFragment extends Fragment {
                 comments.append(note.getValue());
                 i++;
             }
-            reportManagerET.setText("Komentarze: \n\n" + comments);
+            reportManagerET.setText(getContext().getResources().getString(R.string.report_comments) + "\n\n" + comments);
         } else {
             reportManagerET.setText("");
         }
         reportManagerET.setEnabled(false);
         reportManagerET.setVisibility(View.VISIBLE);
 
-        photoCountTV.setText("liczba przesłanych zdjęć: " + ReportData.reportDTO.getPhotosCount());
+        photoCountTV.setText(getContext().getResources().getString(R.string.report_photos_sent) + " " + ReportData.reportDTO.getPhotosCount());
         photoCountTV.setEnabled(false);
 
         if (ReportData.reportDTO.getPhotos() != null

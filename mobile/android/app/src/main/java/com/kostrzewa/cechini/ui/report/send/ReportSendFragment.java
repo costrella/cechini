@@ -54,7 +54,7 @@ public class ReportSendFragment extends Fragment {
                 || ReportData.reportDTO.getOrderDTO().getOrderItems().isEmpty()) {
             //raport bez zamowienia:
             if (TextUtils.isEmpty(ReportData.reportDTO.getDesc())) {
-                validTV.setText("Opis raportu jest pusty :( \n Wymagamy go tylko wtedy, kiedy nie dodajesz zamówienia");
+                validTV.setText(getContext().getResources().getString(R.string.report_desc_empty));
                 sendBtn.setError("");
                 focusView = sendBtn;
                 focusView.requestFocus();

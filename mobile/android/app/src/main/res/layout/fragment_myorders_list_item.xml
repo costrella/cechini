@@ -23,7 +23,7 @@
         android:background="@color/white"
         android:textColor="@color/red"
         android:visibility="gone"
-        tool:text="Testowy sklep"
+        tool:text="@string/test_store"
         android:textAppearance="?attr/textAppearanceListItem" />
 
     <TextView
@@ -32,6 +32,6 @@
         android:layout_height="wrap_content"
         android:padding="15dp"
         android:background="@color/white"
-        tool:text="Testowy sklep"
+        tool:text="@string/test_store"
         android:textAppearance="?attr/textAppearanceListItem" />
 </LinearLayout>

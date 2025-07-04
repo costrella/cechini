@@ -31,33 +31,33 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textColor="@color/colorPrimary"
-            android:text="Z"></TextView>
+            android:text="@string/shortcut_order"></TextView>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text=" - Zamówienie"></TextView>
+            android:text="@string/shortcut_order_desc"></TextView>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textColor="@color/colorProductItemCapacity"
-            android:text=" K"></TextView>
+            android:text="@string/shortcut_comment"></TextView>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text=" - Komentarze"></TextView>
+            android:text="@string/shortcut_comment_desc"></TextView>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textColor="@color/red"
-            android:text=" N"></TextView>
+            android:text="@string/shortcut_comment_unread"></TextView>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text=" - Nieodczytany"></TextView>
+            android:text="@string/shortcut_comment_unread_desc"></TextView>
     </LinearLayout>
 </LinearLayout>

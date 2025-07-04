@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="Z"
+        android:text="@string/shortcut_order"
         android:padding="4dp"
         android:textAppearance="?attr/textAppearanceListItem"
         android:textColor="@color/colorPrimary" />
@@ -37,7 +37,7 @@
         android:padding="4dp"
         android:textAppearance="?attr/textAppearanceListItem"
         android:textColor="@color/colorProductItemCapacity"
-        android:text="K"
+        android:text="@string/shortcut_comment"
          />
 
     <TextView
@@ -49,7 +49,7 @@
         android:padding="4dp"
         android:textAppearance="?attr/textAppearanceListItem"
         android:textColor="@color/red"
-        android:text="N"
+        android:text="@string/shortcut_comment_unread"
         />
 
     <TextView

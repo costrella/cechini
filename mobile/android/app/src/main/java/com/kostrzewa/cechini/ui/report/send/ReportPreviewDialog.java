@@ -105,21 +105,21 @@ public class ReportPreviewDialog extends DialogFragment {
     private String genarateOrderPreview() {
         if (ReportData.reportDTO.getOrderDTO().getOrderItems().isEmpty()) {
             mailInfoTV.setVisibility(View.GONE);
-            return "brak";
+            return getContext().getResources().getString(R.string.empty);
         } else {
             mailInfoTV.setVisibility(View.VISIBLE);
             String warehouseMail = ReportData.reportDTO.getOrderDTO().getWarehouseMail();
             if (!TextUtils.isEmpty(warehouseMail)) {
                 if (TextUtils.isEmpty(storeDTO.getNip())) {
-                    mailInfoTV.setText("Z powodu braku NIP, system nie wyśle e-mail z zamówieniem na adres: " + warehouseMail);
+                    mailInfoTV.setText(getContext().getResources().getString(R.string.report_nip_not_mail) + " " + warehouseMail);
                     mailInfoTV.setTextColor(getResources().getColor(R.color.red));
                 } else {
-                    mailInfoTV.setText("System wyśle również e-mail z zamówieniem na adres hurtowni: " + warehouseMail);
+                    mailInfoTV.setText(getContext().getResources().getString(R.string.report_nip_mail) + " " + warehouseMail);
                     mailInfoTV.setTextColor(getResources().getColor(R.color.colorPrimary));
                 }
             } else {
-                mailInfoTV.setText("Brak adresu mailowego dla wybranej Hurtowni");
-                mailInfoTV.setTextColor(getResources().getColor(R.color.recycler_view_empty_text));
+                mailInfoTV.setText(getContext().getResources().getString(R.string.report_not_mail_warehouse));
+                mailInfoTV.setTextColor(getContext().getResources().getColor(R.color.recycler_view_empty_text));
             }
 
         }
@@ -129,10 +129,10 @@ public class ReportPreviewDialog extends DialogFragment {
             value += ""+i + ") " + item.getProductName() + "\n\t" + item.getProductCapacity() + "L" + ", zgrzewek: " + item.getPackCount() + "\n";
             i++;
         }
-        value += "\nSklep: " + storeDTO.getName() + "\n\tadres: " + storeDTO.getAddress();
-        value += "\nNIP: " + (storeDTO.getNip() != null ? storeDTO.getNip() : "");
+        value += "\n" + getContext().getResources().getString(R.string.store_name) + " " + storeDTO.getName() + "\n\t" + getContext().getResources().getString(R.string.store_address) + " " + storeDTO.getAddress();
+        value += "\n" + getContext().getResources().getString(R.string.store_nip) + " " + (storeDTO.getNip() != null ? storeDTO.getNip() : "");
         value += "\n";
-        value += "\nHurtownia: " + ReportData.reportDTO.getOrderDTO().getWarehouseName();
+        value += "\n" + getContext().getResources().getString(R.string.warehouse)   + " " + ReportData.reportDTO.getOrderDTO().getWarehouseName();
         return value;
     }
 

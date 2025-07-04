@@ -1,11 +1,13 @@
 package com.kostrzewa.cechini.ui.report;
 
+import android.content.Context;
 import android.util.Log;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
+import com.kostrzewa.cechini.R;
 import com.kostrzewa.cechini.model.StoreDTO;
 import com.kostrzewa.cechini.ui.order.CreateOrderFragment;
 import com.kostrzewa.cechini.ui.report.data.ReportData;
@@ -16,9 +18,12 @@ public class ReportPagerAdapter extends FragmentStatePagerAdapter {
     private static final String TAG = "ReportPagerAdapter";
     private final StoreDTO storeDTO;
 
-    public ReportPagerAdapter(FragmentManager fm, StoreDTO storeDTO) {
+    private final Context context;
+
+    public ReportPagerAdapter(FragmentManager fm, StoreDTO storeDTO, Context context) {
         super(fm);
         this.storeDTO = storeDTO;
+        this.context = context;
     }
 
     @Override
@@ -69,20 +74,20 @@ public class ReportPagerAdapter extends FragmentStatePagerAdapter {
         if (ReportData.reportDTO.isReadOnly()) {
             switch (position) {
                 case 0:
-                    return "Raport";
+                    return context.getResources().getString(R.string.adapter_report);
                 case 1:
-                    return "Zamówienie";
+                    context.getResources().getString(R.string.adapter_order);
             }
         } else {
             switch (position) {
                 case 0:
-                    return "Raport";
+                    return context.getResources().getString(R.string.adapter_report);
                 case 1:
-                    return "Zdjęcia";
+                    return context.getResources().getString(R.string.adapter_photos);
                 case 2:
-                    return "Zamówienie";
+                    return context.getResources().getString(R.string.adapter_order);
                 case 3:
-                    return "Realizacja";
+                    return context.getResources().getString(R.string.adapter_realization);
             }
         }
 

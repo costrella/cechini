@@ -64,9 +64,9 @@ public class CreateOrderFragment extends Fragment {
         if (ReportData.reportDTO.getOrderDTO() != null && !ReportData.reportDTO.getOrderDTO().getOrderItems().isEmpty()) {
 
             if (ReportData.reportDTO.getOrderDTO().getNumber() != null) {
-                orderNumberTV.setText("Numer zamówienia: " + ReportData.reportDTO.getOrderDTO().getNumber());
+                orderNumberTV.setText(getContext().getResources().getString(R.string.order_number) + " " + ReportData.reportDTO.getOrderDTO().getNumber());
             } else {
-                orderNumberTV.setText("Numer zamówienia: brak");
+                orderNumberTV.setText(getContext().getResources().getString(R.string.order_number) + " " + getResources().getString(R.string.empty));
             }
             for (int i = 0; i < warehouseDTOS.size(); i++) {
                 if (ReportData.reportDTO.getOrderDTO().getWarehouseId().equals(
@@ -78,7 +78,7 @@ public class CreateOrderFragment extends Fragment {
             }
         }
         warehouseSpinner.setEnabled(false);
-        warehouseTV.setText("Hurtownia");
+        warehouseTV.setText(getContext().getResources().getString(R.string.warehouse));
         recyclerView.setLayoutFrozen(true);
         recyclerView.setEnabled(false);
         recyclerView.setActivated(false);

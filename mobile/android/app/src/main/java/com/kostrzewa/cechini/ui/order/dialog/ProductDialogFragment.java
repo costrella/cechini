@@ -99,7 +99,7 @@ public class ProductDialogFragment extends DialogFragment implements
 
         }
 
-        return (builder.setTitle("Wybierz produkt").setView(form)
+        return (builder.setTitle(getContext().getResources().getString(R.string.select_product)).setView(form)
                 .setPositiveButton(android.R.string.ok, this)
                 .setNegativeButton(android.R.string.cancel, null).create());
     }
@@ -116,7 +116,7 @@ public class ProductDialogFragment extends DialogFragment implements
 
         String packCountString = packCountTV.getText().toString();
         if (packCountString == null || packCountString.equals("")) {
-            Toast.makeText(getActivity(), "Wypełnij ilość zgrzewek !", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), getContext().getResources().getString(R.string.select_product_count), Toast.LENGTH_LONG).show();
             return;
         }
         orderItemDTO.setPackCount(Integer.valueOf(packCountString));

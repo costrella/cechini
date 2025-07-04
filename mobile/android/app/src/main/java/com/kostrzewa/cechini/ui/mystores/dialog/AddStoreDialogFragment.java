@@ -107,12 +107,12 @@ public class AddStoreDialogFragment extends DialogFragment implements AdapterVie
         spinner.setOnItemSelectedListener(this);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        String dialogTitle = "Dodaj sklep";
+        String dialogTitle = getContext().getResources().getString(R.string.add_store);
         if (editStore != null) {
             nameET.setText(editStore.getName());
             addressET.setText(editStore.getAddress());
             nipET.setText(editStore.getNip());
-            dialogTitle = "Edytuj sklep";
+            dialogTitle = getContext().getResources().getString(R.string.store_edit);
         }
 
         return (builder.setTitle(dialogTitle).setView(form)
@@ -182,13 +182,13 @@ public class AddStoreDialogFragment extends DialogFragment implements AdapterVie
 //            return false;
 //        }
         if (TextUtils.isEmpty(name)) {
-            nameET.setError("Wypełnij pole");
+            nameET.setError(getContext().getResources().getString(R.string.fill_field));
             focusView = nameET;
             focusView.requestFocus();
             return false;
         }
         if (TextUtils.isEmpty(address)) {
-            addressET.setError("Wypełnij pole");
+            addressET.setError(getContext().getResources().getString(R.string.fill_field));
             focusView = addressET;
             focusView.requestFocus();
             return false;

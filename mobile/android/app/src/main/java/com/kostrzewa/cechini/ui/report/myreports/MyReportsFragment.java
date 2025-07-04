@@ -91,7 +91,7 @@ public class MyReportsFragment extends Fragment {
             isReportsOfStoreMode = true;
             StoreDTO storeDTO = (StoreDTO) getArguments().getSerializable(STORE_DTO);
             reportDataManager.downloadMyReportsByStoreId(workerDataManager.getWorker().getId(), storeDTO.getId());
-            ((MainActivity) getActivity()).getSupportActionBar().setTitle("Raporty sklepu: " + storeDTO.getName() + " " + storeDTO.getAddress());
+            ((MainActivity) getActivity()).getSupportActionBar().setTitle(getContext().getResources().getString(R.string.report_of_store) + " " + storeDTO.getName() + " " + storeDTO.getAddress());
 
         } else {
             isReportsOfStoreMode = false;
