@@ -137,7 +137,23 @@
 
     <string name="date_since">dane z:</string>
     <string name="error">błąd</string>
+    <string name="comment_from_you">od Ciebie:</string>
+    <string name="comment_from_manager">od Managera:</string>
 
+    <string name="no_internet">Brak internetu</string>
+    <string name="comment_added">Komentarz dodany</string>
+    <string name="comment_not_added">Komentarz nie został dodany. Zapisano w pamięci</string>
+    <string name="memory_saved">Zapisano w pamięci!</string>
+    <string name="internet_needed">Ta operacja wymaga internetu. Zapisano w pamięci</string>
+    <string name="report_sent_ok">Raport wysłany</string>
+    <string name="report_not_added">Raport nie został dodany. Zapisano w pamięci</string>
+    <string name="load_from_memory">Brak internetu. Wczytuję raporty z pamięci</string>
 
+    <string name="creator_report">Kreator Raportu</string>
+    <string name="creator_order">Kreator Zamówienia</string>
+    <string name="unread_comments_shortcut">Nieprzeczytane komentarze</string>
+    <string name="my_orders">Moje zamówienia</string>
+    <string name="store">Sklep</string>
+    <string name="settings">Ustawienia</string>
 
 </resources>

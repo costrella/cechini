@@ -60,8 +60,6 @@ public class ShareFragment extends Fragment {
     private WorkerDataManager workerDataManager;
     Handler handler = new Handler();
 
-    String LAST_SYNCHRO = getContext().getResources().getString(R.string.date_since);
-    String SYNCHRO_ERROR = getContext().getResources().getString(R.string.error);
 
     @BindView(R.id.synchroStoreTime)
     TextView synchroStoreTime;
@@ -131,6 +129,7 @@ public class ShareFragment extends Fragment {
         ButterKnife.bind(this, root);
         preferenceManager = new PreferenceManagerImpl(getContext());
         init();
+        String LAST_SYNCHRO = getContext().getResources().getString(R.string.date_since);
         version.setText(getContext().getResources().getString(R.string.app_version_text) + " " + getVersionApp());
         synchroStoreTime.setText(LAST_SYNCHRO + preferenceManager.getSychroTimeMyStores());
         synchroProductTime.setText(LAST_SYNCHRO + preferenceManager.getSychroTimeProducts());
@@ -179,7 +178,7 @@ public class ShareFragment extends Fragment {
         handler.postDelayed(() -> {
             synchroStoreProgress.setVisibility(View.GONE);
             synchroStoreTime.setVisibility(View.VISIBLE);
-            synchroStoreTime.setText(LAST_SYNCHRO + preferenceManager.getSychroTimeMyStores());
+            synchroStoreTime.setText(getContext().getResources().getString(R.string.date_since) + preferenceManager.getSychroTimeMyStores());
         }, 1500);
     }
 
@@ -188,7 +187,7 @@ public class ShareFragment extends Fragment {
         handler.postDelayed(() -> {
             synchroStoreProgress.setVisibility(View.GONE);
             synchroStoreTime.setVisibility(View.VISIBLE);
-            synchroStoreTime.setText(SYNCHRO_ERROR);
+            synchroStoreTime.setText(getContext().getResources().getString(R.string.error));
         }, 1500);
     }
 
@@ -198,7 +197,7 @@ public class ShareFragment extends Fragment {
         handler.postDelayed(() -> {
             synchroOrdersProgress.setVisibility(View.GONE);
             synchroOrdersTime.setVisibility(View.VISIBLE);
-            synchroOrdersTime.setText(LAST_SYNCHRO + preferenceManager.getSychroTimeOrders());
+            synchroOrdersTime.setText(getContext().getResources().getString(R.string.date_since) + preferenceManager.getSychroTimeOrders());
         }, 1500);
     }
 
@@ -207,7 +206,7 @@ public class ShareFragment extends Fragment {
         handler.postDelayed(() -> {
             synchroOrdersProgress.setVisibility(View.GONE);
             synchroOrdersTime.setVisibility(View.VISIBLE);
-            synchroOrdersTime.setText(SYNCHRO_ERROR);
+            synchroOrdersTime.setText(getContext().getResources().getString(R.string.error));
         }, 1500);
     }
 
@@ -217,7 +216,7 @@ public class ShareFragment extends Fragment {
         handler.postDelayed(() -> {
             synchroReportProgress.setVisibility(View.GONE);
             synchroReportTime.setVisibility(View.VISIBLE);
-            synchroReportTime.setText(LAST_SYNCHRO + preferenceManager.getSychroTimeMyReports());
+            synchroReportTime.setText(getContext().getResources().getString(R.string.date_since) + preferenceManager.getSychroTimeMyReports());
         }, 1500);
     }
 
@@ -226,7 +225,7 @@ public class ShareFragment extends Fragment {
         handler.postDelayed(() -> {
             synchroReportProgress.setVisibility(View.GONE);
             synchroReportTime.setVisibility(View.VISIBLE);
-            synchroReportTime.setText(SYNCHRO_ERROR);
+            synchroReportTime.setText(getContext().getResources().getString(R.string.error));
         }, 1500);
     }
 
@@ -236,7 +235,7 @@ public class ShareFragment extends Fragment {
         handler.postDelayed(() -> {
             synchroWarehouseProgress.setVisibility(View.GONE);
             synchroWarehouseTime.setVisibility(View.VISIBLE);
-            synchroWarehouseTime.setText(LAST_SYNCHRO + preferenceManager.getSychroTimeWarehouses());
+            synchroWarehouseTime.setText(getContext().getResources().getString(R.string.date_since) + preferenceManager.getSychroTimeWarehouses());
         }, 1500);
     }
 
@@ -245,7 +244,7 @@ public class ShareFragment extends Fragment {
         handler.postDelayed(() -> {
             synchroWarehouseProgress.setVisibility(View.GONE);
             synchroWarehouseTime.setVisibility(View.VISIBLE);
-            synchroWarehouseTime.setText(SYNCHRO_ERROR);
+            synchroWarehouseTime.setText(getContext().getResources().getString(R.string.error));
         }, 1500);
     }
 
@@ -254,7 +253,7 @@ public class ShareFragment extends Fragment {
         handler.postDelayed(() -> {
             synchroProductProgress.setVisibility(View.GONE);
             synchroProductTime.setVisibility(View.VISIBLE);
-            synchroProductTime.setText(LAST_SYNCHRO + preferenceManager.getSychroTimeProducts());
+            synchroProductTime.setText(getContext().getResources().getString(R.string.date_since) + preferenceManager.getSychroTimeProducts());
         }, 1500);
     }
 
@@ -263,7 +262,7 @@ public class ShareFragment extends Fragment {
         handler.postDelayed(() -> {
             synchroProductProgress.setVisibility(View.GONE);
             synchroProductTime.setVisibility(View.VISIBLE);
-            synchroProductTime.setText(SYNCHRO_ERROR);
+            synchroProductTime.setText(getContext().getResources().getString(R.string.error));
         }, 1500);
     }
 
@@ -281,7 +280,7 @@ public class ShareFragment extends Fragment {
         handler.postDelayed(() -> {
             synchroReportsNotSentProgress.setVisibility(View.GONE);
             synchroReportsNotSent.setVisibility(View.VISIBLE);
-            synchroReportsNotSent.setText(SYNCHRO_ERROR);
+            synchroReportsNotSent.setText(getContext().getResources().getString(R.string.error));
         }, 1500);
     }
 
@@ -299,7 +298,7 @@ public class ShareFragment extends Fragment {
         handler.postDelayed(() -> {
             synchroCommentsNotSentProgress.setVisibility(View.GONE);
             synchroCommentsNotSent.setVisibility(View.VISIBLE);
-            synchroCommentsNotSent.setText(SYNCHRO_ERROR);
+            synchroCommentsNotSent.setText(getContext().getResources().getString(R.string.error));
         }, 1500);
     }
 }

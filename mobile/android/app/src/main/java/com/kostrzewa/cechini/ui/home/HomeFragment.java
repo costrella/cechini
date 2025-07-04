@@ -85,7 +85,7 @@ public class HomeFragment extends Fragment {
         navController.navigate(R.id.nav_unread_reports, args);
     }
 
-    String text = getContext().getResources().getString(R.string.unread_comments);
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -110,6 +110,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void getAllUnreadReportsByWorkerIdCount() {
+        String text = getContext().getResources().getString(R.string.unread_comments);
         RetrofitClient.getInstance(getContext()).getService()
                 .getAllUnreadReportsByWorkerIdCount(workerDataManager.getWorker().getId()).enqueue(new Callback<Long>() {
             @Override

@@ -82,14 +82,14 @@ public class ReportPreviewDialog extends DialogFragment {
         init();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        return (builder.setTitle("Podgląd").setView(form)
+        return (builder.setTitle(getContext().getResources().getString(R.string.report_preview)).setView(form)
 //                .setNeutralButton(getContext().getResources().getText(R.string.close), null)
                 .create());
     }
 
 
     private void init() {
-        String desc = ReportData.reportDTO.getDesc() != null ? ReportData.reportDTO.getDesc() : "brak";
+        String desc = ReportData.reportDTO.getDesc() != null ? ReportData.reportDTO.getDesc() : getContext().getResources().getString(R.string.empty);
         descTV.setText("" + desc);
         orderTV.setText("" + genarateOrderPreview());
         int count = 0;

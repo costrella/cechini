@@ -28,34 +28,40 @@
         android:orientation="horizontal">
 
         <TextView
+            android:padding="2dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textColor="@color/colorPrimary"
             android:text="@string/shortcut_order"></TextView>
 
         <TextView
+            android:padding="2dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/shortcut_order_desc"></TextView>
 
         <TextView
+            android:padding="2dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textColor="@color/colorProductItemCapacity"
             android:text="@string/shortcut_comment"></TextView>
 
         <TextView
+            android:padding="2dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/shortcut_comment_desc"></TextView>
 
         <TextView
+            android:padding="2dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textColor="@color/red"
             android:text="@string/shortcut_comment_unread"></TextView>
 
         <TextView
+            android:padding="2dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/shortcut_comment_unread_desc"></TextView>

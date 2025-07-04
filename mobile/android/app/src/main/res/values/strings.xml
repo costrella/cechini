@@ -77,7 +77,7 @@
     <string name="shortcut_comment_unread_desc">- Unread</string>
 
     <string name="report_add">Add report/order</string>
-    <string name="report_show">Show reports for this shop</string>
+    <string name="report_show">Show reports</string>
     <string name="report_edit">Edit store</string>
     <string name="store_group">Store group</string>
     <string name="store_edit">Edit store</string>
@@ -135,5 +135,24 @@
 
     <string name="date_since">data from:</string>
     <string name="error">error</string>
+
+    <string name="comment_from_you">from you:</string>
+    <string name="comment_from_manager">from Manager:</string>
+
+    <string name="no_internet">No internet</string>
+    <string name="comment_added">Comment added</string>
+    <string name="comment_not_added">Comment has not been added! Saved in the memory</string>
+    <string name="memory_saved">Saved in the phones memory!</string>
+    <string name="internet_needed">This operation requires the Internet. Saved in memory</string>
+    <string name="report_sent_ok">Report has been sent</string>
+    <string name="report_not_added">Report has not been added. Saved in the memory</string>
+    <string name="load_from_memory">No Internet. Reading reports from memory</string>
+
+    <string name="creator_report">Report creator</string>
+    <string name="creator_order">Order creator</string>
+    <string name="unread_comments_shortcut">Unread comments</string>
+    <string name="my_orders">My orders</string>
+    <string name="store">Store</string>
+    <string name="settings">Settings</string>
 
 </resources>

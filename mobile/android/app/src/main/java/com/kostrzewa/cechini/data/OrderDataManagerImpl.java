@@ -2,6 +2,7 @@ package com.kostrzewa.cechini.data;
 
 import android.content.Context;
 
+import com.kostrzewa.cechini.R;
 import com.kostrzewa.cechini.data.events.MyOrdersDownloadFailed;
 import com.kostrzewa.cechini.data.events.MyOrdersDownloadSuccess;
 import com.kostrzewa.cechini.model.OrderDTO;
@@ -31,16 +32,18 @@ public class OrderDataManagerImpl extends AbstractDataManager implements OrderDa
                             EventBus.getDefault().post(new MyOrdersDownloadSuccess(response.body()));
                             preferenceManager.setSychroTimeMyOrders();
                         } else {
-                            EventBus.getDefault().post(new MyOrdersDownloadFailed("Wystpił błąd a03!"));
+                            EventBus.getDefault().post(new MyOrdersDownloadFailed(
+                                    getContext().getResources().getString(R.string.error) + " a03!"));
                         }
                     }
 
                     @Override
                     public void onFailure(Call<List<OrderDTO>> call, Throwable t) {
                         if (!isNetworkConnected()) {
-                            EventBus.getDefault().post(new MyOrdersDownloadFailed("Brak internetu!"));
+                            EventBus.getDefault().post(new MyOrdersDownloadFailed(getContext().getResources().getString(R.string.no_internet)));
                         } else {
-                            EventBus.getDefault().post(new MyOrdersDownloadFailed("Wystpił błąd a04!"));
+                            EventBus.getDefault().post(new MyOrdersDownloadFailed(
+                                    getContext().getResources().getString(R.string.error) + " a04!"));
                         }
                     }
                 });

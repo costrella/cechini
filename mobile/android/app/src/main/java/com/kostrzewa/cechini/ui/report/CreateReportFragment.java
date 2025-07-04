@@ -135,7 +135,9 @@ public class CreateReportFragment extends Fragment {
             int i = 0;
             for (NoteDTO note : ReportData.reportDTO.getNotes()) {
                 if (i > 0) comments.append("\n---------------\n");
-                comments.append(note.getNoteType().equals(NoteType.BY_MANGER) ? "od Managera:\n " : "od Ciebie:\n");
+                comments.append(note.getNoteType().equals(NoteType.BY_MANGER)
+                        ? getContext().getResources().getString(R.string.comment_from_manager)+"\n "
+                        : getContext().getResources().getString(R.string.comment_from_you)+ "\n");
                 comments.append(DateUtils.parse(note.getDate()));
                 comments.append("\n");
                 comments.append(note.getValue());

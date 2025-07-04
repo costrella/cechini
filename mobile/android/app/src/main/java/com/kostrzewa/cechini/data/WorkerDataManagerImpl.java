@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.google.gson.reflect.TypeToken;
 import com.kostrzewa.cechini.LoginActivity;
+import com.kostrzewa.cechini.R;
 import com.kostrzewa.cechini.data.events.LoginFailed;
 import com.kostrzewa.cechini.data.events.LoginSuccess;
 import com.kostrzewa.cechini.model.WorkerDTO;
@@ -57,7 +58,8 @@ public class WorkerDataManagerImpl extends AbstractDataManager implements Worker
 //                String token = headers.get("Set-Cookie");
 //                EventBus.getDefault().post(new LoginSuccess(workerDTO));
                 if (!response.isSuccessful()) {
-                    EventBus.getDefault().post(new LoginFailed("Błąd a05A: " + response.code()));
+                    EventBus.getDefault().post(new LoginFailed(getContext().getResources().getString(R.string.wrong_user_or_password) + "\n" +
+                            getContext().getResources().getString(R.string.error)+ " a05A: " + response.code()));
                     return;
                 }
 
@@ -71,7 +73,7 @@ public class WorkerDataManagerImpl extends AbstractDataManager implements Worker
                                 JSONObject jObjError = new JSONObject(response.errorBody().string());
                                 EventBus.getDefault().post(new LoginFailed(jObjError.getString("title")));
                             } catch (Exception e) {
-                                EventBus.getDefault().post(new LoginFailed("Błąd a05: " + response.code()));
+                                EventBus.getDefault().post(new LoginFailed(getContext().getResources().getString(R.string.error) + " a05: " + response.code()));
                             }
                         }
                     }

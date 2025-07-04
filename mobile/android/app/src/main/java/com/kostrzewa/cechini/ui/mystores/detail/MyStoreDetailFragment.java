@@ -74,7 +74,7 @@ public class MyStoreDetailFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        ((MainActivity) getActivity()).getSupportActionBar().setTitle("Sklep:" + storeDTO.getName() + " " + storeDTO.getAddress());
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle(storeDTO.getName() + " " + storeDTO.getAddress());
         fillStoreDetail();
         if (storeDTO.isMonthVisited()) {
             visitedTV.setText(getContext().getResources().getString(R.string.store_detail_bylesjuztu));
