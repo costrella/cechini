@@ -31,14 +31,6 @@ public class RetrofitClient {
         return instance;
     }
 
-//    //todo to remove
-//    public static RetrofitClient getInstance() {
-////        if (instance == null) {
-//            instance = new RetrofitClient(null);
-////        }
-//        return instance;
-//    }
-
     RetrofitClient(Context context) {
         Gson gson = new GsonBuilder()
                 .registerTypeHierarchyAdapter(byte[].class, new ByteArrayToBase64TypeAdapter())
@@ -53,11 +45,11 @@ public class RetrofitClient {
                 //https://costrella.ovh/api/"
                 //.baseUrl("http://194.42.111.53:8089/api/")
                 //http://10.0.2.2:8080/api/
-                //"http://192.168.0.104:8080/api/"
+//                .baseUrl("http://192.168.0.104:8080/api/")
 //                .baseUrl(BuildConfig.SERVER_URL)
 //                .addConverterFactory(GsonConverterFactory.create())
                 .client(
-                        new OkHttpClient().newBuilder()
+                        new OkHttpClient().newBuilder().authenticator(new CustomAuth(context))
                                 .cookieJar(new SessionCookieJar(context)).build())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();

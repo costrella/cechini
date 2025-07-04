@@ -90,7 +90,7 @@ public class MyStoreDetailFragment extends Fragment {
         value += "\nnazwa: " + storeDTO.getName();
         value += "\nadres: " + storeDTO.getAddress();
 //        value += "\ngrupa sklepu: " + storeDTO.getStoregroupName();
-        value += "\nNIP: " + storeDTO.getNip();
+        value += "\nNIP: " + (storeDTO.getNip() != null ? storeDTO.getNip() : "");
         storeDetailTV.setText(value);
     }
 

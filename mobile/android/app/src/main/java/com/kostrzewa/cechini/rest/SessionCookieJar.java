@@ -22,20 +22,16 @@ public class SessionCookieJar implements CookieJar {
 
     @Override
     public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
-        if (url.encodedPath().endsWith("authentication")) {
-            workerDataManager.saveCookies(url.host() + "_cookies", cookies);
-        }
+        workerDataManager.saveCookies(url.host() + "_cookies", cookies);
     }
 
 
     @Override
     public List<Cookie> loadForRequest(HttpUrl url) {
-        if (!url.encodedPath().endsWith("authentication")) {
             List<Cookie> cookies = workerDataManager.getCookies(url.host() + "_cookies");
             if (!cookies.isEmpty()) {
                 return cookies;
             }
-        }
         return Collections.emptyList();
     }
 }

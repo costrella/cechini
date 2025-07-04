@@ -122,7 +122,7 @@ public class ReportPreviewDialog extends DialogFragment {
             i++;
         }
         value += "\nSklep: " + storeDTO.getName() + "\n\tadres: " + storeDTO.getAddress();
-        value += "\nSklep NIP: " + storeDTO.getNip();
+        value += "\nNIP: " + (storeDTO.getNip() != null ? storeDTO.getNip() : "");
         value += "\n";
         value += "\nHurtownia: " + ReportData.reportDTO.getOrderDTO().getWarehouseName();
         return value;
