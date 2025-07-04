@@ -24,6 +24,7 @@ import com.kostrzewa.cechini.data.ReportDataManagerImpl;
 import com.kostrzewa.cechini.data.events.ReportSentFailed;
 import com.kostrzewa.cechini.data.events.ReportSentSuccess;
 import com.kostrzewa.cechini.model.OrderItemDTO;
+import com.kostrzewa.cechini.model.PhotoDTO;
 import com.kostrzewa.cechini.model.StoreDTO;
 import com.kostrzewa.cechini.ui.report.data.ReportData;
 
@@ -90,8 +91,15 @@ public class ReportPreviewDialog extends DialogFragment {
     private void init() {
         String desc = ReportData.reportDTO.getDesc() != null ? ReportData.reportDTO.getDesc() : "brak";
         descTV.setText("" + desc);
-        photoCountTV.setText("" + ReportData.reportDTO.getPhotosList().size());
         orderTV.setText("" + genarateOrderPreview());
+        int count = 0;
+        for(PhotoDTO photoDTO : ReportData.reportDTO.getPhotosList()){
+            if(photoDTO.getPhotoFileDTO() != null){
+                count++;
+            }
+        }
+        photoCountTV.setText("" + count);
+
     }
 
     private String genarateOrderPreview() {
