@@ -23,78 +23,54 @@ import com.kostrzewa.cechini.R;
 import com.kostrzewa.cechini.model.NoteDTO;
 import com.kostrzewa.cechini.model.NoteType;
 import com.kostrzewa.cechini.ui.mystores.dialog.AddCommentDialogFragment;
-import com.kostrzewa.cechini.ui.mystores.dialog.AddStoreDialogFragment;
 import com.kostrzewa.cechini.ui.report.data.ReportData;
 import com.kostrzewa.cechini.util.DateUtils;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class CreateReportFragment extends Fragment {
     private static final String TAG = "CreateReportFragment";
     private NavController navController;
 
-    @BindView(R.id.report_desc_et)
     EditText descET;
 
-    @BindView(R.id.reportId_tv)
     TextView reportId_tv;
 
-    @BindView(R.id.report_manager_et)
     EditText reportManagerET;
 
-    @BindView(R.id.report_photoCount_tv)
     TextView photoCountTV;
 
-    @BindView(R.id.btn_addComment)
     Button addCommentBtn;
 
-    @BindView(R.id.btn_report_readyDesc1)
     Button btnReportReadyDesc1;
-    @BindView(R.id.btn_report_readyDesc2)
     Button btnReportReadyDesc2;
-    @BindView(R.id.btn_report_readyDesc3)
     Button btnReportReadyDesc3;
-    @BindView(R.id.btn_report_readyDesc4)
     Button btnReportReadyDesc4;
-    @BindView(R.id.btn_report_readyDesc_clean)
     Button btnReportReadyClean;
 
-    @BindView(R.id.report_preview_photo_1)
     ImageView reportPreviewPhoto1;
 
-    @BindView(R.id.report_preview_photo_2)
     ImageView reportPreviewPhoto2;
 
-    @BindView(R.id.report_preview_photo_3)
     ImageView reportPreviewPhoto3;
 
-    @OnClick(R.id.btn_addComment)
     void addComment() {
         new AddCommentDialogFragment(null, null, ReportData.reportDTO)
                 .show(getFragmentManager(), "sample");
     }
 
-    @OnClick(R.id.btn_report_readyDesc1)
     void addDesc1() {
         descET.setText(descET.getText().toString() + getContext().getResources().getString(R.string.report_ready_desc_zamowienie) + " ");
     }
-    @OnClick(R.id.btn_report_readyDesc2)
     void addDesc2() {
         descET.setText(descET.getText().toString() + getContext().getResources().getString(R.string.report_ready_desc_rozmowa_handlowa) + " ");
     }
-    @OnClick(R.id.btn_report_readyDesc3)
     void addDesc3() {
         descET.setText(descET.getText().toString() + getContext().getResources().getString(R.string.report_ready_desc_merchandising) + " ");
     }
 
-    @OnClick(R.id.btn_report_readyDesc4)
     void addDesc4() {
         descET.setText(descET.getText().toString() + getContext().getResources().getString(R.string.report_ready_desc_dostawa_towaru) + " ");
     }
 
-    @OnClick(R.id.btn_report_readyDesc_clean)
     void addDesc5() {
         descET.setText("");
     }
@@ -207,7 +183,27 @@ public class CreateReportFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_report_create, container, false);
-        ButterKnife.bind(this, root);
+        descET= root.findViewById(R.id.report_desc_et);
+        reportId_tv= root.findViewById(R.id.reportId_tv);
+        reportManagerET= root.findViewById(R.id.report_manager_et);
+        photoCountTV= root.findViewById(R.id.report_photoCount_tv);
+        addCommentBtn= root.findViewById(R.id.btn_addComment);
+        btnReportReadyDesc1= root.findViewById(R.id.btn_report_readyDesc1);
+        btnReportReadyDesc2= root.findViewById(R.id.btn_report_readyDesc2);
+        btnReportReadyDesc3= root.findViewById(R.id.btn_report_readyDesc3);
+        btnReportReadyDesc4= root.findViewById(R.id.btn_report_readyDesc4);
+        btnReportReadyClean= root.findViewById(R.id.btn_report_readyDesc_clean);
+        reportPreviewPhoto1= root.findViewById(R.id.report_preview_photo_1);
+        reportPreviewPhoto2= root.findViewById(R.id.report_preview_photo_2);
+        reportPreviewPhoto3= root.findViewById(R.id.report_preview_photo_3);
+        addCommentBtn.setOnClickListener(v -> addComment());
+        btnReportReadyDesc1.setOnClickListener(v -> addDesc1());
+        btnReportReadyDesc2.setOnClickListener(v -> addDesc2());
+        btnReportReadyDesc3.setOnClickListener(v -> addDesc3());
+        btnReportReadyDesc4.setOnClickListener(v -> addDesc4());
+        btnReportReadyClean.setOnClickListener(v -> addDesc5());
+
+
         init();
         navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
         descET.addTextChangedListener(new TextWatcher() {

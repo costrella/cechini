@@ -76,7 +76,7 @@ public class ReportPagerAdapter extends FragmentStatePagerAdapter {
                 case 0:
                     return context.getResources().getString(R.string.adapter_report);
                 case 1:
-                    context.getResources().getString(R.string.adapter_order);
+                    return context.getResources().getString(R.string.adapter_order);
             }
         } else {
             switch (position) {

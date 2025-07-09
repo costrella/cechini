@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -46,10 +47,6 @@ import com.kostrzewa.cechini.data.prefs.PreferenceManagerImpl;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class ShareFragment extends Fragment {
     PreferenceManager preferenceManager;
     private StoreDataManager storeDataManager;
@@ -60,47 +57,30 @@ public class ShareFragment extends Fragment {
     private WorkerDataManager workerDataManager;
     Handler handler = new Handler();
 
-
-    @BindView(R.id.synchroStoreTime)
     TextView synchroStoreTime;
-    @BindView(R.id.synchroStoreProgress)
     ProgressBar synchroStoreProgress;
 
-    @BindView(R.id.synchroProductTime)
     TextView synchroProductTime;
-    @BindView(R.id.synchroProductProgress)
     ProgressBar synchroProductProgress;
 
-    @BindView(R.id.synchroReportTime)
     TextView synchroReportTime;
-    @BindView(R.id.synchroReportProgress)
     ProgressBar synchroReportProgress;
 
-    @BindView(R.id.synchroOrdersTime)
     TextView synchroOrdersTime;
-    @BindView(R.id.synchroOrdersProgress)
     ProgressBar synchroOrdersProgress;
 
-    @BindView(R.id.synchroWarehouseTime)
     TextView synchroWarehouseTime;
-    @BindView(R.id.synchroWarehouseProgress)
     ProgressBar synchroWarehouseProgress;
 
-    @BindView(R.id.synchroReportsNotSentText)
     TextView synchroReportsNotSent;
-    @BindView(R.id.synchroReportsNotSentProgress)
     ProgressBar synchroReportsNotSentProgress;
 
-
-    @BindView(R.id.synchroCommentsNotSentText)
     TextView synchroCommentsNotSent;
-    @BindView(R.id.synchroCommentsNotSentProgress)
     ProgressBar synchroCommentsNotSentProgress;
 
-    @BindView(R.id.version)
     TextView version;
+    private Button synchroAllBtn;
 
-    @OnClick(R.id.synchroAllBtn)
     public void synchroAllBtn() {
         synchroStoreProgress.setVisibility(View.VISIBLE);
         synchroProductProgress.setVisibility(View.VISIBLE);
@@ -126,7 +106,25 @@ public class ShareFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_synchro, container, false);
-        ButterKnife.bind(this, root);
+        synchroStoreTime = root.findViewById(R.id.synchroStoreTime);
+        synchroStoreProgress = root.findViewById(R.id.synchroStoreProgress);
+        synchroProductTime = root.findViewById(R.id.synchroProductTime);
+        synchroProductProgress = root.findViewById(R.id.synchroProductProgress);
+        synchroReportTime = root.findViewById(R.id.synchroReportTime);
+        synchroReportProgress = root.findViewById(R.id.synchroReportProgress);
+        synchroOrdersTime = root.findViewById(R.id.synchroOrdersTime);
+        synchroOrdersProgress = root.findViewById(R.id.synchroOrdersProgress);
+        synchroWarehouseTime = root.findViewById(R.id.synchroWarehouseTime);
+        synchroWarehouseProgress = root.findViewById(R.id.synchroWarehouseProgress);
+        synchroReportsNotSent = root.findViewById(R.id.synchroReportsNotSentText);
+        synchroReportsNotSentProgress = root.findViewById(R.id.synchroReportsNotSentProgress);
+        synchroCommentsNotSent = root.findViewById(R.id.synchroCommentsNotSentText);
+        synchroCommentsNotSentProgress = root.findViewById(R.id.synchroCommentsNotSentProgress);
+        version = root.findViewById(R.id.version);
+        synchroAllBtn = root.findViewById(R.id.synchroAllBtn);
+        synchroAllBtn.setOnClickListener(v -> synchroAllBtn());
+
+
         preferenceManager = new PreferenceManagerImpl(getContext());
         init();
         String LAST_SYNCHRO = getContext().getResources().getString(R.string.date_since);

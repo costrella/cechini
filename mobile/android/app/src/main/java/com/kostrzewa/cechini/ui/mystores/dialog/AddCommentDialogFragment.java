@@ -14,8 +14,6 @@
 
 package com.kostrzewa.cechini.ui.mystores.dialog;
 
-import static com.kostrzewa.cechini.util.Constants.STORE_DTO;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -47,8 +45,6 @@ import com.kostrzewa.cechini.data.WorkerDataManager;
 import com.kostrzewa.cechini.data.WorkerDataManagerImpl;
 import com.kostrzewa.cechini.data.events.CommentAddedFailed;
 import com.kostrzewa.cechini.data.events.CommentAddedSuccess;
-import com.kostrzewa.cechini.data.events.StoreEditSuccess;
-import com.kostrzewa.cechini.data.events.StoreSentFailed;
 import com.kostrzewa.cechini.model.NoteDTO;
 import com.kostrzewa.cechini.model.NoteType;
 import com.kostrzewa.cechini.model.ReportDTO;
@@ -61,11 +57,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class AddCommentDialogFragment extends DialogFragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
     private static final String TAG = "AddCommentDialogF";
@@ -98,7 +90,8 @@ public class AddCommentDialogFragment extends DialogFragment implements AdapterV
         form =
                 getActivity().getLayoutInflater()
                         .inflate(R.layout.fragment_report_dialog_comment, null);
-        ButterKnife.bind(this, form);
+        comment = form.findViewById(R.id.fragment_mystores_dialog_store_nameET);
+
         spinner = form.findViewById(R.id.fragment_mystores_dialog_storeGroupSpinner);
         okBtn = form.findViewById(R.id.fragment_mystores_dialog_store_okBtn);
         progressBar = form.findViewById(R.id.fragment_mystores_dialog_store_progressBar);
@@ -151,7 +144,6 @@ public class AddCommentDialogFragment extends DialogFragment implements AdapterV
         selectedStoreGroup = null;
     }
 
-    @BindView(R.id.fragment_mystores_dialog_store_nameET)
     EditText comment;
 //    TextView storeGroupTV;
 

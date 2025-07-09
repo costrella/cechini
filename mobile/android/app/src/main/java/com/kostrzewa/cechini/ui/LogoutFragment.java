@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,12 +18,11 @@ import androidx.navigation.Navigation;
 import com.kostrzewa.cechini.LoginActivity;
 import com.kostrzewa.cechini.R;
 
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class LogoutFragment extends Fragment {
 
-    @OnClick(R.id.logout_yesBtn)
+    private Button logout_yesBtn;
+    private Button logout_noBtn;
+
     public void yes(){
         SharedPreferences settings = getContext().getSharedPreferences("cechini", Context.MODE_PRIVATE);
         settings.edit().clear().commit();
@@ -33,7 +33,6 @@ public class LogoutFragment extends Fragment {
     }
 
 
-    @OnClick(R.id.logout_noBtn)
     public void no(){
         NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
         navController.popBackStack();
@@ -43,7 +42,11 @@ public class LogoutFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_logout, container, false);
-        ButterKnife.bind(this, view);
+        logout_yesBtn = view.findViewById(R.id.logout_yesBtn);
+        logout_yesBtn.setOnClickListener(v -> yes());
+        logout_noBtn = view.findViewById(R.id.logout_noBtn);
+        logout_noBtn.setOnClickListener(v -> no());
+
         return view;
     }
 }

@@ -1,10 +1,13 @@
 package com.kostrzewa.cechini.ui.mystores.detail;
 
+import static com.kostrzewa.cechini.util.Constants.STORE_DTO;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,38 +21,30 @@ import com.kostrzewa.cechini.R;
 import com.kostrzewa.cechini.model.StoreDTO;
 import com.kostrzewa.cechini.ui.mystores.dialog.AddStoreDialogFragment;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
-import static com.kostrzewa.cechini.util.Constants.STORE_DTO;
-
 public class MyStoreDetailFragment extends Fragment {
     private static final String TAG = "MyStoreDetailFragment";
     private StoreDTO storeDTO;
     private NavController navController;
 
-    @BindView(R.id.storeDetailTV)
     TextView storeDetailTV;
 
-    @BindView(R.id.visitedTV)
     TextView visitedTV;
+    private Button btn_addReport;
+    private Button btn_storeReports;
+    private Button btn_editStore;
 
-    @OnClick(R.id.btn_addReport)
     void addReport() {
         Bundle args = new Bundle();
         args.putSerializable(STORE_DTO, storeDTO);
         navController.navigate(R.id.nav_report_create, args);
     }
 
-    @OnClick(R.id.btn_storeReports)
     void storeReports() {
         Bundle args = new Bundle();
         args.putSerializable(STORE_DTO, storeDTO);
         navController.navigate(R.id.nav_myreportsOfStore, args);
     }
 
-    @OnClick(R.id.btn_editStore)
     void editStore() {
         new AddStoreDialogFragment(null, null, storeDTO)
                 .show(getFragmentManager(), "sample");
@@ -65,7 +60,16 @@ public class MyStoreDetailFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView: " + savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_mystores_detail, container, false);
-        ButterKnife.bind(this, view);
+        storeDetailTV = view.findViewById(R.id.storeDetailTV);
+        visitedTV = view.findViewById(R.id.visitedTV);
+        btn_addReport = view.findViewById(R.id.btn_addReport);
+        btn_addReport.setOnClickListener(v -> addReport());
+        btn_storeReports = view.findViewById(R.id.btn_storeReports);
+        btn_storeReports.setOnClickListener(v -> storeReports());
+        btn_editStore = view.findViewById(R.id.btn_editStore);
+        btn_editStore.setOnClickListener(v -> editStore());
+
+
         storeDTO = (StoreDTO) getArguments().getSerializable(STORE_DTO);
         navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
         return view;

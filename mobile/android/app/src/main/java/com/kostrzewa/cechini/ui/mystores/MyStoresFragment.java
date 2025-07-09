@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.SearchView;
 
 import androidx.fragment.app.Fragment;
@@ -25,10 +26,6 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * A fragment representing a list of Items.
@@ -48,10 +45,9 @@ public class MyStoresFragment extends Fragment {
     private SearchView searchView;
     private List<StoreDTO> storeDTOList;
 
-    @BindView(R.id.fragment_mystores_recyclerView)
     RecyclerView recyclerView;
+    private Button fragment_mystores_addStoreBtn;
 
-    @OnClick(R.id.fragment_mystores_addStoreBtn)
     public void addStore() {
         new AddStoreDialogFragment(storeDTOList, adapter, null)
                 .show(getFragmentManager(), "sample");
@@ -87,7 +83,9 @@ public class MyStoresFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mystores_list, container, false);
-        ButterKnife.bind(this, view);
+        recyclerView = view.findViewById(R.id.fragment_mystores_recyclerView);
+        fragment_mystores_addStoreBtn = view.findViewById(R.id.fragment_mystores_addStoreBtn);
+        fragment_mystores_addStoreBtn.setOnClickListener(v -> addStore());
         setHasOptionsMenu(true);
 
         if (getArguments() != null && getArguments().getSerializable("doRefresh") != null) {

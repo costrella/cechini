@@ -31,35 +31,24 @@ import com.kostrzewa.cechini.ui.report.data.ReportData;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class ReportPreviewDialog extends DialogFragment {
     Handler handler = new Handler();
     private View form;
     private final StoreDTO storeDTO;
     private ReportDataManager reportDataManager;
 
-    @BindView(R.id.fragment_report_preview_desc)
     TextView descTV;
 
-    @BindView(R.id.fragment_report_preview_photoCount)
     TextView photoCountTV;
 
-    @BindView(R.id.fragment_report_preview_order)
     TextView orderTV;
 
-    @BindView(R.id.fragment_report_preview_mailInfoTV)
     TextView mailInfoTV;
 
-    @BindView(R.id.fragment_report_preview_sendBtn)
     Button sendBtn;
 
-    @BindView(R.id.fragment_report_previewProgressBar)
     ProgressBar progressBar;
 
-    @OnClick(R.id.fragment_report_preview_sendBtn)
     void send() {
         progressBar.setVisibility(View.VISIBLE);
         sendBtn.setVisibility(View.GONE);
@@ -77,7 +66,15 @@ public class ReportPreviewDialog extends DialogFragment {
         form =
                 getActivity().getLayoutInflater()
                         .inflate(R.layout.fragment_report_preview, null);
-        ButterKnife.bind(this, form);
+        descTV = form.findViewById(R.id.fragment_report_preview_desc);
+        photoCountTV = form.findViewById(R.id.fragment_report_preview_photoCount);
+        orderTV = form.findViewById(R.id.fragment_report_preview_order);
+        mailInfoTV = form.findViewById(R.id.fragment_report_preview_mailInfoTV);
+        sendBtn = form.findViewById(R.id.fragment_report_preview_sendBtn);
+        progressBar = form.findViewById(R.id.fragment_report_previewProgressBar);
+        sendBtn.setOnClickListener(v -> send());
+
+
         reportDataManager = new ReportDataManagerImpl(getContext());
         init();
 

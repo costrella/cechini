@@ -1,7 +1,6 @@
 package com.kostrzewa.cechini.ui.home;
 
 import static com.kostrzewa.cechini.util.Constants.IS_UNREAD_REPORTS_FRAGMENT;
-import static com.kostrzewa.cechini.util.Constants.STORE_DTO;
 
 import android.content.Context;
 import android.content.Intent;
@@ -21,7 +20,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.kostrzewa.cechini.LoginActivity;
-import com.kostrzewa.cechini.MainActivity;
 import com.kostrzewa.cechini.R;
 import com.kostrzewa.cechini.data.WorkerDataManager;
 import com.kostrzewa.cechini.data.WorkerDataManagerImpl;
@@ -36,47 +34,40 @@ import com.kostrzewa.cechini.ui.mystores.dialog.AddStoreDialogFragment;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
-
     private HomeViewModel homeViewModel;
     private WorkerDataManager workerDataManager;
+    private Button btn_add_store;
+    private Button btn_my_reports;
+    private Button btn_synchro;
 
-    @OnClick(R.id.btn_mystores)
     public void onClick1() {
         NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
         navController.navigate(R.id.nav_mystores);
     }
 
-    @OnClick(R.id.btn_add_store)
     public void onClick2() {
         new AddStoreDialogFragment(null, null, null)
                 .show(getFragmentManager(), "sample");
     }
 
-    @OnClick(R.id.btn_my_reports)
     public void onClick3() {
         NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
         navController.navigate(R.id.nav_myreports);
     }
 
-    @OnClick(R.id.btn_synchro)
     public void onClick4() {
         NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
         navController.navigate(R.id.nav_synchro);
     }
 
 
-    @BindView(R.id.btn_unreadReport)
     Button btn_unreadReport;
 
-    @OnClick(R.id.btn_unreadReport)
     public void onClick5() {
         Bundle args = new Bundle();
         args.putBoolean(IS_UNREAD_REPORTS_FRAGMENT, true);
@@ -85,14 +76,27 @@ public class HomeFragment extends Fragment {
         navController.navigate(R.id.nav_unread_reports, args);
     }
 
-
+    Button btn_mystores;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        ButterKnife.bind(this, root);
+        btn_mystores = root.findViewById(R.id.btn_mystores);
+        btn_mystores.setOnClickListener(v -> onClick1());
+        btn_add_store = root.findViewById(R.id.btn_add_store);
+        btn_add_store.setOnClickListener(v -> onClick2());
+
+        btn_my_reports = root.findViewById(R.id.btn_my_reports);
+        btn_my_reports.setOnClickListener(v -> onClick3());
+
+        btn_synchro = root.findViewById(R.id.btn_synchro);
+        btn_synchro.setOnClickListener(v -> onClick4());
+
+        btn_unreadReport = root.findViewById(R.id.btn_unreadReport);
+        btn_unreadReport.setOnClickListener(v -> onClick5());
+
         workerDataManager = new WorkerDataManagerImpl(getContext());
         return root;
     }

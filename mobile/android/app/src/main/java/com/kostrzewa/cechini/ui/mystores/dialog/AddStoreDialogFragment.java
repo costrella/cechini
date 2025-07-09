@@ -14,6 +14,8 @@
 
 package com.kostrzewa.cechini.ui.mystores.dialog;
 
+import static com.kostrzewa.cechini.util.Constants.STORE_DTO;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -28,7 +30,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
@@ -54,11 +55,6 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
-import static com.kostrzewa.cechini.util.Constants.STORE_DTO;
 
 public class AddStoreDialogFragment extends DialogFragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
     private static final String TAG = "AddStoreDialogFragment";
@@ -89,7 +85,11 @@ public class AddStoreDialogFragment extends DialogFragment implements AdapterVie
         form =
                 getActivity().getLayoutInflater()
                         .inflate(R.layout.fragment_mystores_dialog_store, null);
-        ButterKnife.bind(this, form);
+        nameET = form.findViewById(R.id.fragment_mystores_dialog_store_nameET);
+        addressET = form.findViewById(R.id.fragment_mystores_dialog_store_addressET);
+        nipET = form.findViewById(R.id.fragment_mystores_dialog_store_nipET);
+
+
         spinner = form.findViewById(R.id.fragment_mystores_dialog_storeGroupSpinner);
         okBtn = form.findViewById(R.id.fragment_mystores_dialog_store_okBtn);
         progressBar = form.findViewById(R.id.fragment_mystores_dialog_store_progressBar);
@@ -141,11 +141,8 @@ public class AddStoreDialogFragment extends DialogFragment implements AdapterVie
         selectedStoreGroup = null;
     }
 
-    @BindView(R.id.fragment_mystores_dialog_store_nameET)
     EditText nameET;
-    @BindView(R.id.fragment_mystores_dialog_store_addressET)
     EditText addressET;
-    @BindView(R.id.fragment_mystores_dialog_store_nipET)
     EditText nipET;
 //    TextView storeGroupTV;
 

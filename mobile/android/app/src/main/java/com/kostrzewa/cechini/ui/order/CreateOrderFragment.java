@@ -35,10 +35,6 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class CreateOrderFragment extends Fragment {
     private static final String TAG = "CreateOrderFragment";
     private ProductDataManager productDataManager;
@@ -85,7 +81,6 @@ public class CreateOrderFragment extends Fragment {
         addProductBtn.setEnabled(false);
     }
 
-    @OnClick(R.id.fragment_order_addProductBtn)
     void addProduct() {
         new ProductDialogFragment(ReportData.reportDTO.getOrderDTO().getOrderItems(), adapter, productDataManager)
                 .show(getFragmentManager(), "sample");
@@ -99,24 +94,26 @@ public class CreateOrderFragment extends Fragment {
 
     }
 
-    @BindView(R.id.fragment_order_addProductBtn)
     Button addProductBtn;
-    @BindView(R.id.fragment_order_recyclerview_emptyTV)
     TextView emptyTV;
-    @BindView(R.id.fragment_order_warehouseTV)
     TextView warehouseTV;
-    @BindView(R.id.fragment_order_numberTV)
     TextView orderNumberTV;
-    @BindView(R.id.fragment_order_recyclerview)
     RecyclerView recyclerView;
-    @BindView(R.id.fragment_order_warehouseSpinner)
     public Spinner warehouseSpinner;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_order_create, container, false);
-        ButterKnife.bind(this, view);
+
+        addProductBtn = view.findViewById(R.id.fragment_order_addProductBtn);
+        emptyTV = view.findViewById(R.id.fragment_order_recyclerview_emptyTV);
+        warehouseTV = view.findViewById(R.id.fragment_order_warehouseTV);
+        orderNumberTV = view.findViewById(R.id.fragment_order_numberTV);
+        recyclerView = view.findViewById(R.id.fragment_order_recyclerview);
+        warehouseSpinner = view.findViewById(R.id.fragment_order_warehouseSpinner);
+        addProductBtn.setOnClickListener(v -> addProduct());
+
         navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
         warehouseDataManager = new WarehouseDataManagerImpl(getContext());
         warehouseDTOS = warehouseDataManager.getAllWarehouses();
