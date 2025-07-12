@@ -1,7 +1,48 @@
 {
   "home": {
-    "title": "Cechini 2.1",
-    "subtitle": "Kontrola sprzedaży.",
+    "title": "Sales Control - costrella",
+    "subtext": "Kontroluj sprzedaż swoich produktów na podstawie raportów dodawanych przez\n            Przedstawicieli Handlowych z aplikacji mobilnej",
+
+    "webPart": "Aplikacja webowa - dla managerów",
+    "webPart01": "Podgląd raportów i zamówień",
+    "webPart01sub": "Zamówienia i raporty są dostępne bezpośrednio po ich stworzeniu przez\n                Przedstawiciela",
+    "webPart02": "Merchandising",
+    "webPart02sub": "Przeglądaj zdjęcia dołączone do raportów",
+    "webPart03": "Przeglądaj zdjęcia dołączone do raportów",
+    "webPart03sub": "Powiadamiaj Przedstawiciela z aplikacji",
+    "webPart04": "Statystki",
+    "webPart04sub": "Który produkt najlepiej się sprzedaje?",
+    "webPart05": "Integruj się z hurtowniami",
+    "webPart05sub": "Zamówienia z aplikacji mobilnej automatycznie wysyłają zamówienia do hurtowni",
+    "webPart06": "Dodawaj produkty",
+    "webPart06sub": "Produkty i wszystko inne jest synchronizowane z Aplikacją mobilną",
+
+    "mobilePart": "Twórz również OFF-LINE",
+    "mobilePart01": "Twórz również OFF-LINE",
+    "mobilePart01sub": "Pomimo braku dostępu do internetu możesz tworzyć raporty i zamówienia",
+    "mobilePart02": "Dodawaj raporty ze zdjęciami",
+    "mobilePart02sub": "...",
+    "mobilePart03": "Sam dodawaj nowe miejsca",
+    "mobilePart03sub": "Dodawaj sklepy w prosty sposób",
+    "mobilePart04": "Dodawaj zamówienia produktów",
+    "mobilePart04sub": "",
+    "mobilePart05": "Przeglądaj swoje dodane raporty",
+    "mobilePart05sub": "",
+    "mobilePart06": "Odpowiadaj na komentarze Managera",
+    "mobilePart06sub": "",
+
+    "needMore01": "Need more?",
+    "needMore02": "Need more?",
+    "needMore03": "Need more?",
+
+    "startFree01": "Start free",
+    "startFree02": "Start free",
+
+    "ourClients01": "Nasi klienci",
+    "cechini": "Nasi klienci",
+    "cechiniSub": "Nasi klienci",
+
+    "subtitle": "Sales Control - Kontrola sprzedaży.",
     "logged": {
       "message": "Jesteś zalogowany jako użytkownik \"{{username}}\"."
     },

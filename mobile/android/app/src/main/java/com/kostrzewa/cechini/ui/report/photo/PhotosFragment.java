@@ -322,12 +322,26 @@ public class PhotosFragment extends Fragment {
         photo_rotate_right_btn5 = root.findViewById(R.id.photo_rotate_right_btn5);
         photo_rotate_right_btn6 = root.findViewById(R.id.photo_rotate_right_btn6);
 
+        photo_btn1 = root.findViewById(R.id.photo_btn1);
+        photo_btn2 = root.findViewById(R.id.photo_btn2);
+        photo_btn3 = root.findViewById(R.id.photo_btn3);
+        photo_btn4 = root.findViewById(R.id.photo_btn4);
+        photo_btn5 = root.findViewById(R.id.photo_btn5);
+        photo_btn6 = root.findViewById(R.id.photo_btn6);
+
         photo_btn1.setOnClickListener(v -> click1());
         photo_btn2.setOnClickListener(v -> click2());
         photo_btn3.setOnClickListener(v -> click3());
         photo_btn4.setOnClickListener(v -> click4());
         photo_btn5.setOnClickListener(v -> click5());
         photo_btn6.setOnClickListener(v -> click6());
+
+        photo_media_btn1 = root.findViewById(R.id.photo_media_btn1);
+        photo_media_btn2 = root.findViewById(R.id.photo_media_btn2);
+        photo_media_btn3 = root.findViewById(R.id.photo_media_btn3);
+        photo_media_btn4 = root.findViewById(R.id.photo_media_btn4);
+        photo_media_btn5 = root.findViewById(R.id.photo_media_btn5);
+        photo_media_btn6 = root.findViewById(R.id.photo_media_btn6);
 
         photo_media_btn1.setOnClickListener(v -> click1Media());
         photo_media_btn2.setOnClickListener(v -> click2Media());

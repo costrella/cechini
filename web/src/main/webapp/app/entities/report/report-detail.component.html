@@ -18,7 +18,7 @@
                         <span>{{ report.desc }}</span>
                     </div>
                     <div *ngIf="!report.desc">
-                        <span>brak</span>
+                        <span jhiTranslate="cechiniApp.order.noOrder">no order</span>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="cechiniApp.report.managerNote">Manager Note</span></dt>
@@ -27,7 +27,7 @@
                         <span>{{ report.managerNote }}</span>
                     </div>
                     <div *ngIf="!report.managerNote">
-                        <span>brak</span>
+                        <span jhiTranslate="cechiniApp.order.noOrder">no order</span>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="cechiniApp.report.order">Order</span></dt>
@@ -36,7 +36,7 @@
                         <a [routerLink]="['/order', report.orderId, 'view']">zobacz</a>
                     </div>
                     <div *ngIf="!report.orderId">
-                        <span>brak</span>
+                        <span jhiTranslate="cechiniApp.order.noOrder">no order</span>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="cechiniApp.report.worker">Worker</span></dt>
@@ -60,12 +60,12 @@
             <button type="button" [routerLink]="['/report', report.id, 'edit']" class="btn btn-primary">
                 <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Dodaj komentarz</span>
             </button>
-            <p></p>    
+            <p></p>
             <dl class="row-md jh-entity-details">
                 <dt><h4>Komentarze</h4></dt>
                 <dd *ngFor="let note of report.notes">
                     <div *ngIf="note.value">
-                      
+
 
                         <span *ngIf="note.noteType == 'BY_WORKER'">
                             <span *ngIf="report.workerId">
@@ -83,14 +83,14 @@
             <p></p>
             <dl class="row-md jh-entity-details">
                 <dt><h4>Zdjęcia</h4></dt>
-                
+
                     <dd *ngFor="let photoFile of report?.photos">
                         <div *ngIf="photoFile.value">
                             <img [src]="'data:' + photoFile.valueContentType + ';base64,' + photoFile.value"
                                 style="max-width: 100%;" alt="photoFile image" />
                         </div>
                     </dd>
-                
+
             </dl>
 
         </div>

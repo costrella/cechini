@@ -25,7 +25,9 @@
       "report": "Report",
       "warehouse": "Warehouse",
       "status": "Status",
-      "store": "Store"
+      "store": "Store",
+
+      "noOrder": "no order"
     }
   }
 }

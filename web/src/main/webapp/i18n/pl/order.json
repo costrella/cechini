@@ -24,7 +24,9 @@
       "report": "Raport",
       "warehouse": "Hurtownia",
       "status": "Status",
-      "store": "Sklep"
+      "store": "Sklep",
+
+      "noOrder": "brak"
     }
   }
 }

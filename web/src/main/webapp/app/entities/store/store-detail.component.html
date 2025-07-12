@@ -56,7 +56,7 @@
                                         <span>{{ report.desc }}</span>
                                     </div>
                                     <div *ngIf="!report.desc">
-                                        <span>brak</span>
+                                        <span jhiTranslate="cechiniApp.order.noOrder">no order</span>
                                     </div>
                                 </dd>
                                 <dt><span jhiTranslate="cechiniApp.report.managerNote">Manager Note</span></dt>
@@ -65,7 +65,7 @@
                                         <span>{{ report.managerNote }}</span>
                                     </div>
                                     <div *ngIf="!report.managerNote">
-                                        <span>brak</span>
+                                        <span jhiTranslate="cechiniApp.order.noOrder">no order</span>
                                     </div>
                                 </dd>
                                 <dt><span jhiTranslate="cechiniApp.report.order">Order</span></dt>
@@ -74,7 +74,7 @@
                                         <a [routerLink]="['/order', report.orderId, 'view']">zobacz</a>
                                     </div>
                                     <div *ngIf="!report.orderId">
-                                        <span>brak</span>
+                                        <span jhiTranslate="cechiniApp.order.noOrder">no order</span>
                                     </div>
                                 </dd>
                                 <dt><span jhiTranslate="cechiniApp.report.worker">Worker</span></dt>
