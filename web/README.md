@@ -1,6 +1,6 @@
 todo:
 
-- EAN USUNAC
+- tlumaczenie orderExcel/orderCSV + statystki
 - numer zamowienia SAMPLE
 - COS NIE HALO Z NIPEM - po stronie web
 - nie mozna edytowc
