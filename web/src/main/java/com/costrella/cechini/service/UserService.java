@@ -84,7 +84,7 @@ public class UserService {
                 user.setActivated(true);
                 user.setActivationKey(null);
 
-                exampleDataService.createReportWithWorkerAndOrder(newTenant);
+                exampleDataService.createReportWithWorkerAndOrder(newTenant, user.getEmail());
                 log.debug("Activated user: {}", user);
                 return user;
             });

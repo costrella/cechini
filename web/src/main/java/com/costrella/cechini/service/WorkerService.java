@@ -59,7 +59,8 @@ public class WorkerService {
     public WorkerDTO save(WorkerDTO workerDTO) {
         log.debug("Request to save Worker : {}", workerDTO);
         Worker worker = workerMapper.toEntity(workerDTO);
-        User user = new User();
+        Optional<User> oneByLogin = userRepository.findOneByLogin(workerDTO.getLogin());
+        User user = oneByLogin.orElseGet(User::new);
         user.setLogin(worker.getLogin());
         user.setTenant(worker.getTenant());
         user.setActivated(true);

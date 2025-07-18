@@ -22,18 +22,18 @@
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
-                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+<!--                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>-->
                     <th scope="col"  jhiSortBy="name"><span jhiTranslate="cechiniApp.product.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="capacity"><span jhiTranslate="cechiniApp.product.capacity">Capacity</span> <fa-icon icon="sort"></fa-icon></th>
+<!--                    <th scope="col"  jhiSortBy="capacity"><span jhiTranslate="cechiniApp.product.capacity">Capacity</span> <fa-icon icon="sort"></fa-icon></th>-->
                     <th scope="col"  jhiSortBy="eanPack"><span jhiTranslate="cechiniApp.product.eanPack">Ean Pack</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let product of products ;trackBy: trackId">
-                    <td><a [routerLink]="['/product', product.id, 'view']">{{ product.id }}</a></td>
+<!--                    <td><a [routerLink]="['/product', product.id, 'view']">{{ product.id }}</a></td>-->
                     <td>{{ product.name }}</td>
-                    <td>{{ product.capacity }}</td>
+<!--                    <td>{{ product.capacity }}</td>-->
                     <td>{{ product.eanPack }}</td>
                     <td class="text-right">
                         <div class="btn-group">

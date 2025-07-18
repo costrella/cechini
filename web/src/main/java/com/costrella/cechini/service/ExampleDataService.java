@@ -1,21 +1,18 @@
 package com.costrella.cechini.service;
 
 import com.costrella.cechini.domain.*;
+import com.costrella.cechini.domain.enumeration.OrderFileType;
 import com.costrella.cechini.repository.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StreamUtils;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.time.Instant;
-import java.util.Base64;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -82,9 +79,11 @@ public class ExampleDataService {
     }
 
 
-    private Warehouse createWarehouseOne(Tenant tenant) {
+    private Warehouse createWarehouseOne(Tenant tenant, String email) {
         Warehouse warehouse = new Warehouse();
         warehouse.setName("Warehouse Example");
+        warehouse.setMail(email);
+        warehouse.setOrderFileType(OrderFileType.CSV);
         warehouse.setTenant(tenant);
         return warehouseRepository.save(warehouse);
     }
@@ -99,7 +98,7 @@ public class ExampleDataService {
         return storeRepository.save(store);
     }
 
-    public void createReportWithWorkerAndOrder(Tenant tenant) {
+    public void createReportWithWorkerAndOrder(Tenant tenant, String email) {
         Report report = new Report();
         report.setDesc("Report Example One");
         report.setTenant(tenant);
@@ -107,7 +106,7 @@ public class ExampleDataService {
         report.setWorker(worker);
         report.setReportDate(Instant.now());
         report.setStore(createStoreOne(tenant, worker));
-        report.setOrder(createOrder(tenant, createWarehouseOne(tenant)));
+        report.setOrder(createOrder(tenant, createWarehouseOne(tenant, email)));
         report.setNotes(createNotes(tenant, report, worker));
         report.setReadByManager(false);
         report.setReadByWorker(true);
@@ -169,6 +168,7 @@ public class ExampleDataService {
 
     private Order createOrder(Tenant tenant, Warehouse warehouse) {
         Order order = new Order();
+        order.setNumber("123456789");
         order.setTenant(tenant);
         order.setOrderDate(Instant.now());
         order.setDeliveryDate(Instant.now());

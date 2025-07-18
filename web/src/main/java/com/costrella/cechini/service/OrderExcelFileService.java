@@ -146,7 +146,7 @@ public class OrderExcelFileService {
 
         cell = row.createCell(4);
         cell.setCellStyle(border(workbook));
-        cell.setCellValue("Ilość (zgrzewki)");
+        cell.setCellValue("Ilość");
     }
 
     private void writeOrderItem(OrderItem orderItem, Row row, Workbook workbook) {

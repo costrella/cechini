@@ -42,6 +42,10 @@
     "cechini": "Nasi klienci",
     "cechiniSub": "Nasi klienci",
 
+    "shareApp01": "Wyślij link do aplikacji przedstawicielowi",
+    "shareApp02": "I przekaż mu login i hasło",
+    "shareApp03": "Link do aplikacji",
+
     "subtitle": "Sales Control - Kontrola sprzedaży.",
     "logged": {
       "message": "Jesteś zalogowany jako użytkownik \"{{username}}\"."
