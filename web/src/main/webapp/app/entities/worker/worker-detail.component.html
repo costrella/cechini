@@ -26,7 +26,13 @@
                 </dd>
                 <dt><span jhiTranslate="cechiniApp.worker.password">Password</span></dt>
                 <dd>
-                    <span>{{ worker.password }}</span>
+                <span>
+                    <input type="password" [value]="worker.password" readonly class="form-control-plaintext" style="display:inline; width:auto;" #passInput>
+                    <button type="button" class="btn btn-link p-0" tabindex="-1"
+                            (mousedown)="passInput.type='text'" (mouseup)="passInput.type='password'" (mouseleave)="passInput.type='password'">
+                        <fa-icon icon="eye"></fa-icon>
+                    </button>
+                </span>
                 </dd>
             </dl>
 

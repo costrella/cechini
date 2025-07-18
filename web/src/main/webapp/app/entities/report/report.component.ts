@@ -209,7 +209,6 @@ export class ReportComponent implements OnInit, OnDestroy {
         this.ascending = ascending;
 
         this.loadPage(pageNumber, true);
-      } else {
       }
     }).subscribe();
   }

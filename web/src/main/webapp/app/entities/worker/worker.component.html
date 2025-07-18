@@ -29,6 +29,8 @@
                     <th scope="col"  jhiSortBy="desc"><span jhiTranslate="cechiniApp.worker.desc">Desc</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="phone"><span jhiTranslate="cechiniApp.worker.phone">Phone</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="login"><span jhiTranslate="cechiniApp.worker.login">Login</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="password"><span jhiTranslate="cechiniApp.worker.password">Password</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -41,6 +43,15 @@
                     <td>{{ worker.desc }}</td>
                     <td>{{ worker.phone }}</td>
                     <td>{{ worker.login }}</td>
+                    <td>
+                        <input type="password" [value]="worker.password" readonly class="form-control-plaintext" #passInput>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-link p-0" tabindex="-1"
+                                (mousedown)="passInput.type='text'" (mouseup)="passInput.type='password'" (mouseleave)="passInput.type='password'">
+                            <fa-icon icon="eye"></fa-icon>
+                        </button>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"
