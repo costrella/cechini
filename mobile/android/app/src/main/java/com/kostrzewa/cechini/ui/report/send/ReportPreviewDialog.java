@@ -87,7 +87,7 @@ public class ReportPreviewDialog extends DialogFragment {
 
     private void init() {
         String desc = ReportData.reportDTO.getDesc() != null ? ReportData.reportDTO.getDesc() : getContext().getResources().getString(R.string.empty);
-        descTV.setText("" + desc);
+        descTV.setText(" " + desc);
         orderTV.setText("" + genarateOrderPreview());
         int count = 0;
         for(PhotoDTO photoDTO : ReportData.reportDTO.getPhotosList()){
@@ -95,7 +95,7 @@ public class ReportPreviewDialog extends DialogFragment {
                 count++;
             }
         }
-        photoCountTV.setText("" + count);
+        photoCountTV.setText(" " + count);
 
     }
 
@@ -123,7 +123,7 @@ public class ReportPreviewDialog extends DialogFragment {
         String value = "";
         int i = 1;
         for (OrderItemDTO item : ReportData.reportDTO.getOrderDTO().getOrderItems()) {
-            value += ""+i + ") " + item.getProductName() + "\n\t" + item.getProductCapacity() + "L" + ", zgrzewek: " + item.getPackCount() + "\n";
+            value += ""+i + ") " + item.getProductName() + "\n\t\t\t" + getContext().getResources().getString(R.string.count2) + " " + item.getPackCount() + "\n";
             i++;
         }
         value += "\n" + getContext().getResources().getString(R.string.store_name) + " " + storeDTO.getName() + "\n\t" + getContext().getResources().getString(R.string.store_address) + " " + storeDTO.getAddress();

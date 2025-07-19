@@ -79,7 +79,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 //        TextView val02TV = convertView.findViewById(R.id.product_item_val02);
 //        TextView val03TV = convertView.findViewById(R.id.product_item_val03);
         ProductDTO p = mValues.get(position);
-        nameTV.setText(p.getName() + "\n\t" + p.getCapacity());
+        nameTV.setText(p.getName());
 //        val01TV.setText("" + p.getPackCountPalette());
 //        val02TV.setText("" + p.getArtCountPalette());
 //        val03TV.setText("" + p.getLayerCountPalette());

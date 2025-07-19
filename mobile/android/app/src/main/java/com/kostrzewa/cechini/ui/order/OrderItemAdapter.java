@@ -51,8 +51,8 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
         holder.mItem = o;
 
 
-        holder.nameTV.setText(o.getProductName() + "\n\t"  + o.getProductCapacity()
-        + ", " + holder.itemView.getContext().getResources().getString(R.string.count) + " " + o.getPackCount());
+        holder.nameTV.setText(o.getProductName() + "\n\t"
+        + holder.itemView.getContext().getResources().getString(R.string.count2) + " " + o.getPackCount());
         int lp = position + 1;
         holder.mIdView.setText("" + lp);
 

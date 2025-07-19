@@ -91,6 +91,7 @@
     <string name="add_product">Add Product</string>
     <string name="product">Product:</string>
     <string name="count">Count:</string>
+    <string name="count2">count:</string>
 
     <string name="camera">Camera</string>
     <string name="gallery">Photo gallery</string>

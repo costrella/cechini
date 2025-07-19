@@ -137,8 +137,10 @@ public class HomeFragment extends Fragment {
                 if(response.isSuccessful()){
                     Long count = response.body();
                     if(count != null && count > 0){
+                        btn_unreadReport.setBackgroundColor(getContext().getResources().getColor(R.color.red));
                         btn_unreadReport.setText(text + " ("+ count + ")");
                     } else {
+                        btn_unreadReport.setBackgroundColor(getContext().getResources().getColor(R.color.colorPrimaryDark));
                         btn_unreadReport.setText(text + " (0)");
                     }
                 } else {

@@ -93,6 +93,7 @@
     <string name="add_product">Dodaj Produkt</string>
     <string name="product">Produkt:</string>
     <string name="count">Ilość:</string>
+    <string name="count2">ilość:</string>
 
     <string name="camera">Aparat</string>
     <string name="gallery">Galeria</string>

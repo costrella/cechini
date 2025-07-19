@@ -4,11 +4,11 @@ apply plugin: 'com.google.firebase.crashlytics'
 android {
     compileSdkVersion 35
     defaultConfig {
-        applicationId "com.costrella.cechini"
+        applicationId "com.costrella.salescontrol"
         minSdkVersion 21
         targetSdkVersion 35
-        versionCode 25071000
-        versionName "1.1.0007"
+        versionCode 25071900
+        versionName "1.1.0011"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildFeatures{
