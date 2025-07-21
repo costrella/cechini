@@ -1,6 +1,9 @@
 {
   "global": {
     "title": "Sales Control - Kontrola Sprzedaży",
+    "chart01": "Wykres ilości przesłanych raportów",
+    "chart02": "Wykres ilości przesłanych zamówień",
+    "chart03": "Wykres ilości sprzedaży produktów",
     "browsehappy": "Używasz <strong>przestarzałej</strong> przeglądarki. Proszę <a href=\"http://browsehappy.com/\">uaktualnij swoją przeglądarkę</a> aby poprawić wrażenia z użytkowania tej aplikacji.",
     "menu": {
       "home": "Strona domowa",

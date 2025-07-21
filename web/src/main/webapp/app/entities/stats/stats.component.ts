@@ -6,6 +6,7 @@ import { JhiEventManager } from 'ng-jhipster';
 import { Subscription } from 'rxjs';
 import { StatsService } from './stats.service';
 import * as Chart from 'chart.js';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'jhi-stats',
@@ -21,7 +22,11 @@ export class StatsComponent implements OnInit, OnDestroy, AfterViewInit {
   ctx02: any;
   ctx03: any;
 
-  constructor(protected statsService: StatsService, protected eventManager: JhiEventManager) {}
+  constructor(
+    protected statsService: StatsService,
+    protected eventManager: JhiEventManager,
+    protected translateService: TranslateService
+  ) {}
 
   chart01(): void {
     this.canvas = document.getElementById('myChart');
@@ -53,7 +58,7 @@ export class StatsComponent implements OnInit, OnDestroy, AfterViewInit {
             },
             title: {
               display: true,
-              text: 'Wykres ilości przesłanych raportów',
+              text: this.translateService.instant('global.chart01'),
             },
           },
         });
@@ -92,7 +97,7 @@ export class StatsComponent implements OnInit, OnDestroy, AfterViewInit {
             },
             title: {
               display: true,
-              text: 'Wykres ilości przesłanych zamówień',
+              text: this.translateService.instant('global.chart02'),
             },
           },
         });
@@ -131,7 +136,7 @@ export class StatsComponent implements OnInit, OnDestroy, AfterViewInit {
             },
             title: {
               display: true,
-              text: 'Wykres ilości sprzedaży zgrzewek produktów',
+              text: this.translateService.instant('global.chart03'),
             },
           },
         });

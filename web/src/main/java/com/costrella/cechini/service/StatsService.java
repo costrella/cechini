@@ -4,6 +4,7 @@ import com.costrella.cechini.domain.Product;
 import com.costrella.cechini.domain.Worker;
 import com.costrella.cechini.repository.ProductRepository;
 import com.costrella.cechini.repository.StatsRepository;
+import com.costrella.cechini.repository.UserRepository;
 import com.costrella.cechini.repository.WorkerRepository;
 import com.costrella.cechini.service.dto.Chart01DTO;
 import com.costrella.cechini.service.dto.ChartDetail01DTO;
@@ -63,7 +64,7 @@ public class StatsService {
                 if (fillMonths)
                     chart.monthsName.add(now.minusMonths(i).getMonth().getDisplayName(
                         TextStyle.FULL_STANDALONE,
-                        Locale.forLanguageTag("PL")
+                        Locale.forLanguageTag("en")
                     ));
             }
 
@@ -97,7 +98,7 @@ public class StatsService {
                 if (fillMonths)
                     chart.monthsName.add(now.minusMonths(i).getMonth().getDisplayName(
                         TextStyle.FULL_STANDALONE,
-                        Locale.forLanguageTag("PL")
+                        Locale.forLanguageTag("en")
                     ));
             }
 
@@ -130,11 +131,11 @@ public class StatsService {
                 if (fillMonths)
                     chart.monthsName.add(now.minusMonths(i).getMonth().getDisplayName(
                         TextStyle.FULL_STANDALONE,
-                        Locale.forLanguageTag("PL")
+                        Locale.forLanguageTag("en")
                     ));
             }
 
-            chartDetail.label = product.getName() + " (" + product.getCapacity() + "L)";
+            chartDetail.label = product.getName();
             chart.details.add(chartDetail);
             fillMonths = false;
         }

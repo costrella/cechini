@@ -1,7 +1,10 @@
 package com.costrella.cechini.service;
 
 import com.costrella.cechini.domain.Report;
+import com.costrella.cechini.domain.User;
+import com.costrella.cechini.domain.Worker;
 import com.costrella.cechini.repository.ReportRepository;
+import com.costrella.cechini.repository.WorkerRepository;
 import com.costrella.cechini.service.dto.ReportDTO;
 import com.costrella.cechini.service.dto.ReportDTOSimple;
 import com.costrella.cechini.service.dto.ReportDTOWithPhotos;
@@ -37,6 +40,8 @@ public class ReportService {
 
     private final ReportRepository reportRepository;
 
+    private final WorkerRepository workerRepository;
+
     private final ReportMapper reportMapper;
 
     private final OrderMapper orderMapper;
@@ -53,8 +58,9 @@ public class ReportService {
 
     private final WarehouseService warehouseService;
 
-    public ReportService(ReportRepository reportRepository, ReportMapper reportMapper, OrderMapper orderMapper, OrderItemMapper orderItemMapper, PhotoFileMapper photoFileMapper, MailService mailService, OrderCSVFileService orderCSVFileService, OrderExcelFileService orderExcelFileService, WarehouseService warehouseService) {
+    public ReportService(ReportRepository reportRepository, WorkerRepository workerRepository, ReportMapper reportMapper, OrderMapper orderMapper, OrderItemMapper orderItemMapper, PhotoFileMapper photoFileMapper, MailService mailService, OrderCSVFileService orderCSVFileService, OrderExcelFileService orderExcelFileService, WarehouseService warehouseService) {
         this.reportRepository = reportRepository;
+        this.workerRepository = workerRepository;
         this.reportMapper = reportMapper;
         this.orderMapper = orderMapper;
         this.orderItemMapper = orderItemMapper;
@@ -122,18 +128,26 @@ public class ReportService {
             && report.getOrder().getWarehouse().getId() != null) {
             Optional<WarehouseDTO> warehouse = warehouseService.findOne(report.getOrder().getWarehouse().getId());
             if (warehouse.isPresent() && warehouse.get().getMail() != null) {
+                String langKey = null;
+                Optional<Worker> worker = workerRepository.findById(reportDTO.getWorkerId());
+                if (worker.isPresent()) {
+                    User user = worker.get().getUser();
+                    if (user != null) {
+                        langKey = user.getLangKey();
+                    }
+                }
                 try {
                     File file;
                     if (warehouse.get().getOrderFileType() == null) {
-                        file = orderExcelFileService.generateFile(report);
+                        file = orderExcelFileService.generateFile(report, langKey);
                     } else {
                         switch (warehouse.get().getOrderFileType()) {
                             case CSV:
-                                file = orderCSVFileService.generateFile(report);
+                                file = orderCSVFileService.generateFile(report, langKey);
                                 break;
                             case EXCEL:
                             default:
-                                file = orderExcelFileService.generateFile(report);
+                                file = orderExcelFileService.generateFile(report, langKey);
                                 break;
                         }
                     }

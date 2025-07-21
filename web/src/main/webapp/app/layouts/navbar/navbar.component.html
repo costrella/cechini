@@ -206,6 +206,11 @@
                         <span jhiTranslate="global.menu.account.main">
                             Account
                         </span>
+                        <span *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']">
+                            <span *ngIf="account$ | async as account">
+                                {{ account.login }}
+                            </span>
+                        </span>
                     </span>
                     <span *ngIf="getImageUrl()">
                         <img [src]="getImageUrl()" class="profile-image rounded-circle" alt="Avatar">
