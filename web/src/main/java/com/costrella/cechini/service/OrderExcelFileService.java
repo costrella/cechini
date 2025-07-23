@@ -41,7 +41,6 @@ public class OrderExcelFileService {
     }
 
     public File generateFile(Report report, String langKey) throws IOException {
-        if (langKey == null || langKey.isEmpty()) langKey = "en";
         locale = Locale.forLanguageTag(langKey);
         return writeExcel(report);
     }
@@ -49,6 +48,9 @@ public class OrderExcelFileService {
     public File writeExcel(Report report) throws IOException {
         Worker worker = workerRepository.getOne(report.getWorker().getId());
         Store store = storeRepository.getOne(report.getStore().getId());
+        if(store.getNip() == null){
+            return null;
+        }
 
         Workbook workbook = new HSSFWorkbook();
         Sheet sheet = workbook.createSheet();

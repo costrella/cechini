@@ -82,7 +82,7 @@ public class MailService {
 
             if(file != null) {
                 if (orderFileType == null) {
-                    message.addAttachment("zamowienie_cechini_" + number + ".xls", file);
+                    message.addAttachment("zamowienie_cechini_" + number + ".xls", file);//todo
                 } else {
                     switch (orderFileType) {
                         case CSV:

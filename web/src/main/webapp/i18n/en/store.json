@@ -18,7 +18,7 @@
         "title": "Store"
       },
       "name": "Name",
-      "nip": "TIN",
+      "nip": "TIN(VAT)",
       "desc": "Desc",
       "visited": "Visited",
       "address": "Address",

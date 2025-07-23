@@ -35,9 +35,11 @@ public class OrderCSVFileService {
     }
 
     public File generateFile(Report report, String langKey) throws IOException {
-        if (langKey == null || langKey.isEmpty()) langKey = "en";
         Locale locale = Locale.forLanguageTag(langKey);
         List<String[]> dataLines = generateContent(report, locale);
+        if (dataLines == null || dataLines.isEmpty()) {
+            return null; // No data to write
+        }
         File csvOutputFile = new File(CSV_FILE_NAME);
 
         Writer out = new BufferedWriter(new OutputStreamWriter(
@@ -71,6 +73,9 @@ public class OrderCSVFileService {
     private List<String[]> generateContent(Report report, Locale locale) {
         Worker worker = workerRepository.getOne(report.getWorker().getId());
         Store store = storeRepository.getOne(report.getStore().getId());
+        if(store.getNip() == null) {
+            return null;
+        }
         List<String[]> dataLines = new ArrayList<>();
         DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
             .withZone(ZoneId.systemDefault());

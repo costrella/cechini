@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit {
   languages = LANGUAGES;
   swaggerEnabled?: boolean;
   version: string;
-  account$?: Observable<Account | null>;
+  // account$?: Observable<Account | null>;
 
   constructor(
     private loginService: LoginService,
@@ -42,7 +42,7 @@ export class NavbarComponent implements OnInit {
       this.inProduction = profileInfo.inProduction;
       this.swaggerEnabled = profileInfo.swaggerEnabled;
     });
-    this.account$ = this.accountService.identity();
+    // this.account$ = this.accountService.identity();
   }
 
   changeLanguage(languageKey: string): void {

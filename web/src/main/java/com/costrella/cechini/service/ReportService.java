@@ -1,9 +1,11 @@
 package com.costrella.cechini.service;
 
 import com.costrella.cechini.domain.Report;
+import com.costrella.cechini.domain.Tenant;
 import com.costrella.cechini.domain.User;
 import com.costrella.cechini.domain.Worker;
 import com.costrella.cechini.repository.ReportRepository;
+import com.costrella.cechini.repository.UserRepository;
 import com.costrella.cechini.repository.WorkerRepository;
 import com.costrella.cechini.service.dto.ReportDTO;
 import com.costrella.cechini.service.dto.ReportDTOSimple;
@@ -58,7 +60,9 @@ public class ReportService {
 
     private final WarehouseService warehouseService;
 
-    public ReportService(ReportRepository reportRepository, WorkerRepository workerRepository, ReportMapper reportMapper, OrderMapper orderMapper, OrderItemMapper orderItemMapper, PhotoFileMapper photoFileMapper, MailService mailService, OrderCSVFileService orderCSVFileService, OrderExcelFileService orderExcelFileService, WarehouseService warehouseService) {
+    private final UserRepository userRepository;
+
+    public ReportService(ReportRepository reportRepository, WorkerRepository workerRepository, ReportMapper reportMapper, OrderMapper orderMapper, OrderItemMapper orderItemMapper, PhotoFileMapper photoFileMapper, MailService mailService, OrderCSVFileService orderCSVFileService, OrderExcelFileService orderExcelFileService, WarehouseService warehouseService, UserRepository userRepository) {
         this.reportRepository = reportRepository;
         this.workerRepository = workerRepository;
         this.reportMapper = reportMapper;
@@ -69,6 +73,7 @@ public class ReportService {
         this.orderCSVFileService = orderCSVFileService;
         this.orderExcelFileService = orderExcelFileService;
         this.warehouseService = warehouseService;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -117,6 +122,21 @@ public class ReportService {
         return reportMapper.toDto(report);
     }
 
+    private String getLangKey(ReportDTO reportDTO) {
+        String langKey = "en";
+        Optional<Worker> worker = workerRepository.findById(reportDTO.getWorkerId());
+        if(!worker.isPresent()) return langKey;
+        Tenant tenant = worker.get().getTenant();
+        if(tenant == null) return langKey;
+        List<User> users = userRepository.findAllByTenantIdAndLangKeyIsNotNull(tenant.getId());
+        if(users.isEmpty()) return langKey;
+        User user = users.get(0);
+        if (user != null) {
+            langKey = user.getLangKey();
+        }
+        return langKey;
+    }
+
     //ASPECT ADDED
     public ReportDTO saveWithPhotos(ReportDTOWithPhotos reportDTO) {
         log.debug("Request to save Report : {}", reportDTO);
@@ -128,14 +148,7 @@ public class ReportService {
             && report.getOrder().getWarehouse().getId() != null) {
             Optional<WarehouseDTO> warehouse = warehouseService.findOne(report.getOrder().getWarehouse().getId());
             if (warehouse.isPresent() && warehouse.get().getMail() != null) {
-                String langKey = null;
-                Optional<Worker> worker = workerRepository.findById(reportDTO.getWorkerId());
-                if (worker.isPresent()) {
-                    User user = worker.get().getUser();
-                    if (user != null) {
-                        langKey = user.getLangKey();
-                    }
-                }
+                String langKey = getLangKey(reportDTO);
                 try {
                     File file;
                     if (warehouse.get().getOrderFileType() == null) {
@@ -151,7 +164,10 @@ public class ReportService {
                                 break;
                         }
                     }
-                    mailService.sendEmailWithOrder(report.getOrder().getNumber(), warehouse.get().getMail(), warehouse.get().getOrderFileType(), file);
+                    if(file != null){
+                        // Send email with the report file
+                        mailService.sendEmailWithOrder(report.getOrder().getNumber(), warehouse.get().getMail(), warehouse.get().getOrderFileType(), file);
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
