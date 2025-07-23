@@ -127,6 +127,6 @@ public class ProductDTO implements Serializable, Comparable<ProductDTO> {
 
     @Override
     public int compareTo(ProductDTO o) {
-        return this.capacity.compareTo(o.capacity);
+        return this.name.compareTo(o.name);
     }
 }

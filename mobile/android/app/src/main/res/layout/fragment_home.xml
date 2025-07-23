@@ -1,69 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:grid="http://schemas.android.com/tools"
-    android:layout_centerHorizontal="true"
-    android:layout_marginTop="10dp"
-    android:layout_marginStart="10dp"
-    android:layout_marginEnd="10dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <Button
         android:id="@+id/btn_mystores"
-        android:layout_width="180dp"
+        android:layout_width="190dp"
         android:layout_height="150dp"
+        android:layout_margin="5dp"
         android:background="@color/colorPrimaryDark"
         android:textColor="@color/white"
-        android:layout_margin="5dp"
         android:text="@string/my_stores"
-        app:layout_column="0"
-        app:layout_row="0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_add_store"
+        />
 
     <Button
         android:id="@+id/btn_add_store"
-        android:layout_width="180dp"
+        android:layout_width="190dp"
         android:layout_height="150dp"
+        android:layout_margin="5dp"
         android:background="@color/colorPrimaryDark"
         android:textColor="@color/white"
-        android:layout_margin="5dp"
         android:text="@string/add_store"
-        android:layout_row="0"
-        android:layout_column="1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_mystores"
+        app:layout_constraintEnd_toEndOf="parent"
         />
 
     <Button
         android:id="@+id/btn_my_reports"
-        android:layout_width="180dp"
+        android:layout_width="190dp"
         android:layout_height="150dp"
+        android:layout_margin="5dp"
         android:background="@color/colorPrimaryDark"
         android:textColor="@color/white"
-        android:layout_margin="5dp"
         android:text="@string/my_sent_reports"
-        android:layout_column="0"
-        android:layout_row="1" />
+        app:layout_constraintTop_toBottomOf="@id/btn_mystores"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_synchro"
+         />
 
     <Button
         android:id="@+id/btn_synchro"
-        android:layout_width="180dp"
+        android:layout_width="190dp"
         android:layout_height="150dp"
         android:layout_margin="5dp"
         android:background="@color/colorPrimaryDark"
         android:textColor="@color/white"
         android:text="@string/sync"
-        android:layout_row="1"
-        android:layout_column="1"/>
+        app:layout_constraintTop_toBottomOf="@id/btn_add_store"
+        app:layout_constraintStart_toEndOf="@id/btn_my_reports"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <Button
         android:id="@+id/btn_unreadReport"
-        android:layout_width="180dp"
+        android:layout_width="190dp"
         android:layout_height="150dp"
         android:layout_margin="5dp"
         android:background="@color/colorPrimaryDark"
         android:textColor="@color/white"
         android:text="@string/unread_comments"
-        android:layout_row="2"
-        android:layout_column="0"/>
+        app:layout_constraintTop_toBottomOf="@id/btn_my_reports"
+        app:layout_constraintStart_toStartOf="@id/btn_my_reports"
+        app:layout_constraintEnd_toEndOf="@id/btn_my_reports"/>
 
-</GridLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

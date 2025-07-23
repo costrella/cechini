@@ -45,7 +45,7 @@
     <string name="report_comments">Comments:</string>
     <string name="report_photos_sent">number of photos uploaded:</string>
     <string name="report_nip_mail">The system will also send an email with the order to the warehouse address:</string>
-    <string name="report_nip_not_mail">Due to the lack of a TIN, the system will not send an e-mail with the order to the address:</string>
+    <string name="report_nip_not_mail">Due to the lack of a TIN(VAT), the system will not send an e-mail with the order to the address:</string>
     <string name="report_not_mail_warehouse">No email address for the selected Warehouse</string>
     <string name="report_desc_empty">The report description is blank\nWe only require it if you do not add an order</string>
 
@@ -83,8 +83,8 @@
     <string name="store_edit">Edit store</string>
     <string name="store_name">Name:</string>
     <string name="store_address">Address:</string>
-    <string name="store_nip">TIN:</string>
-    <string name="store_nip_req">The TIN field is not required, but will be needed when creating a possible order</string>
+    <string name="store_nip">TIN(VAT):</string>
+    <string name="store_nip_req">The TIN(VAT) field is not required, but will be needed when creating a possible order</string>
     <string name="store_add">Add store</string>
     <string name="products_empty">No products added. \Please note that an order is not required</string>
     <string name="select_warehouse">Select warehouse</string>
