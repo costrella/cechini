@@ -7,8 +7,8 @@ android {
         applicationId "com.costrella.salescontrol"
         minSdkVersion 21
         targetSdkVersion 35
-        versionCode 25072300
-        versionName "1.1.0012"
+        versionCode 25072800
+        versionName "1.1.0013"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildFeatures{

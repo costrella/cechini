@@ -38,7 +38,7 @@ public class RetrofitClient {
                 .create();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://costrella.ovh/api/")
+                .baseUrl("https://salescontrol.costrella.ovh/api/")
 //                .baseUrl("http://10.0.2.2:8080/api/")
 
                 //https://costrella.ovh/api/"
