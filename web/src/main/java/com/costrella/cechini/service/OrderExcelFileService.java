@@ -48,7 +48,7 @@ public class OrderExcelFileService {
     public File writeExcel(Report report) throws IOException {
         Worker worker = workerRepository.getOne(report.getWorker().getId());
         Store store = storeRepository.getOne(report.getStore().getId());
-        if(store.getNip() == null){
+        if(store.getNip() == null || store.getNip().isEmpty()) {
             return null;
         }
 

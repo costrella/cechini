@@ -73,7 +73,7 @@ public class OrderCSVFileService {
     private List<String[]> generateContent(Report report, Locale locale) {
         Worker worker = workerRepository.getOne(report.getWorker().getId());
         Store store = storeRepository.getOne(report.getStore().getId());
-        if(store.getNip() == null) {
+        if(store.getNip() == null || store.getNip().isEmpty()) {
             return null;
         }
         List<String[]> dataLines = new ArrayList<>();

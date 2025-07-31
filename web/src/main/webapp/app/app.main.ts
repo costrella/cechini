@@ -4,7 +4,7 @@ import { ProdConfig } from './blocks/config/prod.config';
 import { CechiniAppModule } from './app.module';
 
 ProdConfig();
-
+declare const module: any;
 if (module['hot']) {
   module['hot'].accept();
 }

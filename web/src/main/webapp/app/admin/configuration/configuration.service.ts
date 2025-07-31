@@ -53,12 +53,11 @@ export class ConfigurationService {
   getBeans(): Observable<Bean[]> {
     return this.http.get<ConfigProps>(SERVER_API_URL + 'management/configprops').pipe(
       map(configProps =>
-        Object.values(
-          Object.values(configProps.contexts)
-            .map(context => context.beans)
-            .reduce((allBeans: Beans, contextBeans: Beans) => ({ ...allBeans, ...contextBeans }))
-        )
-      )
+        Object.keys(configProps.contexts)
+          .map(key => configProps.contexts[key].beans)
+          .reduce((allBeans: Beans, contextBeans: Beans) => ({ ...allBeans, ...contextBeans }), {})
+      ),
+      map(beansObj => Object.keys(beansObj).map(key => beansObj[key]))
     );
   }
 

@@ -81,16 +81,17 @@ public class MailService {
 
 
             if(file != null) {
+                String prefix = "order_";
                 if (orderFileType == null) {
-                    message.addAttachment("zamowienie_cechini_" + number + ".xls", file);//todo
+                    message.addAttachment(prefix + number + ".xls", file);
                 } else {
                     switch (orderFileType) {
                         case CSV:
-                            message.addAttachment("zamowienie_cechini_" + number + ".csv", file);
+                            message.addAttachment(prefix + number + ".csv", file);
                             break;
                         case EXCEL:
                         default:
-                            message.addAttachment("zamowienie_cechini_" + number + ".xls", file);
+                            message.addAttachment(prefix + number + ".xls", file);
 
                             break;
                     }

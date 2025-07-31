@@ -18,7 +18,7 @@
 
 
     <!--    errors: -->
-    <string name="storeexists">The shop already exists!</string>
+    <string name="storeexists">The store already exists!</string>
 
 
     <string name="prompt_email">Login</string>

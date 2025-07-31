@@ -1,12 +1,13 @@
 <div *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']">
     <section class="jumbotron text-center">
         <div class="container">
-            <h1 class="jumbotron-heading">Gratulacje, jesteś zalogowany. </h1>
-            <p class="lead text-muted">Przedstawiciele handlowi niech pobiorą sobie aplikacje mobilną ze sklepu Play</p>
-            <p class="lead text-muted">W pozycji 'Menu' Przedstawiciele Handlowi -> dodaj nowych i przekaż im dane do logowania</p>
+            <h1 class="jumbotron-heading">Gratulacje, jesteś zalogowany</h1>
+            <h1 class="jumbotron-heading" jhiTranslate="home.shareApp01">Wyślij link do aplikacji przedstawicielowi</h1>
+            <h2 class="jumbotron-heading" jhiTranslate="home.shareApp02">I przekaż mu login i hasło</h2>
             <p>
-                <a href="#" class="btn btn-primary my-2">Załóż konto</a>
+                <a href="https://play.google.com/store/apps/details?id=pl.jmpolska.clos0.mojabiedronka" target="_blank" class="btn btn-primary my-2" jhiTranslate="home.shareApp03">Link do aplikacji</a>
             </p>
+            <h3 class="jumbotron-heading">Pod koniec okresu próbnego skontaktujemy się z Tobą!</h3>
         </div>
     </section>
 </div>
@@ -94,7 +95,7 @@
         <p class="lead text-muted" jhiTranslate="home.startFree02">Przez 3 miesiące korzystaj całkowicie za darmo, zarówno Manager jak i Przedstawiciele
             Handlowi.</p>
         <p>
-            <a href="#" class="btn btn-primary my-2">Załóż konto</a>
+            <a routerLink="account/register" jhiTranslate="global.menu.account.register" class="btn btn-primary my-2">Załóż konto</a>
         </p>
     </div>
 </section>
@@ -167,7 +168,7 @@
 </div>
 
 <div style="margin-bottom: 80px;"></div>
-<h1 jhiTranslate="home.ourClients01">NASI KLIENCI</h1>
+<h1 jhiTranslate="home.ourClients01" class="text-center">NASI KLIENCI</h1>
 
 <div class="container">
     <div class="row justify-content-center">
@@ -176,11 +177,35 @@
                  src="../../content/images/demo/cechini.jpg"
                  alt="Generic placeholder image" width="140" height="140" style="margin-bottom: 10px;">
             <h2 jhiTranslate="home.cechini">CECHINI</h2>
-            <p jhiTranslate="home.cechiniSub">Firma Cechini na codzień używa tej aplikacji do kontroli sprzedaży</p>
-            <p><a class="btn btn-secondary" href="https://www.cechini-muszyna.pl/" role="button">GO &raquo;</a></p>
+            <p jhiTranslate="home.cechiniSub">Firma Cechini na codzień używa naszej aplikacji do kontroli sprzedaży</p>
+            <p><a class="btn btn-secondary" href="https://www.cechini-muszyna.pl/" target="_blank" role="button">GO &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
     </div>
 </div>
+<div style="margin-bottom: 80px;"></div>
+
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading" style="margin-bottom: 32px;">CENNIK</h1>
+
+        <div class="card mb-4 box-shadow mx-auto d-block" style="width: 18rem; gravity: center;">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Standard</h4>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title">400 PLN <small class="text-muted">/ mc</small></h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>Płacisz za cały system</li>
+                    <li>Pełny support</li>
+                    <li>Brak dodatkowych opłat</li>
+                    <li>3 miesiące całkowicie bezpłatnie</li>
+                </ul>
+                <button type="button" class="btn btn-lg btn-block btn-primary" routerLink="account/register" jhiTranslate="global.menu.account.register">Załóż konto</button>
+            </div>
+        </div>
+
+    </div>
+</section>
 <div style="margin-bottom: 80px;"></div>
 <div class="container marketing">
     <div class="row featurette">
@@ -190,66 +215,8 @@
             <p class="lead" jhiTranslate="home.needMore03">Aplikacja jest otwarta na dedykowane zmiany, skontaktuj się z nami - porozmawiamy o szczegółach.</p>
         </div>
         <div class="col-md-5">
-            <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto"
-                 alt="Generic placeholder image">
+            <h4>Pytania dotyczące aplikacji kieruj na adres </h4><a href="mailto:orders@costrella.ovh">orders@costrella.ovh</a>
         </div>
     </div>
 </div>
-
-
-<!--<footer class="container py-5">-->
-<!--    <div class="row">-->
-<!--        <div class="col-12 col-md">-->
-<!--            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"-->
-<!--                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"-->
-<!--                 class="d-block mb-2">-->
-<!--                <circle cx="12" cy="12" r="10"></circle>-->
-<!--                <line x1="14.31" y1="8" x2="20.05" y2="17.94"></line>-->
-<!--                <line x1="9.69" y1="8" x2="21.17" y2="8"></line>-->
-<!--                <line x1="7.38" y1="12" x2="13.12" y2="2.06"></line>-->
-<!--                <line x1="9.69" y1="16" x2="3.95" y2="6.06"></line>-->
-<!--                <line x1="14.31" y1="16" x2="2.83" y2="16"></line>-->
-<!--                <line x1="16.62" y1="12" x2="10.88" y2="21.94"></line>-->
-<!--            </svg>-->
-<!--            <small class="d-block mb-3 text-muted">&copy; 2017-2018</small>-->
-<!--        </div>-->
-<!--        <div class="col-6 col-md">-->
-<!--            <h5>Features</h5>-->
-<!--            <ul class="list-unstyled text-small">-->
-<!--                <li><a class="text-muted" href="#">Cool stuff</a></li>-->
-<!--                <li><a class="text-muted" href="#">Random feature</a></li>-->
-<!--                <li><a class="text-muted" href="#">Team feature</a></li>-->
-<!--                <li><a class="text-muted" href="#">Stuff for developers</a></li>-->
-<!--                <li><a class="text-muted" href="#">Another one</a></li>-->
-<!--                <li><a class="text-muted" href="#">Last time</a></li>-->
-<!--            </ul>-->
-<!--        </div>-->
-<!--        <div class="col-6 col-md">-->
-<!--            <h5>Resources</h5>-->
-<!--            <ul class="list-unstyled text-small">-->
-<!--                <li><a class="text-muted" href="#">Resource</a></li>-->
-<!--                <li><a class="text-muted" href="#">Resource name</a></li>-->
-<!--                <li><a class="text-muted" href="#">Another resource</a></li>-->
-<!--                <li><a class="text-muted" href="#">Final resource</a></li>-->
-<!--            </ul>-->
-<!--        </div>-->
-<!--        <div class="col-6 col-md">-->
-<!--            <h5>Resources</h5>-->
-<!--            <ul class="list-unstyled text-small">-->
-<!--                <li><a class="text-muted" href="#">Business</a></li>-->
-<!--                <li><a class="text-muted" href="#">Education</a></li>-->
-<!--                <li><a class="text-muted" href="#">Government</a></li>-->
-<!--                <li><a class="text-muted" href="#">Gaming</a></li>-->
-<!--            </ul>-->
-<!--        </div>-->
-<!--        <div class="col-6 col-md">-->
-<!--            <h5>About</h5>-->
-<!--            <ul class="list-unstyled text-small">-->
-<!--                <li><a class="text-muted" href="#">Team</a></li>-->
-<!--                <li><a class="text-muted" href="#">Locations</a></li>-->
-<!--                <li><a class="text-muted" href="#">Privacy</a></li>-->
-<!--                <li><a class="text-muted" href="#">Terms</a></li>-->
-<!--            </ul>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</footer>-->
+<div style="margin-bottom: 80px;"></div>
