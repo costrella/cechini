@@ -1,13 +1,13 @@
 <div *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']">
     <section class="jumbotron text-center">
         <div class="container">
-            <h1 class="jumbotron-heading">Gratulacje, jesteś zalogowany</h1>
+            <h1 class="jumbotron-heading" jhiTranslate="home.congrat01">Gratulacje, jesteś zalogowany</h1>
             <h1 class="jumbotron-heading" jhiTranslate="home.shareApp01">Wyślij link do aplikacji przedstawicielowi</h1>
             <h2 class="jumbotron-heading" jhiTranslate="home.shareApp02">I przekaż mu login i hasło</h2>
             <p>
-                <a href="https://play.google.com/store/apps/details?id=pl.jmpolska.clos0.mojabiedronka" target="_blank" class="btn btn-primary my-2" jhiTranslate="home.shareApp03">Link do aplikacji</a>
+                <a href="https://play.google.com/store/apps/details?id=com.costrella.salescontrol" target="_blank" class="btn btn-primary my-2" jhiTranslate="home.shareApp03">Link do aplikacji</a>
             </p>
-            <h3 class="jumbotron-heading">Pod koniec okresu próbnego skontaktujemy się z Tobą!</h3>
+            <h3 class="jumbotron-heading" jhiTranslate="home.congrat02">Pod koniec okresu próbnego skontaktujemy się z Tobą!</h3>
         </div>
     </section>
 </div>
@@ -72,7 +72,7 @@
     <div class="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
         <div class="my-3 p-3">
             <h2 class="display-5 text-white" jhiTranslate="home.webPart05">Integruj się z hurtowniami</h2>
-            <p class="lead" jhiTranslate="home.webPart05sub">Zamówienia z aplikacji mobilnej automatycznie wysyłają zamówienia do hurtowni</p>
+            <p class="lead text-white" jhiTranslate="home.webPart05sub">Zamówienia z aplikacji mobilnej automatycznie wysyłają zamówienia do hurtowni</p>
         </div>
         <div class="bg-light box-shadow mx-auto klocek">
             <img src="../../content/images/demo/img_2.png" class="klocek-photo">
@@ -173,32 +173,32 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-4">
+            <a class="btn btn-secondary" href="https://www.cechini-muszyna.pl/" target="_blank" role="button">
             <img class="rounded-circle"
                  src="../../content/images/demo/cechini.jpg"
-                 alt="Generic placeholder image" width="140" height="140" style="margin-bottom: 10px;">
+                 alt="Generic placeholder image" width="140" height="140" style="margin-bottom: 10px;"></a>
             <h2 jhiTranslate="home.cechini">CECHINI</h2>
             <p jhiTranslate="home.cechiniSub">Firma Cechini na codzień używa naszej aplikacji do kontroli sprzedaży</p>
-            <p><a class="btn btn-secondary" href="https://www.cechini-muszyna.pl/" target="_blank" role="button">GO &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
     </div>
 </div>
-<div style="margin-bottom: 80px;"></div>
+<div style="margin-bottom: 40px;"></div>
 
 <section class="jumbotron text-center">
     <div class="container">
-        <h1 class="jumbotron-heading" style="margin-bottom: 32px;">CENNIK</h1>
+        <h1 class="jumbotron-heading" style="margin-bottom: 32px;" jhiTranslate="home.prices00">CENNIK</h1>
 
         <div class="card mb-4 box-shadow mx-auto d-block" style="width: 18rem; gravity: center;">
             <div class="card-header">
-                <h4 class="my-0 font-weight-normal">Standard</h4>
+                <h4 class="my-0 font-weight-normal" jhiTranslate="home.pricesMode01">Standard</h4>
             </div>
             <div class="card-body">
-                <h1 class="card-title pricing-card-title">400 PLN <small class="text-muted">/ mc</small></h1>
+                <h1 class="card-title pricing-card-title" jhiTranslate="home.pricesMode01price">400 PLN / m-c</h1>
                 <ul class="list-unstyled mt-3 mb-4">
-                    <li>Płacisz za cały system</li>
-                    <li>Pełny support</li>
-                    <li>Brak dodatkowych opłat</li>
-                    <li>3 miesiące całkowicie bezpłatnie</li>
+                    <li jhiTranslate="home.pricesMode01msg01">Płacisz za cały system</li>
+                    <li jhiTranslate="home.pricesMode01msg02">Pełny support</li>
+                    <li jhiTranslate="home.pricesMode01msg03">Brak dodatkowych opłat</li>
+                    <li jhiTranslate="home.pricesMode01msg04">3 miesiące całkowicie bezpłatnie</li>
                 </ul>
                 <button type="button" class="btn btn-lg btn-block btn-primary" routerLink="account/register" jhiTranslate="global.menu.account.register">Załóż konto</button>
             </div>
@@ -215,7 +215,7 @@
             <p class="lead" jhiTranslate="home.needMore03">Aplikacja jest otwarta na dedykowane zmiany, skontaktuj się z nami - porozmawiamy o szczegółach.</p>
         </div>
         <div class="col-md-5">
-            <h4>Pytania dotyczące aplikacji kieruj na adres </h4><a href="mailto:orders@costrella.ovh">orders@costrella.ovh</a>
+            <h4 jhiTranslate="home.question01">Pytania dotyczące aplikacji kieruj na adres </h4><a href="mailto:orders@costrella.ovh">orders@costrella.ovh</a>
         </div>
     </div>
 </div>

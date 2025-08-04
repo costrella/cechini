@@ -36,12 +36,26 @@
     "needMore03": "Aplikacja umożliwia wprowadzanie dedykowanych zmian – skontaktuj się z nami, aby omówić szczegóły.",
 
     "startFree01": "Wypróbuj za darmo",
-    "startFree02": "Przez 3 miesiące korzystaj z aplikacji całkowicie bezpłatnie – zarówno jako Menedżer, jak i Przedstawiciel Handlowy.",
+    "startFree02": "Przez 3 miesiące korzystaj z aplikacji całkowicie bezpłatnie – zarówno jako Menedżer, jak i Przedstawiciel Handlowy.\nPod koniec okresu próbnego skontaktujemy się z Tobą poprzez e-mail, aby omówić dalsze kroki.",
 
     "ourClients01": "Zaufali nam",
-    "cechini": "Zaufali nam",
-    "cechiniSub": "Zaufali nam",
+    "cechini": "CECHINI",
+    "cechiniSub": "Firma Cechini na codzień używa tej aplikacji do kontroli sprzedaży",
 
+    "congrat01": "Gratulacje, jesteś zalogowany",
+    "congrat02": "Pod koniec okresu próbnego skontaktujemy się z Tobą",
+
+    "prices00": "Cennik",
+    "pricesMode01": "Standard",
+    "pricesMode01price": "400 PLN / m-c",
+    "pricesMode01msg01" : "Płacisz za cały system",
+    "pricesMode01msg02" : "Pełne wsparcie techniczne",
+    "pricesMode01msg03" : "Zero ukrytych kosztów",
+    "pricesMode01msg04" : "3 miesiące całkowicie bezpłatnie",
+
+    "question01" : "Pytania dotyczące aplikacji kieruj na adres",
+
+    "shareApp01": "Gratulacje, jesteś zalogowany!",
     "shareApp01": "Wyślij link do aplikacji przedstawicielowi",
     "shareApp02": "I przekaż mu dane logowania",
     "shareApp03": "Link do aplikacji",
