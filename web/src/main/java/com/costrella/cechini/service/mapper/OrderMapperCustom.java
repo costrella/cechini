@@ -37,7 +37,7 @@ public class OrderMapperCustom {
 
     }
 
-    private static String getOrderNumber() {
+    public static String getOrderNumber() {
         Random rnd = new Random();
         int n = 1000 + rnd.nextInt(9000);
         return new SimpleDateFormat("yyMMddHHmmss").format(new Date()) + n;

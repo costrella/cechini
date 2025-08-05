@@ -18,6 +18,7 @@ import java.util.Set;
 
 import static com.costrella.cechini.domain.enumeration.NoteType.BY_MANGER;
 import static com.costrella.cechini.domain.enumeration.NoteType.BY_WORKER;
+import static com.costrella.cechini.service.mapper.OrderMapperCustom.getOrderNumber;
 
 /**
  * Service class for managing users.
@@ -168,7 +169,7 @@ public class ExampleDataService {
 
     private Order createOrder(Tenant tenant, Warehouse warehouse) {
         Order order = new Order();
-        order.setNumber("123456789");
+        order.setNumber(getOrderNumber());
         order.setTenant(tenant);
         order.setOrderDate(Instant.now());
         order.setDeliveryDate(Instant.now());

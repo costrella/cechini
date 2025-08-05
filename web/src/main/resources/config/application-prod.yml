@@ -90,8 +90,8 @@ jhipster:
       # security key (this key should be unique for your application, and kept secret)
       key: 7166583b8f9b3d2b5e89f8e751fe8e144608bd4a3cc9126aba5da9278df1223e24af48f5a5d13908b61f63ccdb59aafaf321
   mail: # specific JHipster mail property, for standard properties see MailProperties
-    base-url: https://costrella.ovh # Modify according to your server's URL TODO CHANGE TO DOMAIN
-#     base-url: http://194.42.111.53:8089
+    base-url: https://salescontrol.costrella.com # Modify according to your server's URL
+  #     base-url: http://194.42.111.53:8089
   metrics:
     logs: # Reports metrics in the logs
       enabled: false
