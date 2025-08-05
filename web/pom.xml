@@ -7,7 +7,7 @@
     <artifactId>cechini</artifactId>
     <version>1.1.0003</version>
     <packaging>jar</packaging>
-    <name>Cechini</name>
+    <name>Sales Control</name>
 
     <repositories>
         <!-- jhipster-needle-maven-repository -->

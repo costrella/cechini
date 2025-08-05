@@ -17,7 +17,7 @@
     "webPart06": "Zarządzanie produktami",
     "webPart06sub": "Produkty i inne dane są synchronizowane z aplikacją mobilną.",
 
-    "mobilePart": "Twórz raporty również offline",
+    "mobilePart": "Aplikacja mobilna – dla Przedstawicieli Handlowych",
     "mobilePart01": "Działanie offline",
     "mobilePart01sub": "Twórz raporty i zamówienia nawet bez dostępu do internetu.",
     "mobilePart02": "Raporty ze zdjęciami",
@@ -48,19 +48,19 @@
     "prices00": "Cennik",
     "pricesMode01": "Standard",
     "pricesMode01price": "400 PLN / m-c",
-    "pricesMode01msg01" : "Płacisz za cały system",
-    "pricesMode01msg02" : "Pełne wsparcie techniczne",
-    "pricesMode01msg03" : "Zero ukrytych kosztów",
-    "pricesMode01msg04" : "3 miesiące całkowicie bezpłatnie",
+    "pricesMode01msg01": "Płacisz za cały system",
+    "pricesMode01msg02": "Pełne wsparcie techniczne",
+    "pricesMode01msg03": "Zero ukrytych kosztów",
+    "pricesMode01msg04": "3 miesiące całkowicie bezpłatnie",
 
-    "question01" : "Pytania dotyczące aplikacji kieruj na adres",
+    "question01": "Pytania dotyczące aplikacji kieruj na adres",
 
     "shareApp01": "Gratulacje, jesteś zalogowany!",
     "shareApp01": "Wyślij link do aplikacji przedstawicielowi",
     "shareApp02": "I przekaż mu dane logowania",
     "shareApp03": "Link do aplikacji",
 
-    "subtitle": "Sales Control – Kontrola sprzedaży.",
+    "subtitle": "Kontrola sprzedaży",
     "logged": {
       "message": "Jesteś zalogowany jako użytkownik \"{{username}}\"."
     },

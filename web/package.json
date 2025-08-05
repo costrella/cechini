@@ -1,7 +1,7 @@
 {
-  "name": "cechini",
+  "name": "sales-control",
   "version": "0.0.1-SNAPSHOT",
-  "description": "Description for cechini",
+  "description": "Description for sales-control",
   "private": true,
   "license": "UNLICENSED",
   "cacheDirectories": [
