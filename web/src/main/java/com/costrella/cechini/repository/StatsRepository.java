@@ -1,10 +1,13 @@
 package com.costrella.cechini.repository;
 
+import com.costrella.cechini.domain.Product;
 import com.costrella.cechini.domain.Worker;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface StatsRepository extends JpaRepository<Worker, Long> {
@@ -30,5 +33,7 @@ public interface StatsRepository extends JpaRepository<Worker, Long> {
         "and date_part('year', r.report_date) = date_part('year', current_date - ( :toTime || 'months' )\\:\\:interval)\n" +
         "\n", nativeQuery = true)
     Integer getSumOfPackCountOfProduct(@Param("id") Long id, @Param("toTime") String toTime);
+
+    List<Worker> findAllByTenantId(Long tenantId);
 
 }

@@ -57,7 +57,7 @@ public class MailService {
 
     @Async
     public void sendEmailWithOrder(String number, String mail, OrderFileType orderFileType, File orderFile) {
-        String subject = "Cechini. Zamówienie nr.: " + number;
+        String subject = "Order number: " + number;
         String content = subject;
         sendEmail(mail, subject, content, true, true, orderFileType, orderFile, number);
     }
@@ -81,16 +81,17 @@ public class MailService {
 
 
             if(file != null) {
+                String prefix = "order_";
                 if (orderFileType == null) {
-                    message.addAttachment("zamowienie_cechini_" + number + ".xls", file);
+                    message.addAttachment(prefix + number + ".xls", file);
                 } else {
                     switch (orderFileType) {
                         case CSV:
-                            message.addAttachment("zamowienie_cechini_" + number + ".csv", file);
+                            message.addAttachment(prefix + number + ".csv", file);
                             break;
                         case EXCEL:
                         default:
-                            message.addAttachment("zamowienie_cechini_" + number + ".xls", file);
+                            message.addAttachment(prefix + number + ".xls", file);
 
                             break;
                     }
@@ -107,18 +108,43 @@ public class MailService {
     }
 
     @Async
+    public void sendActivationLinkEmail(String to, String subject, String content, boolean isMultipart, boolean isHtml) {
+        log.debug("sendActivationLinkEmail email[multipart '{}' and html '{}'] to '{}' with subject '{}' and content={}",
+            isMultipart, isHtml, to, subject, content);
+
+        // Prepare message using a Spring helper
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        try {
+            MimeMessageHelper message = new MimeMessageHelper(mimeMessage, isMultipart, StandardCharsets.UTF_8.name());
+            message.setTo(to);
+            if (applicationProperties.getCc() != null && applicationProperties.getCc() != "") {
+                message.addCc(applicationProperties.getCc());
+            }
+            message.setFrom(jHipsterProperties.getMail().getFrom());
+            message.setSubject(subject);
+            message.setText(content, isHtml);
+
+
+            javaMailSender.send(mimeMessage);
+            log.debug("Sent email to User '{}'", to);
+        } catch (MailException | MessagingException e) {
+            log.warn("Email could not be sent to user '{}'", to, e);
+        }
+    }
+
+    @Async
     public void sendEmailFromTemplate(User user, String templateName, String titleKey) {
         if (user.getEmail() == null) {
             log.debug("Email doesn't exist for user '{}'", user.getLogin());
             return;
         }
-        Locale locale = Locale.forLanguageTag(user.getLangKey());
+        Locale locale = Locale.forLanguageTag(user.getLangKey());//locale
         Context context = new Context(locale);
         context.setVariable(USER, user);
         context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
         String content = templateEngine.process(templateName, context);
         String subject = messageSource.getMessage(titleKey, null, locale);
-//        sendEmail(null, user.getEmail(), subject, content, false, true);
+        sendActivationLinkEmail(user.getEmail(), subject, content, false, true);
     }
 
     @Async

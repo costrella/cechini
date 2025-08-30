@@ -34,6 +34,17 @@ public class OrderItem implements Serializable {
     @JsonIgnoreProperties(value = "orderItems", allowSetters = true)
     private Order order;
 
+    @ManyToOne
+    private Tenant tenant;
+
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
+    }
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;

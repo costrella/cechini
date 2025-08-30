@@ -23,14 +23,18 @@ public interface ReportMapper extends EntityMapper<ReportDTO, Report> {
         report.setStore(new Store().id(reportDTO.getStoreId()));
         report.setDesc(reportDTO.getDesc());
         report.setManagerNote(reportDTO.getManagerNote());
-        if (reportDTO.getOrderDTO() != null) {
-            report.setOrder(OrderMapperCustom.toEntity(reportDTO.getOrderDTO()));
+        report.setTenant(reportDTO.getTenant());
+        OrderDTO orderDTO = reportDTO.getOrderDTO();
+        if (orderDTO != null) {
+            orderDTO.setTenant(reportDTO.getTenant());
+            report.setOrder(OrderMapperCustom.toEntity(orderDTO));
         }
         return report;
     }
 
     default Report toEntityWithPhotos(ReportDTOWithPhotos reportDTO) {
         Report report = toEntity(reportDTO);
+        Tenant tenant = report.getTenant();
         Set<Photo> photos = new HashSet<>();
         if (!reportDTO.getPhotosList().isEmpty()) {
             for (PhotoDTO photoDTO : reportDTO.getPhotosList()) {
@@ -39,8 +43,10 @@ public interface ReportMapper extends EntityMapper<ReportDTO, Report> {
                     PhotoFile photoFile = new PhotoFile();
                     photoFile.setValue(photoDTO.getPhotoFileDTO().getValue());
                     photoFile.setValueContentType("image/png");
+                    photoFile.setTenant(tenant);
                     photo.setFile(photoFile);
                     photo.setReport(report);
+                    photo.setTenant(tenant);
                     photos.add(photo);
                 }
             }
@@ -66,6 +72,7 @@ public interface ReportMapper extends EntityMapper<ReportDTO, Report> {
         reportDTO.setId(report.getId());
         reportDTO.setDesc(report.getDesc());
         reportDTO.setReportDate(report.getReportDate());
+        reportDTO.setTenant(report.getTenant());
         if (report.getWorker() != null) {
             reportDTO.setWorkerId(report.getWorker().getId());
             reportDTO.setWorkerSurname(report.getWorker().getSurname());

@@ -1,7 +1,66 @@
 {
   "home": {
-    "title": "Cechini 2.1",
-    "subtitle": "Kontrola sprzedaży.",
+    "title": "Sales Control - costrella",
+    "subtext": "Monitoruj sprzedaż swoich produktów dzięki raportom tworzonym przez Przedstawicieli Handlowych w aplikacji mobilnej.",
+
+    "webPart": "Aplikacja webowa – dla menedżerów",
+    "webPart01": "Podgląd raportów i zamówień",
+    "webPart01sub": "Zamówienia i raporty są dostępne natychmiast po ich utworzeniu przez Przedstawiciela.",
+    "webPart02": "Merchandising",
+    "webPart02sub": "Przeglądaj zdjęcia dołączone do raportów.",
+    "webPart03": "Komunikacja z przedstawicielem",
+    "webPart03sub": "Wysyłaj powiadomienia bezpośrednio z aplikacji.",
+    "webPart04": "Statystyki",
+    "webPart04sub": "Które produkty sprzedają się najlepiej?",
+    "webPart05": "Integracja z hurtowniami",
+    "webPart05sub": "Zamówienia z aplikacji mobilnej są automatycznie przekazywane do hurtowni.",
+    "webPart06": "Zarządzanie produktami",
+    "webPart06sub": "Produkty i inne dane są synchronizowane z aplikacją mobilną.",
+
+    "mobilePart": "Aplikacja mobilna – dla Przedstawicieli Handlowych",
+    "mobilePart01": "Działanie offline",
+    "mobilePart01sub": "Twórz raporty i zamówienia nawet bez dostępu do internetu.",
+    "mobilePart02": "Raporty ze zdjęciami",
+    "mobilePart02sub": "Dodawaj zdjęcia bezpośrednio do raportów.",
+    "mobilePart03": "Dodawanie nowych lokalizacji",
+    "mobilePart03sub": "Łatwe dodawanie nowych sklepów.",
+    "mobilePart04": "Zamówienia produktów",
+    "mobilePart04sub": "Twórz i wysyłaj zamówienia bezpośrednio z aplikacji.",
+    "mobilePart05": "Podgląd własnych raportów",
+    "mobilePart05sub": "Przeglądaj wcześniej dodane raporty.",
+    "mobilePart06": "Odpowiedzi na komentarze menedżera",
+    "mobilePart06sub": "Reaguj na uwagi menedżera bezpośrednio w aplikacji.",
+
+    "needMore01": "Potrzebujesz funkcji dopasowanych do Twoich potrzeb?",
+    "needMore02": "To żaden problem",
+    "needMore03": "Aplikacja umożliwia wprowadzanie dedykowanych zmian – skontaktuj się z nami, aby omówić szczegóły.",
+
+    "startFree01": "Wypróbuj za darmo",
+    "startFree02": "Przez 3 miesiące korzystaj z aplikacji całkowicie bezpłatnie – zarówno jako Menedżer, jak i Przedstawiciel Handlowy.\nPod koniec okresu próbnego skontaktujemy się z Tobą poprzez e-mail, aby omówić dalsze kroki.",
+
+    "ourClients01": "Zaufali nam",
+    "cechini": "CECHINI",
+    "cechiniSub": "Firma Cechini na codzień używa tej aplikacji do kontroli sprzedaży",
+
+    "congrat01": "Gratulacje, jesteś zalogowany",
+    "congrat02": "Pod koniec okresu próbnego skontaktujemy się z Tobą",
+
+    "prices00": "Cennik",
+    "pricesMode01": "Standard",
+    "pricesMode01price": "400 PLN / m-c",
+    "pricesMode01msg01": "Płacisz za cały system",
+    "pricesMode01msg02": "Pełne wsparcie techniczne",
+    "pricesMode01msg03": "Zero ukrytych kosztów",
+    "pricesMode01msg04": "3 miesiące całkowicie bezpłatnie",
+
+    "question01": "Pytania dotyczące aplikacji kieruj na adres",
+
+    "shareApp01": "Gratulacje, jesteś zalogowany!",
+    "shareApp01": "Wyślij link do aplikacji przedstawicielowi",
+    "shareApp02": "I przekaż mu dane logowania",
+    "shareApp03": "Link do aplikacji",
+
+    "subtitle": "Kontrola sprzedaży",
     "logged": {
       "message": "Jesteś zalogowany jako użytkownik \"{{username}}\"."
     },

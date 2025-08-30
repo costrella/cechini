@@ -1,5 +1,7 @@
 package com.kostrzewa.cechini.ui.report.photo;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.Manifest;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -30,103 +32,143 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
-import static android.app.Activity.RESULT_OK;
-
 public class PhotosFragment extends Fragment {
     private static final String TAG = "PhotosFragment";
     int pictureNo;
-    Bitmap bitmap1, bitmap2, bitmap3;
+    Bitmap bitmap1, bitmap2, bitmap3, bitmap4, bitmap5, bitmap6;
     List<PhotoDTO> photosList = new ArrayList<>();
 
     private static final int ACTION_TAKE_PHOTO_6 = 6;
     public static final int PICK_IMAGE = 1;
 
-    @BindView(R.id.photo_iv1)
     ImageView imageView1;
-    @BindView(R.id.photo_iv2)
     ImageView imageView2;
-    @BindView(R.id.photo_iv3)
     ImageView imageView3;
+    ImageView imageView4;
+    ImageView imageView5;
+    ImageView imageView6;
 
-    @BindView(R.id.photo_rotate_left_btn1)
     Button photo_rotate_left_btn1;
-    @BindView(R.id.photo_rotate_left_btn2)
     Button photo_rotate_left_btn2;
-    @BindView(R.id.photo_rotate_left_btn3)
     Button photo_rotate_left_btn3;
+    Button photo_rotate_left_btn4;
+    Button photo_rotate_left_btn5;
+    Button photo_rotate_left_btn6;
 
-    @BindView(R.id.photo_rotate_right_btn1)
+
     Button photo_rotate_right_btn1;
-    @BindView(R.id.photo_rotate_right_btn2)
     Button photo_rotate_right_btn2;
-    @BindView(R.id.photo_rotate_right_btn3)
     Button photo_rotate_right_btn3;
+    Button photo_rotate_right_btn4;
+    Button photo_rotate_right_btn5;
+    Button photo_rotate_right_btn6;
 
 
-    @OnClick(R.id.photo_btn1)
+    Button photo_btn1;
     public void click1() {
         dispatchTakePictureIntent(1);
     }
 
-    @OnClick(R.id.photo_btn2)
+    Button photo_btn2;
     public void click2() {
         dispatchTakePictureIntent(2);
     }
 
-    @OnClick(R.id.photo_btn3)
+    Button photo_btn3;
     public void click3() {
         dispatchTakePictureIntent(3);
     }
 
-    @OnClick(R.id.photo_media_btn1)
+    Button photo_btn4;
+    public void click4() {
+        dispatchTakePictureIntent(4);
+    }
+
+    Button photo_btn5;
+    public void click5() {
+        dispatchTakePictureIntent(5);
+    }
+
+    Button photo_btn6;
+    public void click6() {
+        dispatchTakePictureIntent(6);
+    }
+
+    Button photo_media_btn1;
     public void click1Media() {
         goToMediaStore(1);
     }
 
-    @OnClick(R.id.photo_media_btn2)
+    Button photo_media_btn2;
     public void click2Media() {
         goToMediaStore(2);
     }
 
-    @OnClick(R.id.photo_media_btn3)
+    Button photo_media_btn3;
     public void click3Media() {
         goToMediaStore(3);
     }
+    Button photo_media_btn4;
+    public void click4Media() {
+        goToMediaStore(4);
+    }
+    Button photo_media_btn5;
+    public void click5Media() {
+        goToMediaStore(5);
+    }
+    Button photo_media_btn6;
+    public void click6Media() {
+        goToMediaStore(6);
+    }
 
-    @OnClick(R.id.photo_rotate_left_btn1)
     public void click1RotateLeft() {
         bitmap1 = rotate(1, -90, bitmap1, imageView1);
     }
 
-    @OnClick(R.id.photo_rotate_right_btn1)
     public void click1RotateRight() {
         bitmap1 = rotate(1, 90, bitmap1, imageView1);
     }
 
-
-    @OnClick(R.id.photo_rotate_left_btn2)
     public void click2RotateLeft() {
         bitmap2 = rotate(2, -90, bitmap2, imageView2);
     }
 
-    @OnClick(R.id.photo_rotate_right_btn2)
     public void click2RotateRight() {
         bitmap2 = rotate(2, 90, bitmap2, imageView2);
     }
 
 
-    @OnClick(R.id.photo_rotate_left_btn3)
     public void click3RotateLeft() {
         bitmap3 = rotate(3, -90, bitmap3, imageView3);
     }
 
-    @OnClick(R.id.photo_rotate_right_btn3)
     public void click3RotateRight() {
         bitmap3 = rotate(3, 90, bitmap3, imageView3);
+    }
+
+
+    public void click4RotateLeft() {
+        bitmap4 = rotate(3, -90, bitmap4, imageView4);
+    }
+
+    public void click4RotateRight() {
+        bitmap4 = rotate(3, 90, bitmap4, imageView4);
+    }
+
+    public void click5RotateLeft() {
+        bitmap5 = rotate(3, -90, bitmap5, imageView5);
+    }
+
+    public void click5RotateRight() {
+        bitmap5 = rotate(3, 90, bitmap5, imageView5);
+    }
+
+    public void click6RotateLeft() {
+        bitmap6 = rotate(3, -90, bitmap6, imageView6);
+    }
+
+    public void click6RotateRight() {
+        bitmap6 = rotate(3, 90, bitmap6, imageView6);
     }
 
 
@@ -194,6 +236,21 @@ public class PhotosFragment extends Fragment {
                 photo_rotate_left_btn3.setVisibility(View.VISIBLE);
                 photo_rotate_right_btn3.setVisibility(View.VISIBLE);
                 break;
+            case 4:
+                bitmap4 = setPicture(pictureNo, imageView4);
+                photo_rotate_left_btn4.setVisibility(View.VISIBLE);
+                photo_rotate_right_btn4.setVisibility(View.VISIBLE);
+                break;
+            case 5:
+                bitmap5 = setPicture(pictureNo, imageView5);
+                photo_rotate_left_btn5.setVisibility(View.VISIBLE);
+                photo_rotate_right_btn5.setVisibility(View.VISIBLE);
+                break;
+            case 6:
+                bitmap6 = setPicture(pictureNo, imageView6);
+                photo_rotate_left_btn6.setVisibility(View.VISIBLE);
+                photo_rotate_right_btn6.setVisibility(View.VISIBLE);
+                break;
         }
     }
 
@@ -244,17 +301,88 @@ public class PhotosFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_photos, container, false);
-        ButterKnife.bind(this, root);
+        imageView1 = root.findViewById(R.id.photo_iv1);
+        imageView2 = root.findViewById(R.id.photo_iv2);
+        imageView3 = root.findViewById(R.id.photo_iv3);
+        imageView4 = root.findViewById(R.id.photo_iv4);
+        imageView5 = root.findViewById(R.id.photo_iv5);
+        imageView6 = root.findViewById(R.id.photo_iv6);
+
+        photo_rotate_left_btn1 = root.findViewById(R.id.photo_rotate_left_btn1);
+        photo_rotate_left_btn2 = root.findViewById(R.id.photo_rotate_left_btn2);
+        photo_rotate_left_btn3 = root.findViewById(R.id.photo_rotate_left_btn3);
+        photo_rotate_left_btn4 = root.findViewById(R.id.photo_rotate_left_btn4);
+        photo_rotate_left_btn5 = root.findViewById(R.id.photo_rotate_left_btn5);
+        photo_rotate_left_btn6 = root.findViewById(R.id.photo_rotate_left_btn6);
+
+        photo_rotate_right_btn1 = root.findViewById(R.id.photo_rotate_right_btn1);
+        photo_rotate_right_btn2 = root.findViewById(R.id.photo_rotate_right_btn2);
+        photo_rotate_right_btn3 = root.findViewById(R.id.photo_rotate_right_btn3);
+        photo_rotate_right_btn4 = root.findViewById(R.id.photo_rotate_right_btn4);
+        photo_rotate_right_btn5 = root.findViewById(R.id.photo_rotate_right_btn5);
+        photo_rotate_right_btn6 = root.findViewById(R.id.photo_rotate_right_btn6);
+
+        photo_btn1 = root.findViewById(R.id.photo_btn1);
+        photo_btn2 = root.findViewById(R.id.photo_btn2);
+        photo_btn3 = root.findViewById(R.id.photo_btn3);
+        photo_btn4 = root.findViewById(R.id.photo_btn4);
+        photo_btn5 = root.findViewById(R.id.photo_btn5);
+        photo_btn6 = root.findViewById(R.id.photo_btn6);
+
+        photo_btn1.setOnClickListener(v -> click1());
+        photo_btn2.setOnClickListener(v -> click2());
+        photo_btn3.setOnClickListener(v -> click3());
+        photo_btn4.setOnClickListener(v -> click4());
+        photo_btn5.setOnClickListener(v -> click5());
+        photo_btn6.setOnClickListener(v -> click6());
+
+        photo_media_btn1 = root.findViewById(R.id.photo_media_btn1);
+        photo_media_btn2 = root.findViewById(R.id.photo_media_btn2);
+        photo_media_btn3 = root.findViewById(R.id.photo_media_btn3);
+        photo_media_btn4 = root.findViewById(R.id.photo_media_btn4);
+        photo_media_btn5 = root.findViewById(R.id.photo_media_btn5);
+        photo_media_btn6 = root.findViewById(R.id.photo_media_btn6);
+
+        photo_media_btn1.setOnClickListener(v -> click1Media());
+        photo_media_btn2.setOnClickListener(v -> click2Media());
+        photo_media_btn3.setOnClickListener(v -> click3Media());
+        photo_media_btn4.setOnClickListener(v -> click4Media());
+        photo_media_btn5.setOnClickListener(v -> click5Media());
+        photo_media_btn6.setOnClickListener(v -> click6Media());
+
+        photo_rotate_left_btn1.setOnClickListener(v -> click1RotateLeft());
+        photo_rotate_left_btn2.setOnClickListener(v -> click2RotateLeft());
+        photo_rotate_left_btn3.setOnClickListener(v -> click3RotateLeft());
+        photo_rotate_left_btn4.setOnClickListener(v -> click4RotateLeft());
+        photo_rotate_left_btn5.setOnClickListener(v -> click5RotateLeft());
+        photo_rotate_left_btn6.setOnClickListener(v -> click6RotateLeft());
+
+        photo_rotate_right_btn1.setOnClickListener(v -> click1RotateRight());
+        photo_rotate_right_btn2.setOnClickListener(v -> click2RotateRight());
+        photo_rotate_right_btn3.setOnClickListener(v -> click3RotateRight());
+        photo_rotate_right_btn4.setOnClickListener(v -> click4RotateRight());
+        photo_rotate_right_btn5.setOnClickListener(v -> click5RotateRight());
+        photo_rotate_right_btn6.setOnClickListener(v -> click6RotateRight());
+
         photo_rotate_left_btn1.setVisibility(View.INVISIBLE);
         photo_rotate_right_btn1.setVisibility(View.INVISIBLE);
         photo_rotate_left_btn2.setVisibility(View.INVISIBLE);
         photo_rotate_right_btn2.setVisibility(View.INVISIBLE);
         photo_rotate_left_btn3.setVisibility(View.INVISIBLE);
         photo_rotate_right_btn3.setVisibility(View.INVISIBLE);
+        photo_rotate_left_btn4.setVisibility(View.INVISIBLE);
+        photo_rotate_right_btn4.setVisibility(View.INVISIBLE);
+        photo_rotate_left_btn5.setVisibility(View.INVISIBLE);
+        photo_rotate_right_btn5.setVisibility(View.INVISIBLE);
+        photo_rotate_left_btn6.setVisibility(View.INVISIBLE);
+        photo_rotate_right_btn6.setVisibility(View.INVISIBLE);
 
         photosList.add(0, new PhotoDTO());
         photosList.add(1, new PhotoDTO());
         photosList.add(2, new PhotoDTO());
+        photosList.add(3, new PhotoDTO());
+        photosList.add(4, new PhotoDTO());
+        photosList.add(5, new PhotoDTO());
 
         return root;
     }

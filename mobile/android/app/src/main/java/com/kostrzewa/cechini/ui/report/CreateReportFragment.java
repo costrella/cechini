@@ -23,47 +23,58 @@ import com.kostrzewa.cechini.R;
 import com.kostrzewa.cechini.model.NoteDTO;
 import com.kostrzewa.cechini.model.NoteType;
 import com.kostrzewa.cechini.ui.mystores.dialog.AddCommentDialogFragment;
-import com.kostrzewa.cechini.ui.mystores.dialog.AddStoreDialogFragment;
 import com.kostrzewa.cechini.ui.report.data.ReportData;
 import com.kostrzewa.cechini.util.DateUtils;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class CreateReportFragment extends Fragment {
     private static final String TAG = "CreateReportFragment";
     private NavController navController;
 
-    @BindView(R.id.report_desc_et)
     EditText descET;
 
-    @BindView(R.id.reportId_tv)
     TextView reportId_tv;
 
-    @BindView(R.id.report_manager_et)
     EditText reportManagerET;
 
-    @BindView(R.id.report_photoCount_tv)
     TextView photoCountTV;
 
-    @BindView(R.id.btn_addComment)
     Button addCommentBtn;
 
-    @BindView(R.id.report_preview_photo_1)
+    Button btnReportReadyDesc1;
+    Button btnReportReadyDesc2;
+    Button btnReportReadyDesc3;
+    Button btnReportReadyDesc4;
+    Button btnReportReadyClean;
+
     ImageView reportPreviewPhoto1;
 
-    @BindView(R.id.report_preview_photo_2)
     ImageView reportPreviewPhoto2;
 
-    @BindView(R.id.report_preview_photo_3)
     ImageView reportPreviewPhoto3;
 
-    @OnClick(R.id.btn_addComment)
     void addComment() {
         new AddCommentDialogFragment(null, null, ReportData.reportDTO)
                 .show(getFragmentManager(), "sample");
     }
+
+    void addDesc1() {
+        descET.setText(descET.getText().toString() + getContext().getResources().getString(R.string.report_ready_desc_zamowienie) + " ");
+    }
+    void addDesc2() {
+        descET.setText(descET.getText().toString() + getContext().getResources().getString(R.string.report_ready_desc_rozmowa_handlowa) + " ");
+    }
+    void addDesc3() {
+        descET.setText(descET.getText().toString() + getContext().getResources().getString(R.string.report_ready_desc_merchandising) + " ");
+    }
+
+    void addDesc4() {
+        descET.setText(descET.getText().toString() + getContext().getResources().getString(R.string.report_ready_desc_dostawa_towaru) + " ");
+    }
+
+    void addDesc5() {
+        descET.setText("");
+    }
+
 
     private void init() {
         if (ReportData.reportDTO.isReadOnly()){
@@ -71,10 +82,20 @@ public class CreateReportFragment extends Fragment {
         } else {
             addCommentBtn.setVisibility(View.GONE);
             reportId_tv.setVisibility(View.GONE);
+            btnReportReadyDesc1.setVisibility(View.VISIBLE);
+            btnReportReadyDesc2.setVisibility(View.VISIBLE);
+            btnReportReadyDesc3.setVisibility(View.VISIBLE);
+            btnReportReadyDesc4.setVisibility(View.VISIBLE);
+            btnReportReadyClean.setVisibility(View.VISIBLE);
         }
     }
 
     private void fillDataReadOnly() {
+        btnReportReadyDesc1.setVisibility(View.GONE);
+        btnReportReadyDesc2.setVisibility(View.GONE);
+        btnReportReadyDesc3.setVisibility(View.GONE);
+        btnReportReadyDesc4.setVisibility(View.GONE);
+        btnReportReadyClean.setVisibility(View.GONE);
         if (ReportData.reportDTO.getId() != null) {
             reportId_tv.setText("ID: " + ReportData.reportDTO.getId());
             reportId_tv.setVisibility(View.VISIBLE);
@@ -82,7 +103,7 @@ public class CreateReportFragment extends Fragment {
             reportId_tv.setVisibility(View.GONE);
         }
 
-        descET.setText("Mój opis: " + ReportData.reportDTO.getDesc() != null ? ReportData.reportDTO.getDesc() : "");
+        descET.setText(getContext().getResources().getString(R.string.report_my_desc) + " " + ReportData.reportDTO.getDesc() != null ? ReportData.reportDTO.getDesc() : "");
         descET.setEnabled(false);
 
         if (ReportData.reportDTO.getNotes() != null && !ReportData.reportDTO.getNotes().isEmpty()) {
@@ -90,20 +111,22 @@ public class CreateReportFragment extends Fragment {
             int i = 0;
             for (NoteDTO note : ReportData.reportDTO.getNotes()) {
                 if (i > 0) comments.append("\n---------------\n");
-                comments.append(note.getNoteType().equals(NoteType.BY_MANGER) ? "od Managera:\n " : "od Ciebie:\n");
+                comments.append(note.getNoteType().equals(NoteType.BY_MANGER)
+                        ? getContext().getResources().getString(R.string.comment_from_manager)+"\n "
+                        : getContext().getResources().getString(R.string.comment_from_you)+ "\n");
                 comments.append(DateUtils.parse(note.getDate()));
                 comments.append("\n");
                 comments.append(note.getValue());
                 i++;
             }
-            reportManagerET.setText("Komentarze: \n\n" + comments);
+            reportManagerET.setText(getContext().getResources().getString(R.string.report_comments) + "\n\n" + comments);
         } else {
             reportManagerET.setText("");
         }
         reportManagerET.setEnabled(false);
         reportManagerET.setVisibility(View.VISIBLE);
 
-        photoCountTV.setText("liczba przesłanych zdjęć: " + ReportData.reportDTO.getPhotosCount());
+        photoCountTV.setText(getContext().getResources().getString(R.string.report_photos_sent) + " " + ReportData.reportDTO.getPhotosCount());
         photoCountTV.setEnabled(false);
 
         if (ReportData.reportDTO.getPhotos() != null
@@ -160,7 +183,27 @@ public class CreateReportFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_report_create, container, false);
-        ButterKnife.bind(this, root);
+        descET= root.findViewById(R.id.report_desc_et);
+        reportId_tv= root.findViewById(R.id.reportId_tv);
+        reportManagerET= root.findViewById(R.id.report_manager_et);
+        photoCountTV= root.findViewById(R.id.report_photoCount_tv);
+        addCommentBtn= root.findViewById(R.id.btn_addComment);
+        btnReportReadyDesc1= root.findViewById(R.id.btn_report_readyDesc1);
+        btnReportReadyDesc2= root.findViewById(R.id.btn_report_readyDesc2);
+        btnReportReadyDesc3= root.findViewById(R.id.btn_report_readyDesc3);
+        btnReportReadyDesc4= root.findViewById(R.id.btn_report_readyDesc4);
+        btnReportReadyClean= root.findViewById(R.id.btn_report_readyDesc_clean);
+        reportPreviewPhoto1= root.findViewById(R.id.report_preview_photo_1);
+        reportPreviewPhoto2= root.findViewById(R.id.report_preview_photo_2);
+        reportPreviewPhoto3= root.findViewById(R.id.report_preview_photo_3);
+        addCommentBtn.setOnClickListener(v -> addComment());
+        btnReportReadyDesc1.setOnClickListener(v -> addDesc1());
+        btnReportReadyDesc2.setOnClickListener(v -> addDesc2());
+        btnReportReadyDesc3.setOnClickListener(v -> addDesc3());
+        btnReportReadyDesc4.setOnClickListener(v -> addDesc4());
+        btnReportReadyClean.setOnClickListener(v -> addDesc5());
+
+
         init();
         navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
         descET.addTextChangedListener(new TextWatcher() {

@@ -34,7 +34,7 @@
                         <a [routerLink]="['/report', order.reportId, 'view']">zobacz</a>
                     </div>
                     <div *ngIf="!order.reportId">
-                        <span>brak</span>
+                        <span jhiTranslate="cechiniApp.order.noOrder">no order</span>
                     </div>
                 </dd>
                 <!-- <dt><span jhiTranslate="cechiniApp.order.comment">Comment</span></dt>

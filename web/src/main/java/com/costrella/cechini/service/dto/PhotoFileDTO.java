@@ -1,5 +1,7 @@
 package com.costrella.cechini.service.dto;
 
+import com.costrella.cechini.domain.Tenant;
+
 import java.io.Serializable;
 import javax.persistence.Lob;
 
@@ -7,14 +9,14 @@ import javax.persistence.Lob;
  * A DTO for the {@link com.costrella.cechini.domain.PhotoFile} entity.
  */
 public class PhotoFileDTO implements Serializable {
-    
+
     private Long id;
 
     @Lob
     private byte[] value;
 
     private String valueContentType;
-    
+
     public Long getId() {
         return id;
     }
@@ -37,6 +39,16 @@ public class PhotoFileDTO implements Serializable {
 
     public void setValueContentType(String valueContentType) {
         this.valueContentType = valueContentType;
+    }
+
+    private Tenant tenant;
+
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
     }
 
     @Override

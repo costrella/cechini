@@ -3,6 +3,7 @@ package com.kostrzewa.cechini.data;
 import android.content.Context;
 import android.util.Log;
 
+import com.kostrzewa.cechini.R;
 import com.kostrzewa.cechini.data.events.MyStoreDownloadFailed;
 import com.kostrzewa.cechini.data.events.MyStoreDownloadSuccess;
 import com.kostrzewa.cechini.data.events.StoreEditSuccess;
@@ -35,7 +36,7 @@ public class StoreDataManagerImpl extends AbstractDataManager implements StoreDa
 
     @Override
     public void addNewStore(StoreDTO storeDTO) {
-        RetrofitClient.getInstance().getService().addStore(storeDTO).enqueue(new Callback<StoreDTO>() {
+        RetrofitClient.getInstance(getContext()).getService().addStore(storeDTO).enqueue(new Callback<StoreDTO>() {
             @Override
             public void onResponse(Call<StoreDTO> call, Response<StoreDTO> response) {
                 Log.d(TAG, "onResponse: " + response.code());
@@ -61,7 +62,7 @@ public class StoreDataManagerImpl extends AbstractDataManager implements StoreDa
                         JSONObject jObjError = new JSONObject(response.errorBody().string());
                         EventBus.getDefault().post(new StoreSentFailed(jObjError.getString("title")));
                     } catch (Exception e) {
-                        EventBus.getDefault().post(new StoreSentFailed("Błąd a01: " + response.code()));
+                        EventBus.getDefault().post(new StoreSentFailed(getContext().getResources().getString(R.string.error) + " a01: " + response.code()));
                     }
 
 
@@ -71,9 +72,9 @@ public class StoreDataManagerImpl extends AbstractDataManager implements StoreDa
             @Override
             public void onFailure(Call<StoreDTO> call, Throwable t) {
                 if (!isNetworkConnected()) {
-                    EventBus.getDefault().post(new StoreSentFailed("Ta operacja wymaga internetu!"));
+                    EventBus.getDefault().post(new StoreSentFailed(getContext().getResources().getString(R.string.internet_needed)));
                 } else {
-                    EventBus.getDefault().post(new StoreSentFailed("błąd a02"));
+                    EventBus.getDefault().post(new StoreSentFailed(getContext().getResources().getString(R.string.error) + " a02"));
                 }
             }
         });
@@ -81,7 +82,7 @@ public class StoreDataManagerImpl extends AbstractDataManager implements StoreDa
 
     @Override
     public void editStore(StoreDTO storeDTO, StoreDTO old) {
-        RetrofitClient.getInstance().getService().editStore(storeDTO).enqueue(new Callback<StoreDTO>() {
+        RetrofitClient.getInstance(getContext()).getService().editStore(storeDTO).enqueue(new Callback<StoreDTO>() {
             @Override
             public void onResponse(Call<StoreDTO> call, Response<StoreDTO> response) {
                 Log.d(TAG, "onResponse: " + response.code());
@@ -108,7 +109,7 @@ public class StoreDataManagerImpl extends AbstractDataManager implements StoreDa
                         JSONObject jObjError = new JSONObject(response.errorBody().string());
                         EventBus.getDefault().post(new StoreSentFailed(jObjError.getString("title")));
                     } catch (Exception e) {
-                        EventBus.getDefault().post(new StoreSentFailed("Błąd a01: " + response.code()));
+                        EventBus.getDefault().post(new StoreSentFailed(getContext().getResources().getString(R.string.error) +" a01: " + response.code()));
                     }
 
 
@@ -118,9 +119,9 @@ public class StoreDataManagerImpl extends AbstractDataManager implements StoreDa
             @Override
             public void onFailure(Call<StoreDTO> call, Throwable t) {
                 if (!isNetworkConnected()) {
-                    EventBus.getDefault().post(new StoreSentFailed("Ta operacja wymaga internetu!"));
+                    EventBus.getDefault().post(new StoreSentFailed(getContext().getResources().getString(R.string.internet_needed)));
                 } else {
-                    EventBus.getDefault().post(new StoreSentFailed("błąd a02"));
+                    EventBus.getDefault().post(new StoreSentFailed(getContext().getResources().getString(R.string.error) + " a02"));
                 }
             }
         });
@@ -138,7 +139,7 @@ public class StoreDataManagerImpl extends AbstractDataManager implements StoreDa
 
     @Override
     public void downloadMyStores() {
-        RetrofitClient.getInstance().getService().getMyStores(workerDataManager.getWorker().getId())
+        RetrofitClient.getInstance(getContext()).getService().getMyStores(workerDataManager.getWorker().getId())
                 .enqueue(new Callback<List<StoreDTO>>() {
                     @Override
                     public void onResponse(Call<List<StoreDTO>> call, Response<List<StoreDTO>> response) {

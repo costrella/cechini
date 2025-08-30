@@ -1,14 +1,9 @@
 package com.costrella.cechini.security;
 
 import com.costrella.cechini.domain.PersistentToken;
-import com.costrella.cechini.repository.PersistentTokenRepository;
 import com.costrella.cechini.repository.UserRepository;
-
-
 import io.github.jhipster.config.JHipsterProperties;
 import io.github.jhipster.security.PersistentTokenCache;
-import io.github.jhipster.security.RandomUtil;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
@@ -17,12 +12,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.rememberme.*;
 import org.springframework.stereotype.Service;
+import com.costrella.cechini.repository.PersistentTokenRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Optional;
 
 /**
  * Custom implementation of Spring Security's RememberMeServices.
@@ -99,7 +96,7 @@ public class PersistentTokenRememberMeServices extends
                 // Token also matches, so login is valid. Update the token value, keeping the *same* series number.
                 log.debug("Refreshing persistent login token for user '{}', series '{}'", login, token.getSeries());
                 token.setTokenDate(LocalDate.now());
-                token.setTokenValue(RandomUtil.generateRandomAlphanumericString());
+                token.setTokenValue(RandomUtil.generateTokenData());
                 token.setIpAddress(request.getRemoteAddr());
                 token.setUserAgent(request.getHeader("User-Agent"));
                 try {
@@ -124,9 +121,9 @@ public class PersistentTokenRememberMeServices extends
         log.debug("Creating new persistent login for user {}", login);
         PersistentToken token = userRepository.findOneByLogin(login).map(u -> {
             PersistentToken t = new PersistentToken();
-            t.setSeries(RandomUtil.generateRandomAlphanumericString());
+            t.setSeries(RandomUtil.generateSeriesData());
             t.setUser(u);
-            t.setTokenValue(RandomUtil.generateRandomAlphanumericString());
+            t.setTokenValue(RandomUtil.generateTokenData());
             t.setTokenDate(LocalDate.now());
             t.setIpAddress(request.getRemoteAddr());
             t.setUserAgent(request.getHeader("User-Agent"));

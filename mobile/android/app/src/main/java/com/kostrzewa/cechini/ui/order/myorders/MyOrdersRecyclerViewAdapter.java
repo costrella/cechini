@@ -41,8 +41,8 @@ public class MyOrdersRecyclerViewAdapter extends RecyclerView.Adapter<MyOrdersRe
         holder.mItem = mValues.get(position);
         holder.mIdView.setText("" + mValues.get(position).getId());
         holder.mContentView.setText(mValues.get(position).getStoreName()
-                + ", hurtownia: " + mValues.get(position).getWarehouseName()
-                + ", pozycje: " + mValues.get(position).getOrderItems().size());
+                + ", " + context.getResources().getString(R.string.warehouse) + mValues.get(position).getWarehouseName()
+                + ", " + context.getResources().getString(R.string.items) + mValues.get(position).getOrderItems().size());
         //todo dataaa
 //        if (holder.mItem.getManagerNote() != null) {
 //            holder.managerNoteTV.setVisibility(View.VISIBLE);

@@ -36,6 +36,17 @@ public class Photo implements Serializable {
     @JsonIgnoreProperties(value = "photos", allowSetters = true)
     private Report report;
 
+    @ManyToOne
+    private Tenant tenant;
+
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
+    }
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;

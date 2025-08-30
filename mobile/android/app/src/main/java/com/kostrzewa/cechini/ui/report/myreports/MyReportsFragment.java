@@ -1,5 +1,8 @@
 package com.kostrzewa.cechini.ui.report.myreports;
 
+import static com.kostrzewa.cechini.util.Constants.IS_UNREAD_REPORTS_FRAGMENT;
+import static com.kostrzewa.cechini.util.Constants.STORE_DTO;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,21 +27,11 @@ import com.kostrzewa.cechini.data.events.UnreadReportsDownloadFailed;
 import com.kostrzewa.cechini.data.events.UnreadReportsDownloadSuccess;
 import com.kostrzewa.cechini.model.ReportDTOWithPhotos;
 import com.kostrzewa.cechini.model.StoreDTO;
-import com.kostrzewa.cechini.rest.RetrofitClient;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-import static com.kostrzewa.cechini.util.Constants.IS_UNREAD_REPORTS_FRAGMENT;
-import static com.kostrzewa.cechini.util.Constants.STORE_DTO;
 
 public class MyReportsFragment extends Fragment {
     private ReportDataManager reportDataManager;
@@ -49,10 +42,8 @@ public class MyReportsFragment extends Fragment {
 
     private boolean isUnreadReportsMode = false;
 
-    @BindView(R.id.fragment_myreports_recyclerView)
     RecyclerView recyclerView;
 
-    @BindView(R.id.fragment_mystores_progressBar)
     ProgressBar progressBar;
 
     public MyReportsFragment() {
@@ -81,7 +72,8 @@ public class MyReportsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_myreports_list, container, false);
-        ButterKnife.bind(this, view);
+        recyclerView = view.findViewById(R.id.fragment_myreports_recyclerView);
+        progressBar = view.findViewById(R.id.fragment_mystores_progressBar);
 
         if(getArguments() != null){
             isUnreadReportsMode = getArguments().getBoolean(IS_UNREAD_REPORTS_FRAGMENT);
@@ -91,7 +83,7 @@ public class MyReportsFragment extends Fragment {
             isReportsOfStoreMode = true;
             StoreDTO storeDTO = (StoreDTO) getArguments().getSerializable(STORE_DTO);
             reportDataManager.downloadMyReportsByStoreId(workerDataManager.getWorker().getId(), storeDTO.getId());
-            ((MainActivity) getActivity()).getSupportActionBar().setTitle("Raporty sklepu: " + storeDTO.getName() + " " + storeDTO.getAddress());
+            ((MainActivity) getActivity()).getSupportActionBar().setTitle(getContext().getResources().getString(R.string.report_of_store) + " " + storeDTO.getName() + " " + storeDTO.getAddress());
 
         } else {
             isReportsOfStoreMode = false;

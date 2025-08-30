@@ -16,7 +16,7 @@
             android:id="@+id/fragment_mystores_dialog_storeGroupSpinner_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Grupa sklepu: " />
+            android:text="@string/store_group" />
 
         <Spinner
             android:id="@+id/fragment_mystores_dialog_storeGroupSpinner"
@@ -36,7 +36,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nazwa: " />
+            android:text="@string/store_name" />
 
         <EditText
             android:id="@+id/fragment_mystores_dialog_store_nameET"
@@ -55,7 +55,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Adres: " />
+            android:text="@string/store_address" />
 
         <EditText
             android:id="@+id/fragment_mystores_dialog_store_addressET"
@@ -73,7 +73,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="NIP: " />
+            android:text="@string/store_nip" />
 
         <EditText
             android:id="@+id/fragment_mystores_dialog_store_nipET"
@@ -91,7 +91,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pole NIP jest niewymagane, natomiast będzie potrzebne przy ewentualnym tworzeniu zamówienia " />
+            android:text="@string/store_nip_req" />
 
     </LinearLayout>
 
@@ -109,7 +109,7 @@
             android:background="@color/colorPrimary"
             android:textColor="@color/white"
             android:layout_weight="1"
-            android:text="DODAJ " />
+            android:text="@string/store_add" />
 
         <ProgressBar
             android:id="@+id/fragment_mystores_dialog_store_progressBar"

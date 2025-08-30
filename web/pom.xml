@@ -5,9 +5,9 @@
 
     <groupId>com.costrella.cechini</groupId>
     <artifactId>cechini</artifactId>
-    <version>1.0.16</version>
+    <version>1.1.0003</version>
     <packaging>jar</packaging>
-    <name>Cechini</name>
+    <name>Sales Control</name>
 
     <repositories>
         <!-- jhipster-needle-maven-repository -->
@@ -272,10 +272,10 @@
             <groupId>org.zalando</groupId>
             <artifactId>problem-spring-web</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-websocket</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-websocket</artifactId>-->
+<!--        </dependency>-->
         <!-- Spring Cloud -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

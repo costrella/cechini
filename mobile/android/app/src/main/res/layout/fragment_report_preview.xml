@@ -19,7 +19,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Opis: "
+                android:text="@string/preview_desc"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"></TextView>
 
@@ -40,7 +40,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Zdjęcia: "
+                android:text="@string/preview_photos"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"></TextView>
 
@@ -62,7 +62,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Zamówienie: "
+                android:text="@string/preview_order"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"></TextView>
 
@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:visibility="gone"
-            android:text="System wyśle również e-mail z zamówieniem na odpowiedni adres"
+            android:text="@string/preview_mail"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"></TextView>
 
@@ -90,7 +90,7 @@
             android:layout_height="50dp"
             android:layout_margin="5dp"
             android:background="@color/colorPrimary"
-            android:text="Wyślij"
+            android:text="@string/preview_send"
             android:textColor="@color/white"></Button>
 
 

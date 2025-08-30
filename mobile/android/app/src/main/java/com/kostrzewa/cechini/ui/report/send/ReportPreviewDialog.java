@@ -24,15 +24,12 @@ import com.kostrzewa.cechini.data.ReportDataManagerImpl;
 import com.kostrzewa.cechini.data.events.ReportSentFailed;
 import com.kostrzewa.cechini.data.events.ReportSentSuccess;
 import com.kostrzewa.cechini.model.OrderItemDTO;
+import com.kostrzewa.cechini.model.PhotoDTO;
 import com.kostrzewa.cechini.model.StoreDTO;
 import com.kostrzewa.cechini.ui.report.data.ReportData;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class ReportPreviewDialog extends DialogFragment {
     Handler handler = new Handler();
@@ -40,25 +37,18 @@ public class ReportPreviewDialog extends DialogFragment {
     private final StoreDTO storeDTO;
     private ReportDataManager reportDataManager;
 
-    @BindView(R.id.fragment_report_preview_desc)
     TextView descTV;
 
-    @BindView(R.id.fragment_report_preview_photoCount)
     TextView photoCountTV;
 
-    @BindView(R.id.fragment_report_preview_order)
     TextView orderTV;
 
-    @BindView(R.id.fragment_report_preview_mailInfoTV)
     TextView mailInfoTV;
 
-    @BindView(R.id.fragment_report_preview_sendBtn)
     Button sendBtn;
 
-    @BindView(R.id.fragment_report_previewProgressBar)
     ProgressBar progressBar;
 
-    @OnClick(R.id.fragment_report_preview_sendBtn)
     void send() {
         progressBar.setVisibility(View.VISIBLE);
         sendBtn.setVisibility(View.GONE);
@@ -76,55 +66,70 @@ public class ReportPreviewDialog extends DialogFragment {
         form =
                 getActivity().getLayoutInflater()
                         .inflate(R.layout.fragment_report_preview, null);
-        ButterKnife.bind(this, form);
+        descTV = form.findViewById(R.id.fragment_report_preview_desc);
+        photoCountTV = form.findViewById(R.id.fragment_report_preview_photoCount);
+        orderTV = form.findViewById(R.id.fragment_report_preview_order);
+        mailInfoTV = form.findViewById(R.id.fragment_report_preview_mailInfoTV);
+        sendBtn = form.findViewById(R.id.fragment_report_preview_sendBtn);
+        progressBar = form.findViewById(R.id.fragment_report_previewProgressBar);
+        sendBtn.setOnClickListener(v -> send());
+
+
         reportDataManager = new ReportDataManagerImpl(getContext());
         init();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        return (builder.setTitle("Podgląd").setView(form)
+        return (builder.setTitle(getContext().getResources().getString(R.string.report_preview)).setView(form)
 //                .setNeutralButton(getContext().getResources().getText(R.string.close), null)
                 .create());
     }
 
 
     private void init() {
-        String desc = ReportData.reportDTO.getDesc() != null ? ReportData.reportDTO.getDesc() : "brak";
-        descTV.setText("" + desc);
-        photoCountTV.setText("" + ReportData.reportDTO.getPhotosList().size());
+        String desc = ReportData.reportDTO.getDesc() != null ? ReportData.reportDTO.getDesc() : getContext().getResources().getString(R.string.empty);
+        descTV.setText(" " + desc);
         orderTV.setText("" + genarateOrderPreview());
+        int count = 0;
+        for(PhotoDTO photoDTO : ReportData.reportDTO.getPhotosList()){
+            if(photoDTO.getPhotoFileDTO() != null){
+                count++;
+            }
+        }
+        photoCountTV.setText(" " + count);
+
     }
 
     private String genarateOrderPreview() {
         if (ReportData.reportDTO.getOrderDTO().getOrderItems().isEmpty()) {
             mailInfoTV.setVisibility(View.GONE);
-            return "brak";
+            return getContext().getResources().getString(R.string.empty);
         } else {
             mailInfoTV.setVisibility(View.VISIBLE);
             String warehouseMail = ReportData.reportDTO.getOrderDTO().getWarehouseMail();
             if (!TextUtils.isEmpty(warehouseMail)) {
                 if (TextUtils.isEmpty(storeDTO.getNip())) {
-                    mailInfoTV.setText("Z powodu braku NIP, system nie wyśle e-mail z zamówieniem na adres: " + warehouseMail);
+                    mailInfoTV.setText(getContext().getResources().getString(R.string.report_nip_not_mail) + " " + warehouseMail);
                     mailInfoTV.setTextColor(getResources().getColor(R.color.red));
                 } else {
-                    mailInfoTV.setText("System wyśle również e-mail z zamówieniem na adres hurtowni: " + warehouseMail);
+                    mailInfoTV.setText(getContext().getResources().getString(R.string.report_nip_mail) + " " + warehouseMail);
                     mailInfoTV.setTextColor(getResources().getColor(R.color.colorPrimary));
                 }
             } else {
-                mailInfoTV.setText("Brak adresu mailowego dla wybranej Hurtowni");
-                mailInfoTV.setTextColor(getResources().getColor(R.color.recycler_view_empty_text));
+                mailInfoTV.setText(getContext().getResources().getString(R.string.report_not_mail_warehouse));
+                mailInfoTV.setTextColor(getContext().getResources().getColor(R.color.recycler_view_empty_text));
             }
 
         }
         String value = "";
         int i = 1;
         for (OrderItemDTO item : ReportData.reportDTO.getOrderDTO().getOrderItems()) {
-            value += ""+i + ") " + item.getProductName() + "\n\t" + item.getProductCapacity() + "L" + ", zgrzewek: " + item.getPackCount() + "\n";
+            value += ""+i + ") " + item.getProductName() + "\n\t\t\t" + getContext().getResources().getString(R.string.count2) + " " + item.getPackCount() + "\n";
             i++;
         }
-        value += "\nSklep: " + storeDTO.getName() + "\n\tadres: " + storeDTO.getAddress();
-        value += "\nSklep NIP: " + storeDTO.getNip();
+        value += "\n" + getContext().getResources().getString(R.string.store_name) + " " + storeDTO.getName() + "\n\t" + getContext().getResources().getString(R.string.store_address) + " " + storeDTO.getAddress();
+        value += "\n" + getContext().getResources().getString(R.string.store_nip) + " " + (storeDTO.getNip() != null ? storeDTO.getNip() : "");
         value += "\n";
-        value += "\nHurtownia: " + ReportData.reportDTO.getOrderDTO().getWarehouseName();
+        value += "\n" + getContext().getResources().getString(R.string.warehouse)   + " " + ReportData.reportDTO.getOrderDTO().getWarehouseName();
         return value;
     }
 

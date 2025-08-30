@@ -117,6 +117,7 @@ public class ReportResource {
         newNote.setDate(Instant.now());
         newNote.setValue(fromMobile ? noteDTO.getValue() : noteDTO.getManagerNote());
         newNote.setNoteType(fromMobile ? NoteType.BY_WORKER : NoteType.BY_MANGER);
+        newNote.setTenant(reportEntity.getTenant());
         reportEntity.setReadByManager(!fromMobile);
         reportEntity.setReadByWorker(fromMobile);
         reportEntity.addNote(newNote);
@@ -210,8 +211,6 @@ public class ReportResource {
     @GetMapping(value = "/reports/worker/{workerId}/store/{storeId}", params = {"fromDate", "toDate"})
     public ResponseEntity<List<ReportDTO>> getReportsByWorkerAndStore(Pageable pageable, @PathVariable Long workerId, @PathVariable Long storeId,
                                                                       @RequestParam(value = "fromDate") LocalDate fromDate, @RequestParam(value = "toDate") LocalDate toDate) {
-        log.debug("from date:" + fromDate);
-        log.debug("from todate:" + toDate);
         Instant from = fromDate.atStartOfDay(ZoneId.systemDefault()).toInstant();
         Instant to = toDate.atStartOfDay(ZoneId.systemDefault()).plusDays(1).toInstant();
 

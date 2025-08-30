@@ -3,6 +3,7 @@ package com.costrella.cechini.service.dto;
 import com.costrella.cechini.config.Constants;
 
 import com.costrella.cechini.domain.Authority;
+import com.costrella.cechini.domain.Tenant;
 import com.costrella.cechini.domain.User;
 
 import javax.validation.constraints.*;
@@ -50,6 +51,10 @@ public class UserDTO {
 
     private Set<String> authorities;
 
+    private Long tenantId;
+
+    private Tenant tenant;
+
     public UserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -70,6 +75,27 @@ public class UserDTO {
         this.authorities = user.getAuthorities().stream()
             .map(Authority::getName)
             .collect(Collectors.toSet());
+        if (user.getTenant() != null) {
+            this.tenant = user.getTenant();
+            this.tenantId = user.getTenant().getId();
+        }
+
+    }
+
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
+    }
+
+    public Long getTenantId() {
+        return tenantId;
+    }
+
+    public void setTenantId(Long tenantId) {
+        this.tenantId = tenantId;
     }
 
     public Long getId() {

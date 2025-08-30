@@ -34,8 +34,8 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:postgresql://localhost:5432/cechini
-    username: cechini
-    password:
+    username: costrella
+    password: costrella
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -45,12 +45,6 @@ spring:
   # Replace by 'prod, faker' to add the faker context and have sample data loaded in production
   liquibase:
     contexts: prod
-  mail:
-    host: s151.cyber-folks.pl
-    port: 587
-    username: cechini.zamowienia@misiekmk.linuxpl.info
-    password: 1qaz@WSX3edc
-    protocol: smtp
 
   thymeleaf:
     cache: true
@@ -96,7 +90,8 @@ jhipster:
       # security key (this key should be unique for your application, and kept secret)
       key: 7166583b8f9b3d2b5e89f8e751fe8e144608bd4a3cc9126aba5da9278df1223e24af48f5a5d13908b61f63ccdb59aafaf321
   mail: # specific JHipster mail property, for standard properties see MailProperties
-    base-url: http://my-server-url-to-change # Modify according to your server's URL
+    base-url: https://salescontrol.costrella.com # Modify according to your server's URL
+  #     base-url: http://194.42.111.53:8089
   metrics:
     logs: # Reports metrics in the logs
       enabled: false
@@ -122,4 +117,4 @@ jhipster:
 
 # application:
 application:
-  cc: ula.bukowska@cechini-muszyna.pl
+  cc: misiek.mk@gmail.com

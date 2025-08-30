@@ -1,5 +1,6 @@
 package com.kostrzewa.cechini.rest;
 
+import android.content.Context;
 import android.util.Base64;
 
 import com.google.gson.Gson;
@@ -11,10 +12,10 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-import com.kostrzewa.cechini.BuildConfig;
 
 import java.lang.reflect.Type;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -22,14 +23,14 @@ public class RetrofitClient {
     private static RetrofitClient instance;
     private CechiniAPI service;
 
-    public static RetrofitClient getInstance() {
+    public static RetrofitClient getInstance(Context context) {
         if (instance == null) {
-            instance = new RetrofitClient();
+            instance = new RetrofitClient(context);
         }
         return instance;
     }
 
-    RetrofitClient() {
+    RetrofitClient(Context context) {
         Gson gson = new GsonBuilder()
                 .registerTypeHierarchyAdapter(byte[].class, new ByteArrayToBase64TypeAdapter())
 //                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
@@ -37,9 +38,18 @@ public class RetrofitClient {
                 .create();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BuildConfig.SERVER_URL)
-//                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl("https://salescontrol.costrella.ovh/api/")
+//                .baseUrl("http://10.0.2.2:8080/api/")
 
+                //https://costrella.ovh/api/"
+                //.baseUrl("http://194.42.111.53:8089/api/")
+                //http://10.0.2.2:8080/api/
+//                .baseUrl("http://192.168.0.104:8080/api/")
+//                .baseUrl(BuildConfig.SERVER_URL)
+//                .addConverterFactory(GsonConverterFactory.create())
+                .client(
+                        new OkHttpClient().newBuilder().authenticator(new CustomAuth(context))
+                                .cookieJar(new SessionCookieJar(context)).build())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 

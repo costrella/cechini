@@ -5,6 +5,10 @@ import { RouterModule } from '@angular/router';
   imports: [
     RouterModule.forChild([
       {
+        path: 'tenant',
+        loadChildren: () => import('./tenant/tenant.module').then(m => m.CechiniTenantModule),
+      },
+      {
         path: 'worker',
         loadChildren: () => import('./worker/worker.module').then(m => m.CechiniWorkerModule),
       },

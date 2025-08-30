@@ -1,7 +1,7 @@
 {
-  "name": "cechini",
+  "name": "sales-control",
   "version": "0.0.1-SNAPSHOT",
-  "description": "Description for cechini",
+  "description": "Description for sales-control",
   "private": true,
   "license": "UNLICENSED",
   "cacheDirectories": [
@@ -45,7 +45,7 @@
     "@openapitools/openapi-generator-cli": "1.0.13-4.3.1",
     "@types/chart.js": "^2.9.32",
     "@types/jest": "26.0.3",
-    "@types/node": "13.13.4",
+    "@types/node": "^13.13.52",
     "@types/sockjs-client": "1.1.1",
     "@typescript-eslint/eslint-plugin": "2.30.0",
     "@typescript-eslint/eslint-plugin-tslint": "2.30.0",

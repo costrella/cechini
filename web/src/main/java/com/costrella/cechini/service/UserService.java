@@ -2,9 +2,11 @@ package com.costrella.cechini.service;
 
 import com.costrella.cechini.config.Constants;
 import com.costrella.cechini.domain.Authority;
+import com.costrella.cechini.domain.Tenant;
 import com.costrella.cechini.domain.User;
 import com.costrella.cechini.repository.AuthorityRepository;
 import com.costrella.cechini.repository.PersistentTokenRepository;
+import com.costrella.cechini.repository.TenantRepository;
 import com.costrella.cechini.repository.UserRepository;
 import com.costrella.cechini.security.AuthoritiesConstants;
 import com.costrella.cechini.security.SecurityUtils;
@@ -19,6 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -41,17 +44,25 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    private final TenantRepository tenantRepository;
+
     private final PasswordEncoder passwordEncoder;
 
     private final PersistentTokenRepository persistentTokenRepository;
 
     private final AuthorityRepository authorityRepository;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, PersistentTokenRepository persistentTokenRepository, AuthorityRepository authorityRepository) {
+    private final ExampleDataService exampleDataService;
+
+
+
+    public UserService(UserRepository userRepository, TenantRepository tenantRepository, PasswordEncoder passwordEncoder, PersistentTokenRepository persistentTokenRepository, AuthorityRepository authorityRepository, ExampleDataService exampleDataService) {
         this.userRepository = userRepository;
+        this.tenantRepository = tenantRepository;
         this.passwordEncoder = passwordEncoder;
         this.persistentTokenRepository = persistentTokenRepository;
         this.authorityRepository = authorityRepository;
+        this.exampleDataService = exampleDataService;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -59,12 +70,27 @@ public class UserService {
         return userRepository.findOneByActivationKey(key)
             .map(user -> {
                 // activate given user for the registration key.
+
+                Tenant newTenant = new Tenant();
+                List<Tenant> tenants = tenantRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+                if(tenants != null && !tenants.isEmpty()) {
+                    newTenant.setId(tenants.get(0).getId() + 1);
+                } else {
+                    newTenant.setId(1L);
+                }
+                newTenant = tenantRepository.save(newTenant);
+
+                user.setTenant(newTenant);
                 user.setActivated(true);
                 user.setActivationKey(null);
+
+                exampleDataService.createReportWithWorkerAndOrder(newTenant, user.getEmail());
                 log.debug("Activated user: {}", user);
                 return user;
             });
     }
+
+
 
     public Optional<User> completePasswordReset(String newPassword, String key) {
         log.debug("Reset user password for reset key {}", key);
@@ -187,6 +213,7 @@ public class UserService {
                 user.setImageUrl(userDTO.getImageUrl());
                 user.setActivated(userDTO.isActivated());
                 user.setLangKey(userDTO.getLangKey());
+                user.setTenant(userDTO.getTenant());
                 Set<Authority> managedAuthorities = user.getAuthorities();
                 managedAuthorities.clear();
                 userDTO.getAuthorities().stream()

@@ -40,6 +40,7 @@ public class ProductService {
      * @param productDTO the entity to save.
      * @return the persisted entity.
      */
+    //ASPECT ADDED
     public ProductDTO save(ProductDTO productDTO) {
         log.debug("Request to save Product : {}", productDTO);
         Product product = productMapper.toEntity(productDTO);
@@ -53,6 +54,7 @@ public class ProductService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
+    //ASPECT ADDED to Repository
     @Transactional(readOnly = true)
     public Page<ProductDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Products");
@@ -60,6 +62,7 @@ public class ProductService {
             .map(productMapper::toDto);
     }
 
+    //ASPECT ADDED to Repository
     @Transactional(readOnly = true)
     public List<ProductDTO> findAll() {
         return productRepository.findAll().stream()
@@ -73,6 +76,7 @@ public class ProductService {
      * @param id the id of the entity.
      * @return the entity.
      */
+    //ASPECT ADDED to Repository
     @Transactional(readOnly = true)
     public Optional<ProductDTO> findOne(Long id) {
         log.debug("Request to get Product : {}", id);
@@ -85,6 +89,7 @@ public class ProductService {
      *
      * @param id the id of the entity.
      */
+    //ASPECT ADDED
     public void delete(Long id) {
         log.debug("Request to delete Product : {}", id);
         productRepository.deleteById(id);

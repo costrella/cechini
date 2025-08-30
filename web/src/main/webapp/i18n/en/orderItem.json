@@ -17,7 +17,7 @@
         "title": "Order Item"
       },
       "artCount": "Art Count",
-      "packCount": "Pack Count",
+      "packCount": "Count",
       "product": "Product",
       "order": "Order"
     }

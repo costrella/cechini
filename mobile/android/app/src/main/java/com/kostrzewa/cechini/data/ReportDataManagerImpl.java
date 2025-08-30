@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Build;
 import android.util.Log;
 
+import com.kostrzewa.cechini.R;
 import com.kostrzewa.cechini.data.events.CommentAddedFailed;
 import com.kostrzewa.cechini.data.events.CommentAddedSuccess;
 import com.kostrzewa.cechini.data.events.MyReportsDownloadFailed;
@@ -43,14 +44,15 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
     @Override
     public void addNewComment(NoteDTO noteDTO) {
 
-        RetrofitClient.getInstance().getService().addCommentToReportMobile(noteDTO).enqueue(new Callback<Void>() {
+        RetrofitClient.getInstance(getContext()).getService().addCommentToReportMobile(noteDTO).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    EventBus.getDefault().post(new CommentAddedSuccess("Komentarz dodany!"));
+                    EventBus.getDefault().post(new CommentAddedSuccess(getContext().getResources().getString(R.string.comment_added)));
                 } else {
                     saveNotSentComment(noteDTO);
-                    EventBus.getDefault().post(new CommentAddedFailed("Komentarz NIE został dodany! Zapisano w pamięci! Kod błędu: " + response.code()));
+                    EventBus.getDefault().post(new CommentAddedFailed(getContext().getResources().getString(R.string.comment_not_added)
+                            + " " + getContext().getResources().getString(R.string.error) + response.code()));
 
                 }
             }
@@ -59,9 +61,10 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
             public void onFailure(Call<Void> call, Throwable t) {
                 saveNotSentComment(noteDTO);
                 if (!isNetworkConnected()) {
-                    EventBus.getDefault().post(new CommentAddedFailed("Ta operacja wymaga internetu! Zapisano w pamięci."));
+                    EventBus.getDefault().post(new CommentAddedFailed(getContext().getResources().getString(R.string.internet_needed)));
                 } else {
-                    EventBus.getDefault().post(new CommentAddedFailed("Wystąpił problem a11, Zapisano w pamięci"));
+                    EventBus.getDefault().post(new CommentAddedFailed(getContext().getResources().getString(R.string.error) + " a11 "
+                            + getContext().getResources().getString(R.string.memory_saved)));
                 }
             }
         });
@@ -73,7 +76,7 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
             reportDTO.setOrderDTO(null);
         }
 
-        RetrofitClient.getInstance().getService().sendReport(ReportData.reportDTO).enqueue(new Callback<ReportDTO>() {
+        RetrofitClient.getInstance(getContext()).getService().sendReport(ReportData.reportDTO).enqueue(new Callback<ReportDTO>() {
             @Override
             public void onResponse(Call<ReportDTO> call, Response<ReportDTO> response) {
                 if (response.isSuccessful()) {
@@ -83,10 +86,12 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
 //                    }else {
 //                        mailInfo= "E-mail nie dotarł !";
 //                    }
-                    EventBus.getDefault().post(new ReportSentSuccess("Raport wysłany!"));
+                    EventBus.getDefault().post(new ReportSentSuccess(getContext().getResources().getString(R.string.report_sent_ok)));
                 } else {
                     saveNotSentReport(reportDTO);
-                    EventBus.getDefault().post(new ReportSentFailed("Raport NIE został wysłany! Zapisano w pamięci! Kod błędu: " + response.code()));
+                    EventBus.getDefault().post(new ReportSentFailed(
+                            getContext().getResources().getString(R.string.report_not_added) + " " +
+                                    getContext().getResources().getString(R.string.error) + response.code()));
                 }
             }
 
@@ -94,9 +99,11 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
             public void onFailure(Call<ReportDTO> call, Throwable t) {
                 saveNotSentReport(reportDTO);
                 if (!isNetworkConnected()) {
-                    EventBus.getDefault().post(new ReportSentFailed("Brak internetu. Zapisano w pamięci ! "));
+                    EventBus.getDefault().post(new ReportSentFailed(getContext().getResources().getString(R.string.no_internet)
+                            + " " + getContext().getResources().getString(R.string.memory_saved)));
                 } else {
-                    EventBus.getDefault().post(new ReportSentFailed("Wystąpił problem a06. Zapisano w pamięci ! "));
+                    EventBus.getDefault().post(new ReportSentFailed(getContext().getResources().getString(R.string.error)
+                            + " a06. " + getContext().getResources().getString(R.string.memory_saved)));
                 }
 
             }
@@ -112,7 +119,7 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
         if (!notSendReports.isEmpty()) {
             ReportsDTO reportsDTO = new ReportsDTO();
             reportsDTO.setReportsDTOS(notSendReports);
-            RetrofitClient.getInstance().getService().sendManyReports(reportsDTO).enqueue(new Callback<Void>() {
+            RetrofitClient.getInstance(getContext()).getService().sendManyReports(reportsDTO).enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
@@ -143,7 +150,7 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
         if (!notSendComments.isEmpty()) {
             NotesDTO notesDTO = new NotesDTO();
             notesDTO.setNoteDTOS(notSendComments);
-            RetrofitClient.getInstance().getService().addCommentToReportMobileMany(notesDTO).enqueue(new Callback<Void>() {
+            RetrofitClient.getInstance(getContext()).getService().addCommentToReportMobileMany(notesDTO).enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
@@ -206,22 +213,22 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
 
     @Override
     public void downloadMyUnreadReportsByWorkerId(Long workerId) {
-        RetrofitClient.getInstance().getService().getAllUnreadReportsByWorkerId(workerId).enqueue(new Callback<List<ReportDTOWithPhotos>>() {
+        RetrofitClient.getInstance(getContext()).getService().getAllUnreadReportsByWorkerId(workerId).enqueue(new Callback<List<ReportDTOWithPhotos>>() {
             @Override
             public void onResponse(Call<List<ReportDTOWithPhotos>> call, Response<List<ReportDTOWithPhotos>> response) {
                 if (response.isSuccessful()) {
                     EventBus.getDefault().post(new UnreadReportsDownloadSuccess(response.body()));
                 } else {
-                    EventBus.getDefault().post(new UnreadReportsDownloadFailed("Wystąpił problem U01"));
+                    EventBus.getDefault().post(new UnreadReportsDownloadFailed(getContext().getResources().getString(R.string.error) + " U01"));
                 }
             }
 
             @Override
             public void onFailure(Call<List<ReportDTOWithPhotos>> call, Throwable t) {
                 if (!isNetworkConnected()) {
-                    EventBus.getDefault().post(new UnreadReportsDownloadFailed("Brak internetu. U03"));
+                    EventBus.getDefault().post(new UnreadReportsDownloadFailed(getContext().getResources().getString(R.string.no_internet) + " U03"));
                 } else {
-                    EventBus.getDefault().post(new UnreadReportsDownloadFailed("Wystąpił problem U02"));
+                    EventBus.getDefault().post(new UnreadReportsDownloadFailed(getContext().getResources().getString(R.string.error) + " U02"));
                 }
             }
         });
@@ -230,7 +237,7 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
 
     @Override
     public void downloadMyReports(Long workerId) {
-        RetrofitClient.getInstance().getService().getMyReports(workerId).enqueue(new Callback<List<ReportDTOWithPhotos>>() {
+        RetrofitClient.getInstance(getContext()).getService().getMyReports(workerId).enqueue(new Callback<List<ReportDTOWithPhotos>>() {
             @Override
             public void onResponse(Call<List<ReportDTOWithPhotos>> call, Response<List<ReportDTOWithPhotos>> response) {
                 if (response.isSuccessful()) {
@@ -243,16 +250,16 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
                     }
                     preferenceManager.setMyReports(myset);
                 } else {
-                    EventBus.getDefault().post(new MyReportsDownloadFailed("Wystąpił problem a07"));
+                    EventBus.getDefault().post(new MyReportsDownloadFailed(getContext().getResources().getString(R.string.error) + " a07"));
                 }
             }
 
             @Override
             public void onFailure(Call<List<ReportDTOWithPhotos>> call, Throwable t) {
-               if (!isNetworkConnected()) {
-                    EventBus.getDefault().post(new MyReportsDownloadFailed("Brak internetu. Wczytuję raporty z pamięci."));
+                if (!isNetworkConnected()) {
+                    EventBus.getDefault().post(new MyReportsDownloadFailed(getContext().getResources().getString(R.string.load_from_memory)));
                 } else {
-                    EventBus.getDefault().post(new MyReportsDownloadFailed("Wystąpił problem a08"));
+                    EventBus.getDefault().post(new MyReportsDownloadFailed(getContext().getResources().getString(R.string.error) + " a08"));
                 }
             }
         });
@@ -260,22 +267,22 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
 
     @Override
     public void downloadMyReportsByStoreId(Long workerId, Long storeId) {
-        RetrofitClient.getInstance().getService().getMyReportsByStoreId(workerId, storeId).enqueue(new Callback<List<ReportDTOWithPhotos>>() {
+        RetrofitClient.getInstance(getContext()).getService().getMyReportsByStoreId(workerId, storeId).enqueue(new Callback<List<ReportDTOWithPhotos>>() {
             @Override
             public void onResponse(Call<List<ReportDTOWithPhotos>> call, Response<List<ReportDTOWithPhotos>> response) {
                 if (response.isSuccessful()) {
                     EventBus.getDefault().post(new MyReportsDownloadSuccess(response.body()));
                 } else {
-                    EventBus.getDefault().post(new MyReportsDownloadFailed("Wystąpił problem a09"));
+                    EventBus.getDefault().post(new MyReportsDownloadFailed(getContext().getResources().getString(R.string.error) + " a09"));
                 }
             }
 
             @Override
             public void onFailure(Call<List<ReportDTOWithPhotos>> call, Throwable t) {
                 if (!isNetworkConnected()) {
-                    EventBus.getDefault().post(new MyReportsDownloadFailed("Ta operacja wymaga internetu!"));
+                    EventBus.getDefault().post(new MyReportsDownloadFailed(getContext().getResources().getString(R.string.internet_needed)));
                 } else {
-                    EventBus.getDefault().post(new MyReportsDownloadFailed("Wystąpił problem a10"));
+                    EventBus.getDefault().post(new MyReportsDownloadFailed(getContext().getResources().getString(R.string.error) + " a10"));
                 }
             }
         });
@@ -286,14 +293,9 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
         if (!isNetworkConnected()) {
             return;
         }
-        RetrofitClient.getInstance().getService().setReportReadByWorker(reportID).enqueue(new Callback<Void>() {
+        RetrofitClient.getInstance(getContext()).getService().setReportReadByWorker(reportID).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.isSuccessful()) {
-                    System.out.println("ok");
-                }else  {
-                    System.out.println("nie ok");
-                }
             }
 
             @Override
@@ -309,19 +311,19 @@ public class ReportDataManagerImpl extends AbstractDataManager implements Report
         if (!isNetworkConnected()) {
             return;
         }
-        RetrofitClient.getInstance().getService().getReport(id).enqueue(new Callback<ReportDTOWithPhotos>() {
+        RetrofitClient.getInstance(getContext()).getService().getReport(id).enqueue(new Callback<ReportDTOWithPhotos>() {
             @Override
             public void onResponse(Call<ReportDTOWithPhotos> call, Response<ReportDTOWithPhotos> response) {
                 if (response.isSuccessful()) {
                     EventBus.getDefault().post(new OneReportSuccess(response.body()));
                 } else {
-                    EventBus.getDefault().post(new OneReportFailed("Wystąpił problem O1"));
+                    EventBus.getDefault().post(new OneReportFailed(getContext().getResources().getString(R.string.error) + " O1"));
                 }
             }
 
             @Override
             public void onFailure(Call<ReportDTOWithPhotos> call, Throwable t) {
-                EventBus.getDefault().post(new OneReportFailed("Wystąpił problem O2"));
+                EventBus.getDefault().post(new OneReportFailed(getContext().getResources().getString(R.string.error) + " O2"));
             }
         });
     }

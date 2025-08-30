@@ -46,5 +46,6 @@
     <include file="config/liquibase/changelog/20210303195320_changelog.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20210322200000_changelog.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20230705200000_changelog_notes.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20250221200000_changelog_added_tenant_Id_column.xml" relativeToChangelogFile="false"/>
 
 </databaseChangeLog>

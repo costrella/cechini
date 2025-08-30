@@ -6,6 +6,7 @@ import com.costrella.cechini.domain.Store;
 import com.costrella.cechini.domain.Worker;
 import com.costrella.cechini.repository.StoreRepository;
 import com.costrella.cechini.repository.WorkerRepository;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -14,6 +15,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -23,14 +25,21 @@ public class OrderCSVFileService {
     private final WorkerRepository workerRepository;
 
     private final StoreRepository storeRepository;
+    private final MessageSource messageSource;
 
-    public OrderCSVFileService(WorkerRepository workerRepository, StoreRepository storeRepository) {
+
+    public OrderCSVFileService(WorkerRepository workerRepository, StoreRepository storeRepository, MessageSource messageSource) {
         this.workerRepository = workerRepository;
         this.storeRepository = storeRepository;
+        this.messageSource = messageSource;
     }
 
-    public File generateFile(Report report) throws IOException {
-        List<String[]> dataLines = generateContent(report);
+    public File generateFile(Report report, String langKey) throws IOException {
+        Locale locale = Locale.forLanguageTag(langKey);
+        List<String[]> dataLines = generateContent(report, locale);
+        if (dataLines == null || dataLines.isEmpty()) {
+            return null; // No data to write
+        }
         File csvOutputFile = new File(CSV_FILE_NAME);
 
         Writer out = new BufferedWriter(new OutputStreamWriter(
@@ -61,32 +70,35 @@ public class OrderCSVFileService {
         return null;
     }
 
-    private List<String[]> generateContent(Report report) {
+    private List<String[]> generateContent(Report report, Locale locale) {
         Worker worker = workerRepository.getOne(report.getWorker().getId());
         Store store = storeRepository.getOne(report.getStore().getId());
+        if(store.getNip() == null || store.getNip().isEmpty()) {
+            return null;
+        }
         List<String[]> dataLines = new ArrayList<>();
         DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
             .withZone(ZoneId.systemDefault());
 
         dataLines.add(new String[]
-            {"Odbiorca:", store.getName() + " " + store.getAddress()});
+            {messageSource.getMessage("email.attachment.receiver", null, locale), store.getName() + " " + store.getAddress()});
         dataLines.add(new String[]
-            {"Odbiorca NIP:", store.getNip()});
+            {messageSource.getMessage("email.attachment.receiver_nip", null, locale), store.getNip()});
         dataLines.add(new String[]
-            {"Data wystawienia:", DATE_TIME_FORMATTER.format(report.getReportDate()),
-            "",
-                "Nr zamówienia:", report.getOrder().getNumber()
+            {messageSource.getMessage("email.attachment.date", null, locale), DATE_TIME_FORMATTER.format(report.getReportDate()),
+                "",
+                messageSource.getMessage("email.attachment.order_no", null, locale), report.getOrder().getNumber()
             });
         dataLines.add(new String[]
-            {"Dostawca:", report.getOrder().getWarehouse().getName()});
+            {messageSource.getMessage("email.attachment.deliver", null, locale), report.getOrder().getWarehouse().getName()});
         dataLines.add(new String[]
-            {"Przedstawiciel handlowy:", worker.getName() + " " + worker.getSurname(), "tel:" + worker.getPhone()});
+            {messageSource.getMessage("email.attachment.worker", null, locale), worker.getName() + " " + worker.getSurname(), messageSource.getMessage("email.attachment.phone", null, locale) + worker.getPhone()});
         dataLines.add(new String[]
-            {"Lp", "Produkt", "Pojemność", "EAN", "Ilość"});
+            {messageSource.getMessage("email.attachment.lp", null, locale), messageSource.getMessage("email.attachment.product", null, locale), messageSource.getMessage("email.attachment.ean", null, locale), messageSource.getMessage("email.attachment.count", null, locale)});
         int lp = 1;
         for (OrderItem oi : report.getOrder().getOrderItems()) {
             dataLines.add(new String[]
-                {"" + lp, oi.getProduct().getName(), "" + oi.getProduct().getCapacity() + "L", "" + oi.getProduct().getEanPack(), "" + oi.getPackCount()});
+                {"" + lp, oi.getProduct().getName(), "" + oi.getProduct().getEanPack(), "" + oi.getPackCount()});
             lp++;
         }
 

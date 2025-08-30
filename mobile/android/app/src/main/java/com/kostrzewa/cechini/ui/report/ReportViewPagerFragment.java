@@ -70,7 +70,8 @@ public class ReportViewPagerFragment extends Fragment {
 //            if(ReportData.reportDTO.getOrderDTO() == null){
 //                ReportData.reportDTO.setOrderDTO(new OrderDTO());
 //            }
-            ((MainActivity) getActivity()).getSupportActionBar().setTitle("Podgląd raportu");
+
+            ((MainActivity) getActivity()).getSupportActionBar().setTitle(getContext().getResources().getString(R.string.report_preview));
             setReportReadByWorker(ReportData.reportDTO);
 
             reportDataManager.downloadOneReport(ReportData.reportDTO.getId());
@@ -107,7 +108,7 @@ public class ReportViewPagerFragment extends Fragment {
     }
 
     private void load(){
-        reportPagerAdapter = new ReportPagerAdapter(getChildFragmentManager(), currentStore);
+        reportPagerAdapter = new ReportPagerAdapter(getChildFragmentManager(), currentStore, getContext());
         viewPager = view.findViewById(R.id.pager);
         viewPager.setAdapter(reportPagerAdapter);
         viewPager.setOffscreenPageLimit(10);

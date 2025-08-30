@@ -17,9 +17,17 @@ import java.util.List;
 @Repository
 public interface StoreRepository extends JpaRepository<Store, Long> {
 
+    Page<Store> findAllByTenantId(Long id, Pageable pageable);
+
     Page<Store> findAllByWorkerId(Long id, Pageable pageable);
 
+    //for aspect
+    Page<Store> findAllByWorkerIdAndTenantId(Long workerId, Long tenantId, Pageable pageable);
+
     List<Store> findAllByWorkerId(Long id);
+
+    //for aspect
+    List<Store> findAllByWorkerIdAndTenantId(Long workerId, Long tenantId);
 
 
 }

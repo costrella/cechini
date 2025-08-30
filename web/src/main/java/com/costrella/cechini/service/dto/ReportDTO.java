@@ -1,5 +1,7 @@
 package com.costrella.cechini.service.dto;
 
+import com.costrella.cechini.domain.Tenant;
+
 import java.time.Instant;
 import javax.persistence.Column;
 import javax.validation.constraints.*;
@@ -50,6 +52,16 @@ public class ReportDTO implements Serializable {
     private Boolean readByWorker;
 
     private Boolean readByManager;
+
+    private Tenant tenant;
+
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
+    }
 
     public Boolean getReadByWorker() {
         return readByWorker;

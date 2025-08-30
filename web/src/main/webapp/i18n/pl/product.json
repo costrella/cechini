@@ -17,9 +17,9 @@
         "title": "Produkt"
       },
       "name": "Nazwa",
-      "capacity": "Pojemność (L)",
+      "capacity": "Pojemność",
       "eanArt": "ean Art",
-      "eanPack": "Numer EAN Zgrzewki",
+      "eanPack": "Numer EAN",
       "packCountPalette": "Pack Count Palette",
       "artCountPalette": "Art Count Palette",
       "layerCountPalette": "Layer Count Palette",

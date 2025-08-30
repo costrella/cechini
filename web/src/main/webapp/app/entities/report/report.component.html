@@ -106,7 +106,7 @@
                                 (click)="clickItem(['/order/', report.orderId , '/view', report.id])">zobacz</a>
                         </div>
                         <div *ngIf="!report.orderId">
-                            <span>brak</span>
+                            <span jhiTranslate="cechiniApp.order.noOrder">no order</span>
                         </div>
                     </td>
                     <td>
@@ -122,13 +122,13 @@
                         </div>
                     </td>
 
-                    
+
 
                     <td style="text-align: center;">
                         <!-- {{report.photos.size}},  -->
                         {{report.photosCount}}
                     </td>
-                    <td style="text-align: center;" [ngStyle]="{'background-color':  
+                    <td style="text-align: center;" [ngStyle]="{'background-color':
                     report.readByManager == null ? undefined : (!report.readByManager ? '#cfc7fc' : undefined)
                         }">{{ report?.notes?.length }}</td>
                     <td class="text-right">

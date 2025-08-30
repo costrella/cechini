@@ -25,9 +25,6 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 public class MyOrdersFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     private OrderDataManager orderDataManager;
@@ -35,7 +32,6 @@ public class MyOrdersFragment extends Fragment {
     private MyOrdersRecyclerViewAdapter adapter;
     private List<OrderDTO> orderDTOList;
 
-    @BindView(R.id.fragment_myorders_recyclerView)
     RecyclerView recyclerView;
 
     /**
@@ -78,7 +74,7 @@ public class MyOrdersFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_myorders_list, container, false);
-        ButterKnife.bind(this, view);
+        recyclerView = view.findViewById(R.id.fragment_myorders_recyclerView);
         setHasOptionsMenu(true);
         orderDataManager.downloadMyOrders(workerDataManager.getWorker().getId());
 

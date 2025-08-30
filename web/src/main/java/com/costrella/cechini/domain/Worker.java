@@ -1,6 +1,9 @@
 package com.costrella.cechini.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
@@ -71,6 +74,30 @@ public class Worker implements Serializable {
     @ManyToMany(mappedBy = "workers")
     @JsonIgnore
     private Set<Manager> managers = new HashSet<>();
+
+    @JsonManagedReference
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", updatable = false)
+    private User user;
+
+    @ManyToOne
+    private Tenant tenant;
+
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {

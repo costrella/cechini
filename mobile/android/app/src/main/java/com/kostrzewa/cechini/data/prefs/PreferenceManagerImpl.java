@@ -18,6 +18,16 @@ public class PreferenceManagerImpl implements PreferenceManager {
     }
 
     @Override
+    public String getCookies(String host) {
+        return sharedPreferences.getString(host, null);
+    }
+
+    @Override
+    public void setCookies(String host, String cookies) {
+        sharedPreferences.edit().putString(host, cookies).apply();
+    }
+
+    @Override
     public Set<String> getMyStores() {
         return sharedPreferences.getStringSet("myStores", new HashSet<>());
     }
@@ -104,7 +114,7 @@ public class PreferenceManagerImpl implements PreferenceManager {
 
     @Override
     public String getSychroTimeMyStores() {
-        return sharedPreferences.getString("synchroTimeMyStores", "brak");
+        return sharedPreferences.getString("synchroTimeMyStores", " - ");
     }
 
     @Override
@@ -114,7 +124,7 @@ public class PreferenceManagerImpl implements PreferenceManager {
 
     @Override
     public String getSychroTimeProducts() {
-        return sharedPreferences.getString("synchroTimeProducts", "brak");
+        return sharedPreferences.getString("synchroTimeProducts", " - ");
     }
 
     @Override
@@ -124,7 +134,7 @@ public class PreferenceManagerImpl implements PreferenceManager {
 
     @Override
     public String getSychroTimeMyReports() {
-        return sharedPreferences.getString("synchroTimeMyReports", "brak");
+        return sharedPreferences.getString("synchroTimeMyReports", " - ");
     }
 
     @Override
@@ -134,7 +144,7 @@ public class PreferenceManagerImpl implements PreferenceManager {
 
     @Override
     public String getSychroTimeOrders() {
-        return sharedPreferences.getString("synchroTimeMyOrders", "brak");
+        return sharedPreferences.getString("synchroTimeMyOrders", " - ");
     }
 
     @Override
@@ -144,6 +154,6 @@ public class PreferenceManagerImpl implements PreferenceManager {
 
     @Override
     public String getSychroTimeWarehouses() {
-        return sharedPreferences.getString("synchroTimeWarehouses", "brak");
+        return sharedPreferences.getString("synchroTimeWarehouses", " - ");
     }
 }

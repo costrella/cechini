@@ -4,8 +4,12 @@ import com.costrella.cechini.domain.Product;
 import com.costrella.cechini.domain.Worker;
 import com.costrella.cechini.repository.ProductRepository;
 import com.costrella.cechini.repository.StatsRepository;
+import com.costrella.cechini.repository.UserRepository;
+import com.costrella.cechini.repository.WorkerRepository;
 import com.costrella.cechini.service.dto.Chart01DTO;
 import com.costrella.cechini.service.dto.ChartDetail01DTO;
+import com.costrella.cechini.service.dto.ProductDTO;
+import com.costrella.cechini.service.dto.WorkerDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -28,9 +32,15 @@ public class StatsService {
 
     private final ProductRepository productRepository;
 
-    public StatsService(StatsRepository statsRepository, ProductRepository productRepository) {
+    private final ProductService productService;
+
+    private final WorkerService workerService;
+
+    public StatsService(StatsRepository statsRepository, ProductRepository productRepository, ProductService productService, WorkerRepository workerRepository, WorkerService workerService) {
         this.statsRepository = statsRepository;
         this.productRepository = productRepository;
+        this.productService = productService;
+        this.workerService = workerService;
     }
 
     public Chart01DTO getReportsChart(int monthsAgo) {
@@ -40,9 +50,9 @@ public class StatsService {
         LocalDate now = LocalDate.now();
         Random obj = new Random();
         int rand_num;
-        List<Worker> workers = statsRepository.findAll();
+        List<WorkerDTO> workers = workerService.findAll();
         boolean fillMonths = true;
-        for (Worker worker : workers) {
+        for (WorkerDTO worker : workers) {
             ChartDetail01DTO chartDetail = new ChartDetail01DTO();
             rand_num = obj.nextInt(0xffffff + 1);
             String colorCode = String.format("#%06x", rand_num);
@@ -54,7 +64,7 @@ public class StatsService {
                 if (fillMonths)
                     chart.monthsName.add(now.minusMonths(i).getMonth().getDisplayName(
                         TextStyle.FULL_STANDALONE,
-                        Locale.forLanguageTag("PL")
+                        Locale.forLanguageTag("en")
                     ));
             }
 
@@ -74,9 +84,9 @@ public class StatsService {
         LocalDate now = LocalDate.now();
         Random obj = new Random();
         int rand_num;
-        List<Worker> workers = statsRepository.findAll();
+        List<WorkerDTO> workers = workerService.findAll();
         boolean fillMonths = true;
-        for (Worker worker : workers) {
+        for (WorkerDTO worker : workers) {
             ChartDetail01DTO chartDetail = new ChartDetail01DTO();
             rand_num = obj.nextInt(0xffffff + 1);
             String colorCode = String.format("#%06x", rand_num);
@@ -88,7 +98,7 @@ public class StatsService {
                 if (fillMonths)
                     chart.monthsName.add(now.minusMonths(i).getMonth().getDisplayName(
                         TextStyle.FULL_STANDALONE,
-                        Locale.forLanguageTag("PL")
+                        Locale.forLanguageTag("en")
                     ));
             }
 
@@ -107,9 +117,9 @@ public class StatsService {
         LocalDate now = LocalDate.now();
         Random obj = new Random();
         int rand_num;
-        List<Product> products = productRepository.findAll();
+        List<ProductDTO> products = productService.findAll();
         boolean fillMonths = true;
-        for (Product product : products) {
+        for (ProductDTO product : products) {
             ChartDetail01DTO chartDetail = new ChartDetail01DTO();
             rand_num = obj.nextInt(0xffffff + 1);
             String colorCode = String.format("#%06x", rand_num);
@@ -121,11 +131,11 @@ public class StatsService {
                 if (fillMonths)
                     chart.monthsName.add(now.minusMonths(i).getMonth().getDisplayName(
                         TextStyle.FULL_STANDALONE,
-                        Locale.forLanguageTag("PL")
+                        Locale.forLanguageTag("en")
                     ));
             }
 
-            chartDetail.label = product.getName() + " (" + product.getCapacity() + "L)";
+            chartDetail.label = product.getName();
             chart.details.add(chartDetail);
             fillMonths = false;
         }

@@ -1,8 +1,7 @@
-Odbiorca: ,"Zabka Kosciuszki, Krynica "
-Odbiorca NIP: ,
-Data wystawienia: ,2020-12-31 10:16:27
-Dostawca: ,Distro
-Przedstawiciel handlowy: ,Marian Kowalski,tel.:+48 514 442 814
-Lp,Produkt,Pojemnosc,EAN,Ilosc
-1,Szałwia,2L,4343343,9
-2,Szałwia,2L,4343343,44
+Odbiorca:,nowy sklep tenant1 testowy
+Odbiorca NIP:,123123123123
+Data wystawienia:,2025-04-11 07:57:39,,Nr zamówienia:,2504110757397060
+Dostawca:,HurtowniaTenant1
+Przedstawiciel handlowy:,worker_a_tenant1 workerA_tenant1,tel:1
+Lp,Produkt,Pojemność,EAN,Ilość
+1,ProduktA_tenant1,4.0L,34534,1

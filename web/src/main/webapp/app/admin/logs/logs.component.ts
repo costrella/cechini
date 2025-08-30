@@ -24,11 +24,11 @@ export class LogsComponent implements OnInit {
   }
 
   private findAndExtractLoggers(): void {
-    this.logsService
-      .findAll()
-      .subscribe(
-        (response: LoggersResponse) =>
-          (this.loggers = Object.entries(response.loggers).map((logger: [string, Logger]) => new Log(logger[0], logger[1].effectiveLevel)))
-      );
+    this.logsService.findAll().subscribe((response: LoggersResponse) => {
+      this.loggers = Object.keys(response.loggers).map(key => {
+        const logger = response.loggers[key];
+        return new Log(key, logger.effectiveLevel);
+      });
+    });
   }
 }

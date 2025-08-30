@@ -64,6 +64,17 @@ public class Report implements Serializable {
     @Column(name = "read_by_manager")
     private Boolean readByManager;
 
+    @ManyToOne
+    private Tenant tenant;
+
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
+    }
+
     public Boolean getReadByWorker() {
         return readByWorker;
     }

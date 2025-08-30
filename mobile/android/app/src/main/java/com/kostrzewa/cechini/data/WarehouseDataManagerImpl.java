@@ -39,7 +39,7 @@ public class WarehouseDataManagerImpl extends AbstractDataManager implements War
 
     @Override
     public void downloadWarehouse() {
-        RetrofitClient.getInstance().getService().getAllWarehouses().enqueue(new Callback<List<WarehouseDTO>>() {
+        RetrofitClient.getInstance(getContext()).getService().getAllWarehouses().enqueue(new Callback<List<WarehouseDTO>>() {
             @Override
             public void onResponse(Call<List<WarehouseDTO>> call, Response<List<WarehouseDTO>> response) {
                 Log.d(TAG, "onResponse: " + response.code());

@@ -17,28 +17,20 @@ import com.kostrzewa.cechini.R;
 import com.kostrzewa.cechini.model.StoreDTO;
 import com.kostrzewa.cechini.ui.report.data.ReportData;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class ReportSendFragment extends Fragment {
     private static final String TAG = "ReportSendFragment";
     private final StoreDTO storeDTO;
 
-    @BindView(R.id.fragment_report_sendBtn)
     Button sendBtn;
 
-    @BindView(R.id.fragment_report_send_validError)
     TextView validTV;
 
-    @BindView(R.id.fragment_report_sendProgressBar)
     ProgressBar progressBar;
 
     public ReportSendFragment(StoreDTO storeDTO) {
         this.storeDTO = storeDTO;
     }
 
-    @OnClick(R.id.fragment_report_sendBtn)
     public void sendReport() {
         if (valid()) {
             new ReportPreviewDialog(storeDTO)
@@ -54,7 +46,7 @@ public class ReportSendFragment extends Fragment {
                 || ReportData.reportDTO.getOrderDTO().getOrderItems().isEmpty()) {
             //raport bez zamowienia:
             if (TextUtils.isEmpty(ReportData.reportDTO.getDesc())) {
-                validTV.setText("Opis raportu jest pusty :( \n Wymagamy go tylko wtedy, kiedy nie dodajesz zamówienia");
+                validTV.setText(getContext().getResources().getString(R.string.report_desc_empty));
                 sendBtn.setError("");
                 focusView = sendBtn;
                 focusView.requestFocus();
@@ -67,7 +59,10 @@ public class ReportSendFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_report_send, container, false);
-        ButterKnife.bind(this, root);
+        sendBtn = root.findViewById(R.id.fragment_report_sendBtn);
+        validTV = root.findViewById(R.id.fragment_report_send_validError);
+        progressBar = root.findViewById(R.id.fragment_report_sendProgressBar);
+        sendBtn.setOnClickListener(v -> sendReport());
         return root;
     }
 

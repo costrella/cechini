@@ -46,6 +46,7 @@ public class StoreService {
      * @param storeDTO the entity to save.
      * @return the persisted entity.
      */
+    //ASPECT ADDED
     public StoreDTO save(StoreDTO storeDTO) {
         log.debug("Request to save Store : {}", storeDTO);
         Store store = storeMapper.toEntity(storeDTO);
@@ -56,6 +57,7 @@ public class StoreService {
         return storeMapper.toDto(store);
     }
 
+    //ASPECT ADDED
     public StoreDTO update(StoreDTO storeDTO) {
         log.debug("Request to save Store : {}", storeDTO);
         Store store = storeMapper.toEntity(storeDTO);
@@ -76,6 +78,7 @@ public class StoreService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
+    //ASPECT ADDED
     @Transactional(readOnly = true)
     public Page<StoreDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Stores");
@@ -83,6 +86,7 @@ public class StoreService {
             .map(storeMapper::toDto);
     }
 
+    //ASPECT ADDED
     @Transactional(readOnly = true)
     public List<StoreDTOSimple> findAll() {
         return storeRepository.findAll().stream()
@@ -96,6 +100,7 @@ public class StoreService {
      * @param id the id of the entity.
      * @return the entity.
      */
+    //ASPECT ADDED
     @Transactional(readOnly = true)
     public Optional<StoreDTO> findOne(Long id) {
         log.debug("Request to get Store : {}", id);
@@ -108,17 +113,20 @@ public class StoreService {
      *
      * @param id the id of the entity.
      */
+    //ASPECT ADDED
     public void delete(Long id) {
         log.debug("Request to delete Store : {}", id);
         storeRepository.deleteById(id);
     }
 
+    //ASPECT ADDED
     @Transactional(readOnly = true)
     public Page<StoreDTO> findAllByWorkerId(Pageable pageable, Long id) {
         return storeRepository.findAllByWorkerId(id, pageable)
             .map(storeMapper::toDto);
     }
 
+    //ASPECT ADDED
     @Transactional(readOnly = true)
     public List<StoreDTO> findAllByWorkerId(Long id) {
         return storeRepository.findAllByWorkerId(id).stream()

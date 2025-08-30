@@ -1,3 +1,10 @@
+todo:
+
+- tlumaczenie orderExcel/orderCSV + statystki
+- numer zamowienia SAMPLE
+- COS NIE HALO Z NIPEM - po stronie web
+- nie mozna edytowc
+
 # cechini
 
 This application was generated using JHipster 6.10.1, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.10.1](https://www.jhipster.tech/documentation-archive/v6.10.1).
