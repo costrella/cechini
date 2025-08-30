@@ -53,7 +53,7 @@
 
 
     <string name="store_detail_bylesjuztu">Byłeś tu już w tym miesiącu</string>
-    <string name="store_detail_niebyles">Byłeś tu już w tym miesiącu</string>
+    <string name="store_detail_niebyles">Nie było Cię tu w tym miesiącu</string>
 
     <string name="order_number">Numer zamówienia:</string>
     <string name="empty">Brak</string>

@@ -1,9 +1,7 @@
 todo:
-
-- tlumaczenie orderExcel/orderCSV + statystki
-- numer zamowienia SAMPLE
+- nie mozna dac kropki w nazwie produktu !
 - COS NIE HALO Z NIPEM - po stronie web
-- nie mozna edytowc
+- - byles tu juz w tym miesiacu - po edycji sklepu kasuje sie ze juz tu bylismy
 
 # cechini
 
