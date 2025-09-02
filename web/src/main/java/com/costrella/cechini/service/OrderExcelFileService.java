@@ -132,7 +132,7 @@ public class OrderExcelFileService {
         AtomicInteger i = new AtomicInteger();
         i.getAndIncrement();
         orderItems.forEach(orderItem -> {
-            listBook.add(new OrderItem(i.getAndIncrement(), orderItem.getProduct().getName(), orderItem.getProduct().getCapacity(), orderItem.getProduct().getEanPack(), orderItem.getPackCount()));
+            listBook.add(new OrderItem(i.getAndIncrement(), orderItem.getProduct().getName(), orderItem.getProduct().getEanPack(), orderItem.getPackCount()));
         });
         return listBook;
     }

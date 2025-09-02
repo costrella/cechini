@@ -4,14 +4,12 @@ public class OrderItem {
 
     private int lp;
     private String productName;
-    private double capacity;
     private String ean;
     private int count;
 
-    public OrderItem(int lp, String productName, double capacity, String ean, int count) {
+    public OrderItem(int lp, String productName, String ean, int count) {
         this.lp = lp;
         this.productName = productName;
-        this.capacity = capacity;
         this.ean = ean;
         this.count = count;
     }
@@ -32,13 +30,6 @@ public class OrderItem {
         this.productName = productName;
     }
 
-    public double getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(double capacity) {
-        this.capacity = capacity;
-    }
 
     public String getEan() {
         return ean;
