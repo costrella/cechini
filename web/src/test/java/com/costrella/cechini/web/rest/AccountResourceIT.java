@@ -146,6 +146,26 @@ public class AccountResourceIT {
 
     @Test
     @Transactional
+    public void testRegisterHoneypotDoesNotCreateUser() throws Exception {
+        ManagedUserVM botUser = new ManagedUserVM();
+        botUser.setLogin("test-register-bot");
+        botUser.setPassword("password");
+        botUser.setEmail("test-register-bot@example.com");
+        botUser.setLangKey(Constants.DEFAULT_LANGUAGE);
+        botUser.setWebsite("https://spam.example.com");
+
+        restAccountMockMvc.perform(
+            post("/api/register")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(TestUtil.convertObjectToJsonBytes(botUser))
+                .with(csrf()))
+            .andExpect(status().isCreated());
+
+        assertThat(userRepository.findOneByLogin("test-register-bot").isPresent()).isFalse();
+    }
+
+    @Test
+    @Transactional
     public void testRegisterInvalidLogin() throws Exception {
         ManagedUserVM invalidUser = new ManagedUserVM();
         invalidUser.setLogin("funky-log(n");// <-- invalid

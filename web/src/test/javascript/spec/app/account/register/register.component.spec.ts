@@ -40,6 +40,21 @@ describe('Component Tests', () => {
       expect(comp.doNotMatch).toBe(true);
     });
 
+    it('should not submit when the email addresses do not match', inject([RegisterService], (service: RegisterService) => {
+      spyOn(service, 'save').and.returnValue(of({}));
+      comp.registerForm.patchValue({
+        email: 'first@example.com',
+        confirmEmail: 'second@example.com',
+        password: 'password',
+        confirmPassword: 'password',
+      });
+
+      comp.register();
+
+      expect(comp.emailDoNotMatch).toBe(true);
+      expect(service.save).not.toHaveBeenCalled();
+    }));
+
     it('should update success to true after creating an account', inject(
       [RegisterService, JhiLanguageService],
       fakeAsync((service: RegisterService, mockTranslate: MockLanguageService) => {
@@ -56,6 +71,7 @@ describe('Component Tests', () => {
           email: '',
           password: 'password',
           login: '',
+          website: '',
           langKey: 'en',
         });
         expect(comp.success).toBe(true);

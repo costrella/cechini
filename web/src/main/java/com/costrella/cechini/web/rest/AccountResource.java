@@ -6,6 +6,7 @@ import com.costrella.cechini.domain.User;
 import com.costrella.cechini.repository.UserRepository;
 import com.costrella.cechini.security.SecurityUtils;
 import com.costrella.cechini.service.MailService;
+import com.costrella.cechini.service.RegistrationRateLimiter;
 import com.costrella.cechini.service.UserService;
 import com.costrella.cechini.service.dto.PasswordChangeDTO;
 import com.costrella.cechini.service.dto.UserDTO;
@@ -17,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -48,12 +50,15 @@ public class AccountResource {
 
     private final PersistentTokenRepository persistentTokenRepository;
 
-    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService, PersistentTokenRepository persistentTokenRepository) {
+    private final RegistrationRateLimiter registrationRateLimiter;
 
+    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService,
+                           PersistentTokenRepository persistentTokenRepository, RegistrationRateLimiter registrationRateLimiter) {
         this.userRepository = userRepository;
         this.userService = userService;
         this.mailService = mailService;
         this.persistentTokenRepository = persistentTokenRepository;
+        this.registrationRateLimiter = registrationRateLimiter;
     }
 
     /**
@@ -66,7 +71,13 @@ public class AccountResource {
      */
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public void registerAccount(@Valid @RequestBody ManagedUserVM managedUserVM) {
+    public void registerAccount(@Valid @RequestBody ManagedUserVM managedUserVM, HttpServletRequest request) {
+        if (StringUtils.isNotEmpty(managedUserVM.getWebsite())) {
+            return;
+        }
+        if (!registrationRateLimiter.allow(request.getRemoteAddr())) {
+            throw new ResponseStatusException(HttpStatus.TOO_MANY_REQUESTS);
+        }
         if (!checkPasswordLength(managedUserVM.getPassword())) {
             throw new InvalidPasswordException();
         }

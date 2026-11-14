@@ -9,7 +9,7 @@ import { IUser } from 'app/core/user/user.model';
 export class RegisterService {
   constructor(private http: HttpClient) {}
 
-  save(account: IUser): Observable<{}> {
+  save(account: IUser & { website: string }): Observable<{}> {
     return this.http.post(SERVER_API_URL + 'api/register', account);
   }
 }

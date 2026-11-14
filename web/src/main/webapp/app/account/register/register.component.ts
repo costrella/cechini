@@ -16,6 +16,7 @@ export class RegisterComponent implements AfterViewInit {
   login?: ElementRef;
 
   doNotMatch = false;
+  emailDoNotMatch = false;
   error = false;
   errorEmailExists = false;
   errorUserExists = false;
@@ -32,8 +33,10 @@ export class RegisterComponent implements AfterViewInit {
       ],
     ],
     email: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(254), Validators.email]],
+    confirmEmail: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(254), Validators.email]],
     password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
     confirmPassword: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
+    website: [''],
   });
 
   constructor(
@@ -51,17 +54,24 @@ export class RegisterComponent implements AfterViewInit {
 
   register(): void {
     this.doNotMatch = false;
+    this.emailDoNotMatch = false;
     this.error = false;
     this.errorEmailExists = false;
     this.errorUserExists = false;
 
     const password = this.registerForm.get(['password'])!.value;
+    const email = this.registerForm.get(['email'])!.value;
+    const confirmEmail = this.registerForm.get(['confirmEmail'])!.value;
     if (password !== this.registerForm.get(['confirmPassword'])!.value) {
       this.doNotMatch = true;
-    } else {
+    }
+    if (email.trim().toLowerCase() !== confirmEmail.trim().toLowerCase()) {
+      this.emailDoNotMatch = true;
+    }
+    if (!this.doNotMatch && !this.emailDoNotMatch) {
       const login = this.registerForm.get(['login'])!.value;
-      const email = this.registerForm.get(['email'])!.value;
-      this.registerService.save({ login, email, password, langKey: this.languageService.getCurrentLanguage() }).subscribe(
+      const website = this.registerForm.get(['website'])!.value;
+      this.registerService.save({ login, email, password, website, langKey: this.languageService.getCurrentLanguage() }).subscribe(
         () => (this.success = true),
         response => this.processError(response)
       );
